@@ -8,7 +8,7 @@ Contributors and Community members are welcome to make PRs to the `master` branc
 
 ## Docs website
 
-The `filecoin-project/metadocs` repo will be used for doc website deploys.
+The [filecoin-project/metadocs](https://github.com/filecoin-project/metadocs) repo will be used for doc website deploys.
 
 
 ## Licenses
