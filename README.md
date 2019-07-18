@@ -8,7 +8,7 @@ Contributors and Community Members are welcome to make PRs to the `master` branc
 
 ## Docs website
 
-Updates to `master` will trigger documentation website redeploys (in a separate repo).
+Updates to `master` in this repo will trigger documentation website redeploys (in a separate repo).
 
 
 ## Licenses
