@@ -1,14 +1,14 @@
 # Filecoin Docs
 
-This repo contains documentation for the Filecoin Project.
+This repo contains documentation content for the Filecoin Project.
 
 ## Suggest an Edit
 
-Contributors and Community members are welcome to make PRs to the `master` branch of this repo.
+Contributors and Community Members are welcome to make PRs to the `master` branch of this repo.
 
 ## Docs website
 
-The [filecoin-project/metadocs](https://github.com/filecoin-project/metadocs) repo will be used for doc website deploys.
+Updates to `master` here will trigger documentation website redeploys (in a separate repo).
 
 
 ## Licenses
