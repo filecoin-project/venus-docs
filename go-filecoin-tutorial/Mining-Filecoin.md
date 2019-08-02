@@ -27,11 +27,11 @@ In the current implementation, we focus mostly on storage miners. A storage mine
 
 ## Start mining
 
-After daemon has finished syncing the chain, you can create a miner.
+After daemon has finished syncing the chain, you can create a miner and start mining.
 
-By default, Filecoin nodes are not set up to mine. (See [Getting Started](Getting-Started) for how to initialize a Filecoin node). Mining blocks on the Filecoin network requires committing storage capacity to the network. Blocks are mined, and block rewards earned, in proportion to the amount of storage committed.
+Mining blocks on the Filecoin network requires committing storage capacity to the network. Blocks are mined, and block rewards earned, in proportion to the amount of storage committed.
 
-A prospective miner begins by choosing a sector size and pledging collateral. A pledge involves sending a message on the Filecoin blockchain. Like Ethereum, messages cost "gas" to process, and each message specifies the maximum number of gas units it will consume, and a price per unit in FIL (Filecoin network tokens). For now, we can specify some fairly arbitrary numbers for these.
+Start by creating a miner. You'll need to include a sector size and pledge collateral. You'll also need to include "gas", a small fee to send that pledge message to the Filecoin blockchain.
 
 1. Create a miner with 100 FIL as collateral, using the default sector size (256MiB), with a message gas price of 0 FIL/unit and limit of 1000 gas units. When successful, it returns the miner address of the newly created miner.
 
@@ -41,7 +41,7 @@ A prospective miner begins by choosing a sector size and pledging collateral. A 
     go-filecoin miner create 100 --gas-price=0.001 --gas-limit=300 --peerid `go-filecoin id | jq -r '.ID'`   # this may take a minute
     ```
 
-1. Once the miner is created, we can run the following to start mining:
+1. Once the miner is created, run the following to start mining:
 
     ```sh
     go-filecoin mining start

@@ -2,7 +2,7 @@
 
 There are currently 3 Filecoin developer networks (aka devnets) available for development and testing.
 
-Both are subject to _**frequent downtimes**_ for a variety of reasons, including bugs, breaking changes, or the polar vortex ⛄. There is no [SLA](https://en.wikipedia.org/wiki/Service-level_agreement); until we have a status page, please ping in [#fil-chat](https://github.com/filecoin-project/community#chat) if you would like to confirm status.
+Both are subject to _**frequent downtimes**_ for a variety of reasons, including bugs, breaking changes, or the polar vortex ⛄. There is no [SLA](https://en.wikipedia.org/wiki/Service-level_agreement); until we have a status page, please ping in [#fil-help](https://github.com/filecoin-project/community#chat) if you would like to confirm status.
 
 ## Table of Contents
 

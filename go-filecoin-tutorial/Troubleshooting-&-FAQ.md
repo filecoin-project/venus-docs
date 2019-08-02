@@ -6,6 +6,7 @@ _Note: This wiki focuses on `go-filecoin`. For questions about the Filecoin Proj
 
 ## Table of Contents
 
+- [Known Issues](#known-issues)
 - [Installing from binary](#installing-from-binary)
 - [Downloading and building from source](#downloading-and-building-from-source)
 - [Mining and deals](#mining-and-deals)
@@ -15,6 +16,11 @@ _Note: This wiki focuses on `go-filecoin`. For questions about the Filecoin Proj
 - [Issues connecting to a network](#issues-connecting-to-a-network)
 - [Upgrading](#upgrading)
 
+### Known Issues
+Known bugs are [catalogued here](https://github.com/filecoin-project/go-filecoin/issues?q=is%3Aissue+is%3Aopen+label%3AC-bug). 
+
+#### 0.3.x
+- **PoSt takes too long on many sectors**. Due to a limitation of the proofs library, the PoSt algorithm is iterated for every two sectors, and the proofs concatenated. When many sectors are committed, this can take longer than the proving period (1000) blocks, resulting in a miner being "too late". This will be fixed upstream in 0.4 release.
 
 ### Installing from binary
 
@@ -151,4 +157,3 @@ You may see this error if you are building everything from source and not instal
 
 * **How do I upgrade my version of go-filecoin?<br />**
 To upgrade `go-filecoin`, you will need to re-run the full download and build process in [README.md](https://github.com/filecoin-project/go-filecoin/blob/master/README.md). In the future, we plan to add automatic updating ([#8](https://github.com/filecoin-project/go-filecoin/issues/8)).
-
