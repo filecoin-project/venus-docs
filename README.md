@@ -1,6 +1,6 @@
 # Filecoin Docs
 
-This repo contains documentation content for the Filecoin Project.
+This repo contains documentation content for the Filecoin Project hosted at [docs.filecoin.io](https://docs.filecoin.io).
 
 ## Suggest an Edit
 
