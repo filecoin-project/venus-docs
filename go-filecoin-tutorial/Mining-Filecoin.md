@@ -27,11 +27,17 @@ In the current implementation, we focus mostly on storage miners. A storage mine
 
 ## Start mining
 
-After daemon has finished syncing the chain, you can create a miner and start mining.
+After daemon has finished syncing and validating the chain, you can create a miner and start mining.
 
 Mining blocks on the Filecoin network requires committing storage capacity to the network. Blocks are mined, and block rewards earned, in proportion to the amount of storage committed.
 
 Start by creating a miner. You'll need to include a sector size and pledge collateral. You'll also need to include "gas", a small fee to send that pledge message to the Filecoin blockchain.
+
+0. Download the parameters for your sector size (256Mib)
+
+   ```sh 
+   proofs/bin/paramfetch -j proofs/misc/parameters.json -z 1024,268435456
+   ```
 
 1. Create a miner with 100 FIL as collateral, using the default sector size (256MiB), with a message gas price of 0 FIL/unit and limit of 1000 gas units. When successful, it returns the miner address of the newly created miner.
 

@@ -8,7 +8,7 @@ Both are subject to _**frequent downtimes**_ for a variety of reasons, including
 
 - [User](#user)
 - [Nightly](#nightly)
-- [Test (for Infra and pre-release testing)](#test-for-infra-and-pre-release-testing)
+- [Staging (for Infra and pre-release testing)](#staging-for-infra-and-pre-release-testing)
 - [Configuration](#configuration)
 - [Network Health](#network-health)
 
@@ -43,24 +43,24 @@ is for people contributing to `go-filecoin`. You should probably avoid it unless
 - Connected Nodes PeerID's: [http://nightly.kittyhawk.wtf:9082/nodes](http://nightly.kittyhawk.wtf:9082/nodes)
 - Sector size: **1KiB**
 
-### Test (for Infra and pre-release testing)
+### Staging (for Infra and pre-release testing)
 
-Deployed via CI by tagging a commit with `test-devnet-{d}.{d}.{d}` where d is a positive integer. **This network
+Deployed via CI by tagging a commit with `staging-devnet-{d}.{d}.{d}` where d is a positive integer. **This network
 is for people working on infra or testing a pre-release. You should probably avoid it unless that describes you.**
 
-- Faucet: [https://faucet.test.kittyhawk.wtf/](https://faucet.test.kittyhawk.wtf/)
-- Dashboard: [http://test.kittyhawk.wtf:8010/](http://test.kittyhawk.wtf:8010/)
-- Genesis File: [https://genesis.test.kittyhawk.wtf/genesis.car](https://genesis.test.kittyhawk.wtf/genesis.car)
-- Block explorer: [https://explorer.test.kittyhawk.wtf/](https://explorer.test.kittyhawk.wtf/)
-- Prometheus Endpoint: [http://test.kittyhawk.wtf:9082/metrics](http://test.kittyhawk.wtf:9082/metrics)
-- Connected Nodes PeerID's: [http://test.kittyhawk.wtf:9082/nodes](http://test.kittyhawk.wtf:9082/nodes)
+- Faucet: [https://faucet.staging.kittyhawk.wtf/](https://faucet.staging.kittyhawk.wtf/)
+- Dashboard: [http://staging.kittyhawk.wtf:8010/](http://staging.kittyhawk.wtf:8010/)
+- Genesis File: [https://genesis.staging.kittyhawk.wtf/genesis.car](https://genesis.staging.kittyhawk.wtf/genesis.car)
+- Block explorer: [https://explorer.staging.kittyhawk.wtf/](https://explorer.staging.kittyhawk.wtf/)
+- Prometheus Endpoint: [http://staging.kittyhawk.wtf:9082/metrics](http://staging.kittyhawk.wtf:9082/metrics)
+- Connected Nodes PeerID's: [http://staging.kittyhawk.wtf:9082/nodes](http://staging.kittyhawk.wtf:9082/nodes)
 - Sector size: **256MiB**
 
 ## Configuration
 ### Nightly 
 `auto-seal-interval-seconds 300`
 
-### Test 
+### Staging 
 `auto-seal-interval-seconds 300`  
 
 ### User 

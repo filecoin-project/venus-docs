@@ -71,6 +71,9 @@ You may see this error if you are building everything from source and not instal
 
     OS X Mojave moved the location of `stdlib.h` out of `/usr/include`.  This issue exists for other packages and there are several possible solutions suggested in this thread for [neovim issue #9050](https://github.com/neovim/neovim/issues/9050). Thanks to Filecoin community member *A_jinbin_filecoin.cn* for the link.
 
+* **Error when installing dependencies `'go mod download' failed`**<br />
+If you're updating go-filecoin from a previous version the git submodules may also need to be updated. Try `git submodule update --init --recursive` to update them.
+
 ### Mining and deals
 
 * **Miner create fails**

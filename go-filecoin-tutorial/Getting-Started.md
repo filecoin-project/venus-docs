@@ -28,8 +28,8 @@ Coming soon.
   - Fire up your terminal (_Terminal.app_ on MacOS) and `cd` into your newly created `filecoin` directory.
   - Create a directory for proofs parameters and fetch them via `paramfetch`:
     ```sh
-    mkdir -p /tmp/filecoin-proof-parameters
-    ./paramfetch -a -v
+    mkdir -p /var/tmp/filecoin-proof-parameters
+    ./paramfetch
     # be warned, this can take a long time
     ```
   - Add `go-filecoin` to your path by opening the `filecoin` folder inside your Terminal and running:
@@ -68,13 +68,15 @@ Use these steps to install filecoin:
     cp go-filecoin $GOPATH/bin
     ```
 
-_If you run into an error: `panic: json: cannot unmarshal string into Go struct field .Power of type uint64` you will need to remove the `gen.json` file from the fixtures._
+_If you run into the error: `panic: json: cannot unmarshal string into Go struct field .Power of type uint64` you will need to remove the `gen.json` file from the fixtures._
 
 ```sh
 rm -f ./fixtures/{test,live}/gen.json
 ```
 
 More info: Issue [#2859](https://github.com/filecoin-project/go-filecoin/issues/2859#issuecomment-497402147)
+
+_Have another error? See [Troubleshooting & FAQ](Troubleshooting-&-FAQ)._
 
 ## Start running Filecoin
 
@@ -132,7 +134,7 @@ We have a few visualization tools to understand what's happening on the Filecoin
 
 To see your node on the network stats, you'll need to opt in to streaming your node's logs. Open a new Terminal window and run:
 ```sh
-go-filecoin config heartbeat.beatTarget "/dns4/stats-infra.kittyhawk.wtf/tcp/8080/ipfs/QmUWmZnpZb6xFryNDeNU7KcJ1Af5oHy7fB9npU67sseEjR"
+go-filecoin config heartbeat.beatTarget "/dns4/backend-stats.kittyhawk.wtf/tcp/8080/ipfs/QmUWmZnpZb6xFryNDeNU7KcJ1Af5oHy7fB9npU67sseEjR"
 ```
 Restart the currently running `go-filecoin daemon` process and then go to the [Network Stats](https://stats.kittyhawk.wtf/) and watch your node reach consensus with the rest of the network.
 
