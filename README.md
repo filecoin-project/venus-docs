@@ -4,7 +4,7 @@ This repo contains documentation content for the Filecoin Project hosted at [doc
 
 ## Suggest an Edit
 
-Contributors and Community Members are welcome to make PRs to the `master` branch of this repo.
+Contributors and Community Members are welcome to make Pull Requests to this repo.
 
 ## Docs website
 
