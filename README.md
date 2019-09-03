@@ -1,10 +1,12 @@
 # Filecoin Docs
 
-This repo contains documentation content for the Filecoin Project.
+This repo contains documentation for the Filecoin Project hosted at [docs.filecoin.io](https://docs.filecoin.io).
 
 ## Suggest an Edit
 
-Contributors and Community Members are welcome to make PRs to the `master` branch of this repo.
+Contributors and Community Members are welcome to make Pull Requests to this repo.
+
+The `go-filecoin` wiki is in the directory `go-filecoin-tutorial`.
 
 ## Docs website
 
