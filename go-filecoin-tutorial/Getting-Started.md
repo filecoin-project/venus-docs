@@ -57,6 +57,11 @@ Use these steps to install filecoin:
     git checkout $USER_DEVNET_TAG
     ```
 
+1. go-filecoin depends on some proofs code written in Rust, housed in the rust-fil-proofs repo and consumed as a submodule. Recursively update the submodules by running the following: 
+    ```sh
+    git submodule update --init --recursive
+    ```
+
 1. Install dependencies:
     ```sh
     FILECOIN_USE_PRECOMPILED_RUST_PROOFS=true go run ./build deps
