@@ -2,6 +2,8 @@
 
 There are currently 3 Filecoin developer networks (aka devnets) available for development and testing.
 
+Current versions of each devnet are listed as colored badges at the top of [go-filecoin's README](https://github.com/filecoin-project/go-filecoin/blob/master/README.md).
+
 Both are subject to _**frequent downtimes**_ for a variety of reasons, including bugs, breaking changes, or the polar vortex ⛄. There is no [SLA](https://en.wikipedia.org/wiki/Service-level_agreement); until we have a status page, please ping in [#fil-help](https://github.com/filecoin-project/community#chat) if you would like to confirm status.
 
 ## Table of Contents
@@ -36,6 +38,7 @@ Deployed via CI by tagging a commit with `staging-devnet-{d}.{d}.{d}` where d is
 is for people working on infra or testing a pre-release. You should probably avoid it unless that describes you.**
 
 - NetworkStats: [https://staging.stats.kittyhawk.wtf](https://staging.stats.kittyhawk.wtf)
+    * <sub>`heartbeat.beatTarget "/dns4/staging.backend-stats.kittyhawk.wtf/tcp/8080/ipfs/QmUWmZnpZb6xFryNDeNU7KcJ1Af5oHy7fB9npU67sseEjR"`</sub>
 - Faucet: [https://faucet.staging.kittyhawk.wtf/](https://faucet.staging.kittyhawk.wtf/)
 - Dashboard: [http://staging.kittyhawk.wtf:8010/](http://staging.kittyhawk.wtf:8010/)
 - Genesis File: [https://genesis.staging.kittyhawk.wtf/genesis.car](https://genesis.staging.kittyhawk.wtf/genesis.car)
