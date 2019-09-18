@@ -33,10 +33,10 @@ Mining blocks on the Filecoin network requires committing storage capacity to th
 
 Start by creating a miner. You'll need to include a sector size and pledge collateral. You'll also need to include "gas", a small fee to send that pledge message to the Filecoin blockchain.
 
-0. Download the parameters for your sector size (256Mib)
+0. Generate the proof parameters for proving/verification
 
    ```sh 
-   proofs/bin/paramfetch -j proofs/misc/parameters.json -z 1024,268435456
+   ./go-sectorbuilder/paramcache
    ```
 
 1. Create a miner with 100 FIL as collateral, using the default sector size (256MiB), with a message gas price of 0 FIL/unit and limit of 1000 gas units. When successful, it returns the miner address of the newly created miner.

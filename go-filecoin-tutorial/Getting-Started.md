@@ -26,10 +26,10 @@ Coming soon.
   - Click on the `.tar.gz` link that matches your operating system (OSX or Linux) 
   - Unzip the downloaded file
   - Fire up your terminal (_Terminal.app_ on MacOS) and `cd` into your newly created `filecoin` directory.
-  - Create a directory for proofs parameters and fetch them via `paramfetch`:
+  - Create a directory for proofs parameters and generate them:
     ```sh
     mkdir -p /var/tmp/filecoin-proof-parameters
-    ./paramfetch
+    ./paramcache
     # be warned, this can take a long time
     ```
   - Add `go-filecoin` to your path by opening the `filecoin` folder inside your Terminal and running:

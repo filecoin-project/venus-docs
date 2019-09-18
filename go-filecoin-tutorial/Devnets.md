@@ -30,6 +30,20 @@ At the moment, **this is the network to use by default, for testing and experime
 The [Getting Started](Getting-Started) page contains
 instructions for connecting your nodes to this network.
 
+### Staging (for Infra and pre-release testing)
+
+Deployed via CI by tagging a commit with `staging-devnet-{d}.{d}.{d}` where d is a positive integer. **This network
+is for people working on infra or testing a pre-release. You should probably avoid it unless that describes you.**
+
+- NetworkStats: [https://staging.stats.kittyhawk.wtf](https://staging.stats.kittyhawk.wtf)
+- Faucet: [https://faucet.staging.kittyhawk.wtf/](https://faucet.staging.kittyhawk.wtf/)
+- Dashboard: [http://staging.kittyhawk.wtf:8010/](http://staging.kittyhawk.wtf:8010/)
+- Genesis File: [https://genesis.staging.kittyhawk.wtf/genesis.car](https://genesis.staging.kittyhawk.wtf/genesis.car)
+- Block explorer: [https://explorer.staging.kittyhawk.wtf/](https://explorer.staging.kittyhawk.wtf/)
+- Prometheus Endpoint: [http://staging.kittyhawk.wtf:9082/metrics](http://staging.kittyhawk.wtf:9082/metrics)
+- Connected Nodes PeerID's: [http://staging.kittyhawk.wtf:9082/nodes](http://staging.kittyhawk.wtf:9082/nodes)
+- Sector size: **256MiB**
+
 ### Nightly
 
 Deployed from master by CI every day at 0600 UTC. **This network
@@ -42,19 +56,6 @@ is for people contributing to `go-filecoin`. You should probably avoid it unless
 - Prometheus Endpoint: [http://nightly.kittyhawk.wtf:9082/metrics](http://nightly.kittyhawk.wtf:9082/metrics)
 - Connected Nodes PeerID's: [http://nightly.kittyhawk.wtf:9082/nodes](http://nightly.kittyhawk.wtf:9082/nodes)
 - Sector size: **1KiB**
-
-### Staging (for Infra and pre-release testing)
-
-Deployed via CI by tagging a commit with `staging-devnet-{d}.{d}.{d}` where d is a positive integer. **This network
-is for people working on infra or testing a pre-release. You should probably avoid it unless that describes you.**
-
-- Faucet: [https://faucet.staging.kittyhawk.wtf/](https://faucet.staging.kittyhawk.wtf/)
-- Dashboard: [http://staging.kittyhawk.wtf:8010/](http://staging.kittyhawk.wtf:8010/)
-- Genesis File: [https://genesis.staging.kittyhawk.wtf/genesis.car](https://genesis.staging.kittyhawk.wtf/genesis.car)
-- Block explorer: [https://explorer.staging.kittyhawk.wtf/](https://explorer.staging.kittyhawk.wtf/)
-- Prometheus Endpoint: [http://staging.kittyhawk.wtf:9082/metrics](http://staging.kittyhawk.wtf:9082/metrics)
-- Connected Nodes PeerID's: [http://staging.kittyhawk.wtf:9082/nodes](http://staging.kittyhawk.wtf:9082/nodes)
-- Sector size: **256MiB**
 
 ## Configuration
 ### Nightly 
