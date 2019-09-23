@@ -43,12 +43,16 @@ Coming soon.
 Use these steps to install filecoin:
 
 1. Build dependencies
-   - golang `1.12.1`
-   - rust/rustup ([follow the instructions on rust-fil-proofs](https://github.com/filecoin-project/rust-fil-proofs#install-and-configure-rust), **DO NOT** install from homebrew)
-   - pkg-config
-   - jq
+   - go >= `v1.12.1`
+   - rust/rustup >= `v1.36.0` and `cargo` ([follow the instructions on rust-fil-proofs](https://github.com/filecoin-project/rust-fil-proofs#install-and-configure-rust), **DO NOT** install from homebrew)
+   - `pkg-config` <sub>(Mac OS devs can install using brew: `brew install pkg-config`)</sub>
+   - `jq`
 
-1. Find the latest git tag for the user devnet from the project [README](https://github.com/filecoin-project/go-filecoin#filecoin-go-filecoin) by clicking the badge (user devnet etc) that takes you to the release page (e.g., "0.3.2").
+   You will also need `gcc` with `v7.4.0` or higher. (e.g. `export CC=gcc`).
+
+   You can double check this list with the latest required dependencies on the [README](https://github.com/filecoin-project/go-filecoin#install-go-and-rust).
+
+1. Find the latest git tag for the user devnet at the top of the the project [README](https://github.com/filecoin-project/go-filecoin#filecoin-go-filecoin) by clicking the badge (user devnet etc.) that takes you to the release page (e.g., "0.3.2").
 
 1. Ensure you have the correct code for joining the user devnet:
     ```sh
