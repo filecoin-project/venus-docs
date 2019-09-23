@@ -44,7 +44,7 @@ Start by creating a miner. You'll need to include a sector size and pledge colla
     *Note: This step may take about a minute to process, but if it hangs for longer, double-check that `gas-price` is less than `$YOUR_WALLET_BALANCE / LIMIT`.*
 
     ```sh
-    go-filecoin miner create 100 --gas-price=0.001 --gas-limit=300 --peerid `go-filecoin id | jq -r '.ID'`   # this may take a minute
+    go-filecoin miner create 100 --gas-price=0.001 --gas-limit=300`   # this may take a minute
     ```
 
 1. Once the miner is created, run the following to start mining:
