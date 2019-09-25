@@ -4,9 +4,16 @@ This repo contains documentation for the Filecoin Project hosted at [docs.fileco
 
 ## Suggest an Edit
 
-Contributors and Community Members are welcome to make Pull Requests or File Issues in this repo.
+:bulb: Contributors and Community Members are welcome to make Pull Requests or File Issues and Improvements in this repo.
 
-The `go-filecoin` wiki is in the directory `go-filecoin-tutorial`.
+The former `go-filecoin` Wiki is in the directory [go-filecoin-tutorial](go-filecoin-tutorial).
+
+  ***
+
+  :mushroom: Community members can also click on :pencil: `Suggest an Edit` links at [docs.filecoin.io](https://docs.filecoin.io) to file PRs.
+
+  :wrench: Filecoin Developers can still update the [Troubleshooting & FAQ](https://github.com/filecoin-project/go-filecoin/wiki/Troubleshooting-&-FAQ) page on the `go-filecoin` Wiki.
+
 
 ## Docs website
 
