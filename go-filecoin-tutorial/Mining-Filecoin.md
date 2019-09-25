@@ -39,12 +39,12 @@ Start by creating a miner. You'll need to include a sector size and pledge colla
    ./go-sectorbuilder/paramcache
    ```
 
-1. Create a miner with 100 FIL as collateral, using the default sector size (256MiB), with a message gas price of 0 FIL/unit and limit of 1000 gas units. When successful, it returns the miner address of the newly created miner.
+1. Create a miner with 100 FIL as collateral, using the default sector size (256MiB), with a message gas price of 0.001 FIL/unit and limit of 300 gas units. When successful, it returns the miner address of the newly created miner.
 
-    *Note: This step may take about a minute to process, but if it hangs for longer, double-check that `gas-price` is less than `$YOUR_WALLET_BALANCE / LIMIT`.*
+    *Note: This step may take about a minute to process, but if it hangs for longer, double-check that `(gas-price * gas-limit)` is less than `$YOUR_WALLET_BALANCE`.*
 
     ```sh
-    go-filecoin miner create 100 --gas-price=0.001 --gas-limit=300`   # this may take a minute
+    go-filecoin miner create 100 --gas-price=0.001 --gas-limit=300   # this may take a minute
     ```
 
 1. Once the miner is created, run the following to start mining:
