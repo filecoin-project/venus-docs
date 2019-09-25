@@ -4,7 +4,7 @@ This repo contains documentation for the Filecoin Project hosted at [docs.fileco
 
 ## Suggest an Edit
 
-Contributors and Community Members are welcome to make Pull Requests to this repo.
+Contributors and Community Members are welcome to make Pull Requests or File Issues in this repo.
 
 The `go-filecoin` wiki is in the directory `go-filecoin-tutorial`.
 
