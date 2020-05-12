@@ -139,7 +139,7 @@ By default, nodes are referenced by long, alphanumeric node IDs. You can give yo
 
 ## Start streaming activity from your node
 
-We have a few visualization tools to understand what's happening on the Filecoin network: the [Network Stats](https://stats.kittyhawk.wtf/) and [block explorer](Block-Explorer). 
+We have a few visualization tools to understand what's happening on the Filecoin network: the [Network Stats](https://stats.kittyhawk.wtf/) and [block explorer](Explorer-and-Dashboard#block-explorer). 
 
 To see your node on the network stats, you'll need to opt in to streaming your node's logs. Open a new Terminal window and run:
 ```sh
