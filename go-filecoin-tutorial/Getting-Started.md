@@ -1,91 +1,102 @@
-# Getting Started
+# Getting started
 
 This is a step-by-step guide for installing and running a Filecoin node connected to the [User&nbsp;Devnet](Devnets#user) on your computer. Subsequent tutorials explain how to [mine Filecoin](Mining-Filecoin) or [store data](Storing-on-Filecoin) with your node.
 
-## Table of Contents
+## Table of contents
 
-* [Install Filecoin and its dependencies](#install-filecoin-and-its-dependencies)
+* [System requirements](#system-requirements)
+* [Installing dependencies and system configuration](#installing-dependencies-and-system-configuration)
+* [Building Filecoin and running tests](#building-filecoin-and-running-tests)
 * [Start running Filecoin](#start-running-filecoin)
 * [Name your Filecoin node](#name-your-filecoin-node)
 * [Start streaming activity from your node](#start-streaming-activity-from-your-node)
 * [Get FIL from the Filecoin faucet](#get-fil-from-the-filecoin-faucet)
 * [Wait for chain sync](#wait-for-chain-sync)
 
-## Install Filecoin (and its dependencies)
+### System requirements
 
-<!--
-We have two installation methods available:
-* install from binary (recommended for most)
-* install from source (requires golang installation, rust and other tools)
+Go-filecoin can build and run on most Linux and MacOS systems. 
+Windows is not yet supported.
 
-### Installing from binary
-Coming soon.
--->
-### Installing from binary
-  - Go to the latest release for [go-filecoin Releases page on GitHub](https://github.com/filecoin-project/go-filecoin/releases/latest). 
-  - Click on the `.tar.gz` link that matches your operating system (OSX or Linux) 
-  - Unzip the downloaded file
-  - Fire up your terminal (_Terminal.app_ on MacOS) and `cd` into your newly created `filecoin` directory.
-  - Create a directory for proofs parameters and generate them:
-    ```sh
-    mkdir -p /var/tmp/filecoin-proof-parameters
-    ./paramcache
-    # be warned, this can take a long time
-    ```
-  - Add `go-filecoin` to your path by opening the `filecoin` folder inside your Terminal and running:
-    ```sh
-    export PATH="$(pwd)":$PATH
-    ```
-  - You will need to add the previous line to your shell init file like `~/.bash_profile` (advanced) or run it from the `filecoin` directory in each terminal you open.
+A validating node can run on most systems with at least 8GB of RAM. 
+A mining node requires significant RAM and GPU resources, depending on the sector configuration to be used.
 
-### Installing from source
+### Installing dependencies and system configuration
 
-Use these steps to install filecoin:
-
-1. Build dependencies
-   - go >= `v1.12.1`
-   - rust/rustup >= `v1.36.0` and `cargo` ([follow the instructions on rust-fil-proofs](https://github.com/filecoin-project/rust-fil-proofs#install-and-configure-rust), **DO NOT** install from homebrew)
-   - `pkg-config` <sub>(Mac OS devs can install using brew: `brew install pkg-config`)</sub>
-   - `jq`
-
-   You will also need `gcc` with `v7.4.0` or higher. (e.g. `export CC=gcc`).
-
-   You can double check this list with the latest required dependencies on the [README](https://github.com/filecoin-project/go-filecoin#install-go-and-rust).
-
-1. Find the latest git tag for the user devnet at the top of the the project [README](https://github.com/filecoin-project/go-filecoin#filecoin-go-filecoin) by clicking the badge (user devnet etc.) that takes you to the release page (e.g., "0.3.2").
-
-1. Ensure you have the correct code for joining the user devnet:
-    ```sh
-    cd $GOPATH/src/github.com/filecoin-project/go-filecoin
-    git fetch origin
-    git checkout $USER_DEVNET_TAG
-    ```
-
-1. go-filecoin depends on some proofs code written in Rust, housed in the rust-fil-proofs repo and consumed as a submodule. Recursively update the submodules by running the following: 
-    ```sh
-    git submodule update --init --recursive
-    ```
-
-1. Install dependencies:
-    ```sh
-    FILECOIN_USE_PRECOMPILED_RUST_PROOFS=true go run ./build deps
-    ```
-
-1. Build the project:
-    ```sh
-    go run ./build build
-    cp go-filecoin $GOPATH/bin
-    ```
-
-_If you run into the error: `panic: json: cannot unmarshal string into Go struct field .Power of type uint64` you will need to remove the `gen.json` file from the fixtures._
+Clone this git repository to your machine and enter it:
 
 ```sh
-rm -f ./fixtures/{test,live}/gen.json
+mkdir -p /path/to/filecoin-project
+git clone https://github.com/filecoin-project/go-filecoin.git /path/to/filecoin-project/go-filecoin
 ```
 
-More info: Issue [#2859](https://github.com/filecoin-project/go-filecoin/issues/2859#issuecomment-497402147)
+#### Installing Go
 
-_Have another error? See [Troubleshooting & FAQ](Troubleshooting-&-FAQ)._
+The build process for go-filecoin requires [Go](https://golang.org/doc/install) >= v1.13
+
+> Installing Go for the first time? We recommend [this tutorial](https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html) which includes environment setup.
+
+Due to our use of `cgo`, you'll need a C compiler to build go-filecoin whether you're using a prebuilt library or it yourself from source. 
+If you want to use `gcc` (e.g. `export CC=gcc`) when building go-filecoin, you will need to use v7.4.0 or higher.
+
+The build process will download a static library containing the [Filecoin proofs implementation](https://github.com/filecoin-project/rust-fil-proofs) (which is written in Rust).
+
+> If instead you wish to build proofs from source, you'll need (1) Rust development environment and (2) to set the environment variable `FFI_BUILD_FROM_SOURCE=1`.
+More info at [filecoin-ffi](https://github.com/filecoin-project/filecoin-ffi).
+
+#### Installing dependencies
+
+First, load all the Git submodules.
+
+```sh
+git submodule update --init --recursive
+```
+
+Initialize build dependencies.
+
+```sh
+make deps
+```
+
+Note: The first time you run `deps` can be **slow** as very large parameter files are either downloaded or generated locally in `/var/tmp/filecoin-proof-parameters`.
+Have patience; future runs will be faster.
+
+### Building Filecoin and running tests
+From inside your newly cloned Filecoin directory, issue the following commands:
+
+```sh
+# First, build the binary
+make
+
+# Then, run the unit tests.
+go run ./build test
+
+# Build and test can be combined!
+go run ./build best
+```
+
+Other handy build commands include:
+
+```sh
+# Check the code for style and correctness issues
+go run ./build lint
+
+# Run different categories of tests by toggling their flags
+go run ./build test -unit=false -integration=true -functional=true
+
+# Test with a coverage report
+go run ./build test -cover
+
+# Test with Go's race-condition instrumentation and warnings (see https://blog.golang.org/race-detector)
+go run ./build test -race
+
+# Deps, Lint, Build, Test (any args will be passed to `test`)
+go run ./build all
+```
+
+> **NOTICE:** Any flag passed to `go run ./build test` (e.g. `-cover`) will be passed on to `go test`.
+
+If you have **problems with the build**, please consult the [Troubleshooting](https://go.filecoin.io/go-filecoin-tutorial/Troubleshooting-&-FAQ.html) section of this documentation.
 
 ## Start running Filecoin
 
@@ -94,20 +105,35 @@ _Have another error? See [Troubleshooting & FAQ](Troubleshooting-&-FAQ)._
     rm -rf ~/.filecoin
     ```
 
-1. Initialize go-filecoin. The `--devnet-user` flag connects you to our main devnet:
-    ```sh
-    go-filecoin init --devnet-user --genesisfile=https://genesis.user.kittyhawk.wtf/genesis.car
-    ```
+2. Initialize go-filecoin:
+```sh
+go-filecoin init --genesisfile=https://ipfs.io/ipfs/QmXZQeezX1x8uRQX9EUaYxnyivUpTfJqQTvszk3c8SnFPN/testnet.car --network=testnet
+```
 
-1. Start your go-filecoin daemon:
+3. Start your go-filecoin daemon:
     ```sh
     go-filecoin daemon
     ```
-    This should return "My peer ID is `<peerID>`", where `<peerID>` is a long [CID](https://github.com/filecoin-project/specs/blob/master/definitions.md#cid) string starting with "Qm".
+    
+This should return "My peer ID is `<peerID>`", where `<peerID>` is a long [CID](https://github.com/filecoin-project/specs/blob/master/definitions.md#cid) string starting with "Qm".
 
-    Note: this can be **slow** the first time. The filecoin node needs a large parameter file for proofs, stored in `/tmp/filecoin-proof-parameters`. It's usually generated by the `deps` build step. If these files are missing they will be regenerated, which can take up to an hour. We are working on a better solution.
+4. Print a list of bootstrap node addresses:
 
-1. Check your connectivity:
+```
+go-filecoin config bootstrap.addresses
+```
+
+    
+5. Choose any address from the list you just printed, and connect to it (Automatic peer discovery and connection coming soon.):
+```
+go-filecoin swarm connect <any-filecoin-node-mulitaddr>
+```
+    
+ > **NOTICE:** This can be **slow** the first time. The filecoin node needs a large parameter file for proofs, stored in `/tmp/filecoin-proof-parameters`. It's usually generated by the `deps` build step. If these files are missing they will be regenerated, which can take up to an hour. We are working on a better solution.
+
+Your node should now be connected to some peers and will begin downloading and validating the blockchain.
+
+6. Check your connectivity:
     ```sh
     go-filecoin swarm peers                  # lists addresses of peers to which you're connected
     ```
@@ -132,7 +158,7 @@ By default, nodes are referenced by long, alphanumeric node IDs. You can give yo
     ```sh
     go-filecoin config heartbeat.nickname "Pizzanode"
     ````
-1. The new name takes effect immediately, no need to restart. You can check the configured name with:
+2. The new name takes effect immediately, no need to restart. You can check the configured name with:
     ```sh
     go-filecoin config heartbeat.nickname
     ````
