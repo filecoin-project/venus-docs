@@ -7,6 +7,7 @@ _Note: This wiki focuses on `go-filecoin`. For questions about the Filecoin Proj
 ## Table of contents
 
 - [Known Issues](#known-issues)
+- [Changing ports](#changing-ports)
 - [Installing from binary](#installing-from-binary)
 - [Downloading and building from source](#downloading-and-building-from-source)
 - [Mining and deals](#mining-and-deals)
@@ -19,8 +20,19 @@ _Note: This wiki focuses on `go-filecoin`. For questions about the Filecoin Proj
 ### Known issues
 Known bugs are [catalogued here](https://github.com/filecoin-project/go-filecoin/issues?q=is%3Aissue+is%3Aopen+label%3AC-bug).
 
-#### 0.3.x
-- **PoSt takes too long on many sectors**. Due to a limitation of the proofs library, the PoSt algorithm is iterated for every two sectors, and the proofs concatenated. When many sectors are committed, this can take longer than the proving period (1000) blocks, resulting in a miner being "too late". This will be fixed upstream in 0.4 release.
+### Changing ports
+go-filecoin uses static port 6000 by default. If you want to change to another port to troubleshoot NAT or other issues, here's how.
+
+1. After initializing the node, navigate to configuration file `config.json`. By default this lives at `~/.filecoin/config.json`.
+
+2. Find the swarm section of the config. Replace `6000` with the port you wish to use.
+```json
+"swarm": {                                                                                                                                           
+                "address": "/ip4/0.0.0.0/tcp/6000"                                                                                                           
+        }, 
+```
+
+3. Restart the daemon. `go-filecoin id` should show you using the new swarm address.
 
 ### Installing from binary
 
