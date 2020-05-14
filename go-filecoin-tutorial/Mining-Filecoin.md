@@ -2,7 +2,7 @@
 
 This guide provides an overview of how mining works, and a step-by-step of how to mine on the Filecoin network.
 
-## Table of Contents
+## Table of contents
 
 * [What is mining?](#what-is-mining)
 * [Start mining](#start-mining)
@@ -35,7 +35,7 @@ Start by creating a miner. You'll need to include a sector size and pledge colla
 
 0. Generate the proof parameters for proving/verification
 
-   ```sh 
+   ```sh
    ./go-sectorbuilder/paramcache
    ```
 
@@ -63,7 +63,7 @@ You can explore the Filecoin blockchain using the [Filecoin Block Explorer](http
     ```sh    
     go-filecoin chain head # returns JSON including the <blockID> of the chain head
     ```
-1. Then, view the contents of that block with `show block`: 
+1. Then, view the contents of that block with `show block`:
     ```sh    
     go-filecoin show block <blockID>
     ```
@@ -79,21 +79,21 @@ In the Filecoin storage market, miners run a command that sets their price for s
 1. the maximum number of gas units to be consumed by this message
 
 Let's set our price!
-   
+
 1. We set our price to 0.000000001 FIL/byte/block, valid for 2880 blocks, with a message gas price of 0.001 FIL/unit and limit of 1000 gas units:
     ```sh
     go-filecoin miner set-price --gas-price=0.001 --gas-limit=1000 0.000000001 2880
     ```
 1. Once you have set your price, you can check `client list-asks` to see your ask (look for your miner address):
     ```sh
-    go-filecoin client list-asks --enc=json | jq 
+    go-filecoin client list-asks --enc=json | jq
     ```
 
 ## Accept a deal and get paid
 
 Clients propose storage deals to miners who have enough storage and at a price that is lower than their willingness to pay.  Currently, miners accept all deals that are proposed to them by clients with sufficient funds. Payment validation is done automatically so you don't have to take any action to accept a deal that pays you your asking price.  Deal payments are implemented using filecoin's builtin payment channels. Thus, miners are periodically credited funds in a payment channel throughout the lifetime of the deal.
 
-To see all deals your miner has made run 
+To see all deals your miner has made run
 ```sh
 go-filecoin deals list --miner
 ```
@@ -111,16 +111,16 @@ go-filecoin deals list --miner
 }
 ```
 
-To get more information about a specific deal run 
+To get more information about a specific deal run
 ```sh
 go-filecoin deals show <proposal-cid>
 ```  
 In the above example `<proposal-cid>` would be `zDPWYqFD8U3ktr58iiqWTwzEV3sKyz7SGQjLg1zKS1Mgpo5N2nr1`.  You can inspect a deal's state, how long the agreed storage period is, and how much you will get paid for honoring the deal.
 
-When the deal duration is up you can redeem your full payment by running 
+When the deal duration is up you can redeem your full payment by running
 ```sh
 go-filecoin deals redeem --gas-price=0.001 --gas-limit=1000 <proposal-cid>
-``` 
+```
 This will submit a message to the blockchain redeeming funds from the payment channel set up between you and your client.  Wait for the output message to be processed by the network and voila! You will now see the deal's payout in your wallet.
 
 ## Stop mining

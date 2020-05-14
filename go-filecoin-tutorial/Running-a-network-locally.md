@@ -1,18 +1,18 @@
-# Run a Local Network
+# Running a local network
 
 Sometime it can be helpful to setup a local network for testing, both in development or in play. There are currently two different ways to setup a network.
 
 - Manually using the gengen tool
 - Automatically using localnet tool
 
-## Table of Contents
+## Table of contents
 
  - [Manual network setup with gengen tool](#manual-network-setup-with-gengen-tool)
     - [Configuration](#configuration)
-    - [Generated Output](#generated-output)
+    - [Generated output](#generated-output)
     - [Using the output](#using-the-output)
   - [Automatic network setup with localnet tool](#automatic-network-setup-with-localnet-tool)
-    - [Basic Usage](#basic-usage)
+    - [Basic usage](#basic-usage)
     - [Regular Sectors](#regular-sectors)
 
 
@@ -51,7 +51,7 @@ The `preAlloc` property defines the preallocated funds for the wallet. The numer
 
 The `miners` property defines a miner and the amount of power it will have on the network. Power is a measurement of sealed sectors. Currently this power is fake, but for the most part acts like the real thing. Gengen [soon may create real sealed sectors](https://github.com/filecoin-project/go-filecoin/issues/2270). It's best to keep this power value low. The `owner` is the key index, so key `0.key` would be owner `0`.
 
-### Generated Output
+### Generated output
 
 There are two main outputs from `gengen`, with the additional of the `n.key` files for easy importing.
 
@@ -113,14 +113,14 @@ go build -o localnet main.go
 
 Using localnet is really simple. A few examples will showcase this:
 
-### Basic Usage
+### Basic usage
 When using all the default flags, localnet will use the `go-filecoin` binary located in the project directory under `filecoin-project/go-filecoin`. It will default to our small sectors, creating five miners. The `-shell` flag tells localnet to create an additional node and launches your shell with `go-filecoin` setup correctly in your path, ready to use. The node will already be connect to all the miners and have 100,000 FIL in its default wallet.
 
 ```sh
 localnet $ ./localnet -shell
 ```
 
-### Regular Sectors
+### Regular sectors
 Using regular sized sectors with localnet can be incredibly taxing on a system and should probably be avoided
 on laptops due to the number of miners running. The overall miner count can be reduced from the default `5` by passing the `-miner-count` flag.
 

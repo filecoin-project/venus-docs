@@ -2,7 +2,7 @@
 
 This guide will show you how to store data on Filecoin by making storage deals with storage miners.
 
-## Table of Contents
+## Table of contents
 
 * [How to store on Filecoin](#how-to-store-on-filecoin)
 * [Test Filecoin with sample data](#test-filecoin-with-sample-data)
@@ -21,7 +21,7 @@ In order to run the remainder of these commands, make sure you have a Filecoin n
 
 You can use your own data to test Filecoin. We recommend using small test files while you're still getting used to the different commands.
 
-We put together a folder of [sample data](https://github.com/filecoin-project/sample-data) (images, GIFs, and text files) that you can get started with. Download this data, unzip it, and save it wherever you like. In the examples below, we will assume that you have saved the repo to your Desktop (`~/Desktop`). 
+We put together a folder of [sample data](https://github.com/filecoin-project/sample-data) (images, GIFs, and text files) that you can get started with. Download this data, unzip it, and save it wherever you like. In the examples below, we will assume that you have saved the repo to your Desktop (`~/Desktop`).
 
 ## Import data
 
@@ -55,13 +55,13 @@ go-filecoin client cat $CID > image.jpg && open image.jpg
 
 ## Propose a storage deal
 
-Once the data is imported, you can look through available _ask orders_ from miners. For now,  you'll manually choose one of them and propose a storage deal. 
+Once the data is imported, you can look through available _ask orders_ from miners. For now,  you'll manually choose one of them and propose a storage deal.
 
 <!--# Check size of the imported file (in bytes)
 go-filecoin client cat <CID> | wc -c
 -->
 
-To see all available asks, run this command: 
+To see all available asks, run this command:
 ```sh
 go-filecoin client list-asks --enc=json | jq
 ```
@@ -106,7 +106,7 @@ go-filecoin client query-storage-deal <dealID>
 
 ## Retrieve your data
 
-After the deal status becomes "posted, you will have successfully stored your data! 
+After the deal status becomes "posted, you will have successfully stored your data!
 
 Before data can be retrieved from a sealed sector, the sector must be unsealed. At present, the sealing and unsealing processed are artificially fast so it will take around 5-10 minutes for you to retrieve a piece of data after you request it. Note that when Filecoin is working "for real," this number may be much longer.
 
