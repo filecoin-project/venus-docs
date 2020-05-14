@@ -1,10 +1,10 @@
-# How to Connect 2 Nodes Directly
+# Connecting two nodes directly
 
 This guide is primarily for getting two nodes mining and connected to a swarm on a single machine, for local development. Some of the instructions can still apply to connecting to a devnet.
 
 Optionally, you could look at and modify your own copy of [this script](https://github.com/filecoin-project/go-filecoin/blob/master/functional-tests/retrieval), which sets up two local nodes and does a file store/retrieval.
 
-## Table of Contents
+## Table of contents
 
 - [Initial setup](#initial-setup)
     - [Node 1](#node-1)
@@ -26,7 +26,7 @@ Initialize go-filecoin in the default directory, and use the genesis file from g
 go-filecoin init --genesisfile ./fixtures/genesis.car
 ```
 
-Run the daemon: 
+Run the daemon:
 ```sh
 go-filecoin daemon
 ```

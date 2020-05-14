@@ -1,8 +1,8 @@
-# Getting Started
+# Getting started
 
 This is a step-by-step guide for installing and running a Filecoin node connected to the [User&nbsp;Devnet](Devnets#user) on your computer. Subsequent tutorials explain how to [mine Filecoin](Mining-Filecoin) or [store data](Storing-on-Filecoin) with your node.
 
-## Table of Contents
+## Table of contents
 
 * [Install Filecoin and its dependencies](#install-filecoin-and-its-dependencies)
 * [Start running Filecoin](#start-running-filecoin)
@@ -21,26 +21,9 @@ We have two installation methods available:
 ### Installing from binary
 Coming soon.
 -->
-### Installing from binary
-  - Go to the latest release for [go-filecoin Releases page on GitHub](https://github.com/filecoin-project/go-filecoin/releases/latest). 
-  - Click on the `.tar.gz` link that matches your operating system (OSX or Linux) 
-  - Unzip the downloaded file
-  - Fire up your terminal (_Terminal.app_ on MacOS) and `cd` into your newly created `filecoin` directory.
-  - Create a directory for proofs parameters and generate them:
-    ```sh
-    mkdir -p /var/tmp/filecoin-proof-parameters
-    ./paramcache
-    # be warned, this can take a long time
-    ```
-  - Add `go-filecoin` to your path by opening the `filecoin` folder inside your Terminal and running:
-    ```sh
-    export PATH="$(pwd)":$PATH
-    ```
-  - You will need to add the previous line to your shell init file like `~/.bash_profile` (advanced) or run it from the `filecoin` directory in each terminal you open.
-
 ### Installing from source
 
-Use these steps to install filecoin:
+Use these steps to install Filecoin:
 
 1. Build dependencies
    - go >= `v1.12.1`
@@ -61,7 +44,7 @@ Use these steps to install filecoin:
     git checkout $USER_DEVNET_TAG
     ```
 
-1. go-filecoin depends on some proofs code written in Rust, housed in the rust-fil-proofs repo and consumed as a submodule. Recursively update the submodules by running the following: 
+1. go-filecoin depends on some proofs code written in Rust, housed in the rust-fil-proofs repo and consumed as a submodule. Recursively update the submodules by running the following:
     ```sh
     git submodule update --init --recursive
     ```
@@ -128,7 +111,7 @@ _Need help? See [Troubleshooting & FAQ](Troubleshooting-&-FAQ) or [#fil-dev on M
 By default, nodes are referenced by long, alphanumeric node IDs. You can give your node a human-readable nickname.
 * Nicknames can only contain letter characters (no numbers, spaces, or other special characters).
 
-1. Open a new Terminal window and set your node nickname (replace `Pizzanode` with the name of your choice): 
+1. Open a new Terminal window and set your node nickname (replace `Pizzanode` with the name of your choice):
     ```sh
     go-filecoin config heartbeat.nickname "Pizzanode"
     ````
@@ -139,7 +122,7 @@ By default, nodes are referenced by long, alphanumeric node IDs. You can give yo
 
 ## Start streaming activity from your node
 
-We have a few visualization tools to understand what's happening on the Filecoin network: the [Network Stats](https://stats.kittyhawk.wtf/) and [block explorer](Explorer-and-Dashboard#block-explorer). 
+We have a few visualization tools to understand what's happening on the Filecoin network: the [Network Stats](https://stats.kittyhawk.wtf/) and [block explorer](Explorer-and-Dashboard#block-explorer).
 
 To see your node on the network stats, you'll need to opt in to streaming your node's logs. Open a new Terminal window and run:
 ```sh
@@ -185,6 +168,6 @@ All balances of FIL are stored in wallets. When a node is newly created, it will
     go-filecoin wallet balance ${WALLET_ADDR}
     ```
 
-After syncing is complete, you can begin mining or storing data on the Filecoin network! Choose your adventure: 
+After syncing is complete, you can begin mining or storing data on the Filecoin network! Choose your adventure:
 - [Mining Filecoin](Mining-Filecoin)
 - [Storing Data](Storing-on-Filecoin)

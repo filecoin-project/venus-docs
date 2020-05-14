@@ -1,10 +1,10 @@
-# Troubleshooting & FAQ
+# Troubleshooting and FAQ
 
 _Having trouble with `go-filecoin`? Here are some common errors (and their fixes), as well as answers to frequently asked questions._
 
 _Note: This wiki focuses on `go-filecoin`. For questions about the Filecoin Project at large, see the [Filecoin Project FAQ](https://filecoin.io/faqs/)._
 
-## Table of Contents
+## Table of contents
 
 - [Known Issues](#known-issues)
 - [Installing from binary](#installing-from-binary)
@@ -16,8 +16,8 @@ _Note: This wiki focuses on `go-filecoin`. For questions about the Filecoin Proj
 - [Issues connecting to a network](#issues-connecting-to-a-network)
 - [Upgrading](#upgrading)
 
-### Known Issues
-Known bugs are [catalogued here](https://github.com/filecoin-project/go-filecoin/issues?q=is%3Aissue+is%3Aopen+label%3AC-bug). 
+### Known issues
+Known bugs are [catalogued here](https://github.com/filecoin-project/go-filecoin/issues?q=is%3Aissue+is%3Aopen+label%3AC-bug).
 
 #### 0.3.x
 - **PoSt takes too long on many sectors**. Due to a limitation of the proofs library, the PoSt algorithm is iterated for every two sectors, and the proofs concatenated. When many sectors are committed, this can take longer than the proving period (1000) blocks, resulting in a miner being "too late". This will be fixed upstream in 0.4 release.
@@ -96,16 +96,16 @@ If you're updating go-filecoin from a previous version the git submodules may al
     * The maximum piece (i.e. file) size must be less than the miner sector size, currently 256Mib.
 
 * **Proposing deal fails: error creating payment: context deadline exceeded**
-    
+
     * Our best guess is that a prior message failed to be mined, but increased your actor's nonce. Tracking in [#1936](https://github.com/filecoin-project/go-filecoin/issues/1936). You probably need to re-init your node.
-    
+
 * **Why is my deal stuck in the `Staged` state?**
 
     * **Was my piece too big?**
       If a storage client C proposes a deal D with a miner M and that D references a piece P whose size is less than or equal to the size of M's staged sector, P will be transferred from C to M and M will write P to its staged sector. The state of D will be `Staged` at this point.
 
       If the state does not equal `Staged` immediately after C proposes a deal with M and transfers the bytes, then P isn't "waiting to be sealed." This can happen if the size of P is larger than size of the sector. In the devnet/user cluster, that size I speak of is `266338304` bytes.
-      
+
     * **At which point will the state of a deal move from `Staged` to `Posted`?**
         If the state of deal D is `Staged`, then the miner has accepted piece P and written it to a staged sector S. **If M isn't using auto-sealing**, P will sit in S until M receives a new deal D2 proposal whose piece P2 is large enough such that size(P) + size(P2) >= free-space(S). When this happens, M will start sealing S. When sealing completes, the state of D will become `Posted`.
 
@@ -152,7 +152,7 @@ If you're updating go-filecoin from a previous version the git submodules may al
 
     Seeing an error such as
     ```text
-    code not at same version: GIT_SHA does not match DIFFERENT_GIT_SHA, disconnecting from peer: 
+    code not at same version: GIT_SHA does not match DIFFERENT_GIT_SHA, disconnecting from peer:
     ```
     or seeing a lot of errors during validation of blocks during chain syncing means that your binary or source code is not at the correct version for the devnet you'd like to join. To join a devnet, download the latest release for that devnet in the [Releases](https://github.com/filecoin-project/go-filecoin/releases) section of the repository and follow the directions in [Getting Started](#Getting-Started) sections of the wiki.
 
