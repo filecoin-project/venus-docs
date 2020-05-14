@@ -9,7 +9,7 @@ Sometime it can be helpful to setup a local network for testing, both in develop
 
  - [Manual network setup with gengen tool](#manual-network-setup-with-gengen-tool)
     - [Configuration](#configuration)
-    - [Generated Output](#generated-output)
+    - [Generated output](#generated-output)
     - [Using the output](#using-the-output)
   - [Automatic network setup with localnet tool](#automatic-network-setup-with-localnet-tool)
     - [Basic usage](#basic-usage)
