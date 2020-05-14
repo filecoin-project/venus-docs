@@ -25,18 +25,5 @@ Diving into one block:
 
 The Filecoin network dashboard provides a visual way to see nodes on the Filecoin network.
 
-View stats about the whole devnet network:
-- [User devnet network stats](https://stats.kittyhawk.wtf/)
-
-See [Devnets](Devnets) for links to dashboards on the nightly and infra/test devnets.
-
-In order to see your node's activity, configure your node to [stream its activity](Getting-Started#start-streaming-activity-from-your-node):
-
-```sh
-# User devnet
-go-filecoin config heartbeat.beatTarget "/dns4/backend-stats.kittyhawk.wtf/tcp/8080/ipfs/QmUWmZnpZb6xFryNDeNU7KcJ1Af5oHy7fB9npU67sseEjR"
-# Nightly devnet
-go-filecoin config heartbeat.beatTarget "/dns4/nightly.kittyhawk.wtf/tcp/9081/ipfs/QmVR3UFv588pSu8AxSw9C6DrMHiUFkWwdty8ajgPvtWaGU"
-```
-
-Look for your node's miner address, which you can obtain by running `go-filecoin id`.
+View stats about the whole Testnet network:
+- [Testnet Stats Dashboard](https://stats.testnet.filecoin.io/)
