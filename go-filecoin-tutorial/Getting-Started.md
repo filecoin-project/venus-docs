@@ -1,6 +1,6 @@
 # Getting started
 
-This is a step-by-step guide for installing and running a Filecoin node connected to the [User&nbsp;Devnet](Devnets#user) on your computer. Subsequent tutorials explain how to [mine Filecoin](Mining-Filecoin) or [store data](Storing-on-Filecoin) with your node.
+This is a step-by-step guide for installing and running a Filecoin node connected to the testnet on your local machine. Subsequent tutorials explain how to [mine Filecoin](Mining-Filecoin) or [store data](Storing-on-Filecoin) with the node.
 
 ## Table of contents
 
@@ -8,22 +8,18 @@ This is a step-by-step guide for installing and running a Filecoin node connecte
 * [Installing dependencies and system configuration](#installing-dependencies-and-system-configuration)
 * [Building Filecoin and running tests](#building-filecoin-and-running-tests)
 * [Start running Filecoin](#start-running-filecoin)
-* [Name your Filecoin node](#name-your-filecoin-node)
-* [Start streaming activity from your node](#start-streaming-activity-from-your-node)
-* [Get FIL from the Filecoin faucet](#get-fil-from-the-filecoin-faucet)
 * [Wait for chain sync](#wait-for-chain-sync)
+* [Viewing network information](#viewing-network-information)
 
 ### System requirements
 
-Go-filecoin can build and run on most Linux and MacOS systems. 
-Windows is not yet supported.
+Go-filecoin can build and run on most GNU/Linux and MacOS systems. Windows is not yet supported.
 
-A validating node can run on most systems with at least 8GB of RAM. 
-A mining node requires significant RAM and GPU resources, depending on the sector configuration to be used.
+A validating node can run on most systems with **at least 8GB of RAM**. Mining nodes in particular require significant RAM and GPU resources, depending on the sector configuration being implemented.
 
 ### Installing dependencies and system configuration
 
-Clone this git repository to your machine and enter it:
+Clone the `go-filecoin` git repository and enter it:
 
 ```sh
 mkdir -p /path/to/filecoin-project
@@ -32,46 +28,46 @@ git clone https://github.com/filecoin-project/go-filecoin.git /path/to/filecoin-
 
 #### Installing Go
 
-The build process for go-filecoin requires [Go](https://golang.org/doc/install) >= v1.13
+The build process for `go-filecoin` requires [Go](https://golang.org/doc/install) >= v1.13
 
 > Installing Go for the first time? We recommend [this tutorial](https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html) which includes environment setup.
 
-Due to our use of `cgo`, you'll need a C compiler to build go-filecoin whether you're using a prebuilt library or it yourself from source. 
-If you want to use `gcc` (e.g. `export CC=gcc`) when building go-filecoin, you will need to use v7.4.0 or higher.
+Due to the use of `cgo` in `go-filecoin`, a C compiler is required to build it whether a prebuilt library is being used or it is compiled from source. To use `gcc` (e.g. `export CC=gcc`), v7.4.0 or higher is required.
 
 The build process will download a static library containing the [Filecoin proofs implementation](https://github.com/filecoin-project/rust-fil-proofs) (which is written in Rust).
 
-> If instead you wish to build proofs from source, you'll need (1) Rust development environment and (2) to set the environment variable `FFI_BUILD_FROM_SOURCE=1`.
-More info at [filecoin-ffi](https://github.com/filecoin-project/filecoin-ffi).
+> **NOTICE:** To build proofs from source,  (1) a Rust development environment must be installed and (2) The environment variable `FFI_BUILD_FROM_SOURCE=1` must be set. More information can be found in [filecoin-ffi](https://github.com/filecoin-project/filecoin-ffi).
 
 #### Installing dependencies
 
-First, load all the Git submodules.
+1. Load all the Git submodules:
 
 ```sh
 git submodule update --init --recursive
 ```
 
-Initialize build dependencies.
+2. Initialize the build dependencies:
 
 ```sh
 make deps
 ```
 
-Note: The first time you run `deps` can be **slow** as very large parameter files are either downloaded or generated locally in `/var/tmp/filecoin-proof-parameters`.
-Have patience; future runs will be faster.
+ > **NOTICE:** The first `deps` start up can be **slow**, as very large parameter files are either downloaded or generated locally in `/var/tmp/filecoin-proof-parameters`. Have patience; future runs will be faster.
 
 ### Building Filecoin and running tests
-From inside your newly cloned Filecoin directory, issue the following commands:
 
+1. Build the binary:
 ```sh
-# First, build the binary
 make
+```
 
-# Then, run the unit tests.
+2. Run the unit tests:
+```
 go run ./build test
+```
 
-# Build and test can be combined!
+Optionally, building and tests can be combined:
+```
 go run ./build best
 ```
 
@@ -96,11 +92,11 @@ go run ./build all
 
 > **NOTICE:** Any flag passed to `go run ./build test` (e.g. `-cover`) will be passed on to `go test`.
 
-If you have **problems with the build**, please consult the [Troubleshooting](https://go.filecoin.io/go-filecoin-tutorial/Troubleshooting-&-FAQ.html) section of this documentation.
+**For all problems with the build**, please consult the [Troubleshooting](https://go.filecoin.io/go-filecoin-tutorial/Troubleshooting-&-FAQ.html) section of this documentation.
 
 ## Start running Filecoin
 
-1. If you have run go-filecoin before, remove existing Filecoin repo (**this will delete all previous filecoin data**):
+1. If `go-filecoin` has been run on the system before, remove existing Filecoin repo (**this will delete all previous filecoin data**):
     ```sh
     rm -rf ~/.filecoin
     ```
@@ -110,7 +106,7 @@ If you have **problems with the build**, please consult the [Troubleshooting](ht
 go-filecoin init --genesisfile=https://ipfs.io/ipfs/QmXZQeezX1x8uRQX9EUaYxnyivUpTfJqQTvszk3c8SnFPN/testnet.car --network=testnet
 ```
 
-3. Start your go-filecoin daemon:
+3. Start the go-filecoin daemon:
     ```sh
     go-filecoin daemon
     ```
@@ -131,86 +127,37 @@ go-filecoin swarm connect <any-filecoin-node-mulitaddr>
     
  > **NOTICE:** This can be **slow** the first time. The filecoin node needs a large parameter file for proofs, stored in `/tmp/filecoin-proof-parameters`. It's usually generated by the `deps` build step. If these files are missing they will be regenerated, which can take up to an hour. We are working on a better solution.
 
-Your node should now be connected to some peers and will begin downloading and validating the blockchain.
-
-6. Check your connectivity:
+6. Check the nodes connectivity:
     ```sh
     go-filecoin swarm peers                  # lists addresses of peers to which you're connected
     ```
-    The last segment of a peer's address is its `peerID`. Test your connection directly to a peer with:
+    The last segment of a peer's address is its `peerID`. Test the connection directly to a peer with:
     ```sh
     go-filecoin ping <peerID>                # Pings the peer and displays round-trip latency.
     ```
 
+The node should now be connected to some peers and will begin downloading and validating the blockchain.
+
 🎉 Woohoo! You are now running a Filecoin node and connected to the network. This is the anatomy of a basic node:
 ![Diagram of a single node and its components](./images/getting-started-node-diagram.png)
 
-_Note: The daemon is now running indefinitely in its own Terminal (`Ctrl + C` to quit). To run other `go-filecoin` commands, you'll need to open a second Terminal tab or window (`Cmd + T` on Mac)._
+ > **NOTICE:** The daemon is now running indefinitely in its own Terminal (`Ctrl + C` to quit). To run other `go-filecoin` commands, open a second Terminal tab or window (`Cmd + T` on Mac)._
 
 _Need help? See [Troubleshooting & FAQ](Troubleshooting-&-FAQ) or [#fil-dev on Matrix chat](https://riot.im/app/#/room/#fil-dev:matrix.org)._
 
-## Name your Filecoin node
-
-By default, nodes are referenced by long, alphanumeric node IDs. You can give your node a human-readable nickname.
-* Nicknames can only contain letter characters (no numbers, spaces, or other special characters).
-
-1. Open a new Terminal window and set your node nickname (replace `Pizzanode` with the name of your choice): 
-    ```sh
-    go-filecoin config heartbeat.nickname "Pizzanode"
-    ````
-2. The new name takes effect immediately, no need to restart. You can check the configured name with:
-    ```sh
-    go-filecoin config heartbeat.nickname
-    ````
-
-## Start streaming activity from your node
-
-There are a few visualisation tools to help users understand what is happening within the Filecoin network, such as the official [network stats](http://stats.testnet.filecoin.io/) page as well as the community-managed block explorers [filscan.io](https://filscan.io) and [filscout.io](https://filscout.io).
-
-To see your node on the network stats, you'll need to opt in to streaming your node's logs. Open a new Terminal window and run:
-```sh
-go-filecoin config heartbeat.beatTarget "/dns4/backend-stats.kittyhawk.wtf/tcp/8080/ipfs/QmUWmZnpZb6xFryNDeNU7KcJ1Af5oHy7fB9npU67sseEjR"
-```
-Restart the currently running `go-filecoin daemon` process and then go to the [Network Stats](https://stats.kittyhawk.wtf/) and watch your node reach consensus with the rest of the network.
-
 ## Wait for chain sync
-🎉 Congrats, you're now connected to Filecoin! Your daemon is now busy syncing and validating the existing blockchain, which can take awhile -- hours or even days depending on network age and activity.
+🎉 Congratulations, you're now connected to Filecoin! The daemon is now busy syncing and validating the existing blockchain, which can take awhile -- hours or even days depending on network age and activity.
 
-During this time, you'll observe intense activity on one CPU core. Find out what the current block height is first by visiting the [Network Stats Page](https://stats.kittyhawk.wtf/). Then you can watch your node's syncing progress:
+During this initial sync time ther will be intense activity on one CPU core. Find out what the current block height is first by visiting the [network stats page](https://stats.testnet.filecoin.io) then observe the nodes syncing progress:
 ````sh
 watch -n 10 'go-filecoin show block $(go-filecoin chain head | head -n 1)'
 # Mac users will need to install watch first: brew install watch
 ````
 
-## Get FIL from the Filecoin faucet
-
-**Once your chain has finished syncing**, you will be able to use the faucet to get filecoin tokens (FIL). Before Filecoin nodes can participate in the marketplace, they will need some start-up FIL. Clients need FIL in their accounts to make storage deals with miners. Miners use FIL for collateral when initially pledging storage to the network.
-
-During early testing, you can obtain mock FIL from the Filecoin faucet. The "faucet" is thusly named because it drips (or pours) FIL into those who stick their wallets under it. Using mock FIL allows for preliminary testing of market dynamics without the requirement for any money to actually change hands.
-
-All balances of FIL are stored in wallets. When a node is newly created, it will have a Filecoin wallet with a balance of 0 FIL.
-1. Let's get you some FIL. Get your wallet address:
-    ```sh
-    go-filecoin address ls
-    ```
-1. The output should be a long alphanumeric string. Go to the User Devnet faucet at [http://user.kittyhawk.wtf:9797](http://user.kittyhawk.wtf:9797) and submit that wallet address. It will take a minute for the FIL to land in your wallet.
-
-    1. Alternatively, you can tap the faucet from the command line:
-        ```sh
-        export WALLET_ADDR=`go-filecoin address ls`    # fetch your wallet address into a handy variable
-        MESSAGE_CID=`curl -X POST -F "target=${WALLET_ADDR}" "http://user.kittyhawk.wtf:9797/tap" | cut -d" " -f4`
-        ```
-1. The faucet will provide you with a message CID. If your chain is already synced with the network, this message should be processed in about 30 seconds. You can run the following command to wait for confirmation:
-
-    ```sh
-    go-filecoin message wait ${MESSAGE_CID}
-    ```
-
-1. To verify that the FIL has landed in your wallet, check your wallet balance:
-    ```sh
-    go-filecoin wallet balance ${WALLET_ADDR}
-    ```
-
-After syncing is complete, you can begin mining or storing data on the Filecoin network! Choose your adventure: 
+After syncing is complete, you can begin mining or storing data on the Filecoin network:
 - [Mining Filecoin](Mining-Filecoin)
 - [Storing Data](Storing-on-Filecoin)
+
+## Viewing network information
+
+There are a few visualisation tools to help users understand what is happening within the Filecoin network, such as the official [network stats](http://stats.testnet.filecoin.io/) page as well as the community-managed block explorers [filscan.io](https://filscan.io) and [filscout.io](https://filscout.io).
