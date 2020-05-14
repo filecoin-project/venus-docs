@@ -23,7 +23,7 @@ Coming soon.
 -->
 ### Installing from source
 
-Use these steps to install Filecoin:
+Use these steps to install go-filecoin:
 
 1. Build dependencies
    - go >= `v1.12.1`
