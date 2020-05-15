@@ -160,7 +160,7 @@ All balances of FIL are stored in wallets. When a node is newly created, it will
     go-filecoin address ls
     ```
     
-2. The output should be a long alphanumeric string. Go to the testnet faucet at [https://faucet.testnet.filecoin.io] and submit that wallet address. It will take a minute for the FIL to land in your wallet.
+2. The output should be a long alphanumeric string. Go to the testnet faucet at [https://faucet.testnet.filecoin.io] and submit that wallet address. It will take a minute for the FIL to arrive in the wallet.
 
     * Alternatively, you can tap the faucet from the command line:
         ```sh
