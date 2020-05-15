@@ -8,6 +8,7 @@ This is a step-by-step guide for installing and running a Filecoin node connecte
 * [Installing dependencies and system configuration](#installing-dependencies-and-system-configuration)
 * [Building Filecoin and running tests](#building-filecoin-and-running-tests)
 * [Start running Filecoin](#start-running-filecoin)
+* [Get FIL from the Filecoin faucet](#get-fil-from-the-filecoin-faucet)
 * [Wait for chain sync](#wait-for-chain-sync)
 * [Viewing network information](#viewing-network-information)
 
@@ -144,6 +145,37 @@ The node should now be connected to some peers and will begin downloading and va
  > **NOTICE:** The daemon is now running indefinitely in its own Terminal (`Ctrl + C` to quit). To run other `go-filecoin` commands, open a second Terminal tab or window (`Cmd + T` on Mac)._
 
 _Need help? See [Troubleshooting & FAQ](Troubleshooting-&-FAQ) or [#fil-dev on Matrix chat](https://riot.im/app/#/room/#fil-dev:matrix.org)._
+
+
+## Get FIL from the Filecoin faucet
+
+**Once your chain has finished syncing**, you will be able to use the faucet to get filecoin tokens (FIL). Before Filecoin nodes can participate in the marketplace, they will need some start-up FIL. Clients need FIL in their accounts to make storage deals with miners. Miners use FIL for collateral when initially pledging storage to the network.
+
+During early testing, mock FIL can be obtained from the Filecoin faucet. The "faucet" is thusly named because it drips (or pours) FIL into those who stick their wallets under it. Using mock FIL allows for preliminary testing of market dynamics without the requirement for any money to actually change hands.
+
+All balances of FIL are stored in wallets. When a node is newly created, it will have a Filecoin wallet with a balance of 0 FIL.
+
+1. Retrieve your wallet address:
+    ```sh
+    go-filecoin address ls
+    ```
+    
+2. The output should be a long alphanumeric string. Go to the testnet faucet at [https://faucet.testnet.filecoin.io] and submit that wallet address. It will take a minute for the FIL to land in your wallet.
+
+    * Alternatively, you can tap the faucet from the command line:
+        ```sh
+        export WALLET_ADDR=`go-filecoin address ls`    # fetch your wallet address into a handy variable
+        MESSAGE_CID=`curl -X POST -F "target=${WALLET_ADDR}" "#" | cut -d" " -f4`
+        ```
+3. The faucet will provide a message CID. If thr chain is already synced with the network, this message should be processed in about 30 seconds. The following command can be run in order to wait for confirmation:
+
+    ```sh
+    go-filecoin message wait ${MESSAGE_CID}
+    ```
+
+4. To verify that the FIL has landed in the wallet by checking the wallet balance:
+    ```sh
+    go-filecoin wallet balance ${WALLET_ADDR}
 
 ## Wait for chain sync
 🎉 Congratulations, you're now connected to Filecoin! The daemon is now busy syncing and validating the existing blockchain, which can take awhile -- hours or even days depending on network age and activity.
