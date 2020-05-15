@@ -51,7 +51,7 @@ export GO_FILECOIN_PATH=$HOME/go/src/github.com/filecoin-project/go-filecoin
 	export NODE1_ADDR=/ip4/127.0.0.1/tcp/6000/ipfs/QmVk7A2vEBFr9GyKyQ3wvDmTWj8M4H3jubHUDc3CktdoXL    
 	```
 
-### Node 2
+### Node two
 
   > **NOTICE:** This section includes instructions for two nodes on the **same machine** for development/testing purposes. To connect two separate machines, the `--repodir` flag can be removed from each command, unless a different path than the default filecoin repo directory in $HOME/.filecoin is being used for the configuration.
 
@@ -93,7 +93,7 @@ export GO_FILECOIN_PATH=$HOME/go/src/github.com/filecoin-project/go-filecoin
 	go-filecoin daemon --repodir=$HOME/.filecoin2
 	```
 
-4. Fetch the address of Node 2:
+4. Fetch the address of node 2:
 
 	```sh
 	$ go-filecoin id --repodir=$HOME/.filecoin2
@@ -110,7 +110,7 @@ export GO_FILECOIN_PATH=$HOME/go/src/github.com/filecoin-project/go-filecoin
 	$ export NODE2_ADDR=/ip4/127.0.0.1/tcp/6001/ipfs/QmXcUJ7YoFQEY7w8bpxuFvQtY9VHUkYfx6AZW6Bi2MDFbs    
 	```
 
-5. Connect Node 2 to Node 1 using the address retrieved for Node 1:
+5. Connect node 2 to node 1 using the address retrieved for node 1:
 
 	```sh
 	go-filecoin swarm connect $NODE1_ADDR --repodir=$HOME/.filecoin2
