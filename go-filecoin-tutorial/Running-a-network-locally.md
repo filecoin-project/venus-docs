@@ -10,7 +10,7 @@ This section includes instructions for deploying a local network either manually
     - [Using the output](#using-the-output)
   - [Automatic network setup with localnet tool](#automatic-network-setup-with-localnet-tool)
     - [Basic usage](#basic-usage)
-    - [Regular Sectors](#regular-sectors)
+    - [Regular sectors](#regular-sectors)
 
 
 ## Manual network setup with gengen tool
