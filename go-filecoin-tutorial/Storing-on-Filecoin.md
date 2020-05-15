@@ -18,10 +18,7 @@ Because Filecoin is a decentralized storage marketplace, storage clients (our te
 In order to run the remainder of these commands, ensure a Filecoin node is installed and currently running. See the [getting started](Getting-Started) section of this documentation for more information.
 
 ## Test Filecoin with sample data
-
-Personal data can be used to test Filecoin. It is recommended to use small test files while initially getting used to the different commands.
-
-If preferred, there is a folder of [sample data](https://github.com/filecoin-project/sample-data) (images, GIFs, and text files) that can be used to get started. Download this data, unzip it, and save it anywhere. In the examples below, it is assumed that the repository is saved to the Desktop (`~/Desktop`).
+It is recommended to use small test files while initially getting used to the different commands. If preferred, there is a folder of [sample data](https://github.com/filecoin-project/sample-data) (images, GIFs, and text files) that can be used to get started. Download this data, unzip it, and save it anywhere. In the examples below, it is assumed that the repository is saved to the Desktop (`~/Desktop`).
 
 ## Import data
 
@@ -112,7 +109,7 @@ Once it reads "posted, you will have successfully stored your data!", the data i
 
 ## Retrieving data
 
-Before data can be retrieved from a sealed sector, the sector must be unsealed. At present, the sealing and unsealing processes are artificially fast; it will take around 5-10 minutes for a piece of data to be retrieved after it is requested. Note that, when Filecoin is working in production, this may take much longer.
+Before data can be retrieved from a sealed sector, the sector must be unsealed. Sealing and unsealing times vary depending on the size of the sector, and may range from a few minutes to a few hours.
 
 ```sh
 # Retrieve your data, using the address of the
