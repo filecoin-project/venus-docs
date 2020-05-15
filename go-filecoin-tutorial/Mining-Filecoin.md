@@ -1,6 +1,6 @@
 # Mining Filecoin
 
-This guide provides an overview of how mining works, and a step-by-step of how to mine on the Filecoin network.
+This section provides an overview of how mining works as well as a step-by-step guide to mining on the Filecoin network.
 
 ## Table of contents
 
@@ -14,50 +14,49 @@ This guide provides an overview of how mining works, and a step-by-step of how t
 
 ## <div id="what-is-mining" />What is mining?
 
-In most blockchain protocols, "miners" are the participants on the network that do the work necessary to keep the blockchain valid and secure. For providing these services, miners are compensated in the native cryptocurrency. The term "miner" emerged to compare the work of securing blockchains with that of gold miners who expended resources to expand the supply of gold.
+In most blockchain protocols, "miners" are the participants on the network that do the work necessary to advance the blockchain and maintain its validity. For providing these services, miners are compensated in the native cryptocurrency. The term "miner" emerged in the initial Proof-of-Work era, comparing the work done by hardware miners using computational power to secure blockchains with that of gold miners whom expended vast physical resources for a chance at a large payout. 
+
 <!--
 One key difference between Proof-of-Work systems (such as Bitcoin) and Filecoin is that Filecoin is designed to generate a native token as. More specifically, in the case of Filecoin, miners secure the network by computing proofs of storage and the overall purpose of the network is for miners to provide storage to other users. Contrast this to Bitcoin, in which miners secure the network by computing wasteful proofs of work, while the overall purposes of the network are transactions and store-of-value.-->
 
 The Filecoin network will have multiple types of miners:
-* Storage miners
-* Retrieval miners
-* Repair miners (later)
+* **Storage miners**, responsible for storing files and data on the network.
+* **Retrieval miners**, responsible for providing quick pipes to retrieve files.
+* **Repair miners**, which are to be implemented.
 
-In the current implementation, we focus mostly on storage miners. A storage miner sells storage capacity in exchange for filecoin.
+In the current implementation, the focus is mostly on storage miners, which sell storage capacity in exchange for FIL.
+
+After the daemon has finished syncing and validating the chain, a miner can be created straight away. Mining blocks on the Filecoin network requires committing storage capacity to the network. Blocks are mined and block rewards earned in equal proportion to the amount of storage committed.
 
 ## Start mining
 
-After daemon has finished syncing and validating the chain, you can create a miner and start mining.
+To create a miner, a sector size and pledge collateral must be included, as well as "gas"; a small fee provided to send the pledge message to the Filecoin blockchain, similar to a postage stamp.
 
-Mining blocks on the Filecoin network requires committing storage capacity to the network. Blocks are mined, and block rewards earned, in proportion to the amount of storage committed.
-
-Start by creating a miner. You'll need to include a sector size and pledge collateral. You'll also need to include "gas", a small fee to send that pledge message to the Filecoin blockchain.
-
-0. Generate the proof parameters for proving/verification
+1. Generate the proof parameters for proving/verification
 
    ```sh
    ./go-sectorbuilder/paramcache
    ```
 
-1. Create a miner with 100 FIL as collateral, using the default sector size (256MiB), with a message gas price of 0.001 FIL/unit and limit of 300 gas units. When successful, it returns the miner address of the newly created miner.
-
-    *Note: This step may take about a minute to process, but if it hangs for longer, double-check that `(gas-price * gas-limit)` is less than `$YOUR_WALLET_BALANCE`.*
+2. Create a miner with 100 FIL as collateral, using the default sector size (256MiB), with a message gas price of 0.001 FIL/unit and limit of 300 gas units:
 
     ```sh
     go-filecoin miner create 100 --gas-price=0.001 --gas-limit=300   # this may take a minute
     ```
+    
+  > **NOTICE:** This step may take about a minute to process, but if it hangs for longer, double-check that `(gas-price * gas-limit)` is less than `$YOUR_WALLET_BALANCE`.
+  
+When successful, it returns the miner address of the newly created miner.
 
-1. Once the miner is created, run the following to start mining:
+3. Once the miner is created, run the following to start mining:
 
     ```sh
     go-filecoin mining start
     ```
 
-:star2: Congrats, you are now mining blocks on the Filecoin network! Let's take a detour to explore these blocks. (Or, to begin mining your unused storage, skip directly to [Set your price for storage](#set-your-price-for-storage).)
-
 ## Explore mined blocks
 
-You can explore the Filecoin blockchain using the [Filecoin Block Explorer](http://user.kittyhawk.wtf:8000/), or via the command line.  For example, let's get the `blockID` of the very first block of the blockchain. This is known as the _head_.
+The Filecoin blockchain can be explored using the community-managed block explorers [filscout.io](https://filscout.io) and [filscan.io](filscan.io), or via the command line.  For example, to retrieve the `blockID` of the very first block -- or the 'head block' -- of the blockchain:
 
 1. Show the chain head and copy the a block ID (there may be more than one):
     ```sh    
@@ -68,38 +67,39 @@ You can explore the Filecoin blockchain using the [Filecoin Block Explorer](http
     go-filecoin show block <blockID>
     ```
 
-Many commands also support a `--enc=json` option for machine-readable output.
+  > **NOTICE:** Many commands also support a `--enc=json` option for machine-readable output.
 
 ## Set your price for storage
 
-In the Filecoin storage market, miners run a command that sets their price for storage by creating an *ask order* that provide some detail on their available storage space and how much they are charging for storage. Clients propose *deals* to miners for the files they want to store. Setting a price requires the following values:
-1. the price at which you are willing to sell that much storage (in FIL/byte/block)
-1. the number of blocks for which this asking price is valid
-1. the price to pay for each gas unit consumed mining this message (in FIL)
-1. the maximum number of gas units to be consumed by this message
+In the Filecoin storage market, miners run a command that sets their price for storage by creating an *ask order*. This ask order provides the miners available storage capacity as well as the price per unit they are requesting. Clients propose *deals* to miners for the files they want to store. Setting a price requires the following values:
+
+1. The price at which you are willing to sell that much storage (in `FIL/byte/block`).
+2. The number of blocks for which this asking price is valid.
+3. The price to pay for each gas unit consumed mining this message (in FIL).
+4. The maximum number of gas units to be consumed by this message.
 
 Let's set our price!
 
-1. We set our price to 0.000000001 FIL/byte/block, valid for 2880 blocks, with a message gas price of 0.001 FIL/unit and limit of 1000 gas units:
+1. Set the price to 0.000000001 FIL/byte/block, valid for 2880 blocks, with a message gas price of 0.001 FIL/unit and limit of 1000 gas units:
     ```sh
     go-filecoin miner set-price --gas-price=0.001 --gas-limit=1000 0.000000001 2880
     ```
-1. Once you have set your price, you can check `client list-asks` to see your ask (look for your miner address):
+2. Once complete, check `client list-asks` for your miner address to ensure it has been set:
     ```sh
     go-filecoin client list-asks --enc=json | jq
     ```
 
 ## Accept a deal and get paid
 
-Clients propose storage deals to miners who have enough storage and at a price that is lower than their willingness to pay.  Currently, miners accept all deals that are proposed to them by clients with sufficient funds. Payment validation is done automatically so you don't have to take any action to accept a deal that pays you your asking price.  Deal payments are implemented using filecoin's builtin payment channels. Thus, miners are periodically credited funds in a payment channel throughout the lifetime of the deal.
+Clients propose storage deals to miners who have enough storage and at a price that they are willing to accept.  Currently, miners accept all deals that are proposed to them by clients with sufficient funds. Payment validation is done automatically, and not additional input is required to accept a deal that covers the asking price.  Deal payments are implemented using Filecoin's built-in payment channels. Thus, miners are periodically credited funds in a payment channel throughout the lifetime of the deal.
 
-To see all deals your miner has made run
-```sh
-go-filecoin deals list --miner
-```
- You will see a list of meta data about deals looking something like this:
-```json
-{
+1. To see all deals your miner has made:
+	```sh
+	go-filecoin deals list --miner
+	```
+2. A list containing metadata about deals will be printed out, like so:
+	```json
+	{
 	"minerAddress": "t2mpmyigmpopcwguhe2tpdeonoppuht5mtvd2ljcq",
 	"pieceCid": {
 		"/": "QmbHmUVAkqZjQXgifDady7m5cYprX1fgtGaTYxUBBTX3At"
@@ -108,32 +108,36 @@ go-filecoin deals list --miner
 		"/": "zDPWYqFD8U3ktr58iiqWTwzEV3sKyz7SGQjLg1zKS1Mgpo5N2nr1"
 	},
 	"state": "staged"
-}
-```
+	}
+	```
 
-To get more information about a specific deal run
-```sh
-go-filecoin deals show <proposal-cid>
-```  
-In the above example `<proposal-cid>` would be `zDPWYqFD8U3ktr58iiqWTwzEV3sKyz7SGQjLg1zKS1Mgpo5N2nr1`.  You can inspect a deal's state, how long the agreed storage period is, and how much you will get paid for honoring the deal.
+3. To get more information about a specific deal:
+	```sh
+	go-filecoin deals show <proposal-cid>
+	```  
+	
+In the above example `<proposal-cid>` would be `zDPWYqFD8U3ktr58iiqWTwzEV3sKyz7SGQjLg1zKS1Mgpo5N2nr1`. It is possible to inspect the current state of a deal, how long the agreed storage period is, and how much payout will be recieved for honoring the deal.
 
-When the deal duration is up you can redeem your full payment by running
-```sh
-go-filecoin deals redeem --gas-price=0.001 --gas-limit=1000 <proposal-cid>
-```
-This will submit a message to the blockchain redeeming funds from the payment channel set up between you and your client.  Wait for the output message to be processed by the network and voila! You will now see the deal's payout in your wallet.
+4. When the deal duration is up you can redeem your full payment by running
+	```sh
+	go-filecoin deals redeem --gas-price=0.001 --gas-limit=1000 <proposal-cid>
+	```
+	
+This will submit a message to the blockchain redeeming funds from the payment channel set up in the client.  Once the output message is processed by the network, the deal's payout will be visibile in the user's wallet.
 
 ## Stop mining
 
-If at any point you want to stop mining, you can always stop:
-```sh
-go-filecoin mining stop
-```
+To stop mining altogether:
 
-You can also remove all data associated with your Filecoin node instance:
-```sh
-rm -rf ~/.filecoin
-```
+	```sh
+	go-filecoin mining stop
+	```
+
+2. To remove all data associated with your Filecoin node instance:
+
+	```sh
+	rm -rf ~/.filecoin
+	```
 
 ## Advanced options
 
@@ -142,7 +146,8 @@ There are two ways to specify the location of the sector storage directory:
 * the `sectorbase.rootdir` config entry
 * the `--sectordir` option to `go-filecoin init`
 
-If you don’t specify a location, data is stored in a directory named `.filecoin_sectors` underneath the parent directory of the filecoin repo directory by default.
+If a location is not specified, the data is stored in a directory named `.filecoin_sectors` underneath the parent directory of the Filecoin repo directory.
+
 ```sh
 repo-dir-parent ($HOME by default)
    repo-dir
