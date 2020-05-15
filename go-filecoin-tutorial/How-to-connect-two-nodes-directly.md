@@ -12,7 +12,7 @@ It is optionally possible to modify a copy of [this script](https://github.com/f
 
 ## Initial setup
 
-Set the location of the filecoin source (substitute the path the location of the cloned source tree):
+Set the location of the filecoin source (substitute the path with the location of the cloned source tree):
 
 ```sh
 export GO_FILECOIN_PATH=$HOME/go/src/github.com/filecoin-project/go-filecoin
