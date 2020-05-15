@@ -112,7 +112,7 @@ Once it reads "posted, you will have successfully stored your data!", the data i
 
 ## Retrieving data
 
-Before data can be retrieved from a sealed sector, the sector must be unsealed. At present, the sealing and unsealing processed are artificially fast; it will take around 5-10 minutes for a piece of data to be retrieved after it is requested. Note that, when Filecoin is working in production, this may take much longer.
+Before data can be retrieved from a sealed sector, the sector must be unsealed. At present, the sealing and unsealing processes are artificially fast; it will take around 5-10 minutes for a piece of data to be retrieved after it is requested. Note that, when Filecoin is working in production, this may take much longer.
 
 ```sh
 # Retrieve your data, using the address of the
