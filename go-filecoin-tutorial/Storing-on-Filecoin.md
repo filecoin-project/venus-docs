@@ -120,4 +120,4 @@ Before data can be retrieved from a sealed sector, the sector must be unsealed. 
 go-filecoin retrieval-client retrieve-piece <minerAddress> <CID> # can take a minute
 ```
 
-Congratulations! You have now walked through several of the client commands available on Filecoin. Let us know if you have any questions by dropping a message on Matrix (#fil-chat) or the [community forum](https://discuss.filecoin.io/), and take a look at the [Troubleshooting & FAQs page](Troubleshooting-&-FAQ).
+Congratulations! You have now walked through several of the client commands available on Filecoin. Let us know if you have any questions by dropping a message on Slack/Matrix (#fil-help) or the [community forum](https://discuss.filecoin.io/), and take a look at the [Troubleshooting & FAQs page](Troubleshooting-&-FAQ).
