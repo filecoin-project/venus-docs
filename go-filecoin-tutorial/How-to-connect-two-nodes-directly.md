@@ -55,7 +55,7 @@ export GO_FILECOIN_PATH=$HOME/go/src/github.com/filecoin-project/go-filecoin
 
   > **NOTICE:** This section includes instructions for two nodes on the **same machine** for development/testing purposes. To connect two separate machines, the `--repodir` flag can be removed from each command, unless a different path than the default filecoin repo directory in $HOME/.filecoin is being used for the configuration.
 
-1. In another terminal, choose a location for the second node's repository directory and supply its path to the intialization script with the `--repodir` option:
+1. In a new terminal, choose a location for the second node's repository directory and supply its path to the intialization script with the `--repodir` option:
 
 	```sh
 	go-filecoin init --genesisfile $GO_FILECOIN_PATH/fixtures/genesis.car --repodir=$HOME/.filecoin2
@@ -87,7 +87,7 @@ export GO_FILECOIN_PATH=$HOME/go/src/github.com/filecoin-project/go-filecoin
 	...
 	```
 
-3. Launch the daemon (in a new terminal):
+3. In a new terminal, launch the daemon:
 
 	```sh
 	go-filecoin daemon --repodir=$HOME/.filecoin2
