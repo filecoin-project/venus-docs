@@ -42,7 +42,7 @@ To create a miner, a sector size and pledge collateral must be included, as well
 
 2. Create a miner with 100 FIL as collateral, using the default sector size (256MiB), with a message gas price of 0.001 FIL/unit and limit of 300 gas units:
 
-    *Note: This step may take about a minute to process, but if it hangs for longer, double-check that `(gas-price * gas-limit)` is less than `$YOUR_WALLET_BALANCE`.*
+  > **NOTICE:** This step may take about a minute to process, but if it hangs for longer, double-check that `(gas-price * gas-limit)` is less than `$YOUR_WALLET_BALANCE`.
 
     ```sh
     go-filecoin miner create 100 --gas-price=0.001 --gas-limit=300   # this may take a minute
