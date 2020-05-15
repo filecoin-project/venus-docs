@@ -193,13 +193,8 @@ All balances of FIL are stored in wallets. When a node is newly created, it will
     ```sh
     go-filecoin address ls
     ```
-1. The output should be a long alphanumeric string. Go to the User Devnet faucet at [http://user.kittyhawk.wtf:9797](http://user.kittyhawk.wtf:9797) and submit that wallet address. It will take a minute for the FIL to land in your wallet.
+1. The output should be a long alphanumeric string. Go to the testnet faucet (faucet.testnet.filecoin.io) and submit that wallet address. It will take a minute for the FIL to land in your wallet.
 
-    1. Alternatively, you can tap the faucet from the command line:
-        ```sh
-        export WALLET_ADDR=`go-filecoin address ls`    # fetch your wallet address into a handy variable
-        MESSAGE_CID=`curl -X POST -F "target=${WALLET_ADDR}" "http://user.kittyhawk.wtf:9797/tap" | cut -d" " -f4`
-        ```
 1. The faucet will provide you with a message CID. If your chain is already synced with the network, this message should be processed in about 30 seconds. You can run the following command to wait for confirmation:
 
     ```sh
