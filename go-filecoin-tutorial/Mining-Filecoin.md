@@ -26,13 +26,11 @@ The Filecoin network will have multiple types of miners:
 
 In the current implementation, the focus is mostly on storage miners, which sell storage capacity in exchange for FIL.
 
-## Start mining
-
 After the daemon has finished syncing and validating the chain, a miner can be created straight away. Mining blocks on the Filecoin network requires committing storage capacity to the network. Blocks are mined and block rewards earned in equal proportion to the amount of storage committed.
 
-To create a miner, a sector size and pledge collateral must be included, as well as "gas"; a small fee provided to send the pledge message to the Filecoin blockchain, similar to a postage stamp.
+## Start mining
 
-### An example configuration
+To create a miner, a sector size and pledge collateral must be included, as well as "gas"; a small fee provided to send the pledge message to the Filecoin blockchain, similar to a postage stamp.
 
 1. Generate the proof parameters for proving/verification
 
@@ -42,11 +40,12 @@ To create a miner, a sector size and pledge collateral must be included, as well
 
 2. Create a miner with 100 FIL as collateral, using the default sector size (256MiB), with a message gas price of 0.001 FIL/unit and limit of 300 gas units:
 
-  > **NOTICE:** This step may take about a minute to process, but if it hangs for longer, double-check that `(gas-price * gas-limit)` is less than `$YOUR_WALLET_BALANCE`.
-
     ```sh
     go-filecoin miner create 100 --gas-price=0.001 --gas-limit=300   # this may take a minute
     ```
+    
+  > **NOTICE:** This step may take about a minute to process, but if it hangs for longer, double-check that `(gas-price * gas-limit)` is less than `$YOUR_WALLET_BALANCE`.
+  
 When successful, it returns the miner address of the newly created miner.
 
 3. Once the miner is created, run the following to start mining:
