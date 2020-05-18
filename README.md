@@ -19,7 +19,9 @@ The former `go-filecoin` Wiki is in the directory [go-filecoin-tutorial](go-file
 
 ## Docs website
 
-Updates to `master` in this repo will trigger documentation website redeploys (in a separate repo).
+For the most part, updates to `master` in this repo will trigger documentation website redeploys (via the [`metadocs`](https://github.com/filecoin-project/metadocs/) private repo).
+
+To add or subtract pages, you will need to manually update the file listings in `metadocs`.
 
 
 ## Licenses
