@@ -1,28 +1,21 @@
 # go-filecoin docs
 
-This repo contains documentation for the go-filecoin implementation hosted at [go.filecoin.io/go-filecoin-tutorial](https://go.filecoin.io/go-filecoin-tutorial).
+This repo contains documentation content for the [go-filecoin](https://github.com/filecoin-project/go-filecoin) implementation. It feeds into the [Go-Filecoin Tutorial](https://go.filecoin.io), hosted at [go.filecoin.io](https://go.filecoin.io).
 
-For Filecoin documentation more broadly, please visit [docs.filecoin.io](https://docs.filecoin.io) (repo at [https://github.com/filecoin-project/filecoin-docs](https://github.com/filecoin-project/filecoin-docs)
-
-## Suggest an edit
-
-:bulb: Contributors and Community Members are welcome to make Pull Requests or File Issues and Improvements in this repo.
-
-The former `go-filecoin` Wiki is in the directory [go-filecoin-tutorial](go-filecoin-tutorial).
-
-  ***
-
-  :mushroom: Community members can also click on :pencil: `Suggest an Edit` links at [docs.filecoin.io](https://docs.filecoin.io) to file PRs.
-
-  :wrench: Filecoin Developers can still update the [Troubleshooting & FAQ](https://github.com/filecoin-project/go-filecoin/wiki/Troubleshooting-&-FAQ) page on the `go-filecoin` Wiki.
+For general [Filecoin Documentation](https://docs.filecoin.io), please visit [docs.filecoin.io](https://docs.filecoin.io) (repo at [https://github.com/filecoin-project/filecoin-docs](https://github.com/filecoin-project/filecoin-docs).
 
 
-## Docs website
+## Contributing
 
-For the most part, updates to `master` in this repo will trigger documentation website redeploys (via the [`metadocs`](https://github.com/filecoin-project/metadocs/) private repo).
+PRs, bug reports, and issue suggestions are welcome! For major changes, please propose in an issue first so benefits and impacts can be discussed.
 
-To add or subtract pages, you will need to manually update the file listings in `metadocs`.
+👉 From the [docs.filecoin.io](https://docs.filecoin.io) website, you can also click on click on :pencil: `Suggest an Edit` links at the bottom of each page to jump directly to Edit mode.
 
+## Deployment
+
+For the most part, updates to `master` in this repo will trigger automatic redeploys (via the [`metadocs`](https://github.com/filecoin-project/metadocs/) private repo).
+
+The only exception is when adding or subtracting pages. In those cases, you will need to manually update the file listings in `metadocs`.
 
 ## Licenses
 
