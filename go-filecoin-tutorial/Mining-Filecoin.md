@@ -91,7 +91,7 @@ Let's set our price!
 
 ## Accept a deal and get paid
 
-Clients propose storage deals to miners who have enough storage and at a price that they are willing to accept.  Currently, miners accept all deals that are proposed to them by clients with sufficient funds. Payment validation is done automatically, and not additional input is required to accept a deal that covers the asking price.  Deal payments are implemented using Filecoin's built-in payment channels. Thus, miners are periodically credited funds in a payment channel throughout the lifetime of the deal.
+Clients propose storage deals to miners who have enough storage and at a price that they are willing to accept.  Currently, miners accept all deals that are proposed to them by clients with sufficient funds. Payment validation is done automatically, and no additional input is required to accept a deal that covers the asking price.  Deal payments are implemented using Filecoin's built-in payment channels. Thus, miners are periodically credited funds in a payment channel throughout the lifetime of the deal.
 
 1. To see all deals your miner has made:
 	```sh
