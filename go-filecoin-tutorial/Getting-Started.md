@@ -195,4 +195,4 @@ After syncing is complete, you can begin mining or storing data on the Filecoin 
 
 ## Viewing network information
 
-There are a few visualisation tools to help users understand what is happening within the Filecoin network, such as the official [network stats](http://stats.testnet.filecoin.io/) page as well as the community-managed block explorers [filscan.io](https://filscan.io) and [filscout.io](https://filscout.io).
+There are a few visualisation tools to help users understand what is happening within the Filecoin network, such as the official [network stats](http://stats.testnet.filecoin.io/) page as well as the community-managed block explorers [filscan.io](https://filscan.io), [filscout.io](https://filscout.io), and [filfox.io](https://filfox.io/).
