@@ -183,7 +183,7 @@ All balances of FIL are stored in wallets. When a node is newly created, it will
 ## Wait for chain sync
 🎉 Congratulations, you're now connected to Filecoin! The daemon is now busy syncing and validating the existing blockchain, which can take awhile -- hours or even days depending on network age and activity.
 
-During this initial sync time ther will be intense activity on one CPU core. Find out what the current block height is first by visiting the [network stats page](https://stats.testnet.filecoin.io) then observe the nodes syncing progress:
+During this initial sync time there will be intense activity on one CPU core. Find out what the current block height is first by visiting the [network stats page](https://stats.testnet.filecoin.io) then observe the nodes syncing progress:
 ```sh
 watch -n 10 'go-filecoin show block $(go-filecoin chain head | head -n 1)'
 # Mac users will need to install watch first: brew install watch
