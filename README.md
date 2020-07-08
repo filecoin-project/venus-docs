@@ -1,8 +1,8 @@
 # go-filecoin docs
 
-This repo contains documentation content for the [go-filecoin](https://github.com/filecoin-project/go-filecoin) implementation. It feeds into the [Go-Filecoin Tutorial](https://go.filecoin.io), hosted at [go.filecoin.io](https://go.filecoin.io).
+This repository contains documentation content for the [go-filecoin](https://github.com/filecoin-project/go-filecoin) implementation **only**. It feeds into the [Go-Filecoin Tutorial](https://go.filecoin.io), hosted at [go.filecoin.io](https://go.filecoin.io).
 
-For general [Filecoin Documentation](https://docs.filecoin.io), please visit [docs.filecoin.io](https://docs.filecoin.io) (repo at [https://github.com/filecoin-project/filecoin-docs](https://github.com/filecoin-project/filecoin-docs).
+**For general [Filecoin Documentation](https://docs.filecoin.io), please visit [docs.filecoin.io](https://docs.filecoin.io)**. The repository with its source can be found in [/filecoin-project/filecoin-docs](https://github.com/filecoin-project/filecoin-docs).
 
 
 ## Contributing
