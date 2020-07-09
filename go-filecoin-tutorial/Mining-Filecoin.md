@@ -56,7 +56,7 @@ When successful, it returns the miner address of the newly created miner.
 
 ## Explore mined blocks
 
-The Filecoin blockchain can be explored using the community-managed block explorers [filscout.io](https://filscout.io) and [filscan.io](filscan.io), or via the command line.  For example, to retrieve the `blockID` of the very first block -- or the 'head block' -- of the blockchain:
+The Filecoin blockchain can be explored using the community-managed block explorers [filscout.io](https://filscout.io), [filscan.io](filscan.io), and [filfox.io](https://filfox.io/), or via the command line.  For example, to retrieve the `blockID` of the very first block -- or the 'head block' -- of the blockchain:
 
 1. Show the chain head and copy the a block ID (there may be more than one):
     ```sh    
