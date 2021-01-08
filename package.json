@@ -3,7 +3,8 @@
     "start": "yarn docs:dev",
     "docs:dev": "npx vuepress dev docs",
     "docs:build": "npx vuepress build docs",
-    "docs:links": "npx vuepress check-md docs"
+    "docs:links": "npx vuepress check-md docs",
+    "docs:build-for-github": "npm config set unsafe-perm true && npx vuepress build docs"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
