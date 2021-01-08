@@ -9,7 +9,7 @@ This repository contains documentation content for the [Venus](https://github.co
 
 PRs, bug reports, and issue suggestions are welcome! For major changes, please propose in an issue first so benefits and impacts can be discussed.
 
-👉 From the [docs.filecoin.io](https://docs.filecoin.io) website, you can also click on click on :pencil: `Suggest an Edit` links at the bottom of each page to jump directly to Edit mode.
+👉 You can also click on click on :pencil: `Suggest an Edit` links at the bottom of each page to jump directly to Edit mode.
 
 ## Deployment
 
