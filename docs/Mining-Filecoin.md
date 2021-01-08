@@ -4,15 +4,18 @@ This section provides an overview of how mining works as well as a step-by-step 
 
 ## Table of contents
 
-* [What is mining?](#what-is-mining)
-* [Start mining](#start-mining)
-* [Explore mined blocks](#explore-mined-blocks)
-* [Set your price for storage](#set-your-price-for-storage)
-* [Accept a deal and get paid](#accept-a-deal-and-get-paid)
-* [Stop mining](#stop-mining)
-* [Advanced options](#advanced-options)
+- [Mining Filecoin](#mining-filecoin)
+	- [Table of contents](#table-of-contents)
+	- [What is mining?](#what-is-mining)
+	- [Start mining](#start-mining)
+	- [Explore mined blocks](#explore-mined-blocks)
+	- [Set your price for storage](#set-your-price-for-storage)
+	- [Accept a deal and get paid](#accept-a-deal-and-get-paid)
+	- [Stop mining](#stop-mining)
+	- [Advanced options](#advanced-options)
+			- [Specify where client data is stored](#specify-where-client-data-is-stored)
 
-## <div id="what-is-mining" />What is mining?
+## What is mining?
 
 In most blockchain protocols, "miners" are the participants on the network that do the work necessary to advance the blockchain and maintain its validity. For providing these services, miners are compensated in the native cryptocurrency. The term "miner" emerged in the initial Proof-of-Work era, comparing the work done by hardware miners using computational power to secure blockchains with that of gold miners whom expended vast physical resources for a chance at a large payout. 
 
@@ -56,7 +59,7 @@ When successful, it returns the miner address of the newly created miner.
 
 ## Explore mined blocks
 
-The Filecoin blockchain can be explored using the community-managed block explorers [filscout.io](https://filscout.io), [filscan.io](filscan.io), and [filfox.io](https://filfox.io/), or via the command line.  For example, to retrieve the `blockID` of the very first block -- or the 'head block' -- of the blockchain:
+The Filecoin blockchain can be explored using the community-managed block explorers [filscout.io](https://filscout.io), [filscan.io](https://filscan.io), and [filfox.io](https://filfox.io/), or via the command line.  For example, to retrieve the `blockID` of the very first block -- or the 'head block' -- of the blockchain:
 
 1. Show the chain head and copy the a block ID (there may be more than one):
     ```sh    

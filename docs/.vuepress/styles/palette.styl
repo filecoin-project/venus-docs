@@ -1,0 +1,33 @@
+// .vuepress/styles/palette.styl
+
+@import "./fonts.styl";
+
+$defaultTeal = #00D2D6
+$darkerTeal = #00aaac
+$tealGreen = #00E1C4
+$lightGreen = #2EE89C
+$offWhite = #F4F6F9
+$mauveGray = #636C93
+$purple = #8535ED
+$red = #FE6B57
+$orange = #F7A54B
+$darkPurple = #4B1CA5
+$mudPurple = #410868
+$darkGreen = #026963
+$offBlack = #2c3e50
+
+$accentColor = $defaultTeal
+$textAccentColor = $darkerTeal
+$boldTextColor = $offBlack
+
+$logoFontFamily = 'Oxygen'
+
+// adding some overrides here
+
+a, a.sidebar-link.active {
+  color: $textAccentColor;
+}
+
+.navbar .site-name, .hero h1 {
+  font-family: $logoFontFamily;
+}

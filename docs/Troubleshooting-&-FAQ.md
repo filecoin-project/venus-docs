@@ -6,16 +6,18 @@ _Note: This wiki focuses on `go-filecoin`. For questions about the Filecoin Proj
 
 ## Table of contents
 
-- [Known Issues](#known-issues)
-- [Changing ports](#changing-ports)
-- [Installing from binary](#installing-from-binary)
-- [Downloading and building from source](#downloading-and-building-from-source)
-- [Mining and deals](#mining-and-deals)
-- [Storage](#storage)
-- [Daemon won't start](#daemon-wont-start)
-- [Problems caused by incomplete chain sync](#problems-caused-by-incomplete-chain-sync)
-- [Issues connecting to a network](#issues-connecting-to-a-network)
-- [Upgrading](#upgrading)
+- [Troubleshooting and FAQ](#troubleshooting-and-faq)
+  - [Table of contents](#table-of-contents)
+    - [Known issues](#known-issues)
+    - [Changing ports](#changing-ports)
+    - [Installing from binary](#installing-from-binary)
+    - [Downloading and building from source](#downloading-and-building-from-source)
+    - [Mining and deals](#mining-and-deals)
+    - [Storage](#storage)
+    - [Daemon will not start](#daemon-will-not-start)
+    - [Problems caused by incomplete chain sync](#problems-caused-by-incomplete-chain-sync)
+    - [Issues connecting to a network](#issues-connecting-to-a-network)
+    - [Upgrading](#upgrading)
 
 ### Known issues
 Known bugs are [catalogued here](https://github.com/filecoin-project/go-filecoin/issues?q=is%3Aissue+is%3Aopen+label%3AC-bug).
@@ -139,7 +141,7 @@ If you're updating go-filecoin from a previous version the git submodules may al
     PIECE_1_CID=$(./go-filecoin client import < ${PIECE_1_PATH})
     ```
 
-### Daemon won't start
+### Daemon will not start
 
 * If you see `Error: failed to load config file: failed to read config file at "~/.filecoin/config.json": invalid checksum` when trying to start a daemon, check that the defaultAddress and miner.address are correct in config.json.
 
@@ -166,7 +168,7 @@ If you're updating go-filecoin from a previous version the git submodules may al
     ```text
     code not at same version: GIT_SHA does not match DIFFERENT_GIT_SHA, disconnecting from peer:
     ```
-    or seeing a lot of errors during validation of blocks during chain syncing means that your binary or source code is not at the correct version for the devnet you'd like to join. To join a devnet, download the latest release for that devnet in the [Releases](https://github.com/filecoin-project/go-filecoin/releases) section of the repository and follow the directions in [Getting Started](#Getting-Started) sections of the wiki.
+    or seeing a lot of errors during validation of blocks during chain syncing means that your binary or source code is not at the correct version for the devnet you'd like to join. To join a devnet, download the latest release for that devnet in the [Releases](https://github.com/filecoin-project/venus/releases) section of the repository and follow the directions in [Getting Started](Getting-Started) sections of the wiki.
 
 ### Upgrading
 

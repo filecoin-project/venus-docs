@@ -1,6 +1,6 @@
-# go-filecoin docs
+# Venus Filecoin Docs
 
-This repository contains documentation content for the [venus](https://github.com/filecoin-project/venus) implementation **only**. It feeds into the [Venus Filecoin Tutorial](https://go.filecoin.io), hosted at [go.filecoin.io](https://go.filecoin.io).
+This repository contains documentation content for the [Venus](https://github.com/filecoin-project/venus) implementation **only**. It is hosted at [venus.filecoin.io](https://venus.filecoin.io).
 
 **For general [Filecoin Documentation](https://docs.filecoin.io), please visit [docs.filecoin.io](https://docs.filecoin.io)**. The repository with its source can be found in [/filecoin-project/filecoin-docs](https://github.com/filecoin-project/filecoin-docs).
 
@@ -13,9 +13,23 @@ PRs, bug reports, and issue suggestions are welcome! For major changes, please p
 
 ## Deployment
 
-For the most part, updates to `master` in this repo will trigger automatic redeploys (via the [`metadocs`](https://github.com/filecoin-project/metadocs/) private repo).
+### Running locally:
 
-The only exception is when adding or subtracting pages. In those cases, you will need to manually update the file listings in `metadocs`.
+```
+  yarn docs:dev 
+```
+
+### Building:
+
+```
+  yarn docs:build
+```
+
+Then deploy the `docs/.vuepress/dist` directory to the `gh-pages` branch of this repo.
+
+### Notes:
+
+- When new documentation pages are added `./docs/config.js` will need to be **manually updated** in this repo
 
 ## Licenses
 
