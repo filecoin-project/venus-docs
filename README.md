@@ -16,13 +16,15 @@ PRs, bug reports, and issue suggestions are welcome! For major changes, please p
 ### Running locally:
 
 ```
-  yarn docs:dev 
+  $ yarn install
+  $ yarn docs:dev 
 ```
 
 ### Building:
 
 ```
-  yarn docs:build
+  $ yarn docs:links   # verify all links are well-formed
+  $ yarn docs:build
 ```
 
 Then deploy the `docs/.vuepress/dist` directory to the `gh-pages` branch of this repo.
