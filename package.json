@@ -2,7 +2,7 @@
   "scripts": {
     "start": "yarn docs:dev",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "yarn docs:links && vuepress build docs",
+    "docs:build": "vuepress build docs",
     "docs:links": "vuepress check-md docs"
   },
   "devDependencies": {
