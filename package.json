@@ -1,9 +1,9 @@
 {
   "scripts": {
     "start": "yarn docs:dev",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
-    "docs:links": "vuepress check-md docs"
+    "docs:dev": "npx vuepress dev docs",
+    "docs:build": "npx vuepress build docs",
+    "docs:links": "npx vuepress check-md docs"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
@@ -15,11 +15,12 @@
     "markdown-it-footnote": "^3.0.2",
     "markdown-it-task-lists": "^2.1.1",
     "moment": "^2.24.0",
-    "vuepress": "^1.1.0"
+    "vuepress": "^1.7.1"
   },
   "dependencies": {
     "markdown-it": "^8.4.2",
     "markdown-it-emoji": "^1.4.0",
+    "npx": "^10.2.2",
     "vuepress-plugin-check-md": "^0.0.2"
   }
 }

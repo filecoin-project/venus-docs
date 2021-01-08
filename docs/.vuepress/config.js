@@ -37,9 +37,9 @@ module.exports = {
       },
     ],
       /*{ text: 'Languages',
-        items: [ D
+        items: [ 
           { text: 'English', link: '/' },
-          { text: 'Chinese', link: '/language/chinese' }
+        //  { text: 'Chinese', link: '/language/chinese' }
         ]
       }*/
     // Optional options for generating "Edit this page" link
