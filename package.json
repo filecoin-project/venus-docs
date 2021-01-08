@@ -23,5 +23,6 @@
     "markdown-it-emoji": "^1.4.0",
     "npx": "^10.2.2",
     "vuepress-plugin-check-md": "^0.0.2"
-  }
+  },
+  "version": "0.0.0"
 }
