@@ -1,5 +1,4 @@
-name: Vuepress deploy
-uses: jenkey2011/vuepress-deploy@1.0.1
+name: Deploy to gh-pages
 on: [push]
 jobs:
   build-and-deploy:
@@ -8,8 +7,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: vuepress-deploy
-      uses: jenkey2011/vuepress-deploy@master
+    - name: Vuepress deploy
+      uses: jenkey2011/vuepress-deploy@1.0.1
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         TARGET_REPO: filecoin-project/docs
