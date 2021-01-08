@@ -7,11 +7,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Vuepress deploy
-      uses: jenkey2011/vuepress-deploy@1.0.1
+    - name: vuepress-deploy
+      uses: jenkey2011/vuepress-deploy@master
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        TARGET_REPO: filecoin-project/docs
-        TARGET_BRANCH: gh-pages
+        TARGET_REPO: username/repo
+        TARGET_BRANCH: master
         BUILD_SCRIPT: yarn docs:build
         BUILD_DIR: docs/.vuepress/dist/
