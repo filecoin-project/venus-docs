@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Venus Filecoin',
   description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
-  base: '/venus-filecoin/',
+  base: '/venus-docs/',
   markdown: {
     config: md => {
       md.set({ linkify: true })
