@@ -61,13 +61,12 @@ module.exports = {
         collapsable: false,
         children: [
           ['Home.md', 'Overview'],
-          ['Getting-Started.md', 'Getting started'],
-          ['Mining-Filecoin.md', 'Mining Filecoin'],
-          ['Storing-on-Filecoin.md', 'Storing on Filecoin'],
-          ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
           ['Commands.md', 'CLI commands'],
-          ['How-to-connect-two-nodes-directly.md', 'Connecting two nodes directly'],
-          ['Running-a-network-locally.md', 'Running a local network']
+          ['Getting-Started.md', 'Getting started'],
+          ['How-to-connect-network.md', 'How to Start network'],
+          ['How-to-setup_2knet.md', 'How to Start a local network'],
+          ['Mining-Filecoin.md', 'Mining Filecoin'],
+          ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
         ]
       },
       {

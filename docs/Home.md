@@ -6,13 +6,12 @@ home: true
 
 ### Ahoy, Filecoin community! Welcome to the `Venus` Filecoin tutorial.
 
-Venus is a GoLang implementation of the Filecoin Distributed Storage Network. It was the first Filecoin implementation originially initiated and developed by Protocol Labs, and now is maintained by the Filecoin community. **It is currently under active development.**
+Venus is a GoLang implementation of the Filecoin Distributed Storage Network. It was the first Filecoin implementation originially initiated and developed by Protocol Labs, and now is maintained by the  IPFS-Force Community. **It is currently under active development.**
 
 Filecoin mainnet is currently live. Visit [network.filecoin.io](https://network.filecoin.io) for all available networks. The tutorials below explore the network using the `Venus` implementation.
 
 * 🍄 First time using `Venus`? Start with the install and setup steps in [Getting Started](Getting-Started).
 * 🤖 Ready to mine? Head over to [Mining Filecoin](Mining-Filecoin).
-* 📚 Storing data? We've got you covered with [Storing on Filecoin](Storing-on-Filecoin).
 * 💔 Need help? Start with [Troubleshooting & FAQ](Troubleshooting-&-FAQ)
 
 ### Looking for a introduction to the Filecoin network?
