@@ -62,10 +62,11 @@ module.exports = {
           ['Home.md', 'Overview'],
           ['Commands.md', 'CLI commands'],
           ['Getting-Started.md', 'Getting started'],
-          ['How-to-connect-network.md', 'How to Start network'],
-          ['How-to-setup_2knet.md', 'How to Start a local network'],
+          ['How-To-Connect-Network.md', 'How to Start network'],
+          ['How-To-Setup_2knet.md', 'How to Start a local network'],
           ['Mining-Filecoin.md', 'Mining Filecoin'],
           ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
+          ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
         ]
       },
       {

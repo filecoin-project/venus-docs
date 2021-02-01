@@ -12,8 +12,9 @@ Filecoin mainnet is currently live. Visit [network.filecoin.io](https://network.
 
 * 🍄 First time using `Venus`? Start with the install and setup steps in [Getting Started](Getting-Started).
 * 🤖 Ready to mine? Head over to [Mining Filecoin](Mining-Filecoin).
+* 🌸 PRs, bug reports, and issue suggestions are welcome [Welcome to Contributing](How-To-Contribute-Docs)
 * 💔 Need help? Start with [Troubleshooting & FAQ](Troubleshooting-&-FAQ)
-
+ 
 ### Looking for a introduction to the Filecoin network?
 
 Filecoin currently offers several node implementations including a `Lotus` implementation (also in GoLang) that is currently the recommended default. For a more general introduction to the Filecoin network and underlying concepts that apply across all implementations, please visit the [Filecoin Docs](https://docs.filecoin.io) and [Filecoin Specification](https://spec.filecoin.io). 
