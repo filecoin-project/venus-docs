@@ -61,13 +61,12 @@ module.exports = {
         collapsable: false,
         children: [
           ['Home.md', 'Overview'],
-          ['Getting-Started.md', 'Getting started'],
-          ['Mining-Filecoin.md', 'Mining Filecoin'],
-          ['Storing-on-Filecoin.md', 'Storing on Filecoin'],
-          ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
           ['Commands.md', 'CLI commands'],
-          ['How-to-connect-two-nodes-directly.md', 'Connecting two nodes directly'],
-          ['Running-a-network-locally.md', 'Running a local network']
+          ['Getting-Started.md', 'Getting started'],
+          ['How-to-connect-network.md', 'How to Start network'],
+          ['How-to-setup_2knet.md', 'How to Start a local network'],
+          ['Mining-Filecoin.md', 'Mining Filecoin'],
+          ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
         ]
       },
       {
@@ -81,3 +80,9 @@ module.exports = {
     ]
   }
 }
+
+
+bafy2bzaced4dyarx3pyz53ecwibru62vktsb6z7pyl735ljz53xgqeg7vfbno bafy2bzacebvkqkseyyifhgxkyfrwengbgzofmzn3xtgfx3osnbflkxkc5rrdw bafy2bzacedlf4tyypgo7w6vnyudzopo473pf6np345zoue2flc45ssxv4jti4 bafy2bzacebuldkqwwcylm6tzwzdbrga23ulxbjqhltsbdqv7yewjpbp4s4vge
+
+
+bafy2bzacebbxwyicp4zjavswpeixe2pkaw6vc54ahrqd6dc7vucm7mwcgulru bafy2bzacebv2awifkmvdgrk2gpnk7qj5pca57bc54pfsurmkekxiu5uwvublw bafy2bzacedjtnpprzlmk5vhukc4wboxgtwvxh6kdjsskmhtopqs5gt2yh5lha bafy2bzacedemqsqgpmqktieayjj4a3cxyedh6nak7vito22k25lro37ioqpqy bafy2bzacebgpggug242sexq7luvn5armividdbksww6gh47df4cg3dkzjrkz6 bafy2bzaceb2jruetan7pjgn7c5ea2tv6nfibqmmtp7pl2s2aww6gxlc6hbsnw bafy2bzacecrx3fnuoukr5z3lxwyixxdn4lhm5iwlyfxxnksvrli5l6crnk3ly bafy2bzacearmqayjayn742kbgve7z57a2q36spnxnmntgy7mi27swkwm34urq bafy2bzaceb27bs5kv7gl2sarv7m2qpgkyn7hvy2nh4n5my73tlivuu7vz4rpe bafy2bzaced4wvfvdhmhsqkdqngz4boolhwavi7p6du3mnuczmhmzjwqy3r2ti bafy2bzacecisgkx5utbvzl67uiteg6mifytt7lkkjld72jiigpswcfxaejpga

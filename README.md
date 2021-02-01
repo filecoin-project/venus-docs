@@ -1,4 +1,4 @@
-# Venus Filecoin Docs
+# Venus Docs
 
 This repository contains documentation content for the [Venus](https://github.com/filecoin-project/venus) implementation **only**. It is hosted at [venus.filecoin.io](https://venus.filecoin.io).
 

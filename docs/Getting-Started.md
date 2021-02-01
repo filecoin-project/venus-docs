@@ -1,39 +1,43 @@
 # Getting started
 
-This is a step-by-step guide for installing and running a Filecoin node connected to the testnet on your local machine. Subsequent tutorials explain how to [mine Filecoin](Mining-Filecoin) or [store data](Storing-on-Filecoin) with the node.
+This is a step-by-step guide for installing and running a Filecoin node connected to the testnet on your local machine. Subsequent tutorials explain how to [mine Filecoin](Mining-Filecoin).
 
 ## Table of contents
 
-* [System requirements](#system-requirements)
-* [Installing dependencies and system configuration](#installing-dependencies-and-system-configuration)
-* [Building Filecoin and running tests](#building-filecoin-and-running-tests)
-* [Start running Filecoin](#start-running-filecoin)
-* [Get FIL from the Filecoin faucet](#get-fil-from-the-filecoin-faucet)
-* [Wait for chain sync](#wait-for-chain-sync)
-* [Viewing network information](#viewing-network-information)
+- [Getting started](#getting-started)
+  - [Table of contents](#table-of-contents)
+    - [System requirements](#system-requirements)
+    - [Installing dependencies and system configuration](#installing-dependencies-and-system-configuration)
+      - [Installing Go](#installing-go)
+      - [Installing dependencies](#installing-dependencies)
+    - [Building Filecoin and running tests](#building-filecoin-and-running-tests)
+  - [Start running Filecoin](#start-running-filecoin)
+  - [Get FIL from the Filecoin faucet](#get-fil-from-the-filecoin-faucet)
+  - [Wait for chain sync](#wait-for-chain-sync)
+  - [Viewing network information](#viewing-network-information)
 
 ### System requirements
 
-Go-filecoin can build and run on most GNU/Linux and MacOS systems. Windows is not yet supported.
+Venus can build and run on most GNU/Linux and MacOS systems. Windows is not yet supported.
 
 A validating node can run on most systems with **at least 8GB of RAM**. Mining nodes in particular require significant RAM and GPU resources, depending on the sector configuration being implemented.
 
 ### Installing dependencies and system configuration
 
-Clone the `go-filecoin` git repository and enter it:
+Clone the `venus` git repository and enter it:
 
    ```sh
     mkdir -p /path/to/filecoin-project
-    git clone https://github.com/filecoin-project/go-filecoin.git /path/to/filecoin-project/go-filecoin
+    git clone https://github.com/filecoin-project/venus.git /path/to/filecoin-project/venus
    ```
 
 #### Installing Go
 
-The build process for `go-filecoin` requires [Go](https://golang.org/doc/install) >= v1.13.
+The build process for `venus` requires [Go](https://golang.org/doc/install) >= v1.13.
 
 > Installing Go for the first time? We recommend [this tutorial](https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html) which includes environment setup.
 
-Due to the use of `cgo` in `go-filecoin`, a C compiler is required to build it whether a prebuilt library is being used or it is compiled from source. To use `gcc` (e.g. `export CC=gcc`), v7.4.0 or higher is required.
+Due to the use of `cgo` in `venus`, a C compiler is required to build it whether a prebuilt library is being used or it is compiled from source. To use `gcc` (e.g. `export CC=gcc`), v7.4.0 or higher is required.
 
 The build process will download a static library containing the [Filecoin proofs implementation](https://github.com/filecoin-project/rust-fil-proofs) (which is written in Rust).
 
@@ -93,49 +97,38 @@ go run ./build all
 
 > **NOTICE:** Any flag passed to `go run ./build test` (e.g. `-cover`) will be passed on to `go test`.
 
-**For all problems with the build**, please consult the [Troubleshooting](https://go.filecoin.io/go-filecoin-tutorial/Troubleshooting-&-FAQ.html) section of this documentation.
+**For all problems with the build**, please consult the [Troubleshooting](https://go.filecoin.io/venus-tutorial/Troubleshooting-&-FAQ.html) section of this documentation.
 
 ## Start running Filecoin
 
-1. If `go-filecoin` has been run on the system before, remove existing Filecoin repo (**this will delete all previous filecoin data**):
+1. If `venus` has been run on the system before, remove existing Filecoin repo (**this will delete all previous filecoin data**):
     ```sh
-    rm -rf ~/.filecoin
+    rm -rf ~/.venus
     ```
 
-2. Initialize go-filecoin:
+2. Start the venus daemon:
     ```sh
-    go-filecoin init --genesisfile=https://ipfs.io/ipfs/QmXZQeezX1x8uRQX9EUaYxnyivUpTfJqQTvszk3c8SnFPN/testnet.car --network=testnet
-    ```
-
-3. Start the go-filecoin daemon:
-    ```sh
-    go-filecoin daemon
+    venus daemon
     ```
     
 This should return "My peer ID is `<peerID>`", where `<peerID>` is a long [CID](https://github.com/filecoin-project/specs/blob/master/definitions.md#cid) string starting with "Qm".
 
-4. Print a list of bootstrap node addresses:
+1. Print a list of bootstrap node addresses:
     ```sh
-    go-filecoin config bootstrap.addresses
+    venus config bootstrap.addresses
     ```
 
     
-5. Choose any address from the list you just printed, and connect to it (Automatic peer discovery and connection coming soon.):
+2. Choose any address from the list you just printed, and connect to it (Automatic peer discovery and connection coming soon.):
     ```sh
-    go-filecoin swarm connect <any-filecoin-node-mulitaddr>
+    venus swarm connect <any-filecoin-node-mulitaddr>
     ```
     
  > **NOTICE:** This can be **slow** the first time. The filecoin node needs a large parameter file for proofs, stored in `/tmp/filecoin-proof-parameters`. It is usually generated by the `deps` build step. If these files are missing they will be regenerated, which can take up to an hour. We are working on a better solution.
 
-6. Check the node's connectivity:
+3. Check the node's connectivity:
     ```sh
-    go-filecoin swarm peers                  # lists addresses of peers to which you're connected
-    ```
-
-7. The last segment of a peer's address is its `peerID`. Test the connection directly to a peer with:
-    
-    ```sh
-    go-filecoin ping <peerID>  # Pings the peer and displays round-trip latency.
+    venus swarm peers                  # list addresses of peers to which you're connected
     ```
 
 The node should now be connected to some peers and will begin downloading and validating the blockchain.
@@ -143,7 +136,7 @@ The node should now be connected to some peers and will begin downloading and va
 🎉 Woohoo! You are now running a Filecoin node and connected to the network. This is the anatomy of a basic node:
 ![Diagram of a single node and its components](./images/getting-started-node-diagram.png)
 
- > **NOTICE:** The daemon is now running indefinitely in its own Terminal (`Ctrl + C` to quit). To run other `go-filecoin` commands, open a second Terminal tab or window (`Cmd + T` on Mac)._
+ > **NOTICE:** The daemon is now running indefinitely in its own Terminal (`Ctrl + C` to quit). To run other `venus` commands, open a second Terminal tab or window (`Cmd + T` on Mac)._
 
 _Need help? See [Troubleshooting & FAQ](Troubleshooting-&-FAQ) or [#fil-dev on Matrix chat](https://riot.im/app/#/room/#fil-dev:matrix.org)._
 
@@ -158,26 +151,26 @@ All balances of FIL are stored in wallets. When a node is newly created, it will
 
 1. Retrieve your wallet address:
     ```sh
-    go-filecoin address ls
+    venus wallet ls
    ```
     
 2. The output should be a long alphanumeric string. Go to the testnet faucet at [https://faucet.testnet.filecoin.io] and submit that wallet address. It will take a minute for the FIL to arrive in the wallet.
 
     * Alternatively, you can tap the faucet from the command line:
         ```sh
-        export WALLET_ADDR=`go-filecoin address ls`    # fetch your wallet address into a handy variable
+        export WALLET_ADDR=`venus wallet ls`    # fetch your wallet address into a handy variable
         MESSAGE_CID=`curl -X POST -F "address=${WALLET_ADDR}" "https://faucet.testnet.filecoin.io/send"`
         ```
         
 3. The faucet will provide a message CID. If thr chain is already synced with the network, this message should be processed in about 30 seconds. The following command can be run in order to wait for confirmation:
 
     ```sh
-    go-filecoin message wait ${MESSAGE_CID}
+    venus state wait-msg ${MESSAGE_CID}
     ```
 
 4. Verify that the FIL has landed in the wallet by checking the wallet balance:
     ```sh
-    go-filecoin wallet balance ${WALLET_ADDR}
+    venus wallet balance ${WALLET_ADDR}
     ```
     
 ## Wait for chain sync
@@ -185,13 +178,8 @@ All balances of FIL are stored in wallets. When a node is newly created, it will
 
 During this initial sync time ther will be intense activity on one CPU core. Find out what the current block height is first by visiting the [network stats page](https://stats.testnet.filecoin.io) then observe the nodes syncing progress:
 ```sh
-watch -n 10 'go-filecoin show block $(go-filecoin chain head | head -n 1)'
-# Mac users will need to install watch first: brew install watch
+lotus sync status
 ````
-
-After syncing is complete, you can begin mining or storing data on the Filecoin network:
-- [Mining Filecoin](Mining-Filecoin)
-- [Storing Data](Storing-on-Filecoin)
 
 ## Viewing network information
 
