@@ -1,6 +1,6 @@
 # 如何启动一个本地测试网络
 
-使用venus启动本地测试网络，目前工具链尚不完整，需要一些lotus组件，包括lotus-seed, lotus-miner
+使用venus启动本地测试网络，目前工具链尚不完整，需要一些lotus组件，lotus-miner
 
 ## 环境准备
 
@@ -16,15 +16,17 @@ yum install hwloc
 1. 生成pre-seal文件及数据
    
     ```sh
-        ./lotus-seed pre-seal --sector-size 2048 --num-sectors 2
-        ./lotus-seed genesis new localnet.json
-        ./lotus-seed genesis add-miner localnet.json ~/.genesis-sectors/pre-seal-t01000.json
+        ./venus seed pre-seal --sector-size 2048 --num-sectors 2
+        ./venus seed genesis new localnet.json
+        ./venus seed genesis add-miner localnet.json ~/.genesis-sectors/pre-seal-t01000.json
     ```
 
 2. 启动daemon
    
    ```sh
-        ./venus daemon --make-genesis=dev.gen --genesis-template=localnet.json --bootstrap=false
+        ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --bootstrap=false
+        # 设置钱包密码
+        ./venus wallet set-password <password>
         ./venus wallet import ~/.genesis-sectors/pre-seal-t01000.key
    ```
    
@@ -44,32 +46,24 @@ yum install hwloc
 1. 启动venus节点
    ```sh
         # first start, dev.car是创世节点生成
-        ./venus daemon --genesisfile=dev.car --network=2k --offline=true
+        ./venus daemon --genesisfile=devgen.car --network=2k --offline=true
 
         # other
         ./venus daemon --offline=true
    ```
-2.  连接创世节点
-   ```sh
-        # genesis lotus执行
-        ./lotus net listen
-        # venus执行
-        ./venus swarm connect [peer addr]
-        # 查看peers
-        ./lotus swarm peers
-   ```
 
 ## 生成普通miner
 
-    ```sh
+   ```sh
         # 创建钱包
         ./venus wallet new --type=bls
         # 转账,在genesis执行
-        ./lotus send $WALLET_T3_ADDR [value]
+        ./venus send $WALLET_T3_ADDR --value=[value]
         # 查询
         ./venus wallet balance $WALLET_T3_ADDR
-        # 生成miner./lotus-miner init --owner=$WALLET_T3_ADDR --worker=$WALLET_T3_ADDR --sector-size=2048 --nosync
-    ```
+        # 生成miner
+        ./lotus-miner init --owner=$WALLET_T3_ADDR --worker=$WALLET_T3_ADDR --sector-size=2048 --nosync
+   ```
 
 ## 启动miner
 
