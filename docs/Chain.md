@@ -65,10 +65,10 @@ It is possible to _prune_ the current chain data used by Venus to reduce the dis
   venus daemon stop
   ```
 
-1. Remove the contents of the `datastore/chain/` folder in the Venus path:
+1. Remove the contents of the `badger/` folder in the Venus path:
 
   ```bash
-  rm -rf ~/.venus/datastore/chain/*
+  rm -rf ~/.venus/badger/*
   ```
   
 1. Start the daemon using a minimal snapshot, as explained above:
