@@ -1,6 +1,6 @@
 # CLI命令行
 
-For a complete list of available commands, simply run `venus --help` in your terminal.
+可以在你的终端运行 `venus --help` ，以获得完整的可用命令列表。
 
 ```
   START RUNNING FILECOIN
@@ -46,17 +46,17 @@ For a complete list of available commands, simply run `venus --help` in your ter
 ```
 
 
-# Common commands
+# 常用命令
 
-# Start a mainnet node
+# 启动主网节点
 
     ```sh
         ./venus daemon
     ```
 
-## Query chain status
+## 查询链状态
 
-1. get current head tipset
+1. 获取当前tipset的head信息
    
    ```sh
         ./venus chain head
@@ -85,7 +85,7 @@ For a complete list of available commands, simply run `venus --help` in your ter
         }
    ```
 
-2. list recent tipset
+2. 最近的tipset的信息列表
     ```sh
     ./venus chain ls
         [
@@ -129,21 +129,21 @@ For a complete list of available commands, simply run `venus --help` in your ter
         ]
     ```
 
-3. set tipset head
+3. 设置tipset的head
    
    ```sh
         ./venus chain set-head bafy2bzaceckeg7onfhua5jf4xrnrzt2erix5pibjov2r4vvdhcih6oql7vm24 bafy2bzacedt74pgv2rk7iddptz2nz4kfcsoccqnrb4q7mbluof6puw5iccqms
    ```
 
-## Wallet command
+## 钱包命令
 
-1. create address
+1. 创建地址
 
     ```sh
         ./venus wallet new
     ```
 
-2. list address
+2. 地址列表
     
     ```sh
         ./venus wallet ls
@@ -155,35 +155,35 @@ For a complete list of available commands, simply run `venus --help` in your ter
         f3rjuxqnsjk7wuuzf3rqwsfxpbmqp23dn6ik5vyow2ntw5sgdxyijh7cfbujbmwtzdpii6ikunumez55jcxbbq  0 FIL                       0           
     ```
 
-3. set default address
+3. 设置默认地址
 
     ```sh
         ./venus wallet set-default f3qmxlwlzmvvn6vwo73jhuzjufmo65lrdwecxcmd7poyv5yex5hqngvo26sqjzzdge4vj3yxmwn5x24igremna
     ```
 
-4. get default address
+4. 获取默认地址
 
     ```sh
         ./venus wallet default
     ```
 
-5. export/import address,compatible with the lotus private key format
+5. 导出/导入地址，兼容lotus私钥格式
 
     ```sh
         ./venus wallet import
         ./venus wallet export 
     ```
 
-6. query balance of address
+6. 查询地址余额
 
     ```sh
         ./venus wallet balance f3rjuxqnsjk7wuuzf3rqwsfxpbmqp23dn6ik5vyow2ntw5sgdxyijh7cfbujbmwtzdpii6ikunumez55jcxbbq
         0 FIL
     ```
 
-##  Sync commnad
+##  同步命令
 
-1. query sync status
+1. 查询同步状态
 
     ```sh
         ./venus sync status
@@ -221,15 +221,15 @@ For a complete list of available commands, simply run `venus --help` in your ter
         History:
     ```
 
-2. set the number of synchronizations
+2. 设置同步次数
 
     ```sh
         ./venus sync set-concurrent 1
     ```
 
-## Network command
+## 网络命令
 
-1. print local node information
+1. 打印本地节点信息
 
     ```sh
         ./venus swarm id
@@ -243,7 +243,7 @@ For a complete list of available commands, simply run `venus --help` in your ter
         }
     ```
 
-2. query the peers that the node is connected to
+2. 查询已连接的对方节点
     ```sh
         ./venus swarm peers
 
@@ -266,15 +266,15 @@ For a complete list of available commands, simply run `venus --help` in your ter
         }
     ```
 
-3. connect to other node
+3. 连接到其他节点
 
     ```
         ./venus swarm connect /ip4/192.168.1.151/tcp/6000/p2p/QmTBY16KjbJifqrepWriHNaSVxBJRKg63G8hJrAZAstCQt
     ```
 
-## Query state of actor
+## 查询actor状态
 
-1. get actor infomation
+1. 获取actor信息
 
     ```sh
         ./venus get-actor f02438
@@ -288,7 +288,7 @@ For a complete list of available commands, simply run `venus --help` in your ter
         } 
     ```
 
-2. query information of miner
+2. 查询矿工信息
 
     ```sh
         ./venus state miner-info f02438
@@ -309,7 +309,7 @@ For a complete list of available commands, simply run `venus --help` in your ter
         Proving Period Start:   447666 (21 hours 36 minutes ago)
     ```
 
-3. get sector infomation of miner
+3. 获取矿工的扇区信息
 
     ```sh
         ./venus state sector f02438 100001
@@ -332,7 +332,7 @@ For a complete list of available commands, simply run `venus --help` in your ter
         Partition:  0
     ```
     
-4. search msg by id
+4. 通过id搜索消息
 
     ```sh
         ./venus state search-msg bafy2bzaceckluouswlxpaujhihar4yngk3dx6daqbjfoyolbfvlelwgapmzxg 
@@ -342,7 +342,7 @@ For a complete list of available commands, simply run `venus --help` in your ter
         Gas Used: 13133828
     ```
 
-5. wait for msg result of msgid
+5. 等待消息id的结果
 
     ```sh
         ./venus state wait-msg bafy2bzaceanbalwsqc5fetxcdfamfovlpkdjd2s5eje4bwsaxnrrbyswjv5g4
