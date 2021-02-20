@@ -60,11 +60,14 @@ module.exports = {
         collapsable: false,
         children: [
           ['Home.md', 'Overview'],
+          ['Chain.md', 'Chain'],
           ['Commands.md', 'CLI commands'],
           ['Getting-Started.md', 'Getting started'],
-          ['How-To-Connect-Network.md', 'How to Start network'],
-          ['How-To-Setup_2knet.md', 'How to Start a local network'],
+          ['How-to-connect-network.md', 'How to Start network'],
+          ['How-to-setup_2knet.md', 'How to Start a local network'],
+          ['How-to-use-wallet.md', 'How to use wallet'],
           ['Mining-Filecoin.md', 'Mining Filecoin'],
+          ['Payment-channel.md', 'Payment channel'],
           ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
           ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
         ]

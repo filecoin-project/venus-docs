@@ -43,6 +43,7 @@
     venus log                    - Interact with the daemon event log output
     venus protocol               - Show protocol parameter details
     venus version                - Show venus version information
+    venus seed                   - Seal sectors for genesis miner
 ```
 
 
@@ -171,7 +172,7 @@
 
     ```sh
         ./venus wallet import
-        ./venus wallet export 
+        ./venus wallet export <password>
     ```
 
 6. 查询地址余额
@@ -179,6 +180,19 @@
     ```sh
         ./venus wallet balance f3rjuxqnsjk7wuuzf3rqwsfxpbmqp23dn6ik5vyow2ntw5sgdxyijh7cfbujbmwtzdpii6ikunumez55jcxbbq
         0 FIL
+    ```
+
+7. 设置钱包密码
+
+    ```sh
+        ./venus wallet set-password <password>
+    ```
+
+8. 锁定与解锁钱包
+
+    ```sh
+        ./venus wallet lock <password>
+        ./venus wallet unlock <password>
     ```
 
 ##  同步命令

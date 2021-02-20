@@ -43,6 +43,7 @@ For a complete list of available commands, simply run `venus --help` in your ter
     venus log                    - Interact with the daemon event log output
     venus protocol               - Show protocol parameter details
     venus version                - Show venus version information
+    venus seed                   - Seal sectors for genesis miner
 ```
 
 
@@ -171,7 +172,7 @@ For a complete list of available commands, simply run `venus --help` in your ter
 
     ```sh
         ./venus wallet import
-        ./venus wallet export 
+        ./venus wallet export <password>
     ```
 
 6. query balance of address
@@ -179,6 +180,19 @@ For a complete list of available commands, simply run `venus --help` in your ter
     ```sh
         ./venus wallet balance f3rjuxqnsjk7wuuzf3rqwsfxpbmqp23dn6ik5vyow2ntw5sgdxyijh7cfbujbmwtzdpii6ikunumez55jcxbbq
         0 FIL
+    ```
+
+7. set wallet password
+
+    ```sh
+        ./venus wallet set-password <password>
+    ```
+
+8. lock and unlock wallet
+
+    ```sh
+        ./venus wallet lock <password>
+        ./venus wallet unlock <password>
     ```
 
 ##  Sync commnad
