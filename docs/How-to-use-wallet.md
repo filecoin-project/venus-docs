@@ -1,33 +1,56 @@
-# 如何使用钱包
+# How to use wallet
 
-1. 首先需要设置钱包密码，然后就可以创建钱包地址，导入和导出私钥
-2. 每次重启程序都需要解锁钱包
+The wallet is used to manage and save the private key, which is stored in the local database after encryption.
+Before using the wallet, you need to set the password of the wallet. A wallet has only one password, and all the private keys are encrypted with the same password.
+No password will only affect the functions related to the wallet (such as signature). Other functions can be used normally.
+The encrypted private key needs to be decrypted before use, so the unlock command is provided to realize this function. **Every time the program is restarted and the wallet is used, the wallet must be unlocked**.
 
-## 简单描述
+There are two types of wallet addresses, secp256k1 and BLS. The address of secp256k1 starts with f1 and the address of BLS starts with f3.
+In the program, it is distinguished by the SigType field in the structure [keyinfo](https://github.com/filecoin-project/venus/blob/master/pkg/crypto/keyinfo.go#L22).
 
-1. 设置钱包密码
+Wallet provides functions such as creating private key, importing and exporting private key, unlocking and locking wallet, viewing and setting default wallet address.
 
-    ```sh
-        ./venus wallet set-password <password>
-    ```
+## Related functions
 
-2. 执行创建钱包地址、导入或导出私钥操作都需要提前设置正确的密码，不然会执行失败
+1. set password
 
-    ```sh
-        # 创建钱包地址，默认创建的是 BLS 地址
-        ./venus wallet new
-        # 导入私钥
-        ./venus wallet import
-        # 导出私钥，导出时需要输入密码
-        ./venus wallet export <password>
-    ```
+```sh
+./venus wallet set-password <password>
+Password set successfully
+```
 
-3. 重启时需使用命令 `./venus wallet unlock <password>` 解锁钱包，不然会获取不到私钥
+2. to create a wallet address, import or export a private key, you need to set the password in advance, otherwise it will fail
 
-4. 锁定钱包
+```sh
+# To create a wallet address, the BLS address is created by default
+./venus wallet new
+# import private key
+./venus wallet import
+# export private key
+./venus wallet export <password>
+```
 
-    ```sh
-        ./venus wallet lock <password>
-    ```
+3. unlock wallet
 
-## [更多命令](Commands)
+```sh
+./venus wallet unlock <password>
+unlocked success
+```
+
+4. locked wallet
+
+```sh
+./venus wallet lock <password>
+unlocked success
+```
+
+## Matters needing attention
+
+1. **The first time a program starts, you need to set a password for it**.
+
+2. **Set the password before importing or creating the private key，Otherwise, the execution will fail**
+
+3. **The wallet needs to be unlocked after the program is restarted, Otherwise, the signature will fail because the private key cannot be obtained, 
+If you fail to obtain the private key, you will also report an error**: <address> is locked.
+
+## [More wallet commands](Commands)
