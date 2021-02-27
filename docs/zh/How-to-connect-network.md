@@ -1,9 +1,8 @@
-# How to connect to different 
+# 如何连接到不同到网络
 
-in venus, it is easy to decide whether to connect to different networks by setting the startup parameters.
+在Venus中，通过设置启动参数来决定是否连接到不同的网络。
 
-
-## Mainnet
+## 主网
 
 ```sh
 
@@ -11,9 +10,9 @@ in venus, it is easy to decide whether to connect to different networks by setti
 
 ```
 
-## Calibration Network
+## Calibration网络
 
-parameters must be configured to connect to the calibration network.
+必须配置为连接到Calibration网络的参数。
 
 ```sh
 
@@ -21,9 +20,9 @@ parameters must be configured to connect to the calibration network.
 
 ```
 
-## 2k Local Network
+## 2k 本地网络
 
-in addition to the corresponding network parameters, a network boot file (.car) is required to connect the 2k network.
+除了相应的网络参数外，连接2k网络还需要一个网络启动导文件（.car）。
 
 ```sh
 

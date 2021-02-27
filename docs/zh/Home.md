@@ -2,18 +2,18 @@
 home: true
 ---
 
-# Overview
+# 概览
 
-### Ahoy, Filecoin community! Welcome to the `Venus` Filecoin tutorial.
+### 哈喽, Filecoin社区! 欢迎来到Filecoin `Venus`  教程。
 
-Venus is a GoLang implementation of the Filecoin Distributed Storage Network. It was the first Filecoin implementation originially initiated and developed by Protocol Labs, and now is maintained by the  IPFS-Force Community. **It is currently under active development.**
+Venus是Filecoin分布式存储网络的GoLang实现，它是最初由协议实验室发起和开发的第一个Filecoin实现，现在由IPFSForce维护。**目前正在积极开发中。**
 
-Filecoin mainnet is currently live. Visit [network.filecoin.io](https://network.filecoin.io) for all available networks. The tutorials below explore the network using the `Venus` implementation.
+Filecoin主网目前正在运行. 了解所有可用网络请访问 [network.filecoin.io](https://network.filecoin.io) . 下面的教程将使用 `Venus` 实现探索这个网络。
 
-* 🍄 First time using `Venus`? Start with the install and setup steps in [Getting Started](Getting-Started).
-* 🤖 Ready to mine? Head over to [Mining Filecoin](Mining-Filecoin).
-* 💔 Need help? Start with [Troubleshooting & FAQ](Troubleshooting-&-FAQ)
+* 🍄 第一次使用 `Venus`? 从 [Getting Started](Getting-Started) 中的安装和设置步骤开始.
+* 🤖 准备好了吗? 前往 [Mining Filecoin](Mining-Filecoin).
+* 💔 需要帮助吗? 从 [Troubleshooting & FAQ](Troubleshooting-&-FAQ) 开始
 
-### Looking for a introduction to the Filecoin network?
+### 想了解Filecoin网络的介绍吗?
 
-Filecoin currently offers several node implementations including a `Lotus` implementation (also in GoLang) that is currently the recommended default. For a more general introduction to the Filecoin network and underlying concepts that apply across all implementations, please visit the [Filecoin Docs](https://docs.filecoin.io) and [Filecoin Specification](https://spec.filecoin.io). 
+Filecoin目前提供了数个实现，包括 `Lotus` （也基于GoLang语言），这是目前的默认实现。有关Filecoin网络和适用于所有实现的基本概念的一般性介绍，请访问 [Filecoin 文档](https://docs.filecoin.io) 和 [Filecoin 规范](https://spec.filecoin.io)。
