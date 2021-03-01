@@ -1,19 +1,22 @@
-# 如何启动一个本地测试网络
+# 如何启动测试网络
 
-使用venus启动本地测试网络，目前工具链尚不完整，需要一些lotus组件，包括lotus-miner
+本文以建立2k专用网络为例。
 
-## 环境准备
+## 本文以建立2k专用网络为例。
 
+基于 CentOS 7.* :
 ```
 yum install epel-release -y
 yum install ocl-icd-devel -y
 yum install opencl-headers -y
 yum install hwloc
+yum install jq -y 
 ```
+在此过程中，系统会提示您安装所有组件。
 
-## 生成创世节点
+## 生成节点
 
-1. 生成pre-seal文件及数据
+1. 生成预密封文件和数据
    
     ```sh
         ./venus seed pre-seal --sector-size 2048 --num-sectors 2
@@ -21,58 +24,66 @@ yum install hwloc
         ./venus seed genesis add-miner localnet.json ~/.genesis-sectors/pre-seal-t01000.json
     ```
 
-2. 启动daemon
+2. 启动 daemon
    
    ```sh
-        ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json
+        ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --network=2k
         # 设置钱包密码
         ./venus wallet set-password <password>
         ./venus wallet import ~/.genesis-sectors/pre-seal-t01000.key
+        # 重新启动daemon后，您需要解锁钱包
+        ./venus wallet unlock [--] [<password>]
    ```
    
 3. 初始化矿工
    
     ```sh
-        ./lotus-miner init --genesis-miner --actor=t01000 --sector-size=2048 --pre-sealed-sectors=~/.genesis-sectors --pre-sealed-metadata=~/.genesis-sectors/pre-seal-t01000.json --nosync
+        # 初始化 sealer
+        ./venus-sealer init --genesis-miner --actor=t01000 --sector-size=2048 --pre-sealed-sectors=~/.genesis-sectors --pre-sealed-metadata=~/.genesis-sectors/pre-seal-t01000.json --nosync --network=2k
+        # 初始化 miner
+        ./venus-miner init --actor=[miner] --listen-api=[$ cat ~/.venussealer/api] --token=[$ cat ~/.venussealer/token] --sector-size=2048
    ```
-4. 启动创世矿工
+4. 开始创世矿工的服务
 
     ```sh
-        ./lotus-miner run
+        # 启动seal服务
+        ./venus-sealer run --nosync
+        # 启动挖矿服务
+        ./venus-miner run --nosync
     ```
 
-## 启动venus普通节点
+## 启动Venus普通节点
 
-1. 启动venus节点
    ```sh
-        # first start, dev.car是创世节点生成
+        # 首先，devgen.car由创世节点生成
         ./venus daemon --genesisfile=devgen.car --network=2k --offline=true
 
-        # other
-        ./venus daemon --offline=true
+        # 其他
+        ./venus daemon --network=2k --offline=true
    ```
 
-## 生成普通miner
+## 生成普通矿工
 
     ```sh
-        # 创建钱包
+        # 矿建一个钱包
         ./venus wallet new --type=bls
-        # 转账,在genesis执行
+        # 转账，在创世节点执行
         ./venus send $WALLET_T3_ADDR --value=[value]
         # 查询
         ./venus wallet balance $WALLET_T3_ADDR
-        # 生成miner
-        ./lotus-miner init --owner=$WALLET_T3_ADDR --worker=$WALLET_T3_ADDR --sector-size=2048 --nosync
+        # 生成普通矿工
+        ./venus-miner init --owner=$WALLET_T3_ADDR --worker=$WALLET_T3_ADDR --sector-size=2048 --nosync
     ```
 
-## 启动miner
+## 启动普通节点的服务
 
    ```sh
-        # 启动
-        ./lotus-miner run
-        # 做一个 Sector
-        ./lotus-miner sectors pledge
+        # 启动sealing服务
+        ./venus-sealer run --nosync
+        # seal一次
+        ./venus-sealer sectors pledge
+        # 启动挖矿服务
+        ./venus-miner init --actor=[miner] --listen-api=[$ cat ~/.venussealer/api] --token=[$ cat ~/.venussealer/token] --sector-size=2048
+        ./venus-miner run --nosync
    ```
-
-
-   	{"base": "{bafy2bzacebbxwyicp4zjavswpeixe2pkaw6vc54ahrqd6dc7vucm7mwcgulru,bafy2bzacebv2awifkmvdgrk2gpnk7qj5pca57bc54pfsurmkekxiu5uwvublw,bafy2bzacedjtnpprzlmk5vhukc4wboxgtwvxh6kdjsskmhtopqs5gt2yh5lha,bafy2bzacedemqsqgpmqktieayjj4a3cxyedh6nak7vito22k25lro37ioqpqy,bafy2bzacebgpggug242sexq7luvn5armividdbksww6gh47df4cg3dkzjrkz6,bafy2bzaceb2jruetan7pjgn7c5ea2tv6nfibqmmtp7pl2s2aww6gxlc6hbsnw,bafy2bzacecrx3fnuoukr5z3lxwyixxdn4lhm5iwlyfxxnksvrli5l6crnk3ly,bafy2bzacearmqayjayn742kbgve7z57a2q36spnxnmntgy7mi27swkwm34urq,bafy2bzaceb27bs5kv7gl2sarv7m2qpgkyn7hvy2nh4n5my73tlivuu7vz4rpe,bafy2bzaced4wvfvdhmhsqkdqngz4boolhwavi7p6du3mnuczmhmzjwqy3r2ti,bafy2bzacecisgkx5utbvzl67uiteg6mifytt7lkkjld72jiigpswcfxaejpga}", "nullRounds": "0", "took": 4.072557004}
+   

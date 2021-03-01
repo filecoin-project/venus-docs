@@ -1,9 +1,9 @@
 ---
 editLink: false
 ---
-### Have a question? 
+### 有问题？ 
 
-[Filecoin.io](https://filecoin.io) - general information about the Filecoin network
+[Filecoin.io](https://filecoin.io) -  Filecoin网络的基本信息
 
-[Community Channels](https://filecoin.io/build/#community) - links to Filecoin community chat and forum
+[Community Channels](https://filecoin.io/build/#community) - 链接到Filecoin社区聊天和论坛
 

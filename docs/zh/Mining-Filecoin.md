@@ -1,3 +1,3 @@
 # Mining Filecoin
 
-This section provides an overview of how mining works as well as a step-by-step guide to mining on the Filecoin network.
+本节概述了mining的工作原理，以及在Filecoin网络上进行mining的步骤指南。

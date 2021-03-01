@@ -1,77 +1,76 @@
-# Troubleshooting and FAQ
+# 故障排除和常见问题解答
 
-_Having trouble with `venus`? Here are some common errors (and their fixes), as well as answers to frequently asked questions._
+_对于 `venus` 有问题吗? 以下是一些常见错误（及其修复），以及常见问题的解答。_
 
-_Note: This wiki focuses on `venus`. For questions about the Filecoin Project at large, see the [Filecoin Project FAQ](https://filecoin.io/faqs/)._
+_注意: 此Wiki专注于 `venus` 。有关整个Filecoin项目的问题，请参阅[Filecoin项目常见问题解答](https://filecoin.io/faqs/)._
 
-## Table of contents
+## 目录
 
-- [Troubleshooting and FAQ](#troubleshooting-and-faq)
-  - [Table of contents](#table-of-contents)
-    - [Known issues](#known-issues)
-    - [Changing ports](#changing-ports)
-    - [Installing from binary](#installing-from-binary)
-    - [Downloading and building from source](#downloading-and-building-from-source)
-    - [Mining and deals](#mining-and-deals)
-    - [Daemon will not start](#daemon-will-not-start)
-    - [Problems caused by incomplete chain sync](#problems-caused-by-incomplete-chain-sync)
-    - [Issues connecting to a network](#issues-connecting-to-a-network)
-    - [Upgrading](#upgrading)
+- [故障排除和常见问题解答](#故障排除和常见问题解答)
+  - [目录](#目录)
+    - [已知问题](#已知问题)
+    - [更改端口](#更改端口)
+    - [二进制安装](#二进制安装)
+    - [下载并构建](#下载并构建)
+    - [挖矿和交易](#挖矿和交易)
+    - [Daemon无法启动](#daemon无法启动)
+    - [链同步不完全导致的问题](#链同步不完全导致的问题)
+    - [连接到网络的问题](#连接到网络的问题)
+    - [升级](#升级)
 
-### Known issues
-Known bugs are [catalogued here](https://github.com/filecoin-project/venus/issues?q=is%3Aissue+is%3Aopen+label%3AC-bug).
+### 已知问题
+已知问题已 [在此处分类](https://github.com/filecoin-project/venus/issues?q=is%3Aissue+is%3Aopen+label%3AC-bug).
 
-### Changing ports
-venus uses static port 6000 by default. If you want to change to another port to troubleshoot NAT or other issues, here's how.
+### 更改端口
+venus默认使用静态端口 6000。如果要更改为其他端口以解决NAT或其它问题，请按以下方法操作。
 
-1. After initializing the node, navigate to configuration file `config.json`. By default this lives at `~/.venus/config.json`.
+1. 初始化节点后，导航至配置文件 `config.json` 。默认情况下，它位于 `~/.venus/config.json`。
 
-2. Find the swarm section of the config. Replace `6000` with the port you wish to use.
+2. 找到配置的swarm部分。替换 `6000` 为您要使用的端口。
 ```json
 "swarm": {                                                                                                                                           
                 "address": "/ip4/0.0.0.0/tcp/6000"                                                                                                           
         }, 
 ```
 
-1. Restart the daemon. `venus swarm id` should show you using the new swarm address.
+1. 重新启动程序。 `venus swarm id` 应该显示给您使用新的swarm地址。
 
-### Installing from binary
+### 二进制安装
 
-* **Error: “venus is damaged and can’t be opened. You should move it to the Trash." (MacOS) <br />**
-This is due to Mac's default protection settings. On MacOS before Sierra, go to `System Preferences > Security & Privacy > General`. Select `Allow apps downloaded from: Anywhere`. (Allowing the individual application doesn't work.)
+* **错误: “venus is damaged and can’t be opened. You should move it to the Trash." (MacOS) <br />**
+这是由于Mac的默认保护设置。在Sierra之前的MacOS上，转到 `System Preferences > Security & Privacy > General`。选择 `Allow apps downloaded from: Anywhere`. (不允许单个应用程序的运行)
 
-### Downloading and building from source
+### 下载并构建
 
-* **Error when cloning: authenticity of host can’t be established<br />**
-Make sure your Github account has [SSH keys added](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
+* **cloning时出现错误: host无法建立真实性<br />**
+确定您的Github账号已 [添加SSH密钥](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)。
 
-* **Error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun<br />**
-Make sure you have [XCode](https://developer.apple.com/xcode/) installed.
+* **错误: 开发路径无效 (/Library/Developer/CommandLineTools), 缺少 xcrun<br />**
+确保已安装 [XCode](https://developer.apple.com/xcode/) 。
 
-* **Error when pulling: SharedFrameworks not found or unable to locate xcodebuild<br />**
-This is due to an out-of-sync Xcode/command line tools installation (see [golang/go/issues/26073](https://github.com/golang/go/issues/26073)). You can try updating Xcode (if you’re running an outdated version) and then launch it to install the latest command-line tools.
+* **pulling时发生错误: 找不到SharedFrameworks或无法找到xcodebuild<br />**
+这是由于Xcode /命令行工具安装不同步造成的(参考 [golang/go/issues/26073](https://github.com/golang/go/issues/26073))。您可以尝试更新Xcode（如果运行的是老版本），然后启动它以安装最新的命令行工具。
 
-* **$GOPATH or $PATH errors such as "panic: exec: gx-go executable file is not found in $PATH"<br />**
-Make sure that the deps step ran successfully. If for example you are on a Mac and you installed go and rust with brew, GOPATH isn't explicitly set for you, the binaries will be installed in `/usr/local/opt/go/libexec/bin`, and also your default GOPATH is `~/go/`. Check your path and make sure all the go bin paths are there, and if not, add them:
+* **$GOPATH 或 $PATH 错误，例如 "panic: exec: gx-go executable file is not found in $PATH"<br />**
+确保已经正确运行deps的步骤。例如如果您在Mac上安装了go和rust，那么未为您明确设置GOPATH，二进制文件将安装在 `/usr/local/opt/go/libexec/bin` 中, 检查您的路径并确保所有的存放路径都在其中，如果没有，请添加它们：
     ```sh
     export PATH=${PATH}:/usr/local/opt/go/libexec/bin:~/go/bin
     ```
-    Then retry `go run ./build/*.go deps` before retrying the build.
+   然后重试 `go run ./build/*.go deps` ，再重试构建。
 
-    If you are still stuck, or you see an error message with `$GOPATH` or `$PATH`, it could be an issue with your Go workspace setup. This [tutorial](https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html) may help.
+    如果仍然卡住，或者看到带有 `$GOPATH` 或 `$PATH` 的错误消息, 则可能是Go工作区设置存在问题。本[教程](https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html)可能有所帮助。
 
-* **Error: package 'venus' requires at least go version 1.11.1.**
-...however, your gx-go binary was compiled with go1.10.3. Please update gx-go (or recompile with your current go compiler)
-If you installed `ipfs` from homebrew, you may have the wrong version of `gx` and `gx-go` on your path. As with the previous point, check your `$PATH` and make sure all the go bin paths are there, and if not, add them, before your homebrew path.
+* **错误: “venus”软件包至少需要go 1.11.1版。**
+...但是，您的gx-go二进制文件是使用go1.10.3编译的。请更新gx-go（或使用当前的go编译器重新编译）如果 `ipfs` 是从自制软件安装的, 则路径中的 `gx` 和 `gx-go` 版本可能错误。与前述一样，检查您的 `$PATH` 并确认所有存放路径是否存在，如果没有，请在自定义路径之前添加它们。
 
-* **Rust error while running build or deps<br />**
-If you encounter a rust compiler error, i.e. ` cargo build --release --all --manifest-path proofs/rust-proofs/Cargo.toml' failed:` try updating rust to the latest version with `rustup update`.
+* **运行build或deps时出现Rust错误<br />**
+如果遇到rust编译器错误，即 ` cargo build --release --all --manifest-path proofs/rust-proofs/Cargo.toml' failed:` 尝试将rust更新到最新版本 `rustup update`.
 
-* **Error while running install<br />**
-If you encounter an error while running install, i.e. `/System/Library/Frameworks//Security.framework/Security are out of sync. Falling back to library file for linking`, this may be due to outdated installs. Reinstall Go via the [installer](https://golang.org/doc/install). Then remove filecoin (`rm -rf ./venus`) and [reinstall it](Getting-Started).
+* **运行安装时出错<br />**
+如果在运行安装时遇到错误，即 `/System/Library/Frameworks//Security.framework/Security are out of sync. Falling back to library file for linking` 这可能是由于安装了旧的。通过安装程序 [installer](https://golang.org/doc/install) 重新安装Go，然后删除filecoin (`rm -rf ./venus`) 并 [重新安装](Getting-Started).
 
-* **Can't build OS X Mojave `fatal error: 'stdio.h' file not found`**
-You may see this error if you are building everything from source and not installing anything with homebrew, for example, when building go-secp256k1:
+* **无法构建 OS X Mojave `fatal error: 'stdio.h' file not found`**
+例如，当您构建go-secp256k1时，如果从源代码构建所有内容并且未使用自制软件安装任何内容，则可能会看到此错误：
     ```sh
     go get -u github.com/ipsn/go-secp256k1
     #github.com/ipsen/go-secp256k1
@@ -82,80 +81,71 @@ You may see this error if you are building everything from source and not instal
              ^~~~~~~~~~
     ```
 
-    OS X Mojave moved the location of `stdlib.h` out of `/usr/include`.  This issue exists for other packages and there are several possible solutions suggested in this thread for [neovim issue #9050](https://github.com/neovim/neovim/issues/9050). Thanks to Filecoin community member *A_jinbin_filecoin.cn* for the link.
+    OS X Mojave 将`stdlib.h` 的位置移出了`/usr/include`。该问题在其他软件包中也存在，并且在此线程中针对 [neovim issue #9050](https://github.com/neovim/neovim/issues/9050) 建议了几种解决方案。感谢Filecoin社区成员 *A_jinbin_filecoin.cn* 的链接。
 
-* **Error when installing dependencies `'go mod download' failed`**<br />
-If you're updating venus from a previous version the git submodules may also need to be updated. Try `git submodule update --init --recursive` to update them.
+* **安装依赖项时出错 `'go mod download' failed`**<br />
+如果您要从以前的版本更新venus，则可能还需要更新git子模块。尝试 `git submodule update --init --recursive` 更新它们。
 
-### Mining and deals
+### 挖矿和交易
 
-* **Miner create fails**
-    * Make sure that your node has a valid wallet and the wallet has a nonzero balance.
-    * Make sure that your node is connected to the swarm/network. If the daemon has been restarted, run `swarm connect`.
+* **矿工创建失败**
+    * 确保您的节点具有有效的钱包，并且钱包的余额为非零。
+    * 确保您的节点已连接到群集/网络。如果守护程序已重新启动，请运行 `swarm connect`.
 
-* **Transaction hangs (message never mined)**
-    * If running two nodes on the same machine and you see something like `ERROR consensus.: Nonce too high: 5 0 <UnknownActor (0xc0137edda0); balance: 1000000; nonce: 0>`, you probably tried to create a miner at least once before. This updated the local nonce, even though the creation may have failed. Your nonce is too high for valid mining. *There is no known way around this except re-initing the node.*
-    * If only running a single node, this problem is unobservable to you at present (the log message only appears in other nodes). If you suspect this, re-init your node.
+* **交易终止（消息从未被挖掘）**
+    * 如果在同一台计算机上运行两个节点，并且看到类似的信息 `ERROR consensus.: Nonce too high: 5 0 <UnknownActor (0xc0137edda0); balance: 1000000; nonce: 0>`，则您可能至少尝试创建一个矿工一次。即使创建可能失败，此操作也会更新本地随机数。您的nonce过高，无法进行有效的挖矿。*除了重新初始化节点外，没有其他解决方法。*
+    * 如果仅运行单个节点，则此问题目前对您来说是看不到的（日志消息仅出现在其他节点上）。如果您怀疑这一点，请重新初始化您的节点。
 
-* **Proposing deal fails: error sending proposal: context deadline exceeded**
-    * Deals are proposed directly to the miner in question (off-chain), so your node needs a direct connection to the miner, e.g. to create a payment channel. The miner is offline or otherwise inaccessible to you. Try another miner.
-    * The maximum piece (i.e. file) size must be less than the miner sector size, currently 256Mib.
+* **提议的处理失败：发送提议时出错：超过截止日期**
+    * 交易被直接提议给相关矿工（链下），因此您的节点需要直接与矿工建立连接，例如创建支付渠道。该矿工离线或您无法访问，请尝试另一个矿工。
+    * 最大分片（即文件）大小必须小于矿工扇区大小，当前为256 MiB。
 
-* **Proposing deal fails: error creating payment: context deadline exceeded**
-    * Our best guess is that a prior message failed to be mined, but increased your actor's nonce. Tracking in [#1936](https://github.com/filecoin-project/venus/issues/1936). You probably need to re-init your node.
+* **提议处理失败：创建支付时出错：超出了截止日期**
+    * 最好的推断是先前的消息未能被挖掘，但是增加了actor的nonce。跟踪 [#1936](https://github.com/filecoin-project/venus/issues/1936)，您可能需要重新初始化节点。
 
-* **Proposing deal fails: error sending proposal: context deadline exceeded**
-    * Deals are proposed directly to the miner in question (off-chain), so your node needs a direct connection to the miner, e.g. to create a payment channel. The miner is offline or otherwise inaccessible to you. Try another miner.
-    * The maximum piece (i.e. file) size must be less than the miner sector size, currently 256Mib.
+* **为什么我的交易被搁置了 `Staged`?**
 
-* **Proposing deal fails: error creating payment: context deadline exceeded**
+    * **我的文件分片太大了吗?**
+      如果存储客户C建议与矿工M达成交易D，并且D引用了一块数据片段P，其大小小于或等于M的暂存扇区的大小，则P将从C转移到M，并且M将P写入其分段的扇区。D的状态将`Staged` 在此时。
 
-    * Our best guess is that a prior message failed to be mined, but increased your actor's nonce. Tracking in [#1936](https://github.com/filecoin-project/venus/issues/1936). You probably need to re-init your node.
+     如果状态不是 `Staged`，则在C提议处理M并传输字节之后，P就不是“等待被密封”。如果P的大小大于扇区的大小，则会发生这种情况。在devnet /用户集群中，所指的大小是`266338304` 字节。
 
-* **Why is my deal stuck in the `Staged` state?**
+    * **在什么情况下，交易的状态会从`Staged` 到 `Posted` ？**
+        如果交易D的状态为 `Staged`, 则矿工已接受数据片P并将其写入暂存扇区S。如果M不使用自动密封，则P将存在S中，直到M收到新的交易D2提议，其数据片P2足够大，以至于大小（P） + 大小（P2） >= 可用空间（S）。发生这种情况时，M将开始密封S。完成密封后，D的状态将变为 `Posted`。
 
-    * **Was my piece too big?**
-      If a storage client C proposes a deal D with a miner M and that D references a piece P whose size is less than or equal to the size of M's staged sector, P will be transferred from C to M and M will write P to its staged sector. The state of D will be `Staged` at this point.
+* **为什么我的交易状态没有变为  `Posted`?**
 
-      If the state does not equal `Staged` immediately after C proposes a deal with M and transfers the bytes, then P isn't "waiting to be sealed." This can happen if the size of P is larger than size of the sector. In the devnet/user cluster, that size I speak of is `266338304` bytes.
+    * 在交易状态变为 `Posted` 之前, 矿工必须接受该数据碎片并将其写入分段扇区（有关详细信息，请参见上面的问题）。一些矿工，包括由Filecoin项目运行的引导节点，被配置为在短时间内自动执行此操作（这称为自动密封）。但是，选定的矿工完全有可能（1）不使用自动密封，并且（2）在密封之前仍等待新的交易以充分填充扇区。在这种情况下，交易达成之前会有延迟 `Posted`。
 
-    * **At which point will the state of a deal move from `Staged` to `Posted`?**
-        If the state of deal D is `Staged`, then the miner has accepted piece P and written it to a staged sector S. **If M isn't using auto-sealing**, P will sit in S until M receives a new deal D2 proposal whose piece P2 is large enough such that size(P) + size(P2) >= free-space(S). When this happens, M will start sealing S. When sealing completes, the state of D will become `Posted`.
+### Daemon无法启动
 
-* **Why hasn't my deal transitioned to `Posted`?**
+* 如果你看到了 `Error: failed to load config file: failed to read config file at "~/.venus/config.json": invalid checksum` 尝试启动Daemon时，请检查config.json中的defaultAddress和miner.address是否正确。
 
-    * Before a deal can be `Posted`, the miner must accept the piece and write it to a staged sector (see above question for details). Some miners, including bootstrap nodes run by the Filecoin project, are configured to automatically do this at short intervals (this is called auto-sealing). However, it's entirely possible that the selected miner is (1) not using auto-sealing and (2) still waiting for new deals to fill the staged sector sufficient before sealing. In that case, there will be a delay before the deal becomes `Posted`.
+### 链同步不完全导致的问题
 
-### Daemon will not start
+* **我向Faucet获取资金，并且收到消息CID，但我的钱包里没有资金。**
 
-* If you see `Error: failed to load config file: failed to read config file at "~/.venus/config.json": invalid checksum` when trying to start a daemon, check that the defaultAddress and miner.address are correct in config.json.
+    这很可能是因为您的节点尚未完成整个区块链的同步。当您使用faucet接收资金时，Faucet从另一个节点发送节点资金。资金将作为消息发布，并将被上链到新的区块中。在您的节点可以确定您的钱包中有余额之前，必须将新区块同步到您的链中。message wait命令用于确保消息，1）挖掘到区块 2）您已将该区块同步到链中。由于您的faucet要求已放置在最新的块中，因此如果您的链中尚无该块，则FIL不会出现在您的钱包中。
 
-### Problems caused by incomplete chain sync
+    目前，链同步可能会有点慢。下载所有块的过程非常快，但是当您的节点重播块中的所有消息以确保所有内容都有效时，速度就会变慢。目前，此过程需要相当长的时间。有关如何检查节点的同步进度，请参阅 [从Filecoin Faucet获取FIL](https://github.com/filecoin-project/venus/wiki/Getting-Started#get-fil-from-the-filecoin-faucet) 。
 
-* **I requested funds from the faucet and I have a message CID , but there are no funds in my wallet.**
+* **消息长时间处于等待状态，Venus message似乎出问题了**
 
-    This is most likely because your node hasn't finished syncing the entire blockchain yet. When you use the faucet to receive funds, the faucet sends your node funds from another node. The funds are issued as a message which will be mined into a new block. The new block must be synced to your chain before your node can determine that you wallet has the balance. The message wait command is used to ensure that the message is 1) mined into a block 2) that you have that block synced to your chain. Since your faucet request is put on the latest block, if you don't have that block yet in your chain, the FIL won't appear in your wallet.
+    与上述类似，您可以在完成同步链之前将任何新消息发布到网络。链完成同步后，您才能看到消息。有关如何检查节点的同步进度，请参阅 [从Filecoin Faucet获取FIL](https://github.com/filecoin-project/venus/wiki/Getting-Started#get-fil-from-the-filecoin-faucet) 。
 
-    Currently chain syncing can be a little slow. The process of downloading all of the blocks is pretty quick, but the slowness comes when your node replays all messages in the block to ensure everything is valid. This process currently takes quite a long time. See [Get FIL from the Filecoin Faucet](https://github.com/filecoin-project/venus/wiki/Getting-Started#get-fil-from-the-filecoin-faucet) for how to check your node's sync progress.
+### 连接到网络的问题
+* **如何连接到网络？**
 
-* **Message stays in wait state for a long time, venus message wait seems to hang**
+    请参阅 `venus swarm --help`。为了连接到指定的网络，您必须具有正确的二进制文件（或源代码），并且需要使用该网络的正确的genesis.car文件初始化Filecoin存储库。
+* **当我连接到user-devnet或test-devnet时，我收到很多错误**
 
-    Similarly to above, you can post any new message to the network before you have finished syncing the chain. You won't see the message until the chain is done syncing. See [Get FIL from the Filecoin Faucet](https://github.com/filecoin-project/venus/wiki/Getting-Started#get-fil-from-the-filecoin-faucet) for how to check your node's sync progress.
-
-### Issues connecting to a network
-* **How do I connect to the network?**
-
-    See `venus swarm --help`.  In order to connect to a particular network, you must have the correct binary (or source code) and you need to have initialized your filecoin repodir with the right genesis.car file for that network.
-
-* **I'm receiving a lot of errors when I connect to user-devnet or test-devnet**
-
-    Seeing an error such as
+    看到错误例如
     ```text
     code not at same version: GIT_SHA does not match DIFFERENT_GIT_SHA, disconnecting from peer:
     ```
-    or seeing a lot of errors during validation of blocks during chain syncing means that your binary or source code is not at the correct version for the devnet you'd like to join. To join a devnet, download the latest release for that devnet in the [Releases](https://github.com/filecoin-project/venus/releases) section of the repository and follow the directions in [Getting Started](Getting-Started) sections of the wiki.
+    或在链同步期间在块验证期间看到很多错误，这意味着您的二进制或源代码的版本与您要加入的devnet的版本不正确。要加入devnet，请在存储库的 [Releases](https://github.com/filecoin-project/venus/releases) 部分中下载该devnet的最新版本，然后按照Wiki [入门](Getting-Started) 部分中的说明进行操作。
 
-### Upgrading
+### 升级
 
-* **How do I upgrade my version of venus?<br />**
-To upgrade `venus`, you will need to re-run the full download and build process in [README.md](https://github.com/filecoin-project/venus/blob/master/README.md). In the future, we plan to add automatic updating ([#8](https://github.com/filecoin-project/venus/issues/8)).
+* **如何升级我的Venus版本？<br />**
+要进行升级 `venus`，您需要在 [README.md](https://github.com/filecoin-project/venus/blob/master/README.md) 重新运行完整的下载和构建过程。将来，我们计划添加自动更新 ([#8](https://github.com/filecoin-project/venus/issues/8))。
