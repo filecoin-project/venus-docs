@@ -33,3 +33,5 @@ Adding documents needs to be modified ***./docs/.vuepress/config.js*** file, and
 ```
 
 the results are written to the ***./docs/.vuepress/dist directory*** after compiled. you can deploy the project document by overwriting gh-page branch withe ***dist*** directory.
+
+[Edit this page](https://github.com/filecoin-project/venus-docs/blob/master/docs/How-To-Contribute-Docs.md) on GitHub or [open an issue](https://github.com/filecoin-project/venus-docs/issues)

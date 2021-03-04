@@ -54,3 +54,5 @@ unlocked success
 If you fail to obtain the private key, you will also report an error**: <address> is locked.
 
 ## [More wallet commands](Commands)
+
+[Edit this page](https://github.com/filecoin-project/venus-docs/blob/master/docs/How-to-use-wallet.md) on GitHub or [open an issue](https://github.com/filecoin-project/venus-docs/issues)
