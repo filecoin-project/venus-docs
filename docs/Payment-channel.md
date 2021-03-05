@@ -77,3 +77,5 @@ Once the settlement period is over, either the client or provider can call colle
 
 $ venus paych collect <channel addr>
 ```
+
+[Edit this page](https://github.com/filecoin-project/venus-docs/blob/master/docs/Payment-channel.md) on GitHub or [open an issue](https://github.com/filecoin-project/venus-docs/issues)

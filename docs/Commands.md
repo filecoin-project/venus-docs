@@ -366,3 +366,5 @@ For a complete list of available commands, simply run `venus --help` in your ter
         Gas Used: 44152257
         Return: 
     ```
+
+[Edit this page](https://github.com/filecoin-project/venus-docs/blob/master/docs/Commands.md) on GitHub or [open an issue](https://github.com/filecoin-project/venus-docs/issues)

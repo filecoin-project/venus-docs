@@ -86,4 +86,6 @@ During the process, there is a prompt to install any components.
         ./venus-miner init --actor=[miner] --listen-api=[$ cat ~/.venussealer/api] --token=[$ cat ~/.venussealer/token] --sector-size=2048
         ./venus-miner run --nosync
    ```
+
+[Edit this page](https://github.com/filecoin-project/venus-docs/blob/master/docs/How-to-setup_2knet.md) on GitHub or [open an issue](https://github.com/filecoin-project/venus-docs/issues)
    
