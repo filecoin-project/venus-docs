@@ -1,5 +1,5 @@
 ## Venus: Multisig wallet
-多签（multi-signatrue）钱包是指需要多个密钥来授权一个FIL交易的钱包。它适用于多方共管一笔FIL，设置一定的赞成比阙值完成message的签发。
+多签（multi-signature）钱包是指需要多个密钥来授权一个FIL交易的钱包。它适用于多方共管一笔FIL，设置一定的赞成比阙值完成message的签发。
 
 ## CLI范例
 - 以下示范为了方便阅读都将使用“t0”地址，实际上也支持“t3”地址操作。
@@ -72,7 +72,7 @@ ID      State    Approvals  To             Value   Method        Params
 0       pending  1          t01004 (self)  0 FIL   AddSigner(5)  {"Signer":"t01005","Increase":false}
 ```
 > 往t01004多签钱包中提议新增t01005地址，且投票阙值不增加
-- ncrease-threshold： 是否添加新地址成功后，自动增加投票阙值，默认为false
+- increase-threshold： 是否添加新地址成功后，自动增加投票阙值，默认为false
 - signer：待添加的钱包地址，未包含与多签钱包中
 
 ### 同意添加新地址提议
