@@ -178,7 +178,7 @@ All balances of FIL are stored in wallets. When a node is newly created, it will
 
 During this initial sync time ther will be intense activity on one CPU core. Find out what the current block height is first by visiting the [network stats page](https://stats.testnet.filecoin.io) then observe the nodes syncing progress:
 ```sh
-lotus sync status
+venus sync status
 ````
 
 ## Viewing network information

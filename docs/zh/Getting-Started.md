@@ -180,7 +180,7 @@ FIL的所有余额都存放在钱包里。新创建节点时，它将有一个�
 
 在同步初期，一个CPU内核上会有激烈的活动。首先通过访问 [网络统计页](https://stats.testnet.filecoin.io) 了解当前块的高度，然后观察节点同步进度：
 ```sh
-lotus sync status
+venus sync status
 ````
 
 ## 查看网络信息

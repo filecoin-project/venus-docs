@@ -5,7 +5,7 @@ For better use of wallet, please read [how to use wallet](How-to-use-wallet.md)
 This guide will show you how to create and manage a Venus wallet and how to use it to send some Filecoin to a different address.
 Each node can have multiple addresses.
 
-To receive and send FIL with Lotus, you will need to have a [Venus node installed and running](Getting-Started.md).
+To receive and send FIL with Venus, you will need to have a [Venus node installed and running](Getting-Started.md).
 
 [[TOC]]
 
