@@ -61,6 +61,7 @@ module.exports = {
         children: [
           ['Home.md', 'Overview'],
           ['Chain.md', 'Chain'],
+          ['Venus-Worker.md', 'Venus Worker'],
           ['Commands.md', 'CLI commands'],
           ['Getting-Started.md', 'Getting started'],
           ['How-to-connect-network.md', 'How to Start network'],
