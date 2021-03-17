@@ -40,8 +40,8 @@ During the process, there is a prompt to install any components.
     ```sh
         # init sealer
         ./venus-sealer init --genesis-miner --actor=t01000 --sector-size=2048 --pre-sealed-sectors=~/.genesis-sectors --pre-sealed-metadata=~/.genesis-sectors/pre-seal-t01000.json --nosync --network=2k
-        # init miner
-        ./venus-miner init --actor=[miner] --listen-api=[$ cat ~/.venussealer/api] --token=[$ cat ~/.venussealer/token] --sector-size=2048
+        # init miner, one program can be responsible for mining of multiple miners (joint mining)
+        ./venus-miner init
    ```
 4. Start service of Genesis Miners
 
@@ -50,6 +50,12 @@ During the process, there is a prompt to install any components.
         ./venus-sealer run --nosync
         # Start the mining service
         ./venus-miner run --nosync
+        # Add the miner, start mining
+        cat .venussealer/api  -> /ip4/127.0.0.1/tcp/2345/http
+        cat .venussealer/token -> export TOKEN
+        ./venus-miner address add --addr=t01000 --listen-api=/ip4/[sealer_ip]/tcp/2345/http --token=$TOKEN
+        # miner list
+        ./venus-miner address list
     ```
 
 ## Start venus normal node
@@ -66,13 +72,13 @@ During the process, there is a prompt to install any components.
 
     ```sh
         # Create a wallet
-        ./venus wallet new --type=bls
+        ./venus wallet new
         # Transfer, execute in genesis node
         ./venus send $WALLET_T3_ADDR --value=[value]
         # query
         ./venus wallet balance $WALLET_T3_ADDR
         # generate normal miner
-        ./venus-miner init --owner=$WALLET_T3_ADDR --worker=$WALLET_T3_ADDR --sector-size=2048 --nosync
+        ./venus-sealer init --owner=$WALLET_T3_ADDR --worker=$WALLET_T3_ADDR --sector-size=2048 --nosync
     ```
 
 ## Start service of normal node
@@ -82,9 +88,8 @@ During the process, there is a prompt to install any components.
         ./venus-sealer run --nosync
         # seal once
         ./venus-sealer sectors pledge
-        # start mining service
-        ./venus-miner init --actor=[miner] --listen-api=[$ cat ~/.venussealer/api] --token=[$ cat ~/.venussealer/token] --sector-size=2048
-        ./venus-miner run --nosync
+        # start mining service, execute commands on the started miner node
+        ./venus-miner address add --addr=<miner> --listen-api=/ip4/[sealer_ip]/tcp/2345/http --token=<sealer_token>
    ```
 
 [Edit this page](https://github.com/filecoin-project/venus-docs/blob/master/docs/How-to-setup_2knet.md) on GitHub or [open an issue](https://github.com/filecoin-project/venus-docs/issues)
