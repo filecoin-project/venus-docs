@@ -71,6 +71,7 @@ module.exports = {
           ['Payment-channel.md', 'Payment channel'],
           ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
           ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
+          ['Tips-Running-In-China.md', 'Tips when running in China'],
         ]
       },
       {
