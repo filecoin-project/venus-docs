@@ -30,7 +30,7 @@ module.exports = {
   ],
   locales: {
     '/': {
-      lang: 'en-US', 
+      lang: 'en-US',
       title: 'Venus Filecoin',
       description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
     },
@@ -67,6 +67,8 @@ module.exports = {
           ['How-to-connect-network.md', 'How to Start network'],
           ['How-to-setup_2knet.md', 'How to Start a local network'],
           ['How-to-use-wallet.md', 'How to use wallet'],
+          ['Multisig-wallet.md','Multisigwallet'],
+          ['Remote-wallet.md','Remote wallet']
           ['Mining-Filecoin.md', 'Mining Filecoin'],
           ['Payment-channel.md', 'Payment channel'],
           ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
@@ -86,7 +88,7 @@ module.exports = {
       '/': {
         selectText: 'Languages',
         label: 'English',
-        lang: 'en-US', 
+        lang: 'en-US',
         title: 'Venus Filecoin',
         description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
         nav: [
