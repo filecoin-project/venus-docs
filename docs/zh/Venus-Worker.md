@@ -127,3 +127,5 @@ Worker a89d4156-d23e-44e6-b74b-8405e9496db0, host lijunlongdeMacBook-Pro.local
 ## pledge算力
 
 在venus-sealer运行```venus-sealer sectors pledge```命令进行算力积累. 运行```venus-sealer sectors list```查看sealing的进行状态。
+
+***Note 如果RUST代码爆出权限错误，可以加/var/tmp/filecoin-parents，/tmp/bellman.gpu.lock/bellman.priority.lock加777权限***
