@@ -13,10 +13,8 @@ venus-worker配合venus-sealer用于在多个机器上部署，sealing过程分�
 ### 程序
 运行此worker测试流程需要一下几个程序。列出所需的项目地址，具体编译方式参考项目的README.md文件
 
-1. venus [https://github.com/filecoin-project/venus](https://github.com/filecoin-project/venus)
-2. venus-sealer [https://github.com/filecoin-project/venus-sealer](https://github.com/filecoin-project/venus-sealer)
-3. venus-worker [https://github.com/filecoin-project/venus-sealer](https://github.com/filecoin-project/venus-sealer)
-4. venus-miner [https://github.com/filecoin-project/venus-miner](https://github.com/filecoin-project/venus-miner)
+1. venus-sealer [https://github.com/filecoin-project/venus-sealer](https://github.com/filecoin-project/venus-sealer)
+2. venus-worker [https://github.com/filecoin-project/venus-sealer](https://github.com/filecoin-project/venus-sealer)
 
 ## 存储
 
@@ -34,23 +32,8 @@ venus-worker配合venus-sealer用于在多个机器上部署，sealing过程分�
 ```
 
 
-## 创世节点搭建
-
-在机器192.168.1.19上运行创世节点，并且导入私钥用于矿工积累算计及挖矿过程中签名使用
-
-### 启动节点
-    ```sh
-    venus seed pre-seal --sector-size 2KiB --num-sectors 2
-    venus seed genesis new localnet.json
-    venus seed genesis add-miner localnet.json ~/.genesis-sectors/pre-seal-t01000.json
-    venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --network 2k
-    ```
-
-### 导入私钥
-   ```sh
-    venus wallet set-password   #此处需要输入密码并确定，成功后运行下面的命令
-    venus wallet import ~/.genesis-sectors/pre-seal-t01000.key
-   ```
+## 环境准备
+文档默认已经部署完毕venus，venus-wallet和venus-messager
 
 ## 启动venus-sealer
 
@@ -66,9 +49,9 @@ venus-worker配合venus-sealer用于在多个机器上部署，sealing过程分�
 ### 运行venus-sealer
     ```sh
     #初始化sealer，这里不使用本地存储
-    venus-sealer init --genesis-miner --actor=t01000 --sector-size=2KiB --pre-sealed-sectors=~/.genesis-sectors --pre-sealed-metadata=~/.genesis-sectors/pre-seal-t01000.json --nosync --network 2k --no-local-storage
+    venus-sealer init --actor=t01000 --sector-size=512M --network nerpa --no-local-storage --node-url {venus-api} --node-token {venus-token} --messager-url http://{venus-message api}/rpc/v0
 
-    venus-sealer run --nosync
+    venus-sealer run
     ```
 
 ### attach存储
@@ -139,15 +122,6 @@ Worker a89d4156-d23e-44e6-b74b-8405e9496db0, host lijunlongdeMacBook-Pro.local
         Use: ReadOnly   Local: /Users/lijunlong/.genesis-sectors
         URL: http://127.0.0.1:2345/remote
 
-```
-
-## 启动venus-miner
-
-初始化并运行miner
-```
-./venus-miner init --actor t01000 --listen-api /ip4/127.0.0.1/tcp/2345/http --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.gcqF6Pkm4bwGXzEx83NR7h8WPliEihJ3GyUKvhKryAQ --sector-size 2048
-
-./venus-miner run --nosync
 ```
 
 ## pledge算力

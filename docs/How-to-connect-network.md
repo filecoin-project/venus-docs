@@ -21,6 +21,16 @@ parameters must be configured to connect to the calibration network.
 
 ```
 
+## Nerpa Network
+
+parameters must be configured to connect to the nerpa network.
+
+```sh
+
+./venus daemon --network cali
+
+```
+
 ## 2k Local Network
 
 in addition to the corresponding network parameters, a network boot file (.car) is required to connect the 2k network.
