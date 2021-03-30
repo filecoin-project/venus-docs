@@ -66,10 +66,11 @@ module.exports = {
           ['Getting-Started.md', 'Getting started'],
           ['How-to-connect-network.md', 'How to Start network'],
           ['How-to-setup_2knet.md', 'How to Start a local network'],
+          ['How-to-setup_2knet.md', 'How to Start a local network'],
+          ['How-to-Deploy-MingPool.md', 'How-to-Deploy-MingPool.md']
           ['How-to-use-wallet.md', 'How to use wallet'],
           ['Multisig-wallet.md','Multisigwallet'],
           ['Remote-wallet.md','Remote wallet']
-          ['Mining-Filecoin.md', 'Mining Filecoin'],
           ['Payment-channel.md', 'Payment channel'],
           ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
           ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],

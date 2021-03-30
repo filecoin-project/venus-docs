@@ -166,7 +166,7 @@ make
 
 ### 编译sealer组件
 ```
-git clone https://github.com/ipfs-force-community/venus-messager.git
+git clone https://github.com/filecoin-project/venus-sealer.git
 make deps
 make
 ```
@@ -175,11 +175,9 @@ make
 ```sh
 #不存在矿工
 ./venus-sealer init --worker t3uhywoqyqhk2mlhy4yqle3ccy4pyddeelbfj6dlojvm6ehvtnl6xw577vdolrd4pkn3gbz26f5o3hx2usoveq --owner t3uhywoqyqhk2mlhy4yqle3ccy4pyddeelbfj6dlojvm6ehvtnl6xw577vdolrd4pkn3gbz26f5o3hx2usoveq --sector-size 512M --network nerpa --node-url /ip4/x.x.x.x/tcp/3453 --node-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJhbGwiXX0.R6UZS9i6Y9vqAF-O4Z6y74uDK_8jT0M7OzqrrbNQ3II --messager-url http://x.x.x.x:39812/rpc/v0
-./venus-sealer init --actor t0t01076xxx  --sector-size 512M --network nerpa --node-url /ip4/x.x.x.x/tcp/3453 --node-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJhbGwiXX0.R6UZS9i6Y9vqAF-O4Z6y74uDK_8jT0M7OzqrrbNQ3II --messager-url http://x.x.x.x:39812/rpc/v0
 
 #初始化已存在矿工
-./venus-sealer init --actor t01076 --sector-size 512M --network nerpa --node-url /ip4/x.x.x.x/tcp/3453 --node-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJhbGwiXX0.R6UZS9i6Y9vqAF-O4Z6y74uDK_8jT0M7OzqrrbNQ3II --messager-url http://x.x.x.x:39812/rpc/v0
-./venus-sealer init --actor t0t01076  --sector-size 512M --network nerpa --node-url /ip4/x.x.x.x/tcp/3453 --node-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJhbGwiXX0.R6UZS9i6Y9vqAF-O4Z6y74uDK_8jT0M7OzqrrbNQ3II --messager-url http://x.x.x.x:39812/rpc/v0
+./venus-sealer init --actor t01076 --network nerpa --node-url /ip4/x.x.x.x/tcp/3453 --node-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJhbGwiXX0.R6UZS9i6Y9vqAF-O4Z6y74uDK_8jT0M7OzqrrbNQ3II --messager-url http://x.x.x.x:39812/rpc/v0
 ```
 
 ### 运行矿工
