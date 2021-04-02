@@ -64,14 +64,14 @@ module.exports = {
           ['Venus-Worker.md', 'Venus Worker'],
           ['Commands.md', 'CLI commands'],
           ['Getting-Started.md', 'Getting started'],
-          ['How-to-connect-network.md', 'How to Start network'],
-          ['How-to-setup_2knet.md', 'How to Start a local network'],
-          ['How-to-setup_2knet.md', 'How to Start a local network'],
-          ['How-to-Deploy-MingPool.md', 'How-to-Deploy-MingPool.md']
-          ['How-to-use-wallet.md', 'How to use wallet'],
-          ['Multisig-wallet.md','Multisigwallet'],
-          ['Remote-wallet.md','Remote wallet']
-          ['Payment-channel.md', 'Payment channel'],
+          ['How-To-Connect-Network.md', 'How to start network'],
+          ['How-To-Setup_2knet.md', 'How to start a local network'],
+          ['How-To-Deploy-MingPool.md', 'How to deploy mingPool']
+          ['How-To-Use-Messager.md', 'How to use messager']
+          ['How-To-Use-Wallet.md', 'How to use wallet'],
+          ['Multisig-Wallet.md','Multisig wallet'],
+          ['Remote-Wallet.md','Remote wallet']
+          ['Payment-Channel.md', 'Payment channel'],
           ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
           ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
           ['Tips-Running-In-China.md', 'Tips when running in China'],

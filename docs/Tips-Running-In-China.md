@@ -17,5 +17,3 @@ Building Venus requires downloading a few Go modules. These are usually hosted o
 ```
 export GOPROXY=https://goproxy.cn
 ```
-
-[Edit this page](https://github.com/filecoin-project/venus-docs/blob/master/docs/Tips-Running-In-China.md) on GitHub or [open an issue](https://github.com/filecoin-project/venus-docs/issues)
