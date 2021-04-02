@@ -131,6 +131,3 @@ Software: venus-wallet,venus,venus-sealer,venus-miner, genesis nodes and ordinar
         cat .venussealer/token -> SEALER01-TOKEN  
         ./venus-miner address add --addr=<miner addr> --sealer-listen-api=<SEALER01-API> --sealer-token=<SEALER01-TOKEN> --wallet-token=<WALLET-TOKEN> --wallet-listen-api=<WALLET-API>
    ```
-
-[Edit this page](https://github.com/filecoin-project/venus-docs/blob/master/docs/How-to-setup_2knet.md) on GitHub or [open an issue](https://github.com/filecoin-project/venus-docs/issues)
-   

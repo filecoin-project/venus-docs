@@ -128,5 +128,3 @@ Each node stores its wallet in `~/.venus/wallet`:
 ```
 
 To export a wallet when a node is offline, copy these files from `~/.venus/wallet` to another location. To import this wallet, copy these files into `~/.venus/wallet`. The Venus node will automatically use these keys when it next starts.
-
-[Edit this page]() on GitHub or [open an issue](https://github.com/filecoin-project/venus-docs/issues)

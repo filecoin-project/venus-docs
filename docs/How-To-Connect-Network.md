@@ -40,5 +40,3 @@ in addition to the corresponding network parameters, a network boot file (.car) 
 ./venus daemon --network 2k --genesisfile  *.car
 
 ```
-
-[Edit this page](https://github.com/filecoin-project/venus-docs/blob/master/docs/How-to-connect-network.md) on GitHub or [open an issue](https://github.com/filecoin-project/venus-docs/issues)
