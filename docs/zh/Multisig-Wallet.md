@@ -7,9 +7,9 @@
 - 指令标签
     - "[]"：选填
     - "[--phrase]" ：带描述符参数，需要"--phrase"指定才能使用
-    - "<phrase>"：占位参数，不需要指明含义，需要严格按照顺位填写
+    - "\<phrase\>"：占位参数，不需要指明含义，需要严格按照顺位填写
     - "[--]"： '带描述符参数' 和 '占位参数' 的边界
-> 指令标签示例：venus msig create [--phrase1=\<phrase1>] [--] \<phrase2> [\<phrase3>] 
+> 指令标签示例：venus msig create [--phrase1=\<phrase1>] [--] \<phrase2\> [\<phrase3\>] 
 >1. phrase1: 带描述符参数，选填，如需使用，必须"--phrase1=xxx"指定 
 >2. phrase2: 占位参数，必填 
 >3. phrase3: 占位参数，选填

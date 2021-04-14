@@ -4,10 +4,10 @@
 
 ## 目录
 - [快速启动](#快速启动)
-    - [1. 下载代码](#1下载代码)
-    - [2. 编译](#2编译)
-    - [3. 启动服务进程](#3启动服务进程)
-    - [4. 配置介绍](#4配置介绍)
+    - [1. 下载代码](#1-下载代码)
+    - [2. 编译](#2-编译)
+    - [3. 启动服务进程](#3-启动服务进程)
+    - [4. 配置介绍](#4-配置介绍)
 - [CLI操作指南](#cli操作指南)
     - [查看帮助](#查看帮助)
     - [Venus wallet基本操作](#venus-wallet基本操作)
@@ -171,7 +171,7 @@ t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 - 默认secp256k1类型，也可`./venus-wallet new bls`生成bls类型私钥
 
 #### 2. 导入私钥
-> venus-wallet import [command options] [<path> (optional, will read from stdin if omitted)]
+> venus-wallet import [command options] [\<path\> (optional, will read from stdin if omitted)]
 ```
 $ ./venus-wallet import
 Enter private key:7b2254797065223a22736563703235366b31222c22507269766174654b6579223a22626e765665386d53587171346173384633654c647a7438794a6d68764e434c377132795a6c6657784341303d227d
@@ -198,7 +198,7 @@ t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 ```
 > 显示全部私钥对应地址，这里有spec和bls两种地址存在
 ##### 5. 删除指定私钥
-> venus-wallet del [command options] <address>
+> venus-wallet del [command options] \<address\>
 ```
 $ ./venus-wallet del t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 
