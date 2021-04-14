@@ -52,6 +52,7 @@ make
 cat ~/.venus/api      #此处如何ip是127.0.0.1需要修改配置文件的api监听地址，如果是0.0.0.0使用的时候需要改用具体的地址
 ```
 
+为了避免单节点故障,venus最好配置负载均衡:**[venus_load_balancing](./venus_load_balancing.md)**
 
 ### venus-miner
 venus-miner组件用于出块打包消息，可以配置多个矿工，本程序会计算各自的出块机会，并通过远程请求sealer来获取数据证明。
