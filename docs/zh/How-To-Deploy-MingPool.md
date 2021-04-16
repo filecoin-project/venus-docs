@@ -66,14 +66,14 @@ make nerpanet
 运行miner组件, 首先需要写入访问节点的api及其token
 ```sh
 mkdir ~/.venus
-echo <venus api> > ~/.lotus/api       #api从节点中获取
-echo <admin token> > ~/.lotus/token   #token从节点中获取
+echo <venus api> > ~/.venus/api       #api从节点中获取
+echo <admin token> > ~/.venus/token   #token从节点中获取
 ```
 
 运行挖矿软件
 
 ```sh
-TRUST_PARAMS=1 ./venus-miner init
+TRUST_PARAMS=1 ./venus-miner init --actor <addr> --sealer-listen-api <sealer api> --sealer-token <sealer token>  --wallet-listen-api <local wallet api> --wallet-token <local wallet token>
 TRUST_PARAMS=1 ./venus-miner run
 ```
 
@@ -88,30 +88,36 @@ make deps
 make
 ```
 
-运行messager组件，编辑messager.toml配置文件，修改node下的url和token， 配置成节点中获取的地址和token
-
+运行messager组件，编辑messager.toml配置文件，修改node下的url和token， 配置成节点中获取的地址和token，jwt 中的url是 auth 服务的
+url，若数据库使用mysql，则需要把db.mysql 中的配置补充完整
 ```toml
-
-[address]
-  remoteWalletSweepInterval = 10
 
 [api]
   Address = "0.0.0.0:39812"
 
 [db]
-  type = "sqlite"
+  type = "mysql"
 
-  [db.mysql]
+  [db.mysql] # 补充MySQL配置
+    addr = ""
+    connMaxLifeTime = "0s"
+    debug = false
+    maxIdleConn = 0
+    maxOpenConn = 0
+    name = ""  # 数据库名
+    pass = ""
+    user = ""
 
   [db.sqlite]
-    path = "./message.db"
     debug = false
+    path = "./message.db"
 
 [jwt]
     url= <auth url>
 
 [log]
   path = "messager.log"
+  level = "info"  # log level: trace debug info warn|warning error fatal panic
 
 [messageService]
   skipProcessHead = false
@@ -126,6 +132,9 @@ make
 [node]
   url = <venus api>   #修改此处
   token = <admin token> #修改此处
+
+[wallet]
+  scanInterval = 10
 ```
 
 执行命令
