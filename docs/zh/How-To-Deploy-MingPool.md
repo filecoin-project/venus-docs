@@ -88,7 +88,12 @@ make deps
 make
 ```
 
-运行messager组件，编辑messager.toml配置文件，修改node下的url和token， 配置成节点中获取的地址和token，jwt 中的url是 auth 服务的
+创建配置文件：messagr.toml
+```sh
+./venus-messager run --auth-url <auth url> --node-url <node api> --node-token <admin token> --db-type <mysql> --mysql-dsn <mysql dsn>
+```
+
+运行messager组件，按需修改messager.toml配置文件，node下的url和token 配置成节点中获取的地址和token，jwt 中的url是 auth 服务的
 url，若数据库使用mysql，则需要把db.mysql 中的配置补充完整
 ```toml
 
@@ -98,22 +103,19 @@ url，若数据库使用mysql，则需要把db.mysql 中的配置补充完整
 [db]
   type = "mysql"
 
-  [db.mysql] # 补充MySQL配置
-    addr = ""
-    connMaxLifeTime = "0s"
+  [db.mysql]
+    connMaxLifeTime = "1m0s"
+    connectionString = "xxxxx"
     debug = false
-    maxIdleConn = 0
-    maxOpenConn = 0
-    name = ""  # 数据库名
-    pass = ""
-    user = ""
+    maxIdleConn = 10
+    maxOpenConn = 10
 
   [db.sqlite]
     debug = false
     path = "./message.db"
 
 [jwt]
-    url= <auth url>
+    url= <auth url> # 不连接auth服务则填: http://127.0.0.1:8989
 
 [log]
   path = "messager.log"
