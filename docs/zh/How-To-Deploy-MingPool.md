@@ -63,18 +63,11 @@ git clone https://github.com/filecoin-project/venus-miner.git
 make nerpanet
 ```
 
-运行miner组件, 首先需要写入访问节点的api及其token
-```sh
-mkdir ~/.venus
-echo <venus api> > ~/.venus/api       #api从节点中获取
-echo <admin token> > ~/.venus/token   #token从节点中获取
-```
-
 运行挖矿软件
 
 ```sh
-TRUST_PARAMS=1 ./venus-miner init --actor <addr> --sealer-listen-api <sealer api> --sealer-token <sealer token>  --wallet-listen-api <local wallet api> --wallet-token <local wallet token>
-TRUST_PARAMS=1 ./venus-miner run
+./venus-miner init --actor <addr> --api <venus api> --token <venus token> 
+./venus-miner run
 ```
 
 ### venus-messager
