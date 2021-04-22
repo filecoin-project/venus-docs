@@ -6,13 +6,13 @@ messager is a component used to manage local messages, with the purpose of savin
 
 ## Getting start
 
-#### Clone this git repository to your machine
+### Clone this git repository to your machine
 
 ```
 git clone git@github.com:ipfs-force-community/venus-messager.git
 ```
 
-#### Install Dependencies
+### Install Dependencies
 
 1. First, load all the Git submodules.
 
@@ -26,7 +26,7 @@ git submodule update --init --recursive
 make deps
 ```
 
-#### Build and run tests
+### Build and run tests
 
 ```
 # First, build the binary
@@ -36,42 +36,21 @@ make
 make test
 ```
 
-#### Start messager
-
-1. Modify config.toml
+### Start messager
 
 ```
-[node]
-  # If the connection is a venus node, the url is in ~/.venus/api
-  url = "/ip4/127.0.0.1/tcp/3453"
-  # If the connection is a venus node, the token is in ~/.venus/token
-  token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJhbGwiXX0.S5ucwvhFM6tkuLInwZi0VSBEl1T570oLVfp47KBWcXo"
-```
+# --config | -c        specify config file (default: "./messager.toml")
+# --auth-url           url for auth server (default: "http://127.0.0.1:8989")
+# --node-url           url for connection lotus/venus
+# --node-token         token auth for lotus/venus
+# --db-type            which db to use. sqlite/mysql (default: "sqlite")
+# --sqlite-path        sqlite db path (default: "./message.db")
+# --mysql-dsn          mysql connection string
 
-2. run messager
-
-```
-# default -c=messager.toml
-./venus-messager -c=path to messager.toml
-```
-
-3. Set global config, when the messager is running
-
-**If push message arrives at the messager that the expireEpoch or gasOverEstimation or maxFee or maxFeeCap is not set, the global value is used**
-
-```
-# expireEpoch is the expiration height of the message, 0 means it will not expire
-# selMsgNum is the maximum number of messages pushed to mpool by a single address at a time
-# scanInterval is the interval to scan the remote wallet
-# maxEstFailNumOfMsg is the number of failures allowed to estimate gas consumption
-./venus-messager share-params set "{\"expireEpoch\": 0, \"gasOverEstimation\": 0, \"maxFee\": 100000, \"maxFeeCap\": 20000, \"selMsgNum\": 12, \"scanInterval\": 8, \"maxEstFailNumOfMsg\": 5}"
-```
-
-4. If you want to connect to a remote wallet, use this command
-
-```
-# there will be a few seconds delay in getting the wallet address
-./venus-messager wallet add --name=<wallet name> --url=<remote wallet url> --token=<remote wallet token>
+# use sqlite db
+./venus-messager run --config <config path> --auth-url <auth url> --node-url <node url> --node-token <node token> --db-type sqlite --sqlite-path <sqlite path>
+# use mysql db
+./venus-messager run --config <config path> --auth-url <auth url> --node-url <node url> --node-token <node token> --db-type mysql --mysql-dsn <mysql dsn>
 ```
 
 ## Commands
@@ -81,19 +60,21 @@ make test
 1. search message
 
 ```
-./venus-messager msg search --id=<message_id>
+./venus-messager msg search --id=<message id>
 ```
 
-2. list all message
+2. list message
 
 ```
 ./venus-messager msg list
+# list messages with the same address
+./venus-messager msg list --from <address>
 ```
 
 3. manual update one filled message state
 
 ```
-./venus-messager msg update_filled_msg --id=<message_id>
+./venus-messager msg update_filled_msg --id=<message id>
 ```
 
 4. manual update all filled message state
@@ -105,13 +86,13 @@ make test
 5. wait a messager msg id for result
 
 ```
-./venus-messager msg wait <message_id>
+./venus-messager msg wait <message id>
 ```
 
 6. republish a message by id
 
 ```
-./venus-messager msg republish <message_id>
+./venus-messager msg republish <message id>
 ```
 
 7. replace a message
@@ -120,6 +101,24 @@ make test
 ./venus-messager msg replace --gas-feecap=[gas-feecap] --gas-premium=[gas-premium] --gas-limit=[gas-limit] --auto=[auto] --max-fee=[max-fee] <message-id>
 # or
 ./venus-messager msg replace --gas-feecap=[gas-feecap] --gas-premium=[gas-premium] --gas-limit=[gas-limit] --auto=[auto] --max-fee=[max-fee] <from> <nonce>
+```
+
+8. list failed messages, maybe signed message failed or gas estimate failed
+
+```
+./venus-messager msg list-fail
+```
+
+9. lists message that have not been chained for a period of time
+
+```
+./venus-messager msg list-blocked
+```
+
+10. manual mark error messages
+
+```
+./venus-messager msg mark-bad <message id>
 ```
 
 ### Address commands
@@ -205,7 +204,12 @@ make test
 2. set shared params
 
 ```
-./venus-messager share-params set "{\"expireEpoch\": 0, \"gasOverEstimation\": 0, \"maxFee\": 100000, \"maxFeeCap\": 20000, \"selMsgNum\": 12, \"scanInterval\": 8, \"maxEstFailNumOfMsg\": 5}"
+# expireEpoch is the expiration height of the message, 0 means it will not expire
+# selMsgNum is the maximum number of messages pushed to mpool by a single address at a time
+# scanInterval is the interval to scan the remote wallet
+# maxEstFailNumOfMsg is the number of failures allowed to estimate gas consumption
+
+./venus-messager share-params set "{\"expireEpoch\": 0, \"gasOverEstimation\": 1.25, \"maxFee\": 7000000000000000, \"maxFeeCap\": 0, \"selMsgNum\": 20, \"scanInterval\": 10, \"maxEstFailNumOfMsg\": 50}"
 ```
 
 3. manual refresh shared params from DB
