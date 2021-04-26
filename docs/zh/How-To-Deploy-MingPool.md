@@ -8,12 +8,12 @@ Venus是Filecoin分布式矿池的实现方案之一，系统集群组件包括�
 
 程序 | 服务器 | 类型 | 作用
 --- | --- | --- | ---
-Venus-auth     |   <IP1> | 共享|Venus-auth 用于统一授权，当矿工组件访问共享组件的时候需要使用此服务注册生成的token
-Venus-wallet   |   <IP2> | 共享| 钱包管理，数据签名
-Venus          |   <IP3> | 共享| Filecoin节点数据同步
-Venus-messager |   <IP4> | 共享| 管理集群中的消息，保证消息上链，控制消息流量，重试等。可对接多个钱包，针对这些钱包做消息管理
-Venus-miner    |   <IP5> | 共享| 打包出块消息，可配置多个矿工，会自行计算矿工出块情况，并通过远程访问Venus-sealer获取数据证明
-Venus-sealer   |   <IP6> | 非共享| 数据封装
+Venus-auth     |   \<IP1\> | 共享|Venus-auth 用于统一授权，当矿工组件访问共享组件的时候需要使用此服务注册生成的token
+Venus-wallet   |   \<IP2\> | 共享| 钱包管理，数据签名
+Venus          |   \<IP3\> | 共享| Filecoin节点数据同步
+Venus-messager |   \<IP4\> | 共享| 管理集群中的消息，保证消息上链，控制消息流量，重试等。可对接多个钱包，针对这些钱包做消息管理
+Venus-miner    |   \<IP5\> | 共享| 打包出块消息，可配置多个矿工，会自行计算矿工出块情况，并通过远程访问Venus-sealer获取数据证明
+Venus-sealer   |   \<IP6\> | 非共享| 数据封装
 
 Tips:
  - 以下所有`<>`都是需替换参数，根据自己的实际情况替换
