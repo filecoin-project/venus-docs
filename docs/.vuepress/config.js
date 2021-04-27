@@ -30,7 +30,7 @@ module.exports = {
   ],
   locales: {
     '/': {
-      lang: 'en-US', 
+      lang: 'en-US',
       title: 'Venus Filecoin',
       description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
     },
@@ -54,45 +54,83 @@ module.exports = {
     editLinks: true,
     // end Edit on Github section
     displayAllHeaders: false,
-    sidebar: [
-      {
-        title: 'Venus Filecoin Tutorial',
-        collapsable: false,
-        children: [
-          ['Home.md', 'Overview'],
-          ['Chain.md', 'Chain'],
-          ['Commands.md', 'CLI commands'],
-          ['Getting-Started.md', 'Getting started'],
-          ['How-to-connect-network.md', 'How to Start network'],
-          ['How-to-setup_2knet.md', 'How to Start a local network'],
-          ['How-to-use-wallet.md', 'How to use wallet'],
-          ['Mining-Filecoin.md', 'Mining Filecoin'],
-          ['Payment-channel.md', 'Payment channel'],
-          ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
-          ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
-        ]
-      },
-      {
-        title: 'Resources',
-        collapsable: true,
-        children: [
-          ['https://docs.filecoin.io', 'Filecoin docs'],
-          ['questions.md', 'Have a question?'],
-        ]
-      }
-    ],
+    /* sidebar: [
+      *//* {
+ title: 'Venus Filecoin Tutorial',
+ collapsable: false,
+ children: [
+   ['Home.md', 'Overview'],
+   ['Chain.md', 'Chain'],
+   ['Venus-Worker.md', 'Venus Worker'],
+   ['Commands.md', 'CLI commands'],
+   ['Getting-Started.md', 'Getting started'],
+   ['How-To-Connect-Network.md', 'How to start network'],
+   ['How-To-Setup_2knet.md', 'How to start a local network'],
+   ['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
+   ['How-To-Use-Messager.md', 'How to use messager'],
+   ['How-To-Use-Wallet.md', 'How to use wallet'],
+   ['Multisig-Wallet.md','Multisig wallet'],
+   ['Remote-Wallet.md','Remote wallet'],
+   ['Payment-Channel.md', 'Payment channel'],
+   ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
+   ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
+   ['Tips-Running-In-China.md', 'Tips when running in China'],
+ ]
+},*//*
+       {
+         title: 'Resources',
+         collapsable: true,
+         children: [
+           ['https://docs.filecoin.io', 'Filecoin docs'],
+           ['questions.md', 'Have a question?'],
+         ]
+       }
+     ],*/
     locales: {
       '/': {
         selectText: 'Languages',
         label: 'English',
-        lang: 'en-US', 
+        lang: 'en-US',
         title: 'Venus Filecoin',
         description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
         nav: [
           { text: 'Filecoin Docs', link: 'https://docs.filecoin.io' },
-          { text: 'Github', link: 'https://github.com/filecoin-project/venus'
+          {
+            text: 'Github', link: 'https://github.com/filecoin-project/venus'
           },
         ],
+        sidebar: [
+          {
+            title: 'Venus Filecoin Tutorial',
+            collapsable: false,
+            children: [
+              ['Home.md', 'Overview'],
+              ['Chain.md', 'Chain'],
+              ['Venus-Worker.md', 'Venus Worker'],
+              ['Commands.md', 'CLI commands'],
+              ['Getting-Started.md', 'Getting started'],
+              ['How-To-Connect-Network.md', 'How to start network'],
+              ['How-To-Setup_2knet.md', 'How to start a local network'],
+              //['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
+              ['How-To-Use-Messager.md', 'How to use messager'],
+              ['How-To-Use-Wallet.md', 'How to use wallet'],
+              //['Multisig-Wallet.md','Multisig wallet'],
+              //['Remote-Wallet.md','Remote wallet'],
+              ['Payment-Channel.md', 'Payment channel'],
+              ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
+              ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
+              ['Tips-Running-In-China.md', 'Tips when running in China'],
+            ]
+          },
+          {
+            title: 'Resources',
+            collapsable: true,
+            children: [
+              ['https://docs.filecoin.io', 'Filecoin docs'],
+              ['questions.md', 'Have a question?'],
+            ]
+          }
+        ]
       },
       '/zh/': {
         selectText: '选择语言',
@@ -101,11 +139,45 @@ module.exports = {
         description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
         nav: [
           { text: 'Filecoin文档', link: 'https://docs.filecoin.io' },
-          { text: 'Github', link: 'https://github.com/filecoin-project/venus'
+          {
+            text: 'Github', link: 'https://github.com/filecoin-project/venus'
           },
         ],
+        sidebar: {
+          '/zh/': [
+            {
+              title: 'Venus Filecoin Tutorial',
+              collapsable: false,
+              children: [
+                ['Home.md', 'Overview'],
+                //['Chain.md', 'Chain'],
+                ['Venus-Worker.md', 'Venus Worker'],
+                ['Commands.md', 'CLI commands'],
+                ['Getting-Started.md', 'Getting started'],
+                ['How-To-Connect-Network.md', 'How to start network'],
+                ['How-To-Setup_2knet.md', 'How to start a local network'],
+                ['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
+                //['How-To-Use-Messager.md', 'How to use messager'],
+                ['How-To-Use-Wallet.md', 'How to use wallet'],
+                ['Multisig-Wallet.md', 'Multisig wallet'],
+                ['Remote-Wallet.md', 'Remote wallet'],
+                ['Payment-Channel.md', 'Payment channel'],
+                ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
+                ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
+                //['Tips-Running-In-China.md', 'Tips when running in China'],
+              ]
+            },
+            {
+              title: 'Resources',
+              collapsable: true,
+              children: [
+                ['https://docs.filecoin.io', 'Filecoin docs'],
+                ['questions.md', 'Have a question?'],
+              ]
+            }
+          ]
+        }
       }
     }
-  },
-
+  }
 }

@@ -76,5 +76,3 @@ It is possible to _prune_ the current chain data used by Venus to reduce the dis
   ```bash
   venus daemon --import-snapshot https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car
   ```
-
-[Edit this page](https://github.com/filecoin-project/venus-docs/blob/master/docs/Chain.md) on GitHub or [open an issue](https://github.com/filecoin-project/venus-docs/issues)
