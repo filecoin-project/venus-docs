@@ -53,7 +53,7 @@ Public components can be established by service providers or by multiple miners,
 
 The following figure is a typical application scenario in our design.
 
-![../images/venus-arch.png](../images/venus-arch.png)
+![././images/venus-arch.png](././images/venus-arch.png)
 
 The following contents show the relationship between components, which are similar in function, but with more powerful expanded functions in details and uses.
 
@@ -106,7 +106,7 @@ In terms of functions:
 5.  Multi-point message delivery (directly to the blockchain network with libp2p, push to the node by Mpool API), to make sure that messages are propagated over the network.
 6.  Flexible config includes gas estimate, msg push strategy, etc.
 
-![../images/messager.png](../images/messager.png)
+![././images/messager.png](././images/messager.png)
 
 ### venus-wallet
 
