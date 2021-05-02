@@ -24,13 +24,6 @@ The external features of Venus distributed mining pool are similar to other pool
 
 On the storage and retrieval of real data, miners can access the network through the venus unified entrance or by themselves. In the design and with the permission from miners, venus will select the appropriate node to store data according to specific requirements, so that the data is closer to the real scenario.
 
-1. ***数据存储***：支持组件共享，存储会逐渐迁移到MySQL，通过一些高可用的方案保证Venus的元数据安全。
-2. ***共享组件***：支持高可用，保证服务的质量，减少矿工的时间成本与维护成本，这使得矿工能够更容易加入到矿池生态中。现在的挖矿活动专业性很强，而实现Filecoin利用闲散存储资源的梦想则不可避免需要降低参与门槛，才能吸引更多的参与者进来。
-3. ***聚集出块权***：矿工能够将资源整合在一起，互相帮助打包消息，这样可以避免小矿工的消息无人打包的困境。
-4. ***提升Filecoin网络的吞吐量***：如果同一高度存在多个区块，venus-miner能够保证每个区块中的消息都是不同的，而如果各自出块，消息则很可能大量重复。
-5. ***提升消息的稳定性***：挖矿活动中的消息可以和节点分开，由venus-messager来管理，venus-messager会跟踪链的最新状态来设置一个相对合理的预估的gas参数，同时也支持用户自己设置一个消息参数。
-6. ***提升数据访问速度***：目前的Filecoin网络更多的还是存储，但是作为一个存储服务，最终需要对外输出检索服务才能实现根本价值。如果有足够多的矿工使用Venus，那么Venus在真实数据的处理上就有更多的可能，比如数据的分布，Venus可以将数据分布到距离客户最近的一些矿工节点，这样可以提高客户的访问速度；比如一些公有数据可以把这些数据尽可能的分散到更多的节点上，保障在任意位置的访问都有效，这可以大大提升IPFS网络的效能，进一步实现IPFS Web3.0的梦想。
-
 1. ***Data storage***: component sharing is supported, and the storage will be gradually migrated to MySQL to ensure the metadata security of Venus through some highly available solutions.
    
 2. ***Shared components***: support high availability, ensure the quality of service, reduce the time cost and maintenance cost of miners, which make it easier for miners to join the mining pool. Nowadays, mining is a  high-tech activity, but to realize Filecoin's goal to get the utmost out of storage resources, it is inevitable to lower the threshold to attract more participants.
