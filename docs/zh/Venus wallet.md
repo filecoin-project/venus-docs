@@ -1,5 +1,5 @@
 # Venus wallet
-1. Venus wallet是一个针对Filecoin提供的策略化远程wallet，支持JsonRPC2.0调用，它能动态配置各种待签名数据类型是否被放行。
+1. venus-wallet是一个针对Filecoin提供的策略化远程wallet，支持JsonRPC2.0调用，它能动态配置各种待签名数据类型是否被放行。
 2. 项目与Lotus以及Venus之间独立解耦，可以供Filecoin的各种不同实现调用
 
 ## 目录
