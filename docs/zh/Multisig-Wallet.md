@@ -18,7 +18,7 @@
 ### 创建一个多签钱包
 >./venus msig create [--required=\<required>] [--value=\<value>] [--duration=\<duration>] [--from=\<from>] [--] \<addresses>
 
-```
+```shell script
 $ ./venus msig create --from=t01001 --required=2 --value=1000 --duration=20000 "t01001,t01002,t01003"
 
 "Created new multisig: t01004 <multiAddress>"
@@ -30,7 +30,7 @@ $ ./venus msig create --from=t01001 --required=2 --value=1000 --duration=20000 "
 
 ### 查询创建的多签钱包状态
 >./venus msig inspect [--vesting] [--decode-params] [--] \<address>
-```
+```shell script
 $ ./venus msig inspect t01004 --vesting=true --decode-params=true
 
 # 状态信息
@@ -51,7 +51,7 @@ Transactions:  0
 - decode-params：将状态中Transactions的params字段以json格式显示，默认为hex格式
 
 ### 往多签钱包转账FIL
-```
+```shell script
 $ ./venus send t01004 2000
 ```
 > msg打包成功后，多签钱包将会增加2000FIL
@@ -59,7 +59,7 @@ $ ./venus send t01004 2000
 
 ### 提议往多签钱包添加新的钱包地址
 >./venus msig add-propose [--increase-threshold] [--from=\<from>] [--] \<multisigAddress> \<signer>
-```
+```shell script
 $ ./venus msig add-propose --increase-threshold=false --from=t01001 t01004 t01005
 
 # reponse
@@ -77,7 +77,7 @@ ID      State    Approvals  To             Value   Method        Params
 
 ### 同意添加新地址提议
 >./venus msig add-approve [--from=\<from>] [--] \<multisigAddress> \<proposerAddress> \<txId> \<newAddress> \<increaseThreshold>
-```
+```shell script
 $ ./venus msig add-approve --from=t01002 t01004 t01001 0 t01005 false
 
 # reponse
@@ -91,7 +91,6 @@ t01001  <t3Address1>
 t01002  <t3Address2>
 t01003  <t3Address3>
 t01005  <t3Address5>
-
 ```
 > 因为之前的投票比是2/3，所以一个地址通过后，该提议将会执行，投票阙值会因为新成员的加入变为2/4
 - proposerAddress: 发起者的地址
@@ -102,7 +101,7 @@ t01005  <t3Address5>
 
 ### 提议修改投票阙值
 >./venus msig propose-threshold [\<multisigAddress>] \<newM> 
-```
+```shell script
 .$ /venus msig propose-threshold --from=t01001 t01004 3
 
 # reponse
@@ -118,7 +117,7 @@ ID      State    Approvals  To             Value   Method                       
 
 ### 同意修改投票阙值提议(approve指令为万用同意指令)
 > ./venus msig approve [--from=\<from>] [--] \<multisigAddress> \<messageId> [\<proposerAddress>] [\<destination>] [\<value>] [\<methodId>] [\<methodParams>]
-```
+```shell script
 $ ./venus msig approve --from=t01002 t01004 1
 
 # reponse
@@ -147,7 +146,7 @@ Threshold: 3 / 4
 ### 提议移除多签成员
 >./venus msig propose-remove [--decrease-threshold] [--from=\<from>] [--] \<multisigAddress> \<signer>
 
-```
+```shell script
 $  ./venus msig propose-remove --from=t01001 t01004 t01005 
 
 # response
@@ -174,13 +173,12 @@ ID      Address
 t01001  <t3Address1>
 t01002  <t3Address2>
 t01003  <t3Address3>
-
 ```
 
 
 ### 提议替换多签成员
 >./venus msig swap-propose [--from=\<from>] [--] \<multisigAddress> \<oldAddress> \<newAddress>
-```
+```shell script
 $ ./venus msig swap-propose --from=t01001 t01004 t01003 t01005
 
 # response
@@ -211,7 +209,7 @@ Transactions:  0
 ```
 ### 取消多签成员地址替换提议
 >./venus msig swap-cancel [\<multisigAddress>] \<txId> \<oldAddress> \<newAddress> 
-```
+```shell script
 # 发起新的替换提议
 $ ./venus msig swap-propose --from=t01001 t01004 t01005 t01003
 
@@ -226,7 +224,7 @@ $ ./venus msig swap-cancel --from=t01001 t01004 4 t01005 t01003
 
 ### 查询多签地址在指定间隔区块被授予的FIL数
 > ./venus msig vested [--start-epoch=\<start-epoch>] [--end-epoch=\<end-epoch>] [--] \<multisigAddress>
-```
+```shell script
 $  ./venus msig vested --from=t01001 --start-epoch=10 --end-epoch=200 t01004
 
 # reponse
@@ -237,7 +235,7 @@ $  ./venus msig vested --from=t01001 --start-epoch=10 --end-epoch=200 t01004
 ### 提议冻结多签地址中的定量FIL
 >./venus msig lock-propose [--from=\<from>] [--] \<multisigAddress> \<startEpoch> \<unlockDuration> \<amount>
 
-```
+```shell script
 $ ./venus msig lock-propose --from=t01001 t01004 500 100 50
 
 # response
@@ -248,7 +246,6 @@ TxnID: 1
 Transactions:  1
 ID      State    Approvals  To             Value   Method          Params
 5       pending  1          t01004 (self)  0 FIL   LockBalance(9)  {"StartEpoch":1600,"UnlockDuration":100,"Amount":"50000000000000000000"}
-
 ```
 - startEpoch：开始生效的块高
 - unlockDuration：balance锁定区块跨度，startEpoch+unlockDuration后，锁定的balance将会自动解锁
@@ -256,7 +253,7 @@ ID      State    Approvals  To             Value   Method          Params
 
 ### 取消冻结提议
 > ./venus msig lock-cancel [--from=\<from>] [--] \<multisigAddress> \<txId> \<startEpoch> \<unlockDuration> \<amount>
-```
+```shell script
 $ ./venus msig lock-cancel --from=t01001 t01004 5 500 100 50
 
 ### 同意冻结

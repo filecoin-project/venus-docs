@@ -20,14 +20,14 @@ Tips:
  - 具体版本请自行使用git checkout选择 
  - 环境依赖：
      - golang ^1.15
-        - go env -w GOPROXY=https://goproxy.cn,direct
+        - go env -w GOPROXY=https://goproxy.io,direct
         - go env -w GO111MODULE=on
      - git
 
 ## 1. Venus-auth Install
 ### 编译并启动
 
-```
+```shell script
 $ git clone https://github.com/ipfs-force-community/venus-auth.git
 
 $ cd venus-auth
@@ -46,7 +46,7 @@ Tips: MYSQL支持5.7以上官方版本（如云平台MYSQL默认设置各有不�
 
 
 - 初始化数据库及表
-```
+```mysql
 CREATE DATABASE `venus_auth` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `venus_auth`;
 
@@ -65,7 +65,7 @@ CREATE TABLE `token` (
 
 - 修改Venus-auth config中的db设置
 
-```
+```shell script
 $ vim ~/.venus-auth/config.toml
 
 # 数据源配置项
@@ -83,14 +83,13 @@ maxIdleTime = "30s"
 
 ```
 - 启动
-```
+```shell script
 $ nohup ./venus-auth > auth.log 2>&1 &
-
 ```
 
 ### 注册生成各个组件的token
 
-```
+```shell script
 $ ./venus-auth genToken --perm admin miner
 <auth token miner>
 
@@ -108,11 +107,11 @@ $ ./venus-auth genToken --perm admin sealer
 
 ## 2. Venus install
 ### 安装编译环境
-```
+```shell script
 sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum install -y git gcc bzr jq pkgconfig clang llvm mesa-libGL-devel opencl-headers ocl-icd ocl-icd-devel hwloc-devel
 ```
 ### 编译并启动
-```
+```shell script
 $ git clone https://github.com/filecoin-project/venus.git
 
 $ cd venus
@@ -121,57 +120,55 @@ $ make deps
 
 $ make
 
-// 启动venus daemon 设置网络与Venus-auth的地址
-// 启动成功后tail -f venus.log 可以看到数据同步的log
-// 这里需要等待一段时间
+# 启动venus daemon 设置网络与Venus-auth的地址
+# 启动成功后tail -f venus.log 可以看到数据同步的log
+# 这里需要等待一段时间
 $ nohup ./venus daemon --network nerpa \
 --authURL http://<IP1>:8989 \
 > venus.log 2>&1 & 
-
 ```
 - `--authURL` 为设置Venus-auth监听http地址
 
 ### 修改IPV4监听地址
 目前程序启动后默认监听地址为`127.0.0.1:3453`，对于跨服务器集群，需要修改监听策略，可以通过`lsof -i:3453` 查询到进程后，Kill掉进程，修改IPV4策略后重启
 
-```
+```shell script
 vim ~/.venus/config.json
 
-做如下操作，修改为监听所有本机IPV4地址：
-replace api.apiAddress from 
-"/ip4/127.0.0.1/tcp/3453"  to  "/ip4/0.0.0.0/tcp/3453"
+# 做如下操作，修改为监听所有本机IPV4地址：
+# replace api.apiAddress from 
+# "/ip4/127.0.0.1/tcp/3453"  to  "/ip4/0.0.0.0/tcp/3453"
 
-修改完毕后重启服务：
+# 修改完毕后重启服务：
 $ nohup ./venus daemon --network nerpa \
 --authURL http://<IP1>:8989 \
 > venus.log 2>&1 & <absolute path>
-
 ```
 
 
 ## 3. Venus-wallet install
 ### 编译并启动
-```
+```shell script
 $ git clone https://github.com/ipfs-force-community/venus-wallet.git
 
 $ cd venus-wallet 
 
-// 编译
+# 编译
 $ make
 
-// 启动
+# 启动
 $ nohup ./venus-wallet run  --network test> wallet.log 2>&1 &
 ```
 
 ### 设置密码并创建钱包
 > 此处创建了2个BLS钱包，用于之后的Venus-sealer初始化
-```
-// 设置加解锁密码
+```shell script
+# 设置加解锁密码
 $ ./venus-wallet setpwd
 Password:******
 Enter Password again:******
 
-// 生成BLS地址
+# 生成BLS地址
 $ ./venus-wallet new bls
 <bls address 1>
 $ ./venus-wallet new bls
@@ -181,13 +178,13 @@ $ ./venus-wallet new bls
 #### 注意
 新生成的`<bls address 1>` `<bls address 2>`需要到https://faucet.nerpa.interplanetary.dev/funds.html中预充balance后才能在链上生成actor。
 
-```
+```shell script
 $ ./venus-wallet auth api-info --perm admin
 <wallet jwt token>
 ```
 ## 4. Venus-messager install
 ### 编译并启动
-```
+```shell script
 $ git clone https://github.com/ipfs-force-community/venus-messager.git
 
 $ cd venus-messager
@@ -214,7 +211,7 @@ $ nohup ./venus-messager run \
 ### 添加钱包链接（可以添加多个钱包链接）
 > 这边会周期性监控`Venus-wallet`的钱包可访问地址变化 \
 做延时性动态跟踪，依赖于`Venus-wallet`处的`list`接口
-```
+```shell script
 $ ./venus-messager wallet add \
 --name testminer --url /ip4/<IP2>/tcp/5678/http \
 --token <wallet jwt token> 
@@ -233,7 +230,7 @@ $ ./venus-messager wallet list
 2. Venus-auth 注册的JWT token `<auth token sealer>`，用于sealer访问messager
  
 ### 编译并启动（sealer单程序只能绑定一个矿工）
-```
+```shell script
 $ git clone https://github.com/filecoin-project/venus-sealer.git
 
 $ cd venus-sealer
@@ -244,7 +241,7 @@ $ make
 
 ```
 #### 初始化新矿工（2选1）
-```
+```shell script
 $ nohup ./venus-sealer init \
 --worker <bls address 1> \
 --owner <bls address 2>  \
@@ -262,7 +259,7 @@ $ nohup ./venus-sealer init \
 
 #### 初始化已存在矿工（2选1）
 > 不需要指定`--sector-size`
-```
+```shell script
 $ nohup ./venus-sealer init \
 --actor <t0 addr>  \
 --network nerpa \
@@ -276,7 +273,8 @@ $ nohup ./venus-sealer init \
 
 ```
 #### 指定存储目录
-```
+
+```shell script
 # 因为指定了--no-local-storage
 # 所以需要指定sealer存储目录
 $ ./venus-sealer storage attach --init --store --seal <absolute path>
@@ -288,7 +286,7 @@ $ ./venus-sealer storage attach --init --store --seal <absolute path>
 - `<absolute path>`为绝对路径
 
 #### 查看日志等待消息上链注册actor地址
-```
+```shell script
 $ tail -f sealer.log
 
 2021-04-25T18:41:31.925+0800	INFO	main	venus-sealer/init.go:182	Checking if repo exists
@@ -303,7 +301,8 @@ $ tail -f sealer.log
 ```
 
 #### 启动sealer并执行sector封装
-```
+
+```shell script
 $ nohup ./venus-sealer run >> sealer.log 2>&1 &
 
 # 执行sector封装，这个命令只支持单次
@@ -336,11 +335,11 @@ Worker Balance:   1000 FIL
 Total Spendable:  1383.775 FIL
 ```
 
-
 ## 6. Venus-miner install
 
 ### 编译并启动
-```
+
+```shell script
 $ git clone https://github.com/filecoin-project/venus-miner.git
 
 $ cd venus-miner
@@ -396,7 +395,8 @@ $ ./venus-miner address list
 ## 问题相关
 
 1. go mod 出先如下问题
-```
+
+```shell script
 SECURITY ERROR
 This download does NOT match an earlier download recorded in go.sum.
 The bits may have been replaced on the origin server, or an attacker may

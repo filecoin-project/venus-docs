@@ -14,14 +14,14 @@ Wallet provides functions such as creating private key, importing and exporting 
 
 1. set password
 
-```sh
+```shell script
 ./venus wallet set-password <password>
 Password set successfully
 ```
 
 2. to create a wallet address, import or export a private key, you need to set the password in advance, otherwise it will fail
 
-```sh
+```shell script
 # To create a wallet address, the BLS address is created by default
 ./venus wallet new
 # import private key
@@ -32,14 +32,14 @@ Password set successfully
 
 3. unlock wallet
 
-```sh
+```shell script
 ./venus wallet unlock <password>
 unlocked success
 ```
 
 4. locked wallet
 
-```sh
+```shell script
 ./venus wallet lock <password>
 unlocked success
 ```
@@ -51,6 +51,6 @@ unlocked success
 2. **Set the password before importing or creating the private key，Otherwise, the execution will fail**
 
 3. **The wallet needs to be unlocked after the program is restarted, Otherwise, the signature will fail because the private key cannot be obtained, 
-If you fail to obtain the private key, you will also report an error**: <address> is locked.
+If you fail to obtain the private key, you will also report an error**: \<address\> is locked.
 
 ## [More wallet commands](Commands)

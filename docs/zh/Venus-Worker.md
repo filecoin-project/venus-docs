@@ -6,9 +6,9 @@ venus-worker配合venus-sealer用于在多个机器上部署，sealing过程分�
 ## 需求
 
 ### 机器
-    192.168.1.151 用于文件挂载
-    192.168.1.134 运行worker
-    192.168.1.19  运行venus,venus-sealing,venus-miner
+- 192.168.1.151 用于文件挂载
+- 192.168.1.134 运行worker
+- 192.168.1.19  运行venus,venus-sealing,venus-miner
 
 ### 程序
 运行此worker测试流程需要一下几个程序。列出所需的项目地址，具体编译方式参考项目的README.md文件
@@ -22,13 +22,13 @@ venus-worker配合venus-sealer用于在多个机器上部署，sealing过程分�
 参考文档[安装nfs](https://docs.platform9.com/v5.0/openstack/tutorials-setup-nfs-server)
 
 ```sh
-    yum -y install rpcbind nfs-utils
-    mkdir /nfs && chmod 666 /nfs
-    echo "/nfs *(rw,sync,no_root_squash,no_subtree_check,insecure)" > /etc/exports
-    exportfs  -rv
-    systemctl start rpcbind
-    systemctl start nfs
-    cat /var/lib/nfs/etab  #检查nfs是否挂载成功
+yum -y install rpcbind nfs-utils
+mkdir /nfs && chmod 666 /nfs
+echo "/nfs *(rw,sync,no_root_squash,no_subtree_check,insecure)" > /etc/exports
+exportfs  -rv
+systemctl start rpcbind
+systemctl start nfs
+cat /var/lib/nfs/etab  #检查nfs是否挂载成功
 ```
 
 
@@ -41,30 +41,30 @@ venus-worker配合venus-sealer用于在多个机器上部署，sealing过程分�
 
 ### 挂载存储
 
-    ```sh
-    mkdir /nfs
-    mount -t nfs 192.168.1.151:/nfs /nfs
-    ```
+```sh
+mkdir /nfs
+mount -t nfs 192.168.1.151:/nfs /nfs
+```
 
 ### 运行venus-sealer
-    ```sh
-    #初始化sealer，这里不使用本地存储
-    venus-sealer init --actor=t01000 --sector-size=512M --network nerpa --no-local-storage --node-url {venus-api} --node-token {venus-token} --messager-url http://{venus-message api}/rpc/v0
+```sh
+#初始化sealer，这里不使用本地存储
+venus-sealer init --actor=t01000 --sector-size=512M --network nerpa --no-local-storage --node-url {venus-api} --node-token {venus-token} --messager-url http://{venus-message api}/rpc/v0
 
-    venus-sealer run
-    ```
+venus-sealer run
+```
 
 ### attach存储
-    ```sh
-        ./venus-sealer storage attach --init --seal --store /nfs
-    ```
+```sh
+./venus-sealer storage attach --init --seal --store /nfs
+```
 
 ### 获取api地址及token
 
-    ```sh
-    cat ~/.venussealer/api
-    cat ~/.venussealer/token
-    ```
+```sh
+cat ~/.venussealer/api
+cat ~/.venussealer/token
+```
 
 ## 配置venus-worker
 
@@ -72,10 +72,10 @@ venus-worker配合venus-sealer用于在多个机器上部署，sealing过程分�
 
 ### 挂载存储
 
-    ```sh
-    mkdir /nfs
-    mount -t nfs 192.168.1.151:/nfs /nfs
-    ```
+```sh
+mkdir /nfs
+mount -t nfs 192.168.1.151:/nfs /nfs
+```
 
 ### 运行venus-worker
 
@@ -85,15 +85,15 @@ venus-worker配合venus-sealer用于在多个机器上部署，sealing过程分�
 ```
 
 ### attach存储
-    ```sh
-        ./venus-worker storage attach  /nfs
-    ```
+```sh
+./venus-worker storage attach  /nfs
+```
 
 ### 检查是否正常
 
 运行```./venus-sealer sealing workers```, 得到类似下面的结果
 
-```
+```sh
 Worker 8c814d19-ec36-4090-a03b-d4bc9314b39a, host lijunlongdeMacBook-Pro.local
         CPU:  [                                                                ] 0/12 core(s) in use
         RAM:  [||||||||||||||||||||||||||||||||||||||||||||                    ] 69% 11.13 GiB/16 GiB
@@ -105,9 +105,9 @@ Worker a89d4156-d23e-44e6-b74b-8405e9496db0, host lijunlongdeMacBook-Pro.local
 
 ```
 
-运行```./venus-sealer storage list```, 得到类似下面的结果
+运行`./venus-sealer storage list`, 得到类似下面的结果
 
-```
+```sh
 7c046ce2-051f-4531-aa4d-76c1cd728acb:
         [######                                            ] 257.7 GiB/1.998 TiB 12%
         Unsealed: 0; Sealed: 17; Caches: 17; Reserved: 0 B

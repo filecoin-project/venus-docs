@@ -18,7 +18,7 @@ Multi-signature wallet is a wallet that needs multiple keys to authorize the sam
 ### Create multi signature Wallet
 >./venus msig create [--required=\<required>] [--value=\<value>] [--duration=\<duration>] [--from=\<from>] [--] \<addresses>
 
-```
+```shell script
 $ ./venus msig create --from=t01001 --required=2 --value=1000 --duration=20000 "t01001,t01002,t01003"
 
 "Created new multisig: t01004 <multiAddress>"
@@ -30,7 +30,7 @@ $ ./venus msig create --from=t01001 --required=2 --value=1000 --duration=20000 "
 
 ### Query the status of the created multi signature wallet
 >./venus msig inspect [--vesting] [--decode-params] [--] \<address>
-```
+```shell script
 $ ./venus msig inspect t01004 --vesting=true --decode-params=true
 
 # status
@@ -51,7 +51,7 @@ Transactions:  0
 - decode-params: The params field of Transactions in the status is displayed in JSON format, and the default is hex format
 
 ### Transfer FIL to Multisig wallet
-```
+```shell script
 $ ./venus send t01004 2000
 ```
 > After the success of MSG on the Blockchain, multisig wallet will increase by 2000FIL
@@ -59,7 +59,7 @@ $ ./venus send t01004 2000
 
 ### Add a new wallet address to the multisig Wallet
 >./venus msig add-propose [--increase-threshold] [--from=\<from>] [--] \<multisigAddress> \<signer>
-```
+```shell script
 $ ./venus msig add-propose --increase-threshold=false --from=t01001 t01004 t01005
 
 # reponse
@@ -77,7 +77,7 @@ ID      State    Approvals  To             Value   Method        Params
 
 ### Agree to add new address
 >./venus msig add-approve [--from=\<from>] [--] \<multisigAddress> \<proposerAddress> \<txId> \<newAddress> \<increaseThreshold>
-```
+```shell script
 $ ./venus msig add-approve --from=t01002 t01004 t01001 0 t01005 false
 
 # reponse
@@ -101,8 +101,8 @@ t01005  <t3Address5>
 
 ### Propose to amend the voting threshold
 >./venus msig propose-threshold [\<multisigAddress>] \<newM> 
-```
-.$ /venus msig propose-threshold --from=t01001 t01004 3
+```shell script
+$ ./venus msig propose-threshold --from=t01001 t01004 3
 
 # reponse
 sent change threshold proposal in message: <msgCId>
@@ -117,7 +117,7 @@ ID      State    Approvals  To             Value   Method                       
 
 ### Agree to change the number of votes required (approve instruction is universal consent instruction)
 > ./venus msig approve [--from=\<from>] [--] \<multisigAddress> \<messageId> [\<proposerAddress>] [\<destination>] [\<value>] [\<methodId>] [\<methodParams>]
-```
+```shell script
 $ ./venus msig approve --from=t01002 t01004 1
 
 # reponse
@@ -146,8 +146,8 @@ Threshold: 3 / 4
 ### Proposal to remove multisigners
 >./venus msig propose-remove [--decrease-threshold] [--from=\<from>] [--] \<multisigAddress> \<signer>
 
-```
-$  ./venus msig propose-remove --from=t01001 t01004 t01005 
+```shell script
+$ ./venus msig propose-remove --from=t01001 t01004 t01005 
 
 # response
 sent remove singer in message: <msgCId>
@@ -179,7 +179,7 @@ t01003  <t3Address3>
 
 ### Propose to replace multisigner
 >./venus msig swap-propose [--from=\<from>] [--] \<multisigAddress> \<oldAddress> \<newAddress>
-```
+```shell script
 $ ./venus msig swap-propose --from=t01001 t01004 t01003 t01005
 
 # response
@@ -210,7 +210,7 @@ Transactions:  0
 ```
 ### The proposal of canceling address replacement of multisiger
 >./venus msig swap-cancel [\<multisigAddress>] \<txId> \<oldAddress> \<newAddress> 
-```
+```shell script
 # Launch a new replacement proposal
 $ ./venus msig swap-propose --from=t01001 t01004 t01005 t01003
 
@@ -225,10 +225,10 @@ $ ./venus msig swap-cancel --from=t01001 t01004 4 t01005 t01003
 
 ### Query the number of FILs granted by multisig address in the specified block interval
 > ./venus msig vested [--start-epoch=\<start-epoch>] [--end-epoch=\<end-epoch>] [--] \<multisigAddress>
-```
+```shell script
 $  ./venus msig vested --from=t01001 --start-epoch=10 --end-epoch=200 t01004
 
-# reponse
+# response
 "Vested: 9.5 FIL between 10 and 200"
 ```
 
@@ -236,7 +236,7 @@ $  ./venus msig vested --from=t01001 --start-epoch=10 --end-epoch=200 t01004
 ### Propose to freeze part of FIL in multisig address
 >./venus msig lock-propose [--from=\<from>] [--] \<multisigAddress> \<startEpoch> \<unlockDuration> \<amount>
 
-```
+```shell script
 $ ./venus msig lock-propose --from=t01001 t01004 500 100 50
 
 # response
@@ -255,7 +255,7 @@ ID      State    Approvals  To             Value   Method          Params
 
 ### Proposal to lock
 > ./venus msig lock-cancel [--from=\<from>] [--] \<multisigAddress> \<txId> \<startEpoch> \<unlockDuration> \<amount>
-```
+```shell script
 $ ./venus msig lock-cancel --from=t01001 t01004 5 500 100 50
 
 ### Agree to lock

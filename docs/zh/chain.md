@@ -1,12 +1,12 @@
 ---
-标题: 'venus: 链管理'
-描述：“Venus区块链携带计算网络当前状态所需的信息，存储在磁盘上，每30秒增加一个新的块。本指南解释了如何管理th链的几个方面。”
-导航: '链管理'
+title: 'venus: 链管理'
+description: 'Venus区块链携带计算网络当前状态所需的信息，存储在磁盘上，每30秒增加一个新的块。本指南解释了如何管理th链的几个方面。'
+breadcrumb: '链管理'
 ---
 
 # {{ $frontmatter.title }}
 
-{{ $frontmatter.description }}.
+{{ $frontmatter.description }}
 
 [[TOC]]
 

@@ -28,7 +28,7 @@ Tips:
 ## 1. Venus-auth Install
 ### Compile and start
 
-```
+```shell script
 $ git clone https://github.com/ipfs-force-community/venus-auth.git
 
 $ cd venus-auth
@@ -47,7 +47,7 @@ Tips: MySQL supports official versions above 5.7（If the default settings of My
 
 
 - Initialize database and table
-```
+```mysql
 CREATE DATABASE `venus_auth` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `venus_auth`;
 
@@ -66,7 +66,7 @@ CREATE TABLE `token` (
 
 - Modifying DB settings in venus-auth config
 
-```
+```shell script
 $ vim ~/.venus-auth/config.toml
 
 # Data source configuration item
@@ -84,14 +84,13 @@ maxIdleTime = "30s"
 
 ```
 - start-up
-```
+```shell script
 $ nohup ./venus-auth > auth.log 2>&1 &
-
 ```
 
 ### Register and generate the token of each component
 
-```
+```shell script
 $ ./venus-auth genToken --perm admin miner
 <auth token miner>
 
@@ -109,11 +108,11 @@ $ ./venus-auth genToken --perm admin sealer
 
 ## 2. Venus install
 ### Install the compilation environment
-```
+```shell script
 sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum install -y git gcc bzr jq pkgconfig clang llvm mesa-libGL-devel opencl-headers ocl-icd ocl-icd-devel hwloc-devel
 ```
 ### Compile and start
-```
+```shell script
 $ git clone https://github.com/filecoin-project/venus.git
 
 $ cd venus
@@ -122,9 +121,9 @@ $ make deps
 
 $ make
 
-// Start Venus daemon to set the address of the network and venus-auth
-// After successful startup, tail - F venus.log can see the log of data synchronization
-// It's going to take a while here
+# Start Venus daemon to set the address of the network and venus-auth
+# After successful startup, tail - F venus.log can see the log of data synchronization
+# It's going to take a while here
 $ nohup ./venus daemon --network nerpa \
 --authURL http://<IP1>:8989 \
 > venus.log 2>&1 & 
@@ -135,14 +134,14 @@ $ nohup ./venus daemon --network nerpa \
 ### Modify IPv4 listening address
 At present, after the program starts, the default listening address is `127.0.0.1:3453`. For cross server clusters, you need to modify the listening policy. You can query the process through `lsof -i:3453` , kill the process, modify the IPv4 policy, and then restart.
 
-```
+```shell script
 vim ~/.venus/config.json
 
-Do the following operations to monitor all local IPv4 addresses:
-replace api.apiAddress from 
-"/ip4/127.0.0.1/tcp/3453"  to  "/ip4/0.0.0.0/tcp/3453"
+# Do the following operations to monitor all local IPv4 addresses:
+# replace api.apiAddress from 
+# "/ip4/127.0.0.1/tcp/3453"  to  "/ip4/0.0.0.0/tcp/3453"
 
-Restart the service after modification:
+# Restart the service after modification:
 $ nohup ./venus daemon --network nerpa \
 --authURL http://<IP1>:8989 \
 > venus.log 2>&1 & <absolute path>
@@ -152,27 +151,27 @@ $ nohup ./venus daemon --network nerpa \
 
 ## 3. Venus-wallet install
 ### Compile and start
-```
+```shell script
 $ git clone https://github.com/ipfs-force-community/venus-wallet.git
 
 $ cd venus-wallet 
 
-// Compile
+# Compile
 $ make
 
-// start
+# start
 $ nohup ./venus-wallet run  --network test> wallet.log 2>&1 &
 ```
 
 ### Set password and create Wallet
 > Here, two BLS wallets are created for the subsequent venus-sealer initialization
-```
-// Set lock and unlock password
+```shell script
+# Set lock and unlock password
 $ ./venus-wallet setpwd
 Password:******
 Enter Password again:******
 
-// Generate BLS address
+# Generate BLS address
 $ ./venus-wallet new bls
 <bls address 1>
 $ ./venus-wallet new bls
@@ -182,13 +181,13 @@ $ ./venus-wallet new bls
 #### Attention
 The newly generated `<bls address 1>` `<bls address 2>` needs to be pre charged with balance in https://faucet.nerpa.interplanetary.dev/funds.html before actor can be generated on the chain.
 
-```
+```shell script
 $ ./venus-wallet auth api-info --perm admin
 <wallet jwt token>
 ```
 ## 4. Venus-messager install
 ### Compile and start
-```
+```shell script
 $ git clone https://github.com/ipfs-force-community/venus-messager.git
 
 $ cd venus-messager
@@ -205,7 +204,6 @@ $ nohup ./venus-messager run \
 --db-type mysql \
 --mysql-dsn "root:111111@tcp(127.0.0.1:3306)/cali_venus?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s" \
 > msg.log 2>&1 &
-
 ```
 - `--auth-url` is to set venus-auth listening address
 - `--node-url` is to set venus listening address
@@ -215,7 +213,7 @@ $ nohup ./venus-messager run \
 ### Add wallet link (multiple wallet links can be added)
 > This side will periodically monitor the change of the accessible address of the venus-wallet \
 Delay dynamic tracking depends on the `list` interface at `venus-wallet`
-```
+```shell script
 $ ./venus-messager wallet add \
 --name testminer --url /ip4/<IP2>/tcp/5678/http \
 --token <wallet jwt token> 
@@ -234,7 +232,7 @@ $ ./venus-messager wallet list
 2. The JWT token `<auth token sealer>` registered by venus-auth is used for sealer to access messager
  
 ### Compile and start (sealer single program can only bind one miner)
-```
+```shell script
 $ git clone https://github.com/filecoin-project/venus-sealer.git
 
 $ cd venus-sealer
@@ -242,10 +240,9 @@ $ cd venus-sealer
 $ make deps
 
 $ make
-
 ```
 #### Initialize new miner (1 out of 2)
-```
+```shell script
 $ nohup ./venus-sealer init \
 --worker <bls address 1> \
 --owner <bls address 2>  \
@@ -258,12 +255,11 @@ $ nohup ./venus-sealer init \
 --messager-token <auth token sealer> \
 --wallet-name testminer \
 > sealer.log 2>&1 &
-
 ```
 
 #### Initialize the existing miner (1 out of 2)
 > You do not need to specify `--sector-size`
-```
+```shell script
 $ nohup ./venus-sealer init \
 --actor <t0 addr>  \
 --network nerpa \
@@ -274,10 +270,9 @@ $ nohup ./venus-sealer init \
 --messager-token <auth token sealer> \
 --wallet-name testminer \
 > sealer.log 2>&1 &
-
 ```
 #### Specify storage directory
-```
+```shell script
 # Because --no-local-storage is specified
 # So you need to specify the sealer storage directory
 $ ./venus-sealer storage attach --init --store --seal <absolute path>
@@ -289,7 +284,7 @@ $ ./venus-sealer storage attach --init --store --seal <absolute path>
 - `<absolute path>` is the absolute path
 
 #### Check the log, wait for the message to be chained, and register the actor address
-```
+```shell script
 $ tail -f sealer.log
 
 2021-04-25T18:41:31.925+0800	INFO	main	venus-sealer/init.go:182	Checking if repo exists
@@ -304,7 +299,7 @@ $ tail -f sealer.log
 ```
 
 #### Start sealer and perform sector encapsulation
-```
+```shell script
 $ nohup ./venus-sealer run >> sealer.log 2>&1 &
 
 # Sector encapsulation command
@@ -341,7 +336,7 @@ Total Spendable:  1383.775 FIL
 ## 6. Venus-miner install
 
 ### Compile and start
-```
+```shell script
 $ git clone https://github.com/filecoin-project/venus-miner.git
 
 $ cd venus-miner
@@ -397,7 +392,7 @@ $ ./venus-miner address list
 ## Related issues
 
 1. The Go mod has the following problems
-```
+```shell script
 SECURITY ERROR
 This download does NOT match an earlier download recorded in go.sum.
 The bits may have been replaced on the origin server, or an attacker may
