@@ -12,14 +12,14 @@
 
 1. 设置钱包密码
 
-```sh
+```shell script
 ./venus wallet set-password <password>
 Password set successfully
 ```
 
 2. 执行创建钱包地址、导入或导出私钥操作都需要提前设置密码，不然会执行失败
 
-```sh
+```shell script
 # 创建钱包地址，默认创建的是 BLS 地址
 ./venus wallet new
 # 导入私钥
@@ -30,14 +30,14 @@ Password set successfully
 
 3. 解锁钱包
 
-```sh
+```shell script
 ./venus wallet unlock <password>
 unlocked success
 ```
 
 4. 锁定钱包
 
-```sh
+```shell script
 ./venus wallet lock <password>
 unlocked success
 ```

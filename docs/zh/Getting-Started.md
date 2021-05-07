@@ -26,10 +26,10 @@ Venus可以在大多数GNU/Linux和MacOS系统上构建和运行。尚不支持W
 
 Clone“venus”git库并输入：
 
-   ```sh
-    mkdir -p /path/to/filecoin-project
-    git clone https://github.com/filecoin-project/venus.git /path/to/filecoin-project/venus
-   ```
+```sh
+mkdir -p /path/to/filecoin-project
+git clone https://github.com/filecoin-project/venus.git /path/to/filecoin-project/venus
+```
 
 #### 安装Go
 
@@ -47,35 +47,35 @@ Clone“venus”git库并输入：
 
 1. 加载所有Git子模块：
 
-    ```sh
-    git submodule update --init --recursive
-    ```
+```sh
+git submodule update --init --recursive
+```
 
 2. 初始化生成依赖项：
 
-    ```sh
-    make deps
-    ```
+```sh
+make deps
+```
 
  > **注意:** 第一次`deps` 启动可能**慢**，因为很大的参数文件要么下载，要么在 `/var/tmp/filecoin-proof-parameters`中本地生成。要有耐心，以后会更快。
 
 ### 构建和运行测试
 
 1. 构建二进制文件：
-    ```sh
-    make
-    ```
+```sh
+make
+```
 
 2. 运行单元测试：
 
-    ```sh
-    go run ./build test
-    ```
+```sh
+go run ./build test
+```
 
 3. 或者可以将构建和测试结合起来：
-    ```sh
-    go run ./build best
-    ```
+```sh
+go run ./build best
+```
 
 其他方便的构建命令包括：
 
@@ -103,34 +103,34 @@ go run ./build all
 ## 开始运行Filecoin
 
 1. 如果以前在系统上运行过`venus` ,请删除现有的Filecoin repo（**这将删除所有以前的Filecoin数据**）：
-    ```sh
-    rm -rf ~/.venus
-    ```
+```sh
+rm -rf ~/.venus
+```
 
 2. 启动venus守护进程：
-    ```sh
-    venus daemon
-    ```
+```sh
+venus daemon
+```
     
 这应该返回“我的peerID是`<peerID>`” , 其中 `<peerID>` 是一个长的 [CID](https://github.com/filecoin-project/specs/blob/master/definitions.md#cid) ，是以“Qm”开头的字符串。
 
 1. 打印启动节点地址列表：
-    ```sh
-    venus config bootstrap.addresses
-    ```
+```sh
+venus config bootstrap.addresses
+```
 
     
 2. 从刚打印的列表中选择任意地址，并连接到该地址（peer自动的发现和连接即将到来）：
-    ```sh
-    venus swarm connect <any-filecoin-node-mulitaddr>
-    ```
-    
+```sh
+venus swarm connect <any-filecoin-node-mulitaddr>
+```
+
  > **注意:** 第一次可能较**慢**。filecoin节点需要一个大参数文件来进行校对，存储在 `/tmp/filecoin-proof-parameters`中。它通常由 `deps`构建步骤生成。如果这些文件丢失，它们将被重新生成，这可能需要一个小时。我们正在研究更好的解决办法。
 
 3. 检查节点的连接：
-    ```sh
-    venus swarm peers                  # list addresses of peers to which you're connected
-    ```
+```sh
+venus swarm peers                  # list addresses of peers to which you're connected
+```
 
 该节点现在应该连接到一些peer，并将开始下载和验证区块链。
 
@@ -151,29 +151,29 @@ _需要帮助吗？请参阅 [疑难解答和常见问题](Troubleshooting-&-FAQ
 FIL的所有余额都存放在钱包里。新创建节点时，它将有一个余额为0 FIL的Filecoin钱包。
 
 1. 检索您的钱包地址：
-    ```sh
-    venus wallet ls
-   ```
+```sh
+venus wallet ls
+```
     
 2. 输出的应该是一个长的字母数字字符串。转到testnet的 [水龙头](https://faucet.testnet.filecoin.io) 并提交那个钱包地址。要花一分钟才能把钱放进钱包。
 
     * 或者你可以从命令行触发水龙头：
-        ```sh
-        export WALLET_ADDR=`venus wallet ls`    # fetch your wallet address into a handy variable
-        MESSAGE_CID=`curl -X POST -F "address=${WALLET_ADDR}" "https://faucet.testnet.filecoin.io/send"`
-        ```
+```sh
+export WALLET_ADDR=`venus wallet ls`    # fetch your wallet address into a handy variable
+MESSAGE_CID=`curl -X POST -F "address=${WALLET_ADDR}" "https://faucet.testnet.filecoin.io/send"`
+```
         
 3. 水龙头将提供消息CID。如果链已与网络同步，则此消息应在大约30秒内处理。可以运行以下命令以等待确认：
 
-    ```sh
-    venus state wait-msg ${MESSAGE_CID}
-    ```
+```sh
+venus state wait-msg ${MESSAGE_CID}
+```
 
 4. 通过检查钱包余额验证FIL是否已转入钱包中：
 
-    ```sh
-    venus wallet balance ${WALLET_ADDR}
-    ```
+```sh
+venus wallet balance ${WALLET_ADDR}
+```
     
 ## 等待链同步
 🎉 恭喜，您现在已连接到Filecoin！守护进程现在正忙于同步和验证现有的区块链，这可能需要一段时间---数小时甚至数天，具体取决于网络时间和活动。

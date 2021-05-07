@@ -23,7 +23,8 @@ module.exports = {
       {
         'ga': 'UA-148766289-1' // Property: Filecoin Docs
       }
-    ]
+    ],
+    ['vuepress-plugin-code-copy', true]
   ],
   head: [
     ['link', { rel: 'icon', href: '/assets/icon-coin-128.png' }]
@@ -54,38 +55,6 @@ module.exports = {
     editLinks: true,
     // end Edit on Github section
     displayAllHeaders: false,
-    /* sidebar: [
-      *//* {
- title: 'Venus Filecoin Tutorial',
- collapsable: false,
- children: [
-   ['Home.md', 'Overview'],
-   ['Chain.md', 'Chain'],
-   ['Venus-Worker.md', 'Venus Worker'],
-   ['Commands.md', 'CLI commands'],
-   ['Getting-Started.md', 'Getting started'],
-   ['How-To-Connect-Network.md', 'How to start network'],
-   ['How-To-Setup_2knet.md', 'How to start a local network'],
-   ['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
-   ['How-To-Use-Messager.md', 'How to use messager'],
-   ['How-To-Use-Wallet.md', 'How to use wallet'],
-   ['Multisig-Wallet.md','Multisig wallet'],
-   ['Remote-Wallet.md','Remote wallet'],
-   ['Payment-Channel.md', 'Payment channel'],
-   ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
-   ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
-   ['Tips-Running-In-China.md', 'Tips when running in China'],
- ]
-},*//*
-       {
-         title: 'Resources',
-         collapsable: true,
-         children: [
-           ['https://docs.filecoin.io', 'Filecoin docs'],
-           ['questions.md', 'Have a question?'],
-         ]
-       }
-     ],*/
     locales: {
       '/': {
         selectText: 'Languages',
@@ -104,17 +73,18 @@ module.exports = {
             title: 'Venus Filecoin Tutorial',
             collapsable: false,
             children: [
-              ['Home.md', 'Overview'],
+              ['Home.md', 'Home'],
+              ['Overview.md','Overview'],
               ['Chain.md', 'Chain'],
               ['Venus-Worker.md', 'Venus Worker'],
               ['Commands.md', 'CLI commands'],
               ['Getting-Started.md', 'Getting started'],
               ['How-To-Connect-Network.md', 'How to start network'],
               ['How-To-Setup_2knet.md', 'How to start a local network'],
-              //['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
+              ['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
               ['How-To-Use-Messager.md', 'How to use messager'],
               ['How-To-Use-Wallet.md', 'How to use wallet'],
-              //['Multisig-Wallet.md','Multisig wallet'],
+              ['Multisig-Wallet.md','Multisig wallet'],
               //['Remote-Wallet.md','Remote wallet'],
               ['Payment-Channel.md', 'Payment channel'],
               ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
@@ -149,22 +119,21 @@ module.exports = {
               title: 'Venus Filecoin Tutorial',
               collapsable: false,
               children: [
-                ['Home.md', 'Overview'],
-                //['Chain.md', 'Chain'],
+                ['Home.md', 'Home'],
+                ['Overview.md','Overview'],
+                ['chain.md', 'Chain'],
                 ['Venus-Worker.md', 'Venus Worker'],
                 ['Commands.md', 'CLI commands'],
                 ['Getting-Started.md', 'Getting started'],
                 ['How-To-Connect-Network.md', 'How to start network'],
                 ['How-To-Setup_2knet.md', 'How to start a local network'],
                 ['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
-                //['How-To-Use-Messager.md', 'How to use messager'],
                 ['How-To-Use-Wallet.md', 'How to use wallet'],
                 ['Multisig-Wallet.md', 'Multisig wallet'],
                 ['Remote-Wallet.md', 'Remote wallet'],
                 ['Payment-Channel.md', 'Payment channel'],
                 ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
                 ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
-                //['Tips-Running-In-China.md', 'Tips when running in China'],
               ]
             },
             {

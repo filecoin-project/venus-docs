@@ -24,29 +24,28 @@ Payment channels 的作用是在2个actor之间转移filecoin。
 
 创建一个初始额度为10FIL的payment channel:
 
-```
+```shell script
 $ venus paych add-funds <form_addr> <to_addr> 10
 <channel addr>
 ```
 
 客户端在指定的\<channel addr\>中穿件一个nonce默认为1，额度为2FIL，lane为0的voucher:
 
-```
+```shell script
 $ venus paych voucher create <channel addr> 2 0
 <voucher>
 ```
 
 客户端将生成的voucher发送给服务端，服务端将其添加到本地存储中:
 
-```
+```shell script
 $ venus paych voucher add <channel addr> <voucher>
-
 ```
 
 服务端发送一些数据给客户端。
 客户端创建一个lane为0，nonce为2（默认在之前的1的基础上自增后），额度为4Fil的voucher:
 
-```
+```shell script
 $ venus paych voucher create <channel addr> 4 0
 <voucher>
 ```
@@ -55,20 +54,20 @@ $ venus paych voucher create <channel addr> 4 0
 
 客户端可以通过“paych add-funds”给已经创建好的payment channel添加FIL额度：
 
-```
+```shell script
 $ venus paych add-funds <client addr> <provider addr> 5
 <channel addr> #和之前的的地址一样，现在这个channel的额度已经是15了
 ```
 
 一旦客户端收到了所有的数据，他们需要settle掉这个通道，这个settle的动作不需要马上执行，例如客户端可以继续保持这个通道，只要他想继续与服务端进行交易。
 
-```
+```shell script
 $ venus paych settle <channel addr>
 ```
 
 服务端可以提交voucher到链上（venus检测到链上的settle后会自动执行提交）。服务端可能收到许多FIL额度递增的voucher,它需要提交最优的voucher,需要注意的是每个lane中只有一个最佳voucher:
 
-```
+```shell script
 $ venus paych voucher best-spendable <channel addr>
 <voucher>
 <voucher>
@@ -79,6 +78,6 @@ $ venus paych voucher submit <channel addr> <voucher>
 
 一旦settle后的保护周期结束，客户端或者服务端都可以提交collect将资金归属结算。
 
-```
+```shell script
 $ venus paych collect <channel addr>
 ```

@@ -6,7 +6,7 @@ This guide provides a few tips for users in China to get around some of the band
 
 Running Venus requires the download of chain's proof parameters which are large files which by default are hosted outside of China and very slow to download there. To get around that, users should set the following environment variable when running Venus:
 
-```
+```shell script
 export IPFS_GATEWAY=https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/
 ```
 
@@ -14,6 +14,6 @@ export IPFS_GATEWAY=https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/
 
 Building Venus requires downloading a few Go modules. These are usually hosted on Github, which has very low bandwidth from China. To fix this use a local proxy by setting the following variable before running Venus:
 
-```
+```shell script
 export GOPROXY=https://goproxy.cn
 ```
