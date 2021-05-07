@@ -23,7 +23,7 @@ git clone https://github.com/ipfs-force-community/venus-wallet.git
 
 ### 2. Compile
 - go version ^1.15
-```
+```shell script
 # Setting BLS compilation environment variables
 export CGO_CFLAGS_ALLOW="-D__BLST_PORTABLE__"
 export CGO_CFLAGS="-D__BLST_PORTABLE__"
@@ -38,7 +38,7 @@ make linux
 ```
 
 ### 3. Start service process
-```
+```shell script
 # It starts on the Mainnetwork by default(--network=main)
 # The address begins with f
 $ ./venus-wallet run 
@@ -50,7 +50,7 @@ $ ./venus-wallet run  --network=test
 
 ### 4. Configuration introduction
 - Default file location “~/.venus_wallet/config.toml”
-```
+```toml
 [API]
   # The HTTP listening address of the local process
   ListenAddress = "/ip4/0.0.0.0/tcp/5678/http"
@@ -81,7 +81,7 @@ $ ./venus-wallet run  --network=test
 # CLI operation guide
 ## View help
 
-```
+```shell script
 $ ./venus-wallet -h
 
 
@@ -122,7 +122,7 @@ GLOBAL OPTIONS:
 ## Basic operation of Venus Wallet
 ### The state of the wallet
 #### 1. Set the key of private key symmetric encryption
-```
+```shell script
 # ./venus-wallet setpwd (aliase)
 $ ./venus-wallet set-password
 Password:******
@@ -136,7 +136,7 @@ Password set successfully
 - After setting the password, the default state of the wallet is unlock
 #### 2. Lock Wallet
 > After the wallet is locked, the functions of signing, generating new address, importing and exporting private key will be disabled, which will affect the remote call chain, so please use it with caution.
-```
+```shell script
 $ ./venus-wallet lock
 Password:******
 
@@ -145,7 +145,7 @@ wallet lock successfully
 ```
 #### 3. 解锁wallet
 > After unlocking, all functions of the wallet will be released.
-```
+```shell script
 $ ./venus-wallet unlock
 Password:******
 
@@ -153,7 +153,7 @@ Password:******
 wallet unlock successfully
 ```
 #### 4. View the wallet status
-```
+```shell script
 $ ./venus-wallet lockstate
 
 #res 
@@ -162,7 +162,7 @@ wallet state: unlocked
 ### Private key management
 #### 1. Generate new random private key
 > venus-wallet new [command options] [bls|secp256k1 (default secp256k1)]
-```
+```shell script
 $ ./venus-wallet new 
 
 #res
@@ -172,7 +172,7 @@ t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 
 #### 2. Import the private key
 > venus-wallet import [command options] [\<path\> (optional, will read from stdin if omitted)]
-```
+```shell script
 $ ./venus-wallet import
 Enter private key:7b2254797065223a22736563703235366b31222c22507269766174654b6579223a22626e765665386d53587171346173384633654c647a7438794a6d68764e434c377132795a6c6657784341303d227d
 
@@ -181,7 +181,7 @@ imported key t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy successfully!
 ```
 #### 3. Export the private key
 > venus-wallet export [command options] [address]
-```
+```shell script
 $ ./venus-wallet export t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 
 # res
@@ -189,7 +189,7 @@ $ ./venus-wallet export t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 ```
 
 #### 4. View address list
-```
+```shell script
 $ ./venus-wallet list
 
 t3uktqgxtagiyk5cxrjn5h4wq4v247saxtfukfi6zsvt4sek2q2ufkg27biasg7247zhdpm2kpotukwsapr7pa
@@ -199,7 +199,7 @@ t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 > Show all private key corresponding address, there are spec and bls two kinds of address
 ##### 5. Delete the specified private key
 > venus-wallet del [command options] \<address\>
-```
+```shell script
 $ ./venus-wallet del t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 
 #res 
@@ -211,7 +211,7 @@ For remote access interface authorization
 
 #### 1. Gets the remote connection string
 > venus-wallet auth api-info [command options] [arguments...]
-```
+```shell script
 $ ./venus-wallet auth api-info --perm admin
 
 #res
@@ -244,7 +244,7 @@ The main purpose of policy function is to restrict the use of private key for th
 - Notes
     + At present, the change of keyBind will directly affect the group, and the group will directly affect the token policy configuration. At present, all these are linked.
 
-```
+```shell script
 $ ./venus-wallet strategy -h
 
 NAME:
@@ -288,7 +288,7 @@ OPTIONS:
 
 ```
 #### 1. View msgType and method
-```
+```shell script
 # View type （Code is the corresponding value of 1:1 of type, which never changes）
 $ ./venus-wallet st types
 # res
@@ -377,7 +377,7 @@ index	method
 #### 1. Create keyBind
 ##### 1. Custom create
 > venus-wallet strategy newKeyBindCustom [command options] [name, address, codes, methods]
-```
+```shell script
 $ ./venus-wallet st newKBC kb1 <addr1> \
 0,1,2,3 \
 CreateMiner,Send
@@ -393,7 +393,7 @@ success
 ###### 2.1 Create msgType template
 > venus-wallet strategy newMsgTypeTemplate [command options] [name, code1 code2 ...]
 
-```
+```shell script
 $ ./venus-wallet st newMsgTypeTemplate mttmp1 0 1 2 3 4 5
 
 #res
@@ -403,7 +403,7 @@ success
 
 ###### 2.2 Create method template
 > venus-wallet strategy newMethodTemplate [command options] [name, method1 method2 ...]
-```
+```shell script
 $ ./venus-wallet st newMethodTemplate mtmp1 ActivateDeals AddBalance AddLockedFund
 
 #res
@@ -413,7 +413,7 @@ success
 
 ###### 2.3 Create keyBind from template
 > venus-wallet strategy newKeyBindFromTemplate [command options] [name, address, msgTypeTemplateName, methodTemplateName]
-```
+```shell script
 $ ./venus-wallet st newKeyBindFromTemplate kb2 <addr2> \
 mttmp1 mtmp1
 
@@ -422,7 +422,7 @@ success
 ```
 ##### 3. Create group
 > venus-wallet strategy newGroup [command options] [name, keyBindName1 keyBindName2 ...]
-```
+```shell script
 $ ./venus-wallet st newGroup group1 kb1 kb2
 ```
 - group1: group globally unique name
@@ -430,7 +430,7 @@ $ ./venus-wallet st newGroup group1 kb1 kb2
 
 ##### 4. Generate a group token to call the public policy
 > venus-wallet strategy newWalletToken [command options] [groupName]
-```
+```shell script
 $ ./venus-wallet st newWalletToken group1
 
 #res
@@ -442,7 +442,7 @@ $ ./venus-wallet st newWalletToken group1
 
 ###### 4.1 Query keybind 
 > venus-wallet strategy keyBind [command options] [name]
-```
+```shell script
 $ ./venus-wallet st keyBind kb1
 
 #res
@@ -453,7 +453,7 @@ methods	: CreateMiner,Send
 ###### 4.2 KeyBind add method
 > venus-wallet strategy pushMethodIntoKeyBind [command options] [keyBindName, method1 method2 ...]
 
-```
+```shell script
 $ ./venus-wallet st pushMethodIntoKeyBind kb1 Settle SwapSigner
 
 #res
@@ -464,7 +464,7 @@ methods	: CreateMiner,Send,Settle,SwapSigner
 - After adding successfully, Settle SwapSigner will be atomically added to methods. At present, this operation is to prevent concurrency.
 ###### 4.3 KeyBind adds msgType
 > venus-wallet strategy pushMsgTypeIntoKeyBind [command options] [keyBindName, code1 code2 ...]
-```
+```shell script
 $ ./venus-wallet st pushMsgTypeIntoKeyBind kb1 4 5 6
 
 #res
@@ -474,7 +474,7 @@ methods	: CreateMiner,Send,Settle,SwapSigner
 ```
 ###### 4.4 KeyBind remove method
 > venus-wallet strategy pullMethodFromKeyBind [command options] [keyBindName, method1 method2 ...]
-```
+```shell script
 $ ./venus-wallet st pullMethodFromKeyBind kb1 Settle SwapSigner
 
 #res
@@ -485,7 +485,7 @@ methods	: CreateMiner,Send
 
 ###### 4.5 KeyBind remove msgType
 > venus-wallet strategy pullMsgTypeFromKeyBind [command options] [keyBindName, code1 code2 ...]
-```
+```shell script
 $ ./venus-wallet st pullMsgTypeFromKeyBind kb1 4 5 6
 
 #res
@@ -496,7 +496,7 @@ methods	: CreateMiner,Send
 ##### 5. Query operation
 ###### 5.1 Query msgType list
 > venus-wallet strategy listMsgTypeTemplates [command options] [from to]
-```
+```shell script
 $ ./venus-wallet st listMsgTypeTemplates 0 20
 
 #res
@@ -514,7 +514,7 @@ types	: 0,1,2,3,4,5
 
 ###### 5.2 Query the specified msgType template
 >  venus-wallet strategy msgTypeTemplate [command options] [name]
-```
+```shell script
 $ ./venus-wallet st msgTypeTemplate mttmp1
 
 # res
@@ -523,7 +523,7 @@ $ ./venus-wallet st msgTypeTemplate mttmp1
 
 ###### 5.3 Query method list
 > venus-wallet strategy listMethodTemplates [command options] [from to]
-```
+```shell script
 $ ./venus-wallet st listMethodTemplates 0 20
 
 #res
@@ -538,7 +538,7 @@ methods	: ActivateDeals,AddBalance,AddLockedFund
 
 ###### 5.4 Query the specified method template
 > venus-wallet strategy methodTemplateByName [command options] [name]
-```
+```shell script
 $ ./venus-wallet st methodTemplateByName mtmp1
 
 #res
@@ -547,7 +547,7 @@ ActivateDeals,AddBalance,AddLockedFund
 
 ###### 5.5 Query keyBind list
 > venus-wallet strategy listKeyBinds [command options] [from to]
-```
+```shell script
 $ ./venus-wallet st listKeyBinds 0 20
 #res
 num	: 1
@@ -564,7 +564,7 @@ methods	: CreateMiner
 ```
 ###### 5.6 Query the keyBind list of the specified address
 > venus-wallet strategy keyBinds [command options] [address]
-```
+```shell script
 $ ./venus-wallet st keyBinds <addr1>
 #res
 $ ./venus-wallet st listKeyBinds 0 20
@@ -582,7 +582,7 @@ methods	: CreateMiner
 ```
 ###### 5.6 Query the keyBind of the specified name
 > venus-wallet strategy keyBind [command options] [name]
-```
+```shell script
 $ ./venus-wallet st keyBind kb1
 #res
 address	: <addr1>
@@ -592,7 +592,7 @@ methods	: CreateMiner,Send
 
 ###### 5.7 Query group list
 > venus-wallet strategy listGroup [command options] [from to]
-```
+```shell script
 $ ./venus-wallet st listGroup 0 20
 #res
 1	: group1
@@ -602,7 +602,7 @@ $ ./venus-wallet st listGroup 0 20
 
 ###### 5.8 Query the specified group
 > venus-wallet strategy group [command options] [name]
-```
+```shell script
 $ ./venus-wallet st group group1
 #res
 num	: 1
@@ -612,7 +612,7 @@ methods	: CreateMiner,Send
 ```
 ###### 5.9 Query the token list derived from group
 > venus-wallet strategy groupTokens [command options] [groupName]
-```
+```shell script
 $ ./venus-wallet st groupTokens group1
 #res
 041457f0-ea9a-4486-b648-1feb05dda0c0
@@ -620,7 +620,7 @@ a8f09b9f-ad28-8734-c40c-03c222d03982
 ```
 ###### 5.10 Query the group details corresponding to the token
 > venus-wallet strategy tokenInfo [command options] [token]
-```
+```shell script
 $ ./venus-wallet st tokenInfo 041457f0-ea9a-4486-b648-1feb05dda0c0
 #res
 groupName: group1
@@ -637,7 +637,7 @@ keyBinds:
 
 ###### 6.1 Delete msgType template (keyBind created from template is not affected)
 > venus-wallet strategy removeMsgTypeTemplate [command options] [name]
-```
+```shell script
 $ ./venus-wallet st removeMsgTypeTemplate mttmp1
 #res
 success
@@ -645,7 +645,7 @@ success
 
 ###### 6.2 Delete method template (keyBind created from template is not affected)
 > venus-wallet strategy removeMethodTemplate [command options] [name]
-```
+```shell script
 $ ./venus-wallet st removeMethodTemplate mtmp1
 #res
 success
@@ -653,13 +653,13 @@ success
 
 ###### 6.3 Delete keyBind according to the name (it will affect the group and thus the group policy corresponding to the token)
 > venus-wallet strategy removeKeyBind [command options] [name]
-```
+```shell script
 $ ./venus-wallet st removeKeyBind kb1
 ```
 
 ###### 6.4 Delete keyBind according to the wallet address (batch deletion will affect the group, thus affecting the group policy corresponding to the token)
 > venus-wallet strategy removeKeyBindByAddress [command options] [name]
-```
+```shell script
 $ ./venus-wallet st removeKeyBindByAddress <addr1>
 #res
 2 rows of data were deleted
@@ -668,14 +668,14 @@ $ ./venus-wallet st removeKeyBindByAddress <addr1>
 
 ###### 6.5 Remove group (all policies corresponding to the group will be invalid)
 > venus-wallet strategy removeGroup [command options] [name]
-```
+```shell script
 $ ./venus-wallet st removeGroup group1
 #res
 success
 ```
 ###### 6.6 Remove token
 > venus-wallet strategy removeToken [command options] [token]
-```
+```shell script
 $ ./venus-wallet st removeToken 041457f0-ea9a-4486-b648-1feb05dda0c0
 #res
 success
