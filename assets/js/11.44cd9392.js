@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{376:function(t,n,e){"use strict";e.r(n);var u={mounted:function(){this.$router.push("Home.html")}},o=e(17),s=Object(o.a)(u,(function(){var t=this.$createElement;return(this._self._c||t)("div")}),[],!1,null,null,null);n.default=s.exports}}]);
