@@ -7,7 +7,7 @@
     <meta name="generator" content="VuePress 1.8.0">
     <link rel="icon" href="/assets/icon-coin-128.png">
     <meta name="description" content="Venus is a Go implementation of the Filecoin Distributed Storage Network.">
-    
+
     <link rel="preload" href="/assets/css/0.styles.438844f4.css" as="style"><link rel="preload" href="/assets/js/app.c550f272.js" as="script"><link rel="preload" href="/assets/js/2.ec97964e.js" as="script"><link rel="preload" href="/assets/js/8.e68364df.js" as="script"><link rel="prefetch" href="/assets/js/10.583ee7f3.js"><link rel="prefetch" href="/assets/js/11.44cd9392.js"><link rel="prefetch" href="/assets/js/12.e8c5e213.js"><link rel="prefetch" href="/assets/js/13.333ff603.js"><link rel="prefetch" href="/assets/js/14.2b072df6.js"><link rel="prefetch" href="/assets/js/15.d9eedd89.js"><link rel="prefetch" href="/assets/js/16.90f375d0.js"><link rel="prefetch" href="/assets/js/17.03904dd4.js"><link rel="prefetch" href="/assets/js/18.853d58fb.js"><link rel="prefetch" href="/assets/js/19.d8ed9a89.js"><link rel="prefetch" href="/assets/js/20.5b8e5c24.js"><link rel="prefetch" href="/assets/js/21.2be1f63e.js"><link rel="prefetch" href="/assets/js/22.29c65cca.js"><link rel="prefetch" href="/assets/js/23.ec86c63d.js"><link rel="prefetch" href="/assets/js/24.dbb1eecd.js"><link rel="prefetch" href="/assets/js/25.d3e8daed.js"><link rel="prefetch" href="/assets/js/26.014744a4.js"><link rel="prefetch" href="/assets/js/27.1e80ba53.js"><link rel="prefetch" href="/assets/js/28.c3e0bbed.js"><link rel="prefetch" href="/assets/js/29.86e585e7.js"><link rel="prefetch" href="/assets/js/3.32cef0f5.js"><link rel="prefetch" href="/assets/js/30.aa7c2b1f.js"><link rel="prefetch" href="/assets/js/31.2f67a3a1.js"><link rel="prefetch" href="/assets/js/32.2e9e2792.js"><link rel="prefetch" href="/assets/js/33.def615c5.js"><link rel="prefetch" href="/assets/js/34.679eb3d6.js"><link rel="prefetch" href="/assets/js/35.71ab202d.js"><link rel="prefetch" href="/assets/js/36.3bd463a6.js"><link rel="prefetch" href="/assets/js/37.20adbb48.js"><link rel="prefetch" href="/assets/js/38.d30d6490.js"><link rel="prefetch" href="/assets/js/39.3d9d6900.js"><link rel="prefetch" href="/assets/js/4.387ddfbb.js"><link rel="prefetch" href="/assets/js/40.26909d29.js"><link rel="prefetch" href="/assets/js/41.e7c8cbdc.js"><link rel="prefetch" href="/assets/js/42.65f58a8c.js"><link rel="prefetch" href="/assets/js/43.fa756ed7.js"><link rel="prefetch" href="/assets/js/44.b6cb98bb.js"><link rel="prefetch" href="/assets/js/45.bd36cc2b.js"><link rel="prefetch" href="/assets/js/46.0ce1f073.js"><link rel="prefetch" href="/assets/js/47.6ae92fe1.js"><link rel="prefetch" href="/assets/js/48.2a8a65b2.js"><link rel="prefetch" href="/assets/js/49.e21dd090.js"><link rel="prefetch" href="/assets/js/5.3f829f1e.js"><link rel="prefetch" href="/assets/js/50.1bc2fe65.js"><link rel="prefetch" href="/assets/js/51.45d387ea.js"><link rel="prefetch" href="/assets/js/52.dfc97c80.js"><link rel="prefetch" href="/assets/js/53.78bc6c15.js"><link rel="prefetch" href="/assets/js/54.7a8903fc.js"><link rel="prefetch" href="/assets/js/55.5a7824c0.js"><link rel="prefetch" href="/assets/js/56.3b4c1fef.js"><link rel="prefetch" href="/assets/js/57.13b941c0.js"><link rel="prefetch" href="/assets/js/58.79bdc24a.js"><link rel="prefetch" href="/assets/js/59.143846c4.js"><link rel="prefetch" href="/assets/js/6.82ad2f9f.js"><link rel="prefetch" href="/assets/js/7.ed96426d.js"><link rel="prefetch" href="/assets/js/9.1573c46a.js">
     <link rel="stylesheet" href="/assets/css/0.styles.438844f4.css">
   </head>
@@ -32,11 +32,11 @@
 The system components include: venus, venus-auth, venus-miner, venus-wallet, venus-messager and venus-sealer.
 Conceptually, venus, venus-auth, venus-miner, venus-wallet and venus-messager can be shared (that is, the program can be used by multiple miners to make full use of hardware and software resources while ensuring efficiency), while venus-sealer, venus-worker and venus-wallet are mainly used to accumulate power.</p> <p><img src="/assets/img/venus-cluster.2e72d412.png" alt="venus-cluster"></p> <h1 id="deploying-venus-cluster-based-on-nerpa"><a href="#deploying-venus-cluster-based-on-nerpa" class="header-anchor">#</a> Deploying Venus cluster (based on Nerpa)</h1> <table><thead><tr><th>program</th> <th>server</th> <th>type</th> <th>purpose</th></tr></thead> <tbody><tr><td>Venus-auth</td> <td>&lt;IP1&gt;</td> <td>Shared</td> <td>Venus auth is used for unified authorization. When a miner's own running component accesses a shared component, it needs to use this service to register the generated token.</td></tr> <tr><td>Venus-wallet</td> <td>&lt;IP2&gt;</td> <td>Shared</td> <td>Manage your wallet, Message signature</td></tr> <tr><td>Venus</td> <td>&lt;IP3&gt;</td> <td>Shared</td> <td>chain Sync</td></tr> <tr><td>Venus-messager</td> <td>&lt;IP4&gt;</td> <td>Shared</td> <td>Manage the message in the cluster, ensure the message on the chain, control the message flow, and try again. It can dock multiple wallets and manage messages for these wallets.</td></tr> <tr><td>Venus-miner</td> <td>&lt;IP5&gt;</td> <td>Shared</td> <td>Package the block message; Multiple miners can be configured; It can calculate the miner's minning situation by itself, and obtain data proof through remote access to venus-sealer.</td></tr> <tr><td>Venus-sealer</td> <td>&lt;IP6&gt;</td> <td>Unshared</td> <td>Sealing data</td></tr></tbody></table> <p>Tips:</p> <ul><li>All the following <code>&lt;&gt;</code> are parameters that need to be replaced, according to their own actual situation</li> <li>Please use ‘git checkout’ to select the specific version</li> <li>Environmental dependence:
 <ul><li>golang ^1.15
-<ul><li>go env -w GOPROXY=https://goproxy.cn,direct</li> <li>go env -w GO111MODULE=on</li></ul></li> <li>git</li></ul></li></ul> <h2 id="_1-venus-auth-install"><a href="#_1-venus-auth-install" class="header-anchor">#</a> 1. Venus-auth Install</h2> <h3 id="compile-and-start"><a href="#compile-and-start" class="header-anchor">#</a> Compile and start</h3> <div class="language-shell script extra-class"><pre class="language-shell"><code>$ <span class="token function">git</span> clone https://github.com/ipfs-force-community/venus-auth.git
+<ul><li>go env -w GOPROXY=https://goproxy.cn,direct</li> <li>go env -w GO111MODULE=on</li></ul></li> <li>git</li></ul></li></ul> <h2 id="_1-venus-auth-install"><a href="#_1-venus-auth-install" class="header-anchor">#</a> 1. Venus-auth Install</h2> <h3 id="compile-and-start"><a href="#compile-and-start" class="header-anchor">#</a> Compile and start</h3> <div class="language-shell script extra-class"><pre class="language-shell"><code>$ <span class="token function">git</span> clone https://github.com/filecoin-project/venus-auth.git
 
 $ <span class="token builtin class-name">cd</span> venus-auth
 
-$ <span class="token function">make</span> 
+$ <span class="token function">make</span>
 
 $ <span class="token function">nohup</span> ./venus-auth <span class="token operator">&gt;</span> auth.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
 
@@ -60,7 +60,7 @@ CREATE TABLE `token` (
 <span class="token punctuation">[</span>db<span class="token punctuation">]</span>
 <span class="token comment"># support: badger (default), mysql </span>
 <span class="token comment"># the mysql DDL is in the script package </span>
-<span class="token builtin class-name">type</span> <span class="token operator">=</span> <span class="token string">&quot;mysql&quot;</span> 
+<span class="token builtin class-name">type</span> <span class="token operator">=</span> <span class="token string">&quot;mysql&quot;</span>
 <span class="token comment"># The following parameters apply to MySQL</span>
 DSN <span class="token operator">=</span> <span class="token string">&quot;root:111111@(127.0.0.1:3306)/venus_auth?parseTime=true&amp;loc=Local&amp;charset=utf8mb4&amp;collation=utf8mb4_unicode_ci&amp;readTimeout=10s&amp;writeTimeout=10s&quot;</span>
 <span class="token comment"># conns 1500 concurrent</span>
@@ -92,7 +92,7 @@ $ <span class="token function">make</span>
 <span class="token comment"># It's going to take a while here</span>
 $ <span class="token function">nohup</span> ./venus daemon --network nerpa <span class="token punctuation">\</span>
 --authURL http://<span class="token operator">&lt;</span>IP<span class="token operator"><span class="token file-descriptor important">1</span>&gt;</span>:8989 <span class="token punctuation">\</span>
-<span class="token operator">&gt;</span> venus.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span> 
+<span class="token operator">&gt;</span> venus.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
 
 </code></pre></div><ul><li><code>--authURL</code> is set to listen to the HTTP address of venus-auth</li></ul> <h3 id="modify-ipv4-listening-address"><a href="#modify-ipv4-listening-address" class="header-anchor">#</a> Modify IPv4 listening address</h3> <p>At present, after the program starts, the default listening address is <code>127.0.0.1:3453</code>. For cross server clusters, you need to modify the listening policy. You can query the process through <code>lsof -i:3453</code> , kill the process, modify the IPv4 policy, and then restart.</p> <div class="language-shell script extra-class"><pre class="language-shell"><code><span class="token function">vim</span> ~/.venus/config.json
 
@@ -105,9 +105,9 @@ $ <span class="token function">nohup</span> ./venus daemon --network nerpa <span
 --authURL http://<span class="token operator">&lt;</span>IP<span class="token operator"><span class="token file-descriptor important">1</span>&gt;</span>:8989 <span class="token punctuation">\</span>
 <span class="token operator">&gt;</span> venus.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span> <span class="token operator">&lt;</span>absolute path<span class="token operator">&gt;</span>
 
-</code></pre></div><h2 id="_3-venus-wallet-install"><a href="#_3-venus-wallet-install" class="header-anchor">#</a> 3. Venus-wallet install</h2> <h3 id="compile-and-start-3"><a href="#compile-and-start-3" class="header-anchor">#</a> Compile and start</h3> <div class="language-shell script extra-class"><pre class="language-shell"><code>$ <span class="token function">git</span> clone https://github.com/ipfs-force-community/venus-wallet.git
+</code></pre></div><h2 id="_3-venus-wallet-install"><a href="#_3-venus-wallet-install" class="header-anchor">#</a> 3. Venus-wallet install</h2> <h3 id="compile-and-start-3"><a href="#compile-and-start-3" class="header-anchor">#</a> Compile and start</h3> <div class="language-shell script extra-class"><pre class="language-shell"><code>$ <span class="token function">git</span> clone https://github.com/filecoin-project/venus-wallet.git
 
-$ <span class="token builtin class-name">cd</span> venus-wallet 
+$ <span class="token builtin class-name">cd</span> venus-wallet
 
 <span class="token comment"># Compile</span>
 $ <span class="token function">make</span>
@@ -126,13 +126,13 @@ $ ./venus-wallet new bls
 <span class="token operator">&lt;</span>bls address <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>
 </code></pre></div><ul><li><code>&lt;bls address 1&gt;</code> is an 86 bit address</li></ul> <h4 id="attention"><a href="#attention" class="header-anchor">#</a> Attention</h4> <p>The newly generated <code>&lt;bls address 1&gt;</code> <code>&lt;bls address 2&gt;</code> needs to be pre charged with balance in https://faucet.nerpa.interplanetary.dev/funds.html before actor can be generated on the chain.</p> <div class="language-shell script extra-class"><pre class="language-shell"><code>$ ./venus-wallet auth api-info --perm admin
 <span class="token operator">&lt;</span>wallet jwt token<span class="token operator">&gt;</span>
-</code></pre></div><h2 id="_4-venus-messager-install"><a href="#_4-venus-messager-install" class="header-anchor">#</a> 4. Venus-messager install</h2> <h3 id="compile-and-start-4"><a href="#compile-and-start-4" class="header-anchor">#</a> Compile and start</h3> <div class="language-shell script extra-class"><pre class="language-shell"><code>$ <span class="token function">git</span> clone https://github.com/ipfs-force-community/venus-messager.git
+</code></pre></div><h2 id="_4-venus-messager-install"><a href="#_4-venus-messager-install" class="header-anchor">#</a> 4. Venus-messager install</h2> <h3 id="compile-and-start-4"><a href="#compile-and-start-4" class="header-anchor">#</a> Compile and start</h3> <div class="language-shell script extra-class"><pre class="language-shell"><code>$ <span class="token function">git</span> clone https://github.com/filecoin-project/venus-messager.git
 
 $ <span class="token builtin class-name">cd</span> venus-messager
 
 $ <span class="token function">make</span> deps
 
-$ <span class="token function">make</span> 
+$ <span class="token function">make</span>
 
 <span class="token comment"># Start the venus-messager process</span>
 $ <span class="token function">nohup</span> ./venus-messager run <span class="token punctuation">\</span>
@@ -145,7 +145,7 @@ $ <span class="token function">nohup</span> ./venus-messager run <span class="to
 </code></pre></div><ul><li><code>--auth-url</code> is to set venus-auth listening address</li> <li><code>--node-url</code> is to set venus listening address</li> <li><code>--node-token</code> JWT token registered in venus-auth represents its own node and is used for authentication when communicating with venus</li></ul> <h3 id="add-wallet-link-multiple-wallet-links-can-be-added"><a href="#add-wallet-link-multiple-wallet-links-can-be-added" class="header-anchor">#</a> Add wallet link (multiple wallet links can be added)</h3> <blockquote><p>This side will periodically monitor the change of the accessible address of the venus-wallet <br>
 Delay dynamic tracking depends on the <code>list</code> interface at <code>venus-wallet</code></p></blockquote> <div class="language-shell script extra-class"><pre class="language-shell"><code>$ ./venus-messager wallet <span class="token function">add</span> <span class="token punctuation">\</span>
 --name testminer --url /ip4/<span class="token operator">&lt;</span>IP<span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/tcp/5678/http <span class="token punctuation">\</span>
---token <span class="token operator">&lt;</span>wallet jwt token<span class="token operator">&gt;</span> 
+--token <span class="token operator">&lt;</span>wallet jwt token<span class="token operator">&gt;</span>
 
 <span class="token comment"># Query wallet list</span>
 $ ./venus-messager wallet list
@@ -196,7 +196,7 @@ $ ./venus-sealer storage attach --init --store --seal <span class="token operato
 
 <span class="token comment"># Sector encapsulation command</span>
 <span class="token comment"># You can do timing tasks through crontab, or you can write your own policy scripts</span>
-$ ./venus-sealer sectors pledge 
+$ ./venus-sealer sectors pledge
 
 <span class="token comment"># Query section list</span>
 $ ./venus-sealer sectors list
@@ -240,14 +240,14 @@ $ ./venus-miner address <span class="token function">add</span> <span class="tok
 --sealer-listen-api /ip4/<span class="token operator">&lt;</span>IP<span class="token operator"><span class="token file-descriptor important">6</span>&gt;</span>/tcp/2345/http <span class="token punctuation">\</span>
 --sealer-token <span class="token operator">&lt;</span>sealer jwt token<span class="token operator">&gt;</span> <span class="token punctuation">\</span>
 --wallet-listen-api /ip4/<span class="token operator">&lt;</span>IP<span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/tcp/5678/http <span class="token punctuation">\</span>
---wallet-token <span class="token operator">&lt;</span>wallet jwt token<span class="token operator">&gt;</span> 
+--wallet-token <span class="token operator">&lt;</span>wallet jwt token<span class="token operator">&gt;</span>
 
 <span class="token comment"># print</span>
 <span class="token function">add</span> miner:  <span class="token punctuation">{</span><span class="token operator">&lt;</span>t0 addr<span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">..</span>.<span class="token punctuation">}</span><span class="token punctuation">}</span>
 
 
 <span class="token comment"># Query miner status</span>
-$ ./venus-miner address state 
+$ ./venus-miner address state
 <span class="token comment"># print</span>
 <span class="token punctuation">[</span>
 	<span class="token punctuation">{</span>
