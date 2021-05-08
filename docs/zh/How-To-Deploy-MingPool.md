@@ -28,7 +28,7 @@ Tips:
 ### 编译并启动
 
 ```shell script
-$ git clone https://github.com/ipfs-force-community/venus-auth.git
+$ git clone https://github.com/filecoin-project/venus-auth.git
 
 $ cd venus-auth
 
@@ -149,7 +149,7 @@ $ nohup ./venus daemon --network nerpa \
 ## 3. Venus-wallet install
 ### 编译并启动
 ```shell script
-$ git clone https://github.com/ipfs-force-community/venus-wallet.git
+$ git clone https://github.com/filecoin-project/venus-wallet.git
 
 $ cd venus-wallet 
 
@@ -185,7 +185,7 @@ $ ./venus-wallet auth api-info --perm admin
 ## 4. Venus-messager install
 ### 编译并启动
 ```shell script
-$ git clone https://github.com/ipfs-force-community/venus-messager.git
+$ git clone https://github.com/filecoin-project/venus-messager.git
 
 $ cd venus-messager
 

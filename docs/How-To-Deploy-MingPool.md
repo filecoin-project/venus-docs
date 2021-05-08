@@ -21,7 +21,7 @@ Tips:
  - Please use ‘git checkout’ to select the specific version
  - Environmental dependence:
      - golang ^1.15
-        - go env -w GOPROXY=https://goproxy.cn,direct
+        - go env -w GOPROXY=https://goproxy.io,direct
         - go env -w GO111MODULE=on
      - git
 
@@ -29,7 +29,7 @@ Tips:
 ### Compile and start
 
 ```shell script
-$ git clone https://github.com/ipfs-force-community/venus-auth.git
+$ git clone https://github.com/filecoin-project/venus-auth.git
 
 $ cd venus-auth
 
@@ -152,7 +152,7 @@ $ nohup ./venus daemon --network nerpa \
 ## 3. Venus-wallet install
 ### Compile and start
 ```shell script
-$ git clone https://github.com/ipfs-force-community/venus-wallet.git
+$ git clone https://github.com/filecoin-project/venus-wallet.git
 
 $ cd venus-wallet 
 
@@ -188,7 +188,7 @@ $ ./venus-wallet auth api-info --perm admin
 ## 4. Venus-messager install
 ### Compile and start
 ```shell script
-$ git clone https://github.com/ipfs-force-community/venus-messager.git
+$ git clone https://github.com/filecoin-project/venus-messager.git
 
 $ cd venus-messager
 
