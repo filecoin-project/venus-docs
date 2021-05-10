@@ -272,13 +272,6 @@ $ nohup ./venus-sealer init \
 > sealer.log 2>&1 &
 
 ```
-#### 指定存储目录
-
-```shell script
-# 因为指定了--no-local-storage
-# 所以需要指定sealer存储目录
-$ ./venus-sealer storage attach --init --store --seal <absolute path>
-```
 
 - `--wallet-name testminer` 为Venus-messager中add 的wallet 连接，所以在wallet中，这边指定的worker和owner必须在Venus-wallet中存在
 - `<bls address 1>`  `<bls address 2>` 为Venus-wallet中创建的BLS钱包地址，注意这2个钱包地址都需要有balance
@@ -304,6 +297,11 @@ $ tail -f sealer.log
 
 ```shell script
 $ nohup ./venus-sealer run >> sealer.log 2>&1 &
+
+# 指定存储目录(可选)
+# 因为指定了--no-local-storage
+# 所以需要指定sealer存储目录
+$ ./venus-sealer storage attach --init --store --seal <absolute path>
 
 # 执行sector封装，这个命令只支持单次
 # 可以通过crontab 做定时任务，也可以自行编写策略脚本执行

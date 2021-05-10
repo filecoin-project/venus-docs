@@ -271,12 +271,6 @@ $ nohup ./venus-sealer init \
 --wallet-name testminer \
 > sealer.log 2>&1 &
 ```
-#### Specify storage directory
-```shell script
-# Because --no-local-storage is specified
-# So you need to specify the sealer storage directory
-$ ./venus-sealer storage attach --init --store --seal <absolute path>
-```
 
 - `--wallet-name testminer` is the wallet connection added in the venus-messager, so in the wallet, the worker and owner specified here must exist in the venus-wallet
 - `<bls address 1>`  `<bls address 2>` is the BLS wallet address created in venus-wallet. Note that balance is required for both wallet addresses
@@ -301,6 +295,12 @@ $ tail -f sealer.log
 #### Start sealer and perform sector encapsulation
 ```shell script
 $ nohup ./venus-sealer run >> sealer.log 2>&1 &
+
+
+# Specify storage directory（optional）
+# Because --no-local-storage is specified
+# So you need to specify the sealer storage directory
+$ ./venus-sealer storage attach --init --store --seal <absolute path>
 
 # Sector encapsulation command
 # You can do timing tasks through crontab, or you can write your own policy scripts
