@@ -260,7 +260,7 @@ $ nohup ./venus-sealer init \
 #### Initialize the existing miner (1 out of 2)
 > You do not need to specify `--sector-size`
 ```shell script
-$ nohup ./venus-sealer init \
+$ ./venus-sealer init \
 --actor <t0 addr>  \
 --network nerpa \
 --node-url /ip4/<IP3>/tcp/3453 \
@@ -268,19 +268,9 @@ $ nohup ./venus-sealer init \
 --messager-url http://<IP4>:39812/rpc/v0 \
 --no-local-storage \
 --messager-token <auth token sealer> \
---wallet-name testminer \
-> sealer.log 2>&1 &
-```
+--wallet-name testminer 
 
-- `--wallet-name testminer` is the wallet connection added in the venus-messager, so in the wallet, the worker and owner specified here must exist in the venus-wallet
-- `<bls address 1>`  `<bls address 2>` is the BLS wallet address created in venus-wallet. Note that balance is required for both wallet addresses
-- `<auth token sealer>`XXXX is the JWT token registered in venus-auth
-- `<absolute path>` is the absolute path
-
-#### Check the log, wait for the message to be chained, and register the actor address
-```shell script
-$ tail -f sealer.log
-
+# Check the log, wait for the message to be chained, and register the actor address
 2021-04-25T18:41:31.925+0800	INFO	main	venus-sealer/init.go:182	Checking if repo exists
 2021-04-25T18:41:31.926+0800	INFO	main	venus-sealer/init.go:217	Checking full node version
 2021-04-25T18:41:31.927+0800	INFO	main	venus-sealer/init.go:233	Initializing repo
@@ -291,6 +281,11 @@ $ tail -f sealer.log
 2021-04-25T18:46:32.088+0800	INFO	main	venus-sealer/init.go:381	Created new miner: t01640
 2021-04-25T18:46:32.089+0800	INFO	main	venus-sealer/init.go:302	Sealer successfully created, you can now start it with 'venus-sealer run'
 ```
+
+- `--wallet-name testminer` is the wallet connection added in the venus-messager, so in the wallet, the worker and owner specified here must exist in the venus-wallet
+- `<bls address 1>`  `<bls address 2>` is the BLS wallet address created in venus-wallet. Note that balance is required for both wallet addresses
+- `<auth token sealer>`XXXX is the JWT token registered in venus-auth
+- `<absolute path>` is the absolute path
 
 #### Start sealer and perform sector encapsulation
 ```shell script

@@ -260,7 +260,7 @@ $ nohup ./venus-sealer init \
 #### 初始化已存在矿工（2选1）
 > 不需要指定`--sector-size`
 ```shell script
-$ nohup ./venus-sealer init \
+$ ./venus-sealer init \
 --actor <t0 addr>  \
 --network nerpa \
 --node-url /ip4/<IP3>/tcp/3453 \
@@ -268,20 +268,9 @@ $ nohup ./venus-sealer init \
 --messager-url http://<IP4>:39812/rpc/v0 \
 --no-local-storage \
 --messager-token <auth token sealer> \
---wallet-name testminer \
-> sealer.log 2>&1 &
+--wallet-name testminer 
 
-```
-
-- `--wallet-name testminer` 为Venus-messager中add 的wallet 连接，所以在wallet中，这边指定的worker和owner必须在Venus-wallet中存在
-- `<bls address 1>`  `<bls address 2>` 为Venus-wallet中创建的BLS钱包地址，注意这2个钱包地址都需要有balance
-- `<auth token sealer>`为Venus-auth中注册的JWT token
-- `<absolute path>`为绝对路径
-
-#### 查看日志等待消息上链注册actor地址
-```shell script
-$ tail -f sealer.log
-
+# 查看日志等待消息上链注册actor地址
 2021-04-25T18:41:31.925+0800	INFO	main	venus-sealer/init.go:182	Checking if repo exists
 2021-04-25T18:41:31.926+0800	INFO	main	venus-sealer/init.go:217	Checking full node version
 2021-04-25T18:41:31.927+0800	INFO	main	venus-sealer/init.go:233	Initializing repo
@@ -291,7 +280,13 @@ $ tail -f sealer.log
 2021-04-25T18:46:32.088+0800	INFO	main	venus-sealer/init.go:502	New miners address is: t01640 (t2cxzf7xvrqo3froqn2xgdqjdbydhkcrgakj7j3ma)
 2021-04-25T18:46:32.088+0800	INFO	main	venus-sealer/init.go:381	Created new miner: t01640
 2021-04-25T18:46:32.089+0800	INFO	main	venus-sealer/init.go:302	Sealer successfully created, you can now start it with 'venus-sealer run'
+
 ```
+
+- `--wallet-name testminer` 为Venus-messager中add 的wallet 连接，所以在wallet中，这边指定的worker和owner必须在Venus-wallet中存在
+- `<bls address 1>`  `<bls address 2>` 为Venus-wallet中创建的BLS钱包地址，注意这2个钱包地址都需要有balance
+- `<auth token sealer>`为Venus-auth中注册的JWT token
+- `<absolute path>`为绝对路径
 
 #### 启动sealer并执行sector封装
 
