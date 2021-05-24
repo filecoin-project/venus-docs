@@ -3,17 +3,17 @@
 2. The project is decoupled from Lotus and Venus independently, and can be called by different implementations of Filecoin.
 
 ## Catalog
-- [Quick start](#quick start)
-    - [1. Download code](#1-Download code)
+- [Quick start](#quickstart)
+    - [1. Download code](#1-Downloadcode)
     - [2. Compile](#2-Compile)
-    - [3. Start service process](#3-Start service process)
-    - [4. Configuration introduction](#4-Configuration introduction)
-- [CLI operation guide](#CLI operation guide)
-    - [View Help](#View Help)
-    - [Basic operation of venus-wallet](#Basic operation of Venus Wallet)
-        - [The state of the wallet](#The state of the wallet)
-        - [Private key management](#Private key management)
-        - [JWT authority management](#JWT authority management)
+    - [3. Start service process](#3-Startserviceprocess)
+    - [4. Configurationintroduction](#4-Configurationintroduction)
+- [CLI operation guide](#CLIoperationguide)
+    - [View Help](#ViewHelp)
+    - [Basic operation of venus-wallet](#BasicoperationofVenusWallet)
+        - [The state of the wallet](#Thestateofthewallet)
+        - [Private key management](#Privatekeymanagement)
+        - [JWT authority management](#JWTauthoritymanagement)
         - [strategy](#strategy)
 ## Quick start
 ### 1. Download code
