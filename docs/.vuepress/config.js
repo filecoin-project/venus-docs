@@ -75,8 +75,8 @@ module.exports = {
                         children: [
                             ['Home.md', 'Home'],
                             ['Overview.md', 'Overview'],
-                            ['Chain.md', 'Chain'],
                             ['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
+                            ['Venus-replace-lotus.md', 'Venus replace Lotus'],
                             ['Tips-Running-In-China.md', 'Tips running in China'],
                             ['venus_load_balancing.md', 'Venus load balancing'],
                             ['How-To-Use-Messager.md', 'How to use messager'],
@@ -84,6 +84,7 @@ module.exports = {
                             ['How-To-Use-Wallet-In-Venus.md', 'How to use wallet in venus'],
                             ['Multisig-wallet.md', 'Multisig wallet'],
                             ['Venus wallet.md', 'Venus wallet'],
+                            ['Chain.md', 'Chain'],
                             ['Commands.md', 'CLI commands'],
                             ['Getting-Started.md', 'Getting started'],
                             ['How-To-Connect-Network.md', 'How to start network'],
