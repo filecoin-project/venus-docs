@@ -8,18 +8,21 @@ Venus是Filecoin分布式矿池的实现方案之一，系统集群组件包括�
 
 程序 | 服务器 | 类型 | 作用
 --- | --- | --- | ---
-Venus-auth     |   \<IP1\> | 共享|Venus-auth 用于统一授权，当矿工组件访问共享组件的时候需要使用此服务注册生成的token
-Venus-wallet   |   \<IP2\> | 共享| 钱包管理，数据签名
+Venus-auth     |   \<IP1\> | 共享| 统一授权,当矿工组件访问共享组件的时候需要使用此服务注册生成的token
+Venus-wallet   |   \<IP2\> | 共享| 钱包管理,数据签名
 Venus          |   \<IP3\> | 共享| Filecoin节点数据同步
-Venus-messager |   \<IP4\> | 共享| 管理集群中的消息，保证消息上链，控制消息流量，重试等。可对接多个钱包，针对这些钱包做消息管理
-Venus-miner    |   \<IP5\> | 共享| 打包出块消息，可配置多个矿工，会自行计算矿工出块情况，并通过远程访问Venus-sealer获取数据证明
-Venus-sealer   |   \<IP6\> | 非共享| 数据封装
+Venus-messager |   \<IP4\> | 共享| 管理集群中的消息,保证消息上链,控制消息流量,重试等;可对接多个钱包,针对这些钱包做消息管理
+Venus-miner    |   \<IP5\> | 共享| 负责多矿工的出块逻辑,调用venus-gateway进行数据签名或ComputeProof
+Venus-gateway  |   \<IP6\> | 共享| 服务组件与venus-sealer间数据交互的桥梁
+Venus-sealer   |   \<IP7\> | 非共享| 数据封装
+
+共享组件启动顺序: venus-auth --> venus --> venus-gateway --> venus-wallet --> venus-messager --> venus-miner
 
 Tips:
  - 以下所有`<>`都是需替换参数，根据自己的实际情况替换
  - 具体版本请自行使用git checkout选择 
  - 环境依赖：
-     - golang ^1.15
+     - golang ^1.16
         - go env -w GOPROXY=https://goproxy.io,direct
         - go env -w GO111MODULE=on
      - git
@@ -103,7 +106,6 @@ $ make
 
 # 启动venus daemon 设置网络与Venus-auth的地址
 # 启动成功后tail -f venus.log 可以看到数据同步的log
-# 这里需要等待一段时间
 $ nohup ./venus daemon --network nerpa \
 --authURL http://<IP1>:8989 \
 > venus.log 2>&1 & 
@@ -137,9 +139,27 @@ $ cd venus-wallet
 # 编译
 $ make
 
-# 启动
-$ nohup ./venus-wallet run > wallet.log 2>&1 &
+# 执行run,生成配置文件
+./venus-wallet run
 ```
+
+### 修改配置文件,配置venus-gateway连接信息
+```toml
+[APIRegisterHub]
+  RegisterAPI = ["/<IP6>/tcp/45132"]   //gateway 对外的端口地址
+  Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibGlfd2FsbGV0IiwicGVybSI6InJlYWQiLCJleHQiOiIifQ.gGKBm1VUM_juT9FIuxeW2tlLs5KZeLmf7Cl-kTo9-hU"   //钱包的单独token,venus-auth生成
+  SupportAccounts = ["li_sealer"] // 矿工别名,在venus-gateway中验证
+```
+
+### 重启
+```bash
+$ nohup ./venus-wallet run  --network=test > wallet.log 2>&1 &
+```
+
+### venus-wallet增加签名的矿工别名
+```bash
+./venus-wallet support <sealer name> 
+``` 
 
 ### 设置密码并创建钱包
 > 此处创建了2个BLS钱包，用于之后的Venus-sealer初始化
@@ -163,6 +183,8 @@ $ ./venus-wallet new bls
 $ ./venus-wallet auth api-info --perm admin
 <wallet jwt token>
 ```
+
+
 ## 4. Venus-messager install
 ### 编译并启动
 ```shell script
@@ -206,10 +228,6 @@ $ ./venus-messager wallet list
 
 ## 5. Venus-sealer install
 
-### sealer 存在2类JWT token的概念 
-1. 本地JWT token `<sealer jwt token>` 用于其他服务访问sealer
-2. Venus-auth 注册的JWT token `<auth token sealer>`，用于sealer访问messager
- 
 ### 编译并启动（sealer单程序只能绑定一个矿工）
 ```shell script
 $ git clone https://github.com/filecoin-project/venus-sealer.git
@@ -221,6 +239,20 @@ $ make deps
 $ make
 
 ```
+
+### 生成token,用于与共享组件数据交互时验证
+```bash
+./venus-auth addUser --miner <t0 addr> --srouceType 1  --name <miner name>
+./venus-auth genToken --perm write sealer
+```
+
+### 配置文件变化,增加venus-gateway的连接配置
+```toml
+  [RegisterProof]
+    Urls = ["/ip4/<IP6>/tcp/45132"]
+    Token="<venus-auth token"
+```
+
 #### 初始化新矿工（2选1）
 ```shell script
 $ nohup ./venus-sealer init \
@@ -228,12 +260,11 @@ $ nohup ./venus-sealer init \
 --owner <bls address 2>  \
 --sector-size 512M \
 --network nerpa \
---node-url /ip4/<IP3>/tcp/3453 \
---node-token <auth token sealer> \
---messager-url http://<IP4>:39812/rpc/v0 \
+--auth-token <venus-auth token> \
+--messager-url /ip4/<IP4>/tcp/39812/http \
+--node-url /ip4/<IP3>/tcp/34530/http \
+--gateway-url /ip4/<IP6>/tcp/45132/http \
 --no-local-storage \
---messager-token <auth token sealer> \
---wallet-name testminer \
 > sealer.log 2>&1 &
 
 ```
@@ -244,11 +275,11 @@ $ nohup ./venus-sealer init \
 $ ./venus-sealer init \
 --actor <t0 addr>  \
 --network nerpa \
+--auth-token <venus-auth token> \
 --node-url /ip4/<IP3>/tcp/3453 \
---node-token <auth token sealer> \
 --messager-url http://<IP4>:39812/rpc/v0 \
+--gateway-url /ip4/<IP6>/tcp/45132/http \
 --no-local-storage \
---messager-token <auth token sealer> \
 --wallet-name testminer 
 
 # 查看日志等待消息上链注册actor地址
@@ -264,7 +295,6 @@ $ ./venus-sealer init \
 
 ```
 
-- `--wallet-name testminer` 为Venus-messager中add 的wallet 连接，所以在wallet中，这边指定的worker和owner必须在Venus-wallet中存在
 - `<bls address 1>`  `<bls address 2>` 为Venus-wallet中创建的BLS钱包地址，注意这2个钱包地址都需要有balance
 - `<auth token sealer>`为Venus-auth中注册的JWT token
 - `<absolute path>`为绝对路径
@@ -318,24 +348,21 @@ $ git clone https://github.com/filecoin-project/venus-miner.git
 
 $ cd venus-miner
 
-$ make nerpanet
+$ make
 
 # 初始化环境配置
-$ ./venus-miner init --api /ip4/<IP3>/tcp/3453 --token <auth token miner>
+$ ./venus-miner init  --nettype=nerpanet \
+--api=<venus/lotus api> --token=<auth token miner> \
+--auth-api=http://[auth_ip]:[auth_port] \
+--gateway-api=<venus-gateway api>
 
 # 启动miner
-$ nohup ./venus-miner run >>miner.log 2>& 1 &
+$ nohup ./venus-miner run --nettype=nerpanet > miner.log 2>&1 &
 
 
-$ ./venus-miner address add \
---addr <t0 addr> \
---sealer-listen-api /ip4/<IP6>/tcp/2345/http \
---sealer-token <sealer jwt token> \
---wallet-listen-api /ip4/<IP2>/tcp/5678/http \
---wallet-token <wallet jwt token> 
-
-# print
-add miner:  {<t0 addr> {...}}
+# 更新miners,从venus-auth获取联合挖矿的矿工列表
+$ ./venus-miner address update
+- skip,limit为分页参数,标识从skip索引开始往后查询limit个miner
 
 
 # 查询miner状态
@@ -358,9 +385,6 @@ $ ./venus-miner address start <t0 addr>
 # 对于矿工的启停可以自行安排
 $ ./venus-miner address list
 ```
-- `<t0 addr>`在Venus-sealer install部分查看
-- `<sealer jwt token>`为Venus-sealer节点JWT token，切换到对应服务器后`cat ~/.venussealer/token`可获得
-- `<wallet jwt token>` 为设置Venus-wallet中获得的接口授权JWT token,查看Venus-wallet install中`<wallet jwt token>`处可查看token如何获得
 
 ### 将miner的地址添加到Venus-auth中
 ```
