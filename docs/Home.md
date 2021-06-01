@@ -11,7 +11,7 @@ Venus is a GoLang implementation of the Filecoin Distributed Storage Network. It
 Filecoin mainnet is currently live. Visit [network.filecoin.io](https://network.filecoin.io) for all available networks. The tutorials below explore the network using the `Venus` implementation.
 
 * 🍄 First time using `Venus`? Start with the install and setup steps in [Getting Started](Getting-Started).
-* 🤖 Ready to mine? Head over to [Mining Filecoin](Mining-Filecoin).
+* 🤖 Ready to mine? Head over to [Mining Filecoin](How-To-Deploy-MingPool).
 * 🌸 PRs, bug reports, and issue suggestions are welcome [Welcome to Contributing](How-To-Contribute-Docs)
 * 💔 Need help? Start with [Troubleshooting & FAQ](Troubleshooting-&-FAQ)
  
