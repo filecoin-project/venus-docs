@@ -81,7 +81,6 @@ module.exports = {
                             ['venus_load_balancing.md', 'Venus load balancing'],
                             ['How-To-Use-Messager.md', 'How to use messager'],
                             ['Venus-Worker.md', 'How to use Venus Worker'],
-                            ['How-To-Use-Messager.md', 'How to use messager'],
                             ['How-To-Use-Wallet-In-Venus.md', 'How to use wallet in venus'],
                             ['Multisig-wallet.md', 'Multisig wallet'],
                             ['Venus wallet.md', 'Venus wallet'],
@@ -145,19 +144,17 @@ module.exports = {
                         },
                         {
                             title: 'Resources',
-                            collapsable
-:
-true,
-    children
-:
-[
-    ['https://docs.filecoin.io', 'Filecoin docs'],
-    ['questions.md', 'Have a question?'],
-]
-}
-]
-}
-}
-}
-}
+                            collapsable: true,
+                            children:
+                                [
+                                    ['https://docs.filecoin.io', 'Filecoin docs'],
+                                    ['questions.md', 'Have a question?'],
+                                ]
+
+                        }
+                    ]
+                }
+            }
+        }
+    }
 }
