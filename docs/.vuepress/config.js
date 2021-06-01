@@ -76,16 +76,19 @@ module.exports = {
                             ['Home.md', 'Home'],
                             ['Overview.md', 'Overview'],
                             ['Chain.md', 'Chain'],
-                            //['Venus-Worker.md', 'Venus Worker'],
+                            ['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
+                            ['Tips-Running-In-China.md', 'Tips running in China'],
+                            ['venus_load_balancing.md', 'Venus load balancing'],
+                            ['How-To-Use-Messager.md', 'How to use messager'],
+                            ['Venus-Worker.md', 'How to use Venus Worker'],
+                            ['How-To-Use-Messager.md', 'How to use messager'],
+                            ['How-To-Use-Wallet-In-Venus.md', 'How to use wallet in venus'],
+                            ['Multisig-wallet.md', 'Multisig wallet'],
+                            ['Venus wallet.md', 'Venus wallet'],
                             ['Commands.md', 'CLI commands'],
                             ['Getting-Started.md', 'Getting started'],
                             ['How-To-Connect-Network.md', 'How to start network'],
                             ['How-To-Setup_2knet.md', 'How to start a local network'],
-                            ['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
-                            ['How-To-Use-Messager.md', 'How to use messager'],
-                            ['How-To-Use-Wallet.md', 'How to use wallet'],
-                            ['Multisig-wallet.md', 'Multisig wallet'],
-                            ['Venus wallet.md', 'Venus wallet'],
                             ['Payment-Channel.md', 'Payment channel'],
                             ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
                             ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
@@ -116,37 +119,45 @@ module.exports = {
                 sidebar: {
                     '/zh/': [
                         {
-                            title: 'Venus Filecoin Tutorial',
+                            title: 'Filecoin Venus教程',
                             collapsable: false,
                             children: [
-                                ['Home.md', 'Home'],
-                                ['Overview.md', 'Overview'],
-                                ['chain.md', 'Chain'],
-                                ['Venus-Worker.md', 'Venus Worker'],
-                                ['Commands.md', 'CLI commands'],
-                                ['Getting-Started.md', 'Getting started'],
-                                ['How-To-Connect-Network.md', 'How to start network'],
-                                ['How-To-Setup_2knet.md', 'How to start a local network'],
-                                ['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
-                                ['How-To-Use-Wallet.md', 'How to use wallet'],
-                                ['Multisig-Wallet.md', 'Multisig wallet'],
-                                ['Venus wallet.md', 'Venus wallet'],
-                                ['Payment-Channel.md', 'Payment channel'],
-                                ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
-                                ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
+                                ['Home.md', '首页'],
+                                ['Overview.md', '概述'],
+                                ['How-To-Deploy-MingPool.md', '部署Venus组件集群'],
+                                ['Venus-replace-lotus.md', 'Venus替换Lotus'],
+                                ['venus_load_balancing.md', 'Venus负载均衡'],
+                                ['Tips-Running-In-China.md', '中国部署小贴士'],
+                                ['How to use venus messager.md', '如何使用Venus messager组件'],
+                                ['Venus-Worker.md', 'Venus Worker用法'],
+                                ['Venus wallet.md', 'Venus wallet使用'],
+                                ['chain.md', '链管理'],
+                                ['How-To-Use-Wallet-In-Venus.md', 'Venus程序中的钱包使用'],
+                                ['Multisig-Wallet.md', 'Venus内嵌的多签使用'],
+                                ['Payment-Channel.md', '付款通道（paych）使用'],
+                                ['Commands.md', 'CLI 命令'],
+                                ['Getting-Started.md', '快速启动'],
+                                ['How-To-Connect-Network.md', '连接节点网络'],
+                                ['How-To-Setup_2knet.md', '启动本地2K测试网'],
+                                ['Troubleshooting-&-FAQ.md', '故障排除和常见问题解答'],
+                                ['How-To-Contribute-Docs.md', '如何部署文档'],
                             ]
                         },
                         {
                             title: 'Resources',
-                            collapsable: true,
-                            children: [
-                                ['https://docs.filecoin.io', 'Filecoin docs'],
-                                ['questions.md', 'Have a question?'],
-                            ]
-                        }
-                    ]
-                }
-            }
-        }
-    }
+                            collapsable
+:
+true,
+    children
+:
+[
+    ['https://docs.filecoin.io', 'Filecoin docs'],
+    ['questions.md', 'Have a question?'],
+]
+}
+]
+}
+}
+}
+}
 }
