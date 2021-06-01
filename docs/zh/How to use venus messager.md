@@ -1,4 +1,4 @@
-# How to use venus messager
+# 如何使用 Venus Messager
 
 messager是用于管理本地消息的组件，目的是保存地址消息，管理消息状态以及控制推送消息的频率。
 

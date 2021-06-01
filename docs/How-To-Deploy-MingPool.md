@@ -384,7 +384,7 @@ $ ./venus-miner address list
 
 
 
-## Related issues
+## 7. Related issues
 
 1. The Go mod has the following problems
 ```shell script

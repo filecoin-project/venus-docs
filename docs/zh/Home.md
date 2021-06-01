@@ -11,7 +11,7 @@ Venus是Filecoin分布式存储网络的GoLang实现，它是最初由协议实�
 Filecoin主网目前正在运行. 了解所有可用网络请访问 [network.filecoin.io](https://network.filecoin.io) . 下面的教程将使用 `Venus` 实现探索这个网络。
 
 * 🍄 第一次使用 `Venus`? 从 [Getting Started](Getting-Started) 中的安装和设置步骤开始.
-* 🤖 准备好了吗? 前往 [Mining Filecoin](Mining-Filecoin).
+* 🤖 准备好了吗? 前往 [Mining Filecoin](How-To-Deploy-MingPool).
 * 💔 需要帮助吗? 从 [Troubleshooting & FAQ](Troubleshooting-&-FAQ) 开始
 
 ### 想了解Filecoin网络的介绍吗?
