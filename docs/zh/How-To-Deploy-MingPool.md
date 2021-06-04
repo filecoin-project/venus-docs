@@ -44,27 +44,7 @@ $ nohup ./venus-auth > auth.log 2>&1 &
 #### MYSQL存储启动（可选）
 Tips: MYSQL支持5.7以上官方版本（如云平台MYSQL默认设置各有不同，请自己结合云平台修改配置，否则可能会出现 “ Specified key was too long; max key length is 767 bytes ”）
 
-
-- 初始化数据库及表
-```mysql
-CREATE DATABASE `venus_auth` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `venus_auth`;
-
-CREATE TABLE `token` (
-     `name` varchar(50) NOT NULL,
-     `token` varchar(512) NOT NULL,
-     `createTime` datetime NOT NULL,
-     `perm` varchar(50) NOT NULL,
-     `extra` varchar(255) DEFAULT NULL,
-     UNIQUE KEY `token_token_IDX` (`token`) USING HASH
-) ENGINE=InnoDB
-  DEFAULT CHARSET = utf8
-  COLLATE = utf8_general_ci;
-
-```
-
-- 修改Venus-auth config中的db设置
-
+##### 修改Venus-auth config中的db设置
 ```shell script
 $ vim ~/.venus-auth/config.toml
 
@@ -98,6 +78,7 @@ $ ./venus-auth genToken --perm admin messager
 
 $ ./venus-auth genToken --perm admin sealer
 <auth token sealer>
+
 ```
 - `<auth token ?>` 格式统一为 JWT token
 - 这些token之后会被各个程序使用，用以对集群接入组件做验证
@@ -157,7 +138,7 @@ $ cd venus-wallet
 $ make
 
 # 启动
-$ nohup ./venus-wallet run  --network test> wallet.log 2>&1 &
+$ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
 
 ### 设置密码并创建钱包
@@ -381,7 +362,11 @@ $ ./venus-miner address list
 - `<sealer jwt token>`为Venus-sealer节点JWT token，切换到对应服务器后`cat ~/.venussealer/token`可获得
 - `<wallet jwt token>` 为设置Venus-wallet中获得的接口授权JWT token,查看Venus-wallet install中`<wallet jwt token>`处可查看token如何获得
 
-
+### 将miner的地址添加到Venus-auth中
+```
+$  ./venus-auth addUser --miner <t0 addr> --srouceType 1  --name <miner name>
+```
+- `miner name`自定义的miner名称，用于识别
 
 
 

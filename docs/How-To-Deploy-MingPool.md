@@ -45,26 +45,7 @@ $ nohup ./venus-auth > auth.log 2>&1 &
 #### MySQL storage startup (optional)
 Tips: MySQL supports official versions above 5.7（If the default settings of MySQL on the cloud platform are different, please modify the configuration in combination with the cloud platform, otherwise , may appear “ Specified key was too long; max key length is 767 bytes ” ）
 
-
-- Initialize database and table
-```mysql
-CREATE DATABASE `venus_auth` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `venus_auth`;
-
-CREATE TABLE `token` (
-     `name` varchar(50) NOT NULL,
-     `token` varchar(512) NOT NULL,
-     `createTime` datetime NOT NULL,
-     `perm` varchar(50) NOT NULL,
-     `extra` varchar(255) DEFAULT NULL,
-     UNIQUE KEY `token_token_IDX` (`token`) USING HASH
-) ENGINE=InnoDB
-  DEFAULT CHARSET = utf8
-  COLLATE = utf8_general_ci;
-
-```
-
-- Modifying DB settings in venus-auth config
+##### Modifying DB settings in venus-auth config
 
 ```shell script
 $ vim ~/.venus-auth/config.toml
@@ -380,6 +361,11 @@ $ ./venus-miner address list
 - `<sealer jwt token>` is the JWT token of the venus-sealer node. After switching to the corresponding server, Execute `cat ~/.venussealer/token` to get it
 - `<wallet jwt token>` is to set the JWT token of interface authorization obtained in venus-wallet. Check the `<wallet jwt token>` in venus-wallet install to find out how to obtain the token
 
+### Add miner address into Venus-auth
+```
+$  ./venus-auth addUser --miner <t0 addr> --srouceType 1  --name <miner name>
+```
+- `miner name` custom miner name
 
 
 
