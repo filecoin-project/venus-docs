@@ -48,14 +48,14 @@ Venus has more advantages in managing multiple clusters, and its shared moduler 
 
 #### 1）Replacing Lotus moduler with Venus shared moduler
 
-The shared moduler of the Venus service include: [venus](https://github.com/filecoin-project/venus)、[venus-messager](https://github.com/ipfs-force-community/venus-messager)、[venus-auth](https://github.com/ipfs-force-community/venus-auth)、[venus-wallet](https://github.com/ipfs-force-community/venus-wallet)、[venus-miner](https://github.com/filecoin-project/venus-miner)，Please refer to the deployment process: [How-To-Deploy-MingPool](How-To-Deploy-MingPool.md)。
+The shared moduler of the Venus service include: [venus](https://github.com/filecoin-project/venus)、[venus-messager](https://github.com/ipfs-force-community/venus-messager)、[venus-auth](https://github.com/ipfs-force-community/venus-auth)、[venus-wallet](https://github.com/ipfs-force-community/venus-wallet)、[venus-miner](https://github.com/filecoin-project/venus-miner)，Please refer to the deployment process: [How-To-Deploy-MingPool](How-To-Build-Venus-Shared-Service.md)。
 
 #### 2）Replacing Lotus moduler with Venus independent moduler
 
 ##### Scheme 1: customized lotus miner component replacement 1: Replace the public version of lotus-miner moduler
 
 * Stop generating new section seal tasks and wait for all in progress section tasks to complete;
-* Replace lotus-miner with venus-sealer and restart the service. For deployment of venus-sealer, please refer to [How-To-Deploy-MingPool](How-To-Deploy-MingPool.md)。
+* Replace lotus-miner with venus-sealer and restart the service. For deployment of venus-sealer, please refer to [How-To-Deploy-MingPool](How-To-Build-Venus-Shared-Service.md)。
 
 Lotus cluster process before replacement
 ![lotus-cluster-1](./zh/images/lotus-cluster-1.png)

@@ -75,7 +75,7 @@ module.exports = {
                         children: [
                             ['Home.md', 'Home'],
                             ['Overview.md', 'Overview'],
-                            ['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
+                            ['How-To-Build-Venus-Shared-Service.md', 'How to deploy mingPool'],
                             ['Venus-replace-lotus.md', 'Venus replace Lotus'],
                             ['Tips-Running-In-China.md', 'Tips running in China'],
                             ['venus_load_balancing.md', 'Venus load balancing'],
@@ -124,7 +124,7 @@ module.exports = {
                             children: [
                                 ['Home.md', '首页'],
                                 ['Overview.md', '概述'],
-                                ['How-To-Deploy-MingPool.md', '部署Venus组件集群'],
+                                ['How-To-Build-Venus-Shared-Service.md', '部署Venus组件集群'],
                                 ['Venus-replace-lotus.md', 'Venus替换Lotus'],
                                 ['venus_load_balancing.md', 'Venus负载均衡'],
                                 ['Tips-Running-In-China.md', '中国部署小贴士'],
