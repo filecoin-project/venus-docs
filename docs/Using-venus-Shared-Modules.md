@@ -1,4 +1,4 @@
-[toc]
+[[TOC]]
 
 # Preface
 
@@ -29,7 +29,9 @@ Depending on its role in a mining cluster, modules could be loosely broken down 
 
 # Mining architecture
 
+Diagram below illustrates how venus modules interacts with one and another.
 
+<img src="./zh/images/venus-arch.png" alt="./zh/images/venus-arch.png"  />
 
  # Hardware requirements
 
@@ -37,17 +39,212 @@ TBD
 
 # Pre-requisites
 
-Before diving into deployment of your mining operation, please make sure you check the following. 
+Before diving into deployment of your mining operation, please make sure you check the following. It is recommended that you test your setup in nerpa and calibration network before deploying on mainnet.
 
 ## Setup your permanent storage
 
+TBD
+
 ##  Get your account setup in shared modules
+
+There are two ways to have your account setup.
+
+### For miners connecting to shared modules
+
+If you are trying to connect to a hosted shared venus modules, like ones provided by venus incubation center, contact admin of the service and have them set it up for you.
+
+### For admins of shared modules
+
+If you are an admin hosting shared venus modules, use the following command to create an account for your miner.
+
+```bash
+# ?
+$ ./venus-auth addUser --name <ACCOUNT_NAME> --miner <MINER_ID>
+# The returned token is what miner have to add into their config file in order to gain access to your shared modules
+$ ./venus-auth genToken --perm write <ACCOUNT_NAME>
+<AUTH_TOKEN_FOR_ACCOUNT_NAME>
+```
 
 ## Software dependencies
 
+You will need the following software installed before running venus.
+
+### Build tools
+
+Ubuntu/Debian:
+
+```shell
+sudo apt install mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl clang build-essential hwloc libhwloc-dev wget -y && sudo apt upgrade -y
+```
+
+### Rustup?
+
+TBD
+
+### Go
+
+To build venus, you need a working installation of [Go 1.16 or higher](https://golang.org/dl/).
+
+```bash
+wget -c https://golang.org/dl/go1.16.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
+```
+
+Add `/usr/local/go/bin` to your path and setup `Go` env. For most Linux distributions you can run something like:
+
+```bash
+echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc && source ~/.bashrc
+# setup go env
+go env -w GOPROXY=https://goproxy.io,direct
+go env -w GO111MODULE=on
+```
+
+See the [official Golang installation instructions](https://golang.org/doc/install) if you get stuck.
+
 # Install venus-wallet
+
+Download and compile the source code of venus-wallet.
+
+```bash
+$ git clone https://github.com/filecoin-project/venus-wallet.git
+# change directory to venus-wallet
+$ cd venus-wallet 
+# ?
+$ make
+```
+
+Run venus-wallet module in background.
+
+```bash
+# ?
+$ nohup ./venus-wallet run > wallet.log 2>&1 &
+```
+
+Setup a password for your venus-wallet.
+
+```bash
+$ ./venus-wallet setpwd
+Password:******
+Enter Password again:******
+```
+
+Generate owner and worker addresses. (If you don't have an existing miner id)
+
+```bash
+$ ./venus-wallet new bls
+<OWNER_ADDRESS>
+$ ./venus-wallet new bls
+<WORKER_ADDRESS>
+```
+
+:::tip
+
+If you are testing on Nerpa or Calibration, you have to fund all your addresses with test coins from faucets. For nerpa, use this [faucet](https://faucet.nerpa.interplanetary.dev/funds.html). For calibration, use this [faucet](https://faucet.calibration.fildev.network/funds.html).
+
+:::
+
+Change `[APIRegisterHub]` section of of the config file using the credential you get from shared module admin.
+
+?
+
+```toml
+[APIRegisterHub]
+RegisterAPI = ["/ip4/<IP_ADDRESS_OF_VENUS_WALLET>/tcp/45132"]
+Token = "<AUTH_TOKEN_FOR_ACCOUNT_NAME>"
+SupportAccounts = ["<ACCOUNT_NAME>"]
+```
+
+Restart venus-wallet so that the changes takes into effect.
+
+?
 
 # Install venus-sealer
 
-# Start mining
+Download and compile the source code of venus-sealer.
 
+?proofparam?
+
+```bash
+$ git clone https://github.com/filecoin-project/venus-sealer.git
+$ cd venus-sealer
+# make dependency
+$ make deps
+$ make
+```
+
+## Initialize sealer with a new miner id
+
+If you don't have a miner id yet, run the following command to initialize sealer.
+
+```bash
+$ nohup ./venus-sealer init \
+--worker <WORKER_ADDRESS> \
+--owner <OWNER_ADDRESS>  \
+# Choose between 32G or 64G for mainnet
+--sector-size 512M \
+# Choose from nerpa, calibration. Leave out --network for mainet?
+--network nerpa \
+# Point to different shared venus modules
+--node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
+--messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/3453 \
+--gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/3453 \
+--auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
+# Flags sealer to not storing any sealed sectors on the machine it runs on
+--no-local-storage \
+--wallet-name ? \
+> sealer.log 2>&1 &
+
+# Check log to see if miner id is created succussfully
+2021-04-25T18:41:31.925+0800	INFO	main	venus-sealer/init.go:182	Checking if repo exists
+2021-04-25T18:41:31.926+0800	INFO	main	venus-sealer/init.go:217	Checking full node version
+2021-04-25T18:41:31.927+0800	INFO	main	venus-sealer/init.go:233	Initializing repo
+2021-04-25T18:41:31.928+0800	INFO	main	venus-sealer/init.go:309	Initializing libp2p identity
+2021-04-25T18:41:32.082+0800	INFO	main	venus-sealer/init.go:485	Pushed CreateMiner message: aaf489f9-af4b-4e4b-9084-018d43f05b7e
+2021-04-25T18:41:32.082+0800	INFO	main	venus-sealer/init.go:486	Waiting for confirmation
+2021-04-25T18:46:32.088+0800	INFO	main	venus-sealer/init.go:502	New miners address is: t01640 (t2cxzf7xvrqo3froqn2xgdqjdbydhkcrgakj7j3ma)
+# miner id on nerpa and calibration starts with "t", while miner id on mainnet starts with "f"
+2021-04-25T18:46:32.088+0800	INFO	main	venus-sealer/init.go:381	Created new miner: t01640
+2021-04-25T18:46:32.089+0800	INFO	main	venus-sealer/init.go:302	Sealer successfully created, you can now start it with 'venus-sealer run'
+```
+
+## Initialize sealer with existing miner id 
+
+If you already have a miner id, run the following command to initialize sealer.
+
+```bash
+$ ./venus-sealer init \
+--actor <MINER_ID>  \
+# Choose from nerpa, calibration. Leave out --network for mainet?
+--network nerpa \
+# Point to different shared venus modules
+--node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
+--messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/3453 \
+--gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/3453 \
+--auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
+# Flags sealer to not storing any sealed sectors on the machine it runs on
+--no-local-storage \
+--wallet-name ?
+
+?
+```
+
+# Start pledging
+
+Run sealer.
+
+```bash
+$ nohup ./venus-sealer run >> sealer.log 2>&1 &
+```
+
+Attach permanent storage to sealer.
+
+```bash
+$ ./venus-sealer storage attach --init --store --seal <ABSOLUTE_PATH_OF_YOUR_NETWORK_STORAGE>
+```
+
+Pledge a single sector.
+
+```bash
+$ ./venus-sealer sectors pledge 
+```
+
+?sealing_jobs?
