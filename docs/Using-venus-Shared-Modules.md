@@ -2,7 +2,7 @@
 
 # Preface
 
-Starting filecoin mining could be a daunting task given not only the large initial hardware and filecoin collateral [investment](https://filscan.io/calculator) but also the entailing operation commitment. With the idea of security, ease of use and distributed mining pool in mind, Venus implementation of filecoin will help miners turn, what community say, [a full time job](https://filecoinproject.slack.com/archives/CEGN061C5/p1610810730117900?thread_ts=1610809298.116800&cid=CEGN061C5) into a serious hobby. Hope this tutorial will get you started mining in no time! 
+Starting filecoin mining could be a daunting task given not only the large initial hardware and filecoin collateral [investment](https://filscan.io/calculator) but also the entailing operation commitment. With ideas of security, ease of use and distributed mining pool in mind, Venus implementation of filecoin will help miners turn, what community say, [a full time job](https://filecoinproject.slack.com/archives/CEGN061C5/p1610810730117900?thread_ts=1610809298.116800&cid=CEGN061C5) into a serious hobby. Hope this tutorial will get you started mining in no time! 
 
 # How mining works 
 
@@ -21,10 +21,10 @@ Depending on its role in a mining cluster, modules could be loosely broken down 
 | ------------------------------------------------------------ | ----------------------------------------------------- | ------------------ |
 | [venus](https://github.com/filecoin-project/venus)           | daemon for chain interactions                         | shared             |
 | [venus-miner](https://github.com/filecoin-project/venus-miner) | block winning and proving                             | shared             |
-| [venus-messager](https://github.com/filecoin-project/venus-messager) | chain message manager                                 | shared             |
+| [venus-messager](https://github.com/filecoin-project/venus-messager) | chain message management                              | shared             |
 | [venus-auth](https://github.com/filecoin-project/venus-auth) | utility for authorized use of shared modules          | shared             |
 | [venus-gateway](https://github.com/ipfs-force-community/venus-gateway) | utility for controlled access point of shared modules | shared             |
-| [venus-wallet](https://github.com/filecoin-project/venus-wallet) | addresses/keys manager                                | shared/independent |
+| [venus-wallet](https://github.com/filecoin-project/venus-wallet) | addresses/keys management                             | shared/independent |
 | [venus-sealer](https://github.com/filecoin-project/venus-sealer), [venus-worker](https://github.com/filecoin-project/venus-sealer) | job scheduling, sealing and proving                   | independent        |
 
 # Mining architecture
