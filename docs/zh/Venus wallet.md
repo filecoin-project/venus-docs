@@ -1,13 +1,13 @@
 # Venus wallet
-1. Venus wallet是一个针对filecoin提供的策略化远程wallet，支持JsonRPC2.0调用，它能动态配置各种待签名数据类型是否被放行。
+1. venus-wallet是一个针对Filecoin提供的策略化远程wallet，支持JsonRPC2.0调用，它能动态配置各种待签名数据类型是否被放行。
 2. 项目与Lotus以及Venus之间独立解耦，可以供Filecoin的各种不同实现调用
 
 ## 目录
 - [快速启动](#快速启动)
-    - [1. 下载代码](#1下载代码)
-    - [2. 编译](#2编译)
-    - [3. 启动服务进程](#3启动服务进程)
-    - [4. 配置介绍](#4配置介绍)
+    - [1. 下载代码](#1-下载代码)
+    - [2. 编译](#2-编译)
+    - [3. 启动服务进程](#3-启动服务进程)
+    - [4. 配置介绍](#4-配置介绍)
 - [CLI操作指南](#cli操作指南)
     - [查看帮助](#查看帮助)
     - [Venus wallet基本操作](#venus-wallet基本操作)
@@ -17,13 +17,13 @@
         - [策略化](#策略化)
 ## 快速启动
 ### 1. 下载代码
-```
+```shell script
 git clone https://github.com/ipfs-force-community/venus-wallet.git
 ```
 
 ### 2. 编译
 - go version ^1.15
-```
+```shell script
 # 设置bls编译环境变量
 export CGO_CFLAGS_ALLOW="-D__BLST_PORTABLE__"
 export CGO_CFLAGS="-D__BLST_PORTABLE__"
@@ -38,7 +38,7 @@ make linux
 ```
 
 ### 3. 启动服务进程
-```
+```shell script
 # 默认主网启动(--network=main)
 # 地址f开头
 $ ./venus-wallet run 
@@ -50,7 +50,7 @@ $ ./venus-wallet run  --network=test
 
 ### 4. 配置介绍
 - 默认文件位置 “~/.venus_wallet/config.toml”
-```
+```toml
 [API]
   # 本地进程http监听地址
   ListenAddress = "/ip4/0.0.0.0/tcp/5678/http"
@@ -81,12 +81,12 @@ $ ./venus-wallet run  --network=test
 # CLI 操作指南
 ## 查看帮助
 
-```
+```shell script
 $ ./venus-wallet -h
 
 
 NAME:
-   venus remote-wallet - A new cli application
+   venus-wallet - A new cli application
 
 USAGE:
    venus-wallet [global options] command [command options] [arguments...]
@@ -122,7 +122,7 @@ GLOBAL OPTIONS:
 ## Venus wallet基础操作
 ### wallet状态
 #### 1. 设置私钥对称加密Key
-```
+```shell script
 # ./venus-wallet setpwd (aliase)
 $ ./venus-wallet set-password
 Password:******
@@ -136,7 +136,7 @@ Password set successfully
 - 设定密码后，wallet默认为unlock状态
 #### 2. 锁定wallet
 > wallet锁定后，签名，生成新地址，导入，导出私钥等功能都将禁用，会影响到远程调用链，所以请慎用。
-```
+```shell script
 $ ./venus-wallet lock
 Password:******
 
@@ -145,7 +145,7 @@ wallet lock successfully
 ```
 #### 3. 解锁wallet
 > 与锁定wallet相反，解锁后将放行wallet所有功能。
-```
+```shell script
 $ ./venus-wallet unlock
 Password:******
 
@@ -153,7 +153,7 @@ Password:******
 wallet unlock successfully
 ```
 #### 4. 查看wallet状态
-```
+```shell script
 $ ./venus-wallet lockstate
 
 #res 
@@ -162,7 +162,7 @@ wallet state: unlocked
 ### 私钥管理
 #### 1. 生成新随机私钥
 > venus-wallet new [command options] [bls|secp256k1 (default secp256k1)]
-```
+```shell script
 $ ./venus-wallet new 
 
 #res
@@ -171,8 +171,8 @@ t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 - 默认secp256k1类型，也可`./venus-wallet new bls`生成bls类型私钥
 
 #### 2. 导入私钥
-> venus-wallet import [command options] [<path> (optional, will read from stdin if omitted)]
-```
+> venus-wallet import [command options] [\<path\> (optional, will read from stdin if omitted)]
+```shell script
 $ ./venus-wallet import
 Enter private key:7b2254797065223a22736563703235366b31222c22507269766174654b6579223a22626e765665386d53587171346173384633654c647a7438794a6d68764e434c377132795a6c6657784341303d227d
 
@@ -181,7 +181,7 @@ imported key t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy successfully!
 ```
 #### 3. 导出私钥
 > venus-wallet export [command options] [address]
-```
+```shell script
 $ ./venus-wallet export t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 
 # res
@@ -189,7 +189,7 @@ $ ./venus-wallet export t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 ```
 
 #### 4. 查看地址列表
-```
+```shell script
 $ ./venus-wallet list
 
 t3uktqgxtagiyk5cxrjn5h4wq4v247saxtfukfi6zsvt4sek2q2ufkg27biasg7247zhdpm2kpotukwsapr7pa
@@ -198,8 +198,8 @@ t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 ```
 > 显示全部私钥对应地址，这里有spec和bls两种地址存在
 ##### 5. 删除指定私钥
-> venus-wallet del [command options] <address>
-```
+> venus-wallet del [command options] \<address\>
+```shell script
 $ ./venus-wallet del t12mchblwgi243re5i2pg2harmnqvm6q3rwb2cnpy
 
 #res 
@@ -210,8 +210,8 @@ success
 用于远程访问接口授权
 
 #### 1. 获取远程连接字符串
-> venus remote-wallet auth api-info [command options] [arguments...]
-```
+> venus-wallet auth api-info [command options] [arguments...]
+```shell script
 $ ./venus-wallet auth api-info --perm admin
 
 #res
@@ -244,14 +244,14 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiw
 - 注意事项
     + 目前keyBind的变动会直接影响到group，group会直接影响到token的策略配置，这一切目前都是联动的
 
-```
+```shell script
 $ ./venus-wallet strategy -h
 
 NAME:
-   venus remote-wallet strategy - Manage logging
+   venus-wallet strategy - Manage logging
 
 USAGE:
-   venus remote-wallet strategy command [command options] [arguments...]
+   venus-wallet strategy command [command options] [arguments...]
 
 COMMANDS:
    types                              show all msgTypes
@@ -288,7 +288,7 @@ OPTIONS:
 
 ```
 #### 1. 查看msgType和method
-```
+```shell script
 # 查看类型 （code 为 type的1:1对应值，永不变动）
 $ ./venus-wallet st types
 # res
@@ -372,12 +372,11 @@ index	method
 61	UseBytes
 62	VerifyDealsForActivation
 63	WithdrawBalance
-
 ```
 #### 1. 创建keyBind
 ##### 1. 自定义创建
-> venus remote-wallet strategy newKeyBindCustom [command options] [name, address, codes, methods]
-```
+> venus-wallet strategy newKeyBindCustom [command options] [name, address, codes, methods]
+```shell script
 $ ./venus-wallet st newKBC kb1 <addr1> \
 0,1,2,3 \
 CreateMiner,Send
@@ -385,34 +384,35 @@ CreateMiner,Send
 #res
 success
 ```
-- kb1是keybind的全局唯一名称
+- kb1是keyBind的全局唯一名称
+- `<addr1>`为指代，正式的address为BLS，或者SECP的地址
 
 ##### 2. 从模板创建
 
 ###### 2.1 创建msgType模板
-> venus remote-wallet strategy newMsgTypeTemplate [command options] [name, code1 code2 ...]
+> venus-wallet strategy newMsgTypeTemplate [command options] [name, code1 code2 ...]
 
-```
+```shell script
 $ ./venus-wallet st newMsgTypeTemplate mttmp1 0 1 2 3 4 5
 
 #res
 success
 ```
-- mtmp1为msgType template的全局唯一名称
+- mttmp1为msgType template的全局唯一名称
 
 ###### 2.2 创建method模板
-> venus remote-wallet strategy newMethodTemplate [command options] [name, method1 method2 ...]
-```
+> venus-wallet strategy newMethodTemplate [command options] [name, method1 method2 ...]
+```shell script
 $ ./venus-wallet st newMethodTemplate mtmp1 ActivateDeals AddBalance AddLockedFund
 
 #res
 success
 ```
-- mttmp1为method template的全局唯一名称
+- mtmp1为method template的全局唯一名称
 
 ###### 2.3 通过模板创建KeyBind
-> venus remote-wallet strategy newKeyBindFromTemplate [command options] [name, address, msgTypeTemplateName, methodTemplateName]
-```
+> venus-wallet strategy newKeyBindFromTemplate [command options] [name, address, msgTypeTemplateName, methodTemplateName]
+```shell script
 $ ./venus-wallet st newKeyBindFromTemplate kb2 <addr2> \
 mttmp1 mtmp1
 
@@ -420,28 +420,28 @@ mttmp1 mtmp1
 success
 ```
 ##### 3. 创建group
-> venus remote-wallet strategy newGroup [command options] [name, keyBindName1 keyBindName2 ...]
-```
+> venus-wallet strategy newGroup [command options] [name, keyBindName1 keyBindName2 ...]
+```shell script
 $ ./venus-wallet st newGroup group1 kb1 kb2
 ```
 - group1: group全局唯一名称
-- kb1,kb2: 之前创建的2个KeyBind
+- kb1,kb2: 之前创建的2个KeyBind的名称
 
 ##### 4. 生成group token用于对外暴露策略调用
-> venus remote-wallet strategy newWalletToken [command options] [groupName]
-```
+> venus-wallet strategy newWalletToken [command options] [groupName]
+```shell script
 $ ./venus-wallet st newWalletToken group1
 
 #res
 660ceba5-13f8-4571-803e-706e4a4fd36e
 ```
-- 这里针对group1可以生成多个token，也就是说一个group可以生成多个token，用以区分调用链路
+- 这里一个group可用生成多个token，用以区分调用链路，以及token可以做到不定期替换，或者暴露后快速替换用
 
 ##### 4. 原子性修改keyBind策略配置
 
 ###### 4.1 查询以后keybind 
-> venus remote-wallet strategy keyBind [command options] [name]
-```
+> venus-wallet strategy keyBind [command options] [name]
+```shell script
 $ ./venus-wallet st keyBind kb1
 
 #res
@@ -450,9 +450,9 @@ types	: 0,1,2,3
 methods	: CreateMiner,Send
 ```
 ###### 4.2 keyBind增加method
-> venus remote-wallet strategy pushMethodIntoKeyBind [command options] [keyBindName, method1 method2 ...]
+> venus-wallet strategy pushMethodIntoKeyBind [command options] [keyBindName, method1 method2 ...]
 
-```
+```shell script
 $ ./venus-wallet st pushMethodIntoKeyBind kb1 Settle SwapSigner
 
 #res
@@ -462,8 +462,8 @@ methods	: CreateMiner,Send,Settle,SwapSigner
 ```
 - 添加成功后,Settle SwapSigner将会原子性的增加到methods中，目前这个操作是防并发的。
 ###### 4.3 keyBind增加msgType
-> venus remote-wallet strategy pushMsgTypeIntoKeyBind [command options] [keyBindName, code1 code2 ...]
-```
+> venus-wallet strategy pushMsgTypeIntoKeyBind [command options] [keyBindName, code1 code2 ...]
+```shell script
 $ ./venus-wallet st pushMsgTypeIntoKeyBind kb1 4 5 6
 
 #res
@@ -472,8 +472,8 @@ types	: 0,1,2,3,4,5,6
 methods	: CreateMiner,Send,Settle,SwapSigner
 ```
 ###### 4.4 keyBind移除method
-> venus remote-wallet strategy pullMethodFromKeyBind [command options] [keyBindName, method1 method2 ...]
-```
+> venus-wallet strategy pullMethodFromKeyBind [command options] [keyBindName, method1 method2 ...]
+```shell script
 $ ./venus-wallet st pullMethodFromKeyBind kb1 Settle SwapSigner
 
 #res
@@ -483,8 +483,8 @@ methods	: CreateMiner,Send
 ```
 
 ###### 4.5 keyBind移除msgType
-> venus remote-wallet strategy pullMsgTypeFromKeyBind [command options] [keyBindName, code1 code2 ...]
-```
+> venus-wallet strategy pullMsgTypeFromKeyBind [command options] [keyBindName, code1 code2 ...]
+```shell script
 $ ./venus-wallet st pullMsgTypeFromKeyBind kb1 4 5 6
 
 #res
@@ -494,8 +494,8 @@ methods	: CreateMiner,Send
 ```
 ##### 5. 查询操作
 ###### 5.1 查询msgType列表
-> venus remote-wallet strategy listMsgTypeTemplates [command options] [from to]
-```
+> venus-wallet strategy listMsgTypeTemplates [command options] [from to]
+```shell script
 $ ./venus-wallet st listMsgTypeTemplates 0 20
 
 #res
@@ -512,8 +512,8 @@ types	: 0,1,2,3,4,5
 - num: 计数,无其他作用
 
 ###### 5.2 查询指定msgType模板
->  venus remote-wallet strategy msgTypeTemplate [command options] [name]
-```
+>  venus-wallet strategy msgTypeTemplate [command options] [name]
+```shell script
 $ ./venus-wallet st msgTypeTemplate mttmp1
 
 # res
@@ -521,8 +521,8 @@ $ ./venus-wallet st msgTypeTemplate mttmp1
 ```
 
 ###### 5.3 查询method列表
-> venus remote-wallet strategy listMethodTemplates [command options] [from to]
-```
+> venus-wallet strategy listMethodTemplates [command options] [from to]
+```shell script
 $ ./venus-wallet st listMethodTemplates 0 20
 
 #res
@@ -536,8 +536,8 @@ methods	: ActivateDeals,AddBalance,AddLockedFund
 ```
 
 ###### 5.4 查询指定method模板
-> venus remote-wallet strategy methodTemplateByName [command options] [name]
-```
+> venus-wallet strategy methodTemplateByName [command options] [name]
+```shell script
 $ ./venus-wallet st methodTemplateByName mtmp1
 
 #res
@@ -545,8 +545,8 @@ ActivateDeals,AddBalance,AddLockedFund
 ```
 
 ###### 5.5 查询keyBind列表
-> venus remote-wallet strategy listKeyBinds [command options] [from to]
-```
+> venus-wallet strategy listKeyBinds [command options] [from to]
+```shell script
 $ ./venus-wallet st listKeyBinds 0 20
 #res
 num	: 1
@@ -562,8 +562,8 @@ types	: 0,2,3
 methods	: CreateMiner
 ```
 ###### 5.6 查询指定地址的keyBind列表
-> venus remote-wallet strategy keyBinds [command options] [address]
-```
+> venus-wallet strategy keyBinds [command options] [address]
+```shell script
 $ ./venus-wallet st keyBinds <addr1>
 #res
 $ ./venus-wallet st listKeyBinds 0 20
@@ -580,8 +580,8 @@ types	: 0,2,3
 methods	: CreateMiner
 ```
 ###### 5.6 查询指定name的keyBind
-> venus remote-wallet strategy keyBind [command options] [name]
-```
+> venus-wallet strategy keyBind [command options] [name]
+```shell script
 $ ./venus-wallet st keyBind kb1
 #res
 address	: <addr1>
@@ -590,8 +590,8 @@ methods	: CreateMiner,Send
 ```
 
 ###### 5.7 查询group列表
-> venus remote-wallet strategy listGroup [command options] [from to]
-```
+> venus-wallet strategy listGroup [command options] [from to]
+```shell script
 $ ./venus-wallet st listGroup 0 20
 #res
 1	: group1
@@ -600,8 +600,8 @@ $ ./venus-wallet st listGroup 0 20
 - 这里只显示group的名称列表，不包含详细数据
 
 ###### 5.8 查询指定group
-> venus remote-wallet strategy group [command options] [name]
-```
+> venus-wallet strategy group [command options] [name]
+```shell script
 $ ./venus-wallet st group group1
 #res
 num	: 1
@@ -610,16 +610,16 @@ types	: 0,1,2,3
 methods	: CreateMiner,Send
 ```
 ###### 5.9 查询Group衍生的token列表
-> venus remote-wallet strategy groupTokens [command options] [groupName]
-```
+> venus-wallet strategy groupTokens [command options] [groupName]
+```shell script
 $ ./venus-wallet st groupTokens group1
 #res
 041457f0-ea9a-4486-b648-1feb05dda0c0
 a8f09b9f-ad28-8734-c40c-03c222d03982
 ```
 ###### 5.10 查询token对应的group详情
-> venus remote-wallet strategy tokenInfo [command options] [token]
-```
+> venus-wallet strategy tokenInfo [command options] [token]
+```shell script
 $ ./venus-wallet st tokenInfo 041457f0-ea9a-4486-b648-1feb05dda0c0
 #res
 groupName: group1
@@ -635,30 +635,30 @@ keyBinds:
 >这里是真删除，请谨慎使用
 
 ###### 6.1 删除msgType模板(不影响根据模板创建的keyBind)
-> venus remote-wallet strategy removeMsgTypeTemplate [command options] [name]
-```
+> venus-wallet strategy removeMsgTypeTemplate [command options] [name]
+```shell script
 $ ./venus-wallet st removeMsgTypeTemplate mttmp1
 #res
 success
 ```
 
 ###### 6.2 删除method模板(不影响根据模板创建的keyBind)
-> venus remote-wallet strategy removeMethodTemplate [command options] [name]
-```
+> venus-wallet strategy removeMethodTemplate [command options] [name]
+```shell script
 $ ./venus-wallet st removeMethodTemplate mtmp1
 #res
 success
 ```
 
 ###### 6.3 根据名称删除keyBind(将影响group，从而影响token对应的group策略)
-> venus remote-wallet strategy removeKeyBind [command options] [name]
-```
+> venus-wallet strategy removeKeyBind [command options] [name]
+```shell script
 $ ./venus-wallet st removeKeyBind kb1
 ```
 
 ###### 6.4 根据wallet地址删除keyBind(批量删除，将影响group，从而影响到token对应的group策略)
-> venus remote-wallet strategy removeKeyBindByAddress [command options] [name]
-```
+> venus-wallet strategy removeKeyBindByAddress [command options] [name]
+```shell script
 $ ./venus-wallet st removeKeyBindByAddress <addr1>
 #res
 2 rows of data were deleted
@@ -666,15 +666,15 @@ $ ./venus-wallet st removeKeyBindByAddress <addr1>
 - 返回移除的keyBind数量
 
 ###### 6.5 移除group(将导致所有该group对应的策略失效)
-> venus remote-wallet strategy removeGroup [command options] [name]
-```
+> venus-wallet strategy removeGroup [command options] [name]
+```shell script
 $ ./venus-wallet st removeGroup group1
 #res
 success
 ```
 ###### 6.6 移除token
-> venus remote-wallet strategy removeToken [command options] [token]
-```
+> venus-wallet strategy removeToken [command options] [token]
+```shell script
 $ ./venus-wallet st removeToken 041457f0-ea9a-4486-b648-1feb05dda0c0
 #res
 success

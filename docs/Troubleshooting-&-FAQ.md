@@ -72,15 +72,15 @@ If you encounter an error while running install, i.e. `/System/Library/Framework
 
 * **Can't build OS X Mojave `fatal error: 'stdio.h' file not found`**
 You may see this error if you are building everything from source and not installing anything with homebrew, for example, when building go-secp256k1:
-    ```sh
-    go get -u github.com/ipsn/go-secp256k1
-    #github.com/ipsen/go-secp256k1
-    In file included from ../../ipsn/go-secp256k1/secp256.go:17
-    In file included from ././libsecp256k1/src/secp256k1.c:9:
-    ../../ipsn/go-secp256k1/libsecp256k1/src/util.h:14:10: fatal error: 'stdlib.h' file not found
-    #include <stdlib.h>
-             ^~~~~~~~~~
-    ```
+```sh
+go get -u github.com/ipsn/go-secp256k1
+#github.com/ipsen/go-secp256k1
+In file included from ../../ipsn/go-secp256k1/secp256.go:17
+In file included from ././libsecp256k1/src/secp256k1.c:9:
+../../ipsn/go-secp256k1/libsecp256k1/src/util.h:14:10: fatal error: 'stdlib.h' file not found
+#include <stdlib.h>
+         ^~~~~~~~~~
+```
 
     OS X Mojave moved the location of `stdlib.h` out of `/usr/include`.  This issue exists for other packages and there are several possible solutions suggested in this thread for [neovim issue #9050](https://github.com/neovim/neovim/issues/9050). Thanks to Filecoin community member *A_jinbin_filecoin.cn* for the link.
 
