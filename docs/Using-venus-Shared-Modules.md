@@ -1,19 +1,21 @@
+# Table of Contents
+
 [[TOC]]
 
-# Preface
+## Background
 
 Starting filecoin mining could be a daunting task given not only the large initial hardware and filecoin collateral [investment](https://filscan.io/calculator) but also the entailing operation commitment. With ideas of security, ease of use and distributed mining pool in mind, Venus implementation of filecoin will help miners turn, what community say, [a full time job](https://filecoinproject.slack.com/archives/CEGN061C5/p1610810730117900?thread_ts=1610809298.116800&cid=CEGN061C5) into a serious hobby. Hope this tutorial will get you started mining in no time! 
 
-# How mining works 
+## How mining works
 
 There are two ways of getting started with mining using Venus. 
 
-1. Deploy minimum hardware and gain access to a publicly hosted shared Venus modules. (Checkout venus incubation center page to learn more on how you can get an account setup!)
-2. Deploy all hardware and venus modules by yourself.
+1. Deploy minimum hardware and gain access to a publicly hosted shared venus modules. (Checkout venus incubation center page to learn more on how you can get an account setup!)
+2. Deploy all required hardware and venus modules by yourself.
 
 After following the rest of the trutorial and successful deployment, you can start pledging sectors, grow power and evantually obtain block rewards through your contribution to the network's storage capacity!
 
-# Venus modules introduction
+## Introducing venus modules
 
 Depending on its role in a mining cluster, modules could be loosely broken down into two category: shared and independent. Shared modules could be thought as the plumbings of what you need to start sealing sectors. Most of the dealings with the blockchain like chain synchronizations, sending messages, winning a block and etc are handled by the shared modules. The idea is that many miners could all use a set of shared modules, thus reducing overhead in maintainence. Independent modules handles sealing and proving of your sectors, where you will be spend most of your time if you choose to use a publicly hosted shared venus modules. Note also that venus-wallet module could be deployed as either shared or independent. 
 
@@ -27,49 +29,49 @@ Depending on its role in a mining cluster, modules could be loosely broken down 
 | [venus-wallet](https://github.com/filecoin-project/venus-wallet) | addresses/keys management                             | shared/independent |
 | [venus-sealer](https://github.com/filecoin-project/venus-sealer), [venus-worker](https://github.com/filecoin-project/venus-sealer) | job scheduling, sealing and proving                   | independent        |
 
-# Mining architecture
+## Mining architecture
 
 Diagram below illustrates how venus modules interacts with one and another.
 
-<img src="./zh/images/venus-arch.png" alt="./zh/images/venus-arch.png"  />
+<img src="/Users/fatman13/d2d2d/venus-docs/docs/zh/images/venus-arch.png" alt="./zh/images/venus-arch.png"  />
 
- # Hardware requirements
+## Hardware requirements
 
-TBD
+Learn more about hardware requirements [here](https://docs.filecoin.io/mine/mining-architectures/#protocol-labs-example-architecture).
 
-# Pre-requisites
+## Pre-requisites
 
 Before diving into deployment of your mining operation, please make sure you check the following. It is recommended that you test your setup in nerpa and calibration network before deploying on mainnet.
 
-## Setup your permanent storage
+### Setup your permanent storage
 
-TBD
+Choose a network file system that you are familiar with (NFS for example) and deploy your storage cluster.
 
-##  Get your account setup in shared modules
+### Get your account setup in shared modules
 
 There are two ways to have your account setup.
 
-### For miners connecting to shared modules
+#### For miners connecting to shared modules
 
 If you are trying to connect to a hosted shared venus modules, like ones provided by venus incubation center, contact admin of the service and have them set it up for you.
 
-### For admins of shared modules
+#### For admins of shared modules
 
 If you are an admin hosting shared venus modules, use the following command to create an account for your miner.
 
 ```bash
-# ?
+# If miner doesn't have <MINER_ID> yet, leave out --miner flag
 $ ./venus-auth addUser --name <ACCOUNT_NAME> --miner <MINER_ID>
 # The returned token is what miner have to add into their config file in order to gain access to your shared modules
 $ ./venus-auth genToken --perm write <ACCOUNT_NAME>
 <AUTH_TOKEN_FOR_ACCOUNT_NAME>
 ```
 
-## Software dependencies
+### Software dependencies
 
 You will need the following software installed before running venus.
 
-### Build tools
+#### Build tools
 
 Ubuntu/Debian:
 
@@ -77,11 +79,7 @@ Ubuntu/Debian:
 sudo apt install mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl clang build-essential hwloc libhwloc-dev wget -y && sudo apt upgrade -y
 ```
 
-### Rustup?
-
-TBD
-
-### Go
+#### Go
 
 To build venus, you need a working installation of [Go 1.16 or higher](https://golang.org/dl/).
 
@@ -100,7 +98,7 @@ go env -w GO111MODULE=on
 
 See the [official Golang installation instructions](https://golang.org/doc/install) if you get stuck.
 
-# Install venus-wallet
+## Install venus-wallet
 
 Download and compile the source code of venus-wallet.
 
@@ -108,16 +106,21 @@ Download and compile the source code of venus-wallet.
 $ git clone https://github.com/filecoin-project/venus-wallet.git
 # change directory to venus-wallet
 $ cd venus-wallet 
-# ?
+# ?network
 $ make
 ```
 
 Run venus-wallet module in background.
 
 ```bash
-# ?
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
+
+::: Tip 
+
+Use `tail -f wallet.log` to monitor wallet log.
+
+:::
 
 Setup a password for your venus-wallet.
 
@@ -136,15 +139,11 @@ $ ./venus-wallet new bls
 <WORKER_ADDRESS>
 ```
 
-:::tip
+::: Tip
 
-If you are testing on Nerpa or Calibration, you have to fund all your addresses with test coins from faucets. For nerpa, use this [faucet](https://faucet.nerpa.interplanetary.dev/funds.html). For calibration, use this [faucet](https://faucet.calibration.fildev.network/funds.html).
-
-:::
+If you are testing on Nerpa or Calibration, you have to fund all your addresses with test coins from faucets. For nerpa, use this [faucet](https://faucet.nerpa.interplanetary.dev/funds.html). For calibration, use this [faucet](https://faucet.calibration.fildev.network/funds.html). :::
 
 Change `[APIRegisterHub]` section of of the config file using the credential you get from shared module admin.
-
-?
 
 ```toml
 [APIRegisterHub]
@@ -155,13 +154,23 @@ SupportAccounts = ["<ACCOUNT_NAME>"]
 
 Restart venus-wallet so that the changes takes into effect.
 
-?
+```bash
+# grep [PID] of venus-wallet process
+$ ps -ef | grep wallet
+# kill the process and restart
+$ kill [PID]
+$ nohup ./venus-wallet run > wallet.log 2>&1 &
+```
 
-# Install venus-sealer
+::: Tip
+
+Using process controll like  `systemmd` or `supervisord` is recommended.
+
+:::
+
+## Install venus-sealer
 
 Download and compile the source code of venus-sealer.
-
-?proofparam?
 
 ```bash
 $ git clone https://github.com/filecoin-project/venus-sealer.git
@@ -171,7 +180,7 @@ $ make deps
 $ make
 ```
 
-## Initialize sealer with a new miner id
+### Initialize sealer with a new miner id
 
 If you don't have a miner id yet, run the following command to initialize sealer.
 
@@ -206,7 +215,7 @@ $ nohup ./venus-sealer init \
 2021-04-25T18:46:32.089+0800	INFO	main	venus-sealer/init.go:302	Sealer successfully created, you can now start it with 'venus-sealer run'
 ```
 
-## Initialize sealer with existing miner id 
+### Initialize sealer with a new miner id
 
 If you already have a miner id, run the following command to initialize sealer.
 
@@ -224,16 +233,26 @@ $ ./venus-sealer init \
 --no-local-storage \
 --wallet-name ?
 
-?
+# Expected output
+2021-06-07T04:15:49.170+0800    INFO    main    venus-sealer/init.go:193        Checking if repo exists
+2021-06-07T04:15:49.170+0800    INFO    main    venus-sealer/init.go:205        Checking full node version
+2021-06-07T04:15:49.174+0800    INFO    main    venus-sealer/init.go:221        Initializing repo
+2021-06-07T04:15:49.175+0800    INFO    main    venus-sealer/init.go:334        Initializing libp2p identity
+2021-06-07T04:15:49.181+0800    INFO    main    venus-sealer/init.go:406        Created new miner: t02105
+2021-06-07T04:15:49.181+0800    INFO    main    venus-sealer/init.go:290        Sealer successfully created, you can now start it with 'venus-sealer run'
 ```
 
-# Start pledging
+## Start pledging
 
 Run sealer.
 
 ```bash
 $ nohup ./venus-sealer run >> sealer.log 2>&1 &
 ```
+
+::: Tip 
+
+If you are running sealer for the 1st time, it will start to download proof parameters, which may take quite some time. If you are located in China, follow the tips [here](https://venus.filecoin.io/Tips-Running-In-China.html) to speed up the process.  :::
 
 Attach permanent storage to sealer.
 
@@ -247,4 +266,46 @@ Pledge a single sector.
 $ ./venus-sealer sectors pledge 
 ```
 
-?sealing_jobs?
+Check current sealing job.
+
+```bash
+$ ./venus-sealer sealing
+```
+
+See `venus-sealer -h` for list of commands that sealer supports.
+
+```bash
+$ ./venus-sealer -h
+NAME:
+   venus-sealer - Filecoin decentralized storage network miner
+
+USAGE:
+   venus-sealer [global options] command [command options] [arguments...]
+
+VERSION:
+   1.4.1
+
+COMMANDS:
+   init      Initialize a venus sealer repo
+   run       Start a venus sealer process
+   sectors   interact with sector store
+   actor     manipulate the miner actor
+   info      Print miner info
+   sealing   interact with sealing pipeline
+   storage   manage sector storage
+   messager  message cmds
+   proving   View proving information
+   stop      Stop a running venus sealer
+   version   Print version
+   help, h   Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --actor value, -a value  specify other actor to check state for (read only)
+   --color                  (default: false)
+   --help, -h               show help (default: false)
+   --version, -v            print the version (default: false)
+```
+
+## Questions?
+
+Find us on [Slack](https://filecoinproject.slack.com/archives/CEHHJNJS3)!
