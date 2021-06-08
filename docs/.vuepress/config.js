@@ -27,7 +27,7 @@ module.exports = {
         ['vuepress-plugin-code-copy', true]
     ],
     head: [
-        ['link', {rel: 'icon', href: '/assets/icon-coin-128.png'}]
+        ['link', {rel: 'icon', href: '/assets/venus-logo.png'}]
     ],
     locales: {
         '/': {
@@ -75,7 +75,8 @@ module.exports = {
                         children: [
                             ['Home.md', 'Home'],
                             ['Overview.md', 'Overview'],
-                            ['How-To-Deploy-MingPool.md', 'How to deploy mingPool'],
+                            ['How-To-Deploy-MingPool.md', 'How to deploy mining pool'],
+                            ['Using-venus-Shared-Modules.md', 'How to join mining pool'],
                             ['Venus-replace-lotus.md', 'Venus replace Lotus'],
                             ['Tips-Running-In-China.md', 'Tips running in China'],
                             ['venus_load_balancing.md', 'Venus load balancing'],
