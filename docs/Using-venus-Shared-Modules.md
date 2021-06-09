@@ -10,7 +10,7 @@ Starting filecoin mining could be a daunting task given not only the large initi
 
 There are two ways of getting started with mining using Venus. 
 
-1. Deploy minimum hardware and gain access to a publicly hosted shared venus modules. (Checkout venus incubation center page to learn more on how you can get an account setup!)
+1. Deploy minimum hardware and gain access to a publicly hosted shared venus modules. <!--(Checkout venus incubation center page to learn more on how you can get an account setup!)-->
 2. Deploy all required hardware and venus modules by yourself.
 
 After following the rest of the trutorial and successful deployment, you can start pledging sectors, grow power and evantually obtain block rewards through your contribution to the network's storage capacity!
@@ -33,7 +33,7 @@ Depending on its role in a mining cluster, modules could be loosely broken down 
 
 Diagram below illustrates how venus modules interacts with one and another.
 
-<img src="/Users/fatman13/d2d2d/venus-docs/docs/zh/images/venus-arch.png" alt="./zh/images/venus-arch.png"  />
+![venus-cluster](./images/venus-cluster.png)
 
 ## Hardware requirements
 
@@ -41,7 +41,13 @@ Learn more about hardware requirements [here](https://docs.filecoin.io/mine/mini
 
 ## Pre-requisites
 
-Before diving into deployment of your mining operation, please make sure you check the following. It is recommended that you test your setup in nerpa and calibration network before deploying on mainnet.
+Before diving into deployment of your mining operation, please make sure you go through the following steps. 
+
+:::tip 
+
+It is recommended that you test your setup in nerpa or calibration network before deploying on mainnet. 
+
+:::
 
 ### Setup your permanent storage
 
@@ -53,7 +59,7 @@ There are two ways to have your account setup.
 
 #### For miners connecting to shared modules
 
-If you are trying to connect to a hosted shared venus modules, like ones provided by venus incubation center, contact admin of the service and have them set it up for you.
+If you are trying to connect to a hosted shared venus modules, <!--like ones provided by venus incubation center,--> contact admin of said service and have them set it up for you.
 
 #### For admins of shared modules
 
@@ -77,6 +83,12 @@ Ubuntu/Debian:
 
 ```shell
 sudo apt install mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl clang build-essential hwloc libhwloc-dev wget -y && sudo apt upgrade -y
+```
+
+CentOS:
+
+```bash
+sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum install -y git gcc bzr jq pkgconfig clang llvm mesa-libGL-devel opencl-headers ocl-icd ocl-icd-devel hwloc-devel
 ```
 
 #### Go
@@ -106,7 +118,6 @@ Download and compile the source code of venus-wallet.
 $ git clone https://github.com/filecoin-project/venus-wallet.git
 # change directory to venus-wallet
 $ cd venus-wallet 
-# ?network
 $ make
 ```
 
@@ -116,7 +127,7 @@ Run venus-wallet module in background.
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
 
-::: Tip 
+:::tip 
 
 Use `tail -f wallet.log` to monitor wallet log.
 
@@ -128,6 +139,7 @@ Setup a password for your venus-wallet.
 $ ./venus-wallet setpwd
 Password:******
 Enter Password again:******
+Password set successfully
 ```
 
 Generate owner and worker addresses. (If you don't have an existing miner id)
@@ -139,9 +151,11 @@ $ ./venus-wallet new bls
 <WORKER_ADDRESS>
 ```
 
-::: Tip
+:::tip
 
-If you are testing on Nerpa or Calibration, you have to fund all your addresses with test coins from faucets. For nerpa, use this [faucet](https://faucet.nerpa.interplanetary.dev/funds.html). For calibration, use this [faucet](https://faucet.calibration.fildev.network/funds.html). :::
+If you are testing on Nerpa or Calibration, you have to fund all your addresses with test coins from faucets. For nerpa, use this [faucet](https://faucet.nerpa.interplanetary.dev/funds.html). For calibration, use this [faucet](https://faucet.calibration.fildev.network/funds.html). 
+
+:::
 
 Change `[APIRegisterHub]` section of of the config file using the credential you get from shared module admin.
 
@@ -162,7 +176,7 @@ $ kill [PID]
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
 
-::: Tip
+:::tip
 
 Using process controll like  `systemmd` or `supervisord` is recommended.
 
@@ -192,7 +206,7 @@ $ nohup ./venus-sealer init \
 --sector-size 512M \
 # Choose from nerpa, calibration. Leave out --network for mainet?
 --network nerpa \
-# Point to different shared venus modules
+# Config for different shared venus modules
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
 --messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/3453 \
 --gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/3453 \
@@ -202,7 +216,7 @@ $ nohup ./venus-sealer init \
 --wallet-name ? \
 > sealer.log 2>&1 &
 
-# Check log to see if miner id is created succussfully
+# Expect output close to the following
 2021-04-25T18:41:31.925+0800	INFO	main	venus-sealer/init.go:182	Checking if repo exists
 2021-04-25T18:41:31.926+0800	INFO	main	venus-sealer/init.go:217	Checking full node version
 2021-04-25T18:41:31.927+0800	INFO	main	venus-sealer/init.go:233	Initializing repo
@@ -224,16 +238,17 @@ $ ./venus-sealer init \
 --actor <MINER_ID>  \
 # Choose from nerpa, calibration. Leave out --network for mainet?
 --network nerpa \
-# Point to different shared venus modules
+# Config for different shared venus modules
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
 --messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/3453 \
 --gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/3453 \
 --auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
-# Flags sealer to not storing any sealed sectors on the machine it runs on
+# Flags sealer to not store any sealed sectors on the machine it runs on
 --no-local-storage \
 --wallet-name ?
+> sealer.log 2>&1 &
 
-# Expected output
+# Expect output close to the following
 2021-06-07T04:15:49.170+0800    INFO    main    venus-sealer/init.go:193        Checking if repo exists
 2021-06-07T04:15:49.170+0800    INFO    main    venus-sealer/init.go:205        Checking full node version
 2021-06-07T04:15:49.174+0800    INFO    main    venus-sealer/init.go:221        Initializing repo
@@ -250,9 +265,11 @@ Run sealer.
 $ nohup ./venus-sealer run >> sealer.log 2>&1 &
 ```
 
-::: Tip 
+:::tip 
 
-If you are running sealer for the 1st time, it will start to download proof parameters, which may take quite some time. If you are located in China, follow the tips [here](https://venus.filecoin.io/Tips-Running-In-China.html) to speed up the process.  :::
+If you are running sealer for the 1st time, it will start to download proof parameters, which may take quite some time. If you are located in China, follow the tips [here](https://venus.filecoin.io/Tips-Running-In-China.html) to speed up the process.  
+
+:::
 
 Attach permanent storage to sealer.
 
@@ -266,7 +283,7 @@ Pledge a single sector.
 $ ./venus-sealer sectors pledge 
 ```
 
-Check current sealing job.
+Check ongoing sealing job.
 
 ```bash
 $ ./venus-sealer sealing
