@@ -118,7 +118,6 @@ Download and compile the source code of venus-wallet.
 $ git clone https://github.com/filecoin-project/venus-wallet.git
 # change directory to venus-wallet
 $ cd venus-wallet 
-# ?network
 $ make
 ```
 
