@@ -42,11 +42,11 @@ module.exports = {
         }
     },
     themeConfig: {
-        logo: '/assets/filecoin-logo.svg',
+        logo: '/assets/venus-logo-title.svg',
         lastUpdated: 'Last Updated',
         // Optional options for generating "Edit this page" link
         // if your docs are in a different repo from your main project:
-        docsRepo: 'filecoin-project/docs',
+        docsRepo: 'filecoin-project/venus-docs',
         // if your docs are not at the root of the repo:
         docsDir: 'docs',
         // if your docs are in a specific branch (defaults to 'master'):
@@ -63,47 +63,46 @@ module.exports = {
                 title: 'Venus Filecoin',
                 description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
                 nav: [
-                    {text: 'Filecoin Docs', link: 'https://docs.filecoin.io'},
-                    {
-                        text: 'Github', link: 'https://github.com/filecoin-project/venus'
-                    },
                 ],
                 sidebar: [
                     {
-                        title: 'Venus Filecoin Tutorial',
-                        collapsable: false,
+                        title: 'Getting-Started',
+                        collapsable: true,
                         children: [
-                            ['Home.md', 'Home'],
                             ['Overview.md', 'Overview'],
-                            ['How-To-Deploy-MingPool.md', 'How to deploy mining pool'],
-                            ['Using-venus-Shared-Modules.md', 'How to join mining pool'],
-                            ['Venus-replace-lotus.md', 'Venus replace Lotus'],
-                            ['Tips-Running-In-China.md', 'Tips running in China'],
-                            ['venus_load_balancing.md', 'Venus load balancing'],
-                            ['How-To-Use-Messager.md', 'How to use messager'],
-                            ['Venus-Worker.md', 'How to use Venus Worker'],
-                            ['How-To-Use-Wallet-In-Venus.md', 'How to use wallet in venus'],
-                            ['Multisig-wallet.md', 'Multisig wallet'],
-                            ['Venus wallet.md', 'Venus wallet'],
-                            ['Chain.md', 'Chain'],
-                            ['Commands.md', 'CLI commands'],
-                            ['Getting-Started.md', 'Getting started'],
-                            ['How-To-Connect-Network.md', 'How to start network'],
-                            ['How-To-Setup_2knet.md', 'How to start a local network'],
-                            ['Payment-Channel.md', 'Payment channel'],
+                            ['How-To-Deploy-MingPool.md', 'How to deploy a mining pool'],
+                            ['Using-venus-Shared-Modules.md', 'How to join a mining pool'],
+                            ['Venus-replace-lotus.md', 'Migrate from Lotus'],
+                            ['Chain.md', 'Chain management'],
+                            ['How-To-Connect-Network.md', 'Connect to different network'],
                             ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
-                            ['How-To-Contribute-Docs.md', 'Welcome to Contributing'],
-                            ['Tips-Running-In-China.md', 'Tips when running in China'],
+                            ['How-To-Contribute-Docs.md', 'Contribute to doc']
                         ]
                     },
                     {
-                        title: 'Resources',
+                        title: 'Modules',
                         collapsable: true,
                         children: [
-                            ['https://docs.filecoin.io', 'Filecoin docs'],
-                            ['questions.md', 'Have a question?'],
+                            ['Getting-Started.md', 'Venus daemon'],
+                            ['How-To-Use-Messager.md', 'Venus messager'],
+                            ['How-To-Use-Wallet-In-Venus.md', 'Venus wallet'],
+                            // ['Venus-wallet.md', 'Venus wallet'],
+                            ['Venus-Worker.md', 'Venus worker'],
+                        ]
+                    },
+                    {
+                        title: 'Advanced',
+                        collapsable: true,
+                        children: [
+                            ['Commands.md', 'Venus CLI commands'],
+                            ['Tips-Running-In-China.md', 'Tips running in China'],
+                            ['Multisig-wallet.md', 'Multisig wallet'],
+                            ['venus_load_balancing.md', 'Venus load balancing'],
+                            ['Payment-Channel.md', 'Payment channel'],
+                            ['How-To-Setup_2knet.md', 'How to start a local dev network'],
                         ]
                     }
+                    // ]
                 ]
             },
             '/zh/': {
@@ -160,3 +159,4 @@ module.exports = {
         }
     }
 }
+
