@@ -108,50 +108,48 @@ module.exports = {
             '/zh/': {
                 selectText: '选择语言',
                 label: '简体中文',
-                title: 'Venus Filecoin',
+                title: '启明星',
                 description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
                 nav: [
-                    {text: 'Filecoin文档', link: 'https://docs.filecoin.io'},
-                    {
-                        text: 'Github', link: 'https://github.com/filecoin-project/venus'
-                    },
                 ],
                 sidebar: {
                     '/zh/': [
                         {
-                            title: 'Filecoin Venus教程',
-                            collapsable: false,
+                            title: '快速上手',
+                            collapsable: true,
                             children: [
-                                ['Home.md', '首页'],
                                 ['Overview.md', '概述'],
-                                ['How-To-Deploy-MingPool.md', '部署Venus组件集群'],
-                                ['Venus-replace-lotus.md', 'Venus替换Lotus'],
-                                ['venus_load_balancing.md', 'Venus负载均衡'],
-                                ['Tips-Running-In-China.md', '中国部署小贴士'],
-                                ['How to use venus messager.md', '如何使用Venus messager组件'],
-                                ['Venus-Worker.md', 'Venus Worker用法'],
-                                ['Venus wallet.md', 'Venus wallet使用'],
-                                ['chain.md', '链管理'],
-                                ['How-To-Use-Wallet-In-Venus.md', 'Venus程序中的钱包使用'],
-                                ['Multisig-Wallet.md', 'Venus内嵌的多签使用'],
-                                ['Payment-Channel.md', '付款通道（paych）使用'],
-                                ['Commands.md', 'CLI 命令'],
-                                ['Getting-Started.md', '快速启动'],
-                                ['How-To-Connect-Network.md', '连接节点网络'],
-                                ['How-To-Setup_2knet.md', '启动本地2K测试网'],
-                                ['Troubleshooting-&-FAQ.md', '故障排除和常见问题解答'],
-                                ['How-To-Contribute-Docs.md', '如何部署文档'],
+                                ['How-To-Deploy-MingPool.md', '如何部署矿池'],
+                                // ['Using-venus-Shared-Modules.md', '如何加入矿池'],
+                                ['Venus-replace-lotus.md', '从Lotus迁移到Venus'],
+                                ['chain.md', '链维护'],
+                                ['How-To-Connect-Network.md', '加入不同网络'],
+                                ['Troubleshooting-&-FAQ.md', '故障排除'],
+                                ['How-To-Contribute-Docs.md', '贡献文档']
                             ]
                         },
                         {
-                            title: 'Resources',
+                            title: '模块',
                             collapsable: true,
-                            children:
-                                [
-                                    ['https://docs.filecoin.io', 'Filecoin docs'],
-                                    ['questions.md', 'Have a question?'],
-                                ]
-
+                            children: [
+                                ['Getting-Started.md', 'Venus daemon'],
+                                ['How to use venus messager.md', 'Venus messager'],
+                                ['How-To-Use-Wallet-In-Venus.md', 'Venus wallet'],
+                                // ['Venus-wallet.md', 'Venus wallet'],
+                                ['Venus-Worker.md', 'Venus worker'],
+                            ]
+                        },
+                        {
+                            title: '进阶',
+                            collapsable: true,
+                            children: [
+                                ['Commands.md', 'CLI命令'],
+                                ['Tips-Running-In-China.md', '中国部署提示'],
+                                ['Multisig-Wallet.md', '多签钱包'],
+                                ['venus_load_balancing.md', '负载均衡'],
+                                ['Payment-Channel.md', '支付通道'],
+                                ['How-To-Setup_2knet.md', '本地2k开发网络'],
+                            ]
                         }
                     ]
                 }

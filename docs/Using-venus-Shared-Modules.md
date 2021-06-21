@@ -10,8 +10,8 @@ Starting filecoin mining could be a daunting task given not only the large initi
 
 There are two ways of getting started with mining using Venus. 
 
-1. Deploy minimum hardware and gain access to a publicly hosted shared venus modules. <!--(Checkout venus incubation center page to learn more on how you can get an account setup!)-->
-2. Deploy all required hardware and venus modules by yourself.
+1. Deploy minimum hardware and gain access to a publicly hosted shared venus modules.<!--(Checkout venus incubation center page to learn more on how you can get an account setup!)--> (The rest of this tutorial will walk you through this way of deploying venus mining operation)
+2. Deploy all required hardware and venus modules by yourself. (See [this](https://venus.filecoin.io/How-To-Deploy-MingPool.html) tutorial to learn more)
 
 After following the rest of the trutorial and successful deployment, you can start pledging sectors, grow power and evantually obtain block rewards through your contribution to the network's storage capacity!
 
@@ -43,7 +43,7 @@ Learn more about hardware requirements [here](https://docs.filecoin.io/mine/mini
 
 Before diving into deployment of your mining operation, please make sure you go through the following steps. 
 
-:::tip 
+:::warning
 
 It is recommended that you test your setup in nerpa or calibration network before deploying on mainnet. 
 
@@ -61,12 +61,18 @@ There are two ways to have your account setup.
 
 If you are trying to connect to a hosted shared venus modules, <!--like ones provided by venus incubation center,--> contact admin of said service and have them set it up for you.
 
+:::tip
+
+venus-wallet can be deployed as either a shared or independent module depend on your security requirement.
+
+:::
+
 #### For admins of shared modules
 
 If you are an admin hosting shared venus modules, use the following command to create an account for your miner.
 
 ```bash
-# If miner doesn't have <MINER_ID> yet, leave out --miner flag
+# If miner doesn't have a <MINER_ID> yet, leave out --miner flag and use 'updateUser' when user inited their miner id
 $ ./venus-auth addUser --name <ACCOUNT_NAME> --miner <MINER_ID>
 # The returned token is what miner have to add into their config file in order to gain access to your shared modules
 $ ./venus-auth genToken --perm write <ACCOUNT_NAME>
@@ -75,7 +81,7 @@ $ ./venus-auth genToken --perm write <ACCOUNT_NAME>
 
 ### Software dependencies
 
-You will need the following software installed before running venus.
+You will need to have the following software installed before running venus.
 
 #### Build tools
 
@@ -142,6 +148,12 @@ Enter Password again:******
 Password set successfully
 ```
 
+:::warning
+
+Please keep backups of your password and store them properly.
+
+:::
+
 Generate owner and worker addresses. (If you don't have an existing miner id)
 
 ```bash
@@ -157,7 +169,7 @@ If you are testing on Nerpa or Calibration, you have to fund all your addresses 
 
 :::
 
-Change `[APIRegisterHub]` section of of the config file using the credential you get from shared module admin.
+Change `[APIRegisterHub]` section of  `~/.venus_wallet/config.toml` using the credential you get from shared module admin.
 
 ```toml
 [APIRegisterHub]
@@ -204,7 +216,8 @@ $ nohup ./venus-sealer init \
 --owner <OWNER_ADDRESS>  \
 # Choose between 32G or 64G for mainnet
 --sector-size 512M \
-# Choose from nerpa, calibration. Leave out --network for mainet?
+# Choose from nerpa, calibration for testnets
+# Leave out this flag for mainnet
 --network nerpa \
 # Config for different shared venus modules
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
@@ -212,8 +225,8 @@ $ nohup ./venus-sealer init \
 --gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/3453 \
 --auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
 # Flags sealer to not storing any sealed sectors on the machine it runs on
+# You can leave out this flag if you are on testnet
 --no-local-storage \
---wallet-name ? \
 > sealer.log 2>&1 &
 
 # Expect output close to the following
@@ -229,14 +242,15 @@ $ nohup ./venus-sealer init \
 2021-04-25T18:46:32.089+0800	INFO	main	venus-sealer/init.go:302	Sealer successfully created, you can now start it with 'venus-sealer run'
 ```
 
-### Initialize sealer with a new miner id
+### Initialize sealer with an existing miner id
 
 If you already have a miner id, run the following command to initialize sealer.
 
 ```bash
 $ ./venus-sealer init \
 --actor <MINER_ID>  \
-# Choose from nerpa, calibration. Leave out --network for mainet?
+# Choose from nerpa, calibration for testnets
+# Leave out this flag for mainnet
 --network nerpa \
 # Config for different shared venus modules
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
@@ -245,7 +259,6 @@ $ ./venus-sealer init \
 --auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
 # Flags sealer to not store any sealed sectors on the machine it runs on
 --no-local-storage \
---wallet-name ?
 > sealer.log 2>&1 &
 
 # Expect output close to the following
@@ -274,7 +287,7 @@ If you are running sealer for the 1st time, it will start to download proof para
 Attach permanent storage to sealer.
 
 ```bash
-$ ./venus-sealer storage attach --init --store --seal <ABSOLUTE_PATH_OF_YOUR_NETWORK_STORAGE>
+$ ./venus-sealer storage attach --init --store <ABSOLUTE_PATH_OF_YOUR_PERMANENT_STORAGE> --seal <ABSOLUTE_PATH_OF_YOUR_SEALING_STORAGE>
 ```
 
 Pledge a single sector.
