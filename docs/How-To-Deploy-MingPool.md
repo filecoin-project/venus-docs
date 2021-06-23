@@ -95,6 +95,7 @@ Download and compile the source code of venus-auth.
 ```shell script
 $ git clone https://github.com/filecoin-project/venus-auth.git
 $ cd venus-auth
+$ git checkout <RELEASE_TAG>
 $ make 
 $ nohup ./venus-auth > auth.log 2>&1 &
 ```
@@ -172,6 +173,7 @@ Download and compile the source code of venus-gateway.
 ```bash
 $ git clone https://github.com/ipfs-force-community/venus-gateway.git
 $ cd venus-gateway
+$ git checkout <RELEASE_TAG>
 $ go mod tidy
 $ make
 ```
@@ -194,6 +196,7 @@ Download and compile the source code of venus.
 ```shell script
 $ git clone https://github.com/filecoin-project/venus.git
 $ cd venus
+$ git checkout <RELEASE_TAG>
 $ make deps
 $ make
 ```
@@ -258,6 +261,7 @@ Download and compile the source code of venus-wallet.
 ```shell script
 $ git clone https://github.com/filecoin-project/venus-wallet.git
 $ cd venus-wallet 
+$ git checkout <RELEASE_TAG>
 $ make
 ```
 
@@ -321,6 +325,7 @@ Download and compile the source code of venus-messager.
 ```shell script
 $ git clone https://github.com/filecoin-project/venus-messager.git
 $ cd venus-messager
+$ git checkout <RELEASE_TAG>
 $ make deps
 $ make 
 ```
@@ -351,6 +356,7 @@ Download and compile the source code of venus-miner.
 ```shell script
 $ git clone https://github.com/filecoin-project/venus-miner.git
 $ cd venus-miner
+$ git checkout <RELEASE_TAG>
 $ make
 ```
 Initialize venus-miner.
@@ -405,6 +411,7 @@ Download and compile the source code of venus-miner.
 ```shell script
 $ git clone https://github.com/filecoin-project/venus-sealer.git
 $ cd venus-sealer
+$ git checkout <RELEASE_TAG>
 $ make deps
 $ make
 ```

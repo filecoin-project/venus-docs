@@ -123,7 +123,8 @@ Download and compile the source code of venus-wallet.
 ```bash
 $ git clone https://github.com/filecoin-project/venus-wallet.git
 # change directory to venus-wallet
-$ cd venus-wallet 
+$ cd venus-wallet
+$ git checkout <RELEASE_TAG>
 $ make
 ```
 
@@ -201,6 +202,7 @@ Download and compile the source code of venus-sealer.
 ```bash
 $ git clone https://github.com/filecoin-project/venus-sealer.git
 $ cd venus-sealer
+$ git checkout <RELEASE_TAG>
 # make dependency
 $ make deps
 $ make
