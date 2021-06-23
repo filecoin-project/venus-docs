@@ -142,13 +142,22 @@ $ nohup ./venus-auth > auth.log 2>&1 &
 
 venus-auth manages [jwt](https://jwt.io/) tokens used by other venus modules for them to talk to each other securely on the network.
 
+Generate tokens for shared modules.
+
+```bash
+# --perm specifies admin, sign, wirte or read permission of the token generated
+$ ./venus-auth genToken --perm admin <SHARED>
+<SHARED_ADMIN_AUTH_TOKEN>
+```
+
+Generate tokens for independent modules. Tokens can be logically grouped by `<USER>` as individual miner joining the mining pool.
+
 ```shell script
 $ ./venus-auth addUser --name <USER>
-# --perm specifies admin, sign, wirte or read permission of the token generated
-$ ./venus-auth genToken --perm admin <USER>
-<USER_ADMIN_AUTH_TOKEN>
 $ ./venus-auth genToken --perm write <USER>
 <USER_WRITE_AUTH_TOKEN>
+$ ./venus-auth genToken --perm read <USER>
+<USER_READ_AUTH_TOKEN>
 ```
 :::tip
 
@@ -163,7 +172,7 @@ Download and compile the source code of venus-gateway.
 ```bash
 $ git clone https://github.com/ipfs-force-community/venus-gateway.git
 $ cd venus-gateway
-$ make deps
+$ go mod tidy
 $ make
 ```
 
@@ -172,8 +181,10 @@ Start venus-gateway.
 ```bash
 $ ./venus-gateway \
 --listen /ip4/0.0.0.0/tcp/45132 \
---auth-url <VENUS_AUTH_IP_ADDRESS:PORT>
-run > venus-gateway.log 2>&1 &
+run \
+# Use either a http or https url
+--auth-url <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+> venus-gateway.log 2>&1 &
 ```
 
 ## Install venus daemon
@@ -190,7 +201,7 @@ Start venus daemon for chain synchronization. Use `--network` to specify the net
 
 ```bash
 $ nohup ./venus daemon --network nerpa \
---authURL <VENUS_AUTH_IP_ADDRESS:PORT> \
+--authURL <https://VENUS_AUTH_IP_ADDRESS:PORT> \
 > venus.log 2>&1 & 
 ```
 
@@ -236,7 +247,7 @@ Restart venus daemon for the config to take into effects.
 $ ps -ef | grep venus
 $ kill <VENUS_PID>
 $ nohup ./venus daemon --network nerpa \
---authURL <VENUS_AUTH_IP_ADDRESS:PORT> \
+--authURL <https://VENUS_AUTH_IP_ADDRESS:PORT> \
 > venus.log 2>&1 
 ```
 
@@ -285,12 +296,12 @@ If you are testing on Nerpa or Calibration, you have to fund all your addresses 
 
 :::
 
-Change `[APIRegisterHub]` section of `~/.venus_wallet/config.toml` using the token you generated using venus-auth.
+Change `[APIRegisterHub]` section of `~/.venus_wallet/config.toml` using the token you generated with venus-auth.
 
 ```toml
 [APIRegisterHub]
-RegisterAPI = ["/ip4/<IP_ADDRESS_OF_VENUS_WALLET>/tcp/45132"]
-Token = "<USER_WRITE_AUTH_TOKEN>"
+RegisterAPI = ["/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/45132"]
+Token = "<USER_READ_AUTH_TOKEN>"
 SupportAccounts = ["<USER>"]
 ```
 Restart venus-wallet so that the changes takes into effect.
@@ -317,10 +328,10 @@ Start venus-messager. Note that `--auth-url`, `--node-url` and `--auth-token` ar
 
 ```bash
 $ nohup ./venus-messager run \
---auth-url=<VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-url=<https://VENUS_AUTH_IP_ADDRESS:PORT> \
 --node-url /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
---gateway-url=<VENUS_GATEWAY_IP_ADDRESS:PORT> \
---auth-token <USER_ADMIN_AUTH_TOKEN> \
+--gateway-url=/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/45132 \
+--auth-token <SHARED_ADMIN_AUTH_TOKEN> \
 --db-type mysql \
 --mysql-dsn "<USER>:<PASSWORD>@(127.0.0.1:3306)/venus_messager?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s" \
 > msg.log 2>&1 &
@@ -348,10 +359,10 @@ Initialize venus-miner.
 $ ./venus-miner init
 # For nettype, choose from mainnet, nerpanet, debug, 2k, calibnet
 --nettype nerpanet
---api /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
---token <USER_ADMIN_AUTH_TOKEN>
---auth-api <VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-api <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+--token <SHARED_ADMIN_AUTH_TOKEN> \
 --gateway-api /ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132
+--api /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
 ```
 
 Run venus-miner.
