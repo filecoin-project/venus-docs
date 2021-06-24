@@ -4,7 +4,7 @@
 <script>
 export default {
   mounted() {
-    this.$router.push("/Overview.html");
+    // this.$router.push("guide/Overview.html");
   }
 };
 </script>

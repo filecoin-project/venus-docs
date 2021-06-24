@@ -10,8 +10,8 @@ Starting filecoin mining could be a daunting task given not only the large initi
 
 There are two ways of getting started with mining using Venus. 
 
-1. Deploy minimum hardware and gain access to a publicly hosted shared venus modules.<!--(Checkout venus incubation center page to learn more on how you can get an account setup!)--> (The rest of this tutorial will walk you through this way of deploying venus mining operation)
-2. Deploy all required hardware and venus modules by yourself. (See [this](https://venus.filecoin.io/How-To-Deploy-MingPool.html) tutorial to learn more)
+1. Deploy minimum hardware and gain access to a publicly hosted shared venus modules.<!--(Checkout venus incubation center page to learn more on how you can get an account setup!)--> (See [this](https://venus.filecoin.io/Using-venus-Shared-Modules.html) tutorial to learn more)
+2. Deploy all required hardware and venus modules by yourself. (The rest of this tutorial will walk you through this way of deploying venus mining operation)
 
 After following the rest of the trutorial and successful deployment, you can start pledging sectors, grow power and evantually obtain block rewards through your contribution to the network's storage capacity!
 
@@ -33,8 +33,7 @@ Depending on its role in a mining cluster, modules could be loosely broken down 
 
 Diagram below illustrates how venus modules interacts with one and another.
 
-![venus-cluster](./images/venus-cluster.png)
-
+![venus-cluster](../images/venus-cluster.png)
 ## Hardware requirements
 
 Learn more about hardware requirements [here](https://docs.filecoin.io/mine/mining-architectures/#protocol-labs-example-architecture).
@@ -53,35 +52,9 @@ It is recommended that you test your setup in nerpa or calibration network befor
 
 Choose a network file system that you are familiar with (NFS for example) and deploy your storage cluster.
 
-### Get your account setup in shared modules
-
-There are two ways to have your account setup.
-
-#### For miners connecting to shared modules
-
-If you are trying to connect to a hosted shared venus modules, <!--like ones provided by venus incubation center,--> contact admin of said service and have them set it up for you.
-
-:::tip
-
-venus-wallet can be deployed as either a shared or independent module depend on your security requirement.
-
-:::
-
-#### For admins of shared modules
-
-If you are an admin hosting shared venus modules, use the following command to create an account for your miner.
-
-```bash
-# If miner doesn't have a <MINER_ID> yet, leave out --miner flag and use 'updateUser' when user inited their miner id
-$ ./venus-auth addUser --name <ACCOUNT_NAME> --miner <MINER_ID>
-# The returned token is what miner have to add into their config file in order to gain access to your shared modules
-$ ./venus-auth genToken --perm write <ACCOUNT_NAME>
-<AUTH_TOKEN_FOR_ACCOUNT_NAME>
-```
-
 ### Software dependencies
 
-You will need to have the following software installed before running venus.
+You will need the following software installed before running venus.
 
 #### Build tools
 
@@ -116,46 +89,203 @@ go env -w GO111MODULE=on
 
 See the [official Golang installation instructions](https://golang.org/doc/install) if you get stuck.
 
+## Install venus-auth
+Download and compile the source code of venus-auth.
+
+```shell script
+$ git clone https://github.com/filecoin-project/venus-auth.git
+$ cd venus-auth
+$ git checkout <RELEASE_TAG>
+$ make 
+$ nohup ./venus-auth > auth.log 2>&1 &
+```
+:::tip 
+
+Default config file for Venus-auth is located at `~/.venus-auth/config.toml`.
+
+:::
+
+:::tip Logs
+
+Log defaults printing to console. InfluxDB is supported through configuration.
+
+:::
+
+### Using MySQL (Optional)
+
+MySQL 5.7 or above is supported and can be used as a substitute for the dedault Badger key-value  database. To use MySQL database, modify the db section of the config.
+
+```shell script
+$ vim ~/.venus-auth/config.toml
+
+# Data source configuration item
+[db]
+# support: badger (default), mysql 
+# the mysql DDL is in the script package 
+type = "mysql" 
+# The following parameters apply to MySQL
+DSN = "<USER>:<PASSWORD>@(127.0.0.1:3306)/venus_auth?parseTime=true&loc=Local&charset=utf8mb4&collation=utf8mb4_unicode_ci&readTimeout=10s&writeTimeout=10s"
+# conns 1500 concurrent
+maxOpenConns = 64
+maxIdleConns = 128
+maxLifeTime = "120s"
+maxIdleTime = "30s"
+```
+Restart venus-auth for the configuration to take into effect.
+
+```shell script
+$ ps -ef | grep auth
+$ kill <VENUS_AUTH_PID>
+$ nohup ./venus-auth > auth.log 2>&1 &
+```
+
+### Token gerneration
+
+venus-auth manages [jwt](https://jwt.io/) tokens used by other venus modules for them to talk to each other securely on the network.
+
+Generate tokens for shared modules.
+
+```bash
+# --perm specifies admin, sign, wirte or read permission of the token generated
+$ ./venus-auth genToken --perm admin <SHARED>
+<SHARED_ADMIN_AUTH_TOKEN>
+```
+
+Generate tokens for independent modules. Tokens can be logically grouped by `<USER>` as individual miner joining the mining pool.
+
+```shell script
+$ ./venus-auth addUser --name <USER>
+$ ./venus-auth genToken --perm write <USER>
+<USER_WRITE_AUTH_TOKEN>
+$ ./venus-auth genToken --perm read <USER>
+<USER_READ_AUTH_TOKEN>
+```
+:::tip
+
+Use `./venus-auth addUser <USER>` to logically group different tokens.
+
+:::
+
+## Install venus-gateway
+
+Download and compile the source code of venus-gateway.
+
+```bash
+$ git clone https://github.com/ipfs-force-community/venus-gateway.git
+$ cd venus-gateway
+$ git checkout <RELEASE_TAG>
+$ go mod tidy
+$ make
+```
+
+Start venus-gateway.
+
+```bash
+$ ./venus-gateway \
+--listen /ip4/0.0.0.0/tcp/45132 \
+run \
+# Use either a http or https url
+--auth-url <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+> venus-gateway.log 2>&1 &
+```
+
+## Install venus daemon
+
+Download and compile the source code of venus.
+
+```shell script
+$ git clone https://github.com/filecoin-project/venus.git
+$ cd venus
+$ git checkout <RELEASE_TAG>
+$ make deps
+$ make
+```
+Start venus daemon for chain synchronization. Use `--network` to specify the network venus is connecting to.
+
+```bash
+$ nohup ./venus daemon --network nerpa \
+--authURL <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+> venus.log 2>&1 & 
+```
+
+:::tip
+
+Use `tail -f venus.log` to check if there is any errors during sychronization.
+
+:::
+
+### Grant access to venus daemon
+
+By default, venus daemon only respond to local access. Change the following configuration to allow access from other addresses.
+
+```shell script
+vim ~/.venus/config.json
+```
+
+Change `apiAddress` from `/ip4/127.0.0.1/tcp/3453` to `/ip4/0.0.0.0/tcp/3453`. Save and close the config file.
+
+```json
+{
+	"api": {
+		"venusAuthURL": "http://192.168.5.62:8989",
+		"apiAddress": "/ip4/0.0.0.0/tcp/3453",
+		"accessControlAllowOrigin": [
+			"http://localhost:8080",
+			"https://localhost:8080",
+			"http://127.0.0.1:8080",
+			"https://127.0.0.1:8080"
+    ],
+		"accessControlAllowCredentials": false,
+		"accessControlAllowMethods": [
+			"GET",
+			"POST",
+			"PUT"
+    ]
+  },
+```
+
+Restart venus daemon for the config to take into effects.
+
+```bash
+$ ps -ef | grep venus
+$ kill <VENUS_PID>
+$ nohup ./venus daemon --network nerpa \
+--authURL <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+> venus.log 2>&1 
+```
+
 ## Install venus-wallet
 
 Download and compile the source code of venus-wallet.
 
-```bash
+```shell script
 $ git clone https://github.com/filecoin-project/venus-wallet.git
-# change directory to venus-wallet
-$ cd venus-wallet
+$ cd venus-wallet 
 $ git checkout <RELEASE_TAG>
 $ make
 ```
 
-Run venus-wallet module in background.
+Start venus-wallet.
 
 ```bash
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
 
-:::tip 
+Set password for venus-wallet
 
-Use `tail -f wallet.log` to monitor wallet log.
-
-:::
-
-Setup a password for your venus-wallet.
-
-```bash
+```shell script
+# Set lock and unlock password
 $ ./venus-wallet setpwd
 Password:******
 Enter Password again:******
-Password set successfully
 ```
-
 :::warning
 
-Please keep backups of your password and store them properly.
+Make sure you properly backup the password you just set.
 
 :::
 
-Generate owner and worker addresses. (If you don't have an existing miner id)
+Generate addresses for later use.
 
 ```bash
 $ ./venus-wallet new bls
@@ -170,15 +300,14 @@ If you are testing on Nerpa or Calibration, you have to fund all your addresses 
 
 :::
 
-Change `[APIRegisterHub]` section of  `~/.venus_wallet/config.toml` using the credential you get from shared module admin.
+Change `[APIRegisterHub]` section of `~/.venus_wallet/config.toml` using the token you generated with venus-auth.
 
 ```toml
 [APIRegisterHub]
-RegisterAPI = ["/ip4/<IP_ADDRESS_OF_VENUS_WALLET>/tcp/45132"]
-Token = "<AUTH_TOKEN_FOR_ACCOUNT_NAME>"
-SupportAccounts = ["<ACCOUNT_NAME>"]
+RegisterAPI = ["/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/45132"]
+Token = "<USER_READ_AUTH_TOKEN>"
+SupportAccounts = ["<USER>"]
 ```
-
 Restart venus-wallet so that the changes takes into effect.
 
 ```bash
@@ -189,45 +318,122 @@ $ kill [PID]
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
 
+## Install venus-messager
+
+Download and compile the source code of venus-messager.
+
+```shell script
+$ git clone https://github.com/filecoin-project/venus-messager.git
+$ cd venus-messager
+$ git checkout <RELEASE_TAG>
+$ make deps
+$ make 
+```
+Start venus-messager. Note that `--auth-url`, `--node-url` and `--auth-token` are for venus-messager to be aware of other venus modules and be properly authenticated.
+
+```bash
+$ nohup ./venus-messager run \
+--auth-url=<https://VENUS_AUTH_IP_ADDRESS:PORT> \
+--node-url /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
+--gateway-url=/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/45132 \
+--auth-token <SHARED_ADMIN_AUTH_TOKEN> \
+--db-type mysql \
+--mysql-dsn "<USER>:<PASSWORD>@(127.0.0.1:3306)/venus_messager?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s" \
+> msg.log 2>&1 &
+```
+
 :::tip
 
-Using process controll like  `systemmd` or `supervisord` is recommended.
+If no database related params are specified, venus-messager will default to use sqlite.
 
 :::
 
-## Install venus-sealer
 
-Download and compile the source code of venus-sealer.
+## Install venus-miner
+
+Download and compile the source code of venus-miner.
+
+```shell script
+$ git clone https://github.com/filecoin-project/venus-miner.git
+$ cd venus-miner
+$ git checkout <RELEASE_TAG>
+$ make
+```
+Initialize venus-miner.
 
 ```bash
+$ ./venus-miner init
+# For nettype, choose from mainnet, nerpanet, debug, 2k, calibnet
+--nettype nerpanet
+--auth-api <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+--token <SHARED_ADMIN_AUTH_TOKEN> \
+--gateway-api /ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132
+--api /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
+```
+
+Run venus-miner.
+
+```bash
+$ nohup ./venus-miner run >>miner.log 2>& 1 &
+```
+
+### Miner management
+
+Once a miner, venus-sealer with proper miner id, connected to your shared modules. You can query the status of said miner id by the following.
+
+```bash
+$ ./venus-miner address state 
+[
+	{
+		"Addr": "<MINER_ID>",
+		"IsMining": true,
+		"Err": null
+	}
+]
+```
+
+If `IsMining` of your miner is `false`, you can run the following command to start the miner id.
+
+```bash
+$ ./venus-miner address start <MINER_ID>
+```
+
+List all miner ids that have connected to venus-miner.
+
+```bash
+$ ./venus-miner address list
+```
+
+## Install venus-sealer
+
+Download and compile the source code of venus-miner.
+
+```shell script
 $ git clone https://github.com/filecoin-project/venus-sealer.git
 $ cd venus-sealer
 $ git checkout <RELEASE_TAG>
-# make dependency
 $ make deps
 $ make
 ```
 
-### Initialize sealer with a new miner id
+#### Initialize sealer with a new miner id
 
 If you don't have a miner id yet, run the following command to initialize sealer.
 
-```bash
+```shell script
 $ nohup ./venus-sealer init \
 --worker <WORKER_ADDRESS> \
 --owner <OWNER_ADDRESS>  \
 # Choose between 32G or 64G for mainnet
 --sector-size 512M \
-# Choose from nerpa, calibration for testnets
-# Leave out this flag for mainnet
+# Choose from nerpa, calibration. Leave out --network for mainet?
 --network nerpa \
-# Config for different shared venus modules
+# Addresses of different shared venus modules
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
 --messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/3453 \
 --gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/3453 \
---auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
+--auth-token <USER_WRITE_AUTH_TOKEN> \
 # Flags sealer to not storing any sealed sectors on the machine it runs on
-# You can leave out this flag if you are on testnet
 --no-local-storage \
 > sealer.log 2>&1 &
 
@@ -244,21 +450,20 @@ $ nohup ./venus-sealer init \
 2021-04-25T18:46:32.089+0800	INFO	main	venus-sealer/init.go:302	Sealer successfully created, you can now start it with 'venus-sealer run'
 ```
 
-### Initialize sealer with an existing miner id
+#### Initialize sealer with an existing miner id
 
 If you already have a miner id, run the following command to initialize sealer.
 
-```bash
+```shell script
 $ ./venus-sealer init \
 --actor <MINER_ID>  \
-# Choose from nerpa, calibration for testnets
-# Leave out this flag for mainnet
+# Choose from nerpa, calibration. Leave out --network for mainet?
 --network nerpa \
 # Config for different shared venus modules
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
 --messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/3453 \
 --gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/3453 \
---auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
+--auth-token <USER_WRITE_AUTH_TOKEN> \
 # Flags sealer to not store any sealed sectors on the machine it runs on
 --no-local-storage \
 > sealer.log 2>&1 &
@@ -272,17 +477,17 @@ $ ./venus-sealer init \
 2021-06-07T04:15:49.181+0800    INFO    main    venus-sealer/init.go:290        Sealer successfully created, you can now start it with 'venus-sealer run'
 ```
 
-## Start pledging
+### Start pledging
 
-Run sealer.
+Run venus-sealer.
 
-```bash
+```shell script
 $ nohup ./venus-sealer run >> sealer.log 2>&1 &
 ```
 
-:::tip 
+:::tip
 
-If you are running sealer for the 1st time, it will start to download proof parameters, which may take quite some time. If you are located in China, follow the tips [here](https://venus.filecoin.io/Tips-Running-In-China.html) to speed up the process.  
+If you are running sealer for the 1st time, it will start to download proof parameters, which may take quite some time. If you are located in China, follow the tips [here](https://venus.filecoin.io/Tips-Running-In-China.html) to speed up the process.
 
 :::
 
@@ -304,40 +509,6 @@ Check ongoing sealing job.
 $ ./venus-sealer sealing
 ```
 
-See `venus-sealer -h` for list of commands that sealer supports.
-
-```bash
-$ ./venus-sealer -h
-NAME:
-   venus-sealer - Filecoin decentralized storage network miner
-
-USAGE:
-   venus-sealer [global options] command [command options] [arguments...]
-
-VERSION:
-   1.4.1
-
-COMMANDS:
-   init      Initialize a venus sealer repo
-   run       Start a venus sealer process
-   sectors   interact with sector store
-   actor     manipulate the miner actor
-   info      Print miner info
-   sealing   interact with sealing pipeline
-   storage   manage sector storage
-   messager  message cmds
-   proving   View proving information
-   stop      Stop a running venus sealer
-   version   Print version
-   help, h   Shows a list of commands or help for one command
-
-GLOBAL OPTIONS:
-   --actor value, -a value  specify other actor to check state for (read only)
-   --color                  (default: false)
-   --help, -h               show help (default: false)
-   --version, -v            print the version (default: false)
-```
-
-## Questions?
+## Questions？
 
 Find us on [Slack](https://filecoinproject.slack.com/archives/CEHHJNJS3)!
