@@ -37,7 +37,7 @@ module.exports = {
         },
         '/zh/': {
             lang: 'zh-CN',
-            title: 'Venus Filecoin',
+            title: '启明星',
             description: 'Venus是完全兼容Filecoin分布式存储网络的一个go版本代码实现',
         }
     },
@@ -63,47 +63,78 @@ module.exports = {
                 title: 'Venus Filecoin',
                 description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
                 nav: [
-                ],
-                sidebar: [
                     {
-                        title: 'Getting-Started',
-                        collapsable: true,
-                        children: [
-                            ['Overview.md', 'Overview'],
-                            ['How-To-Deploy-MingPool.md', 'How to deploy a mining pool'],
-                            ['Using-venus-Shared-Modules.md', 'How to join a mining pool'],
-                            ['Venus-replace-lotus.md', 'Migrate from Lotus'],
-                            ['Chain.md', 'Chain management'],
-                            ['How-To-Connect-Network.md', 'Connect to different network'],
-                            ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
-                            ['How-To-Contribute-Docs.md', 'Contribute to doc']
-                        ]
+                        text: 'Getting Started',
+                        link: '/guide/'
                     },
                     {
-                        title: 'Modules',
-                        collapsable: true,
-                        children: [
-                            ['Getting-Started.md', 'Venus daemon'],
-                            ['How-To-Use-Messager.md', 'Venus messager'],
-                            ['How-To-Use-Wallet-In-Venus.md', 'Venus wallet'],
-                            // ['Venus-wallet.md', 'Venus wallet'],
-                            ['Venus-Worker.md', 'Venus worker'],
-                        ]
+                        text: 'Venus Modules',
+                        link: '/modules/'
                     },
                     {
-                        title: 'Advanced',
-                        collapsable: true,
-                        children: [
-                            ['Commands.md', 'Venus CLI commands'],
-                            ['Tips-Running-In-China.md', 'Tips running in China'],
-                            ['Multisig-wallet.md', 'Multisig wallet'],
-                            ['venus_load_balancing.md', 'Venus load balancing'],
-                            ['Payment-Channel.md', 'Payment channel'],
-                            ['How-To-Setup_2knet.md', 'How to start a local dev network'],
-                        ]
+                        text: 'Advanced',
+                        link: '/advanced/'
+                    },
+                    {
+                        text: 'Incubation',
+                        link: '/incubation/'
                     }
-                    // ]
-                ]
+                ],
+                sidebar: {
+                    '/guide/': [
+                        {
+                            title: 'Getting Started',
+                            collapsable: false,
+                            children: [
+                                ['', 'Overview'],
+                                ['How-To-Deploy-MingPool.md', 'How to deploy a mining pool'],
+                                ['Using-venus-Shared-Modules.md', 'How to join a mining pool'],
+                                ['Venus-replace-lotus.md', 'Migrate from Lotus'],
+                                ['Chain.md', 'Chain management'],
+                                ['How-To-Connect-Network.md', 'Connect to different network'],
+                                ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
+                                ['How-To-Contribute-Docs.md', 'Contribute to doc']
+                            ]
+                        }
+                    ],
+                    '/modules/': [
+                        {
+                            title: 'Venus Modules',
+                            collapsable: false,
+                            children: [
+                                ['', 'Venus daemon'],
+                                ['How-To-Use-Messager.md', 'Venus messager'],
+                                ['How-To-Use-Wallet-In-Venus.md', 'Venus wallet'],
+                                // ['Venus-wallet.md', 'Venus wallet'],
+                                ['Venus-Worker.md', 'Venus worker'],
+                            ]
+                        }
+                    ],
+                    '/advanced/': [
+                        {
+                            title: 'Advanced',
+                            collapsable: false,
+                            children: [
+                                ['', 'Venus CLI commands'],
+                                ['Tips-Running-In-China.md', 'Tips running in China'],
+                                ['Multisig-wallet.md', 'Multisig wallet'],
+                                ['venus_load_balancing.md', 'Venus load balancing'],
+                                ['Payment-Channel.md', 'Payment channel'],
+                                ['How-To-Setup_2knet.md', 'How to start a local dev network'],
+                            ]
+                        }
+                    ],
+                    '/incubation/': [
+                        {
+                            title: 'Incubation',
+                            collapsable: false,
+                            children: [
+                                ['', 'How to deploy a mining pool'],
+                                ['Using-venus-Shared-Modules.md', 'How to join a mining pool'],
+                            ]
+                        }
+                    ]
+                }
             },
             '/zh/': {
                 selectText: '选择语言',

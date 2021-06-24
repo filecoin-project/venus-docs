@@ -58,11 +58,11 @@ The shared moduler of the Venus service include: [venus](https://github.com/file
 * Replace lotus-miner with venus-sealer and restart the service. For deployment of venus-sealer, please refer to [How-To-Deploy-MingPool](How-To-Deploy-MingPool.md)。
 
 Lotus cluster process before replacement
-![lotus-cluster-1](./zh/images/lotus-cluster-1.png)
+![lotus-cluster-1](../zh/images/lotus-cluster-1.png)
 
 
 Venus cluster process after replacement
-![venus-replace-lotus-cluster-1](./zh/images/venus-replace-lotus-cluster-1.png)
+![venus-replace-lotus-cluster-1](../zh/images/venus-replace-lotus-cluster-1.png)
 
 ##### Scheme 2: customized lotus-miner moduler replacement
 
@@ -73,8 +73,8 @@ Because of the fact that the miners have modified the lotus-miner code, if they 
 * Miners can develop related tools by themselves, or wait for Venus developers to launch related tools and developer documents.
 
 Lotus cluster process before replacement
-![lotus-cluster-2](./zh/images/lotus-cluster-2.png)
+![lotus-cluster-2](../zh/images/lotus-cluster-2.png)
 
 
 Venus cluster process after replacement
-![venus-replace-lotus-cluster-2](./zh/images/venus-replace-lotus-cluster-2.png)
+![venus-replace-lotus-cluster-2](../zh/images/venus-replace-lotus-cluster-2.png)
