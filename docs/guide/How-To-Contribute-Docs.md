@@ -4,10 +4,6 @@
 
 To run the docs project, you need to install ***node*** and ***yarn***
 
-node:[https://nodejs.org/en/download/]()
-
-yarn:[https://yarn.bootcss.com/docs/install/#mac-stable]()
-
 ## pull the project
 
 ```shell script
