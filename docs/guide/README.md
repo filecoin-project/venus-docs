@@ -1,5 +1,3 @@
-# Overview of Venus
-
 ## Preface
 
 Multiple interoperable software implementations are required on the same blockchain. Each implementation has its own set of security issues, but they are not all the same . Therefore, launching cryptocurrency networks with multiple implementations can reduce the catastrophic errors. Venus is one of the implementations of Filecoin network.
