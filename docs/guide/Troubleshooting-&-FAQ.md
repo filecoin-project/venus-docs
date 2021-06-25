@@ -68,7 +68,7 @@ If you installed `ipfs` from homebrew, you may have the wrong version of `gx` an
 If you encounter a rust compiler error, i.e. ` cargo build --release --all --manifest-path proofs/rust-proofs/Cargo.toml' failed:` try updating rust to the latest version with `rustup update`.
 
 * **Error while running install<br />**
-If you encounter an error while running install, i.e. `/System/Library/Frameworks//Security.framework/Security are out of sync. Falling back to library file for linking`, this may be due to outdated installs. Reinstall Go via the [installer](https://golang.org/doc/install). Then remove filecoin (`rm -rf ./venus`) and [reinstall it](Getting-Started).
+If you encounter an error while running install, i.e. `/System/Library/Frameworks//Security.framework/Security are out of sync. Falling back to library file for linking`, this may be due to outdated installs. Reinstall Go via the [installer](https://golang.org/doc/install). Then remove filecoin (`rm -rf ./venus`) and reinstall it.
 
 * **Can't build OS X Mojave `fatal error: 'stdio.h' file not found`**
 You may see this error if you are building everything from source and not installing anything with homebrew, for example, when building go-secp256k1:
@@ -153,7 +153,7 @@ If you're updating venus from a previous version the git submodules may also nee
     ```text
     code not at same version: GIT_SHA does not match DIFFERENT_GIT_SHA, disconnecting from peer:
     ```
-    or seeing a lot of errors during validation of blocks during chain syncing means that your binary or source code is not at the correct version for the devnet you'd like to join. To join a devnet, download the latest release for that devnet in the [Releases](https://github.com/filecoin-project/venus/releases) section of the repository and follow the directions in [Getting Started](Getting-Started) sections of the wiki.
+    or seeing a lot of errors during validation of blocks during chain syncing means that your binary or source code is not at the correct version for the devnet you'd like to join. To join a devnet, download the latest release for that devnet in the [Releases](https://github.com/filecoin-project/venus/releases) section of the repository.
 
 ### Upgrading
 

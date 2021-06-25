@@ -4,9 +4,6 @@
 
 运行docs项目需要安装 ***node*** 和 ***yarn***
 
-安装node:[https://nodejs.org/en/download/]()
-
-安装yarn:[https://yarn.bootcss.com/docs/install/#mac-stable]()
 
 ## 拉取项目
 

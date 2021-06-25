@@ -67,7 +67,7 @@ venus默认使用静态端口 6000。如果要更改为其他端口以解决NAT�
 如果遇到rust编译器错误，即 ` cargo build --release --all --manifest-path proofs/rust-proofs/Cargo.toml' failed:` 尝试将rust更新到最新版本 `rustup update`.
 
 * **运行安装时出错<br />**
-如果在运行安装时遇到错误，即 `/System/Library/Frameworks//Security.framework/Security are out of sync. Falling back to library file for linking` 这可能是由于安装了旧的。通过安装程序 [installer](https://golang.org/doc/install) 重新安装Go，然后删除filecoin (`rm -rf ./venus`) 并 [重新安装](Getting-Started).
+如果在运行安装时遇到错误，即 `/System/Library/Frameworks//Security.framework/Security are out of sync. Falling back to library file for linking` 这可能是由于安装了旧的。通过安装程序 [installer](https://golang.org/doc/install) 重新安装Go，然后删除filecoin (`rm -rf ./venus`) 并重启.
 
 * **无法构建 OS X Mojave `fatal error: 'stdio.h' file not found`**
 例如，当您构建go-secp256k1时，如果从源代码构建所有内容并且未使用自制软件安装任何内容，则可能会看到此错误：
@@ -143,7 +143,7 @@ venus默认使用静态端口 6000。如果要更改为其他端口以解决NAT�
     ```text
     code not at same version: GIT_SHA does not match DIFFERENT_GIT_SHA, disconnecting from peer:
     ```
-    或在链同步期间在块验证期间看到很多错误，这意味着您的二进制或源代码的版本与您要加入的devnet的版本不正确。要加入devnet，请在存储库的 [Releases](https://github.com/filecoin-project/venus/releases) 部分中下载该devnet的最新版本，然后按照Wiki [入门](Getting-Started) 部分中的说明进行操作。
+    或在链同步期间在块验证期间看到很多错误，这意味着您的二进制或源代码的版本与您要加入的devnet的版本不正确。要加入devnet，请在存储库的 [Releases](https://github.com/filecoin-project/venus/releases) 部分中下载该devnet的最新版本。
 
 ### 升级
 

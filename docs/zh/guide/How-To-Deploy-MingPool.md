@@ -2,7 +2,7 @@
 Venus是Filecoin分布式矿池的实现方案之一，系统集群组件包括：Venus，Venus-auth，Venus-miner，Venus-wallet，Venus-messager，Venus-sealer。从概念上理解其中Venus、Venus-auth、Venus-miner、Venus-wallet、Venus-messager具备可共用性（即程序可被多个矿工身份使用，在保证效率的情况下使硬件，软件资源得到充分利用），而Venus-sealer、Venus-worker、Venus-wallet主要用于积累算力。Venus-wallet属于可选组件，基于部署情况的安全性考量，Venus-wallet可以共享使用，也可以本地部署。本篇文档为nerpda测试网络下的集群部署。
 
 
-![venus-cluster](./images/venus-cluster.png)
+![venus-cluster](../images/venus-cluster.png)
 # Venus集群部署（基于nerpa测试网）
 
 

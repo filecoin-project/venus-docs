@@ -92,7 +92,6 @@ module.exports = {
                                 ['Venus-replace-lotus.md', 'Migrate from Lotus'],
                                 ['Chain.md', 'Chain management'],
                                 ['How-To-Connect-Network.md', 'Connect to different network'],
-                                ['Troubleshooting-&-FAQ.md', 'Troubleshooting & FAQ'],
                                 ['How-To-Contribute-Docs.md', 'Contribute to doc']
                             ]
                         }
@@ -149,13 +148,11 @@ module.exports = {
                             title: '快速上手',
                             collapsable: true,
                             children: [
-                                ['Overview.md', '概述'],
                                 ['How-To-Deploy-MingPool.md', '如何部署矿池'],
                                 // ['Using-venus-Shared-Modules.md', '如何加入矿池'],
                                 ['Venus-replace-lotus.md', '从Lotus迁移到Venus'],
                                 ['chain.md', '链维护'],
                                 ['How-To-Connect-Network.md', '加入不同网络'],
-                                ['Troubleshooting-&-FAQ.md', '故障排除'],
                                 ['How-To-Contribute-Docs.md', '贡献文档']
                             ]
                         },
@@ -163,7 +160,6 @@ module.exports = {
                             title: '模块',
                             collapsable: true,
                             children: [
-                                ['Getting-Started.md', 'Venus daemon'],
                                 ['How to use venus messager.md', 'Venus messager'],
                                 ['How-To-Use-Wallet-In-Venus.md', 'Venus wallet'],
                                 // ['Venus-wallet.md', 'Venus wallet'],

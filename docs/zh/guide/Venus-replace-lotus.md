@@ -58,11 +58,11 @@ Venus服务的共享组件包括：[venus](https://github.com/filecoin-project/v
 * 用venus-sealer替换lotus-miner后重启服务，venus-sealer的部署请参考 [How-To-Deploy-MingPool](How-To-Deploy-MingPool.md)。
 
 替换前Lotus集群流程
-![lotus-cluster-1](./images/lotus-cluster-1.png)
+![lotus-cluster-1](../images/lotus-cluster-1.png)
 
 
 替换后Venus集群流程
-![venus-replace-lotus-cluster-1](./images/venus-replace-lotus-cluster-1.png)
+![venus-replace-lotus-cluster-1](../images/venus-replace-lotus-cluster-1.png)
 
 ##### 方案2: 定制化lotus-miner组件替换
 
@@ -73,8 +73,8 @@ Venus服务的共享组件包括：[venus](https://github.com/filecoin-project/v
 * 矿工可以自己做相关工具的开发，或者等待Venus开发者后续推出相关工具及开发者文档。
 
 替换前Lotus集群流程
-![lotus-cluster-2](./images/lotus-cluster-2.png)
+![lotus-cluster-2](../images/lotus-cluster-2.png)
 
 
 替换后Venus集群流程
-![venus-replace-lotus-cluster-2](./images/venus-replace-lotus-cluster-2.png)
+![venus-replace-lotus-cluster-2](../images/venus-replace-lotus-cluster-2.png)
