@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f12f6244-50c3-41c6-9831-90cb8852126b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNAME" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/advanced/How-To-Setup_2knet.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/advanced/Multisig-wallet.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/advanced/Payment-Channel.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/advanced/Send-And-Receive.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/advanced/Tips-Running-In-China.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/advanced/_Footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/advanced/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/advanced/questions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/advanced/venus_load_balancing.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/0.styles.c83c03d3.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/filecoin-logo-v.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/filecoin-logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/oxygen/OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/oxygen/Oxygen-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/oxygen/Oxygen-Light.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/oxygen/Oxygen-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icon-coin-128.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/getting-started-node-diagram.334bc69d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/lotus-cluster-1.e7035fe3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/lotus-cluster-2.bc20ca77.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/messager.b6b78f91.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/search.83621669.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/venus-arch.c29b5e13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/venus-cluster.2e72d412.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/venus-cluster.4bf6bb2c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/venus-replace-lotus-cluster-1.b27b1480.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/venus-replace-lotus-cluster-2.28c832e6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/10.6e40e909.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/11.e54157ee.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/12.0a701583.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/13.9056e2f8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/14.f40e4cf6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/15.37f290d9.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/16.fbf39b45.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/17.b4b9901c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/18.9308105a.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/19.f224d3c7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/2.8f9c6f4c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/20.903bfd0f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/21.ff004bb1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/22.fb6878df.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/23.d9aafeb7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/24.4c4dea4f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/25.3e5a8ba1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/26.54b57e19.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/27.04e151b8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/28.43c75954.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/29.ca8a087b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/3.13530216.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/30.bf0a86fc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/31.2aa6eb7b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/32.5ffe3521.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/33.c816ce46.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/34.c5e31ec2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/35.88af517d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/36.613c4ea5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/37.8a23c099.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/38.239858e5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/39.b1b31985.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/4.49ff5cb8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/40.ee2bfb24.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/41.ad3b94d5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/42.863fa233.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/43.11dfc892.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/44.97959562.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/45.45e17dcb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/46.a95338e1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/47.32c0a1d1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/48.f3f9485c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/49.ebdbd834.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/5.ba67176f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/50.116da55e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/51.631cf8e2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/52.46a9a407.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/53.3b86188c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/54.28f12483.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/55.65ca9abf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/56.2536577d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/57.c670fba6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/58.df03d0b1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/59.8c5578c3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/6.7f17614f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/60.3069d101.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/61.a2effb95.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/62.8375bdbe.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/63.3764f4e3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/64.055cc869.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/65.00b8fafe.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/66.d349e1ec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/67.71c1a406.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/68.43921b93.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/69.c7b608f4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/7.9d94c0e5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/70.34c07c17.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/71.9ee41e80.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/8.8a50ff90.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/9.a24746e1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/app.85d61b07.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/venus-hero-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/venus-logo-title.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/venus-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/guide/Chain.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/guide/How-To-Connect-Network.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/guide/How-To-Contribute-Docs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/guide/How-To-Deploy-MingPool.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/guide/Troubleshooting-&amp;-FAQ.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/guide/Using-venus-Shared-Modules.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/guide/Venus-replace-lotus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/guide/_Footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/guide/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/incubation/Using-venus-Shared-Modules.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/incubation/_Footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/incubation/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mine/hardware-requirements.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mine/how-mining-works.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mine/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mine/mining-architectures.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mine/mining-rewards.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mine/slashing.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mine/venus/gpus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mine/venus/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mine/venus/message-pool.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mine/venus/miner-addresses.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mine/venus/sealer-configuration.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/How-To-Use-Messager.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/How-To-Use-Wallet-In-Venus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/Venus wallet.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/Venus-Worker.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/_Footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/questions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Commands.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Getting-Started.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/How to use venus messager.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/How-To-Connect-Network.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/How-To-Contribute-Docs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/How-To-Deploy-MingPool.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/How-To-Setup_2knet.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/How-To-Use-Wallet-In-Venus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Multisig-Wallet.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Overview.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Payment-Channel.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Send-and-receive.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Tips-Running-In-China.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Troubleshooting-&amp;-FAQ.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Venus wallet.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Venus-Worker.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/Venus-replace-lotus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/_Footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/chain.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/questions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/venus_load_balancing.html" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>chain</find>
+      <find>lotus</find>
+      <find>-configuration</find>
+      <find>Lotus</find>
+      <find>venus-miner</find>
+      <find>Getting-Started</find>
+      <find>Venus</find>
+    </findStrings>
+  </component>
+  <component name="GOROOT" path="C:\Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/docs/installation.md" />
+        <option value="$PROJECT_DIR$/docs/chain.md" />
+        <option value="$PROJECT_DIR$/docs/Chain.md" />
+        <option value="$PROJECT_DIR$/docs/mine/venus/gpus.md" />
+        <option value="$PROJECT_DIR$/docs/mine/venus/message-pool.md" />
+        <option value="$PROJECT_DIR$/docs/mine/venus/miner-addresses.md" />
+        <option value="$PROJECT_DIR$/docs/mine/venus/miner-configuration.md" />
+        <option value="$PROJECT_DIR$/docs/mine/venus/miner-lifecycle.md" />
+        <option value="$PROJECT_DIR$/docs/mine/venus/tips-running-in-china.md" />
+        <option value="$PROJECT_DIR$/docs/mine/hardware-requirements.md" />
+        <option value="$PROJECT_DIR$/docs/mine/mining-architectures.md" />
+        <option value="$PROJECT_DIR$/docs/mine/README.md" />
+        <option value="$PROJECT_DIR$/docs/mine/slashing.md" />
+        <option value="$PROJECT_DIR$/docs/How-to-setup_2knet.md" />
+        <option value="$PROJECT_DIR$/docs/zh/venus_load_balancing.md" />
+        <option value="$PROJECT_DIR$/docs/zh/Vensu-replace-lotus.md" />
+        <option value="$PROJECT_DIR$/docs/zh/How-To-Deploy-MingPool.md" />
+        <option value="$PROJECT_DIR$/docs/zh/How-To-Build-Venus-Shared-Service.md" />
+        <option value="$PROJECT_DIR$/docs/How-To-Build-Venus-Shared-Service.md" />
+        <option value="$PROJECT_DIR$/docs/zh/How-To-Access-Venus-Shared-Service.md" />
+        <option value="$PROJECT_DIR$/docs/How-To-Access-Venus-Shared-Service.md" />
+        <option value="$PROJECT_DIR$/docs/.vuepress/config.js" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/venus-docs.iml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="3266" />
+    <option name="height" value="2106" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="venus-docs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="venus-docs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="venus-docs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="venus-docs" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.gopath.indexing.explicitly.defined" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-6" y="-6" width="1633" height="1053" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20753552" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32934782" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="make" order="3" />
+      <window_info anchor="right" id="Word Book" order="4" side_tool="true" />
+      <window_info anchor="right" id="Database" order="5" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/docs/images/BE-one-block.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/images/getting-started-node-diagram.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Getting-Started.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/How-To-Connect-Network.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="668">
+            <caret line="31" column="3" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/backup-and-restore.md" />
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/benchmarks.md" />
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/connectivity.md" />
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/custom-storage-layout.md" />
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/manage-retrieval-deals.md" />
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/manage-storage-deals.md" />
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/gpus.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="920">
+            <caret line="40" column="134" selection-start-line="40" selection-start-column="134" selection-end-line="40" selection-end-column="134" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/miner-lifecycle.md" />
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/miner-setup.md" />
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/miner-troubleshooting.md" />
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/sector-pledging.md" />
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/tips-running-in-china.md" />
+    <entry file="file://$PROJECT_DIR$/docs/mine/slashing.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="552">
+            <caret line="24" selection-start-line="24" selection-end-line="24" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/mine/mining-architectures.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="598">
+            <caret line="26" column="172" selection-start-line="26" selection-start-column="172" selection-end-line="26" selection-end-column="172" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/miner-addresses.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="529">
+            <caret line="23" selection-start-line="23" selection-end-line="23" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/mine/mining-rewards.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="92">
+            <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/sealer-configuration.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="759">
+            <caret line="33" selection-start-line="33" selection-end-line="33" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/message-pool.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="1932">
+            <caret line="84" column="5" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/venus_load_balancing.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="322">
+            <caret line="14" selection-start-line="14" selection-end-line="14" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/images/venus-replace-lotus-cluster.png" />
+    <entry file="file://$PROJECT_DIR$/docs/zh/Venus wallet.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/Venus-replace-lotus.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/How-To-Contribute-Docs.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Chain.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="1610">
+            <caret line="70" column="24" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Venus wallet.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/mine/how-mining-works.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="920">
+            <caret line="40" column="50" selection-start-line="40" selection-start-column="50" selection-end-line="40" selection-end-column="85" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/chain.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/How-To-Setup_2knet.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="23">
+            <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/How-To-Build-Venus-Shared-Service.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SECOND">
+          <first_editor relative-caret-position="4761">
+            <caret line="207" column="25" selection-end-line="222" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/How-To-Access-Venus-Shared-Service.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SECOND">
+          <first_editor relative-caret-position="2254">
+            <caret line="98" selection-start-line="98" selection-end-line="98" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/How-To-Build-Venus-Shared-Service.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="5106">
+            <caret line="222" selection-start-line="222" selection-end-line="222" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/How-To-Access-Venus-Shared-Service.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="2875">
+            <caret line="125" column="3" selection-start-line="125" selection-start-column="3" selection-end-line="125" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SECOND">
+          <first_editor relative-caret-position="46">
+            <caret line="2" column="193" selection-start-line="2" selection-start-column="147" selection-end-line="2" selection-end-column="193" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/Commands.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/Getting-Started.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="575">
+            <caret line="25" selection-start-line="25" selection-end-line="25" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/Home.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/.vuepress/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="150" column="39" selection-start-line="150" selection-start-column="39" selection-end-line="150" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/Overview.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-65">
+            <caret line="81" selection-start-line="81" selection-end-line="81" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/incubation/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-207" />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/advanced/Tips-Running-In-China.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/advanced/Send-and-receive.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/modules/Venus wallet.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/mine/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="345">
+            <caret line="15" column="53" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/zh/mine/venus/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/mine/venus/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/mine/hardware-requirements.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="805">
+            <caret line="38" column="3" selection-start-line="38" selection-start-column="3" selection-end-line="38" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
