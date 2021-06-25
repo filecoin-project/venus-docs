@@ -52,5 +52,3 @@ unlocked success
 
 3. **The wallet needs to be unlocked after the program is restarted, Otherwise, the signature will fail because the private key cannot be obtained, 
 If you fail to obtain the private key, you will also report an error**: \<address\> is locked.
-
-## [More wallet commands](Commands)

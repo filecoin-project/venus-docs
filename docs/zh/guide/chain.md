@@ -75,4 +75,4 @@ venus chain head
   venus daemon --import-snapshot https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car
   ```
 
-在GitHub上[编辑此页](https://github.com/filecoin-project/venus-docs/blob/master/docs/Chain.md) 或 [创建一个问题](https://github.com/filecoin-project/venus-docs/issues)。
+在GitHub上[创建一个问题](https://github.com/filecoin-project/venus-docs/issues)。

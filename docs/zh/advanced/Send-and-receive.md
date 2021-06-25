@@ -1,10 +1,6 @@
 ## Venus: 发送和接收FIL
 
-为了更好地使用钱包，请阅读 [如何使用钱包](How-to-use-wallet.md)。
-
 本指南将向您展示如何创建和管理Venus钱包，以及如何使用它将一些FIL发送到其它地址。每个节点可以有多个地址。
-
-要使用Venus接收和发送FIL，您将需要 [安装并运行Venus节点](Getting-Started.md)。
 
 [[TOC]]
 
@@ -124,4 +120,4 @@ venus wallet import <private_key>
 
 当节点离线时导出钱包，请将这些文件从 `~/.venus/wallet` 复制到其他位置。要导入此钱包，请将这些文件复制到 `~/.venus/wallet`。下一次启动时，Venus节点将自动使用这些密钥。
 
-在Github上[编辑此页]() 或 [创建一个问题](https://github.com/filecoin-project/venus-docs/issues)。
+在Github上[创建一个问题](https://github.com/filecoin-project/venus-docs/issues)。
