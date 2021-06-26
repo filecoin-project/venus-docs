@@ -60,6 +60,7 @@ As mentioned, the Miners have to perform operations of different nature which di
 | Proving _WindowPoSt_       | Yes (all cores, when no GPU)   | Yes      | -                      | _WindowPoSts_ must be submitted in 30 minute windows. When no GPU available, the more CPU cores the faster                                                                                                                                  |
 | Proving _WinningPoSt_      | Yes                            | No       | -                      | _WinningPoSt_ is a less intensive computation. Must be completed in a 25 seconds window.                                                                                                                                                    |
 
+
 ## About hardware requirements
 
 The above requirements will not increase in the presumable future, and money spent on hardware should provide users with many years of reliable service, paying for themselves several times over.

@@ -38,7 +38,7 @@ module.exports = {
         '/zh/': {
             lang: 'zh-CN',
             title: '启明星',
-            description: 'Venus是完全兼容Filecoin分布式存储网络的一个go版本代码实现',
+            description: 'GO语言实现的Filecoin分布式存储网络',
         }
     },
     themeConfig: {
@@ -141,41 +141,73 @@ module.exports = {
                 title: '启明星',
                 description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
                 nav: [
+                    {
+                        text: '快速上手',
+                        link: '/zh/guide/'
+                    },
+                    {
+                        text: '启明星模块',
+                        link: '/zh/modules/'
+                    },
+                    {
+                        text: '进阶',
+                        link: '/zh/advanced/'
+                    },
+                    {
+                        text: '孵化器',
+                        link: '/zh/incubation/'
+                    }
                 ],
                 sidebar: {
-                    '/zh/': [
+                    '/zh/guide/': [
                         {
                             title: '快速上手',
-                            collapsable: true,
+                            collapsable: false,
                             children: [
+                                ['', '启明星概要'],
                                 ['How-To-Deploy-MingPool.md', '如何部署矿池'],
-                                // ['Using-venus-Shared-Modules.md', '如何加入矿池'],
+                                ['Using-venus-Shared-Modules.md', '如何加入矿池'],
                                 ['Venus-replace-lotus.md', '从Lotus迁移到Venus'],
                                 ['chain.md', '链维护'],
                                 ['How-To-Connect-Network.md', '加入不同网络'],
                                 ['How-To-Contribute-Docs.md', '贡献文档']
                             ]
-                        },
+                        }
+                    ],
+                    '/zh/modules/': [
                         {
-                            title: '模块',
-                            collapsable: true,
+                            title: '启明星模块',
+                            collapsable: false,
                             children: [
+                                ['', 'Venus daemon'],
                                 ['How to use venus messager.md', 'Venus messager'],
                                 ['How-To-Use-Wallet-In-Venus.md', 'Venus wallet'],
                                 // ['Venus-wallet.md', 'Venus wallet'],
                                 ['Venus-Worker.md', 'Venus worker'],
                             ]
-                        },
+                        }
+                    ],
+                    '/zh/advanced/': [
                         {
                             title: '进阶',
-                            collapsable: true,
+                            collapsable: false,
                             children: [
-                                ['Commands.md', 'CLI命令'],
+                                ['', 'CLI命令'],
                                 ['Tips-Running-In-China.md', '中国部署提示'],
                                 ['Multisig-Wallet.md', '多签钱包'],
                                 ['venus_load_balancing.md', '负载均衡'],
                                 ['Payment-Channel.md', '支付通道'],
                                 ['How-To-Setup_2knet.md', '本地2k开发网络'],
+                            ]
+                        }
+                    ],
+                    '/zh/incubation/': [
+                        {
+                            title: '孵化器',
+                            collapsable: false,
+                            children: [
+                                ['', '如何部署矿池'],
+                                ['Using-venus-Shared-Modules.md', '如何加入矿池'],
                             ]
                         }
                     ]
