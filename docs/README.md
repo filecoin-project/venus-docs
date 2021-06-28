@@ -17,7 +17,7 @@ footer: MIT Apache dual Licensed
   </div>
   
   <div class="feature">
-    <h2>Mining Pool</h2>
+    <h2>Storage Pool</h2>
     <p>Share infrastructure with other storage providers to unlock your true potentials.</p>
   </div>
 </div>

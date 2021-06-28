@@ -2,8 +2,6 @@
 
 messager is a component used to manage local messages, with the purpose of saving address messages, managing message status, and controlling the frequency of push messages.
 
-[[TOC]]
-
 ## Getting start
 
 ### Clone this git repository to your machine

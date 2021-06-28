@@ -17,7 +17,7 @@ footer: MIT Apache dual Licensed
   </div>
   
   <div class="feature">
-    <h2>矿池</h2>
+    <h2>存储池</h2>
     <p>与其他存储提供商共享基础服务，释放您的真正潜力！</p>
   </div>
 </div>

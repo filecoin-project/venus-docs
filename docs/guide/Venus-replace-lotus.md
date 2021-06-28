@@ -1,4 +1,6 @@
-# Lotus cluster replaced by Venus cluster
+## Migrating from Lotus to Venus
+
+Lotus users could easily migrate their storage operation to Venus by going through the following steps.
 
 ## Introduction of Venus cluster and lotus cluster
 

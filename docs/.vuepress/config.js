@@ -75,10 +75,6 @@ module.exports = {
                         text: 'Advanced',
                         link: '/advanced/'
                     },
-                    {
-                        text: 'Incubation',
-                        link: '/incubation/'
-                    }
                 ],
                 sidebar: {
                     '/guide/': [
@@ -122,16 +118,6 @@ module.exports = {
                                 ['How-To-Setup_2knet.md', 'How to start a local dev network'],
                             ]
                         }
-                    ],
-                    '/incubation/': [
-                        {
-                            title: 'Incubation',
-                            collapsable: false,
-                            children: [
-                                ['', 'How to deploy a mining pool'],
-                                ['Using-venus-Shared-Modules.md', 'How to join a mining pool'],
-                            ]
-                        }
                     ]
                 }
             },
@@ -152,10 +138,6 @@ module.exports = {
                     {
                         text: '进阶',
                         link: '/zh/advanced/'
-                    },
-                    {
-                        text: '孵化器',
-                        link: '/zh/incubation/'
                     }
                 ],
                 sidebar: {
@@ -198,16 +180,6 @@ module.exports = {
                                 ['venus_load_balancing.md', '负载均衡'],
                                 ['Payment-Channel.md', '支付通道'],
                                 ['How-To-Setup_2knet.md', '本地2k开发网络'],
-                            ]
-                        }
-                    ],
-                    '/zh/incubation/': [
-                        {
-                            title: '孵化器',
-                            collapsable: false,
-                            children: [
-                                ['', '如何部署矿池'],
-                                ['Using-venus-Shared-Modules.md', '如何加入矿池'],
                             ]
                         }
                     ]

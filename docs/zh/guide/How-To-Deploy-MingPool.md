@@ -28,7 +28,7 @@ Tips:
 
 
 # 云上组件搭建
-## 1. Venus-auth Install
+## Venus-auth Install
 ### 编译并启动
 
 ```shell script
@@ -82,7 +82,7 @@ $ ./venus-auth genToken --perm admin admin
 - `--perm`为RPC2.0接口访问权限限制
 - miner，messager，sealer，推荐标记为程序名，若存在多个相同程序要加入集群，可以使用“程序名+标记符”。
 
-## 2. Venus-gateway Install
+## Venus-gateway Install
 
 ```shell script
 $ git clone https://github.com/ipfs-force-community/venus-gateway.git
@@ -92,7 +92,7 @@ $ make
 $ nohup ./venus-gateway --listen /ip4/0.0.0.0/tcp/45132 run --auth-url  http://<auth ip>:8989 > gateway.log 2>&1 &
 ```
 
-## 3. Venus install
+## Venus install
 ### 安装编译环境
 ```shell script
 sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum install -y git gcc bzr jq pkgconfig clang llvm mesa-libGL-devel opencl-headers ocl-icd ocl-icd-devel hwloc-devel
@@ -132,7 +132,7 @@ $ nohup ./venus daemon --network nerpa \
 > venus.log 2>&1 & <absolute path>
 ```
 
-## 4. Venus-messager install
+## Venus-messager install
 ### 编译并启动
 ```shell script
 $ git clone https://github.com/filecoin-project/venus-messager.git
@@ -159,7 +159,7 @@ $ nohup ./venus-messager run \
 - `--gateway-url` 为gateway监听地址
 - `--auth-token` 为在venus-auth中生成的管理员token，用于和Venus通信时的身份验证
 
-## 5. Venus-miner install
+## Venus-miner install
 
 ### 编译并启动
 
@@ -227,7 +227,7 @@ $ venus-auth genToken --perm write jimmy
 <miner token>
 ```
 
-## 1. Venus-wallet install
+## Venus-wallet install
 ### 编译并启动
 ```shell script
 $ git clone https://github.com/filecoin-project/venus-wallet.git
@@ -289,7 +289,7 @@ Token = "<miner token>"
 SupportAccounts = ["jimmy"]
 ```
 
-## 2. Venus-sealer install
+## Venus-sealer install
 
 ### 编译并启动（sealer单程序只能绑定一个矿工）
 ```shell script
@@ -389,7 +389,7 @@ Total Spendable:  1383.775 FIL
 ```
 
 
-## 7. 问题相关
+## 问题相关
 
 1. go mod 出先如下问题
 
