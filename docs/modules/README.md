@@ -1,28 +1,10 @@
-# Getting started
+# Venus daemon
 
 This is a step-by-step guide for installing and running a Filecoin node connected to the testnet on your local machine.
 
-## Table of contents
-
-- [Getting started](#getting-started)
-  - [Table of contents](#table-of-contents)
-  - [Minimal requirements](#minimal-requirements)
-      - [Installing Go](#installing-go)
-      - [Installing Rustup](#installing-rustup)
-      - [Install system dependencies](#install-system-dependencies)
-        - [Linux](#linux)
-        - [MacOS](#macos)
-    - [XCode Command Line Tools](#xcode-command-line-tools)
-    - [Install Homebrew](#install-homebrew)
-      - [Installing dependencies](#installing-dependencies)
-    - [Building Filecoin and running tests](#building-filecoin-and-running-tests)
-  - [Start running Filecoin](#start-running-filecoin)
-  - [Wait for chain sync](#wait-for-chain-sync)
-  - [Viewing network information](#viewing-network-information)
-
 ## Minimal requirements
 
-To run a Lotus node, your computer must have:
+To run a venus node, your computer must have:
 
 - macOS or Linux installed. Windows is not yet supported.
 - 8-core CPU and 32 GiB RAM. Models with support for _Intel SHA Extensions_ (AMD since Zen microarchitecture, or Intel since Ice Lake) will significantly speed things up.

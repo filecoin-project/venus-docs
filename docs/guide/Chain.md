@@ -1,5 +1,5 @@
 ---
-title: 'venus: chain management'
+title: 'Chain management'
 description: 'The Venus blockchain carries the information necessary to compute the current state of the network, is stored on disk and grows every 30 seconds with new blocks. This guide explains how to manage several aspects of th chain.'
 breadcrumb: 'Chain management'
 ---
@@ -7,8 +7,6 @@ breadcrumb: 'Chain management'
 # {{ $frontmatter.title }}
 
 {{ $frontmatter.description }}.
-
-[[TOC]]
 
 ## Syncing
 

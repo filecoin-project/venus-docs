@@ -1,7 +1,3 @@
-# Table of Contents
-
-[[TOC]]
-
 ## Background
 
 Starting filecoin mining could be a daunting task given not only the large initial hardware and filecoin collateral [investment](https://filscan.io/calculator) but also the entailing operation commitment. With ideas of security, ease of use and distributed mining pool in mind, Venus implementation of filecoin will help miners turn, what community say, [a full time job](https://filecoinproject.slack.com/archives/CEGN061C5/p1610810730117900?thread_ts=1610809298.116800&cid=CEGN061C5) into a serious hobby. Hope this tutorial will get you started mining in no time! 
@@ -11,7 +7,7 @@ Starting filecoin mining could be a daunting task given not only the large initi
 There are two ways of getting started with mining using Venus. 
 
 1. Deploy minimum hardware and gain access to a publicly hosted shared venus modules.<!--(Checkout venus incubation center page to learn more on how you can get an account setup!)--> (The rest of this tutorial will walk you through this way of deploying venus mining operation)
-2. Deploy all required hardware and venus modules by yourself. (See [this](https://venus.filecoin.io/How-To-Deploy-MingPool.html) tutorial to learn more)
+2. Deploy all required hardware and venus modules by yourself. (See [this](How-To-Deploy-MingPool.md) tutorial to learn more)
 
 After following the rest of the trutorial and successful deployment, you can start pledging sectors, grow power and evantually obtain block rewards through your contribution to the network's storage capacity!
 
@@ -33,7 +29,7 @@ Depending on its role in a mining cluster, modules could be loosely broken down 
 
 Diagram below illustrates how venus modules interacts with one and another.
 
-![venus-cluster](../images/venus-cluster.png)
+![venus-cluster](/venus-cluster.png)
 
 ## Hardware requirements
 
@@ -73,10 +69,16 @@ If you are an admin hosting shared venus modules, use the following command to c
 
 ```bash
 # If miner doesn't have a <MINER_ID> yet, leave out --miner flag and use 'updateUser' when user inited their miner id
-$ ./venus-auth addUser --name <ACCOUNT_NAME> --miner <MINER_ID>
+$ ./venus-auth addUser --name <ACCOUNT_NAME> --miner <MINER_ID> --state=1 --sourceType=1
 # The returned token is what miner have to add into their config file in order to gain access to your shared modules
 $ ./venus-auth genToken --perm write <ACCOUNT_NAME>
 <AUTH_TOKEN_FOR_ACCOUNT_NAME>
+```
+
+Update user information if necessary.
+
+```bash
+./venus-auth updateUser --name=<ACCOUNT_NAME> --miner=<MINER_ID> --state=1  --sourceType=1
 ```
 
 ### Software dependencies

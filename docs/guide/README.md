@@ -44,7 +44,7 @@ Public components can be established by service providers or by multiple miners,
 
 The following figure is a typical application scenario in our design.
 
-![./zh/images/venus-arch.png](../images/venus-cluster.png)
+![./zh/images/venus-arch.png](/venus-cluster.png)
 
 The following contents show the relationship between components, which are similar in function, but with more powerful expanded functions in details and uses.
 

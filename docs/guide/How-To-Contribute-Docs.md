@@ -1,31 +1,59 @@
-# How to Contribute Docs
+## Contributing
 
-## Installation Dependency 
+PRs, bug reports, and issue suggestions are welcome! For major changes, please propose in an issue first so benefits and impacts can be discussed.
 
-To run the docs project, you need to install ***node*** and ***yarn***
+👉 You can also click on click on `Edit this page` links at the bottom of each page to jump directly to Edit mode.
 
-## pull the project
+## Deployment
 
-```shell script
-git clone git@github.com:filecoin-project/venus-docs.git
-cd venus-docs
-yarn install   #安装依赖
+### Running locally
+
+```
+  $ yarn install
+  $ yarn docs:dev 
 ```
 
-## Run local
+### Building
 
-```shell script
-yarn docs:dev 
+```
+  $ yarn docs:links   # verify all links are well-formed
+  $ yarn docs:build
 ```
 
-The English document changes directly under master, but Chinese under the zh folder, make sure that the folder structure is exactly the same. Changes made on the document are reflected in real time on the Site and do not require the command to be re-run.
-Adding documents needs to be modified ***./docs/.vuepress/config.js*** file, and add a new line of directories under sidebarchildren.
+Then deploy the `docs/.vuepress/dist` directory to the `gh-pages` branch of this repo.
 
-## build and deploy
+### Deploy script
 
-```shell script
-yarn docs:links   # verify all links are well-formed
-yarn docs:build   # generate html pages
+You can also run the following script to combine building and deployment together. Make sure everything is running okay locally.
+
+```bash
+#!/usr/bin/env sh
+
+# abort on errors
+set -e
+
+# build
+npm run docs:build
+
+# navigate into the build output directory
+cd docs/.vuepress/dist
+
+# if you are deploying to a custom domain
+echo 'venus.filecoin.io' > CNAME
+
+git init
+git add -A
+git commit -m 'deploy'
+
+# if you are deploying to https://<USERNAME>.github.io
+# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
+
+# if you are deploying to https://<USERNAME>.github.io/<REPO>
+git push -f git@github.com:filecoin-project/venus-docs.git master:gh-pages
+
+cd -
 ```
 
-the results are written to the ***./docs/.vuepress/dist directory*** after compiled. you can deploy the project document by overwriting gh-page branch withe ***dist*** directory.
+### Notes:
+
+- When new documentation pages are added `./docs/config.js` will need to be **manually updated** in this repo

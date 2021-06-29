@@ -1,6 +1,6 @@
-# How to connect to different 
+# Connect to different network
 
-in venus, it is easy to decide whether to connect to different networks by setting the startup parameters.
+In venus, it is easy to decide whether to connect to different networks by setting the startup parameters.
 
 
 ## Mainnet
