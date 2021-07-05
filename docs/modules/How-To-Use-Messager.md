@@ -7,34 +7,23 @@ messager is a component used to manage local messages, with the purpose of savin
 ### Clone this git repository to your machine
 
 ```
-git clone git@github.com:ipfs-force-community/venus-messager.git
+git clone https://github.com/filecoin-project/venus-messager.git
 ```
 
-### Install Dependencies
-
-1. First, load all the Git submodules.
-
-```
-git submodule update --init --recursive
-```
-
-2. Initialize build dependencies.
+### Install Dependencies and Build
 
 ```
 make deps
-```
-
-### Build and run tests
-
-```
-# First, build the binary
 make
-
-# Then, run the tests.
-make test
 ```
 
-### Start messager
+### Run messager
+
+> ./venus-messager --config=xx.toml run [options]
+
+* Specify the directory of the configuration file by `--config=xxx.toml`，default: `./messager.toml`
+* If the specified configuration file does not exist at startup, a configuration file with the corresponding name will be generated and the value of the set parameter will be written to the configuration file
+* When the specified configuration file exists at startup, the values of the set parameters will be used, but will not be written to the configuration file. If the parameters are not set, the values of the parameters in the configuration file will be used
 
 ```
 # --config | -c        specify config file (default: "./messager.toml")
@@ -44,11 +33,6 @@ make test
 # --db-type            which db to use. sqlite/mysql (default: "sqlite")
 # --sqlite-path        sqlite db path (default: "./message.db")
 # --mysql-dsn          mysql connection string
-
-# use sqlite db
-./venus-messager run --config <config path> --auth-url <auth url> --node-url <node url> --node-token <node token> --db-type sqlite --sqlite-path <sqlite path>
-# use mysql db
-./venus-messager run --config <config path> --auth-url <auth url> --node-url <node url> --node-token <node token> --db-type mysql --mysql-dsn <mysql dsn>
 ```
 
 ## Commands
@@ -69,19 +53,19 @@ make test
 ./venus-messager msg list --from <address>
 ```
 
-3. manual update one filled message state
+3. update one filled message state
 
 ```
 ./venus-messager msg update_filled_msg --id=<message id>
 ```
 
-4. manual update all filled message state
+4. update all filled message state
 
 ```
 ./venus-messager msg update_all_filled_msg
 ```
 
-5. wait a messager msg id for result
+5. wait a message result by id
 
 ```
 ./venus-messager msg wait <message id>
@@ -133,10 +117,12 @@ make test
 ./venus-messager address list
 ```
 
-3. update address nonce
+3. reset address
+
+> The nonce of the address is set to nonce on the chain, and all unchain messages are marked as failed messages
 
 ```
-./venus-messager address update_nonce --nonce=5 <address>
+./venus-messager reset <address>
 ```
 
 4. forbidden address
@@ -154,41 +140,20 @@ make test
 6. set the number of address selection messages
 
 ```
-./venus-messager address set_sel_msg_num --num=5 <address>
+./venus-messager address set-sel-msg-num --num=5 <address>
 ```
 
-### Wallet commands
+7. set parameters related to address fee
 
-1. search wallet by name
-
-```
-./venus-messager wallet search <wallet-name>
-```
-
-2. add wallet
+> venus message address set-fee-params [options] address
 
 ```
-./venus-messager wallet add --name=<wallet-name> --url=<wallet-url> --token=<wallet-token>
-```
+ # options
+ # --gas-overestimation value  Estimate the coefficient of gas (default: 0)
+ # --max-feecap value          Max feecap for a message (burn and pay to miner, attoFIL/GasUnit)
+ # --max-fee value             Spend up to X attoFIL for message
 
-3. list wallet
-
-```
-./venus-messager wallet list
-```
-
-4. list remote wallet address
-
-```
-./venus-messager wallet list-addr --uuid=<wallet-id>
-# or
-./venus-messager wallet list-addr --name=<wallet-name>
-```
-
-5. delete wallet by name
-
-```
-./venus-messager wallet del <name>
+./venus-messager address set-fee-params <address>
 ```
 
 ### shared params commands
@@ -240,4 +205,13 @@ make test
 
 ```
 ./venus-messager node del <name>
+```
+
+### log
+
+1. set log level
+
+```
+# eg. trace,debug,info,warn|warning,error,fatal,panic
+./venus-messager log set-level
 ```
