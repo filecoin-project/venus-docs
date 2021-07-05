@@ -83,8 +83,8 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
-                                ['How-To-Deploy-MingPool.md', 'How to deploy a mining pool'],
-                                ['Using-venus-Shared-Modules.md', 'How to join a mining pool'],
+                                ['How-To-Deploy-MingPool.md', 'How to deploy a storage pool'],
+                                ['Using-venus-Shared-Modules.md', 'How to join a storage pool'],
                                 ['Venus-replace-lotus.md', 'Migrate from Lotus'],
                                 ['Chain.md', 'Chain management'],
                                 ['How-To-Connect-Network.md', 'Connect to different network'],
@@ -147,8 +147,8 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', '启明星概要'],
-                                ['How-To-Deploy-MingPool.md', '如何部署矿池'],
-                                ['Using-venus-Shared-Modules.md', '如何加入矿池'],
+                                ['How-To-Deploy-MingPool.md', '如何部署存储池'],
+                                ['Using-venus-Shared-Modules.md', '如何加入存储池'],
                                 ['Venus-replace-lotus.md', '从Lotus迁移到Venus'],
                                 ['chain.md', '链维护'],
                                 ['How-To-Connect-Network.md', '加入不同网络'],
