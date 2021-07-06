@@ -21,7 +21,7 @@
 必须配置为连接到Nerpa网络的参数。
 
 ```sh
-./venus daemon --network cali
+./venus daemon --network nerpa
 ```
 
 ## 2k 本地网络

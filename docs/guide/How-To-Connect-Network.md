@@ -22,7 +22,7 @@ parameters must be configured to connect to the calibration network.
 parameters must be configured to connect to the nerpa network.
 
 ```sh
-./venus daemon --network cali
+./venus daemon --network nerpa
 ```
 
 ## 2k Local Network

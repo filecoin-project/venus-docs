@@ -226,22 +226,8 @@ Change `apiAddress` from `/ip4/127.0.0.1/tcp/3453` to `/ip4/0.0.0.0/tcp/3453`. S
 
 ```json
 {
-	"api": {
-		"venusAuthURL": "http://192.168.5.62:8989",
-		"apiAddress": "/ip4/0.0.0.0/tcp/3453",
-		"accessControlAllowOrigin": [
-			"http://localhost:8080",
-			"https://localhost:8080",
-			"http://127.0.0.1:8080",
-			"https://127.0.0.1:8080"
-    ],
-		"accessControlAllowCredentials": false,
-		"accessControlAllowMethods": [
-			"GET",
-			"POST",
-			"PUT"
-    ]
-  },
+	"api": {"apiAddress": "/ip4/0.0.0.0/tcp/3453"}
+}
 ```
 
 Restart venus daemon for the config to take into effects.
@@ -250,7 +236,7 @@ Restart venus daemon for the config to take into effects.
 $ ps -ef | grep venus
 $ kill <VENUS_PID>
 $ nohup ./venus daemon --network nerpa \
---authURL <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+--authURL <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 > venus.log 2>&1 
 ```
 
@@ -300,12 +286,19 @@ If you are testing on Nerpa or Calibration, you have to fund all your addresses 
 
 :::
 
+Generate tokens for wallet.
+
+```bash
+$ ./venus-auth genToken --perm write <w1>
+<AUTH_TOKEN_FOR_W1>
+```
+
 Change `[APIRegisterHub]` section of `~/.venus_wallet/config.toml` using the token you generated with venus-auth.
 
 ```toml
 [APIRegisterHub]
 RegisterAPI = ["/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/45132"]
-Token = "<USER_READ_AUTH_TOKEN>"
+Token = "<AUTH_TOKEN_FOR_W1>"
 SupportAccounts = ["<USER>"]
 ```
 Restart venus-wallet so that the changes takes into effect.
@@ -430,8 +423,8 @@ $ nohup ./venus-sealer init \
 --network nerpa \
 # Addresses of different shared venus modules
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
---messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/3453 \
---gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/3453 \
+--messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
+--gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
 --auth-token <USER_WRITE_AUTH_TOKEN> \
 # Flags sealer to not storing any sealed sectors on the machine it runs on
 --no-local-storage \
@@ -461,8 +454,8 @@ $ ./venus-sealer init \
 --network nerpa \
 # Config for different shared venus modules
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
---messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/3453 \
---gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/3453 \
+--messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
+--gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
 --auth-token <USER_WRITE_AUTH_TOKEN> \
 # Flags sealer to not store any sealed sectors on the machine it runs on
 --no-local-storage \
