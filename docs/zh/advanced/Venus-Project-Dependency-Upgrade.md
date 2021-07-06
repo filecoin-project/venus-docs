@@ -32,30 +32,22 @@ github.com/ipfs-force-community/venus-gateway v1.1.0
 - 固定参数: 如升级高度,bootstrap,proof-params,car文件等;
     * venus: fixtures/networks;fixtures/_assets;
     * lotus: build
-
 - api及命令行: 重要功能的api及cmd变化;
-
-- spec-actor;
+- spec-actor:
     * venus: pkg/specactors
     * lotus: chain/actors
     * go.mod 引用升级
-    
-- fork;
+- fork:
     * venus: pkg/fork
     * lotus: chain/stmgr
-
 - vm:一般抓住版本变量及升级高度的引用位置即可,如: network::Version13,UpgradeHyperdriveHeight,StateTreeVersion3;
-
 - 产生随机数逻辑,包括: ChainRandomness和BeaconRandomness;
-
 - mpool: 消息选择逻辑及消息池进出逻辑变化;
-
 - 区块验证: 包括消息验证,涉及同步;
     - venus: pkg/consensus
     - lotus: chain/sync.go
-    
 - filecoin-ffi
-    
+- comm-util: lotus升级后引入的libp2p, ipld,cbor等公共库的版本升级，升级相应go.mod
 ### venus-gateway
 
 - go.mod
@@ -110,6 +102,8 @@ actors = append(actors, exported5.BuiltinActors()...)
 - mining 基本流程有无变化
 
 - filecoin-ffi
+
+= spec-actor: chain/actors下代码升级
 
 ## 验证逻辑
 
