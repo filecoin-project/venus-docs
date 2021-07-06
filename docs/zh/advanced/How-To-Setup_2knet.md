@@ -34,7 +34,7 @@ nohup ./venus-auth > auth.log 2>&1 &
 ### venus-gateway
 
 ```sh
-nohup ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run --auth-url=http://<auth_ip>:8989 gateway.log 2>&1 &
+nohup ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run --auth-url=http://<auth_ip>:8989 > gateway.log 2>&1 &
 ```
 
 ### venus
