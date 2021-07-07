@@ -170,7 +170,7 @@ $ ./venus-wallet new bls
 
 ```toml
 [APIRegisterHub]
-RegisterAPI = ["/ip4/<IP_ADDRESS_OF_VENUS_WALLET>/tcp/45132"]
+RegisterAPI = ["/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/45132"]
 Token = "<AUTH_TOKEN_FOR_ACCOUNT_NAME>"
 SupportAccounts = ["<ACCOUNT_NAME>"]
 ```
@@ -219,8 +219,8 @@ $ nohup ./venus-sealer init \
 --network nerpa \
 # Config for different shared venus modules
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
---messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/3453 \
---gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/3453 \
+--messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
+--gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
 --auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
 # Flags sealer to not storing any sealed sectors on the machine it runs on
 # You can leave out this flag if you are on testnet
@@ -252,8 +252,8 @@ $ ./venus-sealer init \
 --network nerpa \
 # Config for different shared venus modules
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
---messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/3453 \
---gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/3453 \
+--messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
+--gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
 --auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
 # Flags sealer to not store any sealed sectors on the machine it runs on
 --no-local-storage \

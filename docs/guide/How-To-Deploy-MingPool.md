@@ -200,7 +200,7 @@ Start venus daemon for chain synchronization. Use `--network` to specify the net
 
 ```bash
 $ nohup ./venus daemon --network nerpa \
---authURL <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+--authURL <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 > venus.log 2>&1 & 
 ```
 
@@ -222,22 +222,8 @@ Change `apiAddress` from `/ip4/127.0.0.1/tcp/3453` to `/ip4/0.0.0.0/tcp/3453`. S
 
 ```json
 {
-	"api": {
-		"venusAuthURL": "http://192.168.5.62:8989",
-		"apiAddress": "/ip4/0.0.0.0/tcp/3453",
-		"accessControlAllowOrigin": [
-			"http://localhost:8080",
-			"https://localhost:8080",
-			"http://127.0.0.1:8080",
-			"https://127.0.0.1:8080"
-    ],
-		"accessControlAllowCredentials": false,
-		"accessControlAllowMethods": [
-			"GET",
-			"POST",
-			"PUT"
-    ]
-  },
+	"api": {"apiAddress": "/ip4/0.0.0.0/tcp/3453"}
+}
 ```
 
 Restart venus daemon for the config to take into effects.
@@ -246,7 +232,7 @@ Restart venus daemon for the config to take into effects.
 $ ps -ef | grep venus
 $ kill <VENUS_PID>
 $ nohup ./venus daemon --network nerpa \
---authURL <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+--authURL <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 > venus.log 2>&1 
 ```
 
@@ -265,7 +251,7 @@ Start venus-messager. Note that `--auth-url`, `--node-url` and `--auth-token` ar
 
 ```bash
 $ nohup ./venus-messager run \
---auth-url=<https://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --node-url /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
 --gateway-url=/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/45132 \
 --auth-token <SHARED_ADMIN_AUTH_TOKEN> \
@@ -297,7 +283,7 @@ Initialize venus-miner.
 $ ./venus-miner init
 # For nettype, choose from mainnet, nerpanet, debug, 2k, calibnet
 --nettype nerpanet
---auth-api <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-api <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --token <SHARED_ADMIN_AUTH_TOKEN> \
 --gateway-api /ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132
 --api /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
@@ -311,7 +297,7 @@ $ nohup ./venus-miner run >>miner.log 2>& 1 &
 
 ### Miner management
 
-Once a miner, venus-sealer with proper miner id, connected to your shared modules. You can query the status of said miner id by the following.
+Once a user, venus-sealer with proper miner id, connected to your shared modules. You can query the status of said miner id by the following.
 
 ```bash
 $ ./venus-miner address state 

@@ -110,8 +110,8 @@ module.exports = {
                             title: 'Advanced',
                             collapsable: false,
                             children: [
-                                ['', 'Venus CLI commands'],
-                                ['Tips-Running-In-China.md', 'Tips running in China'],
+                                ['', 'Tips running in China'],
+                                ['venus-cli.md', 'Venus CLI commands'],
                                 ['Multisig-wallet.md', 'Multisig wallet'],
                                 ['venus_load_balancing.md', 'Venus load balancing'],
                                 ['Payment-Channel.md', 'Payment channel'],
@@ -162,7 +162,7 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Venus daemon'],
-                                ['How to use venus messager.md', 'Venus messager'],
+                                ['How-To-Use-Messager.md', 'Venus messager'],
                                 ['How-To-Use-Wallet-In-Venus.md', 'Venus wallet'],
                                 // ['Venus-wallet.md', 'Venus wallet'],
                                 ['Venus-Worker.md', 'Venus worker'],
@@ -174,8 +174,9 @@ module.exports = {
                             title: '进阶',
                             collapsable: false,
                             children: [
-                                ['', 'CLI命令'],
-                                ['Tips-Running-In-China.md', '中国部署提示'],
+                                ['', '中国部署提示'],
+                                ['Venus-Project-Dependency-Upgrade.md', '依赖与升级'],
+                                ['venus-cli.md', 'CLI命令'],
                                 ['Multisig-Wallet.md', '多签钱包'],
                                 ['venus_load_balancing.md', '负载均衡'],
                                 ['Payment-Channel.md', '支付通道'],
