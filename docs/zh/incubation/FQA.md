@@ -5,15 +5,14 @@
 &ensp;&ensp; 在venus-auth节点上使用./venus-messager msg list-fail命令打开失败的消息，然后使用./venus-messager msg mark-bad --really-do-it <失败消息id>命令将失败的消息打回sealer侧重启判断消息是否有问题；再次检查是否还有失败的消息
 
 
-## 2. 新集群部署完成，sealer没有下发任务
+## 2. venus-messager中大量消息卡住
 
-&ensp;&ensp; 到venus-auth节点上，使用./venus-messager wallet list 命令查看集群的配置信息是否有误；
-```
-"Name": "venus",
-"Url": "/ip4/xxx.xxx.xxx.xxx/tcp/5678/http",   # venus-wallet的地址和端口
-"Token": "eyJhbGciOiJIUzIadraInR5cCI6IkpXVCJ  # venus-wallet的api-info的token,可以使用 ./venus-wallet-pro auth api-info --perm sign 命令获取wallet的token值
-"State": "Alive",             # 状态连接状态
-```
+&ensp;&ensp; 默认每个worker地址30秒只往链上发送的消息数最多只有20条，可以根据实际体量进行稍微增加到30条（值越大同一高度往链上发送的消息数就越多，可能造成小部分的SysErrOutOfGas消息）
+             
+```sh
+ $./venus-messager address set-sel-msg-num --num 30 <worker 地址>
+```             
+             
 
 ## 3. venus-miner无法出块
 - 确认venus-miner连接的venus节点同步高度正常，并检查其日志是否正常；
