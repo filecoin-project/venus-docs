@@ -69,7 +69,7 @@ Venus cluster process after replacement
 ##### Scheme 2: customized lotus-miner moduler replacement
 
 Because of the fact that the miners have modified the lotus-miner code, if they want to continue to use it, they need to make the following adjustments to lotus-miner:
-* Don't enable winingpest program of lotus-poster, which needs to change the code;
+* Don't enable winningpost program of lotus-poster, which needs to change the code;
 * The conversion of existing sector data, This needs to be developed;
 * lotus-miner connects with venus-messager, which needs to be developed;
 * Miners can develop related tools by themselves, or wait for Venus developers to launch related tools and developer documents.
