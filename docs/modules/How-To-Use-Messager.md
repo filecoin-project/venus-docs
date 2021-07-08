@@ -27,11 +27,11 @@ make
 
 ```bash
 # --config | -c        specify config file (default: "./messager.toml")
-# --auth-url           url for auth server (default: "http://127.0.0.1:8989")
+# --auth-url           url for auth server
 # --node-url           url for connection lotus/venus
 # --node-token         token auth for lotus/venus
-# --db-type            which db to use. sqlite/mysql (default: "sqlite")
-# --sqlite-path        sqlite db path (default: "./message.db")
+# --db-type            which db to use. sqlite/mysql
+# --sqlite-path        sqlite db file. eg. ~/sqlite/message.db
 # --mysql-dsn          mysql connection string
 ```
 
@@ -185,7 +185,7 @@ make
 
 1. search node info by name
 
-```bashbash
+```bash
 ./venus-messager node search <name>
 ```
 
@@ -214,4 +214,21 @@ make
 ```bash
 # eg. trace,debug,info,warn|warning,error,fatal,panic
 ./venus-messager log set-level
+```
+
+### send 命令
+
+> send message
+> venus-messager send [command options] [targetAddress] [amount]
+
+```bash
+   options:
+   --from value         optionally specify the address to send
+   --gas-premium value  specify gas price to use in AttoFIL (default: "0")
+   --gas-feecap value   specify gas fee cap to use in AttoFIL (default: "0")
+   --gas-limit value    specify gas limit (default: 0)
+   --method value       specify method to invoke (default: 0)
+   --params-json value  specify invocation parameters in json
+   --params-hex value   specify invocation parameters in hex
+   --account value      optionally specify the account to send
 ```

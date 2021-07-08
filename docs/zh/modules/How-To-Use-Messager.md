@@ -19,7 +19,7 @@ make
 
 ### 启动messager
 
-> ./venus-messager --config=xx.toml run [options]
+> ./venus-messager --config=xx.toml run [command options]
 
 * 可以通过 `--config=xx.toml` 来指定配置文件的目录，默认目录是 `./messager.toml`
 * 启动时指定的配置文件不存在，则会生成对应名称的配置文件，并把设置的参数的值写到配置文件
@@ -27,12 +27,12 @@ make
 
 ```bash
 options:
-   --auth-url       auth服务的URL，默认: http://127.0.0.1:8989
+   --auth-url       auth服务的URL
    --auth-token     auth服务的token
    --node-url       lotus/venus 节点的URL
    --node-token     auth服务的URL
-   --db-type        使用的数据库类型，sqlite 或者 mysql，默认: sqlite
-   --sqlite-path    sqlite 数据库的路径，默认: ./message.db
+   --db-type        使用的数据库类型，sqlite 或者 mysql
+   --sqlite-file    sqlite 数据库的文件，例子：~/sqlite/message.db
    --mysql-dsn      mysql dsn，eg. user:password@(127.0.0.1:3306)/messager?parseTime=true&loc=Local
    --gateway-url    gateway的URL
    --gateway-token  gateway的token
@@ -148,7 +148,7 @@ options:
 
 7. 设置地址fee相关参数
 
-> venus message address set-fee-params [options] address
+> venus message address set-fee-params [command options] address
 
 ```bash
  # options
@@ -188,7 +188,7 @@ options:
 
 1. 按名称搜索节点信息
 
-```bashbash
+```bash
 ./venus-messager node search <name>
 ```
 
@@ -217,4 +217,21 @@ options:
 ```bash
 # 支持的级别：trace,debug,info,warn|warning,error,fatal,panic
 ./venus-messager log set-level
+```
+
+### send 命令
+
+> 发送消息
+> venus-messager send [command options] [targetAddress] [amount]
+
+```bash
+   options:
+   --from value         optionally specify the address to send
+   --gas-premium value  specify gas price to use in AttoFIL (default: "0")
+   --gas-feecap value   specify gas fee cap to use in AttoFIL (default: "0")
+   --gas-limit value    specify gas limit (default: 0)
+   --method value       specify method to invoke (default: 0)
+   --params-json value  specify invocation parameters in json
+   --params-hex value   specify invocation parameters in hex
+   --account value      optionally specify the account to send
 ```
