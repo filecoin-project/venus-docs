@@ -111,6 +111,7 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Tips running in China'],
+                                ['Using-Lotus-Miner.md', 'Using lotus-miner'],
                                 ['venus-cli.md', 'Venus CLI commands'],
                                 ['Multisig-wallet.md', 'Multisig wallet'],
                                 ['venus_load_balancing.md', 'Venus load balancing'],
@@ -175,6 +176,7 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', '中国部署提示'],
+                                ['Using-Lotus-Miner.md', '使用lotus-miner'],
                                 ['Venus-Project-Dependency-Upgrade.md', '依赖与升级'],
                                 ['venus-cli.md', 'CLI命令'],
                                 ['Multisig-Wallet.md', '多签钱包'],
