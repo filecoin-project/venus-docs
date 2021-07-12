@@ -5,7 +5,7 @@
 ## 快速启动
 ### 1. 下载代码
 ```shell script
-git clone https://github.com/ipfs-force-community/venus-wallet.git
+git clone https://github.com/filecoin-project/venus-wallet.git
 ```
 
 ### 2. 编译

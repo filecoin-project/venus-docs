@@ -48,7 +48,7 @@ Venus在管理多集群时更具优越性，其共享组件可为多个集群服
 
 #### 1）Venus共享组件替换Lotus组件
 
-Venus服务的共享组件包括：[venus](https://github.com/filecoin-project/venus)、[venus-messager](https://github.com/ipfs-force-community/venus-messager)、[venus-auth](https://github.com/ipfs-force-community/venus-auth)、[venus-wallet](https://github.com/ipfs-force-community/venus-wallet)、[venus-miner](https://github.com/filecoin-project/venus-miner)，部署请参考 [How-To-Deploy-MingPool](How-To-Deploy-MingPool.md)。
+Venus服务的共享组件包括：[venus](https://github.com/filecoin-project/venus)、[venus-messager](https://github.com/filecoin-project/venus-messager)、[venus-auth](https://github.com/filecoin-project/venus-auth)、[venus-wallet](https://github.com/filecoin-project/venus-wallet)、[venus-miner](https://github.com/filecoin-project/venus-miner)，部署请参考 [How-To-Deploy-MingPool](How-To-Deploy-MingPool.md)。
 
 #### 2）Venus独立组件替换Lotus组件
 
