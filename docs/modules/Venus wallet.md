@@ -5,7 +5,7 @@
 ## quickstart
 ### 1-Downloadcode
 ```
-git clone https://github.com/ipfs-force-community/venus-wallet.git
+git clone https://github.com/filecoin-project/venus-wallet.git
 ```
 
 ### 2-Compile

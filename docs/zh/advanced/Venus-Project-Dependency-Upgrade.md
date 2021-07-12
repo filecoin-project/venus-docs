@@ -74,8 +74,6 @@ actors = append(actors, exported5.BuiltinActors()...)
 
 - go.mod
 
-- filecoin-ffi
-
 - 初始参数或消息处理逻辑有无变化
 
 
