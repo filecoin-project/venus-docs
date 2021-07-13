@@ -33,7 +33,7 @@ Diagram below illustrates how venus modules interacts with one and another.
 
 ## Hardware requirements
 
-Learn more about hardware requirements [here](https://docs.filecoin.io/mine/mining-architectures/#protocol-labs-example-architecture).
+Learn more about hardware requirements [here](https://github.com/filecoin-project/lotus/discussions/6071).
 
 ## Pre-requisites
 
@@ -191,6 +191,12 @@ $ kill [PID]
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
 
+You should see logs close to the following indicating successful connection to `venus-gateway`.
+
+```bash
+2021-07-12T15:14:12.457+0800    INFO    wallet_event    wallet_event/listenevent.go:197 connect to server fcf714b2-eeb6-498b-aafc-5e58eccd9d0f  {"api hub": "/ip4/<IP_ADDRESS>/tcp/45132"}
+```
+
 :::tip
 
 Using process controll like  `systemmd` or `supervisord` is recommended.
@@ -209,6 +215,12 @@ $ git checkout <RELEASE_TAG>
 $ make deps
 $ make
 ```
+
+:::tip 
+
+If you are using sealer for the 1st time, it may start to download proof parameters, which may take quite some time. If you already downloaded the proof params, use `TRUST_PARAMS=1` to suppress downloading. If you are located in China, follow the tips [here](https://venus.filecoin.io/Tips-Running-In-China.html) to speed up the process.  
+
+:::
 
 ### Initialize sealer with a new miner id
 
@@ -232,19 +244,32 @@ $ nohup ./venus-sealer init \
 # You can leave out this flag if you are on testnet
 --no-local-storage \
 > sealer.log 2>&1 &
-
-# Expect output close to the following
-2021-04-25T18:41:31.925+0800	INFO	main	venus-sealer/init.go:182	Checking if repo exists
-2021-04-25T18:41:31.926+0800	INFO	main	venus-sealer/init.go:217	Checking full node version
-2021-04-25T18:41:31.927+0800	INFO	main	venus-sealer/init.go:233	Initializing repo
-2021-04-25T18:41:31.928+0800	INFO	main	venus-sealer/init.go:309	Initializing libp2p identity
-2021-04-25T18:41:32.082+0800	INFO	main	venus-sealer/init.go:485	Pushed CreateMiner message: aaf489f9-af4b-4e4b-9084-018d43f05b7e
-2021-04-25T18:41:32.082+0800	INFO	main	venus-sealer/init.go:486	Waiting for confirmation
-2021-04-25T18:46:32.088+0800	INFO	main	venus-sealer/init.go:502	New miners address is: t01640 (t2cxzf7xvrqo3froqn2xgdqjdbydhkcrgakj7j3ma)
-# miner id on nerpa and calibration starts with "t", while miner id on mainnet starts with "f"
-2021-04-25T18:46:32.088+0800	INFO	main	venus-sealer/init.go:381	Created new miner: t01640
-2021-04-25T18:46:32.089+0800	INFO	main	venus-sealer/init.go:302	Sealer successfully created, you can now start it with 'venus-sealer run'
 ```
+
+Expect logs close to the following indicating a successful creation of a new `<MINER_ID>`.
+
+```bash
+2021-07-12T17:02:07.199+0800	INFO	main	venus-sealer/init.go:142	Initializing venus sealer
+2021-07-12T17:02:07.199+0800	INFO	main	venus-sealer/init.go:162	Checking proof parameters
+2021-07-12T17:03:35.229+0800	INFO	paramfetch	go-paramfetch@v0.0.2-0.20210614165157-25a6c7769498/paramfetch.go:207	parameter and key-fetching complete
+2021-07-12T17:03:35.229+0800	INFO	main	venus-sealer/init.go:176	Trying to connect to full node RPC
+2021-07-12T17:03:35.592+0800	INFO	main	venus-sealer/init.go:190	Checking full node sync status
+2021-07-12T17:03:35.592+0800	INFO	main	venus-sealer/init.go:198	Checking if repo exists
+2021-07-12T17:03:35.592+0800	INFO	main	venus-sealer/init.go:210	Checking full node version
+2021-07-12T17:03:36.099+0800	INFO	main	venus-sealer/init.go:226	Initializing repo
+2021-07-12T17:03:36.100+0800	INFO	main	venus-sealer/init.go:339	Initializing libp2p identity
+2021-07-12T17:03:39.022+0800	INFO	main	venus-sealer/init.go:515	Pushed CreateMiner message: 3bfd3fc8-4f8d-45c8-86e9-5fe29a02fec0
+2021-07-12T17:03:39.022+0800	INFO	main	venus-sealer/init.go:516	Waiting for confirmation
+2021-07-12T17:07:39.184+0800	INFO	main	venus-sealer/init.go:532	New miners address is: <MINER_ID> (t2qgsnl5qy7sehm7u5nobkblmi2t4tuvh7flc4nqy)
+2021-07-12T17:07:39.184+0800	INFO	main	venus-sealer/init.go:411	Created new miner: <MINER_ID>
+2021-07-12T17:07:39.185+0800	INFO	main	venus-sealer/init.go:295	Sealer successfully created, you can now start it with 'venus-sealer run'
+```
+
+:::tip 
+
+It may take couple minutes before  `init` command finishes. 
+
+:::
 
 ### Initialize sealer with an existing miner id
 
@@ -264,8 +289,11 @@ $ ./venus-sealer init \
 # Flags sealer to not store any sealed sectors on the machine it runs on
 --no-local-storage \
 > sealer.log 2>&1 &
+```
 
-# Expect output close to the following
+Expect logs close to the following.
+
+```bash
 2021-06-07T04:15:49.170+0800    INFO    main    venus-sealer/init.go:193        Checking if repo exists
 2021-06-07T04:15:49.170+0800    INFO    main    venus-sealer/init.go:205        Checking full node version
 2021-06-07T04:15:49.174+0800    INFO    main    venus-sealer/init.go:221        Initializing repo
@@ -281,12 +309,6 @@ Run sealer.
 ```bash
 $ nohup ./venus-sealer run >> sealer.log 2>&1 &
 ```
-
-:::tip 
-
-If you are running sealer for the 1st time, it will start to download proof parameters, which may take quite some time. If you are located in China, follow the tips [here](https://venus.filecoin.io/Tips-Running-In-China.html) to speed up the process.  
-
-:::
 
 Attach permanent storage to sealer.
 
