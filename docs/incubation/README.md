@@ -26,6 +26,8 @@ To Apply, fill out the form [here](http://venusteam.mikecrm.com/1lmpQtj). Applic
 
 Venus Documentations: [https://venus.filecoin.io/](https://venus.filecoin.io/)
 
+3rd-party audit [report](https://leastauthority.com/static/publications/LeastAuthority_Filecoin_Foundation_Venus_Final_Audit_Report.pdf)
+
 Slack Channel: [#fil-venus](https://filecoinproject.slack.com/archives/CEHHJNJS3)
 
 Contact: [@Joss-Venus](https://filecoinproject.slack.com/archives/D01SD621WBT) or [@Tim Guo](https://filecoinproject.slack.com/archives/D0209UW29FE)

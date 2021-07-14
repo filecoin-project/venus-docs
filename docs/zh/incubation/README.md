@@ -26,6 +26,8 @@ venus是GO语言实现的Filecoin分布式存储网络。
 
 Venus文档：[https://venus.filecoin.io/](https://venus.filecoin.io/)
 
+第三方[审计报告](https://leastauthority.com/static/publications/LeastAuthority_Filecoin_Foundation_Venus_Final_Audit_Report.pdf)
+
 Slack频道：[#fil-venus](https://filecoinproject.slack.com/archives/CEHHJNJS3)
 
 联系人：[@Joss-Venus](https://filecoinproject.slack.com/archives/D01SD621WBT) or [@Tim Guo](https://filecoinproject.slack.com/archives/D0209UW29FE)
