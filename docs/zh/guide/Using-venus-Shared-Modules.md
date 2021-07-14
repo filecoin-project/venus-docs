@@ -6,8 +6,8 @@
 
 有两种方法可以开始使用Venus来提供存储服务。
 
-1. 部署最少的硬件并获得对第三方托管的共享venus模块的使用帐号。（本教程的其余部分将引导您完成这种部署Venus服务的方式）
-2. 自行部署所有需要的硬件和venus模块。 （请参阅[这个](How-To-Deploy-MingPool.md)教程以了解更多信息）
+1. 部署最少的硬件并获得对第三方托管的共享venus模块的使用帐号。(本教程的其余部分将引导您完成这种部署Venus服务的方式)
+2. 自行部署所有需要的硬件和venus模块。(请参阅[这个](How-To-Deploy-MingPool.md)教程以了解更多信息)
 
 在遵循其余的教程和成功部署后，您可以开始封装扇区，增加算力并通过您对网络存储容量的贡献最终获得区块奖励！
 
@@ -185,6 +185,12 @@ $ kill [PID]
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
 
+如成功连接 `venus-gateway`，您将看到以下日志。
+
+```bash
+2021-07-12T15:14:12.457+0800    INFO    wallet_event    wallet_event/listenevent.go:197 connect to server fcf714b2-eeb6-498b-aafc-5e58eccd9d0f  {"api hub": "/ip4/<IP_ADDRESS>/tcp/45132"}
+```
+
 :::tip
 
 建议使用`systemd`或`supervisord`等线程控制。
@@ -203,6 +209,12 @@ $ git checkout <RELEASE_TAG>
 $ make deps
 $ make
 ```
+
+:::tip 
+
+如果您是第一次运行sealer，它会开始下载证明参数，这可能需要相当长的时间。如果您确认已下载`proof params`，可使用`TRUST_PARAMS=1`避免重新下载。如果您位于中国，请按照提示[此处](../advanced/Tips-Running-In-China.md)加快流程。
+
+:::
 
 ### 创建新的miner-id来初始化sealer
 
@@ -226,19 +238,32 @@ $ nohup ./venus-sealer init \
 # You can leave out this flag if you are on testnet
 --no-local-storage \
 > sealer.log 2>&1 &
-
-# Expect output close to the following
-2021-04-25T18:41:31.925+0800	INFO	main	venus-sealer/init.go:182	Checking if repo exists
-2021-04-25T18:41:31.926+0800	INFO	main	venus-sealer/init.go:217	Checking full node version
-2021-04-25T18:41:31.927+0800	INFO	main	venus-sealer/init.go:233	Initializing repo
-2021-04-25T18:41:31.928+0800	INFO	main	venus-sealer/init.go:309	Initializing libp2p identity
-2021-04-25T18:41:32.082+0800	INFO	main	venus-sealer/init.go:485	Pushed CreateMiner message: aaf489f9-af4b-4e4b-9084-018d43f05b7e
-2021-04-25T18:41:32.082+0800	INFO	main	venus-sealer/init.go:486	Waiting for confirmation
-2021-04-25T18:46:32.088+0800	INFO	main	venus-sealer/init.go:502	New miners address is: t01640 (t2cxzf7xvrqo3froqn2xgdqjdbydhkcrgakj7j3ma)
-# miner id on nerpa and calibration starts with "t", while miner id on mainnet starts with "f"
-2021-04-25T18:46:32.088+0800	INFO	main	venus-sealer/init.go:381	Created new miner: t01640
-2021-04-25T18:46:32.089+0800	INFO	main	venus-sealer/init.go:302	Sealer successfully created, you can now start it with 'venus-sealer run'
 ```
+
+以下为成功创建`<MINER_ID>`的日志。
+
+```bash
+2021-07-12T17:02:07.199+0800	INFO	main	venus-sealer/init.go:142	Initializing venus sealer
+2021-07-12T17:02:07.199+0800	INFO	main	venus-sealer/init.go:162	Checking proof parameters
+2021-07-12T17:03:35.229+0800	INFO	paramfetch	go-paramfetch@v0.0.2-0.20210614165157-25a6c7769498/paramfetch.go:207	parameter and key-fetching complete
+2021-07-12T17:03:35.229+0800	INFO	main	venus-sealer/init.go:176	Trying to connect to full node RPC
+2021-07-12T17:03:35.592+0800	INFO	main	venus-sealer/init.go:190	Checking full node sync status
+2021-07-12T17:03:35.592+0800	INFO	main	venus-sealer/init.go:198	Checking if repo exists
+2021-07-12T17:03:35.592+0800	INFO	main	venus-sealer/init.go:210	Checking full node version
+2021-07-12T17:03:36.099+0800	INFO	main	venus-sealer/init.go:226	Initializing repo
+2021-07-12T17:03:36.100+0800	INFO	main	venus-sealer/init.go:339	Initializing libp2p identity
+2021-07-12T17:03:39.022+0800	INFO	main	venus-sealer/init.go:515	Pushed CreateMiner message: 3bfd3fc8-4f8d-45c8-86e9-5fe29a02fec0
+2021-07-12T17:03:39.022+0800	INFO	main	venus-sealer/init.go:516	Waiting for confirmation
+2021-07-12T17:07:39.184+0800	INFO	main	venus-sealer/init.go:532	New miners address is: <MINER_ID> (t2qgsnl5qy7sehm7u5nobkblmi2t4tuvh7flc4nqy)
+2021-07-12T17:07:39.184+0800	INFO	main	venus-sealer/init.go:411	Created new miner: <MINER_ID>
+2021-07-12T17:07:39.185+0800	INFO	main	venus-sealer/init.go:295	Sealer successfully created, you can now start it with 'venus-sealer run'
+```
+
+:::tip 
+
+`init`命令可能需要等待几分钟。 
+
+:::
 
 ### 使用现有的miner-id初始化sealer
 
@@ -258,8 +283,11 @@ $ ./venus-sealer init \
 # Flags sealer to not store any sealed sectors on the machine it runs on
 --no-local-storage \
 > sealer.log 2>&1 &
+```
 
-# Expect output close to the following
+以下为成功init日志的范例。
+
+```bash
 2021-06-07T04:15:49.170+0800    INFO    main    venus-sealer/init.go:193        Checking if repo exists
 2021-06-07T04:15:49.170+0800    INFO    main    venus-sealer/init.go:205        Checking full node version
 2021-06-07T04:15:49.174+0800    INFO    main    venus-sealer/init.go:221        Initializing repo
@@ -275,12 +303,6 @@ $ ./venus-sealer init \
 ```bash
 $ nohup ./venus-sealer run >> sealer.log 2>&1 &
 ```
-
-:::tip 
-
-如果您是第一次运行sealer，它会开始下载证明参数，这可能需要相当长的时间。 如果您位于中国，请按照提示 [此处](../advanced/Tips-Running-In-China.md)加快流程。
-
-:::
 
 将永久存储连接到sealer。
 

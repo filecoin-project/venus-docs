@@ -11,8 +11,8 @@
              
 ```sh
  $./venus-messager address set-sel-msg-num --num 30 <worker 地址>
-```             
-             
+```
+
 
 ## 3. venus-miner无法出块
 - 确认venus-miner连接的venus节点同步高度正常，并检查其日志是否正常；
@@ -35,7 +35,7 @@ $ cat ~/messager.toml
 [node]
     url = "/ip4/192.168.1.134/tcp/3453"
     token= "eyJhbGciOIUacbciIsInR5cCI6I.iLCJwZXJtIjoic2lnbiIs.c65GtR7IVjJYE"
-```  
+```
 kill掉之前的venus-messager进程后，再重新启动即可
 
 venus-miner: 修改用户家目录下的配置文件，连接的ip地址
@@ -52,3 +52,37 @@ $ cat .venus/api
 /ip4/120.78.159.125/tcp/3453/http
 ```
 修改完成后使用重启winning-post和sealer
+
+## 5. venus-wallet启动之后报错
+
+```
+ERROR	wallet_event	wallet_event/listenevent.go:192 WalletSign error password not set {"api hub": "/ip4/<IP_ADDRESS>/tcp/45132"}
+```
+
+是由于没有执行./venus-wallet set-password命令设置密码导致的，每次venus-wallet重启都需要执行设置密码的操作；
+设置密码后，如果有下列报错，则需要检查配置文件。
+
+```bash
+ERROR	wallet_event	wallet_listen/listenevent.go:120 listen wallet event errored: listenWalletRequestOnce listenWalletRequestOnce call failed: handler: websocket connection closed {"api hub": "/ip4/47.251.6.27/tcp/45132"}
+```
+
+直到到connect to server返回正确的消息为止。
+
+```bash
+INFO	wallet_event	wallet_event/listenevent.go:156 connect to server 65735211-9b4f-447q-9c8f-ad23791c75e {"api hub": "/ip4/47.251.6.27/tcp/45132"}
+```
+
+## 6. venus-message消息发不出去
+
+```bash
+ERROR[2021-07-12T16:37:45+8:00] wallet sign failed 65735211-9b4f-447q-9c8f-ad23791c75e fail could not decrypt key with given password
+```
+
+从日志中发现消息在签名时失败，主要是没有签名的权限，此时优先检查messager.toml配置文件中连接node的token权限，是否具有签名消息权限，权限要求为sign或admin。
+
+```toml
+[node]
+  url = "/ip4/192.168.1.150/tcp/1234"
+  token= "eyJhbGciOiJIUzI1Ni.xxx.xxx"
+```
+

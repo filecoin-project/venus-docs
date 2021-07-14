@@ -75,6 +75,10 @@ module.exports = {
                         text: 'Advanced',
                         link: '/advanced/'
                     },
+                    {
+                        text: 'Incubation Center',
+                        link: '/incubation/'
+                    },
                 ],
                 sidebar: {
                     '/guide/': [
@@ -119,7 +123,16 @@ module.exports = {
                                 ['How-To-Setup_2knet.md', 'How to start a local dev network'],
                             ]
                         }
-                    ]
+                    ],
+                    '/incubation/': [
+                        {
+                            title: 'Incubation',
+                            collapsable: false,
+                            children: [
+                                ['', 'Overview'],
+                            ]
+                        }
+                    ],
                 }
             },
             '/zh/': {
@@ -139,6 +152,10 @@ module.exports = {
                     {
                         text: '进阶',
                         link: '/zh/advanced/'
+                    },
+                    {
+                        text: '孵化器',
+                        link: '/zh/incubation/'
                     }
                 ],
                 sidebar: {
@@ -183,6 +200,16 @@ module.exports = {
                                 ['venus_load_balancing.md', '负载均衡'],
                                 ['Payment-Channel.md', '支付通道'],
                                 ['How-To-Setup_2knet.md', '本地2k开发网络'],
+                            ]
+                        }
+                    ],
+                    '/zh/incubation/': [
+                        {
+                            title: '孵化器',
+                            collapsable: false,
+                            children: [
+                                ['', '概述'],
+                                ['FQA.md', 'FAQ']
                             ]
                         }
                     ]
