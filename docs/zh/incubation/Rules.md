@@ -42,7 +42,9 @@ Venus由IPFSForce社区维护，是Filecoin生态系统开发中的四个实现�
 
 ## 中心目标
 
-我们希望这个项目能让世界各地的存储提供者参与到Filecoin网络中来。在该计划的为期一年里，我们希望能服务165名以上的新存储提供者。请注意，Filecoin社区行为准则适用于本计划。
+我们希望这个项目能让世界各地的存储提供者参与到Filecoin网络中来。在该计划的为期一年里，我们希望能服务165名以上的新存储提供者。请注意，Filecoin社区[行为准则](https://github.com/filecoin-project/community/blob/master/CODE_OF_CONDUCT.md)适用于本计划。
+
+观看我们在[filecoin meetup](https://youtu.be/Sj-lP8wwoB8?t=778)上的视频项目介绍，了解孵化器更多详情。
 
 ## 如何申请
 

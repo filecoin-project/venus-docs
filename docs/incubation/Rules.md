@@ -42,9 +42,9 @@ In exchange for their work, Masters will receive access to a prize pool of more 
 
 ## Center Goals
 
-We hope this program can empower miners around the world to participate in the Filecoin network. In the first year of the program, we hope to onboard more than 165 new miners. Note that the [Filecoin Community Code of Conduct](https://github.com/filecoin-project/community/blob/master/CODE_OF_CONDUCT.md#:~:text=We believe that our mission,practices will not be tolerated.) applies to this program.
+We hope this program can empower miners around the world to participate in the Filecoin network. In the first year of the program, we hope to onboard more than 165 new miners. Note that the [Filecoin Community Code of Conduct](https://github.com/filecoin-project/community/blob/master/CODE_OF_CONDUCT.md) applies to this program.
 
-Learn more about the program tracks by joining the Filecoin Foundation and the Venus team at the [Filecoin Meetup](https://www.meetup.com/Filecoin-San-Francisco/events/dcqjfsycckbrb/) on July 13, at 4 pm PDT.
+Learn more about the program tracks by the recording of Filecoin Foundation and the Venus team at the [Filecoin Meetup](https://youtu.be/Sj-lP8wwoB8?t=778) on July 13.
 
 ## How to Apply
 
