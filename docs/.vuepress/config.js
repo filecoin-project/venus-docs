@@ -130,6 +130,7 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
+                                ['Rules.md', 'Rules'],
                             ]
                         }
                     ],
@@ -209,7 +210,7 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', '概述'],
-                                ['FQA.md', 'FAQ']
+                                ['Rules.md', '规则']
                             ]
                         }
                     ]
