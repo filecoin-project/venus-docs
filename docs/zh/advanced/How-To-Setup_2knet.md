@@ -26,9 +26,9 @@ yum install jq -y
 ### venus-auth
    
 ```sh
-nohup ./venus-auth > auth.log 2>&1 &
+nohup ./venus-auth run > auth.log 2>&1 &
 # 生成服务组件间相互访问API所需的验证token
-./venus-auth genToken --perm admin admin
+./venus-auth token gen --perm admin admin
 ```
 
 ### venus-gateway
@@ -47,7 +47,7 @@ nohup ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json 
 
 ```sh
 # 服务组件venus-auth需要为每个集群的venus-wallet生成具有wallet权限的token，用于向venus-gateway注册服务时验证请求合法性
-$ ./venus-auth genToken --perm write w1
+$ ./venus-auth token gen --perm write w1
 
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 
@@ -74,8 +74,8 @@ nohup ./venus-messager run --auth-url=http://<auth_ip>:8989 --node-url=/ip4/<ful
    
 ```sh
 # 服务组件venus-auth需要为venus-sealer生成标识信息，比如：具有write权限的token，集群别明等，这些作为独立组件访问服务的必要信息，需要在请求API中带入：
-./venus-auth addUser --name=m1 --miner=t01000
-./venus-auth genToken --perm write m1
+./venus-auth user add --name=m1 --miner=t01000
+./venus-auth token gen --perm write m1
  
 # 初始化 sealer
 ./venus-sealer init --genesis-miner --actor=t01000 --sector-size=2048 --pre-sealed-sectors=~/.genesis-sectors --pre-sealed-metadata=~/.genesis-sectors/pre-seal-t01000.json --nosync --network=2k \
@@ -122,8 +122,8 @@ $ ./venus-wallet new bls
 ./venus wallet balance <bls address 1>
 
 # 服务组件venus-auth需要为venus-sealer生成标识信息，比如：具有write权限的token，集群别明等，这些作为独立组件访问服务的必要信息，需要在请求API中带入：
-./venus-auth addUser --name=m2
-./venus-auth genToken --perm write m2
+./venus-auth user add --name=m2
+./venus-auth token gen --perm write m2
 
 # 生成普通矿工
 ./venus-sealer init --worker=<bls address 1> --owner=<bls address 1> --sector-size=2k --network=2k \
@@ -133,7 +133,7 @@ $ ./venus-wallet new bls
 --auth-token <m2 token>
 
 # 更新venus-auth中的User信息
-./venus-auth updateUser --name=m2 --miner=<t0***> --state=1
+./venus-auth user update --name=m2 --miner=<t0***> --state=1
 
 # 启动
 nohup ./venus-sealer run > sealer.log 2>&1 &

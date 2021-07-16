@@ -93,7 +93,7 @@ $ git clone https://github.com/filecoin-project/venus-auth.git
 $ cd venus-auth
 $ git checkout <RELEASE_TAG>
 $ make 
-$ nohup ./venus-auth > auth.log 2>&1 &
+$ nohup ./venus-auth run > auth.log 2>&1 &
 ```
 :::tip 
 
@@ -132,7 +132,7 @@ maxIdleTime = "30s"
 ```shell script
 $ ps -ef | grep auth
 $ kill <VENUS_AUTH_PID>
-$ nohup ./venus-auth > auth.log 2>&1 &
+$ nohup ./venus-auth run > auth.log 2>&1 &
 ```
 
 ### 生成token
@@ -143,22 +143,22 @@ $ nohup ./venus-auth > auth.log 2>&1 &
 
 ```bash
 # --perm specifies admin, sign, wirte or read permission of the token generated
-$ ./venus-auth genToken --perm admin <SHARED>
+$ ./venus-auth token gen --perm admin <SHARED>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
 
 为独立模块生成令牌。 token可以通过`<USER>` 逻辑分组，作为加入矿池的单个矿工。
 
 ```shell script
-$ ./venus-auth addUser --name <USER>
-$ ./venus-auth genToken --perm write <USER>
+$ ./venus-auth usdr add --name <USER>
+$ ./venus-auth token gen --perm write <USER>
 <USER_WRITE_AUTH_TOKEN>
-$ ./venus-auth genToken --perm read <USER>
+$ ./venus-auth token gen --perm read <USER>
 <USER_READ_AUTH_TOKEN>
 ```
 :::tip
 
-使用`./venus-auth addUser <USER>` 对不同的token进行逻辑分组。
+使用`./venus-auth user add <USER>` 对不同的token进行逻辑分组。
 
 :::
 
