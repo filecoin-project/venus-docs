@@ -69,16 +69,16 @@ If you are an admin hosting shared venus modules, use the following command to c
 
 ```bash
 # If miner doesn't have a <MINER_ID> yet, leave out --miner flag and use 'updateUser' when user inited their miner id
-$ ./venus-auth addUser --name <ACCOUNT_NAME> --miner <MINER_ID> --state=1 --sourceType=1
+$ ./venus-auth user add --name <ACCOUNT_NAME> --miner <MINER_ID> --state=1 --sourceType=1
 # The returned token is what miner have to add into their config file in order to gain access to your shared modules
-$ ./venus-auth genToken --perm write <ACCOUNT_NAME>
+$ ./venus-auth token gen --perm write <ACCOUNT_NAME>
 <AUTH_TOKEN_FOR_ACCOUNT_NAME>
 ```
 
 Update user information if necessary.
 
 ```bash
-./venus-auth updateUser --name=<ACCOUNT_NAME> --miner=<MINER_ID> --state=1  --sourceType=1
+./venus-auth user update --name=<ACCOUNT_NAME> --miner=<MINER_ID> --state=1  --sourceType=1
 ```
 
 ### Software dependencies

@@ -93,7 +93,7 @@ $ git clone https://github.com/filecoin-project/venus-auth.git
 $ cd venus-auth
 $ git checkout <RELEASE_TAG>
 $ make 
-$ nohup ./venus-auth > auth.log 2>&1 &
+$ nohup ./venus-auth run > auth.log 2>&1 &
 ```
 :::tip 
 
@@ -132,7 +132,7 @@ Restart venus-auth for the configuration to take into effect.
 ```shell script
 $ ps -ef | grep auth
 $ kill <VENUS_AUTH_PID>
-$ nohup ./venus-auth > auth.log 2>&1 &
+$ nohup ./venus-auth run > auth.log 2>&1 &
 ```
 
 ### Token gerneration
@@ -143,22 +143,22 @@ Generate tokens for shared modules.
 
 ```bash
 # --perm specifies admin, sign, wirte or read permission of the token generated
-$ ./venus-auth genToken --perm admin <SHARED>
+$ ./venus-auth token gen --perm admin <SHARED>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
 
 Generate tokens for independent modules. Tokens can be logically grouped by `<USER>` as individual miner joining the mining pool.
 
 ```shell script
-$ ./venus-auth addUser --name <USER>
-$ ./venus-auth genToken --perm write <USER>
+$ ./venus-auth user add --name <USER>
+$ ./venus-auth token gen --perm write <USER>
 <USER_WRITE_AUTH_TOKEN>
-$ ./venus-auth genToken --perm read <USER>
+$ ./venus-auth token gen --perm read <USER>
 <USER_READ_AUTH_TOKEN>
 ```
 :::tip
 
-Use `./venus-auth addUser <USER>` to logically group different tokens.
+Use `./venus-auth user add <USER>` to logically group different tokens.
 
 :::
 
