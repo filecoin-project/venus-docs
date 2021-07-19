@@ -200,7 +200,7 @@ $ make
 
 ```bash
 $ nohup ./venus daemon --network nerpa \
---authURL <http://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 > venus.log 2>&1 & 
 ```
 
@@ -232,7 +232,7 @@ vim ~/.venus/config.json
 $ ps -ef | grep venus
 $ kill <VENUS_PID>
 $ nohup ./venus daemon --network nerpa \
---authURL <http://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 > venus.log 2>&1 
 ```
 

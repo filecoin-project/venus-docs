@@ -200,7 +200,7 @@ Start venus daemon for chain synchronization. Use `--network` to specify the net
 
 ```bash
 $ nohup ./venus daemon --network nerpa \
---authURL <http://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 > venus.log 2>&1 & 
 ```
 
@@ -232,7 +232,7 @@ Restart venus daemon for the config to take into effects.
 $ ps -ef | grep venus
 $ kill <VENUS_PID>
 $ nohup ./venus daemon --network nerpa \
---authURL <http://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 > venus.log 2>&1 
 ```
 

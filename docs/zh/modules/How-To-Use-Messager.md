@@ -36,6 +36,7 @@ options:
    --mysql-dsn      mysql dsn，eg. user:password@(127.0.0.1:3306)/messager?parseTime=true&loc=Local
    --gateway-url    gateway的URL
    --gateway-token  gateway的token
+   --rate-limit-redis 限流使用的redis
 ```
 
 ## 命令行
@@ -170,12 +171,7 @@ options:
 2. 设置共享的参数
 
 ```bash
-# expireEpoch is the expiration height of the message, 0 means it will not expire
-# selMsgNum is the maximum number of messages pushed to mpool by a single address at a time
-# scanInterval is the interval to scan the remote wallet
-# maxEstFailNumOfMsg is the number of failures allowed to estimate gas consumption
-
-./venus-messager share-params set "{\"expireEpoch\": 0, \"gasOverEstimation\": 1.25, \"maxFee\": 7000000000000000, \"maxFeeCap\": 0, \"selMsgNum\": 20, \"scanInterval\": 10, \"maxEstFailNumOfMsg\": 50}"
+./venus-messager share-params set --gas-over-estimation=1.25 --max-feecap="0" --max-fee="7000000000000000" --sel-msg-num=20
 ```
 
 3. 从数据库手动刷新共享参数
