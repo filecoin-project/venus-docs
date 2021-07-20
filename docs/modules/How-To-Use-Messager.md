@@ -26,13 +26,17 @@ make
 * When the specified configuration file exists at startup, the values of the set parameters will be used, but will not be written to the configuration file. If the parameters are not set, the values of the parameters in the configuration file will be used
 
 ```bash
-# --config | -c        specify config file (default: "./messager.toml")
-# --auth-url           url for auth server
-# --node-url           url for connection lotus/venus
-# --node-token         token auth for lotus/venus
-# --db-type            which db to use. sqlite/mysql
-# --sqlite-path        sqlite db file. eg. ~/sqlite/message.db
-# --mysql-dsn          mysql connection string
+options：
+  --auth-url           url for auth server
+  --auth-token         token for auth server
+  --node-url           url for connection lotus/venus
+  --node-token         token auth for lotus/venus
+  --db-type            which db to use. sqlite/mysql
+  --sqlite-path        sqlite db file. eg. ~/sqlite/message.db
+  --mysql-dsn          mysql connection string
+  --gateway-url        url for gateway server
+  --gateway-token      token for gateway server
+  --rate-limit-redis   limit flow using redis
 ```
 
 ## Commands
@@ -167,12 +171,7 @@ make
 2. set shared params
 
 ```bash
-# expireEpoch is the expiration height of the message, 0 means it will not expire
-# selMsgNum is the maximum number of messages pushed to mpool by a single address at a time
-# scanInterval is the interval to scan the remote wallet
-# maxEstFailNumOfMsg is the number of failures allowed to estimate gas consumption
-
-./venus-messager share-params set "{\"expireEpoch\": 0, \"gasOverEstimation\": 1.25, \"maxFee\": 7000000000000000, \"maxFeeCap\": 0, \"selMsgNum\": 20, \"scanInterval\": 10, \"maxEstFailNumOfMsg\": 50}"
+./venus-messager share-params set --gas-over-estimation=1.25 --max-feecap="0" --max-fee="7000000000000000" --sel-msg-num=20
 ```
 
 3. manual refresh shared params from DB
