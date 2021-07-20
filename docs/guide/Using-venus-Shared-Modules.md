@@ -99,6 +99,14 @@ CentOS:
 sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum install -y git gcc bzr jq pkgconfig clang llvm mesa-libGL-devel opencl-headers ocl-icd ocl-icd-devel hwloc-devel
 ```
 
+### Rust
+
+Install [rustup](https://rustup.rs/).
+
+```sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
 #### Go
 
 To build venus, you need a working installation of [Go 1.16 or higher](https://golang.org/dl/).
@@ -213,8 +221,14 @@ $ cd venus-sealer
 $ git checkout <RELEASE_TAG>
 # make dependency
 $ make deps
-$ make
+$ RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1" make
 ```
+
+:::warning
+
+Please make sure you use these flags `RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1"` building venus-sealer to get best performance out of your machine.
+
+:::
 
 :::tip 
 
