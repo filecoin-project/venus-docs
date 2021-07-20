@@ -244,7 +244,6 @@ $ nohup ./venus daemon --network nerpa \
 $ git clone https://github.com/filecoin-project/venus-messager.git
 $ cd venus-messager
 $ git checkout <RELEASE_TAG>
-$ make deps
 $ make 
 ```
 启动`venus-messager`。请注意，`--auth-url`、`--node-url` 和`--auth-token` 是为了让 venus-messager 了解其他`venus`模块的存在并进行自身的身份验证。
