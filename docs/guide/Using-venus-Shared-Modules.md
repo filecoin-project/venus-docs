@@ -238,7 +238,7 @@ If you are using sealer for the 1st time, it may start to download proof paramet
 
 ### Initialize sealer with a new miner id
 
-If you don't have a miner id yet, run the following command to initialize sealer.
+If you don't have a miner id yet, run the following command to initialize sealer. Make sure you have some funds in your `<OWNER_ADDRESS>` to cover the gas fee needed for initing a new miner id, or init will fail. 
 
 ```bash
 $ nohup ./venus-sealer init \
@@ -287,7 +287,7 @@ It may take couple minutes before  `init` command finishes.
 
 ### Initialize sealer with an existing miner id
 
-If you already have a miner id, run the following command to initialize sealer.
+If you already have a miner id, run the following command to initialize sealer. Make sure you have some funds in your `<OWNER_ADDRESS>` to cover the gas fee, or init will fail. 
 
 ```bash
 $ ./venus-sealer init \

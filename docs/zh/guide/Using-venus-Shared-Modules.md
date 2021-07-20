@@ -232,7 +232,7 @@ $ RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1" make
 
 ### 创建新的miner-id来初始化sealer
 
-如果您还没有miner-id，请运行以下命令来初始化sealer。
+如果您还没有miner-id，请运行以下命令来初始化sealer。请确保`<OWNER_ADDRESS>`中有足够资金支付gasfee，否则`init`将失败。
 
 ```bash
 $ nohup ./venus-sealer init \
@@ -281,7 +281,7 @@ $ nohup ./venus-sealer init \
 
 ### 使用现有的miner-id初始化sealer
 
-如果您已经有miner-id，请运行以下命令来初始化sealer。
+如果您已经有miner-id，请运行以下命令来初始化sealer。请确保`<OWNER_ADDRESS>`中有足够资金支付gasfee，否则`init`将失败。
 
 ```bash
 $ ./venus-sealer init \
