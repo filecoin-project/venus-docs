@@ -244,7 +244,6 @@ Download and compile the source code of venus-messager.
 $ git clone https://github.com/filecoin-project/venus-messager.git
 $ cd venus-messager
 $ git checkout <RELEASE_TAG>
-$ make deps
 $ make 
 ```
 Start venus-messager. Note that `--auth-url`, `--node-url` and `--auth-token` are for venus-messager to be aware of other venus modules and be properly authenticated.

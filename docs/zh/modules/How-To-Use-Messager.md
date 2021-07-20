@@ -13,7 +13,6 @@ git clone https://github.com/filecoin-project/venus-messager.git
 ### 安装依赖及构建
 
 ```bash
-make deps
 make
 ```
 
