@@ -1,53 +1,38 @@
-## Why do we do this
+## Retrieve rewards
 
-&ensp;&ensp; In the Venus distributed mine pool, Venus-Wallet is a separate component, one for each cluster. The purpose of this is to ensure that the customer fully controls the wallet keys of the cluster and is not disclosed to the outside world. This is also consistent with the original design of Venus to improve the security of the system and protect the security of the user's Fil.
+When storage provider get block rewards from the network, 25% percent of the reward will be immediately released to your miner actor's available balance and the rest 75% will become locked funds and be released linearly in 180 days. This tutorial will walk you through how to withdraw your rewards.
 
-&ensp;&ensp; In Venus mine pool, we have shielded the processing of "Send" message to avoid the means of simulating transfer message to attack the system, but this also brings some troubles to customer transfer. Therefore, this document explains how to extract the available balance of the miner's account and the transfer method.
+## Withdraw balance from miner
 
+Query available balance using `venus-sealer`.
 
-
-## How to do
-
-### Query the available balance
-
-Execute the command on the Venus-Sealer side
-
-```sh
+```bash
 $ ./venus-sealer info
+```
 
-Chain: [sync behind! (1h26m35s behind)] [basefee 100 aFIL]
+Check available balance from the output.
+
+```bash
 ...
-Sealer Balance: 253.94 FIL
-PreCommit: 23.045 FIL
-Pledge: 3 FIL
 Vesting: 102.474 FIL
 The Available: 125.421 FIL
 ...
 ```
-The balance will be updated as the block is released or the mortgage is released
 
+Withdraw available balance. Then check if your owner address recieves the funds using [filscan](filscan.io). 
 
-### Extract available balance
-
-Execute the command on the Venus-Sealer side
-
-```sh
-
-$ ./venus-sealer actor withdraw [amount (FIL)]
-
+```bash
+$ ./venus-sealer actor withdraw <FIL_AMOUNT>
 ```
 
-This command will fetch the specified number of FIL to the owner address of the miner. The owner can be found in several ways. Here is how to query the owner on Venus-Sealer:
+List all addresses using `venus-sealer`.
 
-```sh
+```bash
 $ ./venus-sealer actor control list
-name ID key use balance
-owner t01763 t3qsek22y... *** FIL
-worker t01762 t3rcktwpg... other *** FIL
 ```
 
-### send
+## Send funds from your addresses
 
-&ensp;&ensp; Miners can use [fil-wallet APP](https://fivetoken.io/download) for sending Fils.
+`venus-wallet` doesn't support sending funds from `cli`. Sending funds can be realized by exporting private key to a [wallet](https://docs.filecoin.io/about-filecoin/managing-assets/#wallets) that supports filecoin. And then send funds through the said wallet.
 
-&ensp;&ensp; There are other options available to the user, such as synchronizing a Venus/Lotus node, importing the wallet private key and executing the Send command.
+Note that venus shared modules also blocks `send` messages for security reason, making your storage system more secure from potential attacks. This design makes sending funds less convienent but allows the seperation of an admin role and a node operator role for increased security. 

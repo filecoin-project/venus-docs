@@ -20,7 +20,7 @@ venus是GO语言实现的Filecoin分布式存储网络。
 
 ### 申请 
 
-申请请填写[表格](http://venusteam.mikecrm.com/1lmpQtj)。第一批次的申请截止日期为2021年7月19日。
+申请请填写[表格](http://venusteam.mikecrm.com/1lmpQtj)。
 
 ### 资源
 
