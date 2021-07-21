@@ -99,6 +99,14 @@ CentOS:
 sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum install -y git gcc bzr jq pkgconfig clang llvm mesa-libGL-devel opencl-headers ocl-icd ocl-icd-devel hwloc-devel
 ```
 
+### Rust
+
+Install [rustup](https://rustup.rs/).
+
+```sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
 #### Go
 
 To build venus, you need a working installation of [Go 1.16 or higher](https://golang.org/dl/).
@@ -213,8 +221,14 @@ $ cd venus-sealer
 $ git checkout <RELEASE_TAG>
 # make dependency
 $ make deps
-$ make
+$ RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1" make
 ```
+
+:::warning
+
+Please make sure you use these flags `RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1"` building venus-sealer to get best performance out of your machine.
+
+:::
 
 :::tip 
 
@@ -224,7 +238,7 @@ If you are using sealer for the 1st time, it may start to download proof paramet
 
 ### Initialize sealer with a new miner id
 
-If you don't have a miner id yet, run the following command to initialize sealer.
+If you don't have a miner id yet, run the following command to initialize sealer. Make sure you have some funds in your `<OWNER_ADDRESS>` to cover the gas fee needed for initing a new miner id, or init will fail. 
 
 ```bash
 $ nohup ./venus-sealer init \
@@ -273,7 +287,7 @@ It may take couple minutes before  `init` command finishes.
 
 ### Initialize sealer with an existing miner id
 
-If you already have a miner id, run the following command to initialize sealer.
+If you already have a miner id, run the following command to initialize sealer. Make sure you have some funds in your `<OWNER_ADDRESS>` to cover the gas fee, or init will fail. 
 
 ```bash
 $ ./venus-sealer init \
