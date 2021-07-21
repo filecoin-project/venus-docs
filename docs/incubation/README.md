@@ -20,7 +20,7 @@ To take adavantage of the free 90-day [shared venus modules](https://venus.filec
 
 ### Application 
 
-To Apply, fill out the form [here](http://venusteam.mikecrm.com/1lmpQtj). Application deadline for the first bactch is July 19, 2021.
+To Apply, fill out the form [here](http://venusteam.mikecrm.com/1lmpQtj).
 
 ### Resources
 
