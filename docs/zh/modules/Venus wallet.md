@@ -63,6 +63,13 @@ $ ./venus-wallet run  --network=test
   # 策略等级，0：不开启策略化 1：只验证待签名数据类型 2：验证待签名数据类型，且验证配置了method策略的message类型
   Level = 2
   NodeURL = "/ip4/127.0.0.1/tcp/2345/http"
+
+[APIRegisterHub]
+  # gateway的URL，不配置则不连接gateway
+  RegisterAPI = ["/ip4/127.0.0.1/tcp/45132"]
+  # gateway的token
+  Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6ImFkbWluIiwiZXh0IjoiIn0.oakIfSg1Iiv1T2F1BtH1bsb_1GeXWuirdPSjvE5wQLs"
+  SupportAccounts = ["testminer"]
 ```
 
 # CLI 操作指南
