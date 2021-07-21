@@ -63,6 +63,13 @@ $ ./venus-wallet run  --network=test
   # Strategy level，0：Don't turn on strategy 1：Verify only the data type to be signed 2：Verify the data type to be signed, and verify the message type with the method policy configured
   Level = 2
   NodeURL = "/ip4/127.0.0.1/tcp/2345/http"
+
+[APIRegisterHub]
+  # The URL of the gateway. If not configured, the gateway will not be connected
+  RegisterAPI = ["/ip4/127.0.0.1/tcp/45132"]
+  # The token of the gateway
+  Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6ImFkbWluIiwiZXh0IjoiIn0.oakIfSg1Iiv1T2F1BtH1bsb_1GeXWuirdPSjvE5wQLs"
+  SupportAccounts = ["testminer"]
 ```
 
 # CLIoperationguide
