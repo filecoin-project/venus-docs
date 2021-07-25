@@ -481,7 +481,7 @@ GLOBAL OPTIONS:
 
 Now that you sucessfully pledged your 1st sector, finding optimal configurations for your storage system is crucial for further growth of power. As venus-sealer functions exactly like lotus-miner, resources for scaling cluster and optimization for lotus can be directly applied to venus-sealer. We recommend that you go through this [hardware list](https://github.com/filecoin-project/lotus/discussions/6071) by minerX and this [tutorial](https://github.com/filecoin-project/lotus/discussions/5989) for advanced tips.
 
-To scale your growth, you can run venus-worker to handle different stages of the sealing process (AP, P1, P2, C2 and etc). Even for a single box setup, it is recommended that you run both venus-sealer and venus-worker to gurantee the stability of your stroage system by having sealer do windowPost solely, or sealing jobs may compete with windowPost for resources which may result in a failed windowPost. 
+To scale your growth, you can run venus-worker to handle different stages of the sealing process (AP, P1, P2, C2 and etc). Even for a single box setup, it is recommended that you run both venus-sealer and venus-worker to gurantee the stability of your stroage system by having sealer do windowPost solely, or sealing jobs may compete with windowPost for resources which may result in [a failed windowPost](https://docs.filecoin.io/mine/lotus/seal-workers/#miner-and-worker-co-location). 
 
 ### Using venus-worker
 
@@ -490,7 +490,7 @@ Change `[Storage]` section of `~/.venussealer/config.toml` to the following.
 ```bash
 [Storage]
   ParallelFetchLimit = 10
-  AllowAddPiece = true
+  AllowAddPiece = false
   AllowPreCommit1 = false
   AllowPreCommit2 = false
   AllowCommit = false
