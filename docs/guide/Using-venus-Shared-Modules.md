@@ -511,8 +511,8 @@ Run venus-worker.
 ```bash
 $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --miner-addr=<SEALER_URL> \
---miner-token=<SEALER_TOKEN> \  
---listen=0.0.0.0:3458 >> worker.log 2>&1 &                   
+--miner-token=<SEALER_TOKEN> \
+>> worker.log 2>&1 &                   
 ```
 
 Attach sealing storage to worker. (Path for permanent storage will be inherited from sealer)
