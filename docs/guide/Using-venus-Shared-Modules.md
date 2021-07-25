@@ -33,7 +33,7 @@ Diagram below illustrates how venus modules interacts with one and another.
 
 ## Hardware requirements
 
-Learn more about hardware requirements [here](https://github.com/filecoin-project/lotus/discussions/6071).
+Learn more about hardware requirements [here](https://docs.filecoin.io/mine/hardware-requirements/#general-hardware-requirements). As a sidetone, everyone may have different hardware setups, and it is recommended that you [find your own optimal configurations](#finding-optimal-configurations) through trial and errors. 
 
 ## Pre-requisites
 
@@ -138,6 +138,12 @@ $ git checkout <RELEASE_TAG>
 $ make
 ```
 
+:::tip
+
+For participants in incubation program, please use `incubation` branch by `git checkout incubation`. To recompile using latest code in `incuvation` branch, do `git pull` and then `make`.
+
+:::
+
 Run venus-wallet module in background.
 
 ```bash
@@ -165,6 +171,12 @@ Please keep backups of your password and store them properly.
 
 :::
 
+:::warning
+
+As venus-wallet doesn't store the password on disks for security reasons, you need to do `setpwd` command every time after running venus-wallet.
+
+:::
+
 Generate owner and worker addresses. (If you don't have an existing miner id)
 
 ```bash
@@ -180,22 +192,36 @@ If you are testing on Nerpa or Calibration, you have to fund all your addresses 
 
 :::
 
+:::tip
+
+Use `./venus-wallet import` command for importing addresses from private keys.
+
+:::
+
 Change `[APIRegisterHub]` section of  `~/.venus_wallet/config.toml` using the credential you get from shared module admin.
 
 ```toml
 [APIRegisterHub]
 RegisterAPI = ["/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/45132"]
-Token = "<AUTH_TOKEN_FOR_ACCOUNT_NAME>"
+Token = "<AUTH_TOKEN_FOR_VENUS_WALLET>"
 SupportAccounts = ["<ACCOUNT_NAME>"]
 ```
+
+:::warning
+
+Make sure above 3 params are correctly set, or connection to venus shared modules will fail.
+
+:::
 
 Restart venus-wallet so that the changes takes into effect.
 
 ```bash
 # grep [PID] of venus-wallet process
 $ ps -ef | grep wallet
+root   6704  2.3  0.0 2361236 43148 pts/2   Sl   17:33   0:18 ./venus-wallet run
+root   8029  0.0  0.0 112828   952 pts/2    S+   17:46   0:00 grep --color=auto venus-wallet
 # kill the process and restart
-$ kill [PID]
+$ kill -9 [PID]
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
 
@@ -213,20 +239,42 @@ Using process controll like  `systemmd` or `supervisord` is recommended.
 
 ## Install venus-sealer
 
+Set evironment variable for building venus-sealer.
+
+```bash
+$ export RUSTFLAGS="-C target-cpu=native -g" 
+$ export FFI_BUILD_FROM_SOURCE="1"
+```
+
+:::warning
+
+Please make sure you use these flags `RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1"` building venus-sealer to get best performance out of your machine.
+
+:::
+
 Download and compile the source code of venus-sealer.
 
 ```bash
 $ git clone https://github.com/filecoin-project/venus-sealer.git
 $ cd venus-sealer
 $ git checkout <RELEASE_TAG>
-# make dependency
 $ make deps
-$ RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1" make
+$ make
 ```
 
-:::warning
+:::tip
 
-Please make sure you use these flags `RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1"` building venus-sealer to get best performance out of your machine.
+For participants in incubation program, please use `incubation` branch by `git checkout incubation`. To recompile using latest code in `incuvation` branch, do the following...
+
+```bash
+$ git pull
+$ git submodule update --init --recursive
+$ cd extern/filecoin-ffi
+$ make clean
+$ cd ../..
+$ make deps
+$ make
+```
 
 :::
 
@@ -253,7 +301,7 @@ $ nohup ./venus-sealer init \
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
 --messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
 --gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
---auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
+--auth-token <AUTH_TOKEN_FOR_VENUS_SEALER> \
 # Flags sealer to not storing any sealed sectors on the machine it runs on
 # You can leave out this flag if you are on testnet
 --no-local-storage \
@@ -299,7 +347,7 @@ $ ./venus-sealer init \
 --node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
 --messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
 --gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
---auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
+--auth-token <AUTH_TOKEN_FOR_VENUS_SEALER> \
 # Flags sealer to not store any sealed sectors on the machine it runs on
 --no-local-storage \
 > sealer.log 2>&1 &
@@ -324,11 +372,33 @@ Run sealer.
 $ nohup ./venus-sealer run >> sealer.log 2>&1 &
 ```
 
-Attach permanent storage to sealer.
+Attach permanent storage and sealing storage to sealer.
 
 ```bash
-$ ./venus-sealer storage attach --init --store <ABSOLUTE_PATH_OF_YOUR_PERMANENT_STORAGE> --seal <ABSOLUTE_PATH_OF_YOUR_SEALING_STORAGE>
+$ ./venus-sealer storage attach --init --store <ABSOLUTE_PATH_OF_YOUR_PERMANENT_STORAGE> 
+$ ./venus-sealer storage attach --init --seal <ABSOLUTE_PATH_OF_YOUR_SEALING_STORAGE>
 ```
+
+:::warning
+
+If either path was not set correctly, sealing will fail. Check if your paths are properly setup by `./venus-sealer storage list` , you shold get something close to following...
+
+```bash
+37109bd3-15cc-4821-99e8-b7af891f2e84:
+        [####################***                           ] 4.82 TiB/10.39 TiB 46%
+        Unsealed: 2; Sealed: 1; Caches: 1; Reserved: 483.2 GiB
+        Weight: 10; Use: Seal 
+        URL: http://127.0.0.1:3456/remote (latency: 9.1ms)
+
+f4074188-c851-4468-820b-e138beb5f12d:
+        [####################                              ] 4.348 TiB/10.39 TiB 41%
+        Unsealed: 1; Sealed: 8; Caches: 8; Reserved: 0 B
+        Weight: 10; Use: Seal Store
+        Local: /mnt/mount/litao/
+        URL: http://192.168.200.17:2345/remote
+```
+
+:::
 
 Pledge a single sector.
 
@@ -336,10 +406,41 @@ Pledge a single sector.
 $ ./venus-sealer sectors pledge 
 ```
 
+Congratulations! You are now pledging your 1st sector. Use [sealer commands](#sealer-commands) to monitor sealing processes and keep an eye on errors in the log.
+
+## Sealer Commands
+
 Check ongoing sealing job.
 
 ```bash
-$ ./venus-sealer sealing
+$ ./venus-sealer sealing workers
+$ ./venus-sealer sealing jobs
+```
+
+Check the sector state.
+
+```bash
+$ ./venus-sealer sectors list
+$ ./venus-sealer sectors status --log <SECTOR_NUMBER>
+```
+
+If a sector got stuck in one status for too long, you might want to consider removing them.
+
+```bash
+# Sector State: Removing -> RemoveFailed/Removed
+$ ./venus-sealer sectors remove --really-do-it <SECTOR_NUMBER>
+# Sector State: Terminating -> TerminateWait -> TerminateFinality/TerminateFailed
+$ ./venus-sealer sectors terminate --really-do-it <SECTOR_NUMBER>
+```
+
+Removing a sector could take quite some time. Monitor sector state and retry remove commands if necessary.
+
+```bash
+$ ./venus-sealer sectors list
+ID  State       OnChain  Active  Expiration                    Deals
+1   Proving     YES      YES     2513094 (in 1 year 24 weeks)  CC
+2   Removed     NO       NO      n/a                           CC
+3   PreCommit1  NO       NO      n/a                           CC
 ```
 
 See `venus-sealer -h` for list of commands that sealer supports.
@@ -374,6 +475,82 @@ GLOBAL OPTIONS:
    --color                  (default: false)
    --help, -h               show help (default: false)
    --version, -v            print the version (default: false)
+```
+
+## Finding optimal configurations
+
+Now that you sucessfully pledged your 1st sector, finding optimal configurations for your storage system is crucial for further growth of power. As venus-sealer functions exactly like lotus-miner, resources for scaling cluster and optimization for lotus can be directly applied to venus-sealer. We recommend that you go through this [hardware list](https://github.com/filecoin-project/lotus/discussions/6071) by minerX and this [tutorial](https://github.com/filecoin-project/lotus/discussions/5989) for advanced tips.
+
+To scale your growth, you can run venus-worker to handle different stages of the sealing process (AP, P1, P2, C2 and etc). Even for a single box setup, it is recommended that you run both venus-sealer and venus-worker to gurantee the stability of your stroage system by having sealer do windowPost solely, or sealing jobs may compete with windowPost for resources which may result in a failed windowPost. 
+
+### Using venus-worker
+
+Change `[Storage]` section of `~/.venussealer/config.toml` to the following. 
+
+```bash
+[Storage]
+  ParallelFetchLimit = 10
+  AllowAddPiece = true
+  AllowPreCommit1 = false
+  AllowPreCommit2 = false
+  AllowCommit = false
+  AllowUnseal = false
+```
+
+Save and restart venus-sealer for the config to take into effect. Then collect sealer url and token.
+
+```bash
+$ cat ~/.venussealer/api
+<SEALER_URL>
+$ cat ~/.venussealer/token
+<SEALER_TOKEN>
+```
+
+Run venus-worker.
+
+```bash
+$ TRUST_PARAMS=1 nohup ./venus-worker run \
+--miner-addr=<SEALER_URL> \
+--miner-token=<SEALER_TOKEN> \  
+--listen=0.0.0.0:3458 >> worker.log 2>&1 &                   
+```
+
+Attach sealing storage to worker. (Path for permanent storage will be inherited from sealer)
+
+```bash
+$ ./venus-worker storage attach --init --seal <ABSOLUTE_PATH_OF_YOUR_SEALING_STORAGE>
+```
+
+Check if your worker is connected.
+
+```bash
+$ ./venus-sealer storage list 
+```
+
+### Other optimizations
+
+Increase your open file limit
+
+```bash
+$ ulimit -n 1048576
+```
+
+Environment variable setting for greater use of your resources.
+
+```bash
+export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1
+export FIL_PROOFS_USE_GPU_TREE_BUILDER=1
+export FIL_PROOFS_SDR_PARENTS_CACHE_SIZE=1073741824
+export RUST_BACKTRACE=full
+export RUST_LOG=info
+export FIL_PROOFS_MAXIMIZE_CACHING=1
+export FIL_PROOFS_USE_MULTICORE_SDR=1
+```
+
+More debug-level info.
+
+```bash
+export GOLOG_LOG_LEVEL=debug
 ```
 
 ## Questions?
