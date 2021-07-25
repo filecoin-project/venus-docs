@@ -535,7 +535,7 @@ Increase your open file limit
 $ ulimit -n 1048576
 ```
 
-Environment variable setting for greater use of your resources.
+Environment variable for potential faster sealing speed.
 
 ```bash
 export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1
