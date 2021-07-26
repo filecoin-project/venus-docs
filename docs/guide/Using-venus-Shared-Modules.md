@@ -510,7 +510,8 @@ Run venus-worker.
 
 ```bash
 $ TRUST_PARAMS=1 nohup ./venus-worker run \
---miner-addr=<SEALER_URL> \
+# Replace 0.0.0.0 with the ip address of your sealer
+--miner-addr=<SEALER_URL> \ 
 --miner-token=<SEALER_TOKEN> \
 >> worker.log 2>&1 &                   
 ```
