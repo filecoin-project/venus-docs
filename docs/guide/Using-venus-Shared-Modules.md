@@ -490,7 +490,7 @@ Change `[Storage]` section of `~/.venussealer/config.toml` to the following.
 ```bash
 [Storage]
   ParallelFetchLimit = 10
-  AllowAddPiece = false
+  AllowAddPiece = true
   AllowPreCommit1 = false
   AllowPreCommit2 = false
   AllowCommit = false
@@ -512,6 +512,7 @@ Run venus-worker.
 $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --miner-addr=/ip4/<IP_ADDRESS_OF_VENUS_SEALER>/tcp/2345/http \ 
 --miner-token=<SEALER_TOKEN> \
+--addpiece false \
 >> worker.log 2>&1 &                   
 ```
 
