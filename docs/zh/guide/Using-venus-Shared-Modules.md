@@ -124,12 +124,22 @@ go env -w GO111MODULE=on
 
 下载并编译`Venus-wallet`的源代码。
 
+- 首次编译
+
 ```bash
 $ git clone https://github.com/filecoin-project/venus-wallet.git
 # change directory to venus-wallet
 $ cd venus-wallet
-$ git checkout <RELEASE_TAG>
+$ git checkout -b incubation origin/incubation
 $ make
+```
+
+- 曾经成功编译过
+
+```bash
+# change directory to venus-wallet,switch to the incubation branch
+$ git fetch
+$ git pull
 ```
 
 在后台运行`venus-wallet`模块。
@@ -144,7 +154,7 @@ $ nohup ./venus-wallet run > wallet.log 2>&1 &
 
 :::
 
-为您的`venus-wallet`设置密码。
+为您的`venus-wallet`设置密码
 
 ```bash
 $ ./venus-wallet setpwd
@@ -155,7 +165,16 @@ Password set successfully
 
 :::warning
 
-请备份您的密码并妥善保存。
+请备份您的密码并妥善保存，否则你将无法使用wallet相关的功能。每次venus-wallet run启动时带--password标志会自动解锁钱包,如果没带,在wallet实例启动后你需要手动解锁:
+```bash
+$ ./venus-wallet unlock
+Password: 
+
+# 查看解锁状态
+$ ./venus-wallet lock-state
+wallet state: unlocked
+```
+在扇区封装的过程中需要调用wallet进行签名,如果不解锁,会导致签名失败,进而导致扇区任务失败.
 
 :::
 
@@ -174,7 +193,7 @@ $ ./venus-wallet new bls
 
 :::
 
-使用您从共享模块管理员处获得的帐号信息更改 `~/.venus_wallet/config.toml`中的`[APIRegisterHub]` 部分。
+***配置venus-wallet接入共享服务,使用您从共享模块管理员处获得的帐号信息更改 `~/.venus_wallet/config.toml`中的`[APIRegisterHub]` 部分***
 
 ```toml
 [APIRegisterHub]
@@ -209,24 +228,71 @@ $ nohup ./venus-wallet run > wallet.log 2>&1 &
 
 下载并编译`venus-sealer`的源代码。
 
+- 首次编译
+
 ```bash
 $ git clone https://github.com/filecoin-project/venus-sealer.git
 $ cd venus-sealer
-$ git checkout <RELEASE_TAG>
+$ git checkout -b incubation origin/incubation
+# specify source compilation
+export RUSTFLAGS="-C target-cpu=native -g"
+export FFI_BUILD_FROM_SOURCE=1
 # make dependency
+$ make deps
+$ make
+```
+
+源码编译也可以
+
+```bash
+$ RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1" make deps
+```
+
+- 曾经成功编译过
+
+```bash
+# change directory to venus-wallet,switch to the incubation branch
+$ git fetch
+$ git pull
+$ git submodule update --init --recursive
+# Clean up the previous library files
+$ cd extern/filecoin-ffi
+$ make clean
+# Go back to the project root directory
+$ cd ../..
 $ make deps
 $ RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1" make
 ```
 
 :::warning
 
-确保编译时使用`RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1"`以充分利用机器资源。
+- 确保编译时使用`RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1"` 源码编译filecoin-ffi库，如果cpu支持则启用SHA扩展，这会大幅提高扇区封装速度，源码编译（make deps）时特征如下：
+```
++ trap '{ rm -f $__build_output_log_tmp; }' EXIT
++ local '__rust_flags=--print native-static-libs -C target-feature=+sse2'
++ RUSTFLAGS='--print native-static-libs -C target-feature=+sse2'
++ cargo +nightly-2021-04-24 build --release --no-default-features --features multicore-sdr --features pairing,gpu
++ tee /tmp/tmp.IYtnd3xka9
+   Compiling autocfg v1.0.1
+   Compiling libc v0.2.97
+   Compiling cfg-if v1.0.0
+   Compiling proc-macro2 v1.0.27
+   Compiling unicode-xid v0.2.2
+   Compiling syn v1.0.73
+   Compiling lazy_static v1.4.0
+   Compiling cc v1.0.68
+   Compiling typenum v1.13.0
+   Compiling serde_derive v1.0.126
+   Compiling serde v1.0.126
+```
+
+- 只有在filecoin-ffi有变化时（执行 `git submodule update --init --recursive` 有提示）才需要清除曾生成的ffi库文件（make clean）并重新编译ffi（make deps），否则你只需git pull然后make既可。
 
 :::
 
 :::tip 
 
-如果您是第一次运行sealer，它会开始下载证明参数，这可能需要相当长的时间。如果您确认已下载`proof params`，可使用`TRUST_PARAMS=1`避免重新下载。如果您位于中国，请按照提示[此处](../advanced/Tips-Running-In-China.md)加快流程。
+如果您是第一次运行sealer，它会开始下载证明参数，这可能需要相当长的时间。如果您确认已下载`proof params`，可使用`TRUST_PARAMS=1`跳过下载逻辑执行。如果您位于中国，请按照提示[此处](../advanced/Tips-Running-In-China.md)加快流程。
 
 :::
 
@@ -275,7 +341,7 @@ $ nohup ./venus-sealer init \
 
 :::tip 
 
-`init`命令可能需要等待几分钟。 
+`init`命令会发送创建矿工消息并等待上链，可能需要等待几分钟。 
 
 :::
 
@@ -318,10 +384,32 @@ $ ./venus-sealer init \
 $ nohup ./venus-sealer run >> sealer.log 2>&1 &
 ```
 
-将永久存储连接到sealer。
+给sealer指定临时路径（存放p1-c2阶段生成文件，sector完成后会释放）和持久存储路径（用于做winningPoSt或wdPoSt的文件需要持久保存）
 
 ```bash
-$ ./venus-sealer storage attach --init --store <ABSOLUTE_PATH_OF_YOUR_PERMANENT_STORAGE> --seal <ABSOLUTE_PATH_OF_YOUR_SEALING_STORAGE>
+$ ./venus-sealer storage attach --init --store <ABSOLUTE_PATH_OF_YOUR_PERMANENT_STORAGE>
+$ ./venus-sealer storage attach --init --seal <ABSOLUTE_PATH_OF_YOUR_SEALING_STORAGE>
+```
+
+如果你的两个目录是相同的，那么可以一次性指定
+```
+./venus-sealer storage attach --init --store --seal <ABSOLUTE_PATH>
+```
+
+> 如果你打算只用venus-sealer封装扇区，那么seal和store路径必须都配置，缺一不可。
+```bash
+$ ./venus-sealer storage list
+37109bd3-15cc-4821-99e8-b7af891f2e84:
+        [####################***                           ] 4.82 TiB/10.39 TiB 46%
+        Unsealed: 2; Sealed: 1; Caches: 1; Reserved: 483.2 GiB
+        Weight: 10; Use: Seal 
+        URL: http://127.0.0.1:3456/remote (latency: 9.1ms)
+f4074188-c851-4468-820b-e138beb5f12d:
+        [####################                              ] 4.348 TiB/10.39 TiB 41%
+        Unsealed: 1; Sealed: 8; Caches: 8; Reserved: 0 B
+        Weight: 10; Use: Seal Store
+        Local: /mnt/mount/litao/
+        URL: http://192.168.200.17:2345/remote
 ```
 
 封装一个扇区。
@@ -330,10 +418,34 @@ $ ./venus-sealer storage attach --init --store <ABSOLUTE_PATH_OF_YOUR_PERMANENT_
 $ ./venus-sealer sectors pledge 
 ```
 
-检查正在进行的封装工作。
-
+检查正在进行的封装工作
 ```bash
 $ ./venus-sealer sealing
+$ ./venus-sealer sealing workers
+$ ./venus-sealer sealing jobs
+```
+
+检查扇区状态
+```bash
+$ ./venus-sealer sectors list
+$ ./venus-sealer sectors status  --log  <sectorNum>
+```
+
+如果某个扇区因为ticket过期或别的原因无法继续做下去，你需要及时remove掉，不然会站着磁盘和内存。
+```bash
+# Terminating -> TerminateWait -> TerminateFinality/TerminateFailed
+$ ./venus-sealer sectors terminate  --really-do-it <sectorNum>
+# Removing -> RemoveFailed/Removed
+$ ./venus-sealer sectors remove  --really-do-it <sectorNum>
+```
+
+Remove和Terminate执行受限于Sealing的并发机制，有时需要很长时间，你可以尝试多次执行这两个命令加快速度。查看Sector状态：
+```bash
+$ ./venus-sealer sectors list
+ID  State       OnChain  Active  Expiration                    Deals
+1   Proving     YES      YES     2513094 (in 1 year 24 weeks)  CC
+2   Removed    NO       NO      n/a                           CC
+3   PreCommit1  NO       NO      n/a                           CC
 ```
 
 参见`venus-sealer -h` 获取sealer支持的命令列表。
@@ -369,6 +481,115 @@ GLOBAL OPTIONS:
    --help, -h               show help (default: false)
    --version, -v            print the version (default: false)
 ```
+
+## worker机制
+
+在Filecoin系统中,venus-sealer可以被认为是一个带有状态管理机的venus-worker，也就是说:
+
+sealer = worker + sector_state_manager
+
+除了做worker具备的工作外，它有两个主要功能:
+- 管理每个扇区的状态，包括分配扇区任务，处理与扇区状态变化的事件等;
+- 定期执行windowPost.
+
+因此，我们通常将耗时的任务交给venus-worker做，让sealer做windowPoSt和Sectors状态管理。这样做的好处是:venus-sealer重启后，不会影响到worker正在进行的任务,否则会导致仍无频繁重做.
+
+- 只允许venus-sealer做AddPiece，禁止做P1, P2, C1, C2等任务，修改` ~/.venussealer/config.toml ', 然后重启.
+```bash
+vim  ~/.venussealer/config.toml 
+# modify
+[Storage]
+  ParallelFetchLimit = 10
+  AllowAddPiece = true
+  AllowPreCommit1 = false
+  AllowPreCommit2 = false
+  AllowCommit = false
+  AllowUnseal = false
+  
+# Restart venus-sealer after saving
+```
+
+-- 启动worker并指定可以接的任务类型.
+```
+$ TRUST_PARAMS=1 nohup ./venus-worker run \
+--miner-addr=</ip4/sealer-ip/tcp/sealer-port> \
+--miner-token=<token> \  
+--listen=<0.0.0.0:3458> <flags> >> worker.log 2>&1 &\                   
+```
+- sealer-port: cat ~/.venussealer/api, eg. /ip4/0.0.0.0/tcp/2345/http,把0.0.0.0替换为venus-sealer实际的IP地址.
+- token: cat ~/.venussealer/token
+- flags:
+```
+--addpiece                    enable addpiece (default: true)
+--precommit1                  enable precommit1 (32G sectors: 1 core, 128GiB RAM) (default: true)
+--unseal                      enable unsealing (32G sectors: 1 core, 128GiB RAM) (default: true)
+--precommit2                  enable precommit2 (32G sectors: multiple cores, 96GiB RAM) (default: true)
+--commit                      enable commit (32G sectors: multiple cores or GPUs, 128GiB RAM + 64GiB swap) (default: true)
+```
+
+一般情况下，我们只为venus-worker配置seal路径,Store继承venus-sealer。worker完成扇区密封时，永久存储文件将被转移到venus-sealer指定的store路径.
+```bash
+$ ./venus-worker storage attach --init --seal <ABSOLUTE_LOCAL_PATH>
+```
+
+查看venus-worker状态
+
+```bash
+$ ./venus-worker info
+
+# A worker's storage will be added to the venus-sealer storage list
+$ ./venus-sealer storage list 
+01135ade-337a-4011-9cd8-6e85edbe08fc:
+        [#######                                           ] 26.52 TiB/181.2 TiB 14%
+        Unsealed: 0; Sealed: 1080; Caches: 1080; Reserved: 0 B
+        Weight: 10; Use: Seal Store
+        Local: /storage-nfs/torage
+        URL: http://0.0.0.0:2345/remote
+14142f91-6365-4b2a-ad1b-d2dd4ebd6e33:
+        [###################                               ] 4.044 TiB/10.39 TiB 38%
+        Unsealed: 3; Sealed: 0; Caches: 0; Reserved: 0 B
+        Weight: 10; Use: Seal 
+        URL: http://192.168.200.17:3458/remote (latency: 1.2ms)
+```
+
+## 加速项配置
+
+如果您的系统硬件资源足够大，或者拥有GPU等可以加快扇区密封的资源,您可以根据实际环境设置环境变量。
+
+```bash
+# MINER_API_INFO as obtained before
+export TMPDIR=/fast/disk/folder3                    # used when sealing
+export MINER_API_INFO:<TOKEN>:/ip4/<miner_api_address>/tcp/<port>/http`
+export BELLMAN_CPU_UTILIZATION=0.875      # optimal value depends on exact hardware
+export FIL_PROOFS_MAXIMIZE_CACHING=1
+export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 # when GPU is available
+export FIL_PROOFS_USE_GPU_TREE_BUILDER=1   # when GPU is available
+export FIL_PROOFS_PARAMETER_CACHE=/fast/disk/folder # > 100GiB!
+export FIL_PROOFS_PARENT_CACHE=/fast/disk/folder2   # > 50GiB!
+# The following increases speed of PreCommit1 at the cost of using a full
+# CPU core-complex rather than a single core.
+# See https://github.com/filecoin-project/rust-fil-proofs/ and the
+# "Worker co-location" section below.
+export FIL_PROOFS_USE_MULTICORE_SDR=1
+```
+
+这些变量的使用有两种方式：
+- 在启动venus-sealer和venus-worker前 export设置,如我想开启cpu多核计算
+```bash
+export FIL_PROOFS_USE_MULTICORE_SDR=1
+nohup ./venus-sealer run >> sealer.log 2>&1 &
+```
+
+- 在启动命令中使用环境变量
+```bash
+FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
+```
+
+参考文档
+- https://docs.filecoin.io/mine/lotus/miner-troubleshooting/
+- https://docs.filecoin.io/get-started/lotus/installation/#linux
+- https://docs.filecoin.io/mine/lotus/miner-setup/#pre-requisites
+- https://github.com/filecoin-project/venus-docs/blob/master/docs/zh/mine/venus/power_growth_and_maintain.md
 
 ## 问题?
 
