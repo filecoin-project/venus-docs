@@ -584,6 +584,10 @@ nohup ./venus-sealer run >> sealer.log 2>&1 &
 ```bash
 FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 ```
+***关于GPU的使用***
+
+- C2阶段会主动搜索机器是否有可用GPU，有则使用；
+- P2阶段在生成tree-c和tree-r-last阶段可以使用gpu加速，但需要在启动对应sealer或worker时配置环境变量：FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1表示生成tree-r-last阶段使用GPU，FIL_PROOFS_USE_GPU_TREE_BUILDER=1表示生成tree-c阶段使用GPU。
 
 参考文档
 - https://docs.filecoin.io/mine/lotus/miner-troubleshooting/
