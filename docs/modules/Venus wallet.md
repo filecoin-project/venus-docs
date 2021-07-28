@@ -258,6 +258,7 @@ COMMANDS:
    listGroup, lg                      show a range of groups (the element of groups only contain name)
    groupTokens, gts                   show a range of tokens belong to group
    listKeyBinds, lkb                  show a range of keyBinds (the element of groups only contain name)
+   stTokenInfo, ti                    show info about token
    listMethodTemplates, lmt           show a range of method templates
    listMsgTypeTemplates, lmtt         show a range of method templates
    newMsgTypeTemplate, newMTT         create a msgType common template
@@ -265,17 +266,17 @@ COMMANDS:
    newKeyBindCustom, newKBC           create a strategy about wallet bind msgType and methods
    newKeyBindFromTemplate, newKBFT    create a strategy about wallet bind msgType and methods with template
    newGroup, newG                     create a group with keyBinds
-   newWalletToken, newWT              create a wallet token with group
+   newStToken, newWT                  create a wallet token with group
    removeMsgTypeTemplate, rmMTT       remove msgTypeTemplate ( not affect the group strategy that has been created)
    removeMethodTemplate, rmMT         remove MethodTemplate ( not affect the group strategy that has been created)
    removeKeyBind, rmKB                remove keyBind ( not affect the group strategy that has been created)
    removeKeyBindByAddress, rmKBBA     remove keyBinds by address ( not affect the group strategy that has been created)
    removeGroup, rmG                   remove group by address ( not affect the group strategy that has been created)
-   removeToken, rmT                   remove token
-   pullMethodFromKeyBind, pullM4KB    remove elements of methods in keyBind
-   pullMsgTypeFromKeyBind, pullMT4KB  remove elements of msgTypes in keyBind
-   pushMethodIntoKeyBind, pushM2KB    append methods into keyBind
-   pushMsgTypeIntoKeyBind, pushMT2KB  append msgTypes into keyBind
+   removeStToken, rmT                 remove token
+   removeMethodFromKeyBind, rmM4KB    remove elements of methods in keyBind
+   removeMsgTypeFromKeyBind, rmMT4KB  remove elements of msgTypes in keyBind
+   addMethodIntoKeyBind, addM2KB      append methods into keyBind
+   addMsgTypeIntoKeyBind, addMT2KB    append msgTypes into keyBind
    help, h                            Shows a list of commands or help for one command
 
 OPTIONS:
@@ -423,9 +424,9 @@ $ ./venus-wallet st newGroup group1 kb1 kb2
 - kb1, kb2: the names of the two keyBind created previously.
 
 ##### 4. Generate a group token to call the public policy
-> venus-wallet strategy newWalletToken [command options] [groupName]
+> venus-wallet strategy newStToken [command options] [groupName]
 ```shell script
-$ ./venus-wallet st newWalletToken group1
+$ ./venus-wallet st newStToken group1
 
 #res
 660ceba5-13f8-4571-803e-706e4a4fd36e
@@ -445,10 +446,10 @@ types	: 0,1,2,3
 methods	: CreateMiner,Send
 ```
 ###### 4.2 KeyBind add method
-> venus-wallet strategy pushMethodIntoKeyBind [command options] [keyBindName, method1 method2 ...]
+> venus-wallet strategy addMethodIntoKeyBind [command options] [keyBindName, method1 method2 ...]
 
 ```shell script
-$ ./venus-wallet st pushMethodIntoKeyBind kb1 Settle SwapSigner
+$ ./venus-wallet st addMethodIntoKeyBind kb1 Settle SwapSigner
 
 #res
 address	: <addr1>
@@ -467,9 +468,9 @@ types	: 0,1,2,3,4,5,6
 methods	: CreateMiner,Send,Settle,SwapSigner
 ```
 ###### 4.4 KeyBind remove method
-> venus-wallet strategy pullMethodFromKeyBind [command options] [keyBindName, method1 method2 ...]
+> venus-wallet strategy addMsgTypeIntoKeyBind [command options] [keyBindName, method1 method2 ...]
 ```shell script
-$ ./venus-wallet st pullMethodFromKeyBind kb1 Settle SwapSigner
+$ ./venus-wallet st addMsgTypeIntoKeyBind kb1 Settle SwapSigner
 
 #res
 address	: <addr1>
@@ -478,9 +479,9 @@ methods	: CreateMiner,Send
 ```
 
 ###### 4.5 KeyBind remove msgType
-> venus-wallet strategy pullMsgTypeFromKeyBind [command options] [keyBindName, code1 code2 ...]
+> venus-wallet strategy removeMsgTypeFromKeyBind [command options] [keyBindName, code1 code2 ...]
 ```shell script
-$ ./venus-wallet st pullMsgTypeFromKeyBind kb1 4 5 6
+$ ./venus-wallet st removeMsgTypeFromKeyBind kb1 4 5 6
 
 #res
 address	: <addr1>
@@ -489,7 +490,7 @@ methods	: CreateMiner,Send
 ```
 ##### 5. Query operation
 ###### 5.1 Query msgType list
-> venus-wallet strategy listMsgTypeTemplates [command options] [from to]
+> venus-wallet strategy listMsgTypeTemplates [command options]
 ```shell script
 $ ./venus-wallet st listMsgTypeTemplates 0 20
 
@@ -516,7 +517,7 @@ $ ./venus-wallet st msgTypeTemplate mttmp1
 ```
 
 ###### 5.3 Query method list
-> venus-wallet strategy listMethodTemplates [command options] [from to]
+> venus-wallet strategy listMethodTemplates [command options]
 ```shell script
 $ ./venus-wallet st listMethodTemplates 0 20
 
@@ -540,7 +541,7 @@ ActivateDeals,AddBalance,AddLockedFund
 ```
 
 ###### 5.5 Query keyBind list
-> venus-wallet strategy listKeyBinds [command options] [from to]
+> venus-wallet strategy listKeyBinds [command options]
 ```shell script
 $ ./venus-wallet st listKeyBinds 0 20
 #res
@@ -585,7 +586,7 @@ methods	: CreateMiner,Send
 ```
 
 ###### 5.7 Query group list
-> venus-wallet strategy listGroup [command options] [from to]
+> venus-wallet strategy listGroup [command options]
 ```shell script
 $ ./venus-wallet st listGroup 0 20
 #res
@@ -613,9 +614,9 @@ $ ./venus-wallet st groupTokens group1
 a8f09b9f-ad28-8734-c40c-03c222d03982
 ```
 ###### 5.10 Query the group details corresponding to the token
-> venus-wallet strategy tokenInfo [command options] [token]
+> venus-wallet strategy stTokenInfo [command options] [token]
 ```shell script
-$ ./venus-wallet st tokenInfo 041457f0-ea9a-4486-b648-1feb05dda0c0
+$ ./venus-wallet st stTokenInfo 041457f0-ea9a-4486-b648-1feb05dda0c0
 #res
 groupName: group1
 keyBinds:
@@ -668,9 +669,9 @@ $ ./venus-wallet st removeGroup group1
 success
 ```
 ###### 6.6 Remove token
-> venus-wallet strategy removeToken [command options] [token]
+> venus-wallet strategy removeStToken [command options] [token]
 ```shell script
-$ ./venus-wallet st removeToken 041457f0-ea9a-4486-b648-1feb05dda0c0
+$ ./venus-wallet st removeStToken 041457f0-ea9a-4486-b648-1feb05dda0c0
 #res
 success
 ```
