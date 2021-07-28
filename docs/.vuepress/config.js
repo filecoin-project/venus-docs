@@ -21,7 +21,7 @@ module.exports = {
         '@vuepress-plugin-zooming',
         ['@vuepress/google-analytics',
             {
-                'ga': 'UA-148766289-1' // Property: Filecoin Docs
+                'ga': 'G-SYDDWWLQSP' // Property: Filecoin Docs
             }
         ],
         ['vuepress-plugin-code-copy', true]
@@ -115,8 +115,8 @@ module.exports = {
                             title: 'Advanced',
                             collapsable: false,
                             children: [
-                                ['', 'Tips running in China'],
-                                ['Using-Lotus-Miner.md', 'Using lotus-miner'],
+                                ['', 'Using lotus-miner'],
+                                ['tips-running-in-China.md', 'Tips running in China'],
                                 ['venus-cli.md', 'Venus CLI commands'],
                                 ['Multisig-wallet.md', 'Multisig wallet'],
                                 ['venus_load_balancing.md', 'Venus load balancing'],
@@ -131,6 +131,7 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
+                                ['announcement.md', 'Announcement'],
                                 ['Rules.md', 'Rules'],
                             ]
                         }
@@ -197,8 +198,8 @@ module.exports = {
                             title: '进阶',
                             collapsable: false,
                             children: [
-                                ['', '中国部署提示'],
-                                ['Using-Lotus-Miner.md', '使用lotus-miner'],
+                                ['', '使用lotus-miner'],
+                                ['tips-running-in-China.md', '中国部署提示'],
                                 ['Venus-Project-Dependency-Upgrade.md', '依赖与升级'],
                                 ['venus-cli.md', 'CLI命令'],
                                 ['Multisig-Wallet.md', '多签钱包'],
@@ -214,6 +215,7 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', '概述'],
+                                ['announcement.md', '公告'],
                                 ['Rules.md', '规则']
                             ]
                         }
