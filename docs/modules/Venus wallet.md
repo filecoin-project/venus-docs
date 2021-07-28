@@ -492,7 +492,7 @@ methods	: CreateMiner,Send
 ###### 5.1 Query msgType list
 > venus-wallet strategy listMsgTypeTemplates [command options]
 ```shell script
-$ ./venus-wallet st listMsgTypeTemplates 0 20
+$ ./venus-wallet st listMsgTypeTemplates
 
 #res
 num	: 1
@@ -503,9 +503,6 @@ num	: 2
 name	: mttmp2
 types	: 0,1,2,3,4,5
 ```
-- from: Offset the start bit
-- to: Offset cutoff bit
-- num: Counting, no other function
 
 ###### 5.2 Query the specified msgType template
 >  venus-wallet strategy msgTypeTemplate [command options] [name]
@@ -519,7 +516,7 @@ $ ./venus-wallet st msgTypeTemplate mttmp1
 ###### 5.3 Query method list
 > venus-wallet strategy listMethodTemplates [command options]
 ```shell script
-$ ./venus-wallet st listMethodTemplates 0 20
+$ ./venus-wallet st listMethodTemplates
 
 #res
 num	: 1
@@ -543,7 +540,7 @@ ActivateDeals,AddBalance,AddLockedFund
 ###### 5.5 Query keyBind list
 > venus-wallet strategy listKeyBinds [command options]
 ```shell script
-$ ./venus-wallet st listKeyBinds 0 20
+$ ./venus-wallet st listKeyBinds
 #res
 num	: 1
 name	: kb1
@@ -562,7 +559,7 @@ methods	: CreateMiner
 ```shell script
 $ ./venus-wallet st keyBinds <addr1>
 #res
-$ ./venus-wallet st listKeyBinds 0 20
+$ ./venus-wallet st listKeyBinds
 num	: 1
 name	: kb1
 addr    : <addr1>
@@ -588,7 +585,7 @@ methods	: CreateMiner,Send
 ###### 5.7 Query group list
 > venus-wallet strategy listGroup [command options]
 ```shell script
-$ ./venus-wallet st listGroup 0 20
+$ ./venus-wallet st listGroup
 #res
 1	: group1
 2	: group2

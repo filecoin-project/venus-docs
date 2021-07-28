@@ -491,7 +491,7 @@ methods	: CreateMiner,Send
 ###### 5.1 查询msgType列表
 > venus-wallet strategy listMsgTypeTemplates [command options]
 ```shell script
-$ ./venus-wallet st listMsgTypeTemplates 0 20
+$ ./venus-wallet st listMsgTypeTemplates
 
 #res
 num	: 1
@@ -502,9 +502,6 @@ num	: 2
 name	: mttmp2
 types	: 0,1,2,3,4,5
 ```
-- from: 偏移量开始位
-- to: 偏移量截止位
-- num: 计数,无其他作用
 
 ###### 5.2 查询指定msgType模板
 >  venus-wallet strategy msgTypeTemplate [command options] [name]
@@ -518,7 +515,7 @@ $ ./venus-wallet st msgTypeTemplate mttmp1
 ###### 5.3 查询method列表
 > venus-wallet strategy listMethodTemplates [command options]
 ```shell script
-$ ./venus-wallet st listMethodTemplates 0 20
+$ ./venus-wallet st listMethodTemplates
 
 #res
 num	: 1
@@ -542,7 +539,7 @@ ActivateDeals,AddBalance,AddLockedFund
 ###### 5.5 查询keyBind列表
 > venus-wallet strategy listKeyBinds [command options]
 ```shell script
-$ ./venus-wallet st listKeyBinds 0 20
+$ ./venus-wallet st listKeyBinds
 #res
 num	: 1
 name	: kb1
@@ -561,7 +558,7 @@ methods	: CreateMiner
 ```shell script
 $ ./venus-wallet st keyBinds <addr1>
 #res
-$ ./venus-wallet st listKeyBinds 0 20
+$ ./venus-wallet st listKeyBinds
 num	: 1
 name	: kb1
 addr    : <addr1>
@@ -587,7 +584,7 @@ methods	: CreateMiner,Send
 ###### 5.7 查询group列表
 > venus-wallet strategy listGroup [command options]
 ```shell script
-$ ./venus-wallet st listGroup 0 20
+$ ./venus-wallet st listGroup
 #res
 1	: group1
 2	: group2
