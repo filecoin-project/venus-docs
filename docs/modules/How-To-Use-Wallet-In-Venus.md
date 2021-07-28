@@ -41,7 +41,7 @@ unlocked success
 
 ```shell script
 ./venus wallet lock <password>
-unlocked success
+locked success
 ```
 
 ## Matters needing attention
