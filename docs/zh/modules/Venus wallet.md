@@ -36,7 +36,7 @@ $ ./venus-wallet run  --network=test
 ```
 
 ### 4. 配置介绍
-- 默认文件位置 “~/.venus_wallet/config.toml”
+- 默认文件位置 “~/.venus_wallet/config.toml” 钱包配置文件务必备份好
 ```toml
 [API]
   # 本地进程http监听地址
@@ -248,7 +248,7 @@ USAGE:
    venus-wallet strategy command [command options] [arguments...]
 
 COMMANDS:
-   types                              show all msgTypes
+    types                              show all msgTypes
    methods                            show all methods (index are used for counting only)
    msgTypeTemplate, mtt               show msgTypeTemplate by name
    methodTemplateByName, mt           show methodTemplate by name
@@ -258,6 +258,7 @@ COMMANDS:
    listGroup, lg                      show a range of groups (the element of groups only contain name)
    groupTokens, gts                   show a range of tokens belong to group
    listKeyBinds, lkb                  show a range of keyBinds (the element of groups only contain name)
+   stTokenInfo, ti                    show info about token
    listMethodTemplates, lmt           show a range of method templates
    listMsgTypeTemplates, lmtt         show a range of method templates
    newMsgTypeTemplate, newMTT         create a msgType common template
@@ -265,17 +266,17 @@ COMMANDS:
    newKeyBindCustom, newKBC           create a strategy about wallet bind msgType and methods
    newKeyBindFromTemplate, newKBFT    create a strategy about wallet bind msgType and methods with template
    newGroup, newG                     create a group with keyBinds
-   newWalletToken, newWT              create a wallet token with group
+   newStToken, newWT                  create a wallet token with group
    removeMsgTypeTemplate, rmMTT       remove msgTypeTemplate ( not affect the group strategy that has been created)
    removeMethodTemplate, rmMT         remove MethodTemplate ( not affect the group strategy that has been created)
    removeKeyBind, rmKB                remove keyBind ( not affect the group strategy that has been created)
    removeKeyBindByAddress, rmKBBA     remove keyBinds by address ( not affect the group strategy that has been created)
    removeGroup, rmG                   remove group by address ( not affect the group strategy that has been created)
-   removeToken, rmT                   remove token
-   pullMethodFromKeyBind, pullM4KB    remove elements of methods in keyBind
-   pullMsgTypeFromKeyBind, pullMT4KB  remove elements of msgTypes in keyBind
-   pushMethodIntoKeyBind, pushM2KB    append methods into keyBind
-   pushMsgTypeIntoKeyBind, pushMT2KB  append msgTypes into keyBind
+   removeStToken, rmT                 remove token
+   removeMethodFromKeyBind, rmM4KB    remove elements of methods in keyBind
+   removeMsgTypeFromKeyBind, rmMT4KB  remove elements of msgTypes in keyBind
+   addMethodIntoKeyBind, addM2KB      append methods into keyBind
+   addMsgTypeIntoKeyBind, addMT2KB    append msgTypes into keyBind
    help, h                            Shows a list of commands or help for one command
 
 OPTIONS:
@@ -422,9 +423,9 @@ $ ./venus-wallet st newGroup group1 kb1 kb2
 - kb1,kb2: 之前创建的2个KeyBind的名称
 
 ##### 4. 生成group token用于对外暴露策略调用
-> venus-wallet strategy newWalletToken [command options] [groupName]
+> venus-wallet strategy newStToken [command options] [groupName]
 ```shell script
-$ ./venus-wallet st newWalletToken group1
+$ ./venus-wallet st newStToken group1
 
 #res
 660ceba5-13f8-4571-803e-706e4a4fd36e
@@ -444,10 +445,10 @@ types	: 0,1,2,3
 methods	: CreateMiner,Send
 ```
 ###### 4.2 keyBind增加method
-> venus-wallet strategy pushMethodIntoKeyBind [command options] [keyBindName, method1 method2 ...]
+> venus-wallet strategy addMethodIntoKeyBind [command options] [keyBindName, method1 method2 ...]
 
 ```shell script
-$ ./venus-wallet st pushMethodIntoKeyBind kb1 Settle SwapSigner
+$ ./venus-wallet st addMethodIntoKeyBind kb1 Settle SwapSigner
 
 #res
 address	: <addr1>
@@ -456,9 +457,9 @@ methods	: CreateMiner,Send,Settle,SwapSigner
 ```
 - 添加成功后,Settle SwapSigner将会原子性的增加到methods中，目前这个操作是防并发的。
 ###### 4.3 keyBind增加msgType
-> venus-wallet strategy pushMsgTypeIntoKeyBind [command options] [keyBindName, code1 code2 ...]
+> venus-wallet strategy addMsgTypeIntoKeyBind [command options] [keyBindName, code1 code2 ...]
 ```shell script
-$ ./venus-wallet st pushMsgTypeIntoKeyBind kb1 4 5 6
+$ ./venus-wallet st addMsgTypeIntoKeyBind kb1 4 5 6
 
 #res
 address	: <addr1>
@@ -466,9 +467,9 @@ types	: 0,1,2,3,4,5,6
 methods	: CreateMiner,Send,Settle,SwapSigner
 ```
 ###### 4.4 keyBind移除method
-> venus-wallet strategy pullMethodFromKeyBind [command options] [keyBindName, method1 method2 ...]
+> venus-wallet strategy removeMethodFromKeyBind [command options] [keyBindName, method1 method2 ...]
 ```shell script
-$ ./venus-wallet st pullMethodFromKeyBind kb1 Settle SwapSigner
+$ ./venus-wallet st removeMethodFromKeyBind kb1 Settle SwapSigner
 
 #res
 address	: <addr1>
@@ -477,9 +478,9 @@ methods	: CreateMiner,Send
 ```
 
 ###### 4.5 keyBind移除msgType
-> venus-wallet strategy pullMsgTypeFromKeyBind [command options] [keyBindName, code1 code2 ...]
+> venus-wallet strategy removeMsgTypeFromKeyBind [command options] [keyBindName, code1 code2 ...]
 ```shell script
-$ ./venus-wallet st pullMsgTypeFromKeyBind kb1 4 5 6
+$ ./venus-wallet st removeMsgTypeFromKeyBind kb1 4 5 6
 
 #res
 address	: <addr1>
@@ -488,9 +489,9 @@ methods	: CreateMiner,Send
 ```
 ##### 5. 查询操作
 ###### 5.1 查询msgType列表
-> venus-wallet strategy listMsgTypeTemplates [command options] [from to]
+> venus-wallet strategy listMsgTypeTemplates [command options]
 ```shell script
-$ ./venus-wallet st listMsgTypeTemplates 0 20
+$ ./venus-wallet st listMsgTypeTemplates
 
 #res
 num	: 1
@@ -501,9 +502,6 @@ num	: 2
 name	: mttmp2
 types	: 0,1,2,3,4,5
 ```
-- from: 偏移量开始位
-- to: 偏移量截止位
-- num: 计数,无其他作用
 
 ###### 5.2 查询指定msgType模板
 >  venus-wallet strategy msgTypeTemplate [command options] [name]
@@ -515,9 +513,9 @@ $ ./venus-wallet st msgTypeTemplate mttmp1
 ```
 
 ###### 5.3 查询method列表
-> venus-wallet strategy listMethodTemplates [command options] [from to]
+> venus-wallet strategy listMethodTemplates [command options]
 ```shell script
-$ ./venus-wallet st listMethodTemplates 0 20
+$ ./venus-wallet st listMethodTemplates
 
 #res
 num	: 1
@@ -539,9 +537,9 @@ ActivateDeals,AddBalance,AddLockedFund
 ```
 
 ###### 5.5 查询keyBind列表
-> venus-wallet strategy listKeyBinds [command options] [from to]
+> venus-wallet strategy listKeyBinds [command options]
 ```shell script
-$ ./venus-wallet st listKeyBinds 0 20
+$ ./venus-wallet st listKeyBinds
 #res
 num	: 1
 name	: kb1
@@ -560,7 +558,7 @@ methods	: CreateMiner
 ```shell script
 $ ./venus-wallet st keyBinds <addr1>
 #res
-$ ./venus-wallet st listKeyBinds 0 20
+$ ./venus-wallet st listKeyBinds
 num	: 1
 name	: kb1
 addr    : <addr1>
@@ -584,9 +582,9 @@ methods	: CreateMiner,Send
 ```
 
 ###### 5.7 查询group列表
-> venus-wallet strategy listGroup [command options] [from to]
+> venus-wallet strategy listGroup [command options]
 ```shell script
-$ ./venus-wallet st listGroup 0 20
+$ ./venus-wallet st listGroup
 #res
 1	: group1
 2	: group2
@@ -612,9 +610,9 @@ $ ./venus-wallet st groupTokens group1
 a8f09b9f-ad28-8734-c40c-03c222d03982
 ```
 ###### 5.10 查询token对应的group详情
-> venus-wallet strategy tokenInfo [command options] [token]
+> venus-wallet strategy stTokenInfo [command options] [token]
 ```shell script
-$ ./venus-wallet st tokenInfo 041457f0-ea9a-4486-b648-1feb05dda0c0
+$ ./venus-wallet st stTokenInfo 041457f0-ea9a-4486-b648-1feb05dda0c0
 #res
 groupName: group1
 keyBinds:
@@ -667,9 +665,37 @@ $ ./venus-wallet st removeGroup group1
 success
 ```
 ###### 6.6 移除token
-> venus-wallet strategy removeToken [command options] [token]
+> venus-wallet strategy removeStToken [command options] [token]
 ```shell script
-$ ./venus-wallet st removeToken 041457f0-ea9a-4486-b648-1feb05dda0c0
+$ ./venus-wallet st removeStToken 041457f0-ea9a-4486-b648-1feb05dda0c0
 #res
 success
+```
+
+
+### Config in venus 
+
+格式： []token_[stragetoken]:[地址]. 这里使用_的原因在于为了让lotus的地址解析能够把策略id传过来。
+
+```json
+        "walletModule": {
+                "defaultAddress": "f3ueri27yppflsxodo66r2u4jajw5d4lhrzlcv4ncx7efrrxyivnrsufi7wuvdjmpbepwb2npvj7wglla6gtcq",
+                "passphraseConfig": {
+                        "scryptN": 2097152,
+                        "scryptP": 1
+                },
+                "remoteEnable": true,
+                "remoteBackend": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIl19.gCLPHlI5r9lyxfbPoeU8nSGQI9CpUBaBGA54EzgZ9vE_e78f9e6c-9033-4144-8992-a1890ad76ead:/ip4/192.168.5.64/tcp/5678/http"
+        },
+```
+
+### Config in lotus
+
+格式： []token_[stragetoken]:[地址]. 原因同上
+
+```toml
+[Wallet]
+   RemoteBackend = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIl19.gCLPHlI5r9lyxfbPoeU8nSGQI9CpUBaBGA54EzgZ9vE_e78f9e6c-9033-4144-8992-a1890ad76ead:/ip4/192.168.5.64/tcp/5678/http"
+  #EnableLedger = false
+  #DisableLocal = false
 ```
