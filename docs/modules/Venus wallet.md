@@ -676,7 +676,7 @@ success
 
 ### Config in venus 
 
-format: []token_[stragetoken]:[地址]. the reason for using _ here is to allow lotus address resolution to pass the stragety id. 
+format: [apitoken]___[stragetoken]:[地址]. the reason for using ___ here is to allow lotus address resolution to pass the stragety id. 
 
 ```json
         "walletModule": {
@@ -692,7 +692,7 @@ format: []token_[stragetoken]:[地址]. the reason for using _ here is to allow 
 
 ### Config in lotus
 
-format: []token_[stragetoken]:[地址]. the same reason as before
+format: [apitoken]___[stragetoken]:[地址]. the same reason as before
 
 ```toml
 [Wallet]
