@@ -675,7 +675,7 @@ success
 
 ### Config in venus 
 
-格式： []token_[stragetoken]:[地址]. 这里使用_的原因在于为了让lotus的地址解析能够把策略id传过来。
+格式： [apitoken]___[stragetoken]:[地址]. 这里使用___的原因在于为了让lotus的地址解析能够把策略id传过来。
 
 ```json
         "walletModule": {
@@ -691,7 +691,7 @@ success
 
 ### Config in lotus
 
-格式： []token_[stragetoken]:[地址]. 原因同上
+格式： [apitoken]___[stragetoken]:[地址]. 原因同上
 
 ```toml
 [Wallet]
