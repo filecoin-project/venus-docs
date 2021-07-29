@@ -671,3 +671,31 @@ $ ./venus-wallet st removeStToken 041457f0-ea9a-4486-b648-1feb05dda0c0
 #res
 success
 ```
+
+
+### Config in venus 
+
+格式： []token_[stragetoken]:[地址]. 这里使用_的原因在于为了让lotus的地址解析能够把策略id传过来。
+
+```json
+        "walletModule": {
+                "defaultAddress": "f3ueri27yppflsxodo66r2u4jajw5d4lhrzlcv4ncx7efrrxyivnrsufi7wuvdjmpbepwb2npvj7wglla6gtcq",
+                "passphraseConfig": {
+                        "scryptN": 2097152,
+                        "scryptP": 1
+                },
+                "remoteEnable": true,
+                "remoteBackend": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIl19.gCLPHlI5r9lyxfbPoeU8nSGQI9CpUBaBGA54EzgZ9vE_e78f9e6c-9033-4144-8992-a1890ad76ead:/ip4/192.168.5.64/tcp/5678/http"
+        },
+```
+
+### Config in lotus
+
+格式： []token_[stragetoken]:[地址]. 原因同上
+
+```toml
+[Wallet]
+   RemoteBackend = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIl19.gCLPHlI5r9lyxfbPoeU8nSGQI9CpUBaBGA54EzgZ9vE_e78f9e6c-9033-4144-8992-a1890ad76ead:/ip4/192.168.5.64/tcp/5678/http"
+  #EnableLedger = false
+  #DisableLocal = false
+```
