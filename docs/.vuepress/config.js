@@ -21,7 +21,7 @@ module.exports = {
         '@vuepress-plugin-zooming',
         ['@vuepress/google-analytics',
             {
-                ga: 'G-SYDDWWLQSP' // Property: Filecoin Docs
+                'ga': 'G-SYDDWWLQSP' // Property: Filecoin Docs
             }
         ],
         ['vuepress-plugin-code-copy', true]
