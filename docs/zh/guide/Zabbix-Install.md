@@ -22,7 +22,8 @@ getenforce //查看selinux状态
 # yum install zabbix-server-mysql zabbix-agent -y
 
 //安装zabbix默认的nginx
-# yum install centos-release-scl zabbix-nginx-conf-scl -y
+# yum install centos-release-scl -y
+# yum install rh-php72-php-mysqlnd zabbix-nginx-conf-scl -y
 ```
 
 修改zabbix的安装源配置文件，启用前端的源
@@ -123,7 +124,7 @@ server {
 
 ```bash
 vim /etc/hosts
-192.168.xx.xx venus-zabbix.com
+192.168.xx.xx test.zabbix.com
 
 window hosts文件也需要添加一下
 C:\Windows\System32\drivers\etc\hosts
@@ -150,3 +151,28 @@ Hostname=venus-sealer
 Include=/etc/zabbix/zabbix_agentd.d/*.conf
 ```
 
+#### 四、配置zabbix监控主机
+1、在浏览器输入zabbix-server的ip地址或者主机名
+![](/01-zabbix-install.jpg)
+![](/02-zabbix-install.jpg)
+
+2、配置数据库连接地址信息
+![](/03-zabbix-config.jpg)
+![](/04-zabbix-hostname.jpg)
+![](/05-zabbix-all.jpg)
+![](/06-zabbix-finished.jpg)
+
+3、登录到zabbix系统，默认的用户为Admin，密码为zabbix;注意Admin的A是大写字母
+![](/07-zabbix-login.jpg)
+![](/08-zabbix-dashboard.jpg)
+
+4、添加zabbix-agent主机
+![](/09-zabbix-agent.jpg)
+![](/10-zabbix-agent-add.jpg)
+
+5、查看zabbix监控机器的内存图
+![](/11-zabbix-graphs.jpg)
+![](/12-zabbix-memory.jpg)
+
+6、异常报警，需要处理的机器
+![](/13-Alarm-information.jpg)
