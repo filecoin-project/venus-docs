@@ -174,6 +174,7 @@ module.exports = {
                                 ['Venus-replace-lotus.md', '从Lotus迁移到Venus'],
                                 ['chain.md', '链维护'],
                                 ['How-To-Connect-Network.md', '加入不同网络'],
+                                ['Zabbix-Install.md', '安装 Zabbix'],
                                 ['How-To-Contribute-Docs.md', '贡献文档']
                             ]
                         }
