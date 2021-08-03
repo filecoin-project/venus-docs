@@ -29,7 +29,7 @@ Depending on its role in a mining cluster, modules could be loosely broken down 
 
 Diagram below illustrates how venus modules interacts with one and another.
 
-![venus-cluster](/venus-cluster.png)
+![venus-cluster](../.vuepress/public/venus-cluster.png)
 
 ## Hardware requirements
 
