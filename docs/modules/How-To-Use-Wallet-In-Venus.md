@@ -1,4 +1,4 @@
-# How to use wallet
+# How to use venus local wallet
 
 The wallet is used to manage and save the private key, which is stored in the local database after encryption.
 Before using the wallet, you need to set the password of the wallet. A wallet has only one password, and all the private keys are encrypted with the same password.
