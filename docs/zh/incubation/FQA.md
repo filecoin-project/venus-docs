@@ -2,6 +2,13 @@
 
 ## venus
 
+### 异常关闭venus或者某些特殊情形下可能会对本地存储造成破坏，并且是不可逆的，故需要定时备份本地存储，以便存储损坏是及时替换。
+
+1. 停止venus
+2. rm -rf ~/.venus/*
+3. 用备份的解压或覆盖到~/.venus目录
+4. 重启venus
+
 ### worker fil 不足未及时处理或venus节点出口流量被打满，大量任务卡在WaitSeed
 
 &ensp;&ensp; 在venus-auth节点上使用`./venus-messager msg list-fail`命令打开失败的消息，然后使用`./venus-messager msg mark-bad --really-do-it <失败消息id>`命令将失败的消息打回sealer侧重启判断消息是否有问题；再次检查是否还有失败的消息
@@ -144,12 +151,72 @@ FailedMsg：由于各种原因失败的消息
 
 4. 消息未推送到messager，sealer日志会有错误提示
 
-### venus-sealer 创建矿工提示钱包不存在
+### 创建矿工提示钱包不存在
 
 * 错误日志：**wallet(admin_2)** address t3s22ny35ai24f23avj5s4nmc6hq3wt3uegnigqrdvzid5hplskg2wmqei3j433w4qoxdiy5jxk5yrqcn7p2aq not exists
 * 解决方法：需要在`venus-wallet`中支持下`admin_2` `./venus-wallet support admin_2`
 
-### venus-sealer 启动遇到矿工不存在 `address t02871 not exit`
+### 启动遇到矿工不存在 `address t02871 not exit`
 
 * 错误日志：2021-08-03T10:11:14.154+0800    ERROR   proof_event     proof_client/proof_event.go:28  listen head changes errored: listenHeadChanges ChainNotify call failed: **address t02871 not exit**
 * 解决方法：在`venus_auth`中添加该矿工 `./venus-auth update --name =admin_2 --miner=t02871`
+
+### wdPoSt
+venus-sealer需要周期性进行wdPoSt,一旦失败,将有惩罚算力和扣除抵押的风险.故需要特别重视:
+
+- sealer所在机器要预留一定的cpu资源给wdPoSt;
+- 如果有gpu的话,其他抢占gpu资源的任务不能同sealer在一台机器运行,否则会造成wdPoSt等待gpu无法开始.
+- 需要关注wdPoSt的证明周期,特别是sector被分配的那些窗口期(如下图deadline 0和2),一旦出现wdPoSt任务未开始或失败及时处理
+```
+$ ./venus-sealer proving deadlines
+Sealer: t0***
+deadline partitions sectors (faults) proven partitions
+0        1          9 (9)            0
+1        0          0 (0)            0
+2        1          1 (1)            0
+3        0          0 (0)            0
+4        0          0 (0)            0
+5        0          0 (0)            0
+6        0          0 (0)            0
+7        0          0 (0)            0
+8        0          0 (0)            0
+9        0          0 (0)            0
+10       0          0 (0)            0
+11       0          0 (0)            0
+12       0          0 (0)            0
+13       0          0 (0)            0
+14       0          0 (0)            0
+15       0          0 (0)            0
+16       0          0 (0)            0
+17       0          0 (0)            0
+18       0          0 (0)            0
+19       0          0 (0)            0
+20       0          0 (0)            0
+21       0          0 (0)            0
+22       0          0 (0)            0
+23       0          0 (0)            0
+24       0          0 (0)            0
+25       0          0 (0)            0
+26       0          0 (0)            0
+27       0          0 (0)            0
+28       0          0 (0)            0
+29       0          0 (0)            0
+30       0          0 (0)            0
+31       0          0 (0)            0
+32       0          0 (0)            0 (current)
+33       0          0 (0)            0
+34       0          0 (0)            0
+35       0          0 (0)            0
+36       0          0 (0)            0
+37       0          0 (0)            0
+38       0          0 (0)            0
+39       0          0 (0)            0
+40       0          0 (0)            0
+41       0          0 (0)            0
+42       0          0 (0)            0
+43       0          0 (0)            0
+44       0          0 (0)            0
+45       0          0 (0)            0
+46       0          0 (0)            0
+47       0          0 (0)            0
+```

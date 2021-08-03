@@ -29,7 +29,7 @@
 
 下图展示了venus模块如何相互交互。
 
-![venus-cluster](/venus-cluster.png)
+![venus-cluster](../../.vuepress/public/venus-cluster.png)
 
 ## 硬件要求
 
