@@ -104,8 +104,8 @@ module.exports = {
                             children: [
                                 ['', 'Venus daemon'],
                                 ['How-To-Use-Messager.md', 'Venus messager'],
-                                ['How-To-Use-Wallet-In-Venus.md', 'Venus wallet'],
-                                // ['Venus-wallet.md', 'Venus wallet'],
+                                ['How-To-Use-Wallet-In-Venus.md', 'Venus local wallet'],
+                                ['Venus-Wallet.md', 'Venus remote wallet'],
                                 ['Venus-Worker.md', 'Venus worker'],
                             ]
                         }
@@ -186,8 +186,8 @@ module.exports = {
                             children: [
                                 ['', 'Venus daemon'],
                                 ['How-To-Use-Messager.md', 'Venus messager'],
-                                ['How-To-Use-Wallet-In-Venus.md', 'Venus wallet'],
-                                // ['Venus-wallet.md', 'Venus wallet'],
+                                ['How-To-Use-Wallet-In-Venus.md', 'Venus 本地钱包'],
+                                ['Venus-Wallet.md', 'Venus 远程钱包'],
                                 ['Venus-Worker.md', 'Venus worker'],
                                 ['Venus-Gateway.md', 'Venus gateway'],
                                 ['Venus-Auth.md', 'Venus auth'],

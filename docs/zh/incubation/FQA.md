@@ -95,7 +95,16 @@ ERROR	wallet_event	wallet_listen/listenevent.go:120 listen wallet event errored:
 INFO	wallet_event	wallet_event/listenevent.go:156 connect to server 65735211-9b4f-447q-9c8f-ad23791c75e {"api hub": "/ip4/47.251.6.27/tcp/45132"}
 ```
 
+### venus-wallet 连接gateway
+
+1. token错误
+
+错误日志：2021-08-02T11:37:33.063+0800    ERROR   wallet_event    wallet_event/listenevent.go:65  connect to api hub /ip4/127.0.0.1/tcp/45132/ws failed websocket: **bad handshake**
+
+
 ## venus-sealer
+
+* 开启rust日志：export RUST_LOG=debug
 
 ### venus-sealer 创建矿工失败
 
@@ -134,3 +143,13 @@ FailedMsg：由于各种原因失败的消息
 * 若消息状态是`FailedMsg`，查看失败原因：`./venus-messager msg list-fail --from <address>`
 
 4. 消息未推送到messager，sealer日志会有错误提示
+
+### venus-sealer 创建矿工提示钱包不存在
+
+* 错误日志：**wallet(admin_2)** address t3s22ny35ai24f23avj5s4nmc6hq3wt3uegnigqrdvzid5hplskg2wmqei3j433w4qoxdiy5jxk5yrqcn7p2aq not exists
+* 解决方法：需要在`venus-wallet`中支持下`admin_2` `./venus-wallet support admin_2`
+
+### venus-sealer 启动遇到矿工不存在 `address t02871 not exit`
+
+* 错误日志：2021-08-03T10:11:14.154+0800    ERROR   proof_event     proof_client/proof_event.go:28  listen head changes errored: listenHeadChanges ChainNotify call failed: **address t02871 not exit**
+* 解决方法：在`venus_auth`中添加该矿工 `./venus-auth update --name =admin_2 --miner=t02871`
