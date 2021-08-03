@@ -252,7 +252,7 @@ export FIL_PROOFS_USE_MULTICORE_SDR=1 # 控制P1阶段是否使用多核运行�
   
 # 64G的tree-d文件
   
-# 32G的sealed文件
+# 32G的unsealed文件
   
 11 * 32G + 64 + 32 = 440G
 ```
@@ -288,6 +288,8 @@ export FIL_PROOFS_USE_GPU_TREE_BUILDER=1 # 使用GPU运算tree-c阶段
 # 8个tree-r-last,每个9.2M
   
 # t_aux，4K，p_aux，4K
+
+# 32G的sealed文件
   
 ----------------------
 # 64G
@@ -296,6 +298,8 @@ export FIL_PROOFS_USE_GPU_TREE_BUILDER=1 # 使用GPU运算tree-c阶段
 # 16个tree-r-last,每个9.2M
   
 # t_aux，4K，p_aux，4K
+
+# 64G的sealed文件
 ```
 
 ### Commit
@@ -305,7 +309,7 @@ export FIL_PROOFS_USE_GPU_TREE_BUILDER=1 # 使用GPU运算tree-c阶段
 ```bash
 # C1需要前面2个阶段产生的所有文件
 
-P1 440G + P2 47G = 487G 
+P1 440G + P2 79G = 519G 
 
 # 每个C1的任务需要消耗487G左右的空间
 ```
