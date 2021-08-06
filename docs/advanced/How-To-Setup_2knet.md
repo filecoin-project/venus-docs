@@ -1,6 +1,6 @@
 # How to start the local net
 
->本文以建立2k网络为例,在 CentOS 7.* 系统部署venus集群.
+> This article takes the establishment of a 2k network as an example to deploy a venus cluster on a CentOS 7.* system.
 
 ## Service layer
 
@@ -37,13 +37,13 @@ $ ./venus seed pre-seal --sector-size 2048 --num-sectors 2
 $ ./venus seed genesis new localnet.json
 $ ./venus seed genesis add-miner localnet.json ~/.genesis-sectors/pre-seal-t01000.json
 ```
-> `seed pre-seal` 需要root权限,请在root用户下执行
+> `seed pre-seal` need root privileges, please execute under root user.
 
 - Run venus 
 ```sh
 $ nohup ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --network=2k --auth-url=http://127.0.0.1:8989 > venus.log 2>&1 &
 ```
-> venus作为公共服务组件需要监听不同IP时需要修改配置文件 `.venus/config.json`
+> As a public service component, venus needs to modify the configuration file when it needs to monitor different IPs. `.venus/config.json`
 ```bash
 "apiAddress": "/ip4/0.0.0.0/tcp/3453",
 ```
@@ -59,7 +59,7 @@ $ ./venus-auth token gen --perm admin <SHARED>
 ```
 > SHARED is the name of the token, and the shared component can be started at will.
 
-- 为矿工t01000和wallet生成token
+- Generate tokens for miners t01000 and venus-wallet
 ```bash
 $ ./venus-auth user add --name=test --miner=t01000
 $ ./venus-auth token gen --perm write test
@@ -280,11 +280,11 @@ $ ./venus chain ls
 
 ## Normal node
 
-&ensp;&ensp; 普通节点和其他网络接入共享组件流程一直可参考文档: https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#pre-requisites
+&ensp;&ensp; Please refer to the doc: https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#pre-requisites
 
-&ensp;&ensp; 唯一需要说明的是给普通节点钱包转账的问题:因为venus服务组件是限制Send消息的,而2k私网的原始fil在创世钱包里,故需要一个转账节点.
+&ensp;&ensp; The only thing that needs to be explained is the problem of transferring Fil to ordinary node wallets: because the venus service component restricts Send messages, and the original fil of the 2k private network is in the genesis-wallet, a sync node is required.
 
-- 启动一个venus节点,仅用于转账
+- run a normal venus node
 ```sh
  nohup ./venus daemon --genesisfile=devgen.car --network=2k > venus.log 2>&1 &
 ```
