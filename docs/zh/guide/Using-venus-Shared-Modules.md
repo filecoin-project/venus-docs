@@ -595,6 +595,15 @@ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 - https://docs.filecoin.io/mine/lotus/miner-setup/#pre-requisites
 - https://github.com/filecoin-project/venus-docs/blob/master/docs/zh/mine/venus/power_growth_and_maintain.md
 
+## lotus-miner
+
+&ensp;&ensp; 如果你已经用lotus-miner密封了一定数量的扇区，我们建议你继续使用lotus-miner，venus社区同步维护可接入共享组件的lotus-miner：https://github.com/ipfs-force-community/lotus，对于lotus官方的每个大版本，我们会同步发布对应版本。
+
+&ensp;&ensp; 最新分支: force/v1.10.1_venus_pool 对应 lotus官方 Tag: v1.10.1
+
+&ensp;&ensp; 这个分支只是将对接共享组件的逻辑加进来，其他逻辑一切没变，你可以按照原有的习惯去执行lotus-miner。
+
+
 ## 问题?
 
 来[Slack](https://filecoinproject.slack.com/archives/CEHHJNJS3)上找我们吧！

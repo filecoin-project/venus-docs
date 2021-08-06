@@ -280,7 +280,7 @@ $ ./venus chain ls
 
 ## 普通节点
 
-&ensp;&ensp; 普通节点和其他网络接入共享组件流程一直可参考文档: https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#pre-requisites
+&ensp;&ensp; 普通节点和其他网络接入共享组件流程一致,可参考文档: https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#pre-requisites
 
 &ensp;&ensp; 唯一需要说明的是给普通节点钱包转账的问题:因为venus服务组件是限制Send消息的,而2k私网的原始fil在创世钱包里,故需要一个转账节点.
 
