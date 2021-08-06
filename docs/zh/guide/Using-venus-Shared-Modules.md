@@ -65,12 +65,17 @@ venus-wallet 可以部署为共享或独立模块，具体取决于您的安全�
 
 #### 对于共享模块的管理员
 
-如果您是托管共享 venus 模块的管理员，请使用以下命令为您的矿工创建一个帐户。
+如果您是托管共享 venus 模块的管理员，请使用以下命令注册各个集群。
 
 ```bash
-# If miner doesn't have a <MINER_ID> yet, leave out --miner flag and use 'updateUser' when user inited their miner id
+# 如果已有矿工号
 $ ./venus-auth user add --name <ACCOUNT_NAME> --miner <MINER_ID>
-# The returned token is what miner have to add into their config file in order to gain access to your shared modules
+
+# 没有矿工号，在创建矿工后更新
+$ ./venus-auth user add --name <ACCOUNT_NAME>
+$ ./venus-auth user update --name <ACCOUNT_NAME> --miner <MINER_ID>
+
+# 为此账号分配token,用于接入服务层验证
 $ ./venus-auth token gen --perm write <ACCOUNT_NAME>
 <AUTH_TOKEN_FOR_ACCOUNT_NAME>
 ```

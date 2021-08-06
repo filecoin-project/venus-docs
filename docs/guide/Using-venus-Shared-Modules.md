@@ -65,11 +65,16 @@ venus-wallet can be deployed as either a shared or independent module depend on 
 
 #### For admins of shared modules
 
-If you are an admin hosting shared venus modules, use the following command to create an account for your miner.
+If you are an admin hosting shared venus modules, use the following command to create an account for your sealer-cluster.
 
 ```bash
 # If miner doesn't have a <MINER_ID> yet, leave out --miner flag and use 'updateUser' when user inited their miner id
-$ ./venus-auth user add --name <ACCOUNT_NAME> --miner <MINER_ID> --state=1 --sourceType=1
+$ ./venus-auth user add --name <ACCOUNT_NAME> --state=1 --sourceType=1
+$ ./venus-auth user update --name <ACCOUNT_NAME> --miner <MINER_ID> 
+
+# If miner  have a <MINER_ID> yet
+$ ./venus-auth user add --name <ACCOUNT_NAME> --miner <MINER_ID>  --state=1 --sourceType=1
+
 # The returned token is what miner have to add into their config file in order to gain access to your shared modules
 $ ./venus-auth token gen --perm write <ACCOUNT_NAME>
 <AUTH_TOKEN_FOR_ACCOUNT_NAME>

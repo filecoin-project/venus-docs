@@ -150,7 +150,7 @@ $ ./venus-auth token gen --perm admin <SHARED>
 为独立模块生成令牌。 token可以通过`<USER>` 逻辑分组，作为加入矿池的单个矿工。
 
 ```shell script
-$ ./venus-auth user add --name <USER>
+$ ./venus-auth user add --name <USER> --miner=<minerID>
 $ ./venus-auth token gen --perm write <USER>
 <USER_WRITE_AUTH_TOKEN>
 $ ./venus-auth token gen --perm read <USER>
@@ -158,7 +158,13 @@ $ ./venus-auth token gen --perm read <USER>
 ```
 :::tip
 
-使用`./venus-auth user add <USER>` 对不同的token进行逻辑分组。
+使用`./venus-auth user add <USER>` 对不同的token进行逻辑分组。如果已经有矿工号，则带上--miner，没有则需要在创建矿工后更新：
+```
+$ ./venus-auth user update --name <USER> --miner=<minerID>
+
+# 查看user列表
+$ ./venus-auth user list
+```
 
 :::
 
