@@ -675,9 +675,10 @@ success
 
 ### Config in venus 
 
-格式： [apitoken]___[stragetoken]:[地址]. 这里使用___的原因在于为了让lotus的地址解析能够把策略id传过来。
+格式：`token:muitiaddr` 
 
 ```json
+{
         "walletModule": {
                 "defaultAddress": "f3ueri27yppflsxodo66r2u4jajw5d4lhrzlcv4ncx7efrrxyivnrsufi7wuvdjmpbepwb2npvj7wglla6gtcq",
                 "passphraseConfig": {
@@ -686,12 +687,13 @@ success
                 },
                 "remoteEnable": true,
                 "remoteBackend": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIl19.gCLPHlI5r9lyxfbPoeU8nSGQI9CpUBaBGA54EzgZ9vE_e78f9e6c-9033-4144-8992-a1890ad76ead:/ip4/192.168.5.64/tcp/5678/http"
-        },
+        }
+}
 ```
 
 ### Config in lotus
 
-格式： [apitoken]___[stragetoken]:[地址]. 原因同上
+格式： `token:muitiaddr` 
 
 ```toml
 [Wallet]
