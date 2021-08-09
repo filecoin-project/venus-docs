@@ -174,6 +174,7 @@ module.exports = {
                                 ['Venus-replace-lotus.md', '从Lotus迁移到Venus'],
                                 ['chain.md', '链维护'],
                                 ['How-To-Connect-Network.md', '加入不同网络'],
+                                ['task_ratio_for_sector.md', '最大化利用资源增加密封扇区效率'],
                                 ['Zabbix-Install.md', '安装 Zabbix'],
                                 ['How-To-Contribute-Docs.md', '贡献文档']
                             ]
@@ -217,7 +218,8 @@ module.exports = {
                             children: [
                                 ['', '概述'],
                                 ['announcement.md', '公告'],
-                                ['Rules.md', '规则']
+                                ['FQA.md', '常见问题解答'],
+                                ['announcement.md', '公告']
                             ]
                         }
                     ]

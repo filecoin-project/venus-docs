@@ -19,7 +19,7 @@ The Available: 125.421 FIL
 ...
 ```
 
-Withdraw available balance. Then check if your owner address recieves the funds using [filscan](filscan.io). 
+Withdraw available balance. Then check if your owner address recieves the funds using [filscan](https://filscan.io/). 
 
 ```bash
 $ ./venus-sealer actor withdraw <FIL_AMOUNT>

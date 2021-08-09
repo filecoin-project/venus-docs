@@ -50,7 +50,7 @@ cat .venus/api
 ./venus-messager address set-sel-msg-num --num 30 <worker 地址>
 ```
 
-### <span id="signed-failed">venus-message消息签名失败</span>
+### venus-message消息签名失败
 
 ```bash
 ERROR[2021-07-12T16:37:45+8:00] wallet sign failed 65735211-9b4f-447q-9c8f-ad23791c75e fail **could not decrypt key with given password**
@@ -145,7 +145,7 @@ FailedMsg：由于各种原因失败的消息
 :::
 
 3. 消息已推送到messager，检查消息状态，初始状态是 `UnFillMsg`
-* 若消息长时间是`UnFillMsg`状态，查看日志，可能是gas预估失败或者[签名失败](#signed-failed)
+* 若消息长时间是`UnFillMsg`状态，查看日志，可能是gas预估失败或者签名失败
 * 若消息状态是`FillMsg`，但长时间未上链，先查看messager日志，再检查是否已推送到节点消息池：`./venus mpool pending --from <address>`，若不在消息池，查看节点日志
 * 若消息状态是`FailedMsg`，查看失败原因：`./venus-messager msg list-fail --from <address>`
 
