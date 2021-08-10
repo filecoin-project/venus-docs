@@ -31,7 +31,7 @@ Then deploy the `docs/.vuepress/dist` directory to the `gh-pages` branch of this
 
 ### Notes:
 
-- When new documentation pages are added `./docs/config.js` will need to be **manually updated** in this repo
+- When new documentation pages are added `./docs/.vuepress/config.js` will need to be **manually updated** in this repo
 
 ## Licenses
 
