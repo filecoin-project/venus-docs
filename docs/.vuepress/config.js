@@ -171,7 +171,7 @@ module.exports = {
                     },
                     {
                         text: '运维',
-                        link: '/zh/operation'
+                        link: '/zh/operation/'
                     },
                     {
                         text: '孵化器',
