@@ -76,12 +76,12 @@ module.exports = {
                         link: '/advanced/'
                     },
                     {
-                        text: 'Incubation Center',
-                        link: '/incubation/'
-                    },
-                    {
                         text: 'Operation',
                         link: '/operation/'
+                    },
+                    {
+                        text: 'Incubation Center',
+                        link: '/incubation/'
                     }
                 ],
                 sidebar: {
@@ -131,10 +131,10 @@ module.exports = {
                     ],
                     '/operation/': [
                         {
-                            title: 'Incubation',
+                            title: 'Operation',
                             collapsable: false,
                             children: [
-
+                                [],
                             ]
                         }
                     ],
@@ -195,16 +195,6 @@ module.exports = {
                             ]
                         }
                     ],
-                    '/zh/operation/': [
-                        {
-                            title: '运维',
-                            collapsable: false,
-                            children: [
-                                ['task_ratio_for_sector.md', '最大化利用资源提升密封扇区效率'],
-                                ['Zabbix-Install.md', '系统监控安装与使用之Zabbix'],
-                            ]
-                        }
-                    ],
                     '/zh/modules/': [
                         {
                             title: '启明星模块',
@@ -231,8 +221,19 @@ module.exports = {
                                 ['venus-cli.md', 'CLI命令'],
                                 ['Multisig-Wallet.md', '多签钱包'],
                                 ['venus_load_balancing.md', '负载均衡'],
+                                ['venus_load_balancing.md', '负载均衡'],
                                 ['Payment-Channel.md', '支付通道'],
                                 ['How-To-Setup_2knet.md', '本地2k开发网络'],
+                            ]
+                        }
+                    ],
+                    '/zh/operation/': [
+                        {
+                            title: '运维',
+                            collapsable: false,
+                            children: [
+                                ['task_ratio_for_sector.md', '最大化利用资源提升密封扇区效率'],
+                                ['Zabbix-Install.md', '系统监控安装与使用之Zabbix'],
                             ]
                         }
                     ],
