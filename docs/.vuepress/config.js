@@ -79,6 +79,10 @@ module.exports = {
                         text: 'Incubation Center',
                         link: '/incubation/'
                     },
+                    {
+                        text: 'Operation',
+                        link: '/operation/'
+                    }
                 ],
                 sidebar: {
                     '/guide/': [
@@ -125,6 +129,15 @@ module.exports = {
                             ]
                         }
                     ],
+                    '/operation/': [
+                        {
+                            title: 'Incubation',
+                            collapsable: false,
+                            children: [
+
+                            ]
+                        }
+                    ],
                     '/incubation/': [
                         {
                             title: 'Incubation',
@@ -149,12 +162,16 @@ module.exports = {
                         link: '/zh/guide/'
                     },
                     {
-                        text: '启明星模块',
+                        text: '组件模块',
                         link: '/zh/modules/'
                     },
                     {
                         text: '进阶',
                         link: '/zh/advanced/'
+                    },
+                    {
+                        text: '运维',
+                        link: '/zh/operation'
                     },
                     {
                         text: '孵化器',
@@ -174,9 +191,17 @@ module.exports = {
                                 ['Venus-replace-lotus.md', '从Lotus迁移到Venus'],
                                 ['chain.md', '链维护'],
                                 ['How-To-Connect-Network.md', '加入不同网络'],
-                                ['task_ratio_for_sector.md', '最大化利用资源增加密封扇区效率'],
-                                ['Zabbix-Install.md', '安装 Zabbix'],
                                 ['How-To-Contribute-Docs.md', '贡献文档']
+                            ]
+                        }
+                    ],
+                    '/zh/operation/': [
+                        {
+                            title: '运维',
+                            collapsable: false,
+                            children: [
+                                ['task_ratio_for_sector.md', '最大化利用资源提升密封扇区效率'],
+                                ['Zabbix-Install.md', '系统监控安装与使用之Zabbix'],
                             ]
                         }
                     ],
