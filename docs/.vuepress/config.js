@@ -134,7 +134,9 @@ module.exports = {
                             title: 'Operation',
                             collapsable: false,
                             children: [
-                                [],
+                                ['', 'OM Advanced'],
+                                ['Efficiency_of_sealing.md', 'Improve the efficiency of the sealing sector'],
+                                ['System_monitor_of_Zabbix.md', 'System monitoring installation and use of Zabbix'],
                             ]
                         }
                     ],
@@ -215,12 +217,12 @@ module.exports = {
                             title: '进阶',
                             collapsable: false,
                             children: [
-                                ['', '使用lotus-miner'],
-                                ['tips-running-in-China.md', '中国部署提示'],
-                                ['Venus-Project-Dependency-Upgrade.md', '依赖与升级'],
+                                ['', 'venus矿池进阶'],
+                                ['How-To-Setup_2knet.md', '如何搭建私网'],
+                                ['tips-running-in-China.md', '中国部署小贴士'],
+                                ['Venus-Project-Dependency-Upgrade.md', 'venus组件依赖与升级'],
                                 ['venus-cli.md', 'CLI命令'],
                                 ['Multisig-Wallet.md', '多签钱包'],
-                                ['venus_load_balancing.md', '负载均衡'],
                                 ['venus_load_balancing.md', '负载均衡'],
                                 ['Payment-Channel.md', '支付通道'],
                                 ['How-To-Setup_2knet.md', '本地2k开发网络'],
@@ -229,11 +231,12 @@ module.exports = {
                     ],
                     '/zh/operation/': [
                         {
-                            title: '运维',
+                            title: '独立组件运维',
                             collapsable: false,
                             children: [
-                                ['task_ratio_for_sector.md', '最大化利用资源提升密封扇区效率'],
-                                ['Zabbix-Install.md', '系统监控安装与使用之Zabbix'],
+                                ['', '独立组件运维进阶'],
+                                ['Efficiency_of_sealing.md', '最大化利用资源提升密封扇区效率'],
+                                ['System_monitor_of_Zabbix.md', '系统监控安装与使用之Zabbix'],
                             ]
                         }
                     ],
