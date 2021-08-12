@@ -247,7 +247,7 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', '概述'],
-                                ['Incubation_Center_Prize_Pool.md', 'Filecoin存储提供者孵化中心奖励池计划'],
+                                ['Incubation_Center_Prize_Pool.md', '存储提供者孵化中心奖励池计划'],
                                 ['announcement.md', '公告'],
                                 ['Rules.md', '规则'],
                                 ['FQA.md', '常见问题解答'],
