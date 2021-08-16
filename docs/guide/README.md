@@ -64,23 +64,23 @@ venus-auth is a component used for authorization. In a typical deployment enviro
 
 venus is similar to lotus-daemon, which is used to support all nodes. venus is connected to the Filecoin blockchain network to provide data support for Venus. venus can be used as an ordinary node. It has all the necessary functions of blockchain nodes, such as chain, mpool and wallet. The APIs of venus are almost compatible with those of lotus (you can mention the issue of incompatible APIs). On venus, you can create private keys, query assets, transfer funds, etc. In a typical deployment environment, venus only provides data query service on the basic chain without private key restoration. The block data needed by slashfilter is stored in the database, and the node itself is stateless. In this case, venus node can realize its high availability  through nginx reverse proxy.
 
-There are some differences between nodes of venus and lotus:
+## Venus and Lotus,The Difference ##
 
-1. External signature is supported in the API of creating block (pr will be proposed to lotus later).
-2. The API of message selection supports the selection of multiple batches of messages at the same time, which is used to select messages when multiple miners get the block rewards.
+1. External signature is supported in the API of creating block (request will be proposed to lotus too).
+2. The API of message selection supports the selection of multiple batches of messages at the same time, which is used to select messages when multiple storage providers get the block rewards.
 3. Support the centralized authorization access to venus-auth.
    
-Therefore, if you are interested in the mixed deployment of venus / lotus, you need to use our Venus project which is compatible to Venus or pick your own CCS.
+Therefore, if you are interested in the mixed deployment of venus / lotus, you need to use Venus project which is compatible to Lotus or pick your own CCS.
 
 ### venus-miner
 
-The function of venus-miner is to combine the rights of block rewards. The program can configure the location of multiple miners and their sealers and wallets, and generate blocks for these miners at the same time. venus-miner has the following features:
+The function of venus-miner is to combine the rights to earn block rewards. The program can configure the location of multiple miners and their sealers and wallets, and generate blocks for these miners at the same time. venus-miner has the following features:
 
 1. Separate data: because the process of generating blocks needs to access data, and storage provider's sealer may be heterogeneous, but now most miners will use their own codes, so there is a problem about how to access these data to realize joint mining. By venus-miner’s independence on the storage organization mode and completing the proofs by miners, no matter how the miner's sealer organizes the storage, as long as the Computeproof API is implemented, venus-miner can generate the proof through it.
 2. Separate private key: when calculating random numbers and signature blocks, all operations about private key are accessed through remote wallet, which can improve the security of mining activities.
-3. Improve miners' income and TPS: when the miner who uses venus-miner rto get multiple (> 1) rights of block rewards in a period, venus-miner will try to select different messages from the message pool for packaging, which can somehow improve the speed of these messages on the chain, and make the block get more probable premium.
+3. Improve miners' wincount and TPS: when the miner who uses venus-miner rto get multiple (> 1) rights of block rewards in a period, venus-miner will try to select different messages from the message pool for packaging, which can somehow improve the speed of these messages on the chain, and make the block get more gas premium.
 
-### venus-messager
+### venus-messenger
 
 The goal of venus-messager is to help messages on chain more efficiently, and to flexibly control the timing of messages on chain to reduce gas consumption and control the data traffic, etc. It includes remote wallet management, address management and message management.
 
@@ -90,7 +90,7 @@ The goal of venus-messager is to help messages on chain more efficiently, and to
 
 In terms of functions:
 
-1. Support remote wallet: one messager supports multiple wallets to manage their message separately.
+1. Support remote wallet: one messenger supports multiple wallets to manage their message separately.
 2. Support  local storage of SQLite and remote storage of MySQL for more secure and stable storage.
 3. Dynamic Fill: gas related parameters and nonce are to be filled out when sending a message on chain according to gas and push policy, to make sure the gas-estimation and other setting are valid.
 4.  Maintain message status, including whether the message is chained and replaced and save the results of the execution.
@@ -99,9 +99,9 @@ In terms of functions:
 
 ### venus-wallet
 
-venus-wallet is a remote wallet, which can support both Lotus and Venus in terms of protocols. In a typical deployment environment, this component is deployed locally by miners, and the security of assets is guaranteed by certain policy configuration. venus-wallet has the following features:
+venus-wallet is a remote wallet, which can support both Lotus and Venus in terms of protocols. In a typical deployment environment, this module is deployed locally by miners, and the security of assets is guaranteed by certain policy configuration. venus-wallet has the following features:
 
-1. Private key management module: currently it supports the private key management of asymmetric algorithms BLS and SECP, and it can generate random private key, and uses aes128 to encrypt and store the private key symmetrically whilst supports the private key to sign the data.
+1. Private key management function: currently it supports the private key management of asymmetric algorithms BLS and SECP, and it can generate random private key, and uses aes128 to encrypt and store the private key symmetrically whilst supports the private key to sign the data.
 2. Signature verification: each signature type has its verification policy, which ensures that the signer won't do deceits  the wallet through  non-credible signature type.
 3. Signature tactics module: for the Lotus and Venus implementation of Filecoin, the module is created to manage  10 existing data structures and more than 60 signature types in message data structure, and configure various combination methods on demand to bind private key signature rules, and then integrate several different private key signature rules and authorize them to external components for further usage.
 
@@ -115,8 +115,8 @@ venus-sealer continues the basic features of the mining part of lotus. We separa
 ## Some ideas for the future
 
 The following plans mainly focus on:
-1. Follow up the latest Filecoin network.
-2. Start the venus-market project and improve the entire venus system.
-3. Optimize venus-sealer scheduling mode and storage (in planning).
-4. Improve the availability of components, continuously test components, fix some potential problems, ensure the stability and security of component services, and simplify the deployment mode.
-5.  Optimize the log system to facilitate problem query and tracking.
+1. Follow up with the latest Filecoin network release.
+2. Work on the venus-market project and improve the entire venus architecture.
+3. Optimize venus-sealer scheduling method and storage improvements (in planning).
+4. Improve the usability of each venus module, continuously test components, fix potential bugs, ensure the stability and security of venus architecture, and simplify the procedure of deployment.
+5. Optimize the log system to facilitate problem query and tracking.
