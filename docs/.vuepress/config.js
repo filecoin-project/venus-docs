@@ -135,7 +135,7 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Finding optimal configurations'],
-                                // ['System_monitor_of_Zabbix.md', 'System monitoring installation and use of Zabbix'],
+                                ['System_monitor_of_Zabbix.md', 'System monitoring (Zabbix)'],
                             ]
                         }
                     ],
