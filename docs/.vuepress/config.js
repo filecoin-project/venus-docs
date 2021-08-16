@@ -134,9 +134,8 @@ module.exports = {
                             title: 'Operation',
                             collapsable: false,
                             children: [
-                                ['', 'OM Advanced'],
-                                ['Efficiency_of_sealing.md', 'Improve the efficiency of the sealing sector'],
-                                ['System_monitor_of_Zabbix.md', 'System monitoring installation and use of Zabbix'],
+                                ['', 'Finding optimal configurations'],
+                                // ['System_monitor_of_Zabbix.md', 'System monitoring installation and use of Zabbix'],
                             ]
                         }
                     ],
