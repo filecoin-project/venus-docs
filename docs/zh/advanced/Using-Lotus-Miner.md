@@ -14,7 +14,8 @@
 
 | lotus版本 | 适配venus分支                                                | 适配改造代码                                                 |
 | --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 1.10.1    | [v1.10.1_venus_pool](https://github.com/ipfs-force-community/lotus/commits/force/v1.10.1_venus_pool) | [212721a6b4677f2ffe36688a50f1cacde7ae5e54](https://github.com/ipfs-force-community/lotus/commit/212721a6b4677f2ffe36688a50f1cacde7ae5e54) |
+| 1.10.1    | [v1.10.1_incubation](https://github.com/ipfs-force-community/lotus/commits/v1.10.1_incubation) | [4996c6e3f70b958bae8540d822c367c3aa3546ad](https://github.com/ipfs-force-community/lotus/commit/4996c6e3f70b958bae8540d822c367c3aa3546ad) |
+| 1.10.0    | [v1.11.0_incubation](https://github.com/ipfs-force-community/lotus/commits/v1.11.0_incubation) | [a500491902058a4e6e59283cd56755d56701e4b1](https://github.com/ipfs-force-community/lotus/commit/a500491902058a4e6e59283cd56755d56701e4b1) |
 
 ## 代码行走
 
