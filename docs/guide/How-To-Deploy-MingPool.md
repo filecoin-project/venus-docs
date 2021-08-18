@@ -24,6 +24,7 @@ Depending on its role in a mining cluster, modules could be loosely broken down 
 | [venus-gateway](https://github.com/ipfs-force-community/venus-gateway) | utility for controlled access point of shared modules | shared             |
 | [venus-wallet](https://github.com/filecoin-project/venus-wallet) | addresses/keys management                             | shared/independent |
 | [venus-sealer](https://github.com/filecoin-project/venus-sealer), [venus-worker](https://github.com/filecoin-project/venus-sealer) | job scheduling, sealing and proving                   | independent        |
+| venus-market (under development)                             | deal making                                           | independent        |
 
 ## Mining architecture
 
