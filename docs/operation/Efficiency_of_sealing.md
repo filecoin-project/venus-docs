@@ -202,7 +202,7 @@ TRUST_PARAMS=1 nohup taskset -c 0-32 ./venus-worker run \
 
 这种方式的弊端就在于不方便在程序运行时对核数进行实时调整
 
-* 通过Cgrep限核
+* 通过Cgroup限核
 
 ```bash
 # 好的目录划分会帮助对多个进程的管理
@@ -215,7 +215,7 @@ sudo echo 0-31 > /sys/fs/cgroup/cpuset/Pre1-worker/cpuset.cpus
 sudo echo <PID> > /sys/fs/cgroup/cpuset/Pre1-worker/cgroup.procs
 ```
 
-Cgrep是在进程启动之后加入到配置文件的，并且支持实时的修改核数限制，当然也可以尝试使用docker限核，但docker的限核也是通过Cgrep来实现，至于Cgrep其他的用法我们基本都用不到，就不一一说明了
+Cgroup是在进程启动之后加入到配置文件的，并且支持实时的修改核数限制，当然也可以尝试使用docker限核，但docker的限核也是通过Cgroup来实现，至于Cgroup其他的用法我们基本都用不到，就不一一说明了
 
 
 
