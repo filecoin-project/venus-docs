@@ -42,6 +42,6 @@ The Filecoin Project's software code is dual-licensed under Apache 2.0 and MIT t
 
 Documentation and other written content is copyright (c) Protocol Labs under the [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.
 
-See the [LICENSE.md](LICENSE.md) file for details.
+See the [LICENSE.md](LICENSE.md) file for details.1
 
 
