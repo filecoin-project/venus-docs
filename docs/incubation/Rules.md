@@ -17,7 +17,7 @@ The idea is to make it simple and convenient for small miners to join the networ
 
 Maintained by the IPFS Force community, Venus is one of four implementations in development on the Filecoin ecosystem. Venus is unique because it supports a distributed mining pool, which is a cost-effective way to reduce the overall cost of hardware maintenance and save time when mining on the Filecoin network. Thus, it can bring more miners to the Filecoin network with lower barriers to entry.
 
-Thanks to [Venus’s Distributed Mining Pool Architecture](https://venus.filecoin.io/guide/How-To-Deploy-MingPool.html#mining-architecture), the Incubation Center will run shared modules. Miners can start mining with just [venus-sealer](https://github.com/filecoin-project/venus-sealer) and [venus-wallet](https://github.com/filecoin-project/venus-wallet) along with the shared modules maintained by the Incubation Center. Then, they can run with one or more nodes at the same time.
+Thanks to [Venus’s Distributed Mining Pool Architecture](https://venus.filecoin.io/guide/How-To-Deploy-MingPool.html#mining-architecture), the Incubation Center will run shared modules(*Among them, venus-market is under development and currently does not support 'deal' making. In the plan, it will support storage in the near future and retrieval in October*). Miners can start mining with just [venus-sealer](https://github.com/filecoin-project/venus-sealer) and [venus-wallet](https://github.com/filecoin-project/venus-wallet) along with the shared modules maintained by the Incubation Center. Then, they can run with one or more nodes at the same time.
 
 ## About the Incubation Center Program
 
