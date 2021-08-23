@@ -134,7 +134,8 @@ module.exports = {
                             title: 'Operation',
                             collapsable: false,
                             children: [
-                                ['', 'Finding optimal configurations'],
+                                ['', 'Example single box setup'],
+                                ['Efficiency_of_sealing.md', 'Finding optimal configurations'],
                                 ['System_monitor_of_Zabbix.md', 'System monitoring (Zabbix)'],
                             ]
                         }
@@ -235,6 +236,7 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', '独立组件运维进阶'],
+                                ['example-single-box.md', '单矿机示例'],
                                 ['Efficiency_of_sealing.md', '最大化利用资源提升密封扇区效率'],
                                 ['System_monitor_of_Zabbix.md', '系统监控安装与使用之Zabbix'],
                             ]
