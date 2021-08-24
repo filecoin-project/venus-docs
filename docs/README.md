@@ -13,7 +13,7 @@ footer: MIT Apache dual Licensed
   </div>
   <div class="feature">
     <h2>Simplicity First</h2>
-    <p>Modularized setup with less overheads in maintenance will get you started with a short time.</p>
+    <p>Modularized setup with less overhead in maintenance will get you started in no time.</p>
   </div>
   
   <div class="feature">
