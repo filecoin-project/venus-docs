@@ -414,6 +414,8 @@ $ ./venus-sealer sectors pledge
 
 Congratulations! You are now pledging your 1st sector. Use [sealer commands](#sealer-commands) to monitor sealing processes and keep an eye on errors in the log.
 
+> ***When venus-sealer is doing CC data, it will skip the AddPiece stage and directly search for `/var/tmp/s-basic-unsealed`, so when the first unsealed is generated, it needs to be manually copied to `/var/tmp/s-basic-unsealed`***
+
 ## Sealer Commands
 
 Check ongoing sealing job.

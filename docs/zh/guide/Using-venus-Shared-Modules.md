@@ -386,7 +386,7 @@ $ ./venus-sealer init \
 运行sealer。
 
 ```bash
-$ nohup ./venus-sealer run >> sealer.log 2>&1 &
+$ nohup ./venus-sealer run > sealer.log 2>&1 &
 ```
 
 给sealer指定临时路径（存放p1-c2阶段生成文件，sector完成后会释放）和持久存储路径（用于做winningPoSt或wdPoSt的文件需要持久保存）
@@ -487,6 +487,16 @@ GLOBAL OPTIONS:
    --version, -v            print the version (default: false)
 ```
 
+设置发送消息的地址：
+```bash
+[Addresses]
+  PreCommitControl = [] # P2
+  CommitControl = [] # C2
+  DisableOwnerFallback = false # true 表示禁用
+  DisableWorkerFallback = false # true 表示禁用
+```
+> P2,C2消息的from可以设置多个，但必须是miner ID相关联的，如worker，owner或controller。
+
 ## worker机制
 
 在Filecoin系统中,venus-sealer可以被认为是一个带有状态管理机的venus-worker，也就是说:
@@ -514,6 +524,8 @@ vim  ~/.venussealer/config.toml
 # Restart venus-sealer after saving
 ```
 
+> ***venus-sealer在做CC数据时会跳过AddPiece阶段直接查找`/var/tmp/s-basic-unsealed`,故在第一个unsealed生成时需手动拷贝到`/var/tmp/s-basic-unsealed`***
+
 -- 启动worker并指定可以接的任务类型.
 ```
 $ TRUST_PARAMS=1 nohup ./venus-worker run \
@@ -530,6 +542,8 @@ $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --unseal                      enable unsealing (32G sectors: 1 core, 128GiB RAM) (default: true)
 --precommit2                  enable precommit2 (32G sectors: multiple cores, 96GiB RAM) (default: true)
 --commit                      enable commit (32G sectors: multiple cores or GPUs, 128GiB RAM + 64GiB swap) (default: true)
+--task-total                  total number of task (default: 100)
+--bindP1P2                    P1 and P2 phase tasks are bound to the same machine (default: false)
 ```
 
 一般情况下，我们只为venus-worker配置seal路径,Store继承venus-sealer。worker完成扇区密封时，永久存储文件将被转移到venus-sealer指定的store路径.
@@ -593,6 +607,8 @@ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 
 - C2阶段会主动搜索机器是否有可用GPU，有则使用；
 - P2阶段在生成tree-c和tree-r-last阶段可以使用gpu加速，但需要在启动对应sealer或worker时配置环境变量：FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1表示生成tree-r-last阶段使用GPU，FIL_PROOFS_USE_GPU_TREE_BUILDER=1表示生成tree-c阶段使用GPU。
+
+
 
 参考文档
 - https://docs.filecoin.io/mine/lotus/miner-troubleshooting/

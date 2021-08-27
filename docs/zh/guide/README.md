@@ -39,7 +39,7 @@ Venus架构设计中包括venus、venus-miner、venus-sealer、venus-messager、
 
 下图是我们设想中的一个典型的应用场景
 
-![](/venus-cluster.png)
+![](../../.vuepress/public/venus-cluster.png)
 
 下列内容表示了组件间的对应关系，功能上有一定的相似，细节和用法上有更多强大的功能扩充。
 
