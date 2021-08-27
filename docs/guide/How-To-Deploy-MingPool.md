@@ -30,7 +30,7 @@ Depending on its role in a mining cluster, modules could be loosely broken down 
 
 Diagram below illustrates how venus modules interacts with one and another.
 
-![venus-cluster](/venus-cluster.png)
+![venus-cluster](../.vuepress/public/venus-cluster.png)
 ## Hardware requirements
 
 Learn more about hardware requirements [here](https://docs.filecoin.io/mine/mining-architectures/#protocol-labs-example-architecture).
@@ -151,7 +151,7 @@ $ ./venus-auth token gen --perm admin <SHARED>
 Generate tokens for independent modules. Tokens can be logically grouped by `<USER>` as individual miner joining the mining pool.
 
 ```shell script
-$ ./venus-auth user add --name <USER>
+$ ./venus-auth user add --name <USER> --miner=<minerID>
 $ ./venus-auth token gen --perm write <USER>
 <USER_WRITE_AUTH_TOKEN>
 $ ./venus-auth token gen --perm read <USER>
@@ -159,7 +159,13 @@ $ ./venus-auth token gen --perm read <USER>
 ```
 :::tip
 
-Use `./venus-auth user add <USER>` to logically group different tokens.
+Use `./venus-auth user add <USER>` to logically group different tokens. If there is already a miner number, bring --miner, if not, you need to update after the miner is created:
+```
+$ ./venus-auth user update --name <USER> --miner=<minerID>
+
+# 查看user列表
+$ ./venus-auth user list
+```
 
 :::
 
@@ -168,7 +174,7 @@ Use `./venus-auth user add <USER>` to logically group different tokens.
 Download and compile the source code of venus-gateway.
 
 ```bash
-$ git clone https://github.com/ipfs-force-community/venus-gateway.git
+$ git clone https://github.com/filecoin-project/venus-gateway.git
 $ cd venus-gateway
 $ git checkout <RELEASE_TAG>
 $ go mod tidy
@@ -178,12 +184,16 @@ $ make
 Start venus-gateway.
 
 ```bash
-$ ./venus-gateway \
---listen /ip4/0.0.0.0/tcp/45132 \
-run \
+$ ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run \
 # Use either a http or https url
---auth-url <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> \
 > venus-gateway.log 2>&1 &
+```
+
+> If you encounter the following compilation errors, execute first`go get github.com/google/flatbuffers@v1.12.1`
+```bash
+github.com/dgraph-io/badger/v3@v3.2011.1/fb/BlockOffset.go:6:2: missing go.sum entry for module providing package github.com/google/flatbuffers/go (imported by github.com/dgraph-io/badger/v3/table); to add:
+        go get github.com/dgraph-io/badger/v3/table@v3.2011.1
 ```
 
 ## Install venus daemon
@@ -200,14 +210,12 @@ $ make
 Start venus daemon for chain synchronization. Use `--network` to specify the network venus is connecting to.
 
 ```bash
-$ nohup ./venus daemon --network nerpa \
---auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
-> venus.log 2>&1 & 
+$ nohup ./venus daemon --network=nerpa --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 & 
 ```
 
 :::tip
 
-Use `tail -f venus.log` to check if there is any errors during sychronization.
+Use `tail -f venus.log`  or `./venus sync status` to check if there is any errors during sychronization.
 
 :::
 
@@ -232,9 +240,7 @@ Restart venus daemon for the config to take into effects.
 ```bash
 $ ps -ef | grep venus
 $ kill <VENUS_PID>
-$ nohup ./venus daemon --network nerpa \
---auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
-> venus.log 2>&1 
+$ nohup ./venus daemon --network=nerpa --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 
 ```
 
 ## Install venus-messager

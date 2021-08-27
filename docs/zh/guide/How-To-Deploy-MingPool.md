@@ -29,7 +29,7 @@
 
 下图展示了venus模块如何相互交互。
 
-![venus-cluster](/venus-cluster.png)
+![venus-cluster](../../.vuepress/public/venus-cluster.png)
 ## 硬件要求
 
 在[此处](https://github.com/filecoin-project/community-china/discussions/18)了解有关硬件要求的更多信息。
@@ -95,11 +95,7 @@ $ git checkout <RELEASE_TAG>
 $ make 
 $ nohup ./venus-auth run > auth.log 2>&1 &
 ```
-:::tip 
-
-`venus-auth` 的默认配置文件位于`~/venus-auth/config.toml`。
-
-:::
+> `venus-auth` 的默认配置文件位于`~/.venus-auth/config.toml`
 
 :::tip Logs
 
@@ -139,7 +135,7 @@ $ nohup ./venus-auth run > auth.log 2>&1 &
 
 `venus-auth`管理着其他venus模块使用的[jwt](https://jwt.io/)令牌，以便它们在网络上安全地相互通信。
 
-为共享模块生成token。
+为链服务组件生成token。
 
 ```bash
 # --perm specifies admin, sign, wirte or read permission of the token generated
@@ -150,7 +146,8 @@ $ ./venus-auth token gen --perm admin <SHARED>
 为独立模块生成令牌。 token可以通过`<USER>` 逻辑分组，作为加入矿池的单个矿工。
 
 ```shell script
-$ ./venus-auth user add --name <USER> --miner=<minerID>
+$ ./venus-auth user add --name=<USER> --miner=<minerID>
+
 $ ./venus-auth token gen --perm write <USER>
 <USER_WRITE_AUTH_TOKEN>
 $ ./venus-auth token gen --perm read <USER>
@@ -179,15 +176,18 @@ $ git checkout <RELEASE_TAG>
 $ go mod tidy
 $ make
 ```
+> 如果遇到以下编译错误,先执行`go get github.com/google/flatbuffers@v1.12.1`
+```bash
+github.com/dgraph-io/badger/v3@v3.2011.1/fb/BlockOffset.go:6:2: missing go.sum entry for module providing package github.com/google/flatbuffers/go (imported by github.com/dgraph-io/badger/v3/table); to add:
+        go get github.com/dgraph-io/badger/v3/table@v3.2011.1
+```
 
-启动`venus-gateway`。
+启动`venus-gateway`
 
 ```bash
-$ ./venus-gateway \
---listen /ip4/0.0.0.0/tcp/45132 \
-run \
+$ ./venus-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
 # Use either a http or https url
---auth-url <https://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 > venus-gateway.log 2>&1 &
 ```
 
@@ -205,14 +205,12 @@ $ make
 启动`venus`进程进行链同步。 使用 `--network` 来指定`venus`连接的网络。
 
 ```bash
-$ nohup ./venus daemon --network nerpa \
---auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
-> venus.log 2>&1 & 
+$ nohup ./venus daemon --network=nerpa --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 & 
 ```
 
 :::tip
 
-使用`tail -f venus.log`检查同步过程中是否有任何错误。
+使用`tail -f venus.log` 或 `./venus sync status` 检查同步过程中是否有任何错误。
 
 :::
 
@@ -236,10 +234,8 @@ vim ~/.venus/config.json
 
 ```bash
 $ ps -ef | grep venus
-$ kill <VENUS_PID>
-$ nohup ./venus daemon --network nerpa \
---auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
-> venus.log 2>&1 
+$ kill -9 <VENUS_PID>
+$ nohup ./venus daemon --network=nerpa --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 
 ```
 
 ## 安装venus-messager
@@ -297,7 +293,7 @@ $ ./venus-miner init
 启动`venus-miner`。
 
 ```bash
-$ nohup ./venus-miner run >>miner.log 2>& 1 &
+$ nohup ./venus-miner run > miner.log 2>& 1 &
 ```
 
 ### 矿工管理
