@@ -29,7 +29,7 @@
 
 下图展示了venus模块如何相互交互。
 
-![venus-cluster](../../.vuepress/public/venus-cluster.png)
+![venus-cluster](/venus-cluster.png)
 
 ## 硬件要求
 
@@ -65,17 +65,12 @@ venus-wallet 可以部署为共享或独立模块，具体取决于您的安全�
 
 #### 对于共享模块的管理员
 
-如果您是托管共享 venus 模块的管理员，请使用以下命令注册各个集群。
+如果您是托管共享 venus 模块的管理员，请使用以下命令为您的矿工创建一个帐户。
 
 ```bash
-# 如果已有矿工号
+# If miner doesn't have a <MINER_ID> yet, leave out --miner flag and use 'updateUser' when user inited their miner id
 $ ./venus-auth user add --name <ACCOUNT_NAME> --miner <MINER_ID>
-
-# 没有矿工号，在创建矿工后更新
-$ ./venus-auth user add --name <ACCOUNT_NAME>
-$ ./venus-auth user update --name <ACCOUNT_NAME> --miner <MINER_ID>
-
-# 为此账号分配token,用于接入服务层验证
+# The returned token is what miner have to add into their config file in order to gain access to your shared modules
 $ ./venus-auth token gen --perm write <ACCOUNT_NAME>
 <AUTH_TOKEN_FOR_ACCOUNT_NAME>
 ```
@@ -386,7 +381,7 @@ $ ./venus-sealer init \
 运行sealer。
 
 ```bash
-$ nohup ./venus-sealer run > sealer.log 2>&1 &
+$ nohup ./venus-sealer run >> sealer.log 2>&1 &
 ```
 
 给sealer指定临时路径（存放p1-c2阶段生成文件，sector完成后会释放）和持久存储路径（用于做winningPoSt或wdPoSt的文件需要持久保存）
@@ -487,16 +482,6 @@ GLOBAL OPTIONS:
    --version, -v            print the version (default: false)
 ```
 
-设置发送消息的地址：
-```bash
-[Addresses]
-  PreCommitControl = [] # P2
-  CommitControl = [] # C2
-  DisableOwnerFallback = false # true 表示禁用
-  DisableWorkerFallback = false # true 表示禁用
-```
-> P2,C2消息的from可以设置多个，但必须是miner ID相关联的，如worker，owner或controller。
-
 ## worker机制
 
 在Filecoin系统中,venus-sealer可以被认为是一个带有状态管理机的venus-worker，也就是说:
@@ -524,8 +509,6 @@ vim  ~/.venussealer/config.toml
 # Restart venus-sealer after saving
 ```
 
-> ***venus-sealer在做CC数据时会跳过AddPiece阶段直接查找`/var/tmp/s-basic-unsealed`,故在第一个unsealed生成时需手动拷贝到`/var/tmp/s-basic-unsealed`***
-
 -- 启动worker并指定可以接的任务类型.
 ```
 $ TRUST_PARAMS=1 nohup ./venus-worker run \
@@ -542,8 +525,6 @@ $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --unseal                      enable unsealing (32G sectors: 1 core, 128GiB RAM) (default: true)
 --precommit2                  enable precommit2 (32G sectors: multiple cores, 96GiB RAM) (default: true)
 --commit                      enable commit (32G sectors: multiple cores or GPUs, 128GiB RAM + 64GiB swap) (default: true)
---task-total                  total number of task (default: 100)
---bindP1P2                    P1 and P2 phase tasks are bound to the same machine (default: false)
 ```
 
 一般情况下，我们只为venus-worker配置seal路径,Store继承venus-sealer。worker完成扇区密封时，永久存储文件将被转移到venus-sealer指定的store路径.
@@ -581,8 +562,8 @@ export TMPDIR=/fast/disk/folder3                    # used when sealing
 export MINER_API_INFO:<TOKEN>:/ip4/<miner_api_address>/tcp/<port>/http`
 export BELLMAN_CPU_UTILIZATION=0.875      # optimal value depends on exact hardware
 export FIL_PROOFS_MAXIMIZE_CACHING=1
-export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 # when GPU is available
-export FIL_PROOFS_USE_GPU_TREE_BUILDER=1   # when GPU is available
+export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=0 # when GPU is available,If there are multiple GPU cards, bind specific cards by modifying this value
+export FIL_PROOFS_USE_GPU_TREE_BUILDER=0   # when GPU is available,If there are multiple GPU cards, bind specific cards by modifying this value
 export FIL_PROOFS_PARAMETER_CACHE=/fast/disk/folder # > 100GiB!
 export FIL_PROOFS_PARENT_CACHE=/fast/disk/folder2   # > 50GiB!
 # The following increases speed of PreCommit1 at the cost of using a full
@@ -591,6 +572,24 @@ export FIL_PROOFS_PARENT_CACHE=/fast/disk/folder2   # > 50GiB!
 # "Worker co-location" section below.
 export FIL_PROOFS_USE_MULTICORE_SDR=1
 ```
+采取CUDA环境变量CUDA_VISIBLE_DEVICES来限定程序运行的GPU设备解决问题
+// CUDA_VISIBLE_DEVICES设置说明，设置device对程序可见
+CUDA_VISIBLE_DEVICES=1       // 仅使用device1 (即卡一)
+CUDA_VISIBLE_DEVICES=0,1     // 仅使用device 0和 device1
+CUDA_VISIBLE_DEVICES="0,1"	 // 同上, 仅使用device 0和 device1
+CUDA_VISIBLE_DEVICES=0,2,3   // 仅使用device 0, device2和device3
+CUDA_VISIBLE_DEVICES=2,0,3   // 仅使用device0, device2和device3
+
+#那么最后两条的区别是什么呢？
+CUDA_VISIBLE_DEVICES后面的参数依次是设置gpu[0]，gpu[1], gpu[2]...等的device编号。
+所以区别在于： 0,2,3意思是gpu[0]指向device0, gpu[1], 指向devcie2, gpu[2]指向device3；
+而2,0,3意思是gpu[0]指向device2, gpu[1], 指向devcie0, gpu[2]指向device3；
+
+再举例说明，如果当前主机有5张显卡，默认情况下5个device对程序都可以见，默认排序device0 - 4。
+如果现在我们只希望使用第一张和第三张显卡，并且程序代码里看到的分别对应0，1。
+那么设置应该如下：
+CUDA_VISIBLE_DEVICES=0,2
+
 
 这些变量的使用有两种方式：
 - 在启动venus-sealer和venus-worker前 export设置,如我想开启cpu多核计算
@@ -608,22 +607,11 @@ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 - C2阶段会主动搜索机器是否有可用GPU，有则使用；
 - P2阶段在生成tree-c和tree-r-last阶段可以使用gpu加速，但需要在启动对应sealer或worker时配置环境变量：FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1表示生成tree-r-last阶段使用GPU，FIL_PROOFS_USE_GPU_TREE_BUILDER=1表示生成tree-c阶段使用GPU。
 
-
-
 参考文档
 - https://docs.filecoin.io/mine/lotus/miner-troubleshooting/
 - https://docs.filecoin.io/get-started/lotus/installation/#linux
 - https://docs.filecoin.io/mine/lotus/miner-setup/#pre-requisites
 - https://github.com/filecoin-project/venus-docs/blob/master/docs/zh/mine/venus/power_growth_and_maintain.md
-
-## lotus-miner
-
-&ensp;&ensp; 如果你已经用lotus-miner密封了一定数量的扇区，我们建议你继续使用lotus-miner，venus社区同步维护可接入共享组件的lotus-miner：https://github.com/ipfs-force-community/lotus，对于lotus官方的每个大版本，我们会同步发布对应版本。
-
-&ensp;&ensp; 最新分支: force/v1.10.1_venus_pool 对应 lotus官方 Tag: v1.10.1
-
-&ensp;&ensp; 这个分支只是将对接共享组件的逻辑加进来，其他逻辑一切没变，你可以按照原有的习惯去执行lotus-miner。
-
 
 ## 问题?
 
