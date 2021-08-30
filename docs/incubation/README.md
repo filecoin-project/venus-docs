@@ -1,22 +1,15 @@
-## Storage Provider Incubation Program
+## Storage Provider Incubation Center Program
 
-The incubation program is announced on July 8, 2021 by [Filecoin Foundation](https://fil.org/) partnered with [Venus Team](https://filecoinproject.slack.com/archives/CEHHJNJS3) as technical consultant. Details of the program can be found [here](https://filecoinfoundation.medium.com/introducing-the-filecoin-storage-provider-incubation-center-ea8743e18e).
-
-## About Venus
-
-Venus is a Go implementation of the Filecoin Distributed Storage Network, which focuses its resources  on the following...
-
-- **Security**: Secure by design. Safe guard your keys and storage operation with our extensive security features.
-- **Simplicity first**: Modularized setup with less overhead in maintenance will get you started in no time.
-- **Storage Pool**: Share infrastructure with other storage providers to unlock your true potentials.
+The incubation center program is announced on July 8, 2021 by [Filecoin Foundation](https://fil.org/) partnered with [Venus Team](https://filecoinproject.slack.com/archives/CEHHJNJS3) as technical consultant. Details of the program can be found [here](https://filecoinfoundation.medium.com/introducing-the-filecoin-storage-provider-incubation-center-ea8743e18e).
+Updates about the Incubation Center Prize Pool can be found [here](https://venus.filecoin.io/incubation/Incubation_Center_Prize_Pool.html). 
 
 ## About the program
 
-The program aims to ease small to medium sized storage provider into having better expierence of operating a storage service. Participants of the program will deploy their storage services using Venus implementation of Filecoin with minimum future maintenance and lowered hardware costs.
+This program aims to ease small to medium sized storage provider into having better expierence of operating a storage service in the Filecoin network. Participants of the program will deploy their storage services using Venus implementation with minimum future maintenance and lowered hardware costs.
 
 ### Prerequisites
 
-To take adavantage of the free 90-day [shared venus modules](https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#introducing-venus-modules) of the incubation program, storage providers are required to grow at least 2TiB/day.
+To take adavantage of the free 90-day [shared venus modules](https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#introducing-venus-modules) of the incubation center program, storage providers are required to grow at least 2TiB/day( swicthed to 1TiB since .
 
 ### Application 
 
@@ -33,6 +26,14 @@ Slack Channel: [#fil-venus](https://filecoinproject.slack.com/archives/CEHHJNJS3
 Contact: [@Joss-Venus](https://filecoinproject.slack.com/archives/D01SD621WBT) or [@Tim Guo](https://filecoinproject.slack.com/archives/D0209UW29FE)
 
 Email: [venus@ipfsforce.com](mailto:venus@ipfsforce.com)
+
+## About Venus
+
+Venus is a Go implementation of the Filecoin Distributed Storage Network, which focuses its resources  on the following...
+
+- **Security**: Secure by design. Safe guard your keys and storage operation with our extensive security features.
+- **Simplicity first**: Modularized setup with less overhead in maintenance will get you started in no time.
+- **Storage Pool**: Share infrastructure with other storage providers to unlock your true potentials.
 
 ## More questions?
 
