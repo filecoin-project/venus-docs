@@ -592,6 +592,25 @@ export FIL_PROOFS_PARENT_CACHE=/fast/disk/folder2   # > 50GiB!
 export FIL_PROOFS_USE_MULTICORE_SDR=1
 ```
 
+venus-worker使用了一个GPU程序，在双卡3080机器上运行，程序会自动搜寻并使用0号和1号GPU卡。性能测试要求程序只运行在一张GPU卡上，但程序没有参数设置GPU的地方。
+采取CUDA环境变量CUDA_VISIBLE_DEVICES来限定程序运行的GPU设备解决问题:
+```bash
+// CUDA_VISIBLE_DEVICES设置说明，设置device对程序可见
+CUDA_VISIBLE_DEVICES=1       // 仅使用device1 (即卡一)
+CUDA_VISIBLE_DEVICES=0,1     // 仅使用device 0和 device1
+CUDA_VISIBLE_DEVICES="0,1"	 // 同上, 仅使用device 0和 device1
+CUDA_VISIBLE_DEVICES=0,2,3   // 仅使用device 0, device2和device3
+CUDA_VISIBLE_DEVICES=2,0,3   // 仅使用device0, device2和device3
+```
+
+可以通过以下变量来提升显卡GPU内存的使用率，减少P2任务的用时
+FIL_PROOFS_MAX_GPU_COLUMN_BATCH_SIZE  -  每次计算Column的batch大小，默认400000;
+FIL_PROOFS_MAX_GPU_TREE_BATCH_SIZE  -   每次Encoding计算的batch大小，默认700000
+```bash
+// 建议值
+FIL_PROOFS_MAX_GPU_COLUMN_BATCH_SIZE=8000000,FIL_PROOFS_MAX_GPU_TREE_BATCH_SIZE=8000000
+```
+
 这些变量的使用有两种方式：
 - 在启动venus-sealer和venus-worker前 export设置,如我想开启cpu多核计算
 ```bash
