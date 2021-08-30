@@ -1,0 +1,13 @@
+## Filecoin Storage Provider Incubation Center has been officially launched
+
+This is exciting！ The first phase of [_Filecoin Storage Provider Incubation Center_](https://venus.filecoin.io/incubation/Rules.html)was **officially launched on July 26**. At present, dozens of storage providers have submitted applications, we will support these applicants to the distributed storage pool of the Incubation Center.
+
+On July 7, Filecoin Foundation and Venus Team jointly announced the[_Filecoin Storage Provider Incubation Center_](https://venus.filecoin.io/incubation/Rules.html), which is committed to developing and supporting storage providers, developers and clients in the Filecoin ecosystem. The Center will provide technical, financial related support for small and medium Filecoin storage providers all over the world. **At present, several storage providers have successfully joined the incubation center and started sealing with the shared modules provided by Venus Team &amp; Filecoin Foundation.**
+
+In order to support more participants who have feedback about needing more time to prepare, **the application deadline of phase 1 has been adjusted to August 31.** More small and medium-sized storage providers are welcome to [_join_](http://venusteam.mikecrm.com/1lmpQtj). In addition, the participants of its sub project [_Venus master fellowship program_](https://venus.filecoin.io/incubation/Rules.html) will open to the participants who successfully joined the Incubation Center, together with the experienced storage provider, developer or service provider in Filecoin community.
+
+**The first phase of the Incubation Center will start from July 26, 2021 to October 24, 2021.** Participants who successfully joined the Incubation Center must seal at least 64 sectors (2TiB) per day. Participants can continue to participate in the center until their storage power reaches 1PiB or run to the end of the certain phase.
+
+In addition, the Incubation Center now provides the testing environment for more storage providers. **We provide shared modules services free on the Nerpa network for potential participants to build, test and deploy.**
+
+Interested in joining the Incubation Center Program now? Please fill out this [_application form_](http://venusteam.mikecrm.com/1lmpQtj). If you have any questions about joining the Incubation Center, you can always feel free to contact the Venus team via [_email_](https://www.kdocs.cn/p/venus@ipfsforce.com) or slack here: [_fil-incubation-center_](https://filecoinproject.slack.com/archives/C028MN42KEE).

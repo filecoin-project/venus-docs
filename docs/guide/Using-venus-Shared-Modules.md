@@ -24,12 +24,13 @@ Depending on its role in a mining cluster, modules could be loosely broken down 
 | [venus-gateway](https://github.com/ipfs-force-community/venus-gateway) | utility for controlled access point of shared modules | shared             |
 | [venus-wallet](https://github.com/filecoin-project/venus-wallet) | addresses/keys management                             | shared/independent |
 | [venus-sealer](https://github.com/filecoin-project/venus-sealer), [venus-worker](https://github.com/filecoin-project/venus-sealer) | job scheduling, sealing and proving                   | independent        |
+| venus-market (under development)                             | deal making                                           | independent        |
 
 ## Mining architecture
 
 Diagram below illustrates how venus modules interacts with one and another.
 
-![venus-cluster](/venus-cluster.png)
+![venus-cluster](../.vuepress/public/venus-cluster.png)
 
 ## Hardware requirements
 
@@ -65,11 +66,16 @@ venus-wallet can be deployed as either a shared or independent module depend on 
 
 #### For admins of shared modules
 
-If you are an admin hosting shared venus modules, use the following command to create an account for your miner.
+If you are an admin hosting shared venus modules, use the following command to create an account for your sealer-cluster.
 
 ```bash
 # If miner doesn't have a <MINER_ID> yet, leave out --miner flag and use 'updateUser' when user inited their miner id
-$ ./venus-auth user add --name <ACCOUNT_NAME> --miner <MINER_ID> --state=1 --sourceType=1
+$ ./venus-auth user add --name <ACCOUNT_NAME> --state=1 --sourceType=1
+$ ./venus-auth user update --name <ACCOUNT_NAME> --miner <MINER_ID> 
+
+# If miner  have a <MINER_ID> yet
+$ ./venus-auth user add --name <ACCOUNT_NAME> --miner <MINER_ID>  --state=1 --sourceType=1
+
 # The returned token is what miner have to add into their config file in order to gain access to your shared modules
 $ ./venus-auth token gen --perm write <ACCOUNT_NAME>
 <AUTH_TOKEN_FOR_ACCOUNT_NAME>
@@ -407,6 +413,8 @@ $ ./venus-sealer sectors pledge
 ```
 
 Congratulations! You are now pledging your 1st sector. Use [sealer commands](#sealer-commands) to monitor sealing processes and keep an eye on errors in the log.
+
+> ***When venus-sealer is doing CC data, it will skip the AddPiece stage and directly search for `/var/tmp/s-basic-unsealed`, so when the first unsealed is generated, it needs to be manually copied to `/var/tmp/s-basic-unsealed`***
 
 ## Sealer Commands
 

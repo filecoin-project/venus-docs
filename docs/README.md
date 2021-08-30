@@ -9,7 +9,7 @@ footer: MIT Apache dual Licensed
 <div class="features">
   <div class="feature">
     <h2>Security</h2>
-    <p>Secure by design. Safe guard your keys and storage operation with our extensive security features.</p>
+    <p>Secure by design. Safe guard your private keys and storage operation with our extensive security features.</p>
   </div>
   <div class="feature">
     <h2>Simplicity First</h2>

@@ -21,7 +21,7 @@ module.exports = {
         '@vuepress-plugin-zooming',
         ['@vuepress/google-analytics',
             {
-                'ga': 'UA-148766289-1' // Property: Filecoin Docs
+                'ga': 'G-SYDDWWLQSP' // Property: Filecoin Docs
             }
         ],
         ['vuepress-plugin-code-copy', true]
@@ -76,9 +76,13 @@ module.exports = {
                         link: '/advanced/'
                     },
                     {
+                        text: 'Operation',
+                        link: '/operation/'
+                    },
+                    {
                         text: 'Incubation Center',
                         link: '/incubation/'
-                    },
+                    }
                 ],
                 sidebar: {
                     '/guide/': [
@@ -104,8 +108,8 @@ module.exports = {
                             children: [
                                 ['', 'Venus daemon'],
                                 ['How-To-Use-Messager.md', 'Venus messager'],
-                                ['How-To-Use-Wallet-In-Venus.md', 'Venus wallet'],
-                                // ['Venus-wallet.md', 'Venus wallet'],
+                                ['How-To-Use-Wallet-In-Venus.md', 'Venus local wallet'],
+                                ['Venus-Wallet.md', 'Venus remote wallet'],
                                 ['Venus-Worker.md', 'Venus worker'],
                             ]
                         }
@@ -115,13 +119,24 @@ module.exports = {
                             title: 'Advanced',
                             collapsable: false,
                             children: [
-                                ['', 'Tips running in China'],
-                                ['Using-Lotus-Miner.md', 'Using lotus-miner'],
+                                ['', 'Using lotus-miner'],
+                                ['tips-running-in-China.md', 'Tips running in China'],
                                 ['venus-cli.md', 'Venus CLI commands'],
                                 ['Multisig-wallet.md', 'Multisig wallet'],
                                 ['venus_load_balancing.md', 'Venus load balancing'],
                                 ['Payment-Channel.md', 'Payment channel'],
                                 ['How-To-Setup_2knet.md', 'How to start a local dev network'],
+                            ]
+                        }
+                    ],
+                    '/operation/': [
+                        {
+                            title: 'Operation',
+                            collapsable: false,
+                            children: [
+                                ['', 'Example single box setup'],
+                                ['Efficiency_of_sealing.md', 'Finding optimal configurations'],
+                                ['System_monitor_of_Zabbix.md', 'System monitoring (Zabbix)'],
                             ]
                         }
                     ],
@@ -131,6 +146,8 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
+                                ['Incubation_Center_Prize_Pool.md', 'Incubation Center Prize Pool'],
+                                ['announcement.md', 'Announcement'],
                                 ['Rules.md', 'Rules'],
                             ]
                         }
@@ -148,12 +165,16 @@ module.exports = {
                         link: '/zh/guide/'
                     },
                     {
-                        text: '启明星模块',
+                        text: '组件模块',
                         link: '/zh/modules/'
                     },
                     {
                         text: '进阶',
                         link: '/zh/advanced/'
+                    },
+                    {
+                        text: '运维',
+                        link: '/zh/operation/'
                     },
                     {
                         text: '孵化器',
@@ -184,8 +205,8 @@ module.exports = {
                             children: [
                                 ['', 'Venus daemon'],
                                 ['How-To-Use-Messager.md', 'Venus messager'],
-                                ['How-To-Use-Wallet-In-Venus.md', 'Venus wallet'],
-                                // ['Venus-wallet.md', 'Venus wallet'],
+                                ['How-To-Use-Wallet-In-Venus.md', 'Venus 本地钱包'],
+                                ['Venus-Wallet.md', 'Venus 远程钱包'],
                                 ['Venus-Worker.md', 'Venus worker'],
                                 ['Venus-Gateway.md', 'Venus gateway'],
                                 ['Venus-Auth.md', 'Venus auth'],
@@ -197,14 +218,27 @@ module.exports = {
                             title: '进阶',
                             collapsable: false,
                             children: [
-                                ['', '中国部署提示'],
-                                ['Using-Lotus-Miner.md', '使用lotus-miner'],
-                                ['Venus-Project-Dependency-Upgrade.md', '依赖与升级'],
+                                ['', 'venus矿池进阶'],
+                                ['How-To-Setup_2knet.md', '如何搭建私网'],
+                                ['tips-running-in-China.md', '中国部署小贴士'],
+                                ['Venus-Project-Dependency-Upgrade.md', 'venus组件依赖与升级'],
                                 ['venus-cli.md', 'CLI命令'],
                                 ['Multisig-Wallet.md', '多签钱包'],
                                 ['venus_load_balancing.md', '负载均衡'],
                                 ['Payment-Channel.md', '支付通道'],
                                 ['How-To-Setup_2knet.md', '本地2k开发网络'],
+                            ]
+                        }
+                    ],
+                    '/zh/operation/': [
+                        {
+                            title: '独立组件运维',
+                            collapsable: false,
+                            children: [
+                                ['', '独立组件运维进阶'],
+                                ['example-single-box.md', '单矿机示例'],
+                                ['Efficiency_of_sealing.md', '最大化利用资源提升密封扇区效率'],
+                                ['System_monitor_of_Zabbix.md', '系统监控安装与使用之Zabbix'],
                             ]
                         }
                     ],
@@ -214,7 +248,10 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', '概述'],
-                                ['Rules.md', '规则']
+                                ['Incubation_Center_Prize_Pool.md', '存储提供者孵化中心奖励池计划'],
+                                ['announcement.md', '公告'],
+                                ['Rules.md', '规则'],
+                                ['FQA.md', '常见问题解答'],
                             ]
                         }
                     ]

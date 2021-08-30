@@ -1,20 +1,6 @@
 # 入门
 
-这是安装和运行Filecoin节点并连接到本地机器测试网络的指南。后续教程将解释如何 [挖取Filecoin](Mining-Filecoin).
-
-## 目录
-
-- [入门](#getting-started)
-  - [目录](#table-of-contents)
-    - [系统要求](#system-requirements)
-    - [安装依赖项和系统配置](#installing-dependencies-and-system-configuration)
-      - [安装Go](#installing-go)
-      - [安装依赖项](#installing-dependencies)
-    - [构建和运行测试](#building-filecoin-and-running-tests)
-  - [开始运行Filecoin](#start-running-filecoin)
-  - [从Filecoin水龙头获取FIL](#get-fil-from-the-filecoin-faucet)
-  - [等待链同步](#wait-for-chain-sync)
-  - [查看网络信息](#viewing-network-information)
+这是安装和运行Filecoin节点并连接到本地机器测试网络的指南。
 
 ### 系统要求
 
@@ -134,12 +120,7 @@ venus swarm peers                  # list addresses of peers to which you're con
 
 该节点现在应该连接到一些peer，并将开始下载和验证区块链。
 
-🎉 哇哦！您现在正在运行Filecoin节点并连接到网络。这是一个基础节点的结构：
-![单个节点及其组件的示意图](/getting-started-node-diagram.png)
-
  > **注意:** 守护进程现在正在自己的终端中无限期运行 (`Ctrl + C` 退出)。要运行其他`venus` 命令，请打开第二个终端选项卡或窗口 (在Mac上是 `Cmd + T`)。
-
-_需要帮助吗？请参阅 [疑难解答和常见问题](Troubleshooting-&-FAQ) 或 [在 Matrix chat的 #fil-dev ](https://riot.im/app/#/room/#fil-dev:matrix.org)._
 
 
 ## 从Filecoin水龙头获取FIL
