@@ -604,9 +604,10 @@ CUDA_VISIBLE_DEVICES=2,0,3   // 仅使用device0, device2和device3
 ```
 
 可以通过以下变量来提升显卡GPU内存的使用率，减少P2任务的用时
-每次计算Column的batch大小，默认400000;
-每次Encoding计算的batch大小，默认700000
+FIL_PROOFS_MAX_GPU_COLUMN_BATCH_SIZE  -  每次计算Column的batch大小，默认400000;
+FIL_PROOFS_MAX_GPU_TREE_BATCH_SIZE  -   每次Encoding计算的batch大小，默认700000
 ```bash
+// 建议值
 FIL_PROOFS_MAX_GPU_COLUMN_BATCH_SIZE=8000000,FIL_PROOFS_MAX_GPU_TREE_BATCH_SIZE=8000000
 ```
 
