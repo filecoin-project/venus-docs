@@ -28,7 +28,7 @@
  
  ### 广播区块子流程
  
- - slash filter: （1）一个周期内出两个块； （2）共识错误：区块的parent和实际的不符；
+ - slash filter: （1）一个周期内出两个块； （2）共识错误：基于同一个Tipset出了两个块或相邻高度出块，但是并没有包含前一个块；
  - 广播区块前先会在miner连接的venus节点进行本地验证，如果验证不通过，则不会想网络广播。
  
  ![venus-miner](../../.vuepress/public/venus-miner-submit-block.png)
