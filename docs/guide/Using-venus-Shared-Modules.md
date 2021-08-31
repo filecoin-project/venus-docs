@@ -273,12 +273,13 @@ $ make
 For participants in incubation program, please use `incubation` branch by `git checkout incubation`. To recompile using latest code in `incuvation` branch, do the following...
 
 ```bash
+$ git fetch
 $ git pull
+
 $ git submodule update --init --recursive
-$ cd extern/filecoin-ffi
 $ make clean
-$ cd ../..
 $ make deps
+
 $ make
 ```
 

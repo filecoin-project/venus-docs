@@ -242,7 +242,6 @@ $ git checkout -b incubation origin/incubation
 # specify source compilation
 export RUSTFLAGS="-C target-cpu=native -g"
 export FFI_BUILD_FROM_SOURCE=1
-# make dependency
 $ make deps
 $ make
 ```
@@ -256,17 +255,15 @@ $ RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1" make deps
 - 曾经成功编译过
 
 ```bash
-# change directory to venus-wallet,switch to the incubation branch
 $ git fetch
 $ git pull
+
+# Update and compile filecoin-ffi, if filecoin-ffi has not changed, no need to execute
 $ git submodule update --init --recursive
-# Clean up the previous library files
-$ cd extern/filecoin-ffi
 $ make clean
-# Go back to the project root directory
-$ cd ../..
 $ make deps
-$ RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1" make
+
+$ make
 ```
 
 :::warning
@@ -291,8 +288,6 @@ $ RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1" make
    Compiling serde v1.0.126
 ```
 
-- 只有在filecoin-ffi有变化时（执行 `git submodule update --init --recursive` 有提示）才需要清除曾生成的ffi库文件（make clean）并重新编译ffi（make deps），否则你只需git pull然后make既可。
-
 :::
 
 :::tip 
@@ -306,19 +301,19 @@ $ RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE="1" make
 如果您还没有miner-id，请运行以下命令来初始化sealer。请确保`<OWNER_ADDRESS>`中有足够资金支付gasfee，否则`init`将失败。
 
 ```bash
-$ nohup ./venus-sealer init \
---worker <WORKER_ADDRESS> \
---owner <OWNER_ADDRESS>  \
+$ nohup ./venus-sealer \
+# Leave out this flag for mainnet
+--network=nerpa init \
+--worker=<WORKER_ADDRESS> \
+--owner=<OWNER_ADDRESS>  \
 # Choose between 32G or 64G for mainnet
 --sector-size 512M \
-# Choose from nerpa, calibration for testnets
-# Leave out this flag for mainnet
---network nerpa \
+
 # Config for different shared venus modules
---node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
---messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
---gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
---auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
+--node-url=/ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
+--messager-url=/ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
+--gateway-url=/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
+--auth-token=<AUTH_TOKEN_FOR_ACCOUNT_NAME> \
 # Flags sealer to not storing any sealed sectors on the machine it runs on
 # You can leave out this flag if you are on testnet
 --no-local-storage \
@@ -355,16 +350,16 @@ $ nohup ./venus-sealer init \
 如果您已经有miner-id，请运行以下命令来初始化sealer。请确保`<OWNER_ADDRESS>`中有足够资金支付gasfee，否则`init`将失败。
 
 ```bash
-$ ./venus-sealer init \
---actor <MINER_ID>  \
-# Choose from nerpa, calibration for testnets
+$ ./venus-sealer 
 # Leave out this flag for mainnet
---network nerpa \
+--network=nerpa init \
+--actor=<MINER_ID>  \
+
 # Config for different shared venus modules
---node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
---messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
---gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
---auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> \
+--node-url=/ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
+--messager-url=/ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
+--gateway-url=/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
+--auth-token=<AUTH_TOKEN_FOR_ACCOUNT_NAME> \
 # Flags sealer to not store any sealed sectors on the machine it runs on
 --no-local-storage \
 > sealer.log 2>&1 &
@@ -423,7 +418,18 @@ f4074188-c851-4468-820b-e138beb5f12d:
 $ ./venus-sealer sectors pledge 
 ```
 
+一般启动一个脚本或系统事务用于发任务,最好是相隔一段时间发一个任务。为了避免任务数过多导致系统卡顿，需要控制sector的任务上限(MaxSealingSectors)。
+
+```bash
+$ vim ~/.venussealer/config.toml 
+
+[Sealing]
+  ...
+  MaxSealingSectors = 0
+```
+
 检查正在进行的封装工作
+
 ```bash
 $ ./venus-sealer sealing
 $ ./venus-sealer sealing workers
@@ -436,7 +442,8 @@ $ ./venus-sealer sectors list
 $ ./venus-sealer sectors status  --log  <sectorNum>
 ```
 
-如果某个扇区因为ticket过期或别的原因无法继续做下去，你需要及时remove掉，不然会站着磁盘和内存。
+如果某个扇区因为ticket过期或别的原因无法继续做下去，你需要及时remove掉，不然会占着磁盘和任务数。
+
 ```bash
 # Terminating -> TerminateWait -> TerminateFinality/TerminateFailed
 $ ./venus-sealer sectors terminate  --really-do-it <sectorNum>
@@ -445,6 +452,7 @@ $ ./venus-sealer sectors remove  --really-do-it <sectorNum>
 ```
 
 Remove和Terminate执行受限于Sealing的并发机制，有时需要很长时间，你可以尝试多次执行这两个命令加快速度。查看Sector状态：
+
 ```bash
 $ ./venus-sealer sectors list
 ID  State       OnChain  Active  Expiration                    Deals
@@ -453,41 +461,8 @@ ID  State       OnChain  Active  Expiration                    Deals
 3   PreCommit1  NO       NO      n/a                           CC
 ```
 
-参见`venus-sealer -h` 获取sealer支持的命令列表。
-
-```bash
-$ ./venus-sealer -h
-NAME:
-   venus-sealer - Filecoin decentralized storage network miner
-
-USAGE:
-   venus-sealer [global options] command [command options] [arguments...]
-
-VERSION:
-   1.4.1
-
-COMMANDS:
-   init      Initialize a venus sealer repo
-   run       Start a venus sealer process
-   sectors   interact with sector store
-   actor     manipulate the miner actor
-   info      Print miner info
-   sealing   interact with sealing pipeline
-   storage   manage sector storage
-   messager  message cmds
-   proving   View proving information
-   stop      Stop a running venus sealer
-   version   Print version
-   help, h   Shows a list of commands or help for one command
-
-GLOBAL OPTIONS:
-   --actor value, -a value  specify other actor to check state for (read only)
-   --color                  (default: false)
-   --help, -h               show help (default: false)
-   --version, -v            print the version (default: false)
-```
-
 设置发送消息的地址：
+
 ```bash
 [Addresses]
   PreCommitControl = [] # P2
@@ -495,7 +470,7 @@ GLOBAL OPTIONS:
   DisableOwnerFallback = false # true 表示禁用
   DisableWorkerFallback = false # true 表示禁用
 ```
-> P2,C2消息的from可以设置多个，但必须是miner ID相关联的，如worker，owner或controller。
+> P2,C2消息的from可以设置多个，但必须是miner-id相关联的，如worker，owner或controller。
 
 ## worker机制
 
@@ -524,14 +499,14 @@ vim  ~/.venussealer/config.toml
 # Restart venus-sealer after saving
 ```
 
-> ***venus-sealer在做CC数据时会跳过AddPiece阶段直接查找`/var/tmp/s-basic-unsealed`,故在第一个unsealed生成时需手动拷贝到`/var/tmp/s-basic-unsealed`***
-
 -- 启动worker并指定可以接的任务类型.
 ```
 $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --miner-addr=</ip4/sealer-ip/tcp/sealer-port> \
---miner-token=<token> \  
---listen=<0.0.0.0:3458> <flags> >> worker.log 2>&1 &\                   
+--miner-token=<token> \
+--task-total=100 \
+--bindP1P2=false \
+--listen=<0.0.0.0:3458> <flags> > worker.log 2>&1 &           
 ```
 - sealer-port: cat ~/.venussealer/api, eg. /ip4/0.0.0.0/tcp/2345/http,把0.0.0.0替换为venus-sealer实际的IP地址.
 - token: cat ~/.venussealer/token
@@ -545,10 +520,23 @@ $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --task-total                  total number of task (default: 100)
 --bindP1P2                    P1 and P2 phase tasks are bound to the same machine (default: false)
 ```
+- ***task-total为可同时进行的任务数,默认100;***
+- ***bindP1P2设置为true表示这个worker的P2只能接P1也在本机器上完成的Sector任务,如果网络带宽不足,建议启动,可以减少不必要的文件传输***
 
 一般情况下，我们只为venus-worker配置seal路径,Store继承venus-sealer。worker完成扇区密封时，永久存储文件将被转移到venus-sealer指定的store路径.
 ```bash
 $ ./venus-worker storage attach --init --seal <ABSOLUTE_LOCAL_PATH>
+```
+
+### 多worker注意事项
+
+- TMPDIR指定worker的临时目录，比如gpu的文件锁就会生成在此路径下，worker运行在同一机器上时需要指定不同的TMPDIR，否则会竞争文件锁；
+- 多个worker在同一机器同用户创建时需要指定不同的库目录，需要带repo flag，形式：
+```bash
+$ TRUST_PARAMS=1 nohup ./venus-worker --repo=<REPO_PATH> run \
+--miner-addr=</ip4/sealer-ip/tcp/sealer-port> --miner-token=<token> \
+--task-total=100 --bindP1P2=false \
+--listen=<0.0.0.0:3458> <flags> > worker.log 2>&1 &
 ```
 
 查看venus-worker状态
@@ -628,7 +616,6 @@ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 - P2阶段在生成tree-c和tree-r-last阶段可以使用gpu加速，但需要在启动对应sealer或worker时配置环境变量：FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1表示生成tree-r-last阶段使用GPU，FIL_PROOFS_USE_GPU_TREE_BUILDER=1表示生成tree-c阶段使用GPU。
 
 
-
 参考文档
 - https://docs.filecoin.io/mine/lotus/miner-troubleshooting/
 - https://docs.filecoin.io/get-started/lotus/installation/#linux
@@ -643,6 +630,17 @@ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 
 &ensp;&ensp; 这个分支只是将对接共享组件的逻辑加进来，其他逻辑一切没变，你可以按照原有的习惯去执行lotus-miner。
 
+## 有算力集群迁移venus
+
+如果集群已经有算力，转为venus-sealer后需要把旧的路径attach到venus-sealer中，以便wdPoSt和winningPoSt时能读取对应的Sector密封数据。
+
+假设已有集群的store 目录为 /tmp/data,在venus-sealer启动后需要执行:
+
+```bash
+$ ./venus-sealer storage attach --store /tmp/data
+```
+
+如果想用venus-sealer创建新的store路径，那么创建后需要把旧的sector相关文件全部拷贝到新创建的store目录下。
 
 ## 问题?
 
