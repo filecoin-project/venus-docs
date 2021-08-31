@@ -94,7 +94,6 @@ module.exports = {
                                 ['How-To-Deploy-MingPool.md', 'Deploy a storage pool'],
                                 ['Using-venus-Shared-Modules.md', 'Join a storage pool'],
                                 ['fil_withdraw_and_send.md', 'Retrieve rewards'],
-                                ['Venus-replace-lotus.md', 'Migrate from Lotus'],
                                 ['Chain.md', 'Chain management'],
                                 ['How-To-Connect-Network.md', 'Connect to different network'],
                                 ['How-To-Contribute-Docs.md', 'Contribute to doc']
@@ -191,7 +190,6 @@ module.exports = {
                                 ['How-To-Deploy-MingPool.md', '如何部署存储池'],
                                 ['Using-venus-Shared-Modules.md', '如何加入存储池'],
                                 ['fil_withdraw_and_send.md', '提取奖励'],
-                                ['Venus-replace-lotus.md', '从Lotus迁移到Venus'],
                                 ['chain.md', '链维护'],
                                 ['How-To-Connect-Network.md', '加入不同网络'],
                                 ['How-To-Contribute-Docs.md', '贡献文档']
