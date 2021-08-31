@@ -642,6 +642,8 @@ $ ./venus-sealer storage attach --store /tmp/data
 
 如果想用venus-sealer创建新的store路径，那么创建后需要把旧的sector相关文件全部拷贝到新创建的store目录下。
 
+- ***在pledge前需要将sealer.db数据库metadata表中的sector_count字段改为当前链上Sector的最大值+1,否则会重复分配已经存在sector-id.***
+
 ## 问题?
 
 来[Slack](https://filecoinproject.slack.com/archives/CEHHJNJS3)上找我们吧！
