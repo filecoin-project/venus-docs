@@ -81,7 +81,7 @@ venus底层数据库为badger, 在badger的基础上抽象出了[blockstore](htt
 **以上描述了Venus项目的总体架构, 但由于filecoin系统本身的复杂性,还有许多其它的模块在本文中并未提及**
 
 ### Venus架构图
-<img src="https://raw.githubusercontent.com/filecoin-project/venus-docs/venus-system-archtecture/docs/.vuepress/public/venus-system-architecture.png" width = "600" height = "400" />
+<img src="https://raw.githubusercontent.com/filecoin-project/venus-docs/master/docs/.vuepress/public/venus-system-architecture.png" width = "600" height = "400" />
 
 ### 总结
 Venus的系统比较庞大, 本文只是对主要的系统架构进行了简单的介绍, 
