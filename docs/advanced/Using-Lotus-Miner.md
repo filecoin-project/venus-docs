@@ -1,12 +1,6 @@
 ## Overview
 
-`lotus-miner` can be seamlessly connected to the `venus` shared components through customizations. If you haven't added any custom code to `lotus-miner`, you can use the venus-ready branch directly. If you have customized code for `lotus-miner`, you can refer to the latest `commit` in the venus-ready branch to make `lotus-miner` compatible with `venus` shared modules.
-
-Main changes:
-
-1. Send messages to shared modules
-2. Calculate WinningPost
-3. Disable block mining of lotus-miner
+If you already have power sealed using `lotus-miner`, you can use venus-ready `lotus-miner` maintained in this [repo](https://github.com/ipfs-force-community/lotus). venus-ready `lotus-miner` retains current lotus logic while adding components that allow connection to chain services (venus shared modules). venus-ready `lotus-miner` will be released for every major network updates. 
 
 ### Branches
 

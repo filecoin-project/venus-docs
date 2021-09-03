@@ -34,7 +34,7 @@ Diagram below illustrates how venus modules interacts with one and another.
 
 ## Hardware requirements
 
-Learn more about hardware requirements [here](https://docs.filecoin.io/mine/hardware-requirements/#general-hardware-requirements). As a sidetone, everyone may have different hardware setups, and it is recommended that you [find your own optimal configurations](#finding-optimal-configurations) through trial and errors. 
+Learn more about hardware requirements [here](https://docs.filecoin.io/mine/hardware-requirements/#general-hardware-requirements). Check out this [solo mining guide](https://medium.com/zeethio/filecoin-solo-mining-rig-a549e7fa230d) by one of the comunity members. As a sidetone, everyone may have different hardware setups, and it is recommended that you [find your own optimal configurations](#finding-optimal-configurations) through trial and errors. 
 
 ## Pre-requisites
 
@@ -69,12 +69,12 @@ venus-wallet can be deployed as either a shared or independent module depend on 
 If you are an admin hosting shared venus modules, use the following command to create an account for your sealer-cluster.
 
 ```bash
-# If miner doesn't have a <MINER_ID> yet, leave out --miner flag and use 'updateUser' when user inited their miner id
-$ ./venus-auth user add --name <ACCOUNT_NAME> --state=1 --sourceType=1
-$ ./venus-auth user update --name <ACCOUNT_NAME> --miner <MINER_ID> 
+# If storage provider already have a <MINER_ID>
+$ ./venus-auth user add --name <ACCOUNT_NAME> --miner <MINER_ID>
 
-# If miner  have a <MINER_ID> yet
-$ ./venus-auth user add --name <ACCOUNT_NAME> --miner <MINER_ID>  --state=1 --sourceType=1
+# If storage provider doesn't have a <MINER_ID> yet, leave out --miner flag and use 'updateUser' command when user inited their miner id
+$ ./venus-auth user add --name <ACCOUNT_NAME>
+$ ./venus-auth user update --name <ACCOUNT_NAME> --miner <MINER_ID> 
 
 # The returned token is what miner have to add into their config file in order to gain access to your shared modules
 $ ./venus-auth token gen --perm write <ACCOUNT_NAME>
@@ -84,7 +84,7 @@ $ ./venus-auth token gen --perm write <ACCOUNT_NAME>
 Update user information if necessary.
 
 ```bash
-./venus-auth user update --name=<ACCOUNT_NAME> --miner=<MINER_ID> --state=1  --sourceType=1
+./venus-auth user update --name=<ACCOUNT_NAME> --miner=<MINER_ID>
 ```
 
 ### Software dependencies
@@ -173,13 +173,31 @@ Password set successfully
 
 :::warning
 
-Please keep backups of your password and store them properly.
+Please keep backups of your password and store them properly or you will lose contorl of your wallet.
 
 :::
 
 :::warning
 
-As venus-wallet doesn't store the password on disks for security reasons, you need to do `setpwd` command every time after running venus-wallet.
+When restarting your wallet, manuually unlock your wallet or you wallet won't be able to sign any messages during sealing or other tasks.
+
+```bash
+$ ./venus-wallet unlock
+Password:
+```
+
+Use `--password` for auto unlocking after running.
+
+```bash
+$ ./venus-wallet run --password
+```
+
+Check current state your wallet.
+
+```bash
+$ ./venus-wallet lock-state
+wallet state: unlocked
+```
 
 :::
 
@@ -270,16 +288,20 @@ $ make
 
 :::tip
 
-For participants in incubation program, please use `incubation` branch by `git checkout incubation`. To recompile using latest code in `incuvation` branch, do the following...
+For participants in incubation program, please use `incubation` branch by `git checkout incubation`. 
+
+:::
+
+:::tip
+
+To recompile using latest code in `incuvation` branch, do the following...
 
 ```bash
 $ git fetch
 $ git pull
-
 $ git submodule update --init --recursive
 $ make clean
 $ make deps
-
 $ make
 ```
 
@@ -415,7 +437,15 @@ $ ./venus-sealer sectors pledge
 
 Congratulations! You are now pledging your 1st sector. Use [sealer commands](#sealer-commands) to monitor sealing processes and keep an eye on errors in the log.
 
-> ***When venus-sealer is doing CC data, it will skip the AddPiece stage and directly search for `/var/tmp/s-basic-unsealed`, so when the first unsealed is generated, it needs to be manually copied to `/var/tmp/s-basic-unsealed`***
+:::warning
+
+If you see the following error during sealing, try `mv` unsealed sector file under `~/.venussealer/unsealed/` to `/var/tmp/s-basic-unsealed` on relevant sealer/worker box 
+
+```bash
+2021-09-01T10:41:10.394+0200    WARN    sectors storage-sealing/fsm.go:626      sector 611 got error event sealing.SectorSealPreCommit1Failed: seal pre commit(1) failed: storage call error 0: The default unsealed does not exist,please copy a generated unsealed file to /var/tmp/s-basic-unsealed
+```
+
+:::
 
 ## Sealer Commands
 
@@ -433,7 +463,7 @@ $ ./venus-sealer sectors list
 $ ./venus-sealer sectors status --log <SECTOR_NUMBER>
 ```
 
-If a sector got stuck in one status for too long, you might want to consider removing them.
+If a sector got stuck in one status for too long, you might want to consider removing them. More on [how to terminate](https://github.com/filecoin-project/lotus/discussions/6950) if remove fails.
 
 ```bash
 # Sector State: Removing -> RemoveFailed/Removed
@@ -452,38 +482,23 @@ ID  State       OnChain  Active  Expiration                    Deals
 3   PreCommit1  NO       NO      n/a                           CC
 ```
 
-See `venus-sealer -h` for list of commands that sealer supports.
+Config MaxSealingSectors to limit maximum number of sectors in parallel.
 
 ```bash
-$ ./venus-sealer -h
-NAME:
-   venus-sealer - Filecoin decentralized storage network miner
+$ vim ~/.venussealer/config.toml 
+[Sealing]
+  ...
+  MaxSealingSectors = 10 # actual number varies from system to system
+```
 
-USAGE:
-   venus-sealer [global options] command [command options] [arguments...]
+Config which address to drain during sealing in `~/.venussealer/config.toml`.
 
-VERSION:
-   1.4.1
-
-COMMANDS:
-   init      Initialize a venus sealer repo
-   run       Start a venus sealer process
-   sectors   interact with sector store
-   actor     manipulate the miner actor
-   info      Print miner info
-   sealing   interact with sealing pipeline
-   storage   manage sector storage
-   messager  message cmds
-   proving   View proving information
-   stop      Stop a running venus sealer
-   version   Print version
-   help, h   Shows a list of commands or help for one command
-
-GLOBAL OPTIONS:
-   --actor value, -a value  specify other actor to check state for (read only)
-   --color                  (default: false)
-   --help, -h               show help (default: false)
-   --version, -v            print the version (default: false)
+```toml
+[Addresses]
+  PreCommitControl = [] # P2
+  CommitControl = [] # C2
+  DisableOwnerFallback = false 
+  DisableWorkerFallback = false 
 ```
 
 ## Finding optimal configurations
@@ -519,11 +534,37 @@ Run venus-worker.
 
 ```bash
 $ TRUST_PARAMS=1 nohup ./venus-worker run \
---miner-addr=/ip4/<IP_ADDRESS_OF_VENUS_SEALER>/tcp/2345/http \ 
+--miner-addr=/ip4/<IP_ADDRESS_OF_VENUS_SEALER>/tcp/<PORT_OF_VENUS_SEALER> \ 
 --miner-token=<SEALER_TOKEN> \
+--bindP1P2=false \
+--listen=<0.0.0.0:3458> \ 
 --addpiece false \
 >> worker.log 2>&1 &                   
 ```
+
+Other worker flags of interests.
+
+```bash
+--addpiece		enable addpiece (default: true)
+--precommit1	enable precommit1 (32G sectors: 1 core, 128GiB RAM) (default: true)
+--unseal			enable unsealing (32G sectors: 1 core, 128GiB RAM) (default: true)
+--precommit2	enable precommit2 (32G sectors: multiple cores, 96GiB RAM) (default: true)
+--commit			enable commit (32G sectors: multiple cores or GPUs, 128GiB RAM + 64GiB swap) (default: true)
+--task-total	total number of task (default: 100)
+--bindP1P2		P1 and P2 phase tasks are bound to the same machine (default: false)
+```
+
+:::tip
+
+--bindP1P2 forces P2 to be done on the same machine of P1.
+
+:::
+
+:::tip
+
+--task-total limits the total number of tasks being executed by the worker.
+
+:::
 
 Attach sealing storage to worker. (Path for permanent storage will be inherited from sealer)
 
@@ -537,7 +578,22 @@ Check if your worker is connected.
 $ ./venus-sealer storage list 
 ```
 
-### Other optimizations
+### Multiple worker processes
+
+If you are running multiple worker processes on the same box, each worker need to set their own `TMPDIR` environment variable or sealing process may run into race condition.
+
+Additionally, worker processes on same box will neep different repo path, which can be configured by using `--repo` flag.
+
+```bash
+$ TRUST_PARAMS=1 nohup ./venus-worker --repo=<REPO_PATH> run \
+--miner-addr=/ip4/<IP_ADDRESS_OF_VENUS_SEALER>/tcp/<PORT_OF_VENUS_SEALER> 
+--miner-token=<SEALER_TOKEN> \
+--bindP1P2=false \
+--listen=<0.0.0.0:3458> \ 
+>> worker.log 2>&1 & 
+```
+
+### Misc optimizations
 
 Increase your open file limit
 
@@ -548,19 +604,47 @@ $ ulimit -n 1048576
 Environment variable for potential faster sealing speed.
 
 ```bash
-export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1
-export FIL_PROOFS_USE_GPU_TREE_BUILDER=1
-export FIL_PROOFS_SDR_PARENTS_CACHE_SIZE=1073741824
-export RUST_BACKTRACE=full
-export RUST_LOG=info
+export FIL_PROOFS_PARAMETER_CACHE=/fast/disk/folder1 # > 100GiB!
+export FIL_PROOFS_PARENT_CACHE=/fast/disk/folder2    # > 50GiB!
+export TMPDIR=/fast/disk/folder3    			# used when sealing
+export MINER_API_INFO:<TOKEN>:/ip4/<miner_api_address>/tcp/<port>/http`
+export BELLMAN_CPU_UTILIZATION=0.875      # optimal value depends on exact hardware
 export FIL_PROOFS_MAXIMIZE_CACHING=1
+export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 # when GPU is available
+export FIL_PROOFS_USE_GPU_TREE_BUILDER=1   # when GPU is available
+# The following increases speed of PreCommit1 at the cost of using a full
+# CPU core-complex rather than a single core.
+# See https://github.com/filecoin-project/rust-fil-proofs/ and the
+# "Worker co-location" section below.
 export FIL_PROOFS_USE_MULTICORE_SDR=1
 ```
 
-More debug-level info.
+venus-woker can take advantage of two GPU devices on the same box with the configurable environment variables.
 
 ```bash
-export GOLOG_LOG_LEVEL=debug
+CUDA_VISIBLE_DEVICES=1       # use only device1
+CUDA_VISIBLE_DEVICES=0,1     # use both device0 and device1
+CUDA_VISIBLE_DEVICES="0,1"	 # same as above use device0 and device1
+CUDA_VISIBLE_DEVICES=0,2,3   # use device0, device2 and device3
+CUDA_VISIBLE_DEVICES=2,0,3   # use device0, device2 and device3
+```
+
+Increase GPU RAM usage. (Default FIL_PROOFS_MAX_GPU_COLUMN_BATCH_SIZE=400000, FIL_PROOFS_MAX_GPU_TREE_BATCH_SIZE=700000)
+
+```bash
+# Recommended
+FIL_PROOFS_MAX_GPU_COLUMN_BATCH_SIZE=8000000,FIL_PROOFS_MAX_GPU_TREE_BATCH_SIZE=8000000
+```
+
+There are different ways of using environment variables. For example, if we want to allow multi core SDR, we can do either of the following.
+
+```bash
+# one way of setting env variable
+$ export FIL_PROOFS_USE_MULTICORE_SDR=1
+$ nohup ./venus-sealer run >> sealer.log 2>&1 &
+
+# the other way of setting env variable
+$ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 ```
 
 ## Questions?
