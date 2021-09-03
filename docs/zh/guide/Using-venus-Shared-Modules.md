@@ -33,7 +33,7 @@
 
 ## 硬件要求
 
-在[此处](https://github.com/filecoin-project/community-china/discussions/18)了解有关硬件要求的更多信息。
+在[此处](https://github.com/filecoin-project/community-china/discussions/18)了解有关硬件要求的更多信息。或者参阅我们的[单机配置示例](https://venus.filecoin.io/zh/operation/example-single-box.html)。
 
 ## 前期准备
 
@@ -68,14 +68,14 @@ venus-wallet 可以部署为共享或独立模块，具体取决于您的安全�
 如果您是托管共享 venus 模块的管理员，请使用以下命令注册各个集群。
 
 ```bash
-# 如果已有矿工号
+# 如果已有节点号
 $ ./venus-auth user add --name <ACCOUNT_NAME> --miner <MINER_ID>
 
-# 没有矿工号，在创建矿工后更新
+# 没有节点号，在创建节点号后更新
 $ ./venus-auth user add --name <ACCOUNT_NAME>
 $ ./venus-auth user update --name <ACCOUNT_NAME> --miner <MINER_ID>
 
-# 为此账号分配token,用于接入服务层验证
+# 为此账号分配token，用于接入服务层验证
 $ ./venus-auth token gen --perm write <ACCOUNT_NAME>
 <AUTH_TOKEN_FOR_ACCOUNT_NAME>
 ```
