@@ -318,19 +318,19 @@ If you are using sealer for the 1st time, it may start to download proof paramet
 If you don't have a miner id yet, run the following command to initialize sealer. Make sure you have some funds in your `<OWNER_ADDRESS>` to cover the gas fee needed for initing a new miner id, or init will fail. 
 
 ```bash
-$ nohup ./venus-sealer init \
+$ nohup ./venus-sealer \
+# Choose from nerpa, calibration for testnets
+# Leave out this flag for mainnet
+--network=nerpa init \
 --worker <WORKER_ADDRESS> \
 --owner <OWNER_ADDRESS>  \
 # Choose between 32G or 64G for mainnet
---sector-size 512M \
-# Choose from nerpa, calibration for testnets
-# Leave out this flag for mainnet
---network nerpa \
+--sector-size=512M \
 # Config for different shared venus modules
---node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
---messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
---gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
---auth-token <AUTH_TOKEN_FOR_VENUS_SEALER> \
+--node-url=/ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
+--messager-url=/ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
+--gateway-url=/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
+--auth-token=<AUTH_TOKEN_FOR_VENUS_SEALER> \
 # Flags sealer to not storing any sealed sectors on the machine it runs on
 # You can leave out this flag if you are on testnet
 --no-local-storage \
@@ -367,16 +367,16 @@ It may take couple minutes before  `init` command finishes.
 If you already have a miner id, run the following command to initialize sealer. Make sure you have some funds in your `<OWNER_ADDRESS>` to cover the gas fee, or init will fail. 
 
 ```bash
-$ ./venus-sealer init \
---actor <MINER_ID>  \
+$ ./venus-sealer  \
 # Choose from nerpa, calibration for testnets
 # Leave out this flag for mainnet
---network nerpa \
+--network=nerpa init \
+--actor=<MINER_ID>  \
 # Config for different shared venus modules
---node-url /ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
---messager-url /ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
---gateway-url /ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
---auth-token <AUTH_TOKEN_FOR_VENUS_SEALER> \
+--node-url=/ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
+--messager-url=/ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
+--gateway-url=/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> \
+--auth-token=<AUTH_TOKEN_FOR_VENUS_SEALER> \
 # Flags sealer to not store any sealed sectors on the machine it runs on
 --no-local-storage \
 > sealer.log 2>&1 &
@@ -439,10 +439,39 @@ Congratulations! You are now pledging your 1st sector. Use [sealer commands](#se
 
 :::warning
 
-If you see the following error during sealing, try `mv` unsealed sector file under `~/.venussealer/unsealed/` to `/var/tmp/s-basic-unsealed` on relevant sealer/worker box 
+If you see the following error during sealing, try `mv` unsealed sector file under `~/.venussealer/unsealed/` to `/var/tmp/s-basic-unsealed-34359738368` on relevant sealer/worker box.
 
 ```bash
-2021-09-01T10:41:10.394+0200    WARN    sectors storage-sealing/fsm.go:626      sector 611 got error event sealing.SectorSealPreCommit1Failed: seal pre commit(1) failed: storage call error 0: The default unsealed does not exist,please copy a generated unsealed file to /var/tmp/s-basic-unsealed
+2021-09-01T10:41:10.394+0200    WARN    sectors storage-sealing/fsm.go:626      sector 611 got error event sealing.SectorSealPreCommit1Failed: seal pre commit(1) failed: storage call error 0: The default unsealed does not exist,please copy a generated unsealed file to /var/tmp/s-basic-unsealed-34359738368
+```
+
+We recommend preparing these files in advance for each worker machine,filename rules: 
+- s-basic-unsealed-***SectorSize***
+- s-piece-infos-***SectorSize***
+
+SectorSize options: 2048,8388608,536870912,34359738368,68719476736. The corresponding filename can be created according to the SectorSize corresponding to the minerID,eg. 32G:
+
+```
+/var/tmp/s-piece-infos-34359738368
+/var/tmp/s-basic-unsealed-34359738368
+```
+
+s-piece-infos-***SectorSize*** content corresponding to different SectorSize:
+```
+# 32G
+[{"Size":34359738368,"PieceCID":{"/":"baga6ea4seaqao7s73y24kcutaosvacpdjgfe5pw76ooefnyqw4ynr3d2y6x2mpq"}}]
+
+# 8M
+[{"Size":8388608,"PieceCID":{"/":"baga6ea4seaqgl4u6lwmnerwdrm4iz7ag3mpwwaqtapc2fciabpooqmvjypweeha"}}]
+
+# 512M
+[{"Size":536870912,"PieceCID":{"/":"baga6ea4seaqdsvqopmj2soyhujb72jza76t4wpq5fzifvm3ctz47iyytkewnubq"}}]
+
+# 2k
+[{"Size":2048,"PieceCID":{"/":"baga6ea4seaqpy7usqklokfx2vxuynmupslkeutzexe2uqurdg5vhtebhxqmpqmy"}}]
+
+# 64G
+[{"Size":68719476736,"PieceCID":{"/":"baga6ea4seaqomqafu276g53zko4k23xzh4h4uecjwicbmvhsuqi7o4bhthhm4aq"}}]
 ```
 
 :::
