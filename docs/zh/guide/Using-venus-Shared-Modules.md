@@ -308,7 +308,6 @@ $ nohup ./venus-sealer \
 --owner=<OWNER_ADDRESS>  \
 # Choose between 32G or 64G for mainnet
 --sector-size 512M \
-
 # Config for different shared venus modules
 --node-url=/ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
 --messager-url=/ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
@@ -354,7 +353,6 @@ $ ./venus-sealer
 # Leave out this flag for mainnet
 --network=nerpa init \
 --actor=<MINER_ID>  \
-
 # Config for different shared venus modules
 --node-url=/ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
 --messager-url=/ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
@@ -417,6 +415,45 @@ f4074188-c851-4468-820b-e138beb5f12d:
 ```bash
 $ ./venus-sealer sectors pledge 
 ```
+
+:::warning
+
+如果遇到如下错误, 请复制一个已经生成的unsealed文件(`~/.venussealer/unsealed/`) 到 `/var/tmp/s-basic-unsealed-34359738368`.
+
+```bash
+2021-09-01T10:41:10.394+0200    WARN    sectors storage-sealing/fsm.go:626      sector 611 got error event sealing.SectorSealPreCommit1Failed: seal pre commit(1) failed: storage call error 0: The default unsealed does not exist,please copy a generated unsealed file to /var/tmp/s-basic-unsealed-34359738368
+```
+
+我们建议先生成一个unsealed文件后拷贝到每个做 P1 任务的worker机器/var/tmp目录,文件的命令规则: 
+- s-basic-unsealed-***SectorSize***
+- s-piece-infos-***SectorSize***
+
+SectorSize 选项: 2048,8388608,536870912,34359738368,68719476736,eg. 32G:
+
+```
+/var/tmp/s-piece-infos-34359738368
+/var/tmp/s-basic-unsealed-34359738368
+```
+
+不同SectorSize对应的s-piece-infos-***SectorSize***文件内容:
+```
+# 32G
+[{"Size":34359738368,"PieceCID":{"/":"baga6ea4seaqao7s73y24kcutaosvacpdjgfe5pw76ooefnyqw4ynr3d2y6x2mpq"}}]
+
+# 8M
+[{"Size":8388608,"PieceCID":{"/":"baga6ea4seaqgl4u6lwmnerwdrm4iz7ag3mpwwaqtapc2fciabpooqmvjypweeha"}}]
+
+# 512M
+[{"Size":536870912,"PieceCID":{"/":"baga6ea4seaqdsvqopmj2soyhujb72jza76t4wpq5fzifvm3ctz47iyytkewnubq"}}]
+
+# 2k
+[{"Size":2048,"PieceCID":{"/":"baga6ea4seaqpy7usqklokfx2vxuynmupslkeutzexe2uqurdg5vhtebhxqmpqmy"}}]
+
+# 64G
+[{"Size":68719476736,"PieceCID":{"/":"baga6ea4seaqomqafu276g53zko4k23xzh4h4uecjwicbmvhsuqi7o4bhthhm4aq"}}]
+```
+
+:::
 
 一般启动一个脚本或系统事务用于发任务,最好是相隔一段时间发一个任务。为了避免任务数过多导致系统卡顿，需要控制sector的任务上限(MaxSealingSectors)。
 
