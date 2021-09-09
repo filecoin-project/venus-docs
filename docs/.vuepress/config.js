@@ -208,6 +208,7 @@ module.exports = {
                                 ['Venus-Worker.md', 'Venus worker'],
                                 ['Venus-Gateway.md', 'Venus gateway'],
                                 ['Venus-Auth.md', 'Venus auth'],
+                                ['Venus-Messager-Design-Spec.md', 'Venus Messager 设计说明书'],
                             ]
                         }
                     ],
