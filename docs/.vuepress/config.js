@@ -145,7 +145,8 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
-                                ['Incubation_Center_Prize_Pool.md', 'Incubation Center Prize Pool'],
+                                ['Incubation Center participation process.md', 'Participation process'],
+                                ['Incubation_Center_Prize_Pool.md', 'Participation incentives'],
                                 ['announcement.md', 'Announcement'],
                                 ['Rules.md', 'Rules'],
                             ]
@@ -247,7 +248,8 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', '概述'],
-                                ['Incubation_Center_Prize_Pool.md', '存储提供者孵化中心奖励池计划'],
+                                ['存储提供者孵化中心参与流程.md', '参与流程'],
+                                ['Incubation_Center_Prize_Pool.md', '参与奖励'],
                                 ['announcement.md', '公告'],
                                 ['Rules.md', '规则'],
                                 ['FQA.md', '常见问题解答'],
