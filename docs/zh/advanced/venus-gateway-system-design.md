@@ -45,10 +45,14 @@ venus-miner需要访问旷工的venus-sealer计算WinPOST证明.下面以venus-w
 gateway在孵化器中,其作用是桥接孵化器中其它组件的相互调用,所以在交互上可以分为两类, 
 
 1. 与消息生产者交互(包括venus-miner,venus-messenger)
+
 2. 与消息消费者交互(包括venus-wallet, venus-geateway)
 
-如图所示:
+   
+
 ![gateway交互图](https://raw.githubusercontent.com/filecoin-project/venus-docs/master/docs/.vuepress/public/venus-gateway-system-design.png)
+
+
 
 ##### 与消息消费者交互
 
