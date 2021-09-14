@@ -47,7 +47,7 @@ mount -t nfs 192.168.1.151:/nfs /nfs
 ### Running venus-sealer
 ```sh
 #Initialize venus-sealer. Local storage is not used here
-venus-sealer init --actor=t01000 --sector-size=512M --network nerpa --no-local-storage --node-url {venus-api} --node-token {venus-token} --messager-url http://{venus-message api}/rpc/v0
+venus-sealer --network nerpa init --actor=t01000 --sector-size=512M --no-local-storage --node-url {venus-api} --node-token {venus-token} --messager-url http://{venus-message api}/rpc/v0
 
 venus-sealer run
 ```
