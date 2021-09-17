@@ -5,7 +5,69 @@
 
 ### 链服务问题
 
+1)、venus共享组件报错`ERROR: must set url or token`，或者提示
 
+```bash
+2021-09-08T11:05:33.796+0800 WARN cliutil apiinfo/apiinfo.go:125 parse libp2p address error , plz confirm this error failed to parse multiaddr "": empty multiaddr
+```
+
+检查url或者token是否配置正确。url样式遵循PL定义的[multiaddr](https://github.com/multiformats/go-multiaddr)格式。错误示例：`--node-url= /ip4/127.0.0.1/tcp/3453`，正确示例：`--node-url=/ip4/127.0.0.1/tcp/3453`
+
+
+
+2)、其他venus共享组件连接venus时提示`connect to node failed cannot dialer to addr ws://192.168.10.73:3453/rpc/v0 due to unexpected EOF`
+节点没有配置成允许其他ip访问。错误示例：`198.172.0.3：3453`，正确示例：`0.0.0.0:3453`
+
+
+
+3)、venus共享组件报错`too many files open`[*](https://filecoinproject.slack.com/archives/CEHHJNJS3/p1631578830055000?thread_ts=1631506523.042700&cid=CEHHJNJS3)
+系统可打开文件数量设置太小。`$ ulimit -n 1048576`
+
+
+
+4)、messager或venus报错[*](https://filecoinproject.slack.com/archives/CEHHJNJS3/p1631597560068400?thread_ts=1631506523.042700&cid=CEHHJNJS3)
+
+```bash
+ERROR[2021-09-14T01:30:03-04:00] listen head changes errored: process new head error: process apply failed got parent receipt failed amt load: failed to root: blockstore: block not found: amt load: failed to root: blockstore: block not found
+```
+
+高度同步错误。
+
+
+
+5)、venus-messager报警`WARN[2021-09-14T01:54:21-04:00] no broadcast node config` [*](https://filecoinproject.slack.com/archives/CEHHJNJS3/p1631599790073100?thread_ts=1631506523.042700&cid=CEHHJNJS3)
+此报警可忽略。
+
+
+
+6)、venus-miner报错`ERROR miner miner/baseinfo.go:355 [t01011] failed to compute winning post proof: no connections for this miner t01011` 
+节点号对应的`venus-sealer`没有连接到`venus-gateway`。
+
+
+
+7)、venus-miner报错`ERROR miner miner/multiminer.go:168 create WinningPoStProver failed for [<empty>], err: getting sector size: not found resolve address` [*](https://filecoinproject.slack.com/archives/CEHHJNJS3/p1631621284077800?thread_ts=1631506523.042700&cid=CEHHJNJS3)
+
+网络不支持用户自init的区块大小；
+
+
+
+8)、venus-messager报错`ERROR[2021-09-14T08:54:29-04:00] listen head changes errored: RPC error (-32601): method 'Filecoin.ChainNotify' not supported in this mode (no out channel support)` [*](https://filecoinproject.slack.com/archives/CEHHJNJS3/p1631624179079100?thread_ts=1631506523.042700&cid=CEHHJNJS3)
+使用ws或者wss用于共享组件之间的url。url样式遵循PL定义的[multiaddr](https://github.com/multiformats/go-multiaddr)格式。
+
+
+
+9)、venus和venus-messager之间报错`bad handshake` [*](https://filecoinproject.slack.com/archives/CEHHJNJS3/p1631626576083200?thread_ts=1631506523.042700&cid=CEHHJNJS3)
+venus-messager的url配置中，IP，端口，或者token配置有问题。
+
+
+
+10)、venus节点报错`Proof type 7 not allowed for new miner actors` [*](https://filecoinproject.slack.com/archives/C02E95ZU5PG/p1631758710080500)
+矿工init的时候，扇区大小选择错误。
+
+
+
+11)、发消息过程中报错`Address txxxxxxx not exit` [*](https://filecoinproject.slack.com/archives/C02E95ZU5PG/p1631762887093700)
+先看gateway钱包地址有没有注册上来。然后看message和gateway链接是否正常。
 
 ### 独立组件问题
 

@@ -252,7 +252,7 @@ module.exports = {
                                 ['Incubation_Center_Prize_Pool.md', '参与奖励'],
                                 ['announcement.md', '公告'],
                                 ['Rules.md', '规则'],
-                                ['FQA.md', '常见问题解答'],
+                                // ['FQA.md', '常见问题解答'],
                             ]
                         }
                     ]
