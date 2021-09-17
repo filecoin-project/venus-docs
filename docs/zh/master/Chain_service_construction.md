@@ -115,6 +115,44 @@ $ ./venus-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
 > venus-gateway.log 2>&1 &
 ```
 
+##### 常用命令
+
+1. 列出注册到gateway的钱包，查询结果包含钱包名称、支持的账号和钱包地址等信息。
+
+```
+$ ./venus-gateway wallet list
+
+[
+       {
+                "Account": "li_sealer",
+                "SupportAccounts": [
+                        "li_sealer"
+                ],
+                "ConnectStates": [
+                        {
+                                "Addrs": [
+                                        "t3vlgp2tciovduiuvxls6t7tzasvdddv7cjkoo7z5f3nkjymrb2m73v2dkvulaiaprglihyqqbfrv3wcvtxcra"
+                                ],
+                                "ChannelId": "c9f69aee-dd5d-42c1-a6bc-9a642595f3aa",
+                                "Ip": "127.0.0.1:36376",
+                                "RequestCount": 0,
+                                "CreateTime": "2021-09-10T13:29:22.411062263+08:00"
+                        }
+                ]
+        }
+ ]
+```
+
+2. 列出连接到gateway的矿工
+
+```
+$ ./venus-gateway miner list
+
+t01561
+t02608
+t02082
+```
+
 #### venus
 
 启动`venus`进程进行链同步。 使用 `--network` 来指定`venus`连接的网络。
@@ -154,7 +192,124 @@ $ nohup ./venus-messager run \
 ```
 > 如果没有指定与数据库相关的参数，`venus-messager`将默认使用 sqlite.
 
+messager中消息总共分以下几种状态：
+```
+UnKnown：    unkonwn
+UnFillMsg：  未填充，消息刚推送到messager
+FillMsg：    已填充，也就是已签名消息
+OnChainMsg： 已上链
+FailedMsg：  失败消息
+ReplacedMsg：被替换
+NoWalletMsg：未找到钱包
+```
 
+##### 常用命令
+
+1. 全局参数
+
+1.1 获取全局参数
+
+```
+$ ./venus-messager share-params get
+
+{
+        "id": 1,
+        "gasOverEstimation": 1.25,
+        "maxFee": "7000000000000000",
+        "maxFeeCap": "0",
+        "selMsgNum": 20
+}
+```
+
+1.2 设置全局参数
+
+```
+OPTIONS:
+   --gas-over-estimation  预估gas时，gas的系数
+   --max-fee
+   --max-feecap
+   --sel-msg-num value    一轮推送选择的消息数
+$ ./venus-messager share-params set [options]
+```
+
+2. 消息
+
+2.1 查询单个消息，支持用消息ID和消息cid查询
+
+```
+$ ./venus-messager msg search --id=<message id> or --cid=<message cid>
+```
+
+2.2 列出消息，可以多个flag组合使用，也支持分页
+
+```
+options:
+   --page-index   当前页（默认 1）
+   --page-size    每页消息数（默认100）
+   --from         消息from地址
+   --state        消息状态
+$ ./venus-messager msg list [options]
+```
+
+2.3 列出异常的消息，可能是消息签名失败或gas估算失败
+
+```
+$ ./venus-messager msg list-fail
+# Return 字段里包含粗略的错误
+ID                                                                                                                 To       From          Nonce  Value                      GasLimit  GasFeeCap   GasPremium  Method  State      ExitCode  Return                                                                 Height  CreateAt
+bafk4bzacicqkukukk3jukpankepybvdaj2gpi3fuminxlakacaiukuj2yq53zhb3coapmbx7ozpe6v2bgp4hxphyyrbkhieszvqczwfub2i6bgf2  t016345  t3v5shsyt...  0      7.666985421223199696 FIL   0         3000000000  0           6       UnFillMsg  -1        gas estimate: estimating gas limit: message execution failed: exit 16  0       2021-09-05 21:35:53
+bafk4bzacicviuerbarkm45kjnam7j2tlfv2pdecu46uqiscwdh5eedvixihwwoqhkffwa4rx5rrbi7b66etz2devuoozl2qhkbpz2s7v5rbixnov  t016345  t3v5shsyt...  0      7.671490278328236907 FIL   0         3000000000  0           6       UnFillMsg  -1        gas estimate: estimating gas limit: message execution failed: exit 16  0       2021-09-05 21:50:16
+ba
+```
+
+2.4 标记异常消息，该消息被标记会被置为`FailedMsg`状态
+
+```bash
+./venus-messager msg mark-bad <message id>
+```
+
+2.5 替换消息
+
+```
+# 根据消息ID替换
+$ ./venus-messager msg replace --gas-feecap=[gas-feecap] --gas-premium=[gas-premium] --gas-limit=[gas-limit] --auto=[auto] --max-fee=[max-fee] <message-id>
+# 或者根据消息的from和nonce替换
+$ ./venus-messager msg replace --gas-feecap=[gas-feecap] --gas-premium=[gas-premium] --gas-limit=[gas-limit] --auto=[auto] --max-fee=[max-fee] <from> <nonce>
+```
+
+3. 地址
+
+3.1 查询单个地址信息
+
+```
+$ ./venus-messager address search t3weswpwlpkpbhozfety4ebmph3osweakrgqjmb74nwxt57hru73mx3ttp2abxrqqi45oebshxbenb4jtkmb2q
+{
+        "id": "bda9fbfd-2ccc-487a-aaa1-a7843b2af149",
+        "addr": "t3weswpwlpkpbhozfety4ebmph3osweakrgqjmb74nwxt57hru73mx3ttp2abxrqqi45oebshxbenb4jtkmb2q",
+        "nonce": 4,
+        "weight": 0,
+        "selMsgNum": 0,
+        "state": 1,
+        "gasOverEstimation": 0,
+        "maxFee": "0",
+        "maxFeeCap": "0",
+        "isDeleted": -1,
+        "createAt": "2021-08-30T14:18:24.92+08:00",
+        "updateAt": "2021-08-30T18:17:38.875+08:00"
+ }
+```
+
+3.2 列出所有地址
+
+```
+$ ./venus-messager address list
+```
+
+3.3 设置地址一轮推送选择消息的最大数量
+
+```
+$ ./venus-messager address set-sel-msg-num --num=5 <address>
+```
 
 #### venus-miner
 
