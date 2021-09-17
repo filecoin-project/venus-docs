@@ -195,7 +195,7 @@ $ ./venus-gateway wallet list
 
 - init genesis-miner t01000
 ```bash
-$ ./venus-sealer init --genesis-miner --actor=t01000 --sector-size=2048 --pre-sealed-sectors=~/.genesis-sectors --pre-sealed-metadata=~/.genesis-sectors/pre-seal-t01000.json --nosync --network=2k \
+$ ./venus-sealer --network=2k init --genesis-miner --actor=t01000 --sector-size=2048 --pre-sealed-sectors=~/.genesis-sectors --pre-sealed-metadata=~/.genesis-sectors/pre-seal-t01000.json --nosync \
 --node-url=/ip4/127.0.0.1/tcp/3453 \
 --messager-url=/ip4/127.0.0.1/tcp/39812 \
 --gateway-url=/ip4/127.0.0.1/tcp/45132 \
@@ -205,7 +205,7 @@ $ ./venus-sealer init --genesis-miner --actor=t01000 --sector-size=2048 --pre-se
    
 - start
 ```bash
-$ nohup ./venus-sealer run --nosync --network=2k > sealer.log 2>&1 &
+$ nohup ./venus-sealer --network=2k run --nosync > sealer.log 2>&1 &
 
 $ ./venus-sealer info
 Chain: [sync behind! (15h45m53s behind)] [basefee 100 pFIL]
