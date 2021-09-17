@@ -71,6 +71,8 @@ venus-messager的url配置中，IP，端口，或者token配置有问题。
 
 ### 独立组件问题
 
+#### venus-sealer
+
 1)、venus-sealer启动后报错**key for worker not found in local wallet**
 
 ```bash
@@ -145,3 +147,7 @@ INFO	storageminer	storage/wdpost_run.go:863	Submitted window post: 06df4a21-a0b7
 
 - 发送post消息的地址里面，没有足够的FIL支付上边所需的手续费，导致消息上链；一般小于0.5FIL就可能导致post消息无法上链
 - venus-wallet进程down掉，消息虽然生成后发送到venus-message处，但是没有venus-wallet对消息进行签名
+
+#### venus-cluster
+
+> 目前正在测试中，在一个月左右发布源码及使用文档。
