@@ -1,12 +1,12 @@
 ## Incubation Exit Guide
 
-&ensp;&ensp; After each phase of the incubator is over, miners face the problem of withdrawing. Currently there are lotus and venus implementations of Filecoin mainnet. Therefore, the exit options available to miners are：
+After each phase of the incubator is over, miners face the problem of withdrawing. Currently there are lotus and venus implementations of Filecoin mainnet. Therefore, the exit options available to miners are：
 
 - Access to venus chain services built by other operators or participate in the second phase of the incubator;
 - Access the venus chain service built by yourself;
 - Switch back to lotus.
 
-&ensp;&ensp; The above is the optional exit plan for miners at the current stage. Here we explain how to access the venus chain service built by yourself and switch back to the lotus plan one by one.
+The above is the optional exit plan for miners at the current stage. Here we explain how to access the venus chain service built by yourself and switch back to the lotus plan one by one.
 
 ### Switch back to your own venus
 
