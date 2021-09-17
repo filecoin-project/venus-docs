@@ -78,3 +78,7 @@ venus-sealer基本延续lotus的挖矿部分, 我们把sealer中和挖矿相关�
 
 1. 接入了messager系统，所有的消息都是在messager中进行管理.
 2. 存储脱离badger，使用sqlite保存(元数据，sector状态机系信息，调度及其结果），后续会进一步支持mysql存储，保证数据的安全性。
+
+### venus-cluster
+
+> 敬请期待
