@@ -82,8 +82,20 @@ venus-sealer基本延续lotus的挖矿部分, 我们把sealer中和挖矿相关�
 
 ### venus-market
 
+venus-market是venus系统中的市场组件。其愿景是打造Filecoin网络中分布式的存储和检索市场。目前已经实现了兼容lotus协议的订单存储和检索，逐渐向着venus-market服务多个集群的接单，对外提供统一的检索服务方向发展。[venus-market规划路线](https://github.com/filecoin-project/venus/blob/master/documentation/venus-market%20module%20design%20%26%20roadmap.md)
+
 ### venus-gateway
 
+venus-gateway 是独立组件与链服务层的桥梁，用于简化部署并降低矿工访问的复杂性、增加矿工访问的安全性。独立组件启动时将其服务接口注册到venus-gateway，链服务组件需要时通过venus-gateway请求对应集群的服务接口。
+
+- 矿工不需要外部IP和曝光钱包服务；
+- 矿池配置SSL证书后，集群与矿池的连接是安全的；
+- 矿工可以简单地将多个客户端（钱包/证明）注册到矿池以获得高可用性。
+
+![venus-gateway](../../../docs/.vuepress/public/venus-gateway-system-design.png)
+
 ### venus-cluster
+
+venus-cluster是venus社区即将退出的新版扇区封装,算力维持组件,相对于目前的venus-sealer在任务调度,最大化系统资源方面有一定优势,其面向的主体用户也将有所不同。目前在测试阶段。
 
 > 敬请期待
