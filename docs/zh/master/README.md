@@ -21,6 +21,6 @@
 
 4. [孵化中心答疑篇](Q&A.md)
 
-5. [孵化中心的节点退出指南](Incubation_exit_guide.md)
+5. [孵化中心的节点迁出指南](Incubation_exit_guide.md)
 
 如有更多疑问，请通过[Slack](https://filecoinproject.slack.com/archives/CEHHJNJS3)联系我们，或发送邮件至[venus@filecoin.com](venus@filecoin.com).
