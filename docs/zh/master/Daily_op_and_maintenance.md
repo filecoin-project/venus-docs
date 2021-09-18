@@ -1,11 +1,10 @@
-## 日常运维篇
+# 节点日常运维
 
-### 独立组件
+## 独立组件
 
-&ensp;&ensp;venus系统的独立组件是指venus-sealer/venus-cluster和venus-wallet。venus-sealer是旧版的算力积累与维持组件，在孵化器第二期将不再维护。venus-cluster是新版的算力积累与维持组件，相比venus-sealer在任务调度和系统资源使用上有很大的提升，将是venus社区长期维护并推荐使用的组件。
+Venus系统的独立组件是指venus-sealer & venus-cluster & venus-wallet。venus-sealer是旧版本的算力积累与维持组件，预计在11月之后将不再维护。**venus-cluster是新版本的算力积累与维持组件，相比venus-sealer在任务调度和系统资源使用上有很大的提升，将是Venus社区长期维护并推荐使用的组件。**
 
-
-#### venus-wallet
+### venus-wallet
 
 - 是否成功启动？
 
@@ -16,7 +15,7 @@ WARN	wallet_event	wallet_event/listenevent.go:164	listenWalletRequestOnce quit	{
 INFO	wallet_event	wallet_event/listenevent.go:173	restarting listenWalletRequestOnce	{"api hub": "/dns/gateway.filincubator.com/tcp/83/wss"}
 INFO	wallet_event	wallet_event/listenevent.go:184		{"rand sign byte": "TCzGneQnvI2N6LqBVf0AHwaEr+NueDnk1aCSo+1G3SA="}
 ```
-日志中报**WalletSign error password not set**，需要执行**venus-wallet setpwd**
+日志中显示 **WalletSign error password not set**，需要执行**venus-wallet setpwd**
 
 ```bash
 # venus-wallet setpwd
@@ -37,10 +36,10 @@ Password:********
 7b2254797065223a22626c73222c22626c73222c22507269766174654b6579223a227135
 ```
 
-#### venus-sealer
+### venus-sealer
 
 ```bash
-# 查看矿工的proving相关信息
+# 查看存储提供者的proving相关信息
 venus-sealer proving info
 
 # 查看第0个deadline的信息
@@ -62,20 +61,21 @@ venus-sealer  proving faults
 venus-sealer proving check --only-bad 7
 ```
 
-#### venus-cluster
+### venus-cluster
 
-> 目前正在测试中，在一个月左右发布源码及使用文档。
+> 目前正在测试中，预计在一个月后发布源码以及使用文档。
 
+</br>
 
-### 链服务性能监控
+## 链服务性能监控
 
-#### 组件接口调用统计
+### 组件接口调用统计
 
 - 全组件
 
 ![venus-all](../../../docs/.vuepress/public/monitor/venus-all.jpg)
 
-统计特定矿工的独立组件请求链服务所有组件提供接口的次数，起始点后和结束点前的半个小时数据可以忽略。
+统计特定存储提供者的独立组件请求链服务所有组件所提供接口的次数，起始点后和结束点前的半个小时数据可以忽略。
 
 - venus
 
@@ -87,19 +87,19 @@ venus-sealer proving check --only-bad 7
 
 ![venus-messager](../../../docs/.vuepress/public/monitor/venus-messager.jpg)
   
-矿工在做算力时需要发送PreCommitSector和ProveCommitSector消息，在完成一个窗口期的windowPoSt时需要发送SubmitWindowedPoSt消息，消息发送需要请求venus-messager接口。因此，当矿工正常封装扇区时其请求次数应该维持在一个比较固定的范围内，起始点后和结束点前的半个小时数据可以忽略；
+存储提供者在做算力时需要发送PreCommitSector和ProveCommitSector消息，在完成一个窗口期的windowPoSt时需要发送SubmitWindowedPoSt消息，消息发送需要请求venus-messager接口。因此，当存储提供者正常封装扇区时其请求次数应该维持在一个比较固定的范围内，起始点后和结束点前的半个小时数据可以忽略；
 
 - venus-gateway
   
 ![venus-gateway](../../../docs/.vuepress/public/monitor/venus-gateway.jpg)
  
-在venus系统中，venus-cluster/venus-sealer通过venus-gateway提供winningPoSt的证明计算服务，venus-wallet通过venus-gateway提供签名服务。
+在Venus系统中，venus-cluster/venus-sealer通过venus-gateway提供winningPoSt的证明计算服务，venus-wallet通过venus-gateway提供签名服务。
 
-#### venus-sealer调用接口详细列表
+### venus-sealer调用接口详细列表
 
 ![filecoin-interface](../../../docs/.vuepress/public/monitor/filecoin-interface.jpg)
 
-#### 消息相关接口
+### 消息相关接口
 
 ![venus-mesager-gateway-interface](../../../docs/.vuepress/public/monitor/venus-mesager-gateway-interface.jpg)
  
