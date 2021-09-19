@@ -1,7 +1,7 @@
-# venus master course
+# venus master classes
 
-In order to ensure participants' seamless access to the second phase of the incubation center,
-We are looking for 3 to 5 people who are active in the venus community, have demonstrated their technical-know-how and are interested in being ***venus master*** as their contribution to the community.
+Introducing the ["Venus Master Fellowship"]() program for teams or individuals who have demonstrated their technical-know-how in setuping a storage providing oeration with Venus. If you wish to become a **Venus Master**, please make sure that you go through the following classes which we have prepared so that you may help others to bootstrap their storage providing operations.
+
 Responsibilities for being a venus master includes but not limited to: 
 - Help participants establish connection to chain services
 - Answer the technical questions from the community
@@ -20,3 +20,5 @@ To better serve incubation participants as a ***venus master***, it is necessary
 4. [Daily Maintenance and Operation](Daily_op_and_maintenance.md)
 
 5. [Q&A](Q&A.md)
+
+If you have more questions, please contact us via [Slack](https://filecoinproject.slack.com/archives/CEHHJNJS3), or send an email to [venus@filecoin.com](venus@filecoin.com).
