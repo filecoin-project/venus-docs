@@ -82,6 +82,10 @@ module.exports = {
                     {
                         text: 'Incubation Center',
                         link: '/incubation/'
+                    },
+                    {
+                        text: 'Master',
+                        link: '/master/'
                     }
                 ],
                 sidebar: {
@@ -153,6 +157,15 @@ module.exports = {
                             ]
                         }
                     ],
+                    '/master/': [
+                        {
+                            title: 'Master',
+                            collapsable: false,
+                            children: [
+                                ['', 'Overview'],
+                            ]
+                        }
+                    ]
                 }
             },
             '/zh/': {
@@ -180,6 +193,10 @@ module.exports = {
                     {
                         text: '孵化器',
                         link: '/zh/incubation/'
+                    }
+                    {
+                        text: 'Master',
+                        link: '/zh/master/'
                     }
                 ],
                 sidebar: {
@@ -255,6 +272,15 @@ module.exports = {
                                 ['Rules.md', '规则'],
                                 ['venus-master.md', 'venus大师'],
                                 // ['FQA.md', '常见问题解答'],
+                            ]
+                        }
+                    ],
+                    '/master/': [
+                        {
+                            title: 'Master',
+                            collapsable: false,
+                            children: [
+                                ['', 'Master 概要'],
                             ]
                         }
                     ]
