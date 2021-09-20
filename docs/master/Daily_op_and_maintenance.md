@@ -86,7 +86,7 @@ To be released
 
 - All
 
-![venus-all](../../../docs/.vuepress/public/monitor/venus-all.jpg)
+![venus-all](../../docs/.vuepress/public/monitor/venus-all.jpg)
 
 统计特定矿工的独立组件请求链服务所有组件提供接口的次数，起始点后和结束点前的半个小时数据可以忽略。
 
@@ -94,28 +94,28 @@ Chain service API usage Statistics for a single storage provider. Note: ignore s
 
 - venus
 
-![venus](../../../docs/.vuepress/public/monitor/venus.jpg)
+![venus](../../docs/.vuepress/public/monitor/venus.jpg)
 
 Independent components relies heavily on venus node APIs. Most events are triggered from returns of venus APIs.
 
 - venus-messager
 
-![venus-messager](../../../docs/.vuepress/public/monitor/venus-messager.jpg)
+![venus-messager](../../docs/.vuepress/public/monitor/venus-messager.jpg)
 
 During PoRep, storage providers will need to send PreCommitSector and ProveCommitSector messages and during PoSt storage providers will need to send windowPost messages. Message sending relies on APIs of venus-messager. When a storage provider is growing its storage power, number of API requests should be maintaining at some level.
 
 - venus-gateway
 
-![venus-gateway](../../../docs/.vuepress/public/monitor/venus-gateway.jpg)
+![venus-gateway](../../docs/.vuepress/public/monitor/venus-gateway.jpg)
 
 venus-cluster/venus-sealer send winningPost through venus-gateway. Also, venus-wallet signs a message through venus-gateway.
 
 #### venus-sealer related API
 
-![filecoin-interface](../../../docs/.vuepress/public/monitor/filecoin-interface.jpg)
+![filecoin-interface](../../docs/.vuepress/public/monitor/filecoin-interface.jpg)
 
 #### Message related API
 
-![venus-mesager-gateway-interface](../../../docs/.vuepress/public/monitor/venus-mesager-gateway-interface.jpg)
+![venus-mesager-gateway-interface](../../docs/.vuepress/public/monitor/venus-mesager-gateway-interface.jpg)
 
 When venus-sealer send messages to chain, various APIs will be used. How often messages are sent to chain can be visualized.

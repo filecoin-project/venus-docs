@@ -193,7 +193,7 @@ module.exports = {
                     {
                         text: '孵化器',
                         link: '/zh/incubation/'
-                    }
+                    },
                     {
                         text: 'Master',
                         link: '/zh/master/'
