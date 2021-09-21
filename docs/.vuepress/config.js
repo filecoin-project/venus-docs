@@ -153,7 +153,6 @@ module.exports = {
                                 ['Incubation_Center_Prize_Pool.md', 'Participation incentives'],
                                 ['announcement.md', 'Announcement'],
                                 ['Rules.md', 'Rules'],
-                                ['venus-master.md', 'Venus Master'],
                             ]
                         }
                     ],
@@ -270,17 +269,15 @@ module.exports = {
                                 ['Incubation_Center_Prize_Pool.md', '参与奖励'],
                                 ['announcement.md', '公告'],
                                 ['Rules.md', '规则'],
-                                ['venus-master.md', 'venus大师'],
-                                // ['FQA.md', '常见问题解答'],
                             ]
                         }
                     ],
-                    '/master/': [
+                    '/zh/master/': [
                         {
                             title: 'Master',
                             collapsable: false,
                             children: [
-                                ['', 'Master 概要'],
+                                ['', '概述'],
                             ]
                         }
                     ]
