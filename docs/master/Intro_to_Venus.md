@@ -1,6 +1,6 @@
 ## Venus overview
 
-Venus is one of the implementations of Filecoin storage network, which focuses on distributed architecture and a more concise division of functionalities. Storage resources are geographically dipersed, which means as long as there is internet connection a storage cluster can be connected to the Venus mining pool.
+Venus is one of the implementations of Filecoin storage network, which focuses on distributed architecture and a more concise division of functionalities. Storage resources are geographically dipersed, which means as long as there is internet connection a storage cluster can be connected to the Venus storage pool.
 
 ## Architecture
 
