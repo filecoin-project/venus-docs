@@ -1,6 +1,7 @@
 # How to start the local net
 
 > This article takes the establishment of a 2k network as an example to deploy a venus cluster on a CentOS 7.* system.
+> > Currently there is a problem in CentOS Linux* system, please run on ubuntu* system
 
 ## Service layer
 

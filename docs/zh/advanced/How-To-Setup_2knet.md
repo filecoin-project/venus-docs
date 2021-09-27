@@ -1,6 +1,7 @@
 # 如何启动测试网络
 
->本文以建立2k网络为例,在 CentOS 7.* 系统部署venus集群.
+> 本文以建立2k网络为例,在 CentOS 7.* 系统部署venus集群.
+> 目前在 CentOS Linux * 系统存在问题, 请在 ubuntu* 系统运行.
 
 ## 服务组件搭建
 
@@ -29,6 +30,13 @@ $ ./venus-gateway  wallet list
 $ ./venus-gateway  miner list
 ```
 
+日志
+```
+2021-09-27T11:05:26.736+0800    INFO    main    venus-gateway/main.go:95        venus-gateway current version 1.1.1'+git770f19a', listen /ip4/0.0.0.0/tcp/45032
+2021-09-27T11:05:26.736+0800    INFO    event_stream    walletevent/wallet_event.go:51          {"rand secret": "IkR/US2MFJr1g53mucqPep0GQZ8DzC780QDJIm48yV8="}
+2021-09-27T11:05:26.736+0800    INFO    main    venus-gateway/main.go:104       Setting up control endpoint at /ip4/0.0.0.0/tcp/45032
+```
+
 ### venus
 
 - 生成预密封文件和数据
@@ -46,6 +54,21 @@ $ nohup ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.jso
 > venus作为公共服务组件需要监听不同IP时需要修改配置文件 `.venus/config.json`
 ```bash
 "apiAddress": "/ip4/0.0.0.0/tcp/3453",
+```
+
+此时全网只有创世区块
+```
+$ ./venus chain head
+{
+        "Height": 0,
+        "ParentWeight": "0",
+        "Cids": [
+                {
+                        "/": "bafy2bzacedq52xonfsuaf6o66tkpaavkjwg43cs63weekhzz76wps4ih22lww"
+                }
+        ],
+        "Timestamp": "2021-09-27 11:10:53"
+}
 ```
 
 ### venus-message
@@ -98,33 +121,24 @@ nohup ./venus-messager run \
 --db-type=mysql --mysql-dsn "<USER>:<PASSWORD>@(127.0.0.1:3306)/venus_messager?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s"
 ```
 
+2k网络4s出一个块，故需修改配置文件的WaitingChainHeadStableDuration为2s。
+```
+# 默认是8s
+[messageService]
+  WaitingChainHeadStableDuration = "2s"
+```
+
+
 ### venus-miner
 ```bash
 # init miner repo
 ./venus-miner init --nettype=2k --auth-api=http://127.0.0.1:8989 \
  --gateway-api=/ip4/127.0.0.1/tcp/45132
  --api=/ip4/127.0.0.1/tcp/3453 --token=<SHARED_ADMIN_AUTH_TOKEN>
- 
-# run 
-nohup ./venus-miner run --nettype=2k --nosync > miner.log 2>& 1 &
+```
 
-# 每次启动时会从venus-auth请求当前已加入venus分布式矿池中的miner列表,可以根据命令查询:
-$ ./venus-miner address state
-[
-        {
-                "Addr": "f01000",
-                "IsMining": true,
-                "Err": [
-                        "2021-08-05 09:45:06 failed to compute proof: no connections for this miner t01000"
-                ]
-        }
-]
-```
-> 因为此时我们还没有启动venus-sealer故忽略这个错误。这里我们先将出块停止，等sealer成功启动后再开始。
-```bash
-$ ./venus-miner address stop f01000
-stop mining success.
-```
+&ensp;&ensp; 此时没有启动venus-sealer,所以无法出块,因为获得出块权后需要计算证明，这个是venus-sealer负责的(管理所有的扇区永久存储),故暂时不启动venus-miner。
+
 
 ## 创世节点
 
@@ -146,7 +160,7 @@ $ ./venus-wallet list
 t3sjhgun7xcklmyga6x3c5sq6pbncdlmrjmepfz7ms4fuqimtk4fida37dhq7kpq3tn7nyu5hpnn7mtp3a7lia
 ```
 
-设置接入venus-gateway，提供签名服务
+设置接入venus-gateway，提供签名服务,这一步很重要,否则出块,消息等都没法签名,业务无法正常运行.
 ```bash
 # 修改`~/.venus_wallet/config.toml`
 [APIRegisterHub]
@@ -205,7 +219,7 @@ $ ./venus-sealer --network=2k init --genesis-miner --actor=t01000 --sector-size=
    
 - 启动
 ```bash
-$ nohup ./venus-sealer --network=2k run --nosync > sealer.log 2>&1 &
+$  TMPDIR=<SPECIFIC_PATH> nohup ./venus-sealer --network=2k run --nosync > sealer.log 2>&1 &
 
 $ ./venus-sealer info
 Chain: [sync behind! (15h45m53s behind)] [basefee 100 pFIL]
@@ -234,9 +248,9 @@ Sectors:
         Proving: 2
 ```
 
-查看是不是在服务组件注册成功
+查看是不是在服务组件注册成功,gateway日志:
 ```bash
-2021-08-05T10:44:01.748+0800    INFO    proof_stream    proofevent/proof_event.go:71    add new connections 278c6798-b6ed-4062-8bde-06b8406ce06a for miner t01000
+2021-09-27T14:06:13.135+0800    INFO    proof_stream    proofevent/proof_event.go:71    add new connections 6295d403-275b-430e-a008-1b7491522d86 for miner t01000
 ```
 或
 ```
@@ -245,9 +259,27 @@ t01000
 ```
 
 - 开始出块
-```bash
-$ ./venus-miner address start t01000
-start mining success.
+&ensp;&ensp; 这个时候我们就可以启动venus-miner了
+```
+# run 
+nohup ./venus-miner run --nettype=2k --nosync > miner.log 2>& 1 &
+```
+
+启动时会从venus-auth请求当前已加入venus分布式矿池中的miner列表,可以根据命令查询:
+```
+$ ./venus-miner address state
+[
+        {
+                "Addr": "f01000",
+                "IsMining": true,
+                "Err": nil,
+        }
+]
+```
+
+在venus-miner的运行过程中可以暂停或继续某个miner_id的出块:
+```
+./venus-miner address stop/start f01000
 ```
 
 查看venus-miner日志
@@ -263,6 +295,7 @@ start mining success.
 2021-08-05T12:04:28.707+0800    INFO    miner   miner/multiminer.go:394 select message  {"tickets": 1}
 2021-08-05T12:04:28.715+0800    INFO    miner   miner/multiminer.go:420 mined new block {"cid": "bafy2bzacedyy2xr3bvsyfd42qzpeiprojza2yyt7wdggeawj2cmtisfjnn4lo", "height": "1", "miner": "t01000", "parents": ["t00"], "took": 0.020098632}
 ```
+
 至此公共组件和创世节点搭建已经完成。
 ```
 $ ./venus chain ls
@@ -326,3 +359,39 @@ $ ./venus wallet default
 $ ./venus wallet set-default <wallet>
 ```
 > venus转账节点重启后也需要unlock,不然无法转账.
+
+## 扇区封装
+
+&ensp;&ensp; 和主网逻辑差不多，请查阅：[扇区封装](https://venus.filecoin.io/zh/guide/Using-venus-Shared-Modules.html#开始封装)，需要注意的是：
+
+1. 文档中init时没有添加storage，故如果要做扇区封装，先attach storage；
+
+2. 如果机器上同时运行看了别的占用gpu的程序，如多个venus-worker，需要用TMP_DIR指定不同路径，避免竞争锁。
+
+3. 第一个sector时没有生成/var/tmp/s-piece-infos-2048，需要手动执行拷贝命令：
+```
+cp <unsealed file> /var/tmp/s-piece-infos-2048
+```
+
+&ensp;&ensp; 测试结果: 2~8 是新做的Sector，已上链
+```
+$ ./venus-sealer sectors list
+ID  State    OnChain  Active  Expiration                   Deals  DealWeight  
+0   Proving  YES      YES     1550097 (in 10 weeks 1 day)  CC                 
+1   Proving  YES      YES     1550097 (in 10 weeks 1 day)  1      0B          
+2   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+3   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+4   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+5   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+6   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+7   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+8   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC  
+
+$ ./venus-sealer info
+Chain: [sync behind! (22s behind)] [basefee 100 aFIL]
+Sealer: f01000 (2 KiB sectors)
+Power: 40 Ki / 40 Ki (100.0000%)
+        Raw: 4 KiB / 4 KiB (100.0000%)
+        Committed: 18 KiB
+        Proving: 4 KiB
+```
