@@ -1,13 +1,21 @@
-# How to start the local net
+# Start a local 2k net
 
-> This article takes the establishment of a 2k network as an example to deploy a venus cluster on a CentOS 7.* system.
-> > Currently there is a problem in CentOS Linux* system, please run on ubuntu* system
+This document describes how to start a local 2k network on Ubuntu system.
 
-## Service layer
+:::warning
 
-&ensp;&ensp; Please refer to the document for component download and compilation：https://venus.filecoin.io/guide/How-To-Deploy-MingPool.html#pre-requisites
+2k network doesn't work on CentOS, see this [issue](https://github.com/filecoin-project/lotus/issues/7136) for more details.
+
+:::
+
+## Deploy venus components
+
+Please refer to this [document](https://venus.filecoin.io/guide/How-To-Deploy-MingPool.html#background) for compiling and running of venus chain services (venus shared modules).
 
 ### venus-auth
+
+Start venus-auth.
+
 ```bash
 $ nohup ./venus-auth run > auth.log 2>&1 &
 
@@ -20,55 +28,78 @@ $ ./venus-auth user list
 
 ### venus-gateway
 
+Start venus-gateway.
+
 ```bash
 $ nohup ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run --auth-url=http://127.0.0.1:8989 > gateway.log 2>&1 &
 
 # wallet
-$ ./venus-gateway  wallet list
+$ ./venus-gateway wallet list
  
 # miner
-$ ./venus-gateway  miner list
+$ ./venus-gateway miner list
 ```
 
 ### venus
 
-- Generate pre-sealed files and data
+Generate pre-sealed files and data.
+
 ```bash
 $ ./venus seed pre-seal --sector-size 2048 --num-sectors 2
 $ ./venus seed genesis new localnet.json
 $ ./venus seed genesis add-miner localnet.json ~/.genesis-sectors/pre-seal-t01000.json
 ```
-> `seed pre-seal` need root privileges, please execute under root user.
+:::tip
 
-- Run venus 
+`seed pre-seal` need root privileges, please execute under root user.
+
+:::
+
+Run venus 
+
 ```sh
 $ nohup ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --network=2k --auth-url=http://127.0.0.1:8989 > venus.log 2>&1 &
 ```
 > As a public service component, venus needs to modify the configuration file when it needs to monitor different IPs. `.venus/config.json`
+:::tip
+
+To allow connection from different IP address, you need to change `apiAddress` of  `.venus/config.json` to  the following.
+
 ```bash
 "apiAddress": "/ip4/0.0.0.0/tcp/3453",
 ```
 
-### venus-message
+:::
 
-&ensp;&ensp; venus-auth Manage the jwt tokens used by other venus modules so that they can communicate with each other securely on the network. Generate tokens for shared modules.
+## venus-message
+
+venus-auth manages the jwt tokens used by other venus components so that they can communicate with each other securely on the network. Generate tokens for shared modules.
 
 ```bash
 # --perm specifies admin, sign, wirte or read permission of the token generated
 $ ./venus-auth token gen --perm admin <SHARED>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
-> SHARED is the name of the token, and the shared component can be started at will.
+:::tip
 
-- Generate tokens for miners t01000 and venus-wallet
+<SHARED> is the name of the token, which could be anything you want.
+
+:::
+
+Generate tokens for storage provider id t01000 and venus-wallet.
+
 ```bash
 $ ./venus-auth user add --name=test --miner=t01000
 $ ./venus-auth token gen --perm write test
 <USER_WRITE_AUTH_TOKEN>
 ```
-> test is the cluster alias
+:::tip
 
-query token or user
+"test" is token name like <SHARED>, which could be anyhing you want.
+
+:::
+
+List token and user.
 ```bash
 $ ./venus-auth user list
 number: 1
@@ -95,10 +126,25 @@ nohup ./venus-messager run \
 --db-type=sqlite \
 > msg.log 2>&1 &
 ```
-> db-type also supports mysql, the configuration is as follows：
+:::tip
+
+db-type also supports mysql in the following format.
+
 ```bash
 --db-type=mysql --mysql-dsn "<USER>:<PASSWORD>@(127.0.0.1:3306)/venus_messager?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s"
 ```
+
+:::
+
+2k network is expected to produce a block every 4 seconds. Change configuratoin of `WaitingChainHeadStableDuration` to 2 seconds to accomodate this.
+
+```toml
+# default 8s
+[messageService]
+  WaitingChainHeadStableDuration = "2s"
+```
+
+## venus-miner
 
 ### venus-miner
 ```bash
@@ -106,26 +152,12 @@ nohup ./venus-messager run \
 ./venus-miner init --nettype=2k --auth-api=http://127.0.0.1:8989 \
  --gateway-api=/ip4/127.0.0.1/tcp/45132
  --api=/ip4/127.0.0.1/tcp/3453 --token=<SHARED_ADMIN_AUTH_TOKEN>
- 
-# run 
-nohup ./venus-miner run --nettype=2k --nosync > miner.log 2>& 1 &
+```
+:::tip
 
-$ ./venus-miner address state
-[
-        {
-                "Addr": "f01000",
-                "IsMining": true,
-                "Err": [
-                        "2021-08-05 09:45:06 failed to compute proof: no connections for this miner t01000"
-                ]
-        }
-]
-```
-> Because we have not started venus-sealer at this time, we ignore this error. Here we stop the block production first, and wait for sealer to start successfully before starting.
-```bash
-$ ./venus-miner address stop f01000
-stop mining success.
-```
+Hold starting venus-miner at this point as venus-sealer hasn't been started yet.
+
+:::
 
 ## Genesis node
 
@@ -142,31 +174,38 @@ Enter Password again:******
 # import wallet
 $ ./venus-wallet import ~/.genesis-sectors/pre-seal-t01000.key
 
-# 查询
+# List
 $ ./venus-wallet list
 t3sjhgun7xcklmyga6x3c5sq6pbncdlmrjmepfz7ms4fuqimtk4fida37dhq7kpq3tn7nyu5hpnn7mtp3a7lia
 ```
 
-Set up access to venus-gateway, provide signature service
+Set up access to venus-gateway.
 ```bash
-# 修改`~/.venus_wallet/config.toml`
+# Change `~/.venus_wallet/config.toml`
 [APIRegisterHub]
 RegisterAPI = ["/ip4/127.0.0.1/tcp/45132"]
 Token = "<USER_WRITE_AUTH_TOKEN>"
-# Cluster alias
+# Account names
 SupportAccounts = ["test"]
 ```
-***Restart venus-wallet after saving, you need to unlock***
+:::warning
+
+Make sure venus-wallet is running and connected to gateway or you won't be able to sign a produced block.
+
+:::
+
+Restart venus-wallet and unlock venus-wallet after restarting.
+
 ```bash
 $ ./venus-wallet unlock
 ```
 
-Check whether it is successful, query in the log of venus-gateway:
+Check if connection is successful by going through logs of venus-gateway.
 ```bash
 2021-08-05T10:01:07.665+0800    INFO    event_stream    walletevent/wallet_conn_mgr.go:89       add wallet connection   {"channel": "58309445-87da-4160-831a-44e5236ab3c7", "walletName": "test", "addrs": ["t3sjhgun7xcklmyga6x3c5sq6pbncdlmrjmepfz7ms4fuqimtk4fida37dhq7kpq3tn7nyu5hpnn7mtp3a7lia"], "support": {"test":{}}, "signBytes": "6VzoKBejPzmFp/DvJzSO16s5SziYZKYjU2l2EkDUKy0="}
 2021-08-05T10:01:07.666+0800    INFO    event_stream    walletevent/wallet_event.go:79  add new connections test 58309445-87da-4160-831a-44e5236ab3c7
 ```
-Or use the command query
+Or use following command.
 ```bash
 $ ./venus-gateway wallet list
 [
@@ -189,12 +228,17 @@ $ ./venus-gateway wallet list
         }
  ]
 ```
-> The above log indicates that the wallet registration service component is successful and can provide signature services.
+:::tip
+
+The above log indicates that the wallet is registered on gateway thus enabling the signing of messages.
+
+:::
 
 
 ### venus-sealer
 
-- init genesis-miner t01000
+init genesis-miner t01000。
+
 ```bash
 $ ./venus-sealer --network=2k init --genesis-miner --actor=t01000 --sector-size=2048 --pre-sealed-sectors=~/.genesis-sectors --pre-sealed-metadata=~/.genesis-sectors/pre-seal-t01000.json --nosync \
 --node-url=/ip4/127.0.0.1/tcp/3453 \
@@ -203,8 +247,9 @@ $ ./venus-sealer --network=2k init --genesis-miner --actor=t01000 --sector-size=
 --auth-token=<USER_WRITE_AUTH_TOKEN>
 --no-local-storage
 ```
-   
-- start
+
+Start venus-sealer.
+
 ```bash
 $ nohup ./venus-sealer --network=2k run --nosync > sealer.log 2>&1 &
 
@@ -245,14 +290,35 @@ $ ./venus-gateway miner list
 t01000
 ```
 
-- start winningPoSt
+Start venus-miner.
+
 ```bash
-$ ./venus-miner address start t01000
-start mining success.
+# run 
+$ nohup ./venus-miner run --nettype=2k --nosync > miner.log 2>& 1 &
 ```
 
-View venus-miner log
+Check if storage provider id is properly added.
+
+```bash
+$ ./venus-miner address state
+[
+        {
+                "Addr": "f01000",
+                "IsMining": true,
+                "Err": nil,
+        }
+]
 ```
+
+You can enable/disable storage providing of a particular storage provider id.
+
+```bash
+$ ./venus-miner address stop/start f01000
+```
+
+Check venus-miner log.
+
+```bash
 2021-08-05T12:04:28.562+0800    INFO    miner   miner/minerwpp.go:88    GenerateWinningPoSt took 3.202841ms
 2021-08-05T12:04:28.562+0800    INFO    miner   miner/warmup.go:94      winning PoSt warmup successful  {"took": 0.00494326}
 2021-08-05T12:04:28.695+0800    INFO    miner   miner/multiminer.go:592 attempting to mine a block      {"tipset": ["bafy2bzacebmqknjl3nzdqsfalfe57u6nzzg5c5uphf3ctm4p2gvdgg33lhels"], "miner": "t01000"}
@@ -264,8 +330,8 @@ View venus-miner log
 2021-08-05T12:04:28.707+0800    INFO    miner   miner/multiminer.go:394 select message  {"tickets": 1}
 2021-08-05T12:04:28.715+0800    INFO    miner   miner/multiminer.go:420 mined new block {"cid": "bafy2bzacedyy2xr3bvsyfd42qzpeiprojza2yyt7wdggeawj2cmtisfjnn4lo", "height": "1", "miner": "t01000", "parents": ["t00"], "took": 0.020098632}
 ```
-So far, the construction of public components and genesis node has been completed.
-```
+Now deployment of public components and genesis node has been completed.
+```bash
 $ ./venus chain ls
 2: (2021-08-05 14:09:55) [ bafy2bzacect5pja2prfkugczbdv2jfpbou4qr3edxxr6g7oo5bny6qklzgama: t01000, ]
 3: (2021-08-05 14:09:59) [ bafy2bzacedsl7eyaaiu7oifsdy6zpj2zotbcsnuml45hu5n4erdhygiyeua6s: t01000, ]
@@ -279,19 +345,25 @@ $ ./venus chain ls
 11: (2021-08-05 14:10:31) [ bafy2bzaceay2tzyd45k3e7tisbbp47gkjsrqs23jgl64wkj6jqryk4grrr7ss: t01000, ]
 ```
 
-## Normal node
+:::tip
 
-&ensp;&ensp; Please refer to the doc: https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#pre-requisites
+Please refer to this [document](https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html) for connecting to chain services on 2k network.
 
-&ensp;&ensp; The only thing that needs to be explained is the problem of transferring Fil to ordinary node wallets: because the venus service component restricts Send messages, and the original fil of the 2k private network is in the genesis-wallet, a sync node is required.
+:::
 
-- run a normal venus node
+## Fund sending on 2k network
+
+As venus chain service (venus shared modules) doesn't support `send` messages, transferring funds between wallets needs a node dedicated to this task.
+
+Start a venus node for funds sending only.
+
 ```sh
- nohup ./venus daemon --genesisfile=devgen.car --network=2k > venus.log 2>&1 &
+$ nohup ./venus daemon --genesisfile=devgen.car --network=2k > venus.log 2>&1 &
 ```
 
-- Import Genesis Wallet
-```
+Import genesis wallet.
+
+```bash
 $ ./venus-wallet export t3sjhgun7xcklmyga6x3c5sq6pbncdlmrjmepfz7ms4fuqimtk4fida37dhq7kpq3tn7nyu5hpnn7mtp3a7lia
 Password:*
 7b2254797065223a22626c73222c22507269766174654b6579223a224541326e6a463363326b4f467977323079564f574b66733371794d6451767a35334c667459497347456b673d227d
@@ -304,15 +376,15 @@ You must REMEMBER your password! Without the password, it's impossible to decryp
 
 $ ./venus wallet import
 ipfs: Reading from /dev/stdin; send Ctrl-d to stop.
-
 ```
 
-- Send
-```sh
- ./venus send <to> 100
+Transfer funds.
+
+```bash
+$ ./venus send <to> 100
 ```
--- Common commands
-```
+Common commands
+```bash
 $ ./venus wallet list
 
 $ ./venus wallet balance <wallet>
@@ -320,4 +392,49 @@ $ ./venus wallet balance <wallet>
 $ ./venus wallet default
 $ ./venus wallet set-default <wallet>
 ```
-> The venus transfer node also needs to be unlocked after restarting, otherwise the transfer cannot be made.
+:::tip
+
+Remember to unlock you wallet after restarting or sending will fail.
+
+:::
+
+## Sector sealing
+
+Please refer to this [document](https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html) for sealing sector on 2k network. 
+
+:::tip
+
+- Attach storage before venus-sealer init
+- Make sure different worker processes has different TMP_DIR set or risk GPU race condition 
+- Mannually copy `unsealed file` to `/var/tmp/s-basic-unsealed-2048` for the 1st sector (one time only)
+
+```bash
+$ cp <unsealed file> /var/tmp/s-basic-unsealed-2048
+```
+
+:::
+
+Seal more sectors.
+
+```bash
+$ ./venus-sealer sectors list
+ID  State    OnChain  Active  Expiration                   Deals  DealWeight  
+0   Proving  YES      YES     1550097 (in 10 weeks 1 day)  CC                 
+1   Proving  YES      YES     1550097 (in 10 weeks 1 day)  1      0B          
+2   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+3   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+4   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+5   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+6   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+7   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
+8   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC  
+
+$ ./venus-sealer info
+Chain: [sync behind! (22s behind)] [basefee 100 aFIL]
+Sealer: f01000 (2 KiB sectors)
+Power: 40 Ki / 40 Ki (100.0000%)
+        Raw: 4 KiB / 4 KiB (100.0000%)
+        Committed: 18 KiB
+        Proving: 4 KiB
+```
+
