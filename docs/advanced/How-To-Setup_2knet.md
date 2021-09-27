@@ -290,13 +290,6 @@ $ ./venus-gateway miner list
 t01000
 ```
 
-Enable mining of storage provider id t01000.
-
-```bash
-$ ./venus-miner address start t01000
-start mining success.
-```
-
 Start venus-miner.
 
 ```bash
@@ -413,10 +406,10 @@ Please refer to this [document](https://venus.filecoin.io/guide/Using-venus-Shar
 
 - Attach storage before venus-sealer init
 - Make sure different worker processes has different TMP_DIR set or risk GPU race condition 
-- Mannually copy `unsealed file` to `/var/tmp/s-piece-infos-2048` for the 1st sector (one time only)
+- Mannually copy `unsealed file` to `/var/tmp/s-basic-unsealed-2048` for the 1st sector (one time only)
 
 ```bash
-$ cp <unsealed file> /var/tmp/s-piece-infos-2048
+$ cp <unsealed file> /var/tmp/s-basic-unsealed-2048
 ```
 
 :::

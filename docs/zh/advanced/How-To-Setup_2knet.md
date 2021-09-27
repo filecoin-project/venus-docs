@@ -1,7 +1,13 @@
 # 如何启动测试网络
 
-> 本文以建立2k网络为例,在 CentOS 7.* 系统部署venus集群.
-> 目前在 CentOS Linux * 系统存在问题, 请在 ubuntu* 系统运行.
+> 本文以在 Ubuntu 系统部署2k网络为例
+
+:::warning
+
+目前在 CentOS 系统存在问题, 具体请参考：[issue](https://github.com/filecoin-project/lotus/issues/7136)
+
+:::
+
 
 ## 服务组件搭建
 
@@ -368,9 +374,9 @@ $ ./venus wallet set-default <wallet>
 
 2. 如果机器上同时运行看了别的占用gpu的程序，如多个venus-worker，需要用TMP_DIR指定不同路径，避免竞争锁。
 
-3. 第一个sector时没有生成/var/tmp/s-piece-infos-2048，需要手动执行拷贝命令：
+3. 第一个sector时没有生成/var/tmp/s-basic-unsealed-2048，需要手动执行拷贝命令：
 ```
-cp <unsealed file> /var/tmp/s-piece-infos-2048
+cp <unsealed file> /var/tmp/s-basic-unsealed-2048
 ```
 
 &ensp;&ensp; 测试结果: 2~8 是新做的Sector，已上链
