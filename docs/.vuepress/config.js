@@ -163,7 +163,7 @@ module.exports = {
                             children: [
                                 ['', 'Overview'],
                                 ['Course_introduction.md', 'Classes'],
-                                ['Introduction_to_venus_mining_pool.md', 'Venus storage pool introduction'],
+                                ['Intro_to_Venus.md', 'Venus storage pool introduction'],
                                 ['Chain_service_construction.md', 'Up a Chain Service'],
                                 ['Daily_op_and_maintenance.md', 'Daily Maintenance and Operation'],
                                 ['Q&A.md', 'Q&A'],
@@ -285,7 +285,7 @@ module.exports = {
                             children: [
                                 ['', '概述'],
                                 ['Course_introduction.md', '教程'],
-                                ['Introduction_to_venus_mining_pool.md', 'Venus的分布式存储池介绍'],
+                                ['Intro_to_Venus.md', 'Venus的分布式存储池介绍'],
                                 ['Chain_service_construction.md', 'Venus的链服务搭建'],
                                 ['Daily_op_and_maintenance.md', '孵化中心节点日常运维'],
                                 ['Q&A.md', '孵化中心答疑篇'],
