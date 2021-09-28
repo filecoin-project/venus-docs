@@ -1,4 +1,4 @@
-# Venus Gateway
+# Venus Market
 
 venus-gateway 是用于filecoin市场接受订单并提供检索功能的组件， 包括一个market组件和market客户端组件。用户可以使用venus-market配置venus-sealer完成市场订单的功能。 市场组件需要依赖venus来提供链信息服务，需要连接messager来提供消息推送服务，需要连接钱包提供签名服务。
 
