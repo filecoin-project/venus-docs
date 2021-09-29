@@ -30,7 +30,7 @@ make <network-type>
 
 ## chain-co agent
 
-编译结果输出在bin目录中
+output file in bin directory
 ```sh
 #build
 git clone https://github.com/ipfs-force-community/chain-co.git
