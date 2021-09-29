@@ -6,6 +6,8 @@ The main purpose of this solution is to prevent the overall failure of service d
 
 ## daemon
 
+节点授权这里建议连接venus-auth进行授权，不然节点出问题token会发生变化。
+
 venus:
 ```sh
 #build
@@ -13,7 +15,7 @@ git clone https://github.com/filecoin-project/venus.git
 make deps
 make
 #run
-./venus daemon --network <network-type>
+./venus daemon --network <network-type> --auth-url <venus-auth url>
 ```
 
 lotus:
@@ -23,7 +25,7 @@ git clone https://github.com/ipfs-force-community/chain-co.git
 git checkout v1.11.2_incubation
 make <network-type>
 #run
-./lotus daemon --auth-url 
+./lotus daemon --auth-url --auth-url <venus-auth url>
 ```
 
 ## chain-co agent
