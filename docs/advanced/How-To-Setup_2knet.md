@@ -2,7 +2,7 @@
 
 This document describes how to start a local 2k network on Ubuntu system.
 
-:::warning
+::: warning
 
 2k network doesn't work on CentOS, see this [issue](https://github.com/filecoin-project/lotus/issues/7136) for more details.
 
