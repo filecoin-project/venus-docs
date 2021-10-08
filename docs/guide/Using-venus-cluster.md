@@ -253,8 +253,6 @@ WindowPoStPartitionSectors: 2
 
 ### Start daemon
 
-&ensp;&ensp; 目前，miner的一些必要信息需要手动配置，暂时无法自动获取
-
 Before starting daemon, couple more configurations need to be done. Miner id and sector id.
 
 ```toml
@@ -397,8 +395,6 @@ Since venus-worker allows users to do sealing in the form of sub-processes, and 
 ```bash
 $ ./create-cgroup.sh
 ```
-
-注意：此脚本将为特定的 cgroup 资源组分配当前用户的执行权限。这也就意味着，如果使用者打算用特定的用户启动 venus-cluster，需要先切换到目标用户再执行脚本。
 
 :::tip
 
