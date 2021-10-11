@@ -114,6 +114,8 @@ module.exports = {
                                 ['How-To-Use-Wallet-In-Venus.md', 'Venus local wallet'],
                                 ['Venus-Wallet.md', 'Venus remote wallet'],
                                 ['Venus-Worker.md', 'Venus worker'],
+                                ['Venus-Gateway.md', 'Venus gateway'],
+                                ['Venus-Auth.md', 'Venus auth'],
                             ]
                         }
                     ],
