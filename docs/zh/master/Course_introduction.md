@@ -13,7 +13,7 @@
 
 ## 目录
 
-1. [Venus的分布式存储池介绍](Introduction_to_venus_mining_pool.md)
+1. [Venus的分布式存储池介绍](Intro_to_Venus.md)
 
 2. [Venus的链服务搭建](Chain_service_construction.md)
 

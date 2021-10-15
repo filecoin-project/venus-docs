@@ -11,7 +11,7 @@ To better serve incubation participants as a ***venus master***, it is necessary
 
 ## contents
 
-1. [Venus storage pool introduction](Introduction_to_venus_mining_pool.md)
+1. [Venus storage pool introduction](Intro_to_Venus.md)
 
 2. [Up a Chain Service](Chain_service_construction.md)
 
