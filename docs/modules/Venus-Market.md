@@ -31,7 +31,8 @@ $ ./market-client run --node-url <node url> --messager-url <messager-url> --auth
 
 ## Client commands
 
-客户端命令行和lotus的类似。
+Client commands are similar to lotus.
+
 ### Data related
 
 Import data.
