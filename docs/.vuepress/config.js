@@ -97,6 +97,7 @@ module.exports = {
                                 ['', 'Overview'],
                                 ['How-To-Deploy-MingPool.md', 'Deploy a storage pool'],
                                 ['Using-venus-Shared-Modules.md', 'Join a storage pool'],
+                                ['Using-venus-market.md', 'Deal making'],
                                 ['fil_withdraw_and_send.md', 'Retrieve rewards'],
                                 ['Chain.md', 'Chain management'],
                                 ['How-To-Connect-Network.md', 'Connect to different network'],
@@ -116,6 +117,7 @@ module.exports = {
                                 ['Venus-Worker.md', 'Venus worker'],
                                 ['Venus-Gateway.md', 'Venus gateway'],
                                 ['Venus-Auth.md', 'Venus auth'],
+                                ['Venus-Market.md', 'Venus market'],
                             ]
                         }
                     ],
@@ -213,8 +215,9 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', '启明星概要'],
-                                ['How-To-Deploy-MingPool.md', '如何部署存储池'],
-                                ['Using-venus-Shared-Modules.md', '如何加入存储池'],
+                                ['How-To-Deploy-MingPool.md', '部署存储池'],
+                                ['Using-venus-Shared-Modules.md', '加入存储池'],
+                                ['Using-venus-market.md', '发送接收订单'],
                                 ['fil_withdraw_and_send.md', '提取奖励'],
                                 ['chain.md', '链维护'],
                                 ['How-To-Connect-Network.md', '加入不同网络'],
@@ -234,6 +237,7 @@ module.exports = {
                                 ['Venus-Worker.md', 'Venus worker'],
                                 ['Venus-Gateway.md', 'Venus gateway'],
                                 ['Venus-Auth.md', 'Venus auth'],
+                                ['Venus-Market.md', 'Venus market'],
                                 ['Venus-Messager-Design-Spec.md', 'Venus Messager 设计说明书'],
                             ]
                         }
