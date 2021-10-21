@@ -104,6 +104,24 @@ $ nohup ./venus-auth run > auth.log 2>&1 &
 
 :::
 
+### 默认端口
+
+venus-auth 默认端口为8989，下面其他组件使用参数--auth-url，填写的相关参数就是这个端口号与相应ip。
+
+```shell
+$ head  ~/.venus-auth/config.toml
+Port = "8989"
+Secret = "34f78bb86d9050a8ce21183fd9c5ff4fd7f0a5c2586b40f9ef7ad67c952bffcf"
+ReadTimeout = 60000000000
+WriteTimeout = 60000000000
+IdleTimeout = 60000000000
+
+[Log]
+  LogLevel = "trace"
+  Type = 0
+  HookSwitch = false
+```
+
 ### 使用MySQL (可选)
 
 支持MySQL 5.7及以上版本，可替代默认的`Badger`键值数据库。要使用 MySQL 数据库，请修改配置中的 `db`部分。
