@@ -16,7 +16,7 @@ venus是GO语言实现的Filecoin分布式存储网络。
 
 ### 参与条件
 
-为了利用孵化计划的免费90天[venus共享模块](https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#introducing-venus-modules)，存储提供商要求至少增长 2TiB/天。
+为了利用孵化计划的免费90天[venus共享模块](https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#introducing-venus-modules)，存储提供商要求至少增长 1TiB/天。
 
 ### 申请 
 
