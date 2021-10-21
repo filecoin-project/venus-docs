@@ -17,11 +17,11 @@ Filecoin基金会宣布推出Filecoin存储提供者孵化中心。与Venus团�
 
 Venus由IPFSForce社区维护，是Filecoin生态系统开发中的四个实现之一。Venus的独特之处在于它支持分布式存储池，这是一种经济高效的方法，可以在Filecoin网络上提供存储服务时降低硬件维护的总体成本并节省时间。因此，它可以使更多的存储提供者较低门槛的进入Filecoin网络。
 
-由于Venus的分布式存储池架构，孵化中心将运行Venus共享组件（*其中venus-market正在开发中，目前不支持真实数据的订单，在计划内，它将近期支持存储，在10月支持检索*）。矿工们只需使用[venus-sealer](https://github.com/filecoin-project/venus-sealer)和[venus-wallet](https://github.com/filecoin-project/venus-sealer)，联合孵化中心维护的共享组件即可开始提供存储服务。然后，它们可以同时与一个或多个节点一起运行。
+由于Venus的分布式存储池架构，孵化中心将运行Venus共享组件（*其中[venus-market](https://github.com/filecoin-project/venus-market)正在开发中，目前不支持真实数据的订单，在计划内，它将近期支持存储，在10月支持检索*）。矿工们只需使用[venus-sealer](https://github.com/filecoin-project/venus-sealer)和[venus-wallet](https://github.com/filecoin-project/venus-sealer)，联合孵化中心维护的共享组件即可开始提供存储服务。然后，它们可以同时与一个或多个节点一起运行。
 
 ## 关于孵化中心计划
 
-加入孵化中心的参与者必须每天密封至少64个扇区（2TiB）。参与者可以继续参与该计划，直到他们的存储量达到1PiB或当他们参与该计划超过90天，以便其他符合要求的候选者参与。参与此计划的存储提供者可以免费使用共享组件服务。
+加入孵化中心的参与者必须每天密封至少32个扇区（1TiB）。参与者可以继续参与该计划，直到他们的存储量达到1PiB或该阶段结束，以便其他符合要求的候选者参与。参与此计划的存储提供者可以免费使用共享组件服务。
 
 存储提供者孵化中心的第一阶段将从2021年7月26日至2021年10月24日。
 
