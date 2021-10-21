@@ -9,7 +9,7 @@ This program aims to ease small to medium sized storage provider into having bet
 
 ### Prerequisites
 
-To take adavantage of the free 90-day [shared venus modules](https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#introducing-venus-modules) of the incubation center program, storage providers are required to grow at least 2TiB/day( swicthed to 1TiB since .
+To take adavantage of the free 90-day [shared venus modules](https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#introducing-venus-modules) of the incubation center program, storage providers are required to grow at least 1TiB/day.
 
 ### Application 
 
