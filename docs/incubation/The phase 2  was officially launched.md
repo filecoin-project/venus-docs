@@ -1,3 +1,4 @@
+# The phase 2 of the Incubation Center was officially launched
 
 *With the development of Venus architecture (like [venus-market](https://github.com/filecoin-project/venus-market)) and the Incubation Center Phase 1 , the distributed storage pool in the phase 2 will bring more improvements and benefits to the storage providers. Higher efficiency of sealing and more DataCaps are coming.*
 
