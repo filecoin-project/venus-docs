@@ -86,6 +86,23 @@ addr:
 	 /ip4/10.10.8.16/tcp/58418
 ```
 
+配置venus-sealer，使其能和market交互。
+
+```toml
+$ cat .venussealer/config.toml
+[Market]
+  # venus-market的URL
+  Url = "/ip4/127.0.0.1/tcp/41235"
+  # venus-market的token
+  Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e......"
+```
+
+:::warning
+
+通过`cat .venusmarket/token`获取market的token。
+
+:::
+
 ## 启动maket-client
 
 启动venus-market客户端程序`market-client`。

@@ -110,6 +110,25 @@ addr:
 	 /ip4/10.10.8.16/tcp/58418
 ```
 
+### Configure sealer
+
+Configure your venus-sealer so that it is aware of venus-market.
+
+```toml
+$ cat .venussealer/config.toml
+[Market]
+  # URL of your venus-market
+  Url = "/ip4/127.0.0.1/tcp/41235"
+  # token of your venus-market
+  Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e......"
+```
+
+:::warning
+
+Get token of your venus-market by `cat .venusmarket/token`.
+
+:::
+
 ## Start market client
 
 Start client.
