@@ -153,6 +153,7 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
+                                ['The phase 2  was officially launched.md', 'Incubation center phase II'],
                                 ['Incubation Center participation process.md', 'Participation process'],
                                 ['Incubation_Center_Prize_Pool.md', 'Participation incentives'],
                                 ['announcement.md', 'Announcement'],
@@ -278,6 +279,7 @@ module.exports = {
                             children: [
                                 ['', '概述'],
                                 ['存储提供者孵化中心参与流程.md', '参与流程'],
+                                ['第二阶段正式启动.md', '孵化中心第二阶段'],
                                 ['Incubation_Center_Prize_Pool.md', '参与奖励'],
                                 ['announcement.md', '公告'],
                                 ['Rules.md', '规则'],
