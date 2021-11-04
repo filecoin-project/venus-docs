@@ -136,12 +136,12 @@ FIL的所有余额都存放在钱包里。新创建节点时，它将有一个�
 venus wallet ls
 ```
     
-2. 输出的应该是一个长的字母数字字符串。转到testnet的 [水龙头](https://faucet.testnet.filecoin.io) 并提交那个钱包地址。要花一分钟才能把钱放进钱包。
+2. 输出的应该是一个长的字母数字字符串。转到testnet的 [水龙头](https://faucet.calibration.fildev.network/) 并提交那个钱包地址。要花一分钟才能把钱放进钱包。
 
     * 或者你可以从命令行触发水龙头：
 ```sh
 export WALLET_ADDR=`venus wallet ls`    # fetch your wallet address into a handy variable
-MESSAGE_CID=`curl -X POST -F "address=${WALLET_ADDR}" "https://faucet.testnet.filecoin.io/send"`
+MESSAGE_CID=`curl -X POST -F "address=${WALLET_ADDR}" "https://faucet.calibration.fildev.network/send"`
 ```
         
 3. 水龙头将提供消息CID。如果链已与网络同步，则此消息应在大约30秒内处理。可以运行以下命令以等待确认：
@@ -167,3 +167,16 @@ venus sync status
 ## 查看网络信息
 
 有一些可视化工具可以帮助用户了解Filecoin网络中正在发生的事情，例如官方的 [网络统计页面](http://stats.testnet.filecoin.io/) 以及社区管理的区块浏览器 [filscan.io](https://filscan.io)。
+
+## 组件默认端口
+
+```shell
+Auth 8989
+Gateway 45132
+Daemon node 3453
+Miner 12308
+Sealer 2345
+Worker 3456
+```
+
+在构建Venus各组件过程中可能会产生RPC链接问题，可以运行类似 telnet 10.50.110.59 12308 命令测试各组件端口是否打开。
