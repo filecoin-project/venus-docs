@@ -217,3 +217,15 @@ venus sync status
 ## Viewing network information
 
 There are a few visualisation tools to help users understand what is happening within the Filecoin network, such as the official [network stats](http://stats.testnet.filecoin.io/) page as well as the community-managed block explorers [filscan.io](https://filscan.io), [filscout.io](https://filscout.io), and [filfox.io](https://filfox.io/).
+
+## Module default port
+
+```shell
+Auth 8989
+Gateway 45132
+Daemon node 3453
+Miner 12308
+Sealer 2345
+Worker 3456
+```
+If you have some problem with connect to module, pls check the default port whether is opened. We can run telnet to debug. Such as 10.50.110.59 12308

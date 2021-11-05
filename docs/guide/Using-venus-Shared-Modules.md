@@ -261,6 +261,12 @@ Using process controll like  `systemmd` or `supervisord` is recommended.
 
 :::
 
+:::warning
+
+Pls keep the wallet unlock state. If the state is locked , it will block sealer "Waiting for confirmation".
+
+:::
+
 ## Install venus-sealer
 
 Set evironment variable for building venus-sealer.
