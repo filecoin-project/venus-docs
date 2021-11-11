@@ -675,33 +675,26 @@ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 
 ### 已有算力集群处理
 
-如果集群已经有算力，转为venus-sealer后需要把旧的路径attach到venus-sealer中，以便wdPoSt和winningPoSt时能读取对应的Sector密封数据。
+&ensp;&ensp;等待lotus-miner正在做的扇区完成后执行下列流程：
 
-假设已有集群的store 目录为 /tmp/data,在venus-sealer启动后需要执行:
+1. 停止lotus-miner，因为默认lotus-miner和venus-sealer都是用的2345端口；
 
+2. 初始化venus-sealer，--actor 指定原来的矿工地址；
+
+3. 启动venus-sealer后，使用venus-sealer storage attach --store 来指定原来数据存储的路径；
+
+4. 配置venus-sealer，包括 原来lotus的 [Addresses] [Fees] [Storage] [Sealing] 以及venes相关的 [Node] [JWT] [Messager]
+
+5. 修改默认下发sector id的数值：
+
+&ensp;&ensp; 如果用户是从lotus转到venus上,并且想继续增长算力。比如用户的sector id已经用到了300，建议把venus-sealer的起始sector id设置为301(比300大的值皆可)，具体方法如下:
 ```bash
-$ ./venus-sealer storage attach --store /tmp/data
-```
-
-如果想用venus-sealer创建新的store路径，那么创建后需要把旧的sector相关文件全部拷贝到新创建的store目录下。
-
-- ***在pledge前需要将sealer.db数据库metadata表中的sector_count字段改为当前链上Sector的最大值+1,否则会重复分配已经存在sector-id.***
-
-全流程如下:
-
-1. 等待正在做的停止lotus-miner，默认lotus-miner和venus-sealer都是用的2345端口；
-
-2. 用原有miner地址（--actor=f0***）初始化venus-sealer；
-
-3. 启动venus-sealer后，使用venus-sealer storage attach --store指定为${lotus-miner store}；
-
-4. 修改sector_count的值，假设当前该miner最大的sector_id=300，修改流程如下:
-```bash
-apt install sqlite3 -y
+apt install sqlite3 -y # yum for centos
 sqlite3 .venussealer/sealer.db
 select * from metadata;
-update metadata set sector_count=301; # 大于300即可
+update metadata set sector_count=301;
 ```
+这个sector id就可以从301开始下发下去了
 
 ## 问题?
 
