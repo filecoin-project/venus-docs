@@ -261,12 +261,6 @@ Using process controll like  `systemmd` or `supervisord` is recommended.
 
 :::
 
-:::warning
-
-Pls keep the wallet unlock state. If the state is locked , it will block sealer "Waiting for confirmation".
-
-:::
-
 ## Install venus-sealer
 
 Set evironment variable for building venus-sealer.
@@ -680,6 +674,42 @@ $ nohup ./venus-sealer run >> sealer.log 2>&1 &
 
 # the other way of setting env variable
 $ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
+```
+
+## lotus-miner
+
+&ensp;&ensp; If you have sealed some sectors with lotus-miner, it's recommended to use a customized lotus-miner: https://github.com/ ipfs-force-community/lotus, branch: ${lotus_latestVersion}/incubation, eg v1.12.0/incubation.
+
+&ensp;&ensp; The branch just adds the logic for docking shared components, and the other logic has not changed. You can execute lotus-miner according to your original habits.
+
+### For existing power cluster
+
+If the cluster already has power, after converting to venus-sealer, you need to attach the old path to venus-sealer so that the corresponding sector sealing data can be read when wdPoSt and winningPoSt.
+
+Assuming that the store directory of the existing cluster is /tmp/data, it needs to be executed after venus-sealer is started:
+
+```bash
+$ ./venus-sealer storage attach --store /tmp/data
+```
+
+If you want to use venus-sealer to create a new store path, you need to copy all the old sector related files to the newly created store directory after creation.
+
+-***Before the pledge, you need to change the sector_count field in the metadata table of the sealer.db database to the maximum value of the sector on the current chain + 1, otherwise the existing sector-id will be repeatedly allocated.***
+
+The whole process is as follows:
+
+1. Wait for the lotus-miner to be stopped. By default, both lotus-miner and venus-sealer use port 2345;
+
+2. Initialize venus-sealer with the original miner address (--actor=f0***);
+
+3. After starting venus-sealer, use venus-sealer storage attach --store to specify ${lotus-miner store};
+
+4. Modify the value of sector_count. Assuming that the sector_id of the current miner is 300, the modification process is as follows:
+```bash
+apt install sqlite3 -y
+sqlite3 .venussealer/sealer.db
+select * from metadata;
+update metadata set sector_count=301; # More than 300 is enough
 ```
 
 ## Questions?
