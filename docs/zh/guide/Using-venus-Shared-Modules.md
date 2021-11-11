@@ -230,6 +230,13 @@ $ nohup ./venus-wallet run > wallet.log 2>&1 &
 
 :::
 
+:::warning
+
+请确保venus-wallet 处于unlocked状态，要么会在Sealer模块初始化时卡在 "Waiting for confirmation"，导致miner帐号生成不了。
+
+:::
+
+
 ## 安装venus-sealer
 
 下载并编译`venus-sealer`的源代码。
