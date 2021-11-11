@@ -230,12 +230,6 @@ $ nohup ./venus-wallet run > wallet.log 2>&1 &
 
 :::
 
-:::warning
-
-请确保venus-wallet 处于unlocked状态，要么会在Sealer模块初始化时卡在 "Waiting for confirmation"，导致miner帐号生成不了。
-
-:::
-
 ## 安装venus-sealer
 
 下载并编译`venus-sealer`的源代码。
@@ -670,11 +664,9 @@ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 
 &ensp;&ensp; 如果你已经用lotus-miner密封了一定数量的扇区，我们建议你继续使用lotus-miner，venus社区同步维护可接入共享组件的lotus-miner：https://github.com/ipfs-force-community/lotus，对于lotus官方的每个大版本，我们会同步发布对应版本。
 
-&ensp;&ensp; 最新分支: force/v1.10.1_venus_pool 对应 lotus官方 Tag: v1.10.1
-
 &ensp;&ensp; 这个分支只是将对接共享组件的逻辑加进来，其他逻辑一切没变，你可以按照原有的习惯去执行lotus-miner。
 
-## 有算力集群迁移venus
+### 已有算力集群处理
 
 如果集群已经有算力，转为venus-sealer后需要把旧的路径attach到venus-sealer中，以便wdPoSt和winningPoSt时能读取对应的Sector密封数据。
 
@@ -687,6 +679,22 @@ $ ./venus-sealer storage attach --store /tmp/data
 如果想用venus-sealer创建新的store路径，那么创建后需要把旧的sector相关文件全部拷贝到新创建的store目录下。
 
 - ***在pledge前需要将sealer.db数据库metadata表中的sector_count字段改为当前链上Sector的最大值+1,否则会重复分配已经存在sector-id.***
+
+全流程如下:
+
+1. 等待正在做的停止lotus-miner，默认lotus-miner和venus-sealer都是用的2345端口；
+
+2. 用原有miner地址（--actor=f0***）初始化venus-sealer；
+
+3. 启动venus-sealer后，使用venus-sealer storage attach --store指定为${lotus-miner store}；
+
+4. 修改sector_count的值，假设当前该miner最大的sector_id=300，修改流程如下:
+```bash
+apt install sqlite3 -y
+sqlite3 .venussealer/sealer.db
+select * from metadata;
+update metadata set sector_count=301; # 大于300即可
+```
 
 ## 问题?
 
