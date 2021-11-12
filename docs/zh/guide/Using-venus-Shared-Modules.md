@@ -120,7 +120,7 @@ wget -c https://golang.org/dl/go1.16.2.linux-amd64.tar.gz -O - | sudo tar -xz -C
 ```bash
 echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc && source ~/.bashrc
 # setup go env
-go env -w GOPROXY=https://goproxy.io,direct
+export GOPROXY=https://goproxy.cn
 go env -w GO111MODULE=on
 ```
 
