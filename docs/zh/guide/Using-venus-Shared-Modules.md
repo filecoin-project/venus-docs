@@ -685,16 +685,23 @@ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 
 4. 配置venus-sealer，包括 原来lotus的 [Addresses] [Fees] [Storage] [Sealing] 以及venes相关的 [Node] [JWT] [Messager]
 
-5. 修改默认下发sector id的数值：
+5. 修改默认下发sector id的数值,导入lotus-miner下发的扇区：
 
-&ensp;&ensp; 如果用户是从lotus转到venus上,并且想继续增长算力。比如用户的sector id已经用到了300，建议把venus-sealer的起始sector id设置为301(比300大的值皆可)，具体方法如下:
+&ensp;&ensp; 如果想继续增长算力,需要修改扇区nextid的值>已完成扇区的最大ID;想在venus-sealer查看已有的扇区,需要从lotus-miner导入,具体方法如下:
 ```bash
-apt install sqlite3 -y # yum for centos
-sqlite3 .venussealer/sealer.db
-select * from metadata;
-update metadata set sector_count=301;
+./lotus-convert -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=0 -sid=10
 ```
-这个sector id就可以从301开始下发下去了
+`taskType`: 0-只修改nextid,1-只导入扇区,2-都做; `sid`: 默认是0,这时会从源仓库中查找最大扇区的ID写入nextid,其他值-以指定的值修改nextid,举例如下:
+```bash
+# 只修改nextid=300
+./lotus-convert -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=0 -sid=300
+
+# 仅导入扇区
+./lotus-convert -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=1
+
+# 导入扇区并修改nextid为已有扇区最大的ID
+./lotus-convert -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=2
+```
 
 ## 问题?
 

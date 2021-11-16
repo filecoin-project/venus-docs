@@ -75,39 +75,38 @@ Enter private key:
 TRUST_PARAMS=1 ./lotus-miner init --no-local-storage --actor=<minerID> --sector-size=32G --nosync
 ```
 
+- 设置扇区nextid,导入venus-sealer做的扇区.
+```bash
+# 编译ffi,如果已经编译则跳过
+$ git submodule update --init --recursive
+$ make deps
+# 编译lotus-fix
+$ make lotus-fix
+
+# 修改nextid或导入扇区列表
+$ ./lotus-fix -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=0 -sid=10
+```
+> `taskType`: 0-只修改nextid,1-只导入扇区,2-都做; `sid`: 默认是0,这时会从源仓库中查找最大扇区的ID写入nextid,其他值-以指定的值修改nextid.
+
+> 这一步需要暂时停止lotus-miner的运行，所以建议在init后进行操作。另外，如果是root用户执行的操作，且lotus-miner是子用户（eg. test）执行，则需要授权。
+```bash
+chown test:test /home/test/ -R
+```
+
 - 创建lotus-miner的store路径,和venus-sealer的store路径相同,这样就不需要挪动永久存储文件了。
 ```bash
 # 不加`--init`标志，因为venus-sealer已经创建
 ./lotus-miner storage attach --store <VENUS_SEALER_STORE_PATH>
 ```
 
-- 修改metadata中的key=/storage/nextid,保证新的sectorID不从1开始。
-```bash
-# 在venus-sealer目录编译lotus-fix
-$ make lotus-fix
-
-# 修改lotus-miner的nextid
-./lotus-fix -lotus-miner-repo=<~/.lotusminer> -sid=<max sector id>
-```
-
-- 导入venus-sealer完成的Sector数据，这些数据在链上也可以查找到，所以不是必须的。
-```bash
-./lotus-fix -task=import-sector  -lotus-miner-repo=/home/litao/.lotusminer -venus-sealer-repo=~/.venussealer
-import sectors success.
-```
-> 这两步操作需要暂时停止lotus-miner的运行，所以建议在init后进行操作。另外，如果是root用户执行的操作，且lotus-miner是子用户（eg. test）执行，则需要文件授权。
-```bash
-chown test:test /home/test/ -R
-```
-
 - 封装新的Sector
 
 ```bash
-# 指定lotus-miner的seal目录,这个可以指定和之前venus-sealer相同的目录，也可以不同
+# 指定lotus-miner的seal目录,这个可以指定和之前venus-sealer相同的目录,也可以不同
 $ ./lotus-miner storage attach --init --seal <PATH>
 
 # 启动lotus-miner，发送新的任务
 $ nohup ./lotus-miner run > miner.log 2>&1 &
 $ ./lotus-miner sectors pledge
 ```
-至此你的节点已经切换为Lotus运行，后续操作请参考lotus的相关文档。之前创建的venus-sealer repo也可以删除了。
+至此集群已经切换为Lotus运行，后续操作请参考Lotus集群的相关文档。之前创建的venus-sealer repo也可以删除了。
