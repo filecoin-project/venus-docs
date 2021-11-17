@@ -10,7 +10,7 @@ Venus代指Filecoin的通用实现之一，venus则代指Venus的组件之一。
 
 2020年6月，Protocol Lab发起了关于由社区后续维护go-filecoin的RFP，IPFSForce随后申请并获得了维护权。10月，go-filecoin更名为Venus，我们继续推进对Venus项目的维护工作。
 
-在重新保持维护之前，Venus是一个严重缺乏维护的项目。协议和组件上，vm/mpool/chain/rpc虽然都有了，但是全都存在不同程度的问题，我们用了三个多月的时间，逐渐修复很多协议层、代码层,、性能的问题，使得Venus完成了与Lotus的互操作，让使用Venus的节点可以正常的在网络上运行。后续我们又逐渐的让Venus支持了Calibration、Nerpa、2k网络。
+在重新保持维护之前，Venus是一个严重缺乏维护的项目。协议和组件上，vm/mpool/chain/rpc虽然都有了，但是全都存在不同程度的问题，我们用了三个多月的时间，逐渐修复很多协议层、代码层,、性能的问题，使得Venus完成了与Lotus的互操作，让使用Venus的节点可以正常的在网络上运行。后续我们又逐渐的让Venus支持了Calibration、2k网络。
 
 完成以上工作后，我们着手于Venus的开发方向。
 

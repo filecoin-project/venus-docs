@@ -107,7 +107,7 @@ actors = append(actors, exported5.BuiltinActors()...)
 
 &ensp;&ensp; 在升级前必须通过以下验证:
 
-- 在 cali/nerpa 网络搭建集群能够正常增长算力并出块;
+- 在 cali 网络搭建集群能够正常增长算力并出块;
 
 - 定制的lotus正常工作;
 

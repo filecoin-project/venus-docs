@@ -93,7 +93,7 @@ $ nohup ./venus-wallet run > wallet.log 2>&1 &
 &ensp;&ensp; venus-sector-manager 具备两个全局 flag，分别是：
 
 - home：数据目录，用来保存本地数据，默认位于 `~/.venus-sector-manager`
-- net：用于选择加入的 Filecoin 网络，默认 `mainnet`, 可选项: `mainnet`，`nerpa`，`testnetnet`，`2k`，`cali`，`forcenet`。
+- net：用于选择加入的 Filecoin 网络，默认 `mainnet`, 可选项: `mainnet`，`testnetnet`，`2k`，`cali`，`forcenet`。
 
 
 &ensp;&ensp; 初始化venus-sector-manager。

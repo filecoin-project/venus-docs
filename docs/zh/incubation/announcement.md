@@ -8,6 +8,6 @@ Filecoin基金会与Venus团队于7月7日联合推出生态项目[_Filecoin“�
 
 **孵化中心第一阶段将从2021年7月26日运行至2021年10月24日**，成功加入孵化中心的参与者须每天密封至少64个扇区（2TiB），参与者可以持续参与该计划，直到他们的存储量达到1PiB或运行至该阶段结束。
 
-除此之外，现在孵化中心为更多的存储提供者提供了测试环境，就像在主网一样，Venus团队**在Nerpa网络提供了免费的共享组件服务，供社区成员测试或体验** 。
+除此之外，现在孵化中心为更多的存储提供者提供了测试环境，就像在主网一样，Venus团队**在Calibration网络提供了免费的共享组件服务，供社区成员测试或体验** 。
 
 立即加入孵化中心计划，请填写此[_申请表_](http://venusteam.mikecrm.com/1lmpQtj)。如果对加入孵化中心有任何疑问，可以通过[_电子邮件_](mailto:venus@ipfsforce.com)或Filecoin Slack：[_fil-incubation-center_](https://filecoinproject.slack.com/archives/C028MN42KEE)联系[_Venus团队_](mailto:venus@ipfsforce.com)。

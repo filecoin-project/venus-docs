@@ -49,7 +49,7 @@ mount -t nfs 192.168.1.151:/nfs /nfs
 ### 运行venus-sealer
 ```sh
 #初始化venus-sealer，这里不使用本地存储
-venus-sealer --network nerpa init --actor=t01000 --sector-size=512M --no-local-storage --node-url {venus-api} --node-token {venus-token} --messager-url http://{venus-message api}/rpc/v0
+venus-sealer --network calibration init --actor=t01000 --sector-size=512M --no-local-storage --node-url {venus-api} --node-token {venus-token} --messager-url http://{venus-message api}/rpc/v0
 
 venus-sealer run
 ```

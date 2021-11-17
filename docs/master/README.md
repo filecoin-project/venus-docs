@@ -30,7 +30,7 @@ In exchange for their work, Masters will receive access to a prize pool of more 
 
 To join the Venus Masters Project, fill out this [Application Form](http://venusteam.mikecrm.com/KWWYu0F) with as much information as possible. 
 
-The application of phase 1 will start from September 20 to October 10. In addition to the documents already published, we will publish a series of Master Classes with tutorial videos and documents to help Venus Masters work better. The selected Masters can complete the learning process before October 31, and complete the testing in the provided Calibration/Nerpa network with the assistance of Venus team.
+The application of phase 1 will start from September 20 to October 10. In addition to the documents already published, we will publish a series of Master Classes with tutorial videos and documents to help Venus Masters work better. The selected Masters can complete the learning process before October 31, and complete the testing in the provided Calibration network with the assistance of Venus team.
 
 After learning process and testing, 3 Masters will be selected to start working in early November, so be consistent with the phase 2 of the Incubation Center.
 Participant who have any issues joining the Venus Masters can reach out to the Venus team by email（venus@ipfsforce.com）or on Filecoin Slack: [fil-venus](https://filecoinproject.slack.com/archives/CEHHJNJS3).
