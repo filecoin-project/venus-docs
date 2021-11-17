@@ -4,10 +4,11 @@ If you already have power sealed using `lotus-miner`, you can use venus-ready `l
 
 ### Branches
 
-List of lotus version(s) to their corresponding venus-ready branch.
+List of lotus version(s) to their corresponding venus-ready branch. Note that one way to find corresponding branch is to follow this branch naming convention: ${lotus_latestVersion}/incubation. For example, `v1.12.0/incubation`.
 
 | lotus ver. | venus-ready branch                                           | venus-ready commit                                           |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 1.12.0     | [v1.12.0/incubation](https://github.com/ipfs-force-community/lotus/tree/v1.12.0/incubation) | [de080945d2d9d4d42317ef232ecfbce0a4b61104](https://github.com/ipfs-force-community/lotus/commit/de080945d2d9d4d42317ef232ecfbce0a4b61104) |
 | 1.10.1     | [v1.10.1_incubation](https://github.com/ipfs-force-community/lotus/commits/v1.10.1_incubation) | [4996c6e3f70b958bae8540d822c367c3aa3546ad](https://github.com/ipfs-force-community/lotus/commit/4996c6e3f70b958bae8540d822c367c3aa3546ad) |
 | 1.11.0     | [v1.11.0_incubation](https://github.com/ipfs-force-community/lotus/commits/v1.11.0_incubation) | [a500491902058a4e6e59283cd56755d56701e4b1](https://github.com/ipfs-force-community/lotus/commit/a500491902058a4e6e59283cd56755d56701e4b1) |
 

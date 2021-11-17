@@ -682,28 +682,36 @@ $ nohup ./venus-sealer run >> sealer.log 2>&1 &
 $ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 ```
 
-## lotus-miner
+## Migration
 
-&ensp;&ensp; If you have sealed some sectors with lotus-miner, it's recommended to use a customized lotus-miner: https://github.com/ ipfs-force-community/lotus, branch: ${lotus_latestVersion}/incubation, eg v1.12.0/incubation.
+There are two ways to migrate from Lotus to Venus: 1) switch to venus-sealer and connect to a hosted chain services, or 2) switch to a [venus-ready lotus-miner](https://venus.filecoin.io/advanced/) and connect to a hosted chain service. 
 
-&ensp;&ensp; The branch just adds the logic for docking shared components, and the other logic has not changed. You can execute lotus-miner according to your original habits.
+### Switching to venus-sealer
 
-### For existing power cluster
+Wait till lotus-miner to finish up existing sealing jobs and make sure you have enough time before your next windowPost deadline, then take the following steps:
 
-The whole process is as follows:
-
-1. Stop lotus-miner, because both lotus-miner and venus-sealer use port 2345 by default;
-
-2. Initialize venus-sealer with the original miner address (--actor=f0***);
-
-3. After starting venus-sealer, use venus-sealer storage attach --store to specify ${lotus-miner store};
-
-4. Modify the value of sector_count. Assuming that the sector_id of the current miner is 300, the modification process is as follows:
+1. Stop lotus-miner as both lotus-miner and venus-sealer use port 2345 by default.
+2. Init venus-sealer with your miner id with `--actor` flag along with other configuration flags. For example,  --actor=f0***.
+3. After initialization of venus-sealer, use `venus-sealer storage attach --store` to specify path for permanent storage, ie. what you used for ${lotus-miner store}.
+4. Import sectors from lotus-miner to venus-sealer and set sector nextid to the plus one of latest sealed sector id by executing the following. You can change repo paths in the command accordingly.
 ```bash
-apt install sqlite3 -y # yum for centos
-sqlite3 .venussealer/sealer.db
-select * from metadata;
-update metadata set sector_count=301; # More than 300 is enough
+./lotus-convert -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=2
+```
+
+### More on lotus-convert
+
+lotus-convert is a utility tool for migrating from lotus to venus.
+
+```bash
+# taskType=0; manually change nextid
+# set nextid to 300 with -sid flag
+./lotus-convert -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=0 -sid=300
+
+# taskType=1; import sectors from lotus-miner to venus-sealer
+./lotus-convert -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=1
+
+# taskType=2; atuo change nextid and import sectors from lotus-miner to venus-sealer
+./lotus-convert -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=2
 ```
 
 ## Questions?
