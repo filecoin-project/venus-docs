@@ -163,7 +163,7 @@ t02082
 启动`venus`进程进行链同步。 使用 `--network` 来指定`venus`连接的网络。
 
 ```bash
-$ nohup ./venus daemon --network=nerpa --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 & 
+$ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 & 
 ```
 
 > 使用`tail -f venus.log` 或 `./venus sync status` 检查同步过程中是否有任何错误。
@@ -321,7 +321,7 @@ $ ./venus-messager address set-sel-msg-num --num=5 <address>
 初始化`venus-miner`。
 ```bash
 $ ./venus-miner init
-# For nettype, choose from mainnet, nerpanet, debug, 2k, calibnet
+# For nettype, choose from mainnet, debug, 2k, calibnet
 --nettype <NET_TYPE>
 --auth-api <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --token <SHARED_ADMIN_AUTH_TOKEN> \

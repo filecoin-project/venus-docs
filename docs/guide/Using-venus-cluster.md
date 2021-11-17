@@ -79,7 +79,7 @@ $ ./venus-wallet new bls
 
 :::tip
 
-If you are testing on Nerpa or Calibration, you have to fund all your addresses with test coins from faucets. For nerpa, use this [faucet](https://faucet.nerpa.interplanetary.dev/funds.html). For calibration, use this [faucet](https://faucet.calibration.fildev.network/funds.html). 
+If you are testing on Calibration, you have to fund all your addresses with test coins from faucets. For calibration, use this [faucet](https://faucet.calibration.fildev.network/funds.html). 
 
 :::
 
@@ -135,7 +135,7 @@ Init venus-sector-manager.
 
 ```bash
 # use --home flag for local data storage, default: ~/.venus-sector-manager
-# use --net for network selection, nerpa, testnetnet, 2k, cali, forcenet, default: mainnet
+# use --net for network selection, testnetnet, 2k, cali, forcenet, default: mainnet
 $ ./venus-sector-manager --net=forcenet daemon init
 ```
 

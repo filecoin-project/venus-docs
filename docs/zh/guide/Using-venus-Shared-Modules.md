@@ -42,7 +42,7 @@
 
 :::warning
 
-建议您在部署到主网上之前在`nerpa` 或`calibration`网络中测试您的配置。
+建议您在部署到主网上之前在`calibration`网络中测试您的配置。
 
 :::
 
@@ -195,7 +195,7 @@ $ ./venus-wallet new bls
 
 :::tip
 
-如果您在`Nerpa`或`Calibration`上进行测试，则必须使用来自水龙头的测试币为您的所有地址提供资金。 对于 nerpa，请使用此[水龙头](https://faucet.nerpa.interplanetary.dev/funds.html)。对于校准网，请使用此[水龙头](https://faucet.calibration.fildev.network/funds.html)。
+如果您在`Calibration`上进行测试，则必须使用来自水龙头的测试币为您的所有地址提供资金。对于校准网，请使用此[水龙头](https://faucet.calibration.fildev.network/funds.html)。
 
 :::
 
@@ -311,7 +311,7 @@ $ make
 ```bash
 $ nohup ./venus-sealer \
 # Leave out this flag for mainnet
---network=nerpa init \
+--network=calibration init \
 --worker=<WORKER_ADDRESS> \
 --owner=<OWNER_ADDRESS>  \
 # Choose between 32G or 64G for mainnet
@@ -359,7 +359,7 @@ $ nohup ./venus-sealer \
 ```bash
 $ ./venus-sealer 
 # Leave out this flag for mainnet
---network=nerpa init \
+--network=calibration init \
 --actor=<MINER_ID>  \
 # Config for different shared venus modules
 --node-url=/ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \

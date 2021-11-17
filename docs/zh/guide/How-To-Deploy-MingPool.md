@@ -41,7 +41,7 @@
 
 :::warning
 
-建议您在部署到主网上之前在`nerpa` 或`calibration`网络中测试您的配置。
+建议您在部署到主网上之前在`calibration`网络中测试您的配置。
 
 :::
 
@@ -224,7 +224,7 @@ $ make
 启动`venus`进程进行链同步。 使用 `--network` 来指定`venus`连接的网络。
 
 ```bash
-$ nohup ./venus daemon --network=nerpa --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 & 
+$ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 & 
 ```
 
 :::tip
@@ -254,7 +254,7 @@ vim ~/.venus/config.json
 ```bash
 $ ps -ef | grep venus
 $ kill -9 <VENUS_PID>
-$ nohup ./venus daemon --network=nerpa --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 
+$ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 
 ```
 
 ## 安装venus-messager
@@ -301,8 +301,8 @@ $ make
 
 ```bash
 $ ./venus-miner init
-# For nettype, choose from mainnet, nerpanet, debug, 2k, calibnet
---nettype nerpanet
+# For nettype, choose from mainnet, debug, 2k, calibnet
+--nettype calibnet
 --auth-api <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --token <SHARED_ADMIN_AUTH_TOKEN> \
 --gateway-api /ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132

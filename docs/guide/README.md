@@ -10,7 +10,7 @@ Now Venus has lead the way to the distributed storage pool of Filecoin through c
 
 On June 2020, Protocol Labs launched an RFP to handover the maintenance of go-filecoin to another community member, and IPFSForce applied for it and successfully obtain the project. In October, We renamed go-filecoin as Venus, and take over the maintenance of Venus Implementation.
 
-Before IPFSForce’s application, maintenance effort is seriously lacking in Venus project.  In terms of protocols and components, vm,mpool, chain, rpc are all available, but all have different kind of issue. It takes Venus team more than 3 months to gradually fix protocol layer, code layer, and problematic fuctions, making Venus complete the interoperability with Lotus, so that the nodes using Venus can run smoothly in the Filecoin network. And then we let Venus support calibration, Nerpa and 2K networks.
+Before IPFSForce’s application, maintenance effort is seriously lacking in Venus project.  In terms of protocols and components, vm,mpool, chain, rpc are all available, but all have different kind of issue. It takes Venus team more than 3 months to gradually fix protocol layer, code layer, and problematic fuctions, making Venus complete the interoperability with Lotus, so that the nodes using Venus can run smoothly in the Filecoin network. And then we let Venus support calibration and 2K networks.
 
 After completing the above work, we start to set the roadmap of Venus development.
 

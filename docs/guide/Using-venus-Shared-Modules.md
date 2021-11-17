@@ -42,7 +42,7 @@ Before diving into deployment of your mining operation, please make sure you go 
 
 :::warning
 
-It is recommended that you test your setup in nerpa or calibration network before deploying on mainnet. 
+It is recommended that you test your setup in calibration network before deploying on mainnet. 
 
 :::
 
@@ -212,7 +212,7 @@ $ ./venus-wallet new bls
 
 :::tip
 
-If you are testing on Nerpa or Calibration, you have to fund all your addresses with test coins from faucets. For nerpa, use this [faucet](https://faucet.nerpa.interplanetary.dev/funds.html). For calibration, use this [faucet](https://faucet.calibration.fildev.network/funds.html). 
+If you are testing or Calibration, you have to fund all your addresses with test coins from faucets. For calibration, use this [faucet](https://faucet.calibration.fildev.network/funds.html). 
 
 :::
 
@@ -325,9 +325,9 @@ If you don't have a miner id yet, run the following command to initialize sealer
 
 ```bash
 $ nohup ./venus-sealer \
-# Choose from nerpa, calibration for testnets
+# Choose from calibration for testnets
 # Leave out this flag for mainnet
---network=nerpa init \
+--network=calibration init \
 --worker <WORKER_ADDRESS> \
 --owner <OWNER_ADDRESS>  \
 # Choose between 32G or 64G for mainnet
@@ -374,9 +374,9 @@ If you already have a miner id, run the following command to initialize sealer. 
 
 ```bash
 $ ./venus-sealer  \
-# Choose from nerpa, calibration for testnets
+# Choose from calibration for testnets
 # Leave out this flag for mainnet
---network=nerpa init \
+--network=calibration init \
 --actor=<MINER_ID>  \
 # Config for different shared venus modules
 --node-url=/ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
