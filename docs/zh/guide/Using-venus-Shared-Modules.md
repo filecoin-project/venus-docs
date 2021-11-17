@@ -683,8 +683,6 @@ FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-worker run >> worker.log 2>&1 &
 
 3. 启动venus-sealer后，使用venus-sealer storage attach --store 来指定原来数据存储的路径；
 
-4. 配置venus-sealer，包括 原来lotus的 [Addresses] [Fees] [Storage] [Sealing] 以及venes相关的 [Node] [JWT] [Messager]
-
 5. 修改默认下发sector id的数值,导入lotus-miner下发的扇区：
 
 &ensp;&ensp; 如果想继续增长算力,需要修改扇区nextid的值>已完成扇区的最大ID;想在venus-sealer查看已有的扇区,需要从lotus-miner导入,具体方法如下:
