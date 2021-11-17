@@ -1,18 +1,22 @@
 ## Incubation Exit Guide
 
-After each phase of the incubator is over, miners face the problem of withdrawing. Currently there are lotus and venus implementations of Filecoin mainnet. Therefore, the exit options available to miners are：
+There are couple options for storage providers to exit incubation program either voluntarily or after each phase ends.
 
-- Access to venus chain services built by other operators or participate in the second phase of the incubator;
-- Access the venus chain service built by yourself;
-- Switch back to lotus.
+- Join a hosted chain service (venus shared modules) by third party.
+- Deploy a chain service (venus shared modules) by yourself.
+- Switch back to Lotus.
 
-The above is the optional exit plan for miners at the current stage. Here we explain how to access the venus chain service built by yourself and switch back to the lotus plan one by one.
+We will go through option 2 and 3 in this documentation.
 
-### Switch back to your own venus
+:::warning
 
-- Build the chain service layer, refer to the document [Chain service construction](./Chain_service_construction.md)
+Make sure you go through the documentation carefully before carry out the exit. Find us on Slack if you have questions.
 
-- Modify the `venus-wallet` configuration (`~/.venus_wallet/config.toml`) to point to the local chain service.
+:::
+
+### Deploy a chain service
+
+Refer to this [document](https://venus.filecoin.io/guide/How-To-Deploy-MingPool.html) to first deploy your own venus chain service. Modify configuration file (`~/.venus_wallet/config.toml`) of `venus-wallet` to point to the newly deployed chain service.
 
 ```toml
 [APIRegisterHub]
@@ -21,7 +25,7 @@ Token = "<AUTH_TOKEN_FOR_ACCOUNT_NAME>"
 SupportAccounts = ["<ACCOUNT_NAME>"]
 ```
 
-- Modify the configuration of `venus-sealer` (`~/.venussealer/config.toml`) to point to the local chain service.
+Modify the configuration file of  `venus-sealer` (`~/.venussealer/config.toml`) to point to the newly deployed chain service.
 
 ```toml
 [Node]
@@ -40,69 +44,104 @@ SupportAccounts = ["<ACCOUNT_NAME>"]
   Token = <AUTH_TOKEN_FOR_ACCOUNT_NAME>
 ```
 
-- Restart `venus-walle` --> `venus-sealer`.
-
-[Reference documents](../guide/Using-venus-Shared-Modules.md)
+Restart `venus-walle` and `venus-sealer`.
 
 
 ### Switch back to lotus
 
-- To build a lotus synchronization node, the current chain data is already very large, it is recommended to import the data from the snapshot.
-```bash
-nohup ./lotus daemon --import-snapshot=https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car > lotus.log 2>&1 &
-```
-You can also download the snapshot to the local first, and then `--import-snapshot` points to the local path.
+Refer to Lotus [documentation](https://docs.filecoin.io/mine/lotus/#protocol-labs-example-architecture) to build and deploy a Lotus node. Sync the node from a snapshot.
 
-- Import the wallet address related to miner_id (eg.Owner, Worker, Controller, etc.) into lotus;
 ```bash
-# Export private key from venus-wallet
+$ nohup ./lotus daemon --import-snapshot=https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car > lotus.log 2>&1 &
+```
+Import addresses under your miner_id (eg. owner, worker, controller addresses and etc.) into lotus;
+
+```bash
+# export private key from venus-wallet
 $ ./venus-wallet export <WALLET_ADDRESS>
 Password:
 
-# import to lotus
+# import them to lotus
 $  ./lotus wallet import
 Enter private key: 
 ```
 
-- Wait for the sector currently being sealed to be completed (ProveCommitSector message on the chain);
-
-- Stop venus-sealer and initialize a new repo with lotus-miner. The directory should not be the same as the repo of venus-sealer.
+Make sure you have no sealing tasks running, messages properly sent on-chain and enough time before your next windowPost deadline. Then stop venus-sealer and initialize a new repo using lotus-miner. 
 
 ```bash
 TRUST_PARAMS=1 ./lotus-miner init --no-local-storage --actor=<minerID> --sector-size=32G --nosync
 ```
 
-- Create the `store path` of lotus-miner, which is the same as the store path of venus-sealer, so there is no need to move the permanent storage file.
-```bash
-# Do not add the `--init` flag, because venus-sealer has been created
-./lotus-miner storage attach --store <VENUS_SEALER_STORE_PATH>
-```
+:::warning
 
-- Modify the key=/storage/nextid in the metadata to ensure that the new sectorID does not start from 1.
+Note that lotus-miner repo must not have the same path as the repo of venus-sealer.
+
+:::
+
+Build lotus-fix utility tool, set nextid and import sectors from venus-sealer.
+
 ```bash
-# Compile lotus-fix in the venus-sealer directory
+# Skip if you already compiled ffi
+$ git submodule update --init --recursive
+$ make deps
+
+# Compile lotus-fix
 $ make lotus-fix
 
-# Modify the nextid of lotus-miner
-./lotus-fix -lotus-miner-repo=<~/.lotusminer> -sid=<max sector id>
+# fix nextid and import sectors from venus-sealer
+# change repo path accordingly
+$ ./lotus-fix -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=2
 ```
 
-- Import the Sector data completed by venus-sealer, this is not necessary, because these can also be found on the chain.
+:::tip
+
+lotus-fix is a utility tool for migrating from venus to lotus.
+
 ```bash
-./lotus-fix -task=import-sector  -lotus-miner-repo=/home/litao/.lotusminer -venus-sealer-repo=~/.venussealer
-import sectors success.
+# taskType=0; manually change nextid
+# set nextid to 300 with -sid flag
+$ ./lotus-fix -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=0 -sid=300
+
+# taskType=1; import sectors from venus-sealer to lotus-miner
+$ ./lotus-fix -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=1
+
+# taskType=2; atuo change nextid and import sectors from venus-sealer to lotus-miner 
+$ ./lotus-fix -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=2
 ```
-> These two steps need to temporarily stop lotus-miner operation, so it is recommended to operate after init. In addition, if the operation is performed by the root user and lotus-miner is performed by a sub-user (eg. test), file authorization is required.
+
+:::
+
+:::warning
+
+Make sure lotus-miner is not running while using lotus-fix. 
+
+:::
+
+:::tip
+
+If executing lotus-fix from root user while lotus-miner is run by a user account, you may need set the following. 
+
 ```bash
+# For example, if your user account name is `test`
 chown test:test /home/test/ -R
 ```
 
-- Make a new sector
+:::
+
+Attach `store path` to lotus-miner, which should be the same as the store path of venus-sealer.
 
 ```bash
+# do not add the `--init` flag
+./lotus-miner storage attach --store <VENUS_SEALER_STORE_PATH>
+```
+
+Pledge a new sector
+
+```bash
+# attach seal path for lotus-miner
 $ ./lotus-miner storage attach --init --seal <PATH>
 
 $ nohup ./lotus-miner run > miner.log 2>&1 &
 $ ./lotus-miner sectors pledge
 ```
-At this point, your cluster has been switched to lotus operation. For follow-up operations, please refer to lotus related documents. The previously created venus-sealer repo can also be deleted.
+At this point, your storage system has been switched to lotus. For follow-up operations, please refer to lotus related documents.
