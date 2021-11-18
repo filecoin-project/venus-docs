@@ -288,11 +288,12 @@ Initialize venus-miner.
 ```bash
 $ ./venus-miner init
 # For nettype, choose from mainnet, debug, 2k, calibnet
---nettype calibnet
+--nettype calibnet \
 --auth-api <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --token <SHARED_ADMIN_AUTH_TOKEN> \
---gateway-api /ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132
+--gateway-api /ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132 \
 --api /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
+--slash-filter local
 ```
 
 Run venus-miner.
