@@ -18,21 +18,21 @@ We plan to let Venus support the development of storage pool. At the begining, w
 
 After that, through several times of re-design and modification, we finally decide to build it as a distributed storage pool. Distributed storage pool will not completely in charge with any single storage provider, but managed by multiple storage providers, which is more like a storage provider group/union.
 
-The external features of Venus distributed storage pool are similar to other pools. Storage Providers can store their resources in distributed geographic nodes. As long as there is a stable connection to the network, the storage provider can create a node accessible to Venus storage pool; The probability of earning the block reward is proportional to the amount of storage the miner contributes to the Filecoin network, and the final result of separate calculation and overall calculation should be the same: ***n1/p+ n2/p+n3/p......= (n1+n2+n3+.....)/p***, which provides a theoretical basis on the algorithm.
+The external features of Venus distributed storage pool are similar to other pools. Storage Providers can store their resources in distributed geographic nodes. As long as there is a stable connection to the network, the storage provider can create a node accessible to Venus storage pool; The probability of earning the block reward is proportional to the amount of storage the storage provider contributes to the Filecoin network, and the final result of separate calculation and overall calculation should be the same: ***n1/p+ n2/p+n3/p......= (n1+n2+n3+.....)/p***, which provides a theoretical basis on the algorithm.
 
 For the storage and retrieval, storage providers can access the network through the venus unified entrance or by themselves. In the design and with the permission from storage providers, venus will select the appropriate node to store data according to specific requirements, so that the data is closer to the real scenario.
 
 1. ***Data storage***: component sharing is supported, and the storage will be gradually migrated to MySQL to ensure the metadata security of Venus through some highly available solutions.
    
-2. ***Shared Modules***: support high availability, ensure the quality of service, reduce the time cost and maintenance cost of miners, which make it easier for miners to join the storage pool. Nowadays, mining is a  high-tech activity, but to achieve Filecoin's goal to get the utmost out of storage resources, it is inevitable to lower the threshold to attract more participants.
+2. ***Shared Modules***: support high availability, ensure the quality of service, reduce the time cost and maintenance cost of storage providers, which make it easier for storage providers to join the storage pool. Nowadays, mining is a  high-tech activity, but to achieve Filecoin's goal to get the utmost out of storage resources, it is inevitable to lower the threshold to attract more participants.
    
-3. ***Combine the right for more block rewards***: miners can integrate resources together and help each other pack messages, so as to avoid the situation of small miners that no one can pack messages.
+3. ***Combine the right for more block rewards***: storage providers can integrate resources together and help each other pack messages, so as to avoid the situation of small storage providers that no one can pack messages.
    
 4. ***Improve the TPS of Filecoin network***: if there are multiple blocks at the same height, venus-miner can ensure that the messages in each block are different, as the avoidance of highly-repeated messages when blocks are separated.
    
 5. ***Improve the stability of messages***: messages in storing activities can be separated from nodes and managed by venus-messager, which can track the latest state of the chain to set a relatively reasonable estimated gas parameter, and also supports users to set a message parameter themselves.
 
-6. ***Improve the speed of data access***: the current Filecoin network is more like a pool which is merely for data storage, but as a complete data service, it also needs data retrieval to realize its real value. With sufficient miner users, Venus has more chances to promote the real data application. For example, for data distribution, Venus can distribute the data to some miners' nodes nearest to the customers, which can improve the access speed;  some public data can distribute these data to more nodes as much as possible to ensure that access at any location is effective, which can greatly improve the performance of IPFS network and further realize the goal of IPFS, as one of the Web3.0 solutions.
+6. ***Improve the speed of data access***: the current Filecoin network is more like a pool which is merely for data storage, but as a complete data service, it also needs data retrieval to realize its real value. With sufficient miner users, Venus has more chances to promote the real data application. For example, for data distribution, Venus can distribute the data to some storage providers' nodes nearest to the customers, which can improve the access speed;  some public data can distribute these data to more nodes as much as possible to ensure that access at any location is effective, which can greatly improve the performance of IPFS network and further realize the goal of IPFS, as one of the Web3.0 solutions.
 
 ## How Venus works
 
@@ -69,16 +69,16 @@ venus is similar to lotus-daemon, which is used to support all nodes. venus is c
 1. External signature is supported in the API of creating block (request will be proposed to lotus too).
 2. The API of message selection supports the selection of multiple batches of messages at the same time, which is used to select messages when multiple storage providers get the block rewards.
 3. Support the centralized authorization access to venus-auth.
-   
+
 Therefore, if you are interested in the mixed deployment of venus / lotus, you need to use Venus project which is compatible to Lotus or pick your own CCS.
 
 ### venus-miner
 
-The function of venus-miner is to combine the rights to earn block rewards. The program can configure the location of multiple miners and their sealers and wallets, and generate blocks for these miners at the same time. venus-miner has the following features:
+The function of venus-miner is to combine the rights to earn block rewards. The program can configure the location of multiple storage providers and their sealers and wallets, and generate blocks for these storage providers at the same time. venus-miner has the following features:
 
-1. Separate data: because the process of generating blocks needs to access data, and storage provider's sealer may be heterogeneous, but now most miners will use their own codes, so there is a problem about how to access these data to realize joint mining. By venus-miner’s independence on the storage organization mode and completing the proofs by miners, no matter how the miner's sealer organizes the storage, as long as the Computeproof API is implemented, venus-miner can generate the proof through it.
+1. Separate data: because the process of generating blocks needs to access data, and storage provider's sealer may be heterogeneous, but now most storage providers will use their own codes, so there is a problem about how to access these data to realize joint mining. By venus-miner’s independence on the storage organization mode and completing the proofs by storage providers, no matter how the miner's sealer organizes the storage, as long as the Computeproof API is implemented, venus-miner can generate the proof through it.
 2. Separate private key: when calculating random numbers and signature blocks, all operations about private key are accessed through remote wallet, which can improve the security of mining activities.
-3. Improve miners' wincount and TPS: when the miner who uses venus-miner rto get multiple (> 1) rights of block rewards in a period, venus-miner will try to select different messages from the message pool for packaging, which can somehow improve the speed of these messages on the chain, and make the block get more gas premium.
+3. Improve storage providers' wincount and TPS: when the miner who uses venus-miner rto get multiple (> 1) rights of block rewards in a period, venus-miner will try to select different messages from the message pool for packaging, which can somehow improve the speed of these messages on the chain, and make the block get more gas premium.
 
 ### venus-messenger
 
@@ -99,7 +99,7 @@ In terms of functions:
 
 ### venus-wallet
 
-venus-wallet is a remote wallet, which can support both Lotus and Venus in terms of protocols. In a typical deployment environment, this module is deployed locally by miners, and the security of assets is guaranteed by certain policy configuration. venus-wallet has the following features:
+venus-wallet is a remote wallet, which can support both Lotus and Venus in terms of protocols. In a typical deployment environment, this module is deployed locally by storage providers, and the security of assets is guaranteed by certain policy configuration. venus-wallet has the following features:
 
 1. Private key management function: currently it supports the private key management of asymmetric algorithms BLS and SECP, and it can generate random private key, and uses aes128 to encrypt and store the private key symmetrically whilst supports the private key to sign the data.
 2. Signature verification: each signature type has its verification policy, which ensures that the signer won't do deceits  the wallet through  non-credible signature type.

@@ -698,7 +698,7 @@ Wait till lotus-miner to finish up existing sealing jobs and make sure you have 
 ./lotus-convert -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=2
 ```
 
-### More on lotus-convert
+:::tip
 
 lotus-convert is a utility tool for migrating from lotus to venus.
 
@@ -713,6 +713,8 @@ lotus-convert is a utility tool for migrating from lotus to venus.
 # taskType=2; atuo change nextid and import sectors from lotus-miner to venus-sealer
 ./lotus-convert -lotus-miner-repo=/root/.lotusminer/ -venus-sealer-repo=/root/.venussealer -taskType=2
 ```
+
+:::
 
 ## Questions?
 
