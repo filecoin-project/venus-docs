@@ -139,8 +139,9 @@ nohup ./venus-messager run \
 ```bash
 # init miner repo
 ./venus-miner init --nettype=2k --auth-api=http://127.0.0.1:8989 \
- --gateway-api=/ip4/127.0.0.1/tcp/45132
- --api=/ip4/127.0.0.1/tcp/3453 --token=<SHARED_ADMIN_AUTH_TOKEN>
+ --gateway-api=/ip4/127.0.0.1/tcp/45132 \
+ --api=/ip4/127.0.0.1/tcp/3453 --token=<SHARED_ADMIN_AUTH_TOKEN> \
+ --slash-filter local
 ```
 
 &ensp;&ensp; 此时没有启动venus-sealer,所以无法出块,因为获得出块权后需要计算证明，这个是venus-sealer负责的(管理所有的扇区永久存储),故暂时不启动venus-miner。
