@@ -331,7 +331,7 @@ $ nohup ./venus-sealer \
 --worker <WORKER_ADDRESS> \
 --owner <OWNER_ADDRESS>  \
 # Choose between 32G or 64G for mainnet
---sector-size=512M \
+--sector-size=32GiB \
 # Config for different shared venus modules
 --node-url=/ip4/<IP_ADDRESS_OF_VENUS>/tcp/3453 \
 --messager-url=/ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> \
