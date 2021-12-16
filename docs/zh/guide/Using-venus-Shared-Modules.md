@@ -402,6 +402,8 @@ $ ./venus-sealer storage attach --init --seal <ABSOLUTE_PATH_OF_YOUR_SEALING_STO
 ./venus-sealer storage attach --init --store --seal <ABSOLUTE_PATH>
 ```
 
+> `--groups / --allow-to` 用于将worker分组，介绍见后文。
+
 > 如果你打算只用venus-sealer封装扇区，那么seal和store路径必须都配置，缺一不可。
 ```bash
 $ ./venus-sealer storage list
@@ -550,7 +552,6 @@ $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --miner-addr=</ip4/sealer-ip/tcp/sealer-port> \
 --miner-token=<token> \
 --task-total=100 \
---bindP1P2=false \
 --listen=<0.0.0.0:3458> <flags> > worker.log 2>&1 &           
 ```
 - sealer-port: cat ~/.venussealer/api, eg. /ip4/0.0.0.0/tcp/2345/http,把0.0.0.0替换为venus-sealer实际的IP地址.
@@ -563,7 +564,6 @@ $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --precommit2                  enable precommit2 (32G sectors: multiple cores, 96GiB RAM) (default: true)
 --commit                      enable commit (32G sectors: multiple cores or GPUs, 128GiB RAM + 64GiB swap) (default: true)
 --task-total                  total number of task (default: 100)
---bindP1P2                    P1 and P2 phase tasks are bound to the same machine (default: false)
 ```
 - ***task-total为可同时进行的任务数,默认100;***
 - ***bindP1P2设置为true表示这个worker的P2只能接P1也在本机器上完成的Sector任务,如果网络带宽不足,建议启动,可以减少不必要的文件传输***
@@ -572,6 +572,7 @@ $ TRUST_PARAMS=1 nohup ./venus-worker run \
 ```bash
 $ ./venus-worker storage attach --init --seal <ABSOLUTE_LOCAL_PATH>
 ```
+> `--groups / --allow-to` 用于将worker分组，介绍见后文。
 
 ### 多worker注意事项
 
@@ -580,7 +581,6 @@ $ ./venus-worker storage attach --init --seal <ABSOLUTE_LOCAL_PATH>
 ```bash
 $ TRUST_PARAMS=1 nohup ./venus-worker --repo=<REPO_PATH> run \
 --miner-addr=</ip4/sealer-ip/tcp/sealer-port> --miner-token=<token> \
---task-total=100 --bindP1P2=false \
 --listen=<0.0.0.0:3458> <flags> > worker.log 2>&1 &
 ```
 
@@ -603,6 +603,54 @@ $ ./venus-sealer storage list
         Weight: 10; Use: Seal 
         URL: http://192.168.200.17:3458/remote (latency: 1.2ms)
 ```
+
+### 存储分组
+
+`--groups / --allow-to` 用于 `venus-sealer/venus-worker storage attach` 命令，允许创建工作组，并避免在多venus-worker之间不必要地移动数据。例如在以下设置中：
+
+- venus-sealer
+    - Groups：["example-storage-group-1"]
+- venus-worker 1（PC1、PC2）：
+    - Groups：["example-seal-group-1"]，AllowTo: ["example-seal-group-1"]
+- venus-worker 2（PC1、PC2）：
+    - Groups：[“example-seal-group-2”]，AllowTo：[“example-seal-group-2”]
+- venus-worker 3 (PC1)：
+    - AllowTo：["example-seal-group-1"]
+
+如果没有存储组，worker 1/2 上的 PC2 任务可以使用来自其他 worker 的扇区数据进行调度，这通常会浪费带宽，并且偶尔会在获取数据时阻塞处理。
+
+使用如上配置的存储组，在 worker1/worker2 上完成 PC1 的扇区将始终在同一个 worker 上执行 PC2。来自 worker3 的扇区将只转到 worker1 以获取 PC2。
+
+可以通过两种方式设置组：
+
+- 对于现在的存储路径，当使用带有新 `--groups / --allow-to` 标志的 `storage attach --init` 命令时。
+- 对于现有的存储路径 - 通过修改 [path]/sectorstore.json，然后重新启动 venus-miner/venus-worker。
+
+Groups:
+```
+{
+  "ID": "74e1d667-7bc9-49bc-a9a6-0c30afd8684c",
+  "Weight": 10,
+  "CanSeal": false,
+  "CanStore": true,
+  "MaxStorage": 0,
+  "Groups": ["storage0"]
+}
+```
+
+AllowTo:
+```
+{
+  "ID": "54f090bf-9fa9-4a47-9f67-0cc4f24c810e",
+  "Weight": 10,
+  "CanSeal": true,
+  "CanStore": false,
+  "AllowTo": ["storage0"]
+}
+```
+
+- 如何让同一台机器的worker（PC2）只接收本机PC1完成的扇区任务？
+所有worker的`storage attach`时设置相同的 `--groups` 和`--allow-to`，并指定相同的 `seal` 目录 。
 
 ## 加速项配置
 

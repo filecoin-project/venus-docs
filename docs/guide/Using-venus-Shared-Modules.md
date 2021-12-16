@@ -414,6 +414,13 @@ $ ./venus-sealer storage attach --init --store <ABSOLUTE_PATH_OF_YOUR_PERMANENT_
 $ ./venus-sealer storage attach --init --seal <ABSOLUTE_PATH_OF_YOUR_SEALING_STORAGE>
 ```
 
+:::tip
+
+`--groups / --allow-to` is used to bind PC2 and PC1, see the following text for specific instructions.
+
+:::
+
+
 :::warning
 
 If either path was not set correctly, sealing will fail. Check if your paths are properly setup by `./venus-sealer storage list` , you shold get something close to following...
@@ -571,7 +578,6 @@ Run venus-worker.
 $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --miner-addr=/ip4/<IP_ADDRESS_OF_VENUS_SEALER>/tcp/<PORT_OF_VENUS_SEALER> \ 
 --miner-token=<SEALER_TOKEN> \
---bindP1P2=false \
 --listen=<0.0.0.0:3458> \ 
 --addpiece false \
 >> worker.log 2>&1 &                   
@@ -586,14 +592,7 @@ Other worker flags of interests.
 --precommit2	enable precommit2 (32G sectors: multiple cores, 96GiB RAM) (default: true)
 --commit			enable commit (32G sectors: multiple cores or GPUs, 128GiB RAM + 64GiB swap) (default: true)
 --task-total	total number of task (default: 100)
---bindP1P2		P1 and P2 phase tasks are bound to the same machine (default: false)
 ```
-
-:::tip
-
---bindP1P2 forces P2 to be done on the same machine of P1.
-
-:::
 
 :::tip
 
@@ -607,11 +606,66 @@ Attach sealing storage to worker. (Path for permanent storage will be inherited 
 $ ./venus-worker storage attach --init --seal <ABSOLUTE_PATH_OF_YOUR_SEALING_STORAGE>
 ```
 
+:::tip
+
+`--groups / --allow-to` is used to bind PC2 and PC1, see the following text for specific instructions.
+
+:::
+
 Check if your worker is connected.
 
 ```bash
-$ ./venus-sealer storage list 
+$ ./venus-sealer storage list
 ```
+
+### Storage groups
+
+`--groups / --allow-to` is used for `venus-sealer/venus-worker storage attach` command, allow for creating worker groups, and avoiding unnecesarily moving data between multi-purpose workers. For example in the following setup:
+
+- venus-sealer
+    - Path with Groups: ["example-storage-group-1"]
+- venus-worker 1 (PC1, PC2):
+    - Path with Groups: ["example-seal-group-1"], AllowTo: ["example-seal-group-1"]
+- venus-worker 2 (PC1, PC2):
+    - Path with Groups: ["example-seal-group-2"], AllowTo: ["example-seal-group-2"]
+- venus-worker 3 (PC1):
+    - Path with AllowTo: ["example-seal-group-1"]
+
+Without storage groups, PC2 tasks on workers 1/2 could be scheduled with sector data from other workers, which would often waste bandwidth and occasionally block processing on fetching data.
+
+With storage groups configured as above, sectors which had PC1 done on worker1 / worker2 will always execute PC2 on the same worker. Sectors from worker3 will only go to worker1 for PC2.
+
+Groups can be setup in two ways:
+
+- For now storage paths, when using the storage attach --init command with the new --groups / --allow-to flags.
+- For existing storage paths - by modifying [path]/sectorstore.json, then restarting venus-miner/venus-worker.
+
+Groups:
+```
+{
+  "ID": "74e1d667-7bc9-49bc-a9a6-0c30afd8684c",
+  "Weight": 10,
+  "CanSeal": false,
+  "CanStore": true,
+  "MaxStorage": 0,
+  "Groups": ["storage0"]
+}
+```
+
+AllowTo:
+```
+{
+  "ID": "54f090bf-9fa9-4a47-9f67-0cc4f24c810e",
+  "Weight": 10,
+  "CanSeal": true,
+  "CanStore": false,
+  "AllowTo": ["storage0"]
+}
+```
+
+- How to make the worker (PC2) of the same machine only receive the sector task completed by PC1 on the machine?
+    - Set the same `--groups` and `--allow-to` for storage of all workers on the same machine.
+    - Set the same `seal` storage directory for storage of all workers on the same machine.
 
 ### Multiple worker processes
 
@@ -623,7 +677,6 @@ Additionally, worker processes on same box will neep different repo path, which 
 $ TRUST_PARAMS=1 nohup ./venus-worker --repo=<REPO_PATH> run \
 --miner-addr=/ip4/<IP_ADDRESS_OF_VENUS_SEALER>/tcp/<PORT_OF_VENUS_SEALER> 
 --miner-token=<SEALER_TOKEN> \
---bindP1P2=false \
 --listen=<0.0.0.0:3458> \ 
 >> worker.log 2>&1 & 
 ```
