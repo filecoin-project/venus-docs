@@ -566,7 +566,6 @@ $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --task-total                  total number of task (default: 100)
 ```
 - ***task-total为可同时进行的任务数,默认100;***
-- ***bindP1P2设置为true表示这个worker的P2只能接P1也在本机器上完成的Sector任务,如果网络带宽不足,建议启动,可以减少不必要的文件传输***
 
 一般情况下，我们只为venus-worker配置seal路径,Store继承venus-sealer。worker完成扇区密封时，永久存储文件将被转移到venus-sealer指定的store路径.
 ```bash
