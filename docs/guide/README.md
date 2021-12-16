@@ -120,3 +120,11 @@ The following plans mainly focus on:
 3. Optimize venus-sealer scheduling method and storage improvements (in planning).
 4. Improve the usability of each venus module, continuously test components, fix potential bugs, ensure the stability and security of venus architecture, and simplify the procedure of deployment.
 5. Optimize the log system to facilitate problem query and tracking.
+
+## Learn more about Venus
+Docs : venus.filecoin.io
+Discussion : github.com/filecoin-project/venus/discussions
+Slack : filecoinproject.slack.com/archives/C028PCH8L31
+GitHub : github.com/filecoin-project
+Chain explorer ：filscan.io/home
+Store on the MainNet ：https://docs.filecoin.io/
