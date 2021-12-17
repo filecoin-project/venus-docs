@@ -579,6 +579,7 @@ $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --miner-addr=/ip4/<IP_ADDRESS_OF_VENUS_SEALER>/tcp/<PORT_OF_VENUS_SEALER> \ 
 --miner-token=<SEALER_TOKEN> \
 --listen=<0.0.0.0:3458> \ 
+--no-local-storage \
 --addpiece false \
 >> worker.log 2>&1 &                   
 ```
@@ -603,7 +604,7 @@ Other worker flags of interests.
 Attach sealing storage to worker. (Path for permanent storage will be inherited from sealer)
 
 ```bash
-$ ./venus-worker storage attach --init --seal <ABSOLUTE_PATH_OF_YOUR_SEALING_STORAGE>
+$ ./venus-worker storage attach --init --seal --groups=["g1","g2"] --allow-to=["g1","g2"] <ABSOLUTE_PATH_OF_YOUR_SEALING_STORAGE>
 ```
 
 :::tip
@@ -639,6 +640,21 @@ Groups can be setup in two ways:
 
 - For now storage paths, when using the storage attach --init command with the new --groups / --allow-to flags.
 - For existing storage paths - by modifying [path]/sectorstore.json, then restarting venus-miner/venus-worker.
+
+The command is demonstrated as follows:
+```bash
+# venus-worker 1
+TRUST_PARAMS=1 TMPDIR=./tmpw01 nohup ./venus-worker --repo=./tmpw01 run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<MINER_TOKEN> --listen=127.0.0.1:3458 > worker01.log 2>&1 &
+./venus-worker --repo=./tmpw01 storage attach --init --seal --groups="example-seal-group-1" --allow-to="example-seal-group-1" ./tmp01
+
+# venus-worker 2
+TRUST_PARAMS=1 TMPDIR=./tmpw02 nohup ./venus-worker --repo=./tmpw02 run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<MINER_TOKEN> --listen=127.0.0.1:3460 > worker02.log 2>&1 &
+./venus-worker --repo=./tmpw02 storage attach --init --seal --groups="example-seal-group-2" --allow-to="example-seal-group-2"  ./tmp02
+
+# venus-worker 3
+TRUST_PARAMS=1 TMPDIR=./tmpw03 nohup ./venus-worker --repo=./tmpw03 run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<MINER_TOKEN> --precommit2=false --listen=127.0.0.1:3462 > worker03.log 2>&1 &
+./venus-worker --repo=./tmpw03 storage attach --init --seal --allow-to="example-seal-group-1"  ./tmp03
+```
 
 Groups:
 ```
