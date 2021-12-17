@@ -552,6 +552,7 @@ $ TRUST_PARAMS=1 nohup ./venus-worker run \
 --miner-addr=</ip4/sealer-ip/tcp/sealer-port> \
 --miner-token=<token> \
 --task-total=100 \
+--no-local-storage \
 --listen=<0.0.0.0:3458> <flags> > worker.log 2>&1 &           
 ```
 - sealer-port: cat ~/.venussealer/api, eg. /ip4/0.0.0.0/tcp/2345/http,把0.0.0.0替换为venus-sealer实际的IP地址.
@@ -580,7 +581,7 @@ $ ./venus-worker storage attach --init --seal <ABSOLUTE_LOCAL_PATH>
 ```bash
 $ TRUST_PARAMS=1 nohup ./venus-worker --repo=<REPO_PATH> run \
 --miner-addr=</ip4/sealer-ip/tcp/sealer-port> --miner-token=<token> \
---listen=<0.0.0.0:3458> <flags> > worker.log 2>&1 &
+--listen=<0.0.0.0:3458> --no-local-storage <flags> > worker.log 2>&1 &
 ```
 
 查看venus-worker状态
@@ -624,6 +625,21 @@ $ ./venus-sealer storage list
 
 - 对于现在的存储路径，当使用带有新 `--groups / --allow-to` 标志的 `storage attach --init` 命令时。
 - 对于现有的存储路径 - 通过修改 [path]/sectorstore.json，然后重新启动 venus-miner/venus-worker。
+
+命令演示如下,venus-sealer和每个venus-worker启动时带上`--no-local-storage `参数，避免创建默认的seal目录:
+```bash
+# venus-worker 1
+TRUST_PARAMS=1 TMPDIR=./tmpw01 nohup ./venus-worker --repo=./tmpw01 run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<MINER_TOKEN> --listen=127.0.0.1:3458 > worker01.log 2>&1 &
+./venus-worker --repo=./tmpw01 storage attach --init --seal --groups="example-seal-group-1" --allow-to="example-seal-group-1" ./tmp01
+
+# venus-worker 2
+TRUST_PARAMS=1 TMPDIR=./tmpw02 nohup ./venus-worker --repo=./tmpw02 run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<MINER_TOKEN> --listen=127.0.0.1:3460 > worker02.log 2>&1 &
+./venus-worker --repo=./tmpw02 storage attach --init --seal --groups="example-seal-group-2" --allow-to="example-seal-group-2"  ./tmp02
+
+# venus-worker 3
+TRUST_PARAMS=1 TMPDIR=./tmpw03 nohup ./venus-worker --repo=./tmpw03 run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<MINER_TOKEN> --precommit2=false --listen=127.0.0.1:3462 > worker03.log 2>&1 &
+./venus-worker --repo=./tmpw03 storage attach --init --seal --allow-to="example-seal-group-1"  ./tmp03
+```
 
 Groups:
 ```
