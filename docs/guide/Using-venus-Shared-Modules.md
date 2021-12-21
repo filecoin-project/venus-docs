@@ -146,7 +146,7 @@ $ make
 
 :::tip
 
-For participants in incubation program, please use `incubation` branch by `git checkout incubation`. To recompile using latest code in `incuvation` branch, do `git pull` and then `make`.
+For participants in incubation program, please use `incubation` branch by `git checkout incubation`. To recompile using latest code in `incubation` branch, do `git pull` and then `make`.
 
 :::
 
@@ -300,7 +300,7 @@ For participants in incubation program, please use `incubation` branch by `git c
 
 :::tip
 
-To recompile using latest code in `incuvation` branch, do the following...
+To recompile using latest code in `incubation` branch, do the following...
 
 ```bash
 $ git fetch
