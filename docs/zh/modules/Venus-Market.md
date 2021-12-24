@@ -19,14 +19,26 @@ make
 
 ### 启动市场服务
 
+作为venus服务层运行
 ```shell script
-./venus-market run --node-url <node url> --messager-url <messager-url> --auth-token <auth token>  --signer-url <wallet url> --signer-token  <wallet token> --piecestorage <piece storeage path> --miner <miner address>
+./venus-market pool-run --node-url <node url> --auth-url <auth url> --messager-url <messager url>  --signer-type gateway --signer-url <signer url>  --auth-token <auth token>  --piecestorage fs:/xx
+```
+
+单人运行
+```shell script
+./venus-market solo-run --node-url <node url> --auth-url <auth url>  --auth-token <auth token> --signer-type wallet --signer-url <local wallet url>  --signer-token <local wallet token>   --piecestorage fs:/xx --miner <f0xxx:account>
 ```
 
 ### 启动市场客户端
 
+使用消息池的模式
 ```shell script
 ./market-client run --node-url <node url> --messager-url <messager-url> --auth-token <auth token>  --signer-url <wallet url> --signer-token  <wallet token> --addr <client default address>
+```
+
+使用本地钱包签名的模式
+```shell script
+./market-client run --node-url <node url> --node-token <auth token>  --signer-url <wallet url> --signer-token  <wallet token> --addr <client default address>
 ```
 
 ## 客户端操作指南
@@ -36,115 +48,115 @@ make
 
 导入数据
 ```shell script
-./market-client  import <file>
+./market-client data import <file>
 ```
 
 删除数据
 ```shell script
- ./market-client drop <data id>
+ ./market-client data drop <data id>
 ```
 
 显示本地数据
 ```shell script
- ./market-client local
+ ./market-client data local
 ```
 
 查看本地导入的数据状态
 ```shell script
- ./market-client stat
+ ./market-client data stat
 ```
 
 ### 检索相关
 
 查找检索数据的位置
 ```shell script
- ./market-client find <data id>
+ ./market-client retrieval find <data id>
 ```
 
 检索数据
 ```shell script
- ./market-client retrieve --miner <minerid> <data id> <output file>
+ ./market-client retrieval retrieve --miner <minerid>  --maxPrice <price> <data id> <output file>
 ```
 
 取消数据检索
 ```shell script
- ./market-client cancel-retrieval 
+ ./market-client retrieval cancel-retrieval  --deal-id <deal id>
 ```
 
 显示在检索的订单
 ```shell script
- ./market-client list-retrievals 
+ ./market-client retrieval list-retrievals 
 ```
 
 ### 存储相关
 
 发起存储订单
 ```shell script
- ./market-client deal    
+ ./market-client storage deals init
 ```
 
 查询矿工的要求（价格，等）
 ```shell script
- ./market-client query-ask    
+ ./market-client storage asks query-ask    
 ```
 
 
 显示本地存储订单列表
 ```shell script
- ./market-client list-deals   
+ ./market-client storage deals list-deals   
 ```
 
 显示存储订单详情
 ```shell script
- ./market-client get-deal
+ ./market-client storage deals get-deal
 ```
 
 显示头部矿工的要求信息
 ```shell script
- ./market-client list-asks     List asks for top miners
+ ./market-client storage asks list-asks     List asks for top miners
 ```
 
 查看本地存储订单的状态
 ```shell script
- ./market-client deal-stats    Print statistics about local storage deals
+ ./market-client storage asks deal-stats    Print statistics about local storage deals
 ```
 
 查看存储订单的详细信息
 ```shell script
- ./market-client inspect-deal
+ ./market-client storage deals inspect-deal
  ```
 
 ### 工具命令
 
 计算car文件的piececid
 ```shell script
- ./market-client commP <file>
+ ./market-client data commP <file>
  ```
 
 把文件转换成car文件
 ```shell script
- ./market-client generate-car <file> <car file>
+ ./market-client data generate-car <file> <car file>
  ```
  
  查看市场中抵押的资产情况
 ```shell script
-./market-client balances
+./market-client actor-funds balances
  ```
 
 
 查看正在进行的数据传输
 ```shell script
- ./market-client list-transfers 
+ ./market-client transfer list-transfers 
  ```
 
 重启数据传输
 ```shell script
-./market-client restart-transfer <transfer id>
+./market-client transfer restart-transfer <transfer id>
  ```
 
 取消数据传输
 ```shell script
-./market-client cancel-transfer  <transfer id>
+./market-client transfer cancel-transfer  <transfer id>
  ```
 
  ### 市场命令行指南
@@ -203,13 +215,13 @@ dagstore检索数据管理
 ### 发起订单流程
 
 ```shell script
- ./market-client generate-car  <file> <car file>
- ./market-client import <file>
- ./market-client deal
+ ./market-client data generate-car  <file> <car file>
+ ./market-client data import <file>
+ ./market-client storage deals init
 ```
 
 ### 检索数据流程
 
 ```shell
-./market-client retrieve --miner <miner addr> <data-cid> <dst path>
+./market-client retrieval retrieve --miner <miner addr> --maxPrice <max price> <data-cid> <dst path>
 ```
