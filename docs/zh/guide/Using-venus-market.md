@@ -160,7 +160,7 @@ generate token success: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidG9rZW4
   Url = "http://192.168.200.24:8989"
   Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWFya2V0LWNsaWVudCIsInBlcm0iOiJzaWduIiwiZXh0IjoiIn0.8lSYccRSO-nZuAoH--1s2HG11HUxSvRLDWdpvXkdV-4"
 ```
-:tipping_hand_woman:**:对于market作为云服务组件启动的情况,所有请求权限的验证都是通过venu-auth来进行,所以只需要配置`autho-token`就可以了.**
+:tipping_hand_woman:**:对于market作为云服务组件启动的情况,所有请求权限的验证都是通过venu-auth来进行,所以只需要配置`auth-token`就可以了.**
 
 执行命令:
 
