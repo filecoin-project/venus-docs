@@ -712,7 +712,7 @@ export FIL_PROOFS_PARAMETER_CACHE=/fast/disk/folder1 # > 100GiB!
 export FIL_PROOFS_PARENT_CACHE=/fast/disk/folder2    # > 50GiB!
 export TMPDIR=/fast/disk/folder3    			# used when sealing
 export MINER_API_INFO:<TOKEN>:/ip4/<miner_api_address>/tcp/<port>/http`
-export BELLMAN_CPU_UTILIZATION=0.875      # optimal value depends on exact hardware
+export BELLMAN_CPU_UTILIZATION=0.2      # optimal value depends on exact hardware
 export FIL_PROOFS_MAXIMIZE_CACHING=1
 export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 # when GPU is available
 export FIL_PROOFS_USE_GPU_TREE_BUILDER=1   # when GPU is available

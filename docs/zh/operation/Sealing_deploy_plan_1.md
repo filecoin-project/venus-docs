@@ -39,7 +39,7 @@
 
 # 启动venus-sealer
 
-BELLMAN_CPU_UTILIZATION=0.875 FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-sealer run > sealer.log 2>&1 &
+BELLMAN_CPU_UTILIZATION=0.2 FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-sealer run > sealer.log 2>&1 &
 
 # FIL_PROOFS_MAXIMIZE_CACHING=1 表示做P1的时候把部分临时文件缓存到内存
 
@@ -48,7 +48,7 @@ BELLMAN_CPU_UTILIZATION=0.875 FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-seale
 
 
 # 启动一个worker,只做AP,P1,P2,unseal(不允许用GPU)
-FIL_PROOFS_MAXIMIZE_CACHING=1 BELLMAN_CPU_UTILIZATION=0.875 FIL_PROOFS_USE_MULTICORE_SDR=1 ./venus-worker run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<sealer token> --commit=false --no-local-storage 
+FIL_PROOFS_MAXIMIZE_CACHING=1 BELLMAN_CPU_UTILIZATION=0.2 FIL_PROOFS_USE_MULTICORE_SDR=1 ./venus-worker run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<sealer token> --commit=false --no-local-storage 
 
 # 指定worker的seal路径
 ./venus-worker storage attach --init --seal <ABSOLUTE_LOCAL_PATH>
@@ -89,13 +89,13 @@ FIL_PROOFS_MAXIMIZE_CACHING=1 BELLMAN_CPU_UTILIZATION=0.875 FIL_PROOFS_USE_MULTI
     - 限核：这台机器我们运行2个worker为了避免一个worker占满cpu资源，故需要对每个worker进程进行限核。这里我们将75%的核数分配给worker01，将25%的核数分配给worker02.参考文档：https://venus.filecoin.io/zh/operation/Efficiency_of_sealing.html
 ```sh
 # worker01
-BELLMAN_CPU_UTILIZATION=0.875 FIL_PROOFS_USE_MULTICORE_SDR=1 FIL_PROOFS_MAXIMIZE_CACHING=1 ./venus-worker run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<sealer token> --unseal=false --addpiece=false --commit=false --no-local-storage
+BELLMAN_CPU_UTILIZATION=0.2 FIL_PROOFS_USE_MULTICORE_SDR=1 FIL_PROOFS_MAXIMIZE_CACHING=1 ./venus-worker run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<sealer token> --unseal=false --addpiece=false --commit=false --no-local-storage
     
 # 指定worker01的seal路径
 ./venus-worker storage attach --init --seal <ABSOLUTE_LOCAL_PATH>
 
 # worker02
-VENUS_WORKER_PATH=<worker_path> BELLMAN_CPU_UTILIZATION=0.875 ./venus-worker run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<sealer token> --precommit1=false --precommit2=false --addpiece=false --unseal=false --no-local-storage
+VENUS_WORKER_PATH=<worker_path> BELLMAN_CPU_UTILIZATION=0.2 ./venus-worker run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<sealer token> --precommit1=false --precommit2=false --addpiece=false --unseal=false --no-local-storage
 
 # 指定worker02的seal路径与worker01相同，这样做的好处是不需要文件的拷贝。
 ./venus-worker storage attach --seal <ABSOLUTE_LOCAL_PATH>

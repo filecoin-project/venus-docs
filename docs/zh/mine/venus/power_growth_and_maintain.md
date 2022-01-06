@@ -20,9 +20,9 @@ export FFI_BUILD_FROM_SOURCE=1
 
 ```
 # See https://github.com/filecoin-project/bellman
-export BELLMAN_CPU_UTILIZATION=0.875
+export BELLMAN_CPU_UTILIZATION=0.2
 ```
-&ensp;&ensp; BELLMAN_CPU_UTILIZATION是一个可选的可变来指定所述多幂计算的比例要被移动到一个CPU在平行于GPU。这是为了保持所有硬件都被占用。间隔必须是0和之间的数字1。该值0.875是一个很好的起点，但如果您想要最佳设置，您应该尝试使用它。不同的硬件设置将导致不同的最佳值。省略此环境变量也可能是最佳选择。
+&ensp;&ensp; BELLMAN_CPU_UTILIZATION是一个可选的可变来指定所述多幂计算的比例要被移动到一个CPU在平行于GPU。这是为了保持所有硬件都被占用。间隔必须是0和之间的数字1。该值0.2是一个很好的起点，但如果您想要最佳设置，您应该尝试使用它。不同的硬件设置将导致不同的最佳值。省略此环境变量也可能是最佳选择。
 
 ```
 # See https://github.com/filecoin-project/rust-fil-proofs/
@@ -144,7 +144,7 @@ Unseal 任务与 PreCommit1 任务具有相同的资源使用。
 # MINER_API_INFO as obtained before
 export TMPDIR=/fast/disk/folder3                    # used when sealing
 export MINER_API_INFO:<TOKEN>:/ip4/<miner_api_address>/tcp/<port>/http`
-export BELLMAN_CPU_UTILIZATION=0.875      # optimal value depends on exact hardware
+export BELLMAN_CPU_UTILIZATION=0.2      # optimal value depends on exact hardware
 export FIL_PROOFS_MAXIMIZE_CACHING=1
 export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 # when GPU is available
 export FIL_PROOFS_USE_GPU_TREE_BUILDER=1   # when GPU is available
