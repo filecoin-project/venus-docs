@@ -56,7 +56,7 @@
     
 
 # 启动venus-sealer
-BELLMAN_CPU_UTILIZATION=0.875 FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-sealer run > sealer.log 2>&1 &
+BELLMAN_CPU_UTILIZATION=0.2 FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-sealer run > sealer.log 2>&1 &
 
 # 设置store目录，因为sealer我们不做任务，故只需设置store目录
 ./venus-sealer storage attach --init --store <ABSOLUTE_PATH_OF_YOUR_PERMANENT_STORAGE>
@@ -66,7 +66,7 @@ BELLMAN_CPU_UTILIZATION=0.875 FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-seale
 
 - 启动venus-worker-01: 只做P1
 ```bash
-FIL_PROOFS_MAXIMIZE_CACHING=1 BELLMAN_CPU_UTILIZATION=0.875 FIL_PROOFS_USE_MULTICORE_SDR=1 \
+FIL_PROOFS_MAXIMIZE_CACHING=1 BELLMAN_CPU_UTILIZATION=0.2 FIL_PROOFS_USE_MULTICORE_SDR=1 \
 nohup ./venus-worker --repo=<ABSOLUTE_PATH_OF_WORKER_01> run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<sealer token> \
 --addpiece=false --unseal=false --precommit2=false --commit=false --no-local-storage  > worker-01.log 2>&1 &
 
@@ -78,7 +78,7 @@ nohup ./venus-worker --repo=<ABSOLUTE_PATH_OF_WORKER_01> run --miner-addr=/ip4/1
 - 启动venus-worker-02: 做AP,P2,Commit等任务
 
 ```bash
-BELLMAN_CPU_UTILIZATION=0.875 FIL_PROOFS_USE_MULTICORE_SDR=1 TMP_DIR=<OTHER_PATH> \
+BELLMAN_CPU_UTILIZATION=0.2 FIL_PROOFS_USE_MULTICORE_SDR=1 TMP_DIR=<OTHER_PATH> \
 nohup ./venus-worker --repo=<ABSOLUTE_PATH_OF_WORKER_02> run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<sealer token> \
 --precommit1=false --no-local-storage  > worker-02.log 2>&1 &
 
