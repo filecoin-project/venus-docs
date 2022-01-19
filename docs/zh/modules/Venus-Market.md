@@ -21,24 +21,58 @@ make
 
 作为venus服务层运行
 ```shell script
-./venus-market pool-run --node-url <node url> --auth-url <auth url> --messager-url <messager url>  --signer-type gateway --signer-url <signer url>  --auth-token <auth token>  --piecestorage fs:/xx
+./venus-market pool-run --node-url <node url> --auth-url <auth url> --messager-url <messager url>  --signer-type gateway --signer-url <signer url>  --auth-token <auth token>  --piecestorage fs:/xx  --payment-addr <addr:account>
 ```
 
 单人运行
 ```shell script
-./venus-market solo-run --node-url <node url> --auth-url <auth url>  --auth-token <auth token> --signer-type wallet --signer-url <local wallet url>  --signer-token <local wallet token>   --piecestorage fs:/xx --miner <f0xxx:account>
+./venus-market solo-run --node-url <node url> --auth-url <auth url>  --auth-token <auth token> --signer-type wallet --signer-url <local wallet url>  --signer-token <local wallet token>   --piecestorage fs:/xx --miner <f0xxx>  --payment-addr <addr:account>
+```
+
+设置peerid和address
+
+```shell script
+./venus-market net  listen  查看market地址和id
+./venus-market actor set-peer-id --miner <f0xxxx> <id>   设置peerid
+./venus-market actor set-addrs --miner <f0xxxx> <addr>   设置矿工的服务地址
+./venus-market actor info --miner <f0xxxx>               查看矿工的peerid和服务地址
+```
+
+设置矿工的存储ask
+```shell script
+./venus-market storage-deals set-ask --price <price> --verified-price <price> --min-piece-size  <minsize >=256B>  --max-piece-size <max size <=sector-size> --miner <f0xxxx>
+```
+设置矿工检索ask
+```shell script
+./venus-market retrieval-deals set-ask --price <pirce> --unseal-price <price> --payment-interval <bytes> --payment-interval-increase <bytes> --payment-addr <fxxx>
 ```
 
 ### 启动市场客户端
 
 使用消息池的模式
+
 ```shell script
-./market-client run --node-url <node url> --messager-url <messager-url> --auth-token <auth token>  --signer-url <wallet url> --signer-token  <wallet token> --addr <client default address>
+./market-client run --node-url <node url> --messager-url <messager-url> --auth-token <auth token>  --wallet-url <wallet url> --wallet-token  <wallet token> --addr <client default address>
 ```
 
 使用本地钱包签名的模式
 ```shell script
-./market-client run --node-url <node url> --node-token <auth token>  --signer-url <wallet url> --signer-token  <wallet token> --addr <client default address>
+./market-client run --node-url <node url> --node-token <auth token>  --wallet-url <wallet url> --wallet-token  <wallet token> --addr <client default address>
+```
+
+
+
+发起订单命令
+
+```shell script
+ ./market-client data import <file>  导入文件
+ ./market-client storage deals init  交互式命令开始发送订单，一次根据提示输入数据cid，数据生命周期，yes接受订单设置之后，订单发起成功
+```
+
+### 检索数据流程
+
+```shell
+./market-client retrieval retrieve --miner <miner addr> --maxPrice <max price> <data-cid> <dst path>
 ```
 
 ## 客户端操作指南
@@ -211,17 +245,3 @@ dagstore检索数据管理
 * `./venus-market dagstore recover-shard <piece cid>` 恢复错误的数据文件
 * `./venus-market dagstore gc` 清理dagstore垃圾文件
 
-
-### 发起订单流程
-
-```shell script
- ./market-client data generate-car  <file> <car file>
- ./market-client data import <file>
- ./market-client storage deals init
-```
-
-### 检索数据流程
-
-```shell
-./market-client retrieval retrieve --miner <miner addr> --maxPrice <max price> <data-cid> <dst path>
-```
