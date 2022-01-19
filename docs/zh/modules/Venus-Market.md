@@ -21,12 +21,12 @@ make
 
 作为venus服务层运行
 ```shell script
-./venus-market pool-run --node-url <node url> --auth-url <auth url> --messager-url <messager url>  --signer-type gateway --signer-url <signer url>  --auth-token <auth token>  --piecestorage fs:/xx  --payment-addr <addr:account>
+./venus-market pool-run --auth-url <auth url> --node-url <node url> --messager-url <messager url>  --gateway-url <signer url>  --auth-token <auth token>  --piecestorage fs:/xx  --payment-addr <addr:account>
 ```
 
 单人运行
 ```shell script
-./venus-market solo-run --node-url <node url> --auth-url <auth url>  --auth-token <auth token> --signer-type wallet --signer-url <local wallet url>  --signer-token <local wallet token>   --piecestorage fs:/xx --miner <f0xxx>  --payment-addr <addr:account>
+./venus-market solo-run --node-url <node url>  --node-token <auth token> --wallet-url <local wallet url>  --wallet-token <local wallet token>   --piecestorage fs:/xx --miner <f0xxx>  --payment-addr <addr:account>
 ```
 
 设置peerid和address
