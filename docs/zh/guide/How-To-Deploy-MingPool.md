@@ -343,6 +343,10 @@ $ ./venus-miner address start <MINER_ID>
 $ ./venus-miner address list
 ```
 
+## 安装venus-market
+
+venus-market项目是venus矿池中存储市场和检索市场的实现，包括两个组件：用于market provider的venus-market和给存储或检索客户使用的market-client。venus-market既可以作为服务层组件给多个矿工服务提供市场服务，也可以作为独立组件单独部署。其部署请参考[文档](Using-venus-market.md)
+
 ## 下一步
 
 接下来请按照这个[文档](Using-venus-Shared-Modules.md)加入到你刚刚部署的存储池！
