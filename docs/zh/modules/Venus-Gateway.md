@@ -19,7 +19,7 @@ make
 ### 启动服务
 
 ```shell script
-./venus-gateway run --auth-url=<autl-url>
+./venus-gateway run --auth-url=<auth-url>
 ```
 
 > 启动成功会在当前目录生成 `token` 文件，里面存的是 jwt token，给命令行使用
