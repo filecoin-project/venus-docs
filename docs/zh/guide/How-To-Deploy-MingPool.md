@@ -30,7 +30,7 @@
 
 下图展示了venus模块如何相互交互。
 
-![venus-cluster](../../.vuepress/public/venus-cluster.png)
+![venus-cluster](../../.vuepress/public/venus-cluster2.png)
 ## 硬件要求
 
 在[此处](https://github.com/filecoin-project/community-china/discussions/18)了解有关硬件要求的更多信息。

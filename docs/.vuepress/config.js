@@ -95,9 +95,9 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
-                                ['How-To-Deploy-MingPool.md', 'Deploy a storage pool'],
-                                ['Using-venus-Shared-Modules.md', 'Join a storage pool'],
-                                ['Using-venus-market.md', 'Deal making'],
+                                ['How-To-Deploy-MingPool.md', 'Deploy a chain service'],
+                                ['Using-venus-Shared-Modules.md', 'Use a chain service'],
+                                ['Using-venus-market.md', 'Join storage market'],
                                 ['fil_withdraw_and_send.md', 'Retrieve rewards'],
                                 ['Chain.md', 'Chain management'],
                                 ['How-To-Connect-Network.md', 'Connect to different network'],
@@ -110,14 +110,15 @@ module.exports = {
                             title: 'Venus Modules',
                             collapsable: false,
                             children: [
-                                ['', 'Venus daemon'],
-                                ['How-To-Use-Messager.md', 'Venus messager'],
-                                ['How-To-Use-Wallet-In-Venus.md', 'Venus local wallet'],
-                                ['Venus-Wallet.md', 'Venus remote wallet'],
-                                ['Venus-Worker.md', 'Venus worker'],
-                                ['Venus-Gateway.md', 'Venus gateway'],
-                                ['Venus-Auth.md', 'Venus auth'],
-                                ['Venus-Market.md', 'Venus market'],
+                                ['', 'venus daemon'],
+                                ['Venus-Auth.md', 'venus-auth'],
+                                ['venus-miner.md', 'venus-miner'],
+                                ['How-To-Use-Messager.md', 'venus-messager'],
+                                ['Venus-Gateway.md', 'venus-gateway'],
+                                ['How-To-Use-Wallet-In-Venus.md', 'venus-wallet (local)'],
+                                ['Venus-Wallet.md', 'venus-wallet (remote)'],
+                                ['Venus-Worker.md', 'venus-worker'],
+                                ['Venus-Market.md', 'venus-market'],
                             ]
                         }
                     ],
@@ -144,6 +145,7 @@ module.exports = {
                                 ['', 'Example single box setup'],
                                 ['Efficiency_of_sealing.md', 'Finding optimal configurations'],
                                 ['System_monitor_of_Zabbix.md', 'System monitoring (Zabbix)'],
+                                ['lotus-vs-venus.md', 'Coming from Lotus'],
                             ]
                         }
                     ],
@@ -167,12 +169,12 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
-                                ['Course_introduction.md', 'Classes'],
-                                ['Intro_to_Venus.md', 'Venus storage pool introduction'],
-                                ['Chain_service_construction.md', 'Up a Chain Service'],
-                                ['Daily_op_and_maintenance.md', 'Daily Maintenance and Operation'],
+                                ['Course_introduction.md', 'Master course'],
+                                ['Intro_to_Venus.md', 'Introduction'],
+                                ['Chain_service_construction.md', 'Deploy a Chain Service'],
+                                ['Daily_op_and_maintenance.md', 'Node operations'],
                                 ['Q&A.md', 'Q&A'],
-                                ['Incubation_exit_guide.md', 'Incubation Exit Guide'],
+                                ['Incubation_exit_guide.md', 'Exit incubation program'],
                             ]
                         }
                     ]
@@ -216,13 +218,13 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', '启明星概要'],
-                                ['How-To-Deploy-MingPool.md', '部署存储池'],
-                                ['Using-venus-Shared-Modules.md', '加入存储池'],
-                                ['Using-venus-market.md', '发送接收订单'],
+                                ['How-To-Deploy-MingPool.md', '部署链服务'],
+                                ['Using-venus-Shared-Modules.md', '使用链服务'],
+                                ['using-venus-market-v1.md', '加入存储市场'],
                                 ['fil_withdraw_and_send.md', '提取奖励'],
                                 ['chain.md', '链维护'],
                                 ['How-To-Connect-Network.md', '加入不同网络'],
-                                ['How-To-Contribute-Docs.md', '贡献文档']
+                                ['How-To-Contribute-Docs.md', '贡献文档'],
                             ]
                         }
                     ],
@@ -232,12 +234,13 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Venus daemon'],
+                                ['Venus-Auth.md', 'Venus auth'],
+                                ['venus-miner.md', 'venus-miner'],
                                 ['How-To-Use-Messager.md', 'Venus messager'],
+                                ['Venus-Gateway.md', 'Venus gateway'],
                                 ['How-To-Use-Wallet-In-Venus.md', 'Venus 本地钱包'],
                                 ['Venus-Wallet.md', 'Venus 远程钱包'],
                                 ['Venus-Worker.md', 'Venus worker'],
-                                ['Venus-Gateway.md', 'Venus gateway'],
-                                ['Venus-Auth.md', 'Venus auth'],
                                 ['Venus-Market.md', 'Venus market'],
                                 ['Venus-Messager-Design-Spec.md', 'Venus Messager 设计说明书'],
                             ]
@@ -269,6 +272,7 @@ module.exports = {
                                 ['example-single-box.md', '单矿机示例'],
                                 ['Efficiency_of_sealing.md', '最大化利用资源提升密封扇区效率'],
                                 ['System_monitor_of_Zabbix.md', '系统监控安装与使用之Zabbix'],
+                                ['lotus-vs-venus.md', '从Lotus中来'],
                             ]
                         }
                     ],
@@ -292,12 +296,12 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', '概述'],
-                                ['Course_introduction.md', '教程'],
-                                ['Intro_to_Venus.md', 'Venus的分布式存储池介绍'],
-                                ['Chain_service_construction.md', 'Venus的链服务搭建'],
-                                ['Daily_op_and_maintenance.md', '孵化中心节点日常运维'],
-                                ['Q&A.md', '孵化中心答疑篇'],
-                                ['Incubation_exit_guide.md', '孵化中心的节点迁出指南'],
+                                ['Course_introduction.md', '大师课程'],
+                                ['Intro_to_Venus.md', 'Venus概要'],
+                                ['Chain_service_construction.md', '部署链服务'],
+                                ['Daily_op_and_maintenance.md', '节点日常运维'],
+                                ['Q&A.md', 'Q&A'],
+                                ['Incubation_exit_guide.md', '节点迁出指南'],
                             ]
                         }
                     ]

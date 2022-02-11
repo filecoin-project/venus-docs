@@ -1,6 +1,6 @@
 # venus-market
 
-venus-market is responsible for deal making for a venus storage system. It compiles into venus-market (provider side) and market-client (lightweight client). Both need chain services and a local venus-wallet to function.
+venus-market is responsible for deal making for a venus storage system. It compiles into venus-market (provider side) and market-client (lightweight client). Both needs to be connected to a chain service and a local venus-wallet to function.
 
 ## Install
 

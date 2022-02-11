@@ -30,7 +30,7 @@ Depending on its role in a mining cluster, modules could be loosely broken down 
 
 Diagram below illustrates how venus modules interacts with one and another.
 
-![venus-cluster](../.vuepress/public/venus-cluster.png)
+![venus-cluster](../.vuepress/public/venus-cluster2.png)
 ## Hardware requirements
 
 Learn more about hardware requirements [here](https://docs.filecoin.io/mine/mining-architectures/#protocol-labs-example-architecture).
