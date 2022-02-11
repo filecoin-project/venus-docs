@@ -257,6 +257,12 @@ $ kill -9 <VENUS_PID>
 $ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 
 ```
 
+:::tip
+
+为了链服务能够与链进行交互，`daemon`需要与网络其他节点同步最新的链。具体如何导入一个链的`snapshot`进行链同步可参见[这个文档](Chain.md)。
+
+:::
+
 ## 安装venus-messager
 
 下载并编译`venus-messager`的源代码。

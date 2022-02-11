@@ -243,6 +243,12 @@ $ kill <VENUS_PID>
 $ nohup ./venus daemon --network=cali --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 
 ```
 
+:::tip
+
+In order for the chain service to interact with the chain, daemon needs to be synced with the network by importing a snapshot of the filecoin chain. Please refer to [this guide](Chain.md) for more details.
+
+:::
+
 ## Install venus-messager
 
 Download and compile the source code of venus-messager.
