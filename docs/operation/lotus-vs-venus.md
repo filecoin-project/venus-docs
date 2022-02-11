@@ -1,0 +1,3 @@
+## Commands from Lotus
+
+Many basic commands including but not limited to [creating worker/controler addresses](https://lotus.filecoin.io/docs/storage-providers/addresses/), setting different types of [configurations](https://lotus.filecoin.io/docs/storage-providers/config/), or [changing storage locations](https://lotus.filecoin.io/docs/storage-providers/lifecycle/#changing-storage-locations) apply to both Lotus and Venus. Node operators are expected to follow the same process as what is instructed on the Lotus documentation. If you encounter any questions please do not hesitate to reach out to us on [#fil-venus](https://filecoinproject.slack.com/archives/CEHHJNJS3).
