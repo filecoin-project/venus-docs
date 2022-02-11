@@ -38,10 +38,32 @@ venus-marke在收到market-client的订单时, 并不会马上就发布`ClientDe
 PublishMsgPeriod = "10s"
 ```
 
-### 旷工搭建自己的market服务
-此时venus-market工作模式为独立组件模式,只需要为其指定miner地址和全节点的url.
+### 启动market服务
+旷工在启动自己的market时, 有两种方案可以选择
+- 使用孵化器提供的venus节点 + venus-wallet
+- 使用自己的venus全节点
 
-执行命令如下:
+#### 使用venus-wallet作为签名服务
+```shell
+./venus-market solo-run --node-url=/ip4/192.168.200.19/tcp/3453/ \
+  --node-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiMS0xMjUiLCJwZXJtIjoic2lnbiIsImV4dCI6IiJ9.JenwgK0JZcxFDin3cyhBUN41VXNvYw-_0UUT2ZOohM0 \
+  --wallet-url=/ip4/127.0.0.1/tcp/5678/http \
+  --wallet-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.lE180EhNrEu1yGmnVEmT2vySD3UpiUU73kKTYpgQhJ0 \
+  --piecestorage=fs:/Users/zl/Downloads/pieces_solo --miner=t01051:accountName
+```
+参数说明:
+- node-url, 可以为自己的venus节点, 也可以是链服务的venus节点
+- node-token 分成两种情况
+  1. node-url为自己的节点, `node-token` 直接通过`cat ~/.venus/token`命令获取
+  2. node-url为链服务组件的连接地址, `node-token`为`venus-auth`中授权账户的token.从链服务管理员处获取
+- wallet-url, wallet的url地址
+- wallet-token, 通过venus-wallet的命令查看:
+```shell
+./venus-wallet auth api-info --perm admin
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.lE180EhNrEu1yGmnVEmT2vySD3UpiUU73kKTYpgQhJ0:/ip4/127.0.0.1/tcp/5678/http
+```
+
+#### 使用自己的venus节点
 
 ```shell
 ./venus-market solo-run --node-url=/ip4/192.168.200.21/tcp/3454/ --node-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.OmJkVf10xXip7U0mSvX09gDG806tkFximCOrTxROIPg --piecestorage=fs:/Users/zl/Downloads/pieces_solo --miner=t01041:accountName
@@ -371,8 +393,9 @@ DealId  PieceCID                                                          PieceS
   WaitDealsDelay = "10s"
 ```
 
-:tipping_hand_man:使用`venus-sealer sectors deal`命令下发deal订单，然后使用./venus-sealer sectors list可以查看一个新的任务。
+封装deal有两种方式
 
+- 直接执行`./venus-sealer sectors deal`将数据封装到一个新的扇区.
 ```bash
 ./venus-sealer sectors deal
 Assign Deals 36 sector 8 piece baga6ea4seaqpz47j4kqdiixpehmzk3uw5c4cmqvs5iyi7xf7rwkepfhdvowdiai offset 0 length 1024
@@ -380,6 +403,24 @@ Assign Deals 36 sector 8 piece baga6ea4seaqpz47j4kqdiixpehmzk3uw5c4cmqvs5iyi7xf7
 ID  State          OnChain  Active  Expiration                    Deals  DealWeight
 8   PreCommitWait  NO       NO      n/a                           1      [0B]
 ```
+
+- 使用snapdeal的方式,将现有的cc-sector升级为真实数据的sector.过程如下:
+  1. 首先查看sector 信息, 选择一个`State`为`Proving`,`OnChain`状态为`YES`, `Active`为`YES`的sector.
+```shell
+./venus-sealer sectors list
+ID  State              OnChain  Active  Expiration                    Deals  DealWeight
+1   Proving            YES      YES     1590156 (in 1 year 23 weeks)  CC
+```
+  2. 执行命令标记sector为`cc-update`
+```shell
+./venus-sealer sectors snap-up 9
+```
+  3. 再次执行`sectors list`查看sector, 此时`state`会标记为`SnapDealsWaitDeals`
+  4. 执行`./venus-sealer sectors deal`此时, `venus-sealer`会自动选择状态为`SnapDealsWaitDeals`升级为真实订单的扇区.
+  5. 执行命令后, sector的会进入`UpdateReplica`, 生成新的证明参数文件, 进入`ProveReplicaUpdate`状态, 此过程如果使用GPU的情况需要20分钟左右;如果使用2*32核的CPU大概需要1小时20分钟.
+  6. 成功完成以后, sector会发送`SubmitReplicaUpdate`消息, 然后等待消息`ReplicaUpdateWait`.
+
+:tipping_hand_man: 提示:**使用snapdeal的升级cc-sector要求机器至少有150G的内存.**
 
 如果一切顺利, deal封装完成, `State`状态为`Proving`
 
