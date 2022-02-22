@@ -22,24 +22,23 @@
     分支：v1.2.0
     影响功能：支持新网络版本
     注意事项：    
-      1. 如果已经存在repo，升级前需要将`~/.venus/version`内容改为7
-      2. 升级后检查vk文件是否完整
-      3. 升级后检查配置文件，升级高度是否正常设置: 
+      1. 升级后检查vk文件是否完整
+      2. 升级后检查配置文件，升级高度是否正常设置: 
       ```
       # cali
       "upgradeOhSnapHeight": 682006
       # mainnet
       "upgradeOhSnapHeight": 1594680
       ```
-      4. 升级后检查mpool下maxfee配置是否由数字转换成xxFil形式
+      3. 升级后检查mpool下maxfee配置是否由数字转换成xxFil形式
       ```
       "mpool": {
                 "maxNonceGap": 100,
                 "maxFee": "10 FIL"
       },
       ```
-      5. 升级后需检查是否正常同步区块
-      6. api版本发生变化，影响sealer的连接，升级方式需要按照大升级的方式来处理
+      4. 升级后需检查是否正常同步区块
+      5. api版本发生变化，影响sealer的连接，升级方式需要按照大升级的方式来处理
 
 3. lotus兼容版本： 升级
     分支: venus/v1.14.0
