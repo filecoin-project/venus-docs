@@ -15,7 +15,7 @@
 
 
 ## 升级细节
-1. venus-auth: 非必要升级
+1. venus-auth: 可选择升级
     分支： v1.3.2
     影响功能: 无
 2. venus： 升级
@@ -28,7 +28,7 @@
       ```
       # cali
       "upgradeOhSnapHeight": 682006
-      # mail
+      # mainnet
       "upgradeOhSnapHeight": 1594680
       ```
       4. 升级后检查mpool下maxfee配置是否由数字转换成xxFil形式
@@ -78,7 +78,7 @@
     Tag：v1.4.0
     影响功能：无
 
-9. venus-market： 非必要升级
+9. venus-market： 可选择升级
     分支： v2.0.0
     影响功能  新版本
 ## 升级顺序
