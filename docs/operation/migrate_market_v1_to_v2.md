@@ -1,8 +1,38 @@
-# market v1 to v2 upgrade guide
+## Upgrade market v1 to market v2 
 
-During the process of upgrading market v1 to v2, the data structure has changed. If you need current data in venus-market v1, please follow the existing steps to migrate the data.
+:::warning
 
-## bild upgrade tool
+Before upgrading, please make sure that there are no deals in the state of `Publish`, `Publishing` or `StorageDealAwaitingPreCommit`.
+
+:::
+
+Stop venus-market process.
+
+```bash
+# grep [PID] of venus-market process
+$ ps -ef | grep market
+root   6704  2.3  0.0 2361236 43148 pts/2   Sl   17:33   0:18 ./venus-market run
+
+$ kill -9 [PID]
+```
+
+Backup venus-market repo. Default path is `~/.venusmarket`.
+
+```bash
+$ cp -a ~/.venusmarket ~/.venusmarket-bak
+```
+
+(Optional) Export v1 data
+
+:::tip
+
+As v1 meta data structure depreciates, in order to view deals sealed using v1, an export tools could be built to export v1 data and import data into v2. 
+
+:::
+
+:::tip
+
+Build export tool.
 
 ```
 git clone https://github.com/filecoin-project/venus-market.git
@@ -13,26 +43,22 @@ cd cli/market_export
 go build
 ```
 
-market_export tool will be build after performing the above steps, which is used to export the data of the v1 version
+:::
 
-## step for upgrade v1 to v2
+:::tip
 
-1. stop venus-market
+Export v1 data. 
 
-2. backup venus-market repo, it always in ~/.venusmarket by default.
+```sh
+$ ./market_export --repo <VENUS_MARKET_REPO> export <EXPORT_DATA_FILE_PATH>
+```
+    
+:::
 
-3. export data in v1 venus-market, 
+Build and init market v2 (2.0.0-rc2 or higher). Please refer to market v2 document for more details.
 
-    ```sh
-     ./market_export --repo <venus-market repo> export <path of export data file> 
-    ```
+(Optional) Lastly import v1 data to market v2.
 
-4. reinit venusmarket v2 (version must be higher than 2.0.0 rc2)
-
-5. excute migrate cmd in market v2, this cmd used to import v1 data that generated in step 3.
-
-    ```sh
-    ./market_export --repo <venus-market repo> migrate import_v1 <path of export data file>
-    ```
-
-***To be safe, please make sure that there are no storage deals in the (Publish/Publishing/StorageDealAwaitingPreCommit) state before doing the upgrade***
+```bash
+$ ./market_export --repo <VENUS_MARKET_REPO> migrate import_v1 <EXPORT_DATA_FILE_PATH>
+```
