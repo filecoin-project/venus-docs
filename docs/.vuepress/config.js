@@ -146,6 +146,7 @@ module.exports = {
                                 ['Efficiency_of_sealing.md', 'Finding optimal configurations'],
                                 ['System_monitor_of_Zabbix.md', 'System monitoring (Zabbix)'],
                                 ['lotus-vs-venus.md', 'Coming from Lotus'],
+                                ['Nv15_upgrade_guide.md', 'nv15 upgrade'],
                             ]
                         }
                     ],
@@ -273,6 +274,7 @@ module.exports = {
                                 ['Efficiency_of_sealing.md', '最大化利用资源提升密封扇区效率'],
                                 ['System_monitor_of_Zabbix.md', '系统监控安装与使用之Zabbix'],
                                 ['lotus-vs-venus.md', '从Lotus中来'],
+                                ['Nv15_upgrade_guide.md', 'nv15网络升级'],
                             ]
                         }
                     ],
