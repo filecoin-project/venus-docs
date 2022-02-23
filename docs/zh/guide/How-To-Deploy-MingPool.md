@@ -192,6 +192,7 @@ $ ./venus-auth user list
 $ git clone https://github.com/ipfs-force-community/venus-gateway.git
 $ cd venus-gateway
 $ git checkout <RELEASE_TAG>
+$ make deps
 $ go mod tidy
 $ make
 ```
