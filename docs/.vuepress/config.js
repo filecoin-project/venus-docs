@@ -147,6 +147,7 @@ module.exports = {
                                 ['System_monitor_of_Zabbix.md', 'System monitoring (Zabbix)'],
                                 ['lotus-vs-venus.md', 'Coming from Lotus'],
                                 ['Nv15_upgrade_guide.md', 'nv15 upgrade'],
+                                ['migrate_market_v1_to_v2.md', 'market v2 upgrade'],
                             ]
                         }
                     ],
@@ -275,6 +276,7 @@ module.exports = {
                                 ['System_monitor_of_Zabbix.md', '系统监控安装与使用之Zabbix'],
                                 ['lotus-vs-venus.md', '从Lotus中来'],
                                 ['Nv15_upgrade_guide.md', 'nv15网络升级'],
+                                ['migrate_market_v1_to_v2.md', 'market_v2升级'],
                             ]
                         }
                     ],
