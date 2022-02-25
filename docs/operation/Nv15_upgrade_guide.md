@@ -30,7 +30,7 @@ For large scale storage systems, it is recommended that running chain-co with bo
 
 2. venus-wallet: `optional` upgrade; branch/tag `v1.4.0`;
 
-3. venus daemon: `mandatory` upgrade; branch/tag `v1.2.0`;
+3. venus daemon: `mandatory` upgrade; branch/tag `v1.2.1`;
 
 :::tip
 
