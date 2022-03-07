@@ -98,9 +98,6 @@ module.exports = {
                                 ['How-To-Deploy-MingPool.md', 'Deploy a chain service'],
                                 ['Using-venus-Shared-Modules.md', 'Use a chain service'],
                                 ['Using-venus-market.md', 'Join storage market'],
-                                ['fil_withdraw_and_send.md', 'Retrieve rewards'],
-                                ['Chain.md', 'Chain management'],
-                                ['How-To-Connect-Network.md', 'Connect to different network'],
                                 ['How-To-Contribute-Docs.md', 'Contribute to doc']
                             ]
                         }
@@ -129,11 +126,15 @@ module.exports = {
                             children: [
                                 ['', 'Using lotus-miner'],
                                 ['tips-running-in-China.md', 'Tips running in China'],
-                                ['venus-cli.md', 'Venus CLI commands'],
+                                ['fil_withdraw_and_send.md', 'Retrieve rewards'],
+                                ['Chain.md', 'Chain management'],
+                                ['How-To-Connect-Network.md', 'Connect to different network'],
+                                ['How-To-Setup_2knet.md', 'How to start a local dev network'],
                                 ['Multisig-wallet.md', 'Multisig wallet'],
                                 ['venus_load_balancing.md', 'Venus load balancing'],
                                 ['Payment-Channel.md', 'Payment channel'],
-                                ['How-To-Setup_2knet.md', 'How to start a local dev network'],
+                                ['venus-cli.md', 'Venus CLI commands'],
+
                             ]
                         }
                     ],
@@ -223,9 +224,7 @@ module.exports = {
                                 ['How-To-Deploy-MingPool.md', '部署链服务'],
                                 ['Using-venus-Shared-Modules.md', '使用链服务'],
                                 ['using-venus-market-v1.md', '加入存储市场'],
-                                ['fil_withdraw_and_send.md', '提取奖励'],
-                                ['chain.md', '链维护'],
-                                ['How-To-Connect-Network.md', '加入不同网络'],
+                                ['Using-venus-cluster-alt.md', '使用cluster'],
                                 ['How-To-Contribute-Docs.md', '贡献文档'],
                             ]
                         }
@@ -236,15 +235,16 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Venus daemon'],
-                                ['Venus-Auth.md', 'Venus auth'],
+                                ['Venus-Auth.md', 'venus-auth'],
                                 ['venus-miner.md', 'venus-miner'],
-                                ['How-To-Use-Messager.md', 'Venus messager'],
-                                ['Venus-Gateway.md', 'Venus gateway'],
-                                ['How-To-Use-Wallet-In-Venus.md', 'Venus 本地钱包'],
-                                ['Venus-Wallet.md', 'Venus 远程钱包'],
-                                ['Venus-Worker.md', 'Venus worker'],
-                                ['Venus-Market.md', 'Venus market'],
-                                ['Venus-Messager-Design-Spec.md', 'Venus Messager 设计说明书'],
+                                ['How-To-Use-Messager.md', 'venus-messager'],
+                                ['Venus-Gateway.md', 'venus-gateway'],
+                                ['How-To-Use-Wallet-In-Venus.md', 'venus-wallet（本地）'],
+                                ['Venus-Wallet.md', 'venus-wallet（远程）'],
+                                ['Venus-Worker.md', 'venus-worker（sealer）'],
+                                ['Venus-Market.md', 'venus-market'],
+                                ['Venus-Sector-Manager.md', 'venus-sector-manager（cluster）'],
+                                ['Venus-Worker-c.md', 'venus-worker（cluster）'],
                             ]
                         }
                     ],
@@ -253,15 +253,18 @@ module.exports = {
                             title: '进阶',
                             collapsable: false,
                             children: [
-                                ['', 'venus矿池进阶'],
-                                ['How-To-Setup_2knet.md', '如何搭建私网'],
+                                ['', '使用lotus-miner'],
                                 ['tips-running-in-China.md', '中国部署小贴士'],
-                                ['Venus-Project-Dependency-Upgrade.md', 'venus组件依赖与升级'],
-                                ['venus-cli.md', 'CLI命令'],
-                                ['Multisig-Wallet.md', '多签钱包'],
-                                ['venus_load_balancing.md', '负载均衡'],
-                                ['Payment-Channel.md', '支付通道'],
+                                ['fil_withdraw_and_send.md', '提取奖励'],
+                                ['chain.md', '链维护'],
+                                ['How-To-Connect-Network.md', '加入不同网络'],
                                 ['How-To-Setup_2knet.md', '本地2k开发网络'],
+                                ['venus_load_balancing.md', '负载均衡'],
+                                ['Venus-Project-Dependency-Upgrade.md', 'venus组件依赖与升级'],
+                                ['Multisig-Wallet.md', '多签钱包'],
+                                ['Payment-Channel.md', '支付通道'],
+                                ['venus-cli.md', 'CLI命令'],
+
                             ]
                         }
                     ],
