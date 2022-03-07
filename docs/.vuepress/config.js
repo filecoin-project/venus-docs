@@ -243,7 +243,7 @@ module.exports = {
                                 ['Venus-Wallet.md', 'venus-wallet（远程）'],
                                 ['Venus-Worker.md', 'venus-worker'],
                                 ['Venus-Market.md', 'venus-market'],
-                                ['Venus-Sector-Manager.md', 'venus-sector-manager'],
+                                ['Venus-Sector-Manager.md', 'venus-sector-manager（cluster）'],
                                 ['Venus-Worker-c.md', 'venus-worker（cluster）'],
                             ]
                         }
