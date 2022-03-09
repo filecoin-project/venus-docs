@@ -98,6 +98,7 @@ module.exports = {
                                 ['How-To-Deploy-MingPool.md', 'Deploy a chain service'],
                                 ['Using-venus-Shared-Modules.md', 'Use a chain service'],
                                 ['Using-venus-market.md', 'Join storage market'],
+                                ['Using-venus-cluster-alt.md', 'Use venus-cluster'],
                                 ['How-To-Contribute-Docs.md', 'Contribute to doc']
                             ]
                         }
@@ -243,6 +244,7 @@ module.exports = {
                                 ['Venus-Wallet.md', 'venus-wallet（远程）'],
                                 ['Venus-Worker.md', 'venus-worker（sealer）'],
                                 ['Venus-Market.md', 'venus-market'],
+                                ['Venus-Cluster.md', 'venus-cluster'],
                                 ['Venus-Sector-Manager.md', 'venus-sector-manager（cluster）'],
                                 ['Venus-Worker-c.md', 'venus-worker（cluster）'],
                             ]
