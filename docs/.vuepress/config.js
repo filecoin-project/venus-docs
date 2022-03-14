@@ -165,7 +165,7 @@ module.exports = {
                     ],
                     '/master/': [
                         {
-                            title: 'Master Class',
+                            title: 'Master Course',
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
