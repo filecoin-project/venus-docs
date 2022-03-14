@@ -80,10 +80,6 @@ module.exports = {
                         link: '/operation/'
                     },
                     {
-                        text: 'Incubation Center',
-                        link: '/incubation/'
-                    },
-                    {
                         text: 'Master',
                         link: '/master/'
                     }
@@ -169,7 +165,7 @@ module.exports = {
                     ],
                     '/master/': [
                         {
-                            title: 'Master',
+                            title: 'Master Class',
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
@@ -205,10 +201,6 @@ module.exports = {
                     {
                         text: '运维',
                         link: '/zh/operation/'
-                    },
-                    {
-                        text: '孵化器',
-                        link: '/zh/incubation/'
                     },
                     {
                         text: 'Master',
@@ -301,11 +293,10 @@ module.exports = {
                     ],
                     '/zh/master/': [
                         {
-                            title: 'Master',
+                            title: '大师课',
                             collapsable: false,
                             children: [
-                                ['', '概述'],
-                                ['Course_introduction.md', '大师课程'],
+                                ['', '目录'],
                                 ['Intro_to_Venus.md', 'Venus概要'],
                                 ['Chain_service_construction.md', '部署链服务'],
                                 ['Daily_op_and_maintenance.md', '节点日常运维'],
