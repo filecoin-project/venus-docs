@@ -1,12 +1,10 @@
 # 答疑篇
 
-用户在接入[Filecoin存储提供者孵化中心](https://venus.filecoin.io/zh/incubation/Rules.html)的过程或集群日常运维中，会遇到各种各样的问题，为了快速定位、高效解决问题，对已经遇到过的问题
+用户在接入[Filecoin存储提供者孵化中心](https://venushub.io/incubator)的过程或集群日常运维中，会遇到各种各样的问题，为了快速定位、高效解决问题，对已经遇到过的问题
 记录在案是必要的。根据功能模块的不同，我们将问题归为两类：
 
 - 链服务的问题
 - 独立组件的问题
-
-</br>
 
 ## 链服务的问题
 
@@ -160,4 +158,4 @@ INFO	storageminer	storage/wdpost_run.go:863	Submitted window post: 06df4a21-a0b7
 
 ### venus-cluster
 
-> 目前正在测试中，预计在一个月后发布源码及使用文档。
+`venus-cluster`相关问题，请在 [#fil-venus-cn](https://filecoinproject.slack.com/archives/C028PCH8L31) 阅览相关聊天记录。特别是 [@dtynn大神](https://filecoinproject.slack.com/team/UMK2CF76W) 关于cluster的相关发言。
