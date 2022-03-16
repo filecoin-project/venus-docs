@@ -1,6 +1,6 @@
-### Incubation Exit Guide
+### Exit Guide
 
-There are couple options for storage providers to exit incubation program either voluntarily or after each phase ends.
+There are couple options for storage providers to exit a hosted chain service either voluntarily or after each phase ends.
 
 - Join a hosted chain service (venus shared modules) by third party.
 - Deploy a chain service (venus shared modules) by yourself.

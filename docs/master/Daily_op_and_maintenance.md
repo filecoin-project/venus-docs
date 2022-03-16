@@ -1,6 +1,6 @@
 ### Local modules
 
-The independent components of the venus system are venus-sealer/venus-cluster and venus-wallet. venus-sealer is 1st generation of PoRep and PoSt component which will no longer be maintained in the second phase of the incubation center. **venus-cluster** is latest generation of Venus' PoRep and PoSt component. Compared with venus-sealer, it has a great improvement in task scheduling and system resources management. **venus-cluster** will be actively maintained and is now the recommended component for PoRep and PoSt.
+The local components of the venus system are venus-sealer/venus-cluster and venus-wallet. venus-sealer is 1st generation of PoRep and PoSt component which will no longer be maintained in the second phase of the incubation center. **venus-cluster** is latest generation of Venus' PoRep and PoSt component. Compared with venus-sealer, it has a great improvement in task scheduling and system resources management. **venus-cluster** will be actively maintained and is now the recommended component for PoRep and PoSt.
 
 
 #### venus-wallet
