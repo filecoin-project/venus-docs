@@ -1,4 +1,4 @@
-## Incubation Exit Guide
+### Incubation Exit Guide
 
 There are couple options for storage providers to exit incubation program either voluntarily or after each phase ends.
 

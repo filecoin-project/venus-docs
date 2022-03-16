@@ -1,6 +1,6 @@
-## Q&A
+### Q&A
 
-Q&As are loosely broken into two categories, chain services (venus shared modules) and independent modules. 
+For more questions SP encounters when using Venus, please refer to [#fil-venus](https://filecoinproject.slack.com/archives/CEHHJNJS3) and [#fil-venus-cn](https://filecoinproject.slack.com/archives/C028PCH8L31) for more.
 
 ### chain services (venus shared modules)
 
@@ -55,7 +55,7 @@ During sealer init, user chose wrong sector size for the network. Check [network
 
 Check if there is wallet addresses registered on gateway. Also see if connection between venus-messager and Venus-gateway is okay.
 
-### venus independent modules
+### Venus local modules
 
 TBC
 

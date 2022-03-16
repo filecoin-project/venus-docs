@@ -168,10 +168,9 @@ module.exports = {
                             title: 'Master Course',
                             collapsable: false,
                             children: [
-                                ['', 'Overview'],
-                                ['Course_introduction.md', 'Master course'],
+                                ['', 'TOC'],
                                 ['Intro_to_Venus.md', 'Introduction'],
-                                ['Chain_service_construction.md', 'Deploy a Chain Service'],
+                                ['Chain_service_construction.md', 'Deploy/join a Chain Service'],
                                 ['Daily_op_and_maintenance.md', 'Node operations'],
                                 ['Q&A.md', 'Q&A'],
                                 ['Incubation_exit_guide.md', 'Exit incubation program'],
@@ -298,7 +297,7 @@ module.exports = {
                             children: [
                                 ['', '目录'],
                                 ['Intro_to_Venus.md', 'Venus概要'],
-                                ['Chain_service_construction.md', '部署链服务'],
+                                ['Chain_service_construction.md', '部署/加入链服务'],
                                 ['Daily_op_and_maintenance.md', '节点日常运维'],
                                 ['Q&A.md', 'Q&A'],
                                 ['Incubation_exit_guide.md', '节点迁出指南'],
