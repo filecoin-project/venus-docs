@@ -410,7 +410,11 @@ $ ./venus-miner address update
 
 ## 使用链服务
 
-请学习参见[这个](/guide/Using-venus-Shared-Modules.html)文档。
+请学习参见[这个](/zh/guide/Using-venus-Shared-Modules.html)文档。
+
+## 使用venus-cluster
+
+请学习参见[这个](/zh/guide/Using-venus-cluster-alt.html)文档。
 
 ## 接收存储订单
 

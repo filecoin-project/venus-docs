@@ -1,8 +1,6 @@
-## Daily operations
+### Local modules
 
-### Independent modules
-
-The independent components of the venus system are venus-sealer/venus-cluster and venus-wallet. venus-sealer is 1st generation of PoRep and PoSt component which will no longer be maintained in the second phase of the incubation center. **venus-cluster** is latest generation of Venus' PoRep and PoSt component. Compared with venus-sealer, it has a great improvement in task scheduling and system resources management. **venus-cluster** will be actively maintained and is now the recommended component for PoRep and PoSt.
+The local components of the venus system are venus-sealer/venus-cluster and venus-wallet. venus-sealer is 1st generation of PoRep and PoSt component which will no longer be maintained in the second phase of the incubation center. **venus-cluster** is latest generation of Venus' PoRep and PoSt component. Compared with venus-sealer, it has a great improvement in task scheduling and system resources management. **venus-cluster** will be actively maintained and is now the recommended component for PoRep and PoSt.
 
 
 #### venus-wallet
@@ -77,8 +75,7 @@ $ ./venus-sealer proving check --only-bad 7
 
 #### venus-cluster
 
-To be released
-
+Please refer to documentations [here](https://github.com/ipfs-force-community/venus-cluster/tree/main/docs/zh).
 
 ### Chain services monitoring
 
@@ -87,8 +84,6 @@ To be released
 - All
 
 ![venus-all](../../docs/.vuepress/public/monitor/venus-all.jpg)
-
-统计特定矿工的独立组件请求链服务所有组件提供接口的次数，起始点后和结束点前的半个小时数据可以忽略。
 
 Chain service API usage Statistics for a single storage provider. Note: ignore starting half an hour and ending half an hour in a given interval.
 
