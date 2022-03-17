@@ -215,7 +215,8 @@ module.exports = {
                                 ['', '启明星概要'],
                                 ['How-To-Deploy-MingPool.md', '部署链服务'],
                                 ['Using-venus-Shared-Modules.md', '使用链服务'],
-                                ['using-venus-market-v1.md', '加入存储市场'],
+                                ['using-venus-market-for-master.md', '链服务部署market服务'],
+                                ['using-venus-market-for-miner.md', '本地部署market节点'],
                                 ['Using-venus-cluster-alt.md', '使用cluster'],
                                 ['How-To-Contribute-Docs.md', '贡献文档'],
                             ]
