@@ -4,10 +4,10 @@ venus-market v2支持两种运行模式
 - 作为链服务运行模式
 - 作为独立组件运行模式
 
-链服务提供者需要搭建一个venus-market, 为其下的多个旷工提供存储市场的服务时, 需要venus-market工作在链服务模式,如果你是一个旷工, 只想搭建一个简单的服务, 单独为自己提供存储市场的服务, 请参考[venus-market v2 for miner](./using-venus-market-for-miner.md)
+链服务提供者需要搭建一个venus-market, 为其下的多个旷工提供存储市场的服务时, 需要venus-market工作在链服务模式,如果你是一个旷工, 只想搭建一个简单的服务, 单独为自己提供存储市场的服务, 请参考[venus-market v2 for miner](using-venus-market-for-miner.md)
 
 ### 全局配置
-全局配置对于独立运行模式和链服务组件模式都完全一样, 请参考独立运行模式中的[全局配置](./using-venus-marekt-for-miner.md#全局配置)
+全局配置对于独立运行模式和链服务组件模式都完全一样, 请参考独立运行模式中的[全局配置](using-venus-market-for-miner.md#全局配置)
 
 ### 启动venus-market
 
