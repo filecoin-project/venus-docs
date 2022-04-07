@@ -19,15 +19,24 @@ module.exports = {
         '@vuepress/nprogress',
         '@vuepress/medium-zoom',
         '@vuepress-plugin-zooming',
-        ['@vuepress/google-analytics',
-            {
-                'ga': 'G-SYDDWWLQSP' // Property: Filecoin Docs
-            }
-        ],
         ['vuepress-plugin-code-copy', true]
     ],
     head: [
-        ['link', {rel: 'icon', href: '/assets/venus-logo.png'}]
+        ['link', {rel: 'icon', href: '/assets/venus-logo.png'}],
+        [
+            'script',
+            {
+                async: true,
+                src: 'https://www.googletagmanager.com/gtag/js?id=G-SMSDTMGLTV',
+            },
+        ],
+        [
+            'script',
+            {},
+            [
+                "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-SMSDTMGLTV');",
+            ],
+        ],
     ],
     locales: {
         '/': {
