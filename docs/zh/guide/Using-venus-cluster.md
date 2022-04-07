@@ -11,12 +11,14 @@
 
 &ensp;&ensp; venus-cluster中的独立组件由venus-worker，venus-sector-manager和venus-wallet组成。
 - venus-worker负责扇区封装，同一扇区各阶段任务都在一个worker中完成；
-- venus-sector-manager负责windowPoSt、提供链服务；
+- venus-sector-manager负责windowPoSt、winningPoSt计算及提供链服务；
 - venus-wallet提供签名服务。
+
+> 本文档提供的实例是在`forcenet`网络下搭建的
 
 ### 安装 venus-wallet
 
-在后台运行`venus-wallet`模块。
+在后台运行`venus-wallet`实例。
 
 ```bash
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
@@ -49,7 +51,7 @@ wallet state: unlocked
 
 创建owner和worker地址。（如果没有现有的 miner ID）
 
-```bash
+```
 $ ./venus-wallet new bls
 <OWNER_ADDRESS>
 $ ./venus-wallet new bls
@@ -99,96 +101,92 @@ $ nohup ./venus-wallet run > wallet.log 2>&1 &
 &ensp;&ensp; 初始化venus-sector-manager。
 
 ```bash
- ./venus-sector-manager --net=forcenet daemon init
+ ./venus-sector-manager --net=[net-type] daemon init
 ```
 
 生成的初始配置文件`~/.venus-sector-manager/sector-manager.cfg`内容：
 ```toml
 # Default config:
-[SectorManager]
-#  PreFetch = true
+[Common]
+[Common.API]
+#Chain = "/ip4/{api_host}/tcp/{api_port}"
+#Messager = "/ip4/{api_host}/tcp/{api_port}"
+#Market = "/ip4/{api_host}/tcp/{api_port}"
+#Gateway = ["/ip4/{api_host}/tcp/{api_port}"]
+#Token = "{some token}"
 #
-#  [[SectorManager.Miners]]
-#    ID = 10000
-#    InitNumber = 0
-#    MaxNumber = 10000
-#    Disabled = false
+[[Common.PieceStores]]
+#Name = "{store_name}"
+#Path = "{store_path}"
+#Strict = false
+#ReadOnly = false
 #
-[Commitment]
-#  [Commitment.DefaultPolicy]
-#    CommitBatchThreshold = 0
-#    CommitBatchMaxWait = "0s"
-#    CommitCheckInterval = "0s"
-#    EnableBatchProCommit = false
-#    PreCommitBatchThreshold = 0
-#    PreCommitBatchMaxWait = "0s"
-#    PreCommitCheckInterval = "0s"
-#    EnableBatchPreCommit = false
-#    PreCommitGasOverEstimation = 0.0
-#    ProCommitGasOverEstimation = 0.0
-#    BatchPreCommitGasOverEstimation = 0.0
-#    BatchProCommitGasOverEstimation = 0.0
-#    MaxPreCommitFeeCap = ""
-#    MaxProCommitFeeCap = ""
-#    MaxBatchPreCommitFeeCap = ""
-#    MaxBatchProCommitFeeCap = ""
-#    MsgConfidence = 0
-#  [Commitment.Miners]
-#    [Commitment.Miners.example]
-#      [Commitment.Miners.example.Controls]
-#        PreCommit = ""
-#        ProveCommit = ""
+[[Common.PersistStores]]
+#Name = "{store_name}"
+#Path = "{store_path}"
+#Strict = false
+#ReadOnly = false
 #
-[Chain]
-#  Api = ""
-#  Token = ""
-#
-[Messager]
-#  Api = ""
-#  Token = ""
-#
-[PersistedStore]
-#  Includes = ["unavailable"]
-#
-#  [[PersistedStore.Stores]]
-#    Name = "storage name,like `100.100.10.1`"
-#    Path = "/path/to/storage/"
-#    Strict = false
-#    ReadOnly = true
-#
-[PoSt]
-#  [PoSt.Default]
-#    StrictCheck = false
-#    GasOverEstimation = 0.0
-#    MaxFeeCap = ""
-#    MsgCheckInteval = "1m0s"
-#    MsgConfidence = 5
-#  [PoSt.Actors]
-#    [PoSt.Actors.10000]
-#      Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
-#      StrictCheck = false
-#      GasOverEstimation = 0.0
-#      MaxFeeCap = ""
-#      MsgCheckInteval = "1m0s"
-#      MsgConfidence = 5
+[[Miners]]
+#Actor = 10086
+[Miners.Sector]
+#InitNumber = 0
+#MaxNumber = 1000000
+#Enabled = true
+[Miners.Commitment]
+#Confidence = 10
+[Miners.Commitment.Pre]
+#Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
+#GasOverEstimation = 1.2
+#MaxFeeCap = "5 nanoFIL"
+[Miners.Commitment.Pre.Batch]
+#Enabled = false
+#Threshold = 16
+#MaxWait = "1h0m0s"
+#CheckInterval = "1m0s"
+#GasOverEstimation = 1.2
+#MaxFeeCap = "5 nanoFIL"
+[Miners.Commitment.Prove]
+#Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
+#GasOverEstimation = 1.2
+#MaxFeeCap = "5 nanoFIL"
+[Miners.Commitment.Prove.Batch]
+#Enabled = false
+#Threshold = 16
+#MaxWait = "1h0m0s"
+#CheckInterval = "1m0s"
+#GasOverEstimation = 1.2
+#MaxFeeCap = "5 nanoFIL"
+[Miners.PoSt]
+#Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
+#Enabled = true
+#StrictCheck = true
+#GasOverEstimation = 1.2
+#MaxFeeCap = "5 nanoFIL"
+#Confidence = 10
+[Miners.Proof]
+#Enabled = false
+[Miners.Deal]
+#Enabled = false
 ```
+
+配置项的解析请参考文章[venus-sector-manager 的配置解析](https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/zh/04.venus-sector-manager%E7%9A%84%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90.md)
 
 将链服务配置更新到`sector-manager.cfg`：
 ```toml
-[Chain]
-  Api = "/ip4/<IP_ADDRESS_OF_VENUS>/tcp/<PORT_OF_VENUS>"
-  Token = "AUTH_TOKEN_FOR_ACCOUNT_NAME"
-
-[Messager]
-  Api = "/ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER>"
-  Token = "AUTH_TOKEN_FOR_ACCOUNT_NAME"
+[Common.API]
+Chain = "/ip4/<IP_OF_VENUS>/tcp/<PORT_OF_VENUS>"
+Messager = "/ip4/<IP__OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER>"
+Market = "/ip4/<IP_OF_VENUS_MARKET>/tcp/<PORT_OF_VENUS_MARKET>"
+Gateway = ["/ip4/<IP_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY>"]
+Token = "AUTH_TOKEN_FOR_ACCOUNT_NAME"
 ```
 
 #### 创建矿工
 
 &ensp;&ensp; 如果已有矿工，可略过此步骤。
 
-```bash
+```
 $ ./venus-sector-manager --net=forcenet util miner create --from=t3skelnvntu5m7kb656jfvr5dfy663aru76c6pxqp4qf6madrm7s4db77ysasefohdjypmoumc3niug6xmcxuq --sector-size=512MiB 
 2021-09-28T16:11:20.168+0800    DEBUG   policy  policy/const.go:18      NETWORK SETUP   {"name": "forcenet"}
 2021-09-28T16:11:20.185+0800    INFO    sealer  internal/util_miner.go:250      wait for message receipt        {"size": "512MiB", "from": "t3skelnvntu5m7kb656jfvr5dfy663aru76c6pxqp4qf6madrm7s4db77ysasefohdjypmoumc3niug6xmcxuq", "actor": "t01032", "mid": "bafy2bzaceb66tlt744zjrq6bvtziinlsi7vajlyux6t3rnzxx4sfjeupxliha"}
@@ -202,7 +200,7 @@ $ ./venus-sector-manager --net=forcenet util miner create --from=t3skelnvntu5m7k
 
 至此矿工创建成功，矿工号为：t01033，查看该矿工信息：
 
-```bash
+```
 $ ./venus-sector-manager --net=forcenet util miner info t01033
 2021-09-28T16:19:19.236+0800    DEBUG   policy  policy/const.go:18      NETWORK SETUP   {"name": "forcenet"}
 Miner: t01033
@@ -220,36 +218,42 @@ WindowPoStPartitionSectors: 2
 
 &ensp;&ensp; 目前，miner的一些必要信息需要手动配置，暂时无法自动获取。
 
-- 矿工号，sector id范围
-```toml
-[[SectorManager.Miners]]
-    ID = 1033 # 矿工id，eg。 t01033 -> 1033 
-    InitNumber = 0 # min sid 
-    MaxNumber = 10000 # max sid
-    Disabled = false # false: 做算力; true:仅维持算力
-```
-
-- P2,C2消息的from配置
-```toml
-[Commitment.Miners]
-    [Commitment.Miners.1033]
-      [Commitment.Miners.1033.Controls]
-        PreCommit = "" # 根据实际需求配置钱包地址
-        ProveCommit = "" # 根据实际需求配置钱包地址
-```
-
 - 永久存储路径配置
 ```toml
-[[PersistedStore.Stores]]
-    Name = "store-f01033" # 自己起的名称
-    Path = ""  # 绝对路径
+[[Common.PersistStores]]
+Name = "storage-01"
+Path = "/mnt/cluster/"
+Strict = false
+ReadOnly = true
 ```
 
-- wdPoSt配置
-```toml
-[PoSt.Actors]
-    [PoSt.Actors.1033]
-      Sender = "" # 根据实际需求配置钱包地址
+- miner相关配置
+```
+[[Miners]]
+Actor = 1033 # minerID
+[Miners.Sector]
+InitNumber = 0 # 扇区 ID 开始索引
+MaxNumber = 1000000 # 最多可封装的扇区数
+Enabled = true
+
+[Miners.Commitment.Pre]
+Sender = "" # 根据实际需求配置钱包地址
+
+[Miners.Commitment.Prove]
+Sender = "" # 根据实际需求配置钱包地址
+GasOverEstimation = 1.2
+MaxFeeCap = "5 nanoFIL"
+
+[Miners.PoSt]
+Sender = "" # 根据实际需求配置钱包地址
+Enabled = true
+StrictCheck = true
+GasOverEstimation = 1.2
+MaxFeeCap = "5 nanoFIL"
+Confidence = 10
+
+[Miners.Proof]
+Enabled = true
 ```
 
 确保以上信息都配置无误后启动服务:
@@ -261,85 +265,7 @@ nohup ./venus-sector-manager daemon run  --listen=0.0.0.0:1789 --poster=true 2>&
 
 刚启动时会将配置信息输出到日志:
 ```
-021-09-28T16:51:03.850+0800    INFO    dep     dep/sealer_constructor.go:69    Sector-manager initial cfg: [SectorManager]
-  PreFetch = true
-
-  [[SectorManager.Miners]]
-    ID = 1033
-    InitNumber = 0
-    MaxNumber = 10000
-    Disabled = false
-
-[Commitment]
-  [Commitment.DefaultPolicy]
-    CommitBatchThreshold = 0
-    CommitBatchMaxWait = "0s"
-    CommitCheckInterval = "0s"
-    EnableBatchProCommit = false
-    PreCommitBatchThreshold = 0
-    PreCommitBatchMaxWait = "0s"
-    PreCommitCheckInterval = "0s"
-    EnableBatchPreCommit = false
-    PreCommitGasOverEstimation = 0.0
-    ProCommitGasOverEstimation = 0.0
-    BatchPreCommitGasOverEstimation = 0.0
-    BatchProCommitGasOverEstimation = 0.0
-    MaxPreCommitFeeCap = ""
-    MaxProCommitFeeCap = ""
-    MaxBatchPreCommitFeeCap = ""
-    MaxBatchProCommitFeeCap = ""
-    MsgConfidence = 0
-  [Commitment.Miners]
-    [Commitment.Miners.1033]
-      [Commitment.Miners.1033.Controls]
-        PreCommit = "t3skelnvntu5m7kb656jfvr5dfy663aru76c6pxqp4qf6madrm7s4db77ysasefohdjypmoumc3niug6xmcxuq"
-        ProveCommit = "t3skelnvntu5m7kb656jfvr5dfy663aru76c6pxqp4qf6madrm7s4db77ysasefohdjypmoumc3niug6xmcxuq"
-    [Commitment.Miners.example]
-      [Commitment.Miners.example.Controls]
-        PreCommit = ""
-        ProveCommit = ""
-
-[Chain]
-  Api = "/ip4/192.168.200.12/tcp/3453"
-  Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibGl0YW8wNCIsInBlcm0iOiJzaWduIiwiZXh0IjoiIn0.rezCJILQkXw0hZrCYdyVVX_dB2ZqqlXWCk4izAqnld8"
-
-[Messager]
-  Api = "/ip4/192.168.200.12/tcp/39812"
-  Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibGl0YW8wNCIsInBlcm0iOiJzaWduIiwiZXh0IjoiIn0.rezCJILQkXw0hZrCYdyVVX_dB2ZqqlXWCk4izAqnld8"
-
-[PersistedStore]
-  Includes = []
-
-  [[PersistedStore.Stores]]
-    Name = "store-f01033"
-    Path = "/mnt/test"
-    Strict = false
-    ReadOnly = false
-
-[PoSt]
-  [PoSt.Default]
-    StrictCheck = false
-    GasOverEstimation = 0.0
-    MaxFeeCap = ""
-    MsgCheckInteval = "1m0s"
-    MsgConfidence = 5
-  [PoSt.Actors]
-    [PoSt.Actors.1033]
-      Sender = "t3skelnvntu5m7kb656jfvr5dfy663aru76c6pxqp4qf6madrm7s4db77ysasefohdjypmoumc3niug6xmcxuq"
-
-
-2021-09-28T16:51:03.859+0800    INFO    badger  v2@v2.2007.2/logger.go:46       All 0 tables opened in 0s
-        {"path": "/home/ipfs/.venus-sector-manager/meta"}
-2021-09-28T16:51:03.860+0800    DEBUG   kv      kvstore/prefix_wrapper.go:26    kv wrapped      {"prefix": "sector-number/", "prefix-len": 14}
-2021-09-28T16:51:03.863+0800    INFO    badger  v2@v2.2007.2/logger.go:46       All 0 tables opened in 0s
-        {"path": "/home/ipfs/.venus-sector-manager/offline_meta"}
-2021-09-28T16:51:03.863+0800    DEBUG   kv      kvstore/prefix_wrapper.go:26    kv wrapped      {"prefix": "sector-states/", "prefix-len": 14}
-2021-09-28T16:51:03.863+0800    DEBUG   kv      kvstore/prefix_wrapper.go:26    kv wrapped      {"prefix": "sector-states-offline/", "prefix-len": 22}
-2021-09-28T16:51:03.870+0800    INFO    badger  v2@v2.2007.2/logger.go:46       All 0 tables opened in 0s
-        {"path": "/home/ipfs/.venus-sector-manager/sector-index"}
-2021-09-28T16:51:03.872+0800    INFO    confmgr confmgr/local_mgr.go:133        will reload sector-manager(/home/ipfs/.venus-sector-manager/sector-manager.cfg) once receive reload sig
-2021-09-28T16:51:03.872+0800    INFO    confmgr confmgr/local_mgr.go:49 local conf mgr start
-2021-09-28T16:51:03.874+0800    INFO    dep     dep/sealer_constructor.go:215   miner info pre-fetched  {"miner": "1033"}
+... ...
 2021-09-28T16:51:03.874+0800    INFO    sealer  venus-sector-manager/server.go:38       daemon running
 2021-09-28T16:51:03.874+0800    INFO    sealer  venus-sector-manager/server.go:31       trying to listen on 0.0.0.0:1789
 ```
