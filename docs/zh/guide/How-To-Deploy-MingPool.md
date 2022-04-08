@@ -350,7 +350,10 @@ $ ./venus-miner address start <MINER_ID>
 $ ./venus-miner address list
 ```
 
+:::tip
+
 如果在执行`venus-miner address list`后仍然无法看到你配置的矿工号，请在venus-auth检查用户状态
+
 ```bash
 number: 2
 name: venus01
@@ -359,7 +362,10 @@ miners: [f033222]
 createTime: Mon, 14 Mar 2022 13:23:20 CST
 updateTime: Mon, 14 Mar 2022 13:23:20 CST
 ```
+
 如果state是`disabled`说明venus-miner并没有启用轮询些矿工出块权，需要使用venus-auth active `venus01`来激活这个矿工状态
+
+:::
 
 ## 安装venus-market
 
