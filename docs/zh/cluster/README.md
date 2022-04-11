@@ -1,25 +1,26 @@
 ## venus-cluster 是什么?
 
-venus-cluster is the next generation venus-sealer, which offers a configurable, expandable and customizable storage power solution for the Filecoin storage providers.  
+`venus-cluster`是`Venus`研发团队基于大量的运维实践经验，经过不懈的技术攻坚与设计迭代，针对当前Fielcoin参考实现的算力服务进行大幅优化的，次世代集群算力服务方案。其三大特点为配置化，集群化，定制化。`venus-cluster`的整体介绍，欢迎参见这个`Venus meetup`的[视频](https://youtu.be/Tin9Y0Bk_AE?t=1506)来了解更多。
 
-## venus-cluster Features
+## 功能特性
 
-### Complete revamp of existing job scheduling
+### 重新设计的任务调度
 
-Managing sealing pipeline traditionally not only requires extensive knowledge across sealing mechanism and hardware specifications, but also demand a lot of devOps attentions for maintenance and troubleshooting. By allowing venus-workers to change the state machine of a sealing sector, instead of having an active and centralized job scheduling model, venus-cluster introduced a new model that worker itself actively grabs new tasks.
+`venus-cluster`不是简单地对现有Filecoin参考实现的任务调度进行优化，而是打破了所有现有任务调度的格局，从零开始，重新设想了当前理想的任务调度方式。能够做到这样颠覆性的改变，得益于`venus-cluster`把状态机(state machine)的修改能力从中心化的任务调度`lotus-miner`/`venus-sealer`手中下放到了`venus-worker`上。这样使得`worker`不是被动的等待被分配任务而是主动去领取封装任务。
 
-### Horizontal scaling of your workers
+### 集群横向扩容
 
-With extensive configurations venus-cluster supports to optimize your setups, a storage provider can easily take the config file of one worker and apply it to another worker with same hardware specification. Thus enabling lightning fast expansion of a storage provider’s sealing capacity. 
+利用`venus-cluster`对硬件资源详尽的配置能力，一个存储提供者可以非常便捷的使用一台`worker`机器上的配置文件，将其运用到另外一台硬件配置相同的`worker`机器上，并得到与前一台`worker`机器相同算力产能。这样就可使得集群能够快速横向扩容，降低提高集群产能带来的运维难度以及集群风险。而不是像当前参考实现中，为了扩容牵一发而动全身。
 
-### Decoupling of Post workers
+### Post worker 分离
 
-venus-cluster supports worker machines to be setup as dedicated Post workers, relieve the headache that sealing tasks compete resources with essential post tasks. 
+`venus-cluster`支持部署专门运算时空证明的`worker`机器。这样，`windowPost`和`winningPost`就不必为与封装任务抢夺资源，导致算力和出块损失，而担心了。
 
-### Pooling of worker resources
+### 池化 worker 资源
 
-Thanks to the new scheduling model, storage power services (sealing pipeline and Post workers) by venus-cluster can be used to serve multiple nodes (miner_id). The pooling of workers essentially allows storage providers more flexibility in their deployment and saves hardware resources and operation overhead.
+得益于全新的任务调度模型，使用`venus-cluster`的算力服务方案可以同时为多个节点服务。只需要通过简单的配置，您的`worker`算力机便能充分利用其价值，为多个矿工节点号提供算力服务（复制与时空证明服务）。
 
-### Customized sealing tasks
+### 定制化封装任务
 
-If storage provider has extensive background in optimizing a particular phase of sealing task, maintaining a forked reference implementation of Filecoin is no longer as venus-cluster allows your custom code to be plugged into the sealing pipeline directly through simple configuration. 
+如果存储提供者有比较强的编程背景，能够针对某个封装阶段进行代码优化。那么存储提供者将无需再维护一个自己优化过的Filecoin参考实现，而是直接将该封装阶段的优化代码封装为一个可执行文件`bin`，直接配置到`venus-cluster`中让其运行优化后的代码。
+

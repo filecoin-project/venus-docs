@@ -1,25 +1,25 @@
 ## venus-market 是什么?
 
-venus-market version 2 is the latest release for a Venus storage system to handle deal-making process. It grants storage providers a seamless deal-taking experience while allowing maximum flexibility if storage providers still choose to take matters into their own hands.   
+`venus-market v2`是`Venus`存储系统给社区带来的最新的存储市场的解决方案。在提供了最大的灵活性的同时，他给予了存储提供者一个更无缝，更便捷的订单流程体验， 
 
-## venus-market Features
+## 功能特性
 
-### Chain service deployment
+### 链服务部署
 
-One of the most distinct features that venus-market v2 has is that if a storage provider is using a chain service with venus-market v2, then she/he doesn’t need to deploy a market node locally at all, making the whole deal-taking experience just like sealing a CC sector!
+`venus-market v2`最大的特点之一就是它能被作为链服务的组件进行部署。当一个存储提供使用带有`venus-market v2`的链服务时，那么他/她本地将无需部署一个`market`节点。`venus-market v2`将负责链上的互动，以及告诉存储提供者在哪儿里获取订单的`piece`数据。
 
-### Multiple data transfer protocol support
+### 多传输协议支持
 
-The transfer of deal data from the chain service to storage provider will not only support graphsync, OSS but also other popular data transfer protocols like HTTP (coming).
+订单`piece`数据的传输将不仅支持默认的`graphsync`，还支持OSS，HTTP等其他更有韧性，可断点续传的数据传输协议。保证接单过程中数据传输的稳定性。
 
-### Light weight storage client
+### 轻量级客户端
 
-venus-market v2 comes with a light weight client can be used to make storage deals without the need of deploying a fully synced local node. A storage client can go on making storage deals once the client connects to a Venus chain service.
+`venus-market v2`带有一个轻量级客户端。存储客户无需本地维护一个与主网保持同步的节点，只需接入一个链服务，便可轻松发出存储订单。
 
-### Compatibility with other implementation
+### 兼容其他实现
 
-As a storage provider using Venus storage system, you will enjoy complete comparability with other implementations, which means you have the flexibility to take deals from other storage clients or deal distribution system too.  
+`venus-market v2`实现的所有订单流程都将与`Filecoin`其他实现的订单市场进行兼容。保证`Venus`存储提供者能够接收来自任何符合协议要求客户端的订单。
 
-### Developer friendly
+### 开发者友好
 
-APIs and SDKs will be opened up to allow storage providers with programming background to further customize their deal-taking workflow.
+更多`venus-market v2`的API以及SDK将陆续开放给开发者。`venus-market v2`将成为一个开放平台，让开发者在上面实现他们需要的定制化需求。
