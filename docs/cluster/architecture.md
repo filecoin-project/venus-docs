@@ -30,6 +30,6 @@ With architectural changes of `venus-cluster`, it presents new streamlined ways 
 
 ### Configuration architecture
 
-![venus-cluster](../.vuepress/public/vc_arc.jpg)
+![venus-cluster](../.vuepress/public/vc_arc.jpeg)
 
 `venus-cluster` allows extensive configurations of worker’s planning and isolation of its computational resources (CPU, RAM, GPU) and its storage resources (SSD, NVMe).  Proper configuration of computational resources and storage resources would contribute to a highly efficient sealing pipeline. Most notably, [[processors]] configures the isolation of the computational resources on a `venus-worker` and [[sealing_thread]] configures the task control and isolation of storage resources on a `venus-worker`. This means that when you have one [[processors.pc1]] configured, `venus-worker` would allocate the configured computational resources for use of this pc1 process only. Similarly, when you have one [[sealing_thread]] configured, `venus-worker` will allocate a section of your storage resources for storing all temporary files when sealing a sector. 

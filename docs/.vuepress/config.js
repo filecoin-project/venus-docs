@@ -77,6 +77,14 @@ module.exports = {
                         link: '/guide/'
                     },
                     {
+                        text: 'venus-cluster',
+                        link: '/cluster/'
+                    },
+                    {
+                        text: 'venus-market',
+                        link: '/market/'
+                    },
+                    {
                         text: 'Venus Modules',
                         link: '/modules/'
                     },
@@ -89,7 +97,7 @@ module.exports = {
                         link: '/operation/'
                     },
                     {
-                        text: 'Master',
+                        text: 'Master Class',
                         link: '/master/'
                     }
                 ],
@@ -102,9 +110,30 @@ module.exports = {
                                 ['', 'Overview'],
                                 ['How-To-Deploy-MingPool.md', 'Deploy a chain service'],
                                 ['Using-venus-Shared-Modules.md', 'Use a chain service'],
-                                ['Using-venus-market.md', 'Join storage market'],
-                                ['Using-venus-cluster-alt.md', 'Use venus-cluster'],
                                 ['How-To-Contribute-Docs.md', 'Contribute to doc']
+                            ]
+                        }
+                    ],
+                    '/cluster/': [
+                        {
+                            title: 'venus-cluster guide',
+                            collapsable: false,
+                            children: [
+                                ['', 'Overview'],
+                                ['architecture.md', 'Architecture'],
+                                ['Using-venus-cluster-alt.md', 'Getting started'],
+                            ]
+                        }
+                    ],
+                    '/market/': [
+                        {
+                            title: 'venus-market guide',
+                            collapsable: false,
+                            children: [
+                                ['', 'Overview'],
+                                ['architecture.md', 'Architecture'],
+                                ['Using-venus-market.md', 'Getting started'],
+                                ['migrate_market_v1_to_v2.md', 'Upgrading to version 2.0'],                              
                             ]
                         }
                     ],
@@ -154,21 +183,6 @@ module.exports = {
                                 ['System_monitor_of_Zabbix.md', 'System monitoring (Zabbix)'],
                                 ['lotus-vs-venus.md', 'Coming from Lotus'],
                                 ['Nv15_upgrade_guide.md', 'nv15 upgrade'],
-                                ['migrate_market_v1_to_v2.md', 'market v2 upgrade'],
-                            ]
-                        }
-                    ],
-                    '/incubation/': [
-                        {
-                            title: 'Incubation',
-                            collapsable: false,
-                            children: [
-                                ['', 'Overview'],
-                                ['The phase 2  was officially launched.md', 'Incubation center phase II'],
-                                ['Incubation Center participation process.md', 'Participation process'],
-                                ['Incubation_Center_Prize_Pool.md', 'Participation incentives'],
-                                ['announcement.md', 'Announcement'],
-                                ['Rules.md', 'Rules'],
                             ]
                         }
                     ],
@@ -199,7 +213,15 @@ module.exports = {
                         link: '/zh/guide/'
                     },
                     {
-                        text: '组件模块',
+                        text: 'venus-cluster',
+                        link: '/zh/cluster/'
+                    },
+                    {
+                        text: 'venus-market',
+                        link: '/zh/market/'
+                    },
+                    {
+                        text: '组件',
                         link: '/zh/modules/'
                     },
                     {
@@ -224,10 +246,32 @@ module.exports = {
                                 ['', '启明星概要'],
                                 ['How-To-Deploy-MingPool.md', '部署链服务'],
                                 ['Using-venus-Shared-Modules.md', '使用链服务'],
+                                ['How-To-Contribute-Docs.md', '贡献文档'],
+                            ]
+                        }
+                    ],
+                    '/zh/cluster/': [
+                        {
+                            title: 'venus-cluster 教程',
+                            collapsable: false,
+                            children: [
+                                ['', '概要'],
+                                ['architecture.md', '架构'],
+                                ['Using-venus-cluster-alt.md', '快速上手'],
+                                ['Venus-Sector-Manager.md', 'venus-sector-manager配置'],
+                                ['Venus-Worker-c.md', 'venus-worker配置'],
+                            ]
+                        }
+                    ],
+                    '/zh/market/': [
+                        {
+                            title: 'venus-market 教程',
+                            collapsable: false,
+                            children: [
+                                ['', '概要'],
+                                ['architecture.md', '架构'],
                                 ['using-venus-market-for-master.md', '链服务部署market服务'],
                                 ['using-venus-market-for-miner.md', '本地部署market节点'],
-                                ['Using-venus-cluster-alt.md', '使用cluster'],
-                                ['How-To-Contribute-Docs.md', '贡献文档'],
                             ]
                         }
                     ],
@@ -246,8 +290,6 @@ module.exports = {
                                 ['Venus-Worker.md', 'venus-worker（sealer）'],
                                 ['Venus-Market.md', 'venus-market'],
                                 ['Venus-Cluster.md', 'venus-cluster'],
-                                ['Venus-Sector-Manager.md', 'venus-sector-manager（cluster）'],
-                                ['Venus-Worker-c.md', 'venus-worker（cluster）'],
                             ]
                         }
                     ],
@@ -283,20 +325,6 @@ module.exports = {
                                 ['lotus-vs-venus.md', '从Lotus中来'],
                                 ['Nv15_upgrade_guide.md', 'nv15网络升级'],
                                 ['migrate_market_v1_to_v2.md', 'market_v2升级'],
-                            ]
-                        }
-                    ],
-                    '/zh/incubation/': [
-                        {
-                            title: '孵化器',
-                            collapsable: false,
-                            children: [
-                                ['', '概述'],
-                                ['存储提供者孵化中心参与流程.md', '参与流程'],
-                                ['第二阶段正式启动.md', '孵化中心第二阶段'],
-                                ['Incubation_Center_Prize_Pool.md', '参与奖励'],
-                                ['announcement.md', '公告'],
-                                ['Rules.md', '规则'],
                             ]
                         }
                     ],
