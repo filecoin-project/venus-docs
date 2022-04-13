@@ -260,6 +260,8 @@ module.exports = {
                                 ['Using-venus-cluster-alt.md', '快速上手'],
                                 ['Venus-Sector-Manager.md', 'venus-sector-manager配置'],
                                 ['Venus-Worker-c.md', 'venus-worker配置'],
+                                ['migrate_sectors.md', '导入已有扇区'],
+                                ['processors_example.md', 'Processors配置范例'],
                             ]
                         }
                     ],
