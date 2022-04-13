@@ -21,6 +21,7 @@ rpc_client.addr = "/ip4/127.0.0.1/tcp/1789"
 # allowed_miners = [10123, 10124, 10125]
 # allowed_sizes = ["32GiB", "64GiB"]
 enable_deals = true
+# max_deals = 3
 max_retries = 3
 # seal_interval = "30s"
 # recover_interval = "30s"
@@ -32,6 +33,7 @@ location = "./mock-tmp/store1"
 # sealing.allowed_miners = [10123, 10124, 10125]
 # sealing.allowed_sizes = ["32GiB", "64GiB"]
 # sealing.enable_deals = true
+# sealing.max_deals = 3
 # sealing.max_retries = 3
 # sealing.seal_interval = "30s"
 # sealing.recover_interval = "30s"
@@ -44,7 +46,12 @@ location = "./mock-tmp/store2"
 [[sealing_thread]]
 location = "./mock-tmp/store3"
 
-[remote_store]
+# deprecated
+# [remote_store]
+# name = "persist-store1"
+# location = "./mock-tmp/remote"
+
+[[attached]]
 # name = "persist-store1"
 location = "./mock-tmp/remote"
 
@@ -52,6 +59,9 @@ location = "./mock-tmp/remote"
 # pc1 = 3
 # pc2 = 2
 # c2 = 1
+
+[processors.ext_locks]
+# gpu1 = 1
 
 [processors.static_tree_d]
 # 2KiB = "./tmp/2k/sc-02-data-tree-d.dat"
@@ -173,6 +183,10 @@ rpc_client.addr = "/ip4/127.0.0.1/tcp/1789"
 # 默认为 false
 # 当设置为 true 时，通常需要同时设置 `sector_manager` 中的 `piece_token` 项
 # enable_deals = true
+
+# 允许向扇区内添加的最大订单数量，选填项，数字类型
+# 默认为 null
+# max_deals = 3
 
 # 封装过程中遇到 temp 类型的错误时，重试的次数，选填项，数字格式
 # 默认为 5
@@ -314,7 +328,7 @@ sealing.allowed_sizes = ["64GiB"]
 
 
 
-## [remote_store]
+## [remote_store] 已废弃
 
 `remote_store` 用于配置已完成的扇区持久化数据保存的位置。
 
@@ -339,6 +353,35 @@ location = "/mnt/remote/10.0.0.14/store"
 如果持久化存储目录在所有机器上的挂载路径都统一的话，配置时也可以选择在 `venus-worker` 和`venus-sector-manager` 两侧都不配置 `name`。这种情况下，两者都会使用绝对路径作为 `name`，也能匹配。
 
 
+## [[attached]]
+
+`attached` 用于配置已完成的扇区持久化数据保存的位置，允许同时配置多个。
+
+
+
+### 基础配置范例
+
+```
+[attached]
+# 名称， 选填项，字符串类型
+# 默认为路径对应的绝对路径
+# name = "remote-store1"
+
+# 路径，必填项，字符串类型
+# 建议直接填写绝对路径
+location = "/mnt/remote/10.0.0.14/store"
+
+# 只读，选填项，布尔类型
+# 默认值为 false
+# readonly = true
+
+```
+
+由于需要在 `venus-worker` 和 `venus-sector-manager` 之间协调存储位置信息，而在很多情况下，同一个持久化存储目录在`venus-worker` 机器和 `venus-sector-manager` 机器上的挂载路径不完全一致，因此我们决定使用 `name` 作为协调的基础信息.
+
+如果持久化存储目录在所有机器上的挂载路径都统一的话，配置时也可以选择在 `venus-worker` 和`venus-sector-manager` 两侧都不配置 `name`。这种情况下，两者都会使用绝对路径作为 `name`，也能匹配。
+
+
 
 ## [processors]
 
@@ -352,7 +395,7 @@ location = "/mnt/remote/10.0.0.14/store"
 
 `processors.limit` 用于配置不同封装阶段的并行任务数量控制。这是为了降低不同阶段的资源相互争抢的情况。
 
-需要注意的是，`processors.limit`通常只在对应的封装阶段未使用外部执行器的情况下有明显效果。当配置了外部执行器时，外部执行器的数量也会影响并行任务数量。
+需要注意的是，当配置了外部执行器时，外部执行器的数量和允许的并发总量也会影响并行任务数量。
 
 
 
@@ -375,6 +418,60 @@ location = "/mnt/remote/10.0.0.14/store"
 
 举例来说，如果设置了 `pc2 = 2`，那么同一时间最多只会有两个扇区可以执行 `pc2` 阶段的任务。
 
+
+### [processors.ext_locks]
+
+`processors.ext_locks` 用于配置一些自定义的锁限制, 它是和 `[[processors.{stage_name}]]` 中的 `locks` 配置项联动使用的。
+这个配置项允许使用者自定一些限制条件，并令不同的外部处理器受其约束。
+
+
+#### 基础配置范例
+
+```
+[processors.ext_locks]
+# some_name = some_number
+```
+
+
+#### 特殊配置范例
+`processors.ext_locks` 自身是不能独立生效的。
+
+##### 一块 GPU， pc2 和 c2 公用
+
+```
+[processors.ext_locks]
+gpu = 1
+
+[[processors.pc2]]
+locks = ["gpu"]
+
+[[processors.c2]]
+locks = ["gpu"]
+```
+
+这样，`pc2` `c2` 会各启动一个外部处理器，两者将会产生竞争关系，也就意味着两者将不会同时发生。
+
+##### 两块 GPU， pc2 和 c2 公用
+
+```
+[processors.ext_locks]
+gpu1 = 1
+gpu2 = 1
+
+[[processors.pc2]]
+locks = ["gpu1"]
+
+[[processors.pc2]]
+locks = ["gpu2"]
+
+[[processors.c2]]
+locks = ["gpu1"]
+
+[[processors.c2]]
+locks = ["gpu2"]
+```
+
+这样，`pc2` `c2` 会各启动两个外部处理器，将会产生两两竞争的关系，从而允许限制一块 GPU 上只能执行其中一个阶段的任务。
 
 
 ### [processors.static_tree_d]
@@ -435,6 +532,15 @@ location = "/mnt/remote/10.0.0.14/store"
 # 外部执行器的附加环境变量，选填项，字典类型
 # 默认值为 null
 # envs = { RUST_LOG = "info" }
+
+# 本执行器允许的并发任务数量上限
+# 默认值为 null，无限制，但任务具体是否并发执行，视使用的外部执行器实现而定
+# 主要使用在 pc1 这样可以多个并行的环节，可以有效节约共享内存、线程池等资源
+# concurrent = 4
+
+# 自定义的外部限制锁名称，选填项，字符串数组类型
+# 默认值为 null
+# locks = ["gpu1"]
 ```
 
 
@@ -442,39 +548,35 @@ location = "/mnt/remote/10.0.0.14/store"
 #### 基础配置范例
 
 ```
-[[processors.pc1]]
-numa_preferred = 0
-cgroup.cpuset = "0-3"
-env = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
+[processors.limit]
+pc1 = 4
+pc2 = 2
+c2 = 1
 
 [[processors.pc1]]
 numa_preferred = 0
-cgroup.cpuset = "4-7"
-env = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
+cgroup.cpuset = "0-7"
+concurrent = 2
+envs = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
 
 [[processors.pc1]]
 numa_preferred = 1
-cgroup.cpuset = "12-15"
-env = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
-
-[[processors.pc1]]
-numa_preferred = 1
-cgroup.cpuset = "16-19"
-env = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
-
+cgroup.cpuset = "12-19"
+concurrent = 2
+envs = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
 
 [[processors.pc2]]
 cgroup.cpuset = "8-11,24-27"
-env = { FIL_PROOFS_USE_GPU_COLUMN_BUILDER = "1", FIL_PROOFS_USE_GPU_TREE_BUILDER = "1", CUDA_VISIBLE_DEVICES = "0" }
+envs = { FIL_PROOFS_USE_GPU_COLUMN_BUILDER = "1", FIL_PROOFS_USE_GPU_TREE_BUILDER = "1", CUDA_VISIBLE_DEVICES = "0" }
 
 [[processors.pc2]]
 cgroup.cpuset = "20-23,36-39"
-env = { FIL_PROOFS_USE_GPU_COLUMN_BUILDER = "1", FIL_PROOFS_USE_GPU_TREE_BUILDER = "1", CUDA_VISIBLE_DEVICES = "1" }
+envs = { FIL_PROOFS_USE_GPU_COLUMN_BUILDER = "1", FIL_PROOFS_USE_GPU_TREE_BUILDER = "1", CUDA_VISIBLE_DEVICES = "1" }
 
 
 [[processors.c2]]
 cgroup.cpuset = "28-35"
-env = { CUDA_VISIBLE_DEVICES = "2,3" }
+envs = { CUDA_VISIBLE_DEVICES = "2,3" }
 
 
 [[processors.tree_d]]
@@ -483,7 +585,7 @@ cgroup.cpuset = "40-45"
 
 以上是基于一台 48C + 4GPU 的设备的 `processors.{stage_name}`  配置范例，在这套配置下，将启动：
 
-- 4个 `pc1` 外部执行器，采用 `MULTICORE_SDR` 模式，各分配 4核，且内存分配优先使用本 numa 分区
+- 2个 `pc1` 外部执行器，采用 `MULTICORE_SDR` 模式，各分配 8 核，允许 2 个并发任务，且内存分配优先使用本 numa 分区
 - 2个 `pc2` 外部执行器，各分配 8 核，各使用一块 GPU
 - 1个 `c2` 外部执行器，分配 8 核， 使用一块 GPU
 - 1 个 `tree_d` 外部执行器，分配 6 核
@@ -498,7 +600,7 @@ cgroup.cpuset = "40-45"
 [[processors.c2]]
 bin = /usr/local/bin/venus-worker-c2-optimized
 cgroup.cpuset = "40-47"
-env = { CUDA_VISIBLE_DEVICES = "2,3" }
+envs = { CUDA_VISIBLE_DEVICES = "2,3" }
 ```
 
 
@@ -509,7 +611,7 @@ env = { CUDA_VISIBLE_DEVICES = "2,3" }
 [[processors.c2]]
 bin = /usr/local/bin/venus-worker-c2-outsource
 args = ["--url", "/ip4/apis.filecoin.io/tcp/10086/https", "--timeout", "10s"]
-env = { LICENCE_PATH = "/var/tmp/c2.licence.dev" }
+envs = { LICENCE_PATH = "/var/tmp/c2.licence.dev" }
 ```
 
 
@@ -519,12 +621,56 @@ env = { LICENCE_PATH = "/var/tmp/c2.licence.dev" }
 ```
 [[processors.pc2]]
 cgroup.cpuset = "8-11,24-27"
-env = { FIL_PROOFS_USE_GPU_COLUMN_BUILDER = "1", FIL_PROOFS_USE_GPU_TREE_BUILDER = "1", CUDA_VISIBLE_DEVICES = "0" }
+envs = { FIL_PROOFS_USE_GPU_COLUMN_BUILDER = "1", FIL_PROOFS_USE_GPU_TREE_BUILDER = "1", CUDA_VISIBLE_DEVICES = "0" }
 
 [[processors.pc2]]
 cgroup.cpuset = "20-23,36-45"
 ```
 
+#### 4. 最优配比下，pc1 总量为奇数，无法平分
+
+```
+[processors.limit]
+pc1 = 29
+pc2 = 2
+c2 = 1
+
+[[processors.pc1]]
+numa_preferred = 0
+cgroup.cpuset = "0-41"
+concurrent = 14
+envs = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
+
+[[processors.pc1]]
+numa_preferred = 1
+cgroup.cpuset = "48-92"
+concurrent = 15
+envs = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
+
+```
+
+
+#### 5. 希望优先集中使用 numa 0 区完成 pc1
+
+```
+[processors.limit]
+pc1 = 29
+pc2 = 2
+c2 = 1
+
+[[processors.pc1]]
+numa_preferred = 0
+cgroup.cpuset = "0-47"
+concurrent = 16
+envs = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
+
+[[processors.pc1]]
+numa_preferred = 1
+cgroup.cpuset = "48-86"
+concurrent = 13
+envs = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
+
+```
 
 
 ## 一份最简可工作的配置文件范例
@@ -568,39 +714,36 @@ location = "{path to remote store}"
 64GiB = "{path to static tree_d for 64GiB}"
 
 # 根据实际资源规划
-[[processors.pc1]]
-numa_preferred = 0
-cgroup.cpuset = "0-3"
-env = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
+[processors.limit]
+pc1 = 4
+pc2 = 2
+c2 = 1
 
 [[processors.pc1]]
 numa_preferred = 0
-cgroup.cpuset = "4-7"
-env = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
+cgroup.cpuset = "0-7"
+concurrent = 2
+envs = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
 
 [[processors.pc1]]
 numa_preferred = 1
-cgroup.cpuset = "12-15"
-env = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
-
-[[processors.pc1]]
-numa_preferred = 1
-cgroup.cpuset = "16-19"
-env = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
+cgroup.cpuset = "12-19"
+concurrent = 2
+envs = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
 
 
 [[processors.pc2]]
 cgroup.cpuset = "8-11,24-27"
-env = { FIL_PROOFS_USE_GPU_COLUMN_BUILDER = "1", FIL_PROOFS_USE_GPU_TREE_BUILDER = "1", CUDA_VISIBLE_DEVICES = "0" }
+envs = { FIL_PROOFS_USE_GPU_COLUMN_BUILDER = "1", FIL_PROOFS_USE_GPU_TREE_BUILDER = "1", CUDA_VISIBLE_DEVICES = "0" }
 
 [[processors.pc2]]
 cgroup.cpuset = "20-23,36-39"
-env = { FIL_PROOFS_USE_GPU_COLUMN_BUILDER = "1", FIL_PROOFS_USE_GPU_TREE_BUILDER = "1", CUDA_VISIBLE_DEVICES = "1" }
+envs = { FIL_PROOFS_USE_GPU_COLUMN_BUILDER = "1", FIL_PROOFS_USE_GPU_TREE_BUILDER = "1", CUDA_VISIBLE_DEVICES = "1" }
 
 
 [[processors.c2]]
 cgroup.cpuset = "28-35"
-env = { CUDA_VISIBLE_DEVICES = "2,3" }
+envs = { CUDA_VISIBLE_DEVICES = "2,3" }
 
 
 [[processors.tree_d]]
