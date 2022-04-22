@@ -69,12 +69,12 @@ venus-wallet 可以部署为共享或独立模块，具体取决于您的安全�
 如果您是托管共享 venus 模块的管理员，请使用以下命令注册各个集群。
 
 ```bash
-# 如果已有节点号
-$ ./venus-auth user add --name <ACCOUNT_NAME> --miner <MINER_ID>
-
-# 没有节点号，在创建节点号后更新
+# 创建user
 $ ./venus-auth user add --name <ACCOUNT_NAME>
-$ ./venus-auth user update --name <ACCOUNT_NAME> --miner <MINER_ID>
+# 激活user
+$ ./venus-auth user update --name <ACCOUNT_NAME> --state 1
+# 绑定节点号
+$ ./venus-auth user miner add <ACCOUNT_NAME> <MinerID>
 
 # 为此账号分配token，用于接入服务层验证
 $ ./venus-auth token gen --perm write <ACCOUNT_NAME>
