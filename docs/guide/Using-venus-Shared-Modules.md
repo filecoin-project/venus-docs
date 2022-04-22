@@ -84,7 +84,7 @@ $ ./venus-auth token gen --perm write <ACCOUNT_NAME>
 Update user information if necessary.
 
 ```bash
-./venus-auth user miner add <ACCOUNT_NAME> <MINER_ID>
+./venus-auth user update --user=<ACCOUNT_NAME> --help
 ```
 
 ### Software dependencies
