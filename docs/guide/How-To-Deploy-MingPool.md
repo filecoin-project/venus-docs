@@ -159,9 +159,10 @@ $ ./venus-auth token gen --perm read <USER>
 ```
 :::tip
 
-Use `./venus-auth user add <USER>` to logically group different tokens. If there is already a miner number, bring --miner, if not, you need to update after the miner is created:
+Use `./venus-auth user add <USER>` to logically group different tokens. Activate the user, which was just created,  then bind miner to it:
 ```
-$ ./venus-auth user update --name <USER> --miner=<minerID>
+$ ./venus-auth user update --name <USER> --state 1
+$ ./venus-auth user miner add <USER> <minerID>
 
 # 查看user列表
 $ ./venus-auth user list

@@ -229,13 +229,12 @@ USAGE:
 
 OPTIONS:
    --name value
-   --miner value
    --comment value
    --sourceType value  (default: 0)
    --state value       (default: 0)
    --help, -h          show help (default: false)
 
-$ ./venus-auth user update --name testminer2 --miner f01570
+$ ./venus-auth user update --name testminer2 --state 1
 
 # output
 update user success
