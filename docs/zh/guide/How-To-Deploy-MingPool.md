@@ -174,9 +174,9 @@ $ ./venus-auth token gen --perm read <USER>
 ```
 :::tip
 
-使用`./venus-auth user add <USER>` 对不同的token进行逻辑分组。如果已经有矿工号，则带上--miner，没有则需要在创建矿工后更新：
+使用`./venus-auth user add <USER>` 对不同的token进行逻辑分组。然后绑定miner到user：
 ```
-$ ./venus-auth user update --name <USER> --miner=<minerID>
+$ ./venus-auth user miner add <USER> <minerID>
 
 # 查看user列表
 $ ./venus-auth user list

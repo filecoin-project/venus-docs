@@ -144,7 +144,7 @@ addr: /ip4/192.168.19.67/tcp/58418
 --market-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiemwiLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.3u-PInSUmX-8f6Z971M7JBCHYgFVQrvwUjJfFY03ouQ \
 --no-local-storage
 ```
- 
+
 参数说明:
 - actor 使用已经存在的旷工, 如果要创建新的旷工, 则不要设置此项
 - worker, owner 旷工的worker和owner地址
@@ -305,7 +305,7 @@ ProposalCid  DealId  State                  Client                              
 1. 导入订单存储文件
 
 ```bash
-./market-client import ./README.md
+./market-client data import ./README.md
 Import 1642643014364955003, Root bafk2bzaceaf4sallirkt63fqrojz5gaut7akiwxrclcsymqelqad7man3hc2c
 ```
 
@@ -342,7 +342,7 @@ bafyreiecguaxgtmgcanfco6huni4d6h6zs3w3bznermmiurtdos7r6hftm
 - 第一步执行`import`命令后输入的`Root`
 - 旷工ID
 - 协商支付订单的费用`0.01fil`, **这个值必须大于旷工设置的`storage ask`中的最小值, 不然订单会被拒绝掉.
-- 合约周期, 必须大于等于180天, 这个值也需要换算成秒为单位.
+- 合约周期, 必须大于等于180天, 这个值也需要换成epoch为单位, 每个epoch=30秒, 示例中:518400 = 180天.
 
 最后的输出`bafyreidfs2w7lxacq6zpqck7q4zimyitidxyahojf7dbbuz5zr7irdlmqa`为propose的cid.
 线上订单一样, 此时可以通过market-client查看deal信息, 订单的最后状态会停止在`StorageDealWaitingForData`

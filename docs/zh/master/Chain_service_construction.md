@@ -89,9 +89,10 @@ $ ./venus-auth token gen --perm read <USER>
 <USER_READ_AUTH_TOKEN>
 ```
 
->`./venus-auth user add <USER>` 对不同的token进行逻辑分组。如果已经有miner id，则带上--miner，如果没有，则需要在创建miner后更新：
+>`./venus-auth user add <USER>` 对不同的token进行逻辑分组。然后激活user, 并绑定miner
 ```
-$ ./venus-auth user update --name <USER> --miner=<minerID>
+$ ./venus-auth user update --name=<USER> --state=1
+$ ./venus-auth user miner add <USER> <minerID>
 
 # 查看 user 列表
 $ ./venus-auth user list

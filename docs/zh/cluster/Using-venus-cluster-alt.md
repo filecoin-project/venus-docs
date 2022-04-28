@@ -85,7 +85,7 @@
 3. 启动 `venus-sector-manager`
 
    ```
-   ./dist/bin/venus-sector-manager --net="calibnet" daemon run
+   ./dist/bin/venus-sector-manager --net="cali" daemon run
    ```
 
    注意，在主网使用时，`--net` 参数可以不设置，或设置为 `mainnet`
