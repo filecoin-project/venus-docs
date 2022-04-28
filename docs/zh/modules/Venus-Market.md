@@ -4,16 +4,12 @@ venus-gateway 是用于filecoin市场接受订单并提供检索功能的组件�
 
 ## 快速启动
 
-### 下载代码
+### 下载并编译代码
+
+### 
 
 ```shell script
 git clone https://github.com/filecoin-project/venus-market.git
-```
-
-### 编译
-
-```shell script
-make deps
 make
 ```
 
@@ -21,12 +17,31 @@ make
 
 作为venus服务层运行
 ```shell script
-./venus-market pool-run --auth-url <auth url> --node-url <node url> --messager-url <messager url>  --gateway-url <signer url>  --auth-token <auth token>  --piecestorage fs:/xx  --payment-addr <addr:account>
+./venus-market pool-run --auth-url <auth url> --node-url <node url> --messager-url <messager url>  --gateway-url <signer url>  --auth-token <auth token>  --payment-addr <addr:account>
 ```
 
 单人运行
 ```shell script
-./venus-market solo-run --node-url <node url>  --node-token <auth token> --wallet-url <local wallet url>  --wallet-token <local wallet token>   --piecestorage fs:/xx --miner <f0xxx>  --payment-addr <addr:account>
+./venus-market solo-run --node-url <node url>  --node-token <auth token> --wallet-url <local wallet url>  --wallet-token <local wallet token> --miner <f0xxx>  --payment-addr <addr:account>
+```
+
+配置piecestorage存储配置,增加如下配置到配置文件当中
+
+文件存储，如果存储仅仅只是供检索使用，可以把ReadOnly设置成true
+```toml
+[[PieceStorage.Fs]]
+ReadOnly = false
+Path = "path"
+```
+
+对象存储，如果存储仅仅只是供检索使用，可以把ReadOnly设置成true
+```toml
+[[PieceStorage.S3]]
+ReadOnly  = false
+EndPoint  = "url"
+AccessKey = ""
+SecretKey = ""
+Token     = ""
 ```
 
 设置peerid和address
@@ -42,10 +57,30 @@ make
 ```shell script
 ./venus-market storage-deals set-ask --price <price> --verified-price <price> --min-piece-size  <minsize >=256B>  --max-piece-size <max size <=sector-size> --miner <f0xxxx>
 ```
+
 设置矿工检索ask
 ```shell script
 ./venus-market retrieval-deals set-ask --price <pirce> --unseal-price <price> --payment-interval <bytes> --payment-interval-increase <bytes> --payment-addr <fxxx>
 ```
+
+#### venus-market水平扩充支持
+
+目前水平扩充的方式，首先通过tcp代理，下面起多个节点，每个节点使用
+1. tcp代理，根据客户端ip进行负载均衡
+2. market采用mysql数据存储方式
+3. dagstore topindex采用mongo存储方式
+    ```
+        [DAGStore]
+        RootDir = "/root/.venusmarket/dagstore"
+        MaxConcurrentIndex = 5
+        MaxConcurrentReadyFetches = 0
+        MaxConcurrencyStorageCalls = 100
+        GCInterval = "1m0s"
+        Transient = ""   #临时文件存放位置
+        Index = ""       #临时索引存放位置
+        UseTransient = false #开启此选项会先把文件从存储中加载到本地在给客户端检索，如果是使用对象存储方案，建议开启此选项
+    ```
+4. piecstorage采用共享存储或者是对象存储
 
 ### 启动市场客户端
 
