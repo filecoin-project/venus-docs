@@ -415,7 +415,7 @@ $ ./venus-miner address update
 
 ## 使用venus-cluster
 
-请学习参见[这个](/zh/guide/Using-venus-cluster-alt.html)文档。
+请学习参见[这个](/zh/cluster)文档。
 
 ## 接收存储订单
 
