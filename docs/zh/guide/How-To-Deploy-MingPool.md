@@ -1,30 +1,31 @@
 ## 背景
 
-考虑到庞大的初始硬件和Filecoin质押[投资](https://filscan.io/calculator)以及相关的运营成本，开始Filecoin挖掘是一项艰巨的任务。 囊括了安全性、易用性和分布式存储池的想法，Venus将帮助存储提供者，正如社区所说，把[全职工作](https://filecoinproject.slack.com/archives/CEGN061C5/p1610810730117900?thread_ts=1610809298.116800&cid=CEGN061C5)变成为一个严肃的爱好。 希望本教程能让您立即开始挖矿！
+考虑到庞大的初始硬件和Filecoin质押[投资](https://filscan.io/calculator)以及相关的运营成本，开始Filecoin存储提供是一项艰巨的任务。 囊括了分布式部署架构，订单服务和算力服务，Venus将帮助存储提供者，如社区所说，把[全职工作](https://filecoinproject.slack.com/archives/CEGN061C5/p1610810730117900?thread_ts=1610809298.116800&cid=CEGN061C5)变成为一个对运维更加友好的解决方案。 希望本教程能让您立即开始存储提供！
 
 ## 如何提供存储服务
 
 有两种方法可以开始使用Venus来提供存储服务。
 
-1. 部署最少的硬件并获得对第三方托管的共享venus模块的使用帐号。(请参阅[这个](Using-venus-Shared-Modules.md)教程以了解更多信息)
-2. 自行部署所有需要的硬件和venus模块。(本教程的其余部分将引导您完成这种部署Venus服务的方式)
+1. 部署最少的硬件并获得对第三方Venus链服务的帐号。(请参阅[这个](Using-venus-Shared-Modules.md)教程以了解更多信息)
+2. 自行部署Venus链服务。(本教程的其余部分将引导您完成这种部署Venus服务的方式)
 
 在遵循其余的教程和成功部署后，您可以开始封装扇区，增加算力并通过您对网络存储容量的贡献最终获得区块奖励！
 
 ## venus模块介绍
 
-根据其在挖矿集群中的作用，模块可以大致分为两类：共享和独立。 共享模块可以被认为是开始封装扇区所需的基础。 大多数与区块链的交互，如链同步、发送消息、赢得赢票等，都是由共享模块处理的。 这个想法是许多矿工都可以共用一组共享模块，从而减少维护成本。 独立模块处理封装和证明您的扇区。如果您选择使用第三方托管的共享Venus模块，您将花费大部分时间在独立模块上。 另请注意，`venus-wallet`模块可以作为共享或独立部署。
+根据其在挖矿集群中的作用，模块可以大致分为两类：链服务组件和本地组件。 链服务可以被认为是开始封装扇区所需的基础。 大多数与区块链的交互，如链同步、发送消息、赢得赢票等，都是由链服务处理的。 这个想法是许多存储提供者都可以共用一套链服务，从而减少维护成本。 本地组件提供了一整套算力服务。如果您选择使用第三方托管的Venus链服务，您只要将花费大部分时间在独立模块上。 另请注意，`venus-wallet`模块可以作为链服务或本地组件部署。
 
-| name                                                         | role                                                  | shared/independent |
+| name                                                         | role                                                  | Chain_Service/Local |
 | ------------------------------------------------------------ | ----------------------------------------------------- | ------------------ |
-| [venus](https://github.com/filecoin-project/venus)           | daemon for chain interactions                         | shared             |
-| [venus-miner](https://github.com/filecoin-project/venus-miner) | block winning and proving                             | shared             |
-| [venus-messager](https://github.com/filecoin-project/venus-messager) | chain message management                              | shared             |
-| [venus-auth](https://github.com/filecoin-project/venus-auth) | utility for authorized use of shared modules          | shared             |
-| [venus-gateway](https://github.com/ipfs-force-community/venus-gateway) | utility for controlled access point of shared modules | shared             |
-| [venus-wallet](https://github.com/filecoin-project/venus-wallet) | addresses/keys management                             | shared/independent |
-| [venus-sealer](https://github.com/filecoin-project/venus-sealer), [venus-worker](https://github.com/filecoin-project/venus-sealer) | job scheduling, sealing and proving                   | independent        |
-| [venus_market](https://github.com/filecoin-project/venus-market) | deal making                                           | independent        |
+| [venus](https://github.com/filecoin-project/venus)           | daemon for chain interactions                         | Chain_Service             |
+| [venus-miner](https://github.com/filecoin-project/venus-miner) | block winning and proving                             | Chain_Service             |
+| [venus-messager](https://github.com/filecoin-project/venus-messager) | chain message management                              | Chain_Service             |
+| [venus-auth](https://github.com/filecoin-project/venus-auth) | utility for authorized use of shared modules          | Chain_Service             |
+| [venus-gateway](https://github.com/ipfs-force-community/venus-gateway) | utility for controlled access point of shared modules | Chain_Service             |
+| [venus-wallet](https://github.com/filecoin-project/venus-wallet) | addresses/keys management                             | Chain_Service/Local |
+| [venus-cluster](https://github.com/ipfs-force-community/venus-cluster) | job scheduling, sealing and proving                   | Local        |
+| [venus-sealer](https://github.com/filecoin-project/venus-sealer), [venus-worker](https://github.com/filecoin-project/venus-sealer) | job scheduling, sealing and proving                   | Local        |
+| [venus-market](https://github.com/filecoin-project/venus-market) | deal making                                           | Local        |
 
 ## 服务架构
 
@@ -34,6 +35,12 @@
 ## 硬件要求
 
 在[此处](https://github.com/filecoin-project/community-china/discussions/18)了解有关硬件要求的更多信息。
+
+:::warning
+
+使用`venus-cluster`时，请参阅`venus-cluster`[性能测试](https://mp.weixin.qq.com/s/AxEaV2iZT8-8jOKyMoFRvA)中，社区成员使用的硬件，并作出对自己的最优调整。如有问题可以寻求[Venus Master](https://venushub.io/master/)的帮助。
+
+:::
 
 ## 前期准备
 
@@ -51,42 +58,10 @@
 
 ### 软件依赖
 
-在运行 venus 之前，您需要安装以下软件。
-
-#### 构建工具
-
-Ubuntu/Debian:
-
-```shell
-sudo apt install mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl clang build-essential hwloc libhwloc-dev wget -y && sudo apt upgrade -y
-```
-
-CentOS:
-
-```bash
-sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum install -y git gcc bzr jq pkgconfig clang llvm mesa-libGL-devel opencl-headers ocl-icd ocl-icd-devel hwloc-devel
-```
-
-#### Go
-
-构建venus，您需要安装[Go 1.16 或更高版本](https://golang.org/dl/)。
-
-```bash
-wget -c https://golang.org/dl/go1.16.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
-```
-
-将 `/usr/local/go/bin` 添加到您的路径并设置`go env`。对于大多数Linux系统，您可以运行以下内容：
-
-```bash
-echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc && source ~/.bashrc
-# setup go env
-export GOPROXY=https://goproxy.cn
-go env -w GO111MODULE=on
-```
-
-如果卡住，请参阅[官方Golang安装说明](https://golang.org/doc/install)。
+在运行`Venus`之前，您需要安装[这些](https://lotus.filecoin.io/lotus/install/linux/#software-dependencies)软件。（注：和lotus的软件依赖相同）
 
 ## 安装venus-auth
+
 下载并编译`venus-auth`的源代码。
 
 ```shell script
@@ -369,12 +344,12 @@ updateTime: Mon, 14 Mar 2022 13:23:20 CST
 
 ## 安装venus-market
 
-venus-market项目是venus矿池中存储市场和检索市场的实现，包括两个组件：用于market provider的venus-market和给存储或检索客户使用的market-client。venus-market既可以作为服务层组件给多个矿工服务提供市场服务，也可以作为独立组件单独部署。其部署请参考[文档](Using-venus-market.md)
+`venus-market`可以作为链服务组件之一来进行部署，具体部署文档请参考[文档](/zh/market/using-venus-market-for-master)
 
 ## 下一步
 
-接下来请按照这个[文档](Using-venus-Shared-Modules.md)加入到你刚刚部署的存储池！
+接下来请按照这个[文档](Using-venus-Shared-Modules.md)加入到你刚刚部署的链服务吧！
 
 ## 问题?
 
-来[Slack](https://filecoinproject.slack.com/archives/CEHHJNJS3)上找我们吧！
+来[Slack](https://filecoinproject.slack.com/archives/C028PCH8L31)上找我们吧！
