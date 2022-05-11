@@ -13,7 +13,7 @@
 
 ## venus模块介绍
 
-根据其在挖矿集群中的作用，模块可以大致分为两类：链服务组件和本地组件。 链服务可以被认为是开始封装扇区所需的基础。 大多数与区块链的交互，如链同步、发送消息、赢得赢票等，都是由链服务处理的。 这个想法是许多存储提供者都可以共用一套链服务，从而减少维护成本。 本地组件提供了一整套算力服务。如果您选择使用第三方托管的Venus链服务，您只要将花费大部分时间在独立模块上。 另请注意，`venus-wallet`模块可以作为链服务或本地组件部署。
+根据其在挖矿集群中的作用，模块可以大致分为两类：链服务组件和本地组件。 链服务可以被认为是开始封装扇区所需的基础。 大多数与区块链的交互，如链同步、发送消息、赢得赢票等，都是由链服务处理的。 这个想法是许多存储提供者都可以共用一套链服务，从而减少维护成本。 本地组件提供了一整套算力服务。如果您选择使用第三方托管的Venus链服务，您只要将花费大部分时间在独立模块上。 另请注意，`venus-market`和`venus-wallet`模块可以作为链服务或本地组件部署。
 
 | name                                                         | role                                                  | Chain_Service/Local |
 | ------------------------------------------------------------ | ----------------------------------------------------- | ------------------ |
@@ -25,7 +25,7 @@
 | [venus-wallet](https://github.com/filecoin-project/venus-wallet) | addresses/keys management                             | Chain_Service/Local |
 | [venus-cluster](https://github.com/ipfs-force-community/venus-cluster) | job scheduling, sealing and proving                   | Local        |
 | [venus-sealer](https://github.com/filecoin-project/venus-sealer), [venus-worker](https://github.com/filecoin-project/venus-sealer) | job scheduling, sealing and proving                   | Local        |
-| [venus-market](https://github.com/filecoin-project/venus-market) | deal making                                           | Local        |
+| [venus-market](https://github.com/filecoin-project/venus-market) | deal making                                           | Chain_Service/Local        |
 
 ## 服务架构
 

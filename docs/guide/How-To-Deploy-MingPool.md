@@ -1,39 +1,45 @@
 ## Background
 
-Starting filecoin mining could be a daunting task given not only the large initial hardware and filecoin collateral [investment](https://filscan.io/calculator) but also the entailing operation commitment. With ideas of security, ease of use and distributed mining pool in mind, Venus implementation of filecoin will help miners turn, what community say, [a full time job](https://filecoinproject.slack.com/archives/CEGN061C5/p1610810730117900?thread_ts=1610809298.116800&cid=CEGN061C5) into a serious hobby. Hope this tutorial will get you started mining in no time! 
+Starting filecoin storage providing could be a daunting task given not only the large initial hardware and filecoin collateral [investment](https://filscan.io/calculator) but also the entailing operation commitment. With ideas of distributed infrastracture, optimized deal experience and new storage power service in mind, Venus implementation of filecoin will help storage providers turn, what community say, [a full time job](https://filecoinproject.slack.com/archives/CEGN061C5/p1610810730117900?thread_ts=1610809298.116800&cid=CEGN061C5) into a full fledged solution that is more friendly to opeartion. Hope this tutorial will get you started mining in no time! 
 
-## How mining works
+## How storage providing works
 
 There are two ways of getting started with mining using Venus. 
 
-1. Deploy minimum hardware and gain access to a publicly hosted shared venus modules.<!--(Checkout venus incubation center page to learn more on how you can get an account setup!)--> (See [this](Using-venus-Shared-Modules.md) tutorial to learn more)
-2. Deploy all required hardware and venus modules by yourself. (The rest of this tutorial will walk you through this way of deploying venus mining operation)
+1. Deploy minimum hardware and gain access to a hosted chain service.<!--(Checkout venus incubation center page to learn more on how you can get an account setup!)--> (See [this](Using-venus-Shared-Modules.md) tutorial to learn more)
+2. Deploy chain service by yourself. (The rest of this tutorial will walk you through this way of deploying Venus storage providing operation)
 
 After following the rest of the trutorial and successful deployment, you can start pledging sectors, grow power and evantually obtain block rewards through your contribution to the network's storage capacity!
 
-## Introducing venus modules
+## Introducing Venus Components
 
-Depending on its role in a mining cluster, modules could be loosely broken down into two category: shared and independent. Shared modules could be thought as the plumbings of what you need to start sealing sectors. Most of the dealings with the blockchain like chain synchronizations, sending messages, winning a block and etc are handled by the shared modules. The idea is that many miners could all use a set of shared modules, thus reducing overhead in maintainence. Independent modules handles sealing and proving of your sectors, where you will be spend most of your time if you choose to use a publicly hosted shared venus modules. Note also that venus-wallet module could be deployed as either shared or independent. 
+Depending on its role in a storage system, components could be loosely broken down into two category: chain service components and local components. Chain service could be thought as the plumbings of what you need to start sealing sectors. Most of the interactions with the blockchain like chain synchronizations, sending messages, winning a block and etc are handled by the chain service. The idea is that many miners could all use one chain service, thus reducing overhead in maintainence. Local components handles sealing and proving of your sectors, where you will be spend most of your time if you choose to use a publicly hosted chain service. Note also that both `venus-market` and `venus-wallet` component could be deployed as either chain service or local component. 
 
-| name                                                         | role                                                  | shared/independent |
+| name                                                         | role                                                  | Chain_Service/Local |
 | ------------------------------------------------------------ | ----------------------------------------------------- | ------------------ |
-| [venus](https://github.com/filecoin-project/venus)           | daemon for chain interactions                         | shared             |
-| [venus-miner](https://github.com/filecoin-project/venus-miner) | block winning and proving                             | shared             |
-| [venus-messager](https://github.com/filecoin-project/venus-messager) | chain message management                              | shared             |
-| [venus-auth](https://github.com/filecoin-project/venus-auth) | utility for authorized use of shared modules          | shared             |
-| [venus-gateway](https://github.com/ipfs-force-community/venus-gateway) | utility for controlled access point of shared modules | shared             |
-| [venus-wallet](https://github.com/filecoin-project/venus-wallet) | addresses/keys management                             | shared/independent |
-| [venus-sealer](https://github.com/filecoin-project/venus-sealer), [venus-worker](https://github.com/filecoin-project/venus-sealer) | job scheduling, sealing and proving                   | independent        |
-| [venus-market](https://github.com/filecoin-project/venus-market) | deal making                                           | independent        |
+| [venus](https://github.com/filecoin-project/venus)           | daemon for chain interactions                         | Chain_Service             |
+| [venus-miner](https://github.com/filecoin-project/venus-miner) | block winning and proving                             | Chain_Service             |
+| [venus-messager](https://github.com/filecoin-project/venus-messager) | chain message management                              | Chain_Service             |
+| [venus-auth](https://github.com/filecoin-project/venus-auth) | utility for authorized use of shared modules          | Chain_Service             |
+| [venus-gateway](https://github.com/ipfs-force-community/venus-gateway) | utility for controlled access point of shared modules | Chain_Service             |
+| [venus-wallet](https://github.com/filecoin-project/venus-wallet) | addresses/keys management                             | Chain_Service/Local |
+| [venus-cluster](https://github.com/ipfs-force-community/venus-cluster) | job scheduling, sealing and proving                   | Local        |
+| [venus-sealer](https://github.com/filecoin-project/venus-sealer), [venus-worker](https://github.com/filecoin-project/venus-sealer) | job scheduling, sealing and proving                   | Local        |
+| [venus-market](https://github.com/filecoin-project/venus-market) | deal making  | Chain_Service/Local |
 
 ## Mining architecture
 
 Diagram below illustrates how venus modules interacts with one and another.
 
 ![venus-cluster](../.vuepress/public/venus-cluster2.png)
+
 ## Hardware requirements
 
 Learn more about hardware requirements [here](https://docs.filecoin.io/mine/mining-architectures/#protocol-labs-example-architecture).
+
+:::warning
+For `venus-cluster`, you could refer to this [community test report](https://github.com/filecoin-project/venus/discussions/4865) for hardware reference. Plan your hardware carefully, when in doubt please seek help from [Venus Master](https://venushub.io/master/).
+:::
 
 ## Pre-requisites
 
@@ -51,42 +57,10 @@ Choose a network file system that you are familiar with (NFS for example) and de
 
 ### Software dependencies
 
-You will need the following software installed before running venus.
-
-#### Build tools
-
-Ubuntu/Debian:
-
-```shell
-sudo apt install mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl clang build-essential hwloc libhwloc-dev wget -y && sudo apt upgrade -y
-```
-
-CentOS:
-
-```bash
-sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum install -y git gcc bzr jq pkgconfig clang llvm mesa-libGL-devel opencl-headers ocl-icd ocl-icd-devel hwloc-devel
-```
-
-#### Go
-
-To build venus, you need a working installation of [Go 1.16 or higher](https://golang.org/dl/).
-
-```bash
-wget -c https://golang.org/dl/go1.16.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
-```
-
-Add `/usr/local/go/bin` to your path and setup `Go` env. For most Linux distributions you can run something like:
-
-```bash
-echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc && source ~/.bashrc
-# setup go env
-go env -w GOPROXY=https://goproxy.io,direct
-go env -w GO111MODULE=on
-```
-
-See the [official Golang installation instructions](https://golang.org/doc/install) if you get stuck.
+You will need to install these [software dependencies](https://lotus.filecoin.io/lotus/install/linux/#software-dependencies) (same as Lotus) before running venus.
 
 ## Install venus-auth
+
 Download and compile the source code of venus-auth.
 
 ```shell script
