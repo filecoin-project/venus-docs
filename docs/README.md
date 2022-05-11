@@ -8,16 +8,16 @@ footer: MIT Apache dual Licensed
 
 <div class="features">
   <div class="feature">
-    <h2>Security</h2>
-    <p>Secure by design. Safe guard your private keys and storage operation with our extensive security features.</p>
+    <h2>Distributed Infrastructure</h2>
+    <p>Adhering to design principles of distributed systems, Venus chain service enables you to scale and guarantees availability to your storage providing systems</p>
   </div>
   <div class="feature">
-    <h2>Simplicity First</h2>
-    <p>Modularized setup with less overhead in maintenance will get you started in no time.</p>
+    <h2>Optimized Storage Deal</h2>
+    <p>Solution for both storage client and storage provider enables seamless storage deal process</p>
   </div>
   
   <div class="feature">
-    <h2>Storage Pool</h2>
-    <p>Share infrastructure with other storage providers to unlock your true potentials.</p>
+    <h2>Reimagined Storage Power</h2>
+    <p>Completely revamped sealer submodule to help you to grow and maintain your storage power with more efficiency and stability</p>
   </div>
 </div>
