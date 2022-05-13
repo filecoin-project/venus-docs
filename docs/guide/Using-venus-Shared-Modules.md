@@ -78,7 +78,7 @@ If you are an admin hosting shared venus modules, use the following command to c
 # create user
 $ ./venus-auth user add --name <ACCOUNT_NAME>
 # activate above created user
-$ ./veus-auth user update --name <ACCOUNT_NAME> --state 1
+$ ./venus-auth user update --name <ACCOUNT_NAME> --state 1
 # bind miner to user
 $ ./venus-auth user miner add <ACCOUNT_NAME> <MINER_ID> 
 
