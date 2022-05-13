@@ -9,7 +9,7 @@ compose 启动会在当前主机上，部署venus的一套云组件。
 
 ```shell
 # 下载配置文件
-wget http://url/to/docker-compose.yaml 
+wget https://github.com/filecoin-project/venus-docs/raw/feat/docker-docs/script/docker-compose.yaml
 
 # 启动docker集群
 snapshot=/path/to/your/snapshot.car \
