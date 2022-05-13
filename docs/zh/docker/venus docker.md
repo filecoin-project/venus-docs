@@ -28,7 +28,7 @@ docker-compose down
 
 ```shell
 # 下载配置文件
-wget http://url/to/docker-compose.yaml 
+wget https://github.com/filecoin-project/venus-docs/raw/feat/docker-docs/script/docker-compose.yaml 
 
 # ./env 
 # 
