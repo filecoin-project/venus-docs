@@ -47,7 +47,9 @@ docker-compose --env-file ./env down
 为了方便修改配置，默认会将容器中的 repo 映射到本地的 `./.venus/root/`中，修改完配置之后直接重启容器即可
 
 :warning::venus 和 market 组件默认监听本地IP，如有需要，请注意修改相应文件
+
 :warning:: 在miner初始化完成之后要记得通过auth 绑定到相应的用户，参见[用户管理](https://venus.filecoin.io/zh/guide/Using-venus-Shared-Modules.html#%E5%AF%B9%E4%BA%8E%E5%85%B1%E4%BA%AB%E6%A8%A1%E5%9D%97%E7%9A%84%E7%AE%A1%E7%90%86%E5%91%98)
+
 :warning:: 在miner初始化完成之后,需要将miner关联到merket，参见[将miner的Multiaddrs和PeerID设置为market的对应地址](https://venus.filecoin.io/zh/market/using-venus-market-for-miner.html#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84venus%E8%8A%82%E7%82%B9)部分
 
 ```
