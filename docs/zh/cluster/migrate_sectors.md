@@ -48,6 +48,34 @@ ReadOnly = false
 如果我们发现导入时填写的信息有误，例如 `--name` 出现了拼写错误，那么我们只需要重新使用正确的信息完成一次导入流程即可。
 扇区的位置信息会被覆盖更新。
 
+#### sealed_file 与 cache_dir 分离
+一些算力组件允许 `sealed_file` 与 `cache_dir` 位于不同的存储实例上，这种情况下，常规导入可能会无法正常定位扇区文件。
+这种情况下，可以通过增加命令行参数 `--allow-splitted` 来启用分隔扫描模式，在这种模式下，会单独扫描 `sealed` 文件夹和 `cache` 文件夹中符合扇区命名规则的路径，并分别记录定位信息。
+
+此时，日志会类似：
+```
+2022-04-19T19:11:55.137+0800    DEBUG   policy  policy/const.go:18      NETWORK SETUP   {"name": "mainnet"}
+2022-04-19T19:11:55.154+0800    INFO    cmd     internal/util_storage.go:120    scan for sectors(upgrade=false) {"name": "p3", "strict": false, "read-only": false, "splitted": true}
+2022-04-19T19:11:55.154+0800    INFO    cmd     internal/util_storage.go:211    0 sectors out of 0 files have been found        {"name": "p3", "strict": false, "read-only": false, "splitted": true}
+2022-04-19T19:11:55.154+0800    INFO    cmd     internal/util_storage.go:145    scan for splitted cache dirs(upgrade=false)     {"name": "p3", "strict": false, "read-only": false, "splitted": true}
+2022-04-19T19:11:55.155+0800    INFO    cmd     internal/util_storage.go:211    3 sectors out of 3 files have been found        {"name": "p3", "strict": false, "read-only": false, "splitted": true}
+2022-04-19T19:11:55.156+0800    INFO    cmd     internal/util_storage.go:120    scan for sectors(upgrade=true)  {"name": "p3", "strict": false, "read-only": false, "splitted": true}
+2022-04-19T19:11:55.156+0800    INFO    cmd     internal/util_storage.go:211    0 sectors out of 0 files have been found        {"name": "p3", "strict": false, "read-only": false, "splitted": true}
+2022-04-19T19:11:55.156+0800    INFO    cmd     internal/util_storage.go:145    scan for splitted cache dirs(upgrade=true)      {"name": "p3", "strict": false, "read-only": false, "splitted": true}
+2022-04-19T19:11:55.156+0800    INFO    cmd     internal/util_storage.go:211    0 sectors out of 0 files have been found        {"name": "p3", "strict": false, "read-only": false, "splitted": true}
+2022-04-19T19:11:55.156+0800    WARN    cmd     internal/util_storage.go:166    add the section below into the config file:     {"name": "p3", "strict": false, "read-only": false, "splitted": true}
+
+[[Common.PersistStores]]
+Name = "p3"
+Path = "/home/dtynn/proj/github.com/ipfs-force-community/venus-cluster/mock-tmp/pstore3"
+Strict = false
+ReadOnly = false
+```
+
+注意，使用这种模式需要确认：
+- 目标目录中不存在由于存储异常导致的重复存储的文件
+- 仅有 `cache_dir` 而无与之对应的 `sealed_file` 的扇区仍然无法正常定位
+
 ### 校验
 `venus-sector-manager` 提供的 `storage find` 工具可以用来检查扇区导入的结果是否正确，其使用方式如下：
 ```
@@ -61,9 +89,10 @@ venus-sector-manager util storage find 10000 17
 
 通常会产生类似下面的日志：
 ```
-2022-03-11T16:23:01.207+0800    DEBUG   policy  policy/const.go:18      NETWORK SETUP   {"name": "mainnet"}
-2022-03-11T16:23:01.223+0800    INFO    cmd     internal/util_storage.go:218    found s-t010000-17 in "a"
-2022-03-11T16:23:01.223+0800    INFO    cmd     internal/util_storage.go:222    store instance exists
+2022-04-19T19:13:15.235+0800    DEBUG   policy  policy/const.go:18      NETWORK SETUP   {"name": "mainnet"}
+2022-04-19T19:13:15.249+0800    INFO    cmd     internal/util_storage.go:279    sector s-t010000-17 located, sealed file in "a", cache dir in "a"
+2022-04-19T19:13:15.249+0800    INFO    cmd     internal/util_storage.go:285    store instance exists   {"instance": "a"}
+2022-04-19T19:13:15.249+0800    INFO    cmd     internal/util_storage.go:285    store instance exists   {"instance": "a"}
 ```
 
 这就表示我们的导入和配置工作都已经完成了。

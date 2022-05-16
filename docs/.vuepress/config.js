@@ -276,9 +276,11 @@ module.exports = {
                             ]
                         },
                         {
-                            title: '迁移',
+                            title: '其他功能特性',
                             collapsable: false,
                             children: [
+                                ['poster.md', 'poster分离'],
+                                ['snapdeal.md', 'Snapdeal'],
                                 ['migrate_sectors.md', '导入已有扇区'],
                             ]
                         },

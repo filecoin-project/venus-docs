@@ -5,6 +5,7 @@
 在完成初始化之后，我们可以得到一份原始的配置内容：
 
 ```
+
 # Default config:
 [Common]
 [Common.API]
@@ -13,6 +14,7 @@
 #Market = "/ip4/{api_host}/tcp/{api_port}"
 #Gateway = ["/ip4/{api_host}/tcp/{api_port}"]
 #Token = "{some token}"
+#ChainEventInterval = "1m0s"
 #
 [[Common.PieceStores]]
 #Name = "{store_name}"
@@ -32,6 +34,16 @@
 #InitNumber = 0
 #MaxNumber = 1000000
 #Enabled = true
+#EnableDeals = false
+#LifetimeDays = 540
+#Verbose = false
+[Miners.SnapUp]
+#Enabled = false
+#Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
+#GasOverEstimation = 1.2
+#MaxFeeCap = "5 nanoFIL"
+#MessageConfidential = 15
+#ReleaseCondidential = 30
 [Miners.Commitment]
 #Confidence = 10
 [Miners.Commitment.Pre]
@@ -64,8 +76,6 @@
 #MaxFeeCap = "5 nanoFIL"
 #Confidence = 10
 [Miners.Proof]
-#Enabled = false
-[Miners.Deal]
 #Enabled = false
 #
 ```
@@ -108,6 +118,9 @@ Gateway = ["/ip4/{api_host}/tcp/{api_port}"]
 # 根据所使用的服务实际情况填写
 Token = "{some token}"
 
+# 侦测链高度变化的间隔时间，选填项，时间类型
+# 默认值为 1min
+#ChainEventInterval = "1m0s"
 ```
 
 
@@ -191,9 +204,48 @@ InitNumber = 0
 # 是否允许分配扇区， 选填项，布尔类型
 # 默认值为 true， 即开启分配
 #Enabled = true
+
+# 是否允许分配订单， 选填项，布尔类型
+# 默认值为 false
+#EnableDeals = false
+
+# CC 扇区的生命周期，单位为 天，选填项，数字类型
+# 默认值为 540
+#LifetimeDays = 540
+
+# Sector 相关模块的日志详尽程度，选填项，布尔类型
+# 默认值为 false，即精简日志输出
+#Verbose = false
 ```
 
+### [Miners.SnapUp]
 
+用于控制 `SnapDeal` 的生产策略
+```
+[Miners.SnapUp]
+# 是否启用，选填项，布尔类型
+# 默认值为 false
+#Enabled = false
+
+# 发送地址，在启用的情况下为必填项，地址类型
+#Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
+
+# 单条提交消息的 Gas 估算倍数，选填项，浮点数类型
+# 默认值为1.2
+#GasOverEstimation = 1.2
+
+# 单条提交消息的FeeCap 限制，选填项，FIL值类型
+# 默认值为 5 nanoFIL
+#MaxFeeCap = "5 nanoFIL"
+
+# Update 消息上链的确信高度，选填项，数字类型
+# 默认值为 15
+#MessageConfidential = 15
+
+# 释放旧数据存储空间的确信高度，选填项，数字类型
+# 默认值为 30
+#ReleaseCondidential = 30
+```
 
 ### [Miners.Commitment]
 
@@ -310,7 +362,7 @@ Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
 
 
 
-### [Miners.Deal]
+### [Miners.Deal] `已废弃`
 
 用于配置订单相关的策略。
 
@@ -360,6 +412,7 @@ Actor = 10086
 [Miners.Sector]
 InitNumber = 1000
 Enabled = true
+EnableDeals = true
 
 [Miners.Commitment]
 [Miners.Commitment.Pre]
@@ -379,9 +432,6 @@ Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
 Enabled = true
 
 [Miners.Proof]
-Enabled = true
-
-[Miners.Deal]
 Enabled = true
 
 ```
