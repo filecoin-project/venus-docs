@@ -1,95 +1,47 @@
-## 概要
 
-通过对协议实验室的`lotus-miner`进行改造升级，能使其无缝接入`venus`共享组件。如您没有对`lotus-miner`添加过自定义代码，那么可以直接使用适配分支。如您对`lotus-miner`有定制化的代码，可以参考适配分支中最新的`commit`来添加适配代码。
+## 为什么要这样做
 
-主要变化功能点：
+&ensp;&ensp; Venus分布式矿池中, `venus-wallet`属于独立组件，每个集群部署一个，这样做的目的是保证客户完全掌控集群的钱包密钥,不对外界公开,这也和`venus`的设计初衷一致,提高系统安全性，保障用户资金安全.
 
-1. 发送消息到共享组件
-2. 计算WinningPost证明
-3. 禁用本地出块
+&ensp;&ensp; 在`venus`矿池中,我们屏蔽了`Send`消息的处理，避免模拟发送转账消息攻击系统的手段，但这也给客户转账带来一定的困扰，故此文档对如何提取矿工账户可用余额和转账方式进行说明。
 
-### 代码分支
+## 余额管理
 
-对应lotus版本的适配venus的lotus-miner分支如下表。
+### 查看可用余额
 
-| lotus版本 | 适配venus分支                                                | 适配改造代码                                                 |
-| --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 1.10.1    | [v1.10.1_venus_pool](https://github.com/ipfs-force-community/lotus/commits/force/v1.10.1_venus_pool) | [212721a6b4677f2ffe36688a50f1cacde7ae5e54](https://github.com/ipfs-force-community/lotus/commit/212721a6b4677f2ffe36688a50f1cacde7ae5e54) |
+在venus-sealer端执行命令
+```sh
+$  ./venus-sealer info
+  Chain: [sync behind! (1h26m35s behind)] [basefee 100 aFIL]
+  ...
+  
+  Sealer Balance:    253.94 FIL
+        PreCommit:  23.045 FIL
+        Pledge:     3 FIL
+        Vesting:    102.474 FIL
+        Available:  125.421 FIL
+ ...
+```
+- Available 即可用余额,会随着出块或抵押释放等方式更新
 
-## 代码行走
+### 提取可用余额
 
-以下大致概括了适配改造代码的一些要点。
-
-### 配置文件改变
+在venus-sealer端执行命令
+```sh
+$  ./venus-sealer actor withdraw [amount (FIL)]
 
 ```
-[Venus]
-  [Venus.Messager]
-    Url = ""
-    Token = ""
-  [Venus.RegisterProofAPI]
-    Url = ""
-    Token = ""
-  [Venus.Wallet]
-    Url = ""
-    Token = ""
+这个命令会将指定数额的fil提取到该矿工对应的owner地址，查看owner可以通过多种方式,这里介绍在venus-sealer端查询方式:
+
+```sh
+$ ./venus-sealer actor control list
+name    ID      key           use    balance                    
+owner   t01763  t3qsek22y...         *** FIL  
+worker  t01762  t3rcktwpg...  other  *** FIL  
 ```
 
-### lotus-miner推送消息的API
+### 转账
 
-lotus-miner提供的命令中需要发送，等待，搜索消息的命令全部通过调用lotus-miner新加的messager接口来实现。
+用户将fil提取到owner地址后，利用协议实验室推荐的[钱包APP](https://fivetoken.io/download)可以转出到其他账户.
 
-1. MessagerWaitMessage
-2. MessagerPushMessage
-3. MessagerGetMessage
-
-位置：
-
-``` bash
-cmd/lotus-storage-miner/*
-api/api_storage.go
-extern/storage-sealing/sealing.go
-extern/storage-sealing/terminate_batch.go
-node/modules/storageminer.go
-storage/*
-```
-
-### 给MessageSendSpec添加GasOverEstimate参数 
-
-位置: `api/types.go`
-```go
-type MessageSendSpec struct {
-	MaxFee            abi.TokenAmount
-	GasOverEstimation float64
-}
-```
-
-### miner检查发送消息的地址是否存在
-
-lotus-miner中原先需要判断地址存在的接口，需要改成调用messager的WalletHas接口。
-
-位置: `storage/addresses.go`
-
-### venus-messager client
-
-venus-messager的客户端和lotus类似，都是使用的jsonrpc协议，可以同样使用lotus的jsonrpc库来接入。 需要注意的是命名空间是Message。
-
-位置: `node/modules/messager/*`
-
-### 链接gateway以接受ComputeProof请求
-
-这个功能用于监听共享组件下发的请求，在miner中是为了用于计算WinningPost证明。
-
-位置: `cli/wallet_client.go`， `node/impl/proof_client/*`
-
-### 非消息类型签名转到本钱包（storageask， proposaldeal）
-
-由于远程节点中不再存在私钥，一些不需要共享组件参与的签名（例如StorageAsk，DealProposal)需要连接钱包在本地进行签名。
-
-位置: `markets/storageadapter/provider.go`
-
-### lotus-miner禁用本地出块
-
-因为共享组件已经在出块，本地如果在出块会导致共识错误，因此，务必禁用本地出块。
-
-位置: `node/modules/storageminer.go` 方法 `SetupBlockProducer`
+用户也可以选择其他可行方式:比如同步一个venus/lotus节点,导入钱包私钥后执行转账(Send)命令等.
