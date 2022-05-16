@@ -90,7 +90,12 @@
 
    注意，在主网使用时，`--net` 参数可以不设置，或设置为 `mainnet`
 
-
+:::warning
+建议参看[Poster分离文档](poster.md)分别将计算`windowPost`和`winningPost`的进程启动在各自进程专用的机器上。如果想让`secotr-manager`运行所有`Post`计算，可以这样启动`sector-manager`:
+```bash
+$ ./dist/bin/venus-sector-manager daemon run --miner --poster
+```
+:::
 
 ### venus-worker
 

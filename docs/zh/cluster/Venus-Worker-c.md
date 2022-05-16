@@ -24,20 +24,21 @@ enable_deals = true
 # max_deals = 3
 max_retries = 3
 # seal_interval = "30s"
-# recover_interval = "30s"
-# rpc_polling_interval = "30s"
+# recover_interval = "60s"
+# rpc_polling_interval = "180s"
 # ignore_proof_check = false
 
 [[sealing_thread]]
 location = "./mock-tmp/store1"
+# plan = "snapup"
 # sealing.allowed_miners = [10123, 10124, 10125]
 # sealing.allowed_sizes = ["32GiB", "64GiB"]
 # sealing.enable_deals = true
 # sealing.max_deals = 3
 # sealing.max_retries = 3
 # sealing.seal_interval = "30s"
-# sealing.recover_interval = "30s"
-# sealing.rpc_polling_interval = "30s"
+# sealing.recover_interval = "60s"
+# sealing.rpc_polling_interval = "180s"
 # sealing.ignore_proof_check = false
 
 [[sealing_thread]]
@@ -54,6 +55,9 @@ location = "./mock-tmp/store3"
 [[attached]]
 # name = "persist-store1"
 location = "./mock-tmp/remote"
+
+[attached_selection]
+# enable_space_weighted = false
 
 [processors.limit]
 # pc1 = 3
@@ -193,18 +197,18 @@ rpc_client.addr = "/ip4/127.0.0.1/tcp/1789"
 # max_retries = 3
 
 # 封装过程中遇到 temp 类型的错误时，重试的间隔，选填项，时间字符串格式
-# 默认为 “30s"， 即30秒
+# 默认为 "30s"， 即30秒
 # recover_interval = "30s"
 
 # 空闲的 `sealing_store` 申请封装任务的间隔， 选填项，时间字符串格式
-# 默认为 ”30s"， 即30秒
+# 默认为 "30s"， 即30秒
 # seal_interval = "30s"
 
 # rpc 状态轮询请求的间隔，选填项，时间字符串格式
-# 默认为 ”30s"， 即30秒
+# 默认为 "180s"， 即180秒
 # 封装过程中，部分环节使用了轮询方式来获取非实时的信息，如消息上链等。
 # 这个值有助于避免过于频繁的请求占用网络资源
-# rpc_polling_interval = "30s"
+# rpc_polling_interval = "180s"
 
 # 是否跳过 proof 的本地校验环节，选填项，布尔格式
 # 默认为 false
@@ -233,7 +237,7 @@ allowed_miners = [2234, 2236, 2238]
 recover_interval = "90s"
 
 # 正常过程中的轮询请求也增大间隔时间降低请求频率
-rpc_polling_interval = "90s"
+rpc_polling_interval = "300s"
 ```
 
 
@@ -264,14 +268,19 @@ recover_interval = "60s"
 # 建议使用绝对路径，数据目录和工作线程是一对一绑定的
 location = "/mnt/nvme1/store"
 
+# 任务类型，选填项，字符串类型
+# 默认值为 null
+# 可选填 sealer 或 snapup, 当不填写时，默认等效为 selaer
+# plan = "snapup"
+
 # 封装过程的定制参数，仅对当前工作线程生效
 # sealing.allowed_miners = [10123, 10124, 10125]
 # sealing.allowed_sizes = ["32GiB", "64GiB"]
 # sealing.enable_deals = true
 # sealing.max_retries = 3
 # sealing.seal_interval = "30s"
-# sealing.recover_interval = "30s"
-# sealing.rpc_polling_interval = "30s"
+# sealing.recover_interval = "60s"
+# sealing.rpc_polling_interval = "180s"
 # sealing.ignore_proof_check = false
 
 [[sealing_thread]]
@@ -351,6 +360,18 @@ location = "/mnt/remote/10.0.0.14/store"
 由于需要在 `venus-worker` 和 `venus-sector-manager` 之间协调存储位置信息，而在很多情况下，同一个持久化存储目录在`venus-worker` 机器和 `venus-sector-manager` 机器上的挂载路径不完全一致，因此我们决定使用 `name` 作为协调的基础信息.
 
 如果持久化存储目录在所有机器上的挂载路径都统一的话，配置时也可以选择在 `venus-worker` 和`venus-sector-manager` 两侧都不配置 `name`。这种情况下，两者都会使用绝对路径作为 `name`，也能匹配。
+
+## [attached_selection]
+`attached_selection` 用于配置选择已完成的扇区持久化数据保存的位置
+
+### 基础配置范例
+```
+[attached_selection]
+# 是否启用以剩余空间作为权重的选择策略，选填项，布尔类型
+# 默认值为 false
+# enable_space_weighted = false
+
+```
 
 
 ## [[attached]]
