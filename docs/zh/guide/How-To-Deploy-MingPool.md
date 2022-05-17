@@ -52,26 +52,13 @@
 
 :::
 
-### 永久存储
-
-选择您熟悉的网络文件系统（例如 NFS）并部署您的存储集群。
-
-### 软件依赖
-
-在运行`Venus`之前，您需要安装[这些](https://lotus.filecoin.io/lotus/install/linux/#software-dependencies)软件。（注：和lotus的软件依赖相同）
+所需组件构建完成,可参考 [组件构建](../modules/build.md)
 
 ## 安装venus-auth
 
-下载并编译`venus-auth`的源代码。
-
 ```shell script
-$ git clone https://github.com/filecoin-project/venus-auth.git
-$ cd venus-auth
-$ git checkout <RELEASE_TAG>
-$ make 
 $ nohup ./venus-auth run > auth.log 2>&1 &
 ```
-> `venus-auth` 的默认配置文件位于`~/.venus-auth/config.toml`
 
 :::tip Logs
 
@@ -86,15 +73,6 @@ venus-auth 默认端口为8989，下面其他组件使用参数--auth-url，填�
 ```shell
 $ head  ~/.venus-auth/config.toml
 Port = "8989"
-Secret = "34f78bb86d9050a8ce21183fd9c5ff4fd7f0a5c2586b40f9ef7ad67c952bffcf"
-ReadTimeout = 60000000000
-WriteTimeout = 60000000000
-IdleTimeout = 60000000000
-
-[Log]
-  LogLevel = "trace"
-  Type = 0
-  HookSwitch = false
 ```
 
 ### 使用MySQL (可选)
@@ -125,14 +103,16 @@ $ kill <VENUS_AUTH_PID>
 $ nohup ./venus-auth run > auth.log 2>&1 &
 ```
 
-### 生成token
+### user及token生成
 
 `venus-auth`管理着其他venus模块使用的[jwt](https://jwt.io/)令牌，以便它们在网络上安全地相互通信。
 
+`venus` 集群中 `token` 的理论知识可参考 [venus集群token认证体系](https://github.com/filecoin-project/venus/discussions/4880)
+
+
 为链服务组件生成token。
 
-```bash
-# --perm specifies admin, sign, wirte or read permission of the token generated
+```shell script
 $ ./venus-auth token gen --perm admin <SHARED>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
@@ -140,16 +120,14 @@ $ ./venus-auth token gen --perm admin <SHARED>
 为独立模块生成令牌。 token可以通过`<USER>` 逻辑分组，作为加入矿池的单个矿工。
 
 ```shell script
-$ ./venus-auth user add --name=<USER> --miner=<minerID>
-
-$ ./venus-auth token gen --perm write <USER>
+$ ./venus-auth token gen --perm sign <USER>
 <USER_WRITE_AUTH_TOKEN>
-$ ./venus-auth token gen --perm read <USER>
-<USER_READ_AUTH_TOKEN>
-```
-:::tip
 
-使用`./venus-auth user add <USER>` 对不同的token进行逻辑分组。然后绑定miner到user：
+$ ./venus-auth user add --name=<USER>
+```
+
+给 `user` 绑定矿工(`miner`),一个 `user` 可以有多个矿工.
+
 ```
 $ ./venus-auth user miner add <USER> <minerID>
 
@@ -157,29 +135,16 @@ $ ./venus-auth user miner add <USER> <minerID>
 $ ./venus-auth user list
 ```
 
-:::
+设置 `user` 可用,否则在其他组件请求 `user` 列表时请求不到.
+ 
+ ```
+$ ./venus-auth user update --name=<USER> --state=1
+  update user success
+ ```
 
 ## 安装venus-gateway
 
-下载并编译`venus-gateway`的源代码。
-
-```bash
-$ git clone https://github.com/ipfs-force-community/venus-gateway.git
-$ cd venus-gateway
-$ git checkout <RELEASE_TAG>
-$ make deps
-$ go mod tidy
-$ make
-```
-> 如果遇到以下编译错误,先执行`go get github.com/google/flatbuffers@v1.12.1`
-```bash
-github.com/dgraph-io/badger/v3@v3.2011.1/fb/BlockOffset.go:6:2: missing go.sum entry for module providing package github.com/google/flatbuffers/go (imported by github.com/dgraph-io/badger/v3/table); to add:
-        go get github.com/dgraph-io/badger/v3/table@v3.2011.1
-```
-
-启动`venus-gateway`
-
-```bash
+```shell script
 $ ./venus-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
 # Use either a http or https url
 --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
@@ -188,18 +153,9 @@ $ ./venus-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
 
 ## 安装venus daemon
 
-下载并编译`venus-daemon`的源代码。
-
-```shell script
-$ git clone https://github.com/filecoin-project/venus.git
-$ cd venus
-$ git checkout <RELEASE_TAG>
-$ make deps
-$ make
-```
 启动`venus`进程进行链同步。 使用 `--network` 来指定`venus`连接的网络。
 
-```bash
+```shell script
 $ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 & 
 ```
 
@@ -209,7 +165,7 @@ $ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:P
 
 :::
 
-### 允许访问venus daemon
+### venus监听远程访问
 
 默认情况下，`venus`进程只响应本地访问。更改以下配置以允许从其他地址访问。
 
@@ -217,7 +173,7 @@ $ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:P
 vim ~/.venus/config.json
 ```
 
-将`apiAddress`从` /ip4/127.0.0.1/tcp/3453`更改为`/ip4/0.0.0.0/tcp/3453`。保存并关闭配置文件。
+将`apiAddress`从` /ip4/127.0.0.1/tcp/3453`更改为`/ip4/0.0.0.0/tcp/3453`。此修改重启后生效
 
 ```json
 {
@@ -225,13 +181,12 @@ vim ~/.venus/config.json
 }
 ```
 
-重启`venus`进程使配置生效。
+在其他机器上执行`telnet` 验证配置生效:
 
-```bash
-$ ps -ef | grep venus
-$ kill -9 <VENUS_PID>
-$ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 
+```shell script
+telnet <VENUS_IP_ADDRESS> <PORT>
 ```
+
 
 :::tip
 
@@ -241,17 +196,9 @@ $ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:P
 
 ## 安装venus-messager
 
-下载并编译`venus-messager`的源代码。
-
-```shell script
-$ git clone https://github.com/filecoin-project/venus-messager.git
-$ cd venus-messager
-$ git checkout <RELEASE_TAG>
-$ make 
-```
 启动`venus-messager`。请注意，`--auth-url`、`--node-url` 和`--auth-token` 是为了让 venus-messager 了解其他`venus`模块的存在并进行自身的身份验证。
 
-```bash
+```shell script
 $ nohup ./venus-messager run \
 --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --node-url /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
@@ -264,24 +211,16 @@ $ nohup ./venus-messager run \
 
 :::tip
 
-如果没有指定与数据库相关的参数，`venus-messager`将默认使用 sqlite。
+如果没有指定与数据库相关的参数，`venus-messager`将默认使用 `sqlite3` 数据库。
 
 :::
 
 
 ## 安装venus-miner
 
-下载并编译`venus-miner`的源代码。
-
-```shell script
-$ git clone https://github.com/filecoin-project/venus-miner.git
-$ cd venus-miner
-$ git checkout <RELEASE_TAG>
-$ make
-```
 初始化`venus-miner`。
 
-```bash
+```shell script
 $ ./venus-miner init
 # For nettype, choose from mainnet, debug, 2k, calibnet
 --nettype calibnet \
@@ -294,53 +233,51 @@ $ ./venus-miner init
 
 启动`venus-miner`。
 
-```bash
+```shell script
 $ nohup ./venus-miner run > miner.log 2>& 1 &
 ```
 
-### 矿工管理
+`venus-miner`启动后会从`venus-auth`请求矿工列表,并对每个矿工执行出块的必要检查,如:钱包服务,WinningPoSt服务是否正常等.检查矿工列表:
 
-一旦有用户(有`miner id`的`venus-sealer`) 连接到您的共享模块。 您可以通过以下方式查询该`miner id`的状态。
-
-```bash
-$ ./venus-miner address state 
+```shell script
+$ ./venus-miner address list 
 [
-	{
-		"Addr": "<MINER_ID>",
-		"IsMining": true,
-		"Err": null
-	}
+        {
+                "Addr": "f031429",
+                "Id": "1f06d7b9-9fb2-497e-80f5-68f06b0a4b5f",
+                "Name": "200-21"
+        }
 ]
 ```
 
-如果你的矿工的`IsMining`为`false`，你可以运行以下命令来启动这个`miner id`。
+如果列表中没有在`venus-auth`中配置的矿工,则需要从`venus-auth`检查配置是否正确
+- `检查venus-miner`初始化配置的`auth-token`对应的`user`是激活状态,即`state=enabled`
+```shell script
+$ ./venus-auth user list
+name: ***
+state: enabled
+```
 
-```bash
+- 检查`venus-miner`初始化配置的`auth-token`对应的`user`下成功添加了此矿工.
+```shell script
+./venus-auth user list
+name: ***
+miners: [***,***,...]
+```
+> `miners` 列表有此矿工为正确.
+
+修改成功后执行下列命令重新拉取:
+
+```shell script
+$ ./venus-miner address update
+```
+
+如果想要暂时终止或开始列表中某个矿工的出块,可通过下列命令执行.通常用于某个矿工出问题或集群迁移时使用.
+
+```shell script
 $ ./venus-miner address start <MINER_ID>
+$ ./venus-miner address stop <MINER_ID>
 ```
-
-列出所有已连接到`venus-miner`的`miner id`。
-
-```bash
-$ ./venus-miner address list
-```
-
-:::tip
-
-如果在执行`venus-miner address list`后仍然无法看到你配置的矿工号，请在venus-auth检查用户状态
-
-```bash
-number: 2
-name: venus01
-state: disabled
-miners: [f033222]
-createTime: Mon, 14 Mar 2022 13:23:20 CST
-updateTime: Mon, 14 Mar 2022 13:23:20 CST
-```
-
-如果state是`disabled`说明venus-miner并没有启用轮询些矿工出块权，需要使用venus-auth active `venus01`来激活这个矿工状态
-
-:::
 
 ## 安装venus-market
 
