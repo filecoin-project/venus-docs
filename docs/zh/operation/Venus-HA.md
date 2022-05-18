@@ -6,7 +6,7 @@
 
 ## 部署节点
 
-api auth suggest to use venus-auth but not local.  in local mode, when reimport snapshot, token will change
+节点授权这里建议连接venus-auth进行授权，不然节点出问题token会发生变化。
 
 venus:
 ```sh

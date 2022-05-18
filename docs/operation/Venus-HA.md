@@ -6,7 +6,7 @@ The main purpose of this solution is to prevent the overall failure of service d
 
 ## daemon
 
-节点授权这里建议连接venus-auth进行授权，不然节点出问题token会发生变化。
+api auth suggest to use venus-auth but not local.  in local mode, when reimport snapshot, token will change.
 
 venus:
 ```sh
@@ -94,8 +94,8 @@ http {
 }
 ```
 
-## 注意事项
-
+:::warning
 1. Because the data between nodes is still separated, it is impossible to provide completely consistent api, especially in the processing of the top header block. Therefore, when writing a program, it is necessary to take into condisider the possible inconsistencies of different nodes.
 2. If you deploy lotus, you need to use a customized version, because venus has some unique api.
-3. If there is a problem, please make an issue on venus . 
+3. If there is a problem, please make an issue on venus. 
+:::
