@@ -1,3 +1,7 @@
+:::warning
+For a more complex chain service, please refer to [this document](/operation/) for a full scale HA solution.
+:::
+
 ## Preparation
 
 1. Cancel the jwt-token verification of Venus program;

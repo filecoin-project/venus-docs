@@ -85,7 +85,7 @@ module.exports = {
                         link: '/market/'
                     },
                     {
-                        text: 'Venus Modules',
+                        text: 'Components',
                         link: '/modules/'
                     },
                     {
@@ -104,42 +104,60 @@ module.exports = {
                 sidebar: {
                     '/guide/': [
                         {
-                            title: 'Getting Started',
+                            title: 'Introduction',
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
-                                ['How-To-Deploy-MingPool.md', 'Deploy a chain service'],
-                                ['Using-venus-Shared-Modules.md', 'Use a chain service'],
                                 ['How-To-Contribute-Docs.md', 'Contribute to doc']
                             ]
-                        }
+                        },
+                        {
+                            title: 'Chain Service',
+                            collapsable: false,
+                            children: [
+                                ['How-To-Deploy-MingPool.md', 'Deploy a chain service'],
+                                ['Using-venus-Shared-Modules.md', 'Use a chain service'],
+                            ]
+                        },
                     ],
                     '/cluster/': [
                         {
-                            title: 'venus-cluster guide',
+                            title: 'Introduction',
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
                                 ['architecture.md', 'Architecture'],
+                            ]
+                        },
+                        {
+                            title: 'Deployment',
+                            collapsable: false,
+                            children: [
                                 ['Using-venus-cluster-alt.md', 'Getting started'],
                             ]
-                        }
+                        },
                     ],
                     '/market/': [
                         {
-                            title: 'venus-market guide',
+                            title: 'Introduction',
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
                                 ['architecture.md', 'Architecture'],
+                            ]
+                        },
+                        {
+                            title: 'Deployment',
+                            collapsable: false,
+                            children: [
                                 ['Using-venus-market.md', 'Getting started'],
                                 ['migrate_market_v1_to_v2.md', 'Upgrading to version 2.0'],                              
                             ]
-                        }
+                        },
                     ],
                     '/modules/': [
                         {
-                            title: 'Venus Modules',
+                            title: 'Chain Service',
                             collapsable: false,
                             children: [
                                 ['', 'venus daemon'],
@@ -148,43 +166,61 @@ module.exports = {
                                 ['How-To-Use-Messager.md', 'venus-messager'],
                                 ['Venus-Gateway.md', 'venus-gateway'],
                                 ['How-To-Use-Wallet-In-Venus.md', 'venus-wallet (local)'],
-                                ['Venus-Wallet.md', 'venus-wallet (remote)'],
-                                ['Venus-Worker.md', 'venus-worker'],
                                 ['Venus-Market.md', 'venus-market'],
                             ]
-                        }
+                        },
+                        {
+                            title: 'Local Component',
+                            collapsable: false,
+                            children: [
+                                ['Venus-Wallet.md', 'venus-wallet (remote)'],
+                                ['Venus-Worker.md', 'venus-worker'],
+                            ]
+                        },
                     ],
                     '/advanced/': [
                         {
-                            title: 'Advanced',
+                            title: 'Advanced Practice',
                             collapsable: false,
                             children: [
-                                ['', 'Using lotus-miner'],
-                                ['tips-running-in-China.md', 'Tips running in China'],
-                                ['fil_withdraw_and_send.md', 'Retrieve rewards'],
-                                ['Chain.md', 'Chain management'],
-                                ['How-To-Connect-Network.md', 'Connect to different network'],
-                                ['How-To-Setup_2knet.md', 'How to start a local dev network'],
-                                ['Multisig-wallet.md', 'Multisig wallet'],
-                                ['venus_load_balancing.md', 'Venus load balancing'],
-                                ['Payment-Channel.md', 'Payment channel'],
-                                ['venus-cli.md', 'Venus CLI commands'],
+                                ['', 'Withdraw Rewards'],
+                                ['Chain.md', 'Chain Management'],
+                                ['venus-cli.md', 'Venus CLI Commands'],
+                                ['venus_load_balancing.md', 'Simple Load Balancing'],
 
                             ]
-                        }
+                        },
+                        {
+                            title: 'Local Dev Env',
+                            collapsable: false,
+                            children: [
+                                ['How-To-Setup_2knet.md', 'How to start a local dev network'],
+                                ['How-To-Connect-Network.md', 'Connect to different network'],
+                                ['Multisig-wallet.md', 'Multisig wallet'],
+                                ['Payment-Channel.md', 'Payment channel'],
+
+                            ]
+                        },
                     ],
                     '/operation/': [
                         {
                             title: 'Operation',
                             collapsable: false,
                             children: [
-                                ['', 'Example single box setup'],
+                                ['', 'High Availability Solution'],
+                                ['example-single-box.md', 'Example single box setup (depreciating)'],
                                 ['Efficiency_of_sealing.md', 'Finding optimal configurations'],
                                 ['System_monitor_of_Zabbix.md', 'System monitoring (Zabbix)'],
-                                ['lotus-vs-venus.md', 'Coming from Lotus'],
+                                ['lotus-vs-venus.md', 'Configurations inherited from Lotus'],
+                            ]
+                        },
+                        {
+                            title: 'Upgrade',
+                            collapsable: false,
+                            children: [
                                 ['Nv15_upgrade_guide.md', 'nv15 upgrade'],
                             ]
-                        }
+                        },
                     ],
                     '/master/': [
                         {
