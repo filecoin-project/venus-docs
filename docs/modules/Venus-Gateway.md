@@ -19,7 +19,7 @@ make
 Start service.
 
 ```shell script
-./venus-gateway run --auth-url=<autl-url>
+./venus-gateway run --auth-url=<auth-url>
 ```
 
 :::tip

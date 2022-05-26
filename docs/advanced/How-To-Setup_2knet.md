@@ -89,7 +89,8 @@ $ ./venus-auth token gen --perm admin <SHARED>
 Generate tokens for storage provider id t01000 and venus-wallet.
 
 ```bash
-$ ./venus-auth user add --name=test --miner=t01000
+$ ./venus-auth user add --name=test
+$ ./venus-auth user miner add test t01000
 $ ./venus-auth token gen --perm write test
 <USER_WRITE_AUTH_TOKEN>
 ```

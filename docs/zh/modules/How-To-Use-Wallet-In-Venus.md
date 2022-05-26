@@ -25,7 +25,7 @@ Password set successfully
 # 导入私钥
 ./venus wallet import
 # 导出私钥，需输入密码
-./venus wallet export <password>
+./venus wallet export <address>
 ```
 
 3. 解锁钱包

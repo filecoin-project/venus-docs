@@ -82,6 +82,10 @@ Log defaults printing to console. InfluxDB is supported through configuration.
 
 :::
 
+### Default port
+
+> The default port of `venus-auth` is `8989`
+
 ### Using MySQL (Optional)
 
 MySQL 5.7 or above is supported and can be used as a substitute for the dedault Badger key-value  database. To use MySQL database, modify the db section of the config.
@@ -125,7 +129,8 @@ $ ./venus-auth token gen --perm admin <SHARED>
 Generate tokens for independent modules. Tokens can be logically grouped by `<USER>` as individual miner joining the mining pool.
 
 ```shell script
-$ ./venus-auth user add --name <USER> --miner=<minerID>
+$ ./venus-auth user add --name <USER>
+
 $ ./venus-auth token gen --perm write <USER>
 <USER_WRITE_AUTH_TOKEN>
 $ ./venus-auth token gen --perm read <USER>
@@ -136,7 +141,7 @@ $ ./venus-auth token gen --perm read <USER>
 Use `./venus-auth user add <USER>` to logically group different tokens. Activate the user, which was just created,  then bind miner to it:
 ```
 $ ./venus-auth user update --name <USER> --state 1
-$ ./venus-auth user miner add <USER> <minerID>
+$ ./venus-auth user miner add <USER> <MINER_ID>
 
 # 查看user列表
 $ ./venus-auth user list
@@ -152,7 +157,6 @@ Download and compile the source code of venus-gateway.
 $ git clone https://github.com/filecoin-project/venus-gateway.git
 $ cd venus-gateway
 $ git checkout <RELEASE_TAG>
-$ go mod tidy
 $ make
 ```
 
@@ -215,7 +219,7 @@ Restart venus daemon for the config to take into effects.
 ```bash
 $ ps -ef | grep venus
 $ kill <VENUS_PID>
-$ nohup ./venus daemon --network=cali --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 
+$ nohup ./venus daemon --network=cali --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 &
 ```
 
 :::tip

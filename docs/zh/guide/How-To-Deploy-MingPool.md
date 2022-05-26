@@ -71,6 +71,7 @@ $ git checkout <RELEASE_TAG>
 $ make 
 $ nohup ./venus-auth run > auth.log 2>&1 &
 ```
+
 > `venus-auth` 的默认配置文件位于`~/.venus-auth/config.toml`
 
 :::tip Logs
@@ -82,6 +83,8 @@ $ nohup ./venus-auth run > auth.log 2>&1 &
 ### 默认端口
 
 venus-auth 默认端口为8989，下面其他组件使用参数--auth-url，填写的相关参数就是这个端口号与相应ip。
+
+### 查看配置
 
 ```shell
 $ head  ~/.venus-auth/config.toml
@@ -140,7 +143,7 @@ $ ./venus-auth token gen --perm admin <SHARED>
 为独立模块生成令牌。 token可以通过`<USER>` 逻辑分组，作为加入矿池的单个矿工。
 
 ```shell script
-$ ./venus-auth user add --name=<USER> --miner=<minerID>
+$ ./venus-auth user add --name=<USER>
 
 $ ./venus-auth token gen --perm write <USER>
 <USER_WRITE_AUTH_TOKEN>
@@ -151,7 +154,7 @@ $ ./venus-auth token gen --perm read <USER>
 
 使用`./venus-auth user add <USER>` 对不同的token进行逻辑分组。然后绑定miner到user：
 ```
-$ ./venus-auth user miner add <USER> <minerID>
+$ ./venus-auth user miner add <USER> <MINER_ID>
 
 # 查看user列表
 $ ./venus-auth user list
@@ -168,7 +171,6 @@ $ git clone https://github.com/ipfs-force-community/venus-gateway.git
 $ cd venus-gateway
 $ git checkout <RELEASE_TAG>
 $ make deps
-$ go mod tidy
 $ make
 ```
 > 如果遇到以下编译错误,先执行`go get github.com/google/flatbuffers@v1.12.1`
@@ -230,7 +232,7 @@ vim ~/.venus/config.json
 ```bash
 $ ps -ef | grep venus
 $ kill -9 <VENUS_PID>
-$ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 
+$ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 &
 ```
 
 :::tip

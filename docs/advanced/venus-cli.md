@@ -4,13 +4,13 @@ For a complete list of available commands, simply run `venus --help` in your ter
 
 ```
   START RUNNING FILECOIN
-    venus config <key> [<value>] - Get and set filecoin config values
     venus daemon                 - Start a long-running daemon process
     venus wallet                 - Manage your filecoin wallets
+    venus msig                   - Interact with a multisig wallet
   
   VIEW DATA STRUCTURES
     venus chain                  - Inspect the filecoin blockchain
-    venus sync                             - Inspect the filecoin Sync
+    venus sync                   - Inspect the filecoin Sync
     venus dag                    - Interact with IPLD DAG objects
     venus show                   - Get human-readable representations of filecoin objects
   
@@ -37,6 +37,9 @@ For a complete list of available commands, simply run `venus --help` in your ter
     venus state network-version        - MReturns the network version
     venus state list-actor             - list all actors
   
+  Paych COMMANDS 
+    venus paych                  - Manage payment channels
+  
   TOOL COMMANDS
     venus inspect                - Show info about the venus node
     venus leb128                 - Leb128 cli encode/decode
@@ -44,6 +47,7 @@ For a complete list of available commands, simply run `venus --help` in your ter
     venus protocol               - Show protocol parameter details
     venus version                - Show venus version information
     venus seed                   - Seal sectors for genesis miner
+    venus fetch                  - Fetch proving parameters
 ```
 
 
@@ -291,7 +295,7 @@ History:
 1. get actor infomation
 
 ```shell script
-./venus get-actor f02438
+./venus state get-actor f02438
 
 {
     "Address": "f02438",

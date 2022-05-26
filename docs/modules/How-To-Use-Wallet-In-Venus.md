@@ -27,7 +27,7 @@ Password set successfully
 # import private key
 ./venus wallet import
 # export private key
-./venus wallet export <password>
+./venus wallet export <address>
 ```
 
 3. unlock wallet

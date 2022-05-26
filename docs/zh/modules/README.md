@@ -10,7 +10,7 @@ Venus可以在大多数GNU/Linux和MacOS系统上构建和运行。尚不支持W
 
 ### 安装依赖项和系统配置
 
-Clone“venus”git库并输入：
+从 Git 下载 `venus` 代码：
 
 ```sh
 mkdir -p /path/to/filecoin-project
@@ -19,7 +19,7 @@ git clone https://github.com/filecoin-project/venus.git /path/to/filecoin-projec
 
 #### 安装Go
 
-'venus'的构建过程需要 [Go](https://golang.org/doc/install) >= v1.13。
+`venus` 的构建过程需要 [Go](https://golang.org/doc/install) >= v1.17。
 
 > 第一次安装Go？我们推荐 [这个教程](https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html) 其中包括环境设置。
 
@@ -31,19 +31,11 @@ git clone https://github.com/filecoin-project/venus.git /path/to/filecoin-projec
 
 #### 安装依赖项
 
-1. 加载所有Git子模块：
-
-```sh
-git submodule update --init --recursive
-```
-
-2. 初始化生成依赖项：
-
 ```sh
 make deps
 ```
 
- > **注意:** 第一次`deps` 启动可能**慢**，因为很大的参数文件要么下载，要么在 `/var/tmp/filecoin-proof-parameters`中本地生成。要有耐心，以后会更快。
+ > **注意:** 第一次`deps` 启动可能**慢**，因为需要下载和编译 `filecoin-ffi`。
 
 ### 构建和运行测试
 
@@ -88,7 +80,7 @@ go run ./build all
 
 ## 开始运行Filecoin
 
-1. 如果以前在系统上运行过`venus` ,请删除现有的Filecoin repo（**这将删除所有以前的Filecoin数据**）：
+1. 如果以前在系统上运行过`venus` ，请删除现有的Filecoin repo（**这将删除所有以前的Filecoin数据**）：
 ```sh
 rm -rf ~/.venus
 ```
@@ -99,19 +91,6 @@ venus daemon
 ```
     
 这应该返回“我的peerID是`<peerID>`” , 其中 `<peerID>` 是一个长的 [CID](https://github.com/filecoin-project/specs/blob/master/definitions.md#cid) ，是以“Qm”开头的字符串。
-
-1. 打印启动节点地址列表：
-```sh
-venus config bootstrap.addresses
-```
-
-    
-2. 从刚打印的列表中选择任意地址，并连接到该地址（peer自动的发现和连接即将到来）：
-```sh
-venus swarm connect <any-filecoin-node-mulitaddr>
-```
-
- > **注意:** 第一次可能较**慢**。filecoin节点需要一个大参数文件来进行校对，存储在 `/tmp/filecoin-proof-parameters`中。它通常由 `deps`构建步骤生成。如果这些文件丢失，它们将被重新生成，这可能需要一个小时。我们正在研究更好的解决办法。
 
 3. 检查节点的连接：
 ```sh
