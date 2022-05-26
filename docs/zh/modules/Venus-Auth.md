@@ -136,7 +136,21 @@ num    name             perm    createTime              token
 5      testminer5       write   2021-05-27 15:33:29     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6IndyaXRlIiwiZXh0IjoiIn0.yVC2lZlmBQAxThTt0pLXH9cZgUZuuM6Us19aUw4DWNQ
 ```
 
-3. 删除 token
+3. 查询 token
+
+> ./venus-auth token get --name [name] or --token [token]
+
+```shell script
+./venus-auth token get --name testminer2
+
+# res
+name:        testminer2
+perm:        sign
+create time: 2021-05-27 15:33:15 +0800 CST
+token:       eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6InNpZ24iLCJleHQiOiIifQ.D_IFz2qZjFRkLJEzmv4HkZ3rZxukYoYZXEjlBKZmGOA
+```
+
+4. 删除 token
 
 ```shell script
 ./venus-auth token rm eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6ImFkbWluIiwiZXh0IjoiIn0.8yNodOcALJ8fy4h-Hh5yLfaR27cD4a8ePd9BkmWlfEo
@@ -145,12 +159,21 @@ num    name             perm    createTime              token
 remove token success: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6ImFkbWluIiwiZXh0IjoiIn0.8yNodOcALJ8fy4h-Hh5yLfaR27cD4a8ePd9BkmWlfEo
 ```
 
+5. 恢复 token
+
+```shell script
+./venus-auth token recover eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6ImFkbWluIiwiZXh0IjoiIn0.8yNodOcALJ8fy4h-Hh5yLfaR27cD4a8ePd9BkmWlfEo
+
+# res
+recover token success: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6ImFkbWluIiwiZXh0IjoiIn0.8yNodOcALJ8fy4h-Hh5yLfaR27cD4a8ePd9BkmWlfEo
+```
+
 #### user 相关
 
 1. 增加 user
 
 ```shell script
-./venus-auth user add --name testminer2 --miner f01569
+./venus-auth user add --name testminer2
 
 # res
 add user success: f29d524a-1589-4784-b934-5b3432290f79
@@ -163,7 +186,6 @@ add user success: f29d524a-1589-4784-b934-5b3432290f79
 
 # res
 name: testminer2
-miner: f01569
 sourceType: 0   // miner:1
 state 0         // 0: disable, 1: enable
 comment:
@@ -194,7 +216,6 @@ OPTIONS:
 # res
 number: 1
 name: testminer
-miner: f01561
 sourceType: 0   // miner:1
 state 0         // 0: disable, 1: enable
 comment: test
@@ -203,7 +224,6 @@ updateTime: Mon, 31 May 2021 18:41:55 CST
 
 number: 2
 name: li_sealer
-miner: f02256
 sourceType: 0   // miner:1
 state 0         // 0: disable, 1: enable
 comment: li
@@ -251,6 +271,55 @@ true
 
 # res
 active user success
+```
+
+7. 删除 user
+
+```shell script
+./venus-auth user rm testminer2
+
+# res
+remove user success
+```
+
+8. 恢复 user
+
+```shell script
+./venus-auth user recover testminer2
+
+# res
+recover user success
+```
+
+#### miner 相关
+
+1. 增加矿工
+
+```shell script
+./venus-auth user miner testminer2 f010101
+
+# res
+create user:testminer2 miner:f010101 success.
+```
+
+2. 列出用户的下的矿工
+
+```shell script
+./venus-auth user miner list testminer2
+
+# res
+user: testminer2, miner count:1
+idx  miner    create-time                    
+0    f010101  Tue, 24 May 2022 16:58:49 CST 
+```
+
+3. 删除矿工
+
+```shell script
+./venus-auth user miner rm f010101
+
+# res
+remove miner:f010101 success.
 ```
 
 #### 用户请求限流相关

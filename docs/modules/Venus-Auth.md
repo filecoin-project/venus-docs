@@ -141,6 +141,19 @@ num    name             perm    createTime              token
 5      testminer5       write   2021-05-27 15:33:29     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6IndyaXRlIiwiZXh0IjoiIn0.yVC2lZlmBQAxThTt0pLXH9cZgUZuuM6Us19aUw4DWNQ
 ```
 
+Get token
+
+> ./venus-auth token get --name [name] or --token [token]
+```shell script
+./venus-auth token get --name testminer2
+
+# output
+name:        testminer2
+perm:        sign
+create time: 2021-05-27 15:33:15 +0800 CST
+token:       eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6InNpZ24iLCJleHQiOiIifQ.D_IFz2qZjFRkLJEzmv4HkZ3rZxukYoYZXEjlBKZmGOA
+```
+
 Remove token.
 
 ```shell script
@@ -150,12 +163,21 @@ $ ./venus-auth token rm eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1
 remove token success: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6ImFkbWluIiwiZXh0IjoiIn0.8yNodOcALJ8fy4h-Hh5yLfaR27cD4a8ePd9BkmWlfEo
 ```
 
+Recover token
+
+```shell script
+./venus-auth token recover eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6ImFkbWluIiwiZXh0IjoiIn0.8yNodOcALJ8fy4h-Hh5yLfaR27cD4a8ePd9BkmWlfEo
+
+# output
+recover token success: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1pbmVyIiwicGVybSI6ImFkbWluIiwiZXh0IjoiIn0.8yNodOcALJ8fy4h-Hh5yLfaR27cD4a8ePd9BkmWlfEo
+```
+
 #### user related
 
 Add user.
 
 ```shell script
-$ ./venus-auth user add --name testminer2 --miner f01569
+$ ./venus-auth user add --name testminer2
 
 # output
 add user success: f29d524a-1589-4784-b934-5b3432290f79
@@ -168,7 +190,6 @@ $ ./venus-auth user get testminer2
 
 # output
 name: testminer2
-miner: f01569
 sourceType: 0   // miner:1
 state 0         // 0: disable, 1: enable
 comment:
@@ -199,7 +220,6 @@ $ ./venus-auth user list
 # output
 number: 1
 name: testminer
-miner: f01561
 sourceType: 0   // miner:1
 state 0         // 0: disable, 1: enable
 comment: test
@@ -208,7 +228,6 @@ updateTime: Mon, 31 May 2021 18:41:55 CST
 
 number: 2
 name: li_sealer
-miner: f02256
 sourceType: 0   // miner:1
 state 0         // 0: disable, 1: enable
 comment: li
@@ -256,6 +275,55 @@ Activate user.
 
 # output
 active user success
+```
+
+Remove user
+
+```shell script
+./venus-auth user rm testminer2
+
+# output
+remove user success
+```
+
+Recover user
+
+```shell script
+./venus-auth user recover testminer2
+
+# output
+recover user success
+```
+
+#### Miner related
+
+Add miner
+
+```shell script
+./venus-auth user miner testminer2 f010101
+
+# output
+create user:testminer2 miner:f010101 success.
+```
+
+List miners by user
+
+```shell script
+./venus-auth user miner list testminer2
+
+# output
+user: testminer2, miner count:1
+idx  miner    create-time                    
+0    f010101  Tue, 24 May 2022 16:58:49 CST 
+```
+
+Remove miner
+
+```shell script
+./venus-auth user miner rm f010101
+
+# output
+remove miner:f010101 success.
 ```
 
 #### User request rate limit related
