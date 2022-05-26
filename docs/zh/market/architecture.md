@@ -1,6 +1,6 @@
 ## 背景
 
-随着由[FIP0018](https://github.com/filecoin-project/FIPs/blob/master/_fips/fip-0018.md) 牵头的针对`filecoin`术语的重新命名，社区（开发者、存储提供商、生态系统合作伙伴等）将进一步推动进行更多的存储交易，以提高公众对大多数网络存储仍然是承诺容量（CC）这一事实的看法。鉴于上述情绪，`venus-market` 模块的设计和实施已成为焦点。`Venus`社区应该讨论和迭代一个明确的长期路线图，这也是与`Filecoin`生态系统进行更好沟通的一种手段。`Venus`团队正重试[Filecoin 组件架构](https://docs.google.com/document/d/1ukPD8j6plLEbbzUjxfo7eCauIrOeC_tqxqYK_ls9xbc/edit#)，`venus-market`如何促进存储提供商和存储之间的互动，将不断融入到`Venus filecoin`的长期愿景当中。
+随着由[FIP0018](https://github.com/filecoin-project/FIPs/blob/master/FIPS/fip-0018.md) 牵头的针对`filecoin`术语的重新命名，社区（开发者、存储提供商、生态系统合作伙伴等）将进一步推动进行更多的存储交易，以提高公众对大多数网络存储仍然是承诺容量（CC）这一事实的看法。鉴于上述情绪，`venus-market` 模块的设计和实施已成为焦点。`Venus`社区应该讨论和迭代一个明确的长期路线图，这也是与`Filecoin`生态系统进行更好沟通的一种手段。`Venus`团队正重试[Filecoin 组件架构](https://docs.google.com/document/d/1ukPD8j6plLEbbzUjxfo7eCauIrOeC_tqxqYK_ls9xbc/edit#)，`venus-market`如何促进存储提供商和存储之间的互动，将不断融入到`Venus filecoin`的长期愿景当中。
 
 ## 架构
 
