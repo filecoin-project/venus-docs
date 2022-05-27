@@ -173,10 +173,10 @@ recover token success: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdG1p
 1. 增加 user
 
 ```shell script
-./venus-auth user add --name testminer2
+./venus-auth user add  testminer2
 
 # res
-add user success: f29d524a-1589-4784-b934-5b3432290f79
+add user success: f29d524a-1589-4784-b934-5b3432290f79, next can add miner for this user
 ```
 
 2. 查询 user

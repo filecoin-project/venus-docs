@@ -76,8 +76,8 @@ venus-wallet 可以部署为链服务或者本地组件，具体取决于您的�
 如果您是托管共享 venus 模块的管理员，请使用以下命令注册各个集群。
 
 ```bash
-# 创建user
-$ ./venus-auth user add --name <ACCOUNT_NAME>
+# 创建user,默认激活状态
+$ ./venus-auth user add <ACCOUNT_NAME>
 # 激活user
 $ ./venus-auth user update --name <ACCOUNT_NAME> --state 1
 # 绑定节点号

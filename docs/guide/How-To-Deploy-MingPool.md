@@ -129,7 +129,7 @@ $ ./venus-auth token gen --perm admin <SHARED>
 Generate tokens for independent modules. Tokens can be logically grouped by `<USER>` as individual miner joining the mining pool.
 
 ```shell script
-$ ./venus-auth user add --name <USER>
+$ ./venus-auth user add <USER>
 
 $ ./venus-auth token gen --perm write <USER>
 <USER_WRITE_AUTH_TOKEN>

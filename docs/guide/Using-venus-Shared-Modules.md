@@ -75,10 +75,8 @@ venus-wallet can be deployed as either a chain service or a local component depe
 If you are an admin hosting shared venus modules, use the following command to create an account for your sealer-cluster.
 
 ```bash
-# create user
-$ ./venus-auth user add --name <ACCOUNT_NAME>
-# activate above created user
-$ ./venus-auth user update --name <ACCOUNT_NAME> --state 1
+# create user, default state=1
+$ ./venus-auth user add <ACCOUNT_NAME>
 # bind miner to user
 $ ./venus-auth user miner add <ACCOUNT_NAME> <MINER_ID> 
 
