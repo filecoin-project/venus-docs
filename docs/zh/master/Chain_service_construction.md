@@ -81,7 +81,7 @@ $ ./venus-auth token gen --perm admin <SHARED>
 为独立组件生成token。token可以通过`<USER>` 逻辑分组，作为加入分布式存储池的单个存储提供者。
 
 ```shell script
-$ ./venus-auth user add --name=<USER> --miner=<minerID>
+$ ./venus-auth user add <USER>
 
 $ ./venus-auth token gen --perm write <USER>
 <USER_WRITE_AUTH_TOKEN>
@@ -92,7 +92,7 @@ $ ./venus-auth token gen --perm read <USER>
 >`./venus-auth user add <USER>` 对不同的token进行逻辑分组。然后激活user, 并绑定miner
 ```
 $ ./venus-auth user update --name=<USER> --state=1
-$ ./venus-auth user miner add <USER> <minerID>
+$ ./venus-auth user miner add <USER> <MINER_ID>
 
 # 查看 user 列表
 $ ./venus-auth user list

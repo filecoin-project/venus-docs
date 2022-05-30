@@ -60,6 +60,10 @@
 $ nohup ./venus-auth run > auth.log 2>&1 &
 ```
 
+:::tip
+`venus-auth` 的默认配置文件位于`~/.venus-auth/config.toml`
+:::
+
 :::tip Logs
 
 日志默认打印到控制台。 通过配置可以支持InfluxDB。
@@ -69,6 +73,8 @@ $ nohup ./venus-auth run > auth.log 2>&1 &
 ### 默认端口
 
 venus-auth 默认端口为8989，下面其他组件使用参数--auth-url，填写的相关参数就是这个端口号与相应ip。
+
+### 查看配置
 
 ```shell
 $ head  ~/.venus-auth/config.toml
@@ -120,6 +126,7 @@ $ ./venus-auth token gen --perm admin <SHARED>
 为独立模块生成令牌。 token可以通过`<USER>` 逻辑分组，作为加入矿池的单个矿工。
 
 ```shell script
+$ ./venus-auth user add <USER>
 $ ./venus-auth token gen --perm sign <USER>
 <USER_WRITE_AUTH_TOKEN>
 
@@ -129,7 +136,7 @@ $ ./venus-auth user add --name=<USER>
 给 `user` 绑定矿工(`miner`),一个 `user` 可以有多个矿工.
 
 ```
-$ ./venus-auth user miner add <USER> <minerID>
+$ ./venus-auth user miner add <USER> <MINER_ID>
 
 # 查看user列表
 $ ./venus-auth user list
@@ -144,7 +151,27 @@ $ ./venus-auth user update --name=<USER> --state=1
 
 ## 安装venus-gateway
 
-```shell script
+下载并编译`venus-gateway`的源代码。
+
+```bash
+$ git clone https://github.com/ipfs-force-community/venus-gateway.git
+$ cd venus-gateway
+$ git checkout <RELEASE_TAG>
+$ make deps
+$ make
+```
+
+:::tip
+ 如果遇到以下编译错误,先执行`go get github.com/google/flatbuffers@v1.12.1`
+```bash
+github.com/dgraph-io/badger/v3@v3.2011.1/fb/BlockOffset.go:6:2: missing go.sum entry for module providing package github.com/google/flatbuffers/go (imported by github.com/dgraph-io/badger/v3/table); to add:
+        go get github.com/dgraph-io/badger/v3/table@v3.2011.1
+```
+:::
+
+启动`venus-gateway`
+
+```bash
 $ ./venus-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
 # Use either a http or https url
 --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
@@ -179,6 +206,14 @@ vim ~/.venus/config.json
 {
 	"api": {"apiAddress": "/ip4/0.0.0.0/tcp/3453"}
 }
+```
+
+重启`Venus daemon`。
+
+```bash
+$ ps -ef | grep venus
+$ kill -9 <VENUS_PID>
+$ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 &
 ```
 
 在其他机器上执行`telnet` 验证配置生效:
