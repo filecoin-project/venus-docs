@@ -245,15 +245,19 @@ module.exports = {
                 description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
                 nav: [
                     {
-                        text: '快速上手',
-                        link: '/zh/guide/'
+                        text: '启明星简介',
+                        link: '/zh/intro/'
                     },
                     {
-                        text: 'venus-cluster',
+                        text: '链服务',
+                        link: '/zh/cs/'
+                    },
+                    {
+                        text: '算力服务',
                         link: '/zh/cluster/'
                     },
                     {
-                        text: 'venus-market',
+                        text: '订单服务',
                         link: '/zh/market/'
                     },
                     {
@@ -268,27 +272,38 @@ module.exports = {
                         text: '运维',
                         link: '/zh/operation/'
                     },
-                    {
-                        text: 'Master',
-                        link: '/zh/master/'
-                    }
                 ],
                 sidebar: {
-                    '/zh/guide/': [
+                    '/zh/intro/': [
                         {
                             title: '简述',
                             collapsable: false,
                             children: [
                                 ['', '启明星概要'],
-                                ['How-To-Contribute-Docs.md', '贡献文档'],
                             ]
                         },
                         {
-                            title: '链服务',
+                            title: '参与',
                             collapsable: false,
                             children: [
-                                ['How-To-Deploy-MingPool.md', '部署链服务'],
-                                ['Using-venus-Shared-Modules.md', '使用链服务'],
+                                ['contribute-doc.md', '贡献文档'],
+                            ]
+                        },
+                    ],
+                    '/zh/cs/': [
+                        {
+                            title: '简述',
+                            collapsable: false,
+                            children: [
+                                ['', '概要'],
+                            ]
+                        },
+                        {
+                            title: '部署',
+                            collapsable: false,
+                            children: [
+                                ['deploy-a-cs.md', '部署链服务'],
+                                ['join-a-cs.md', '使用链服务'],
                             ]
                         },
                     ],

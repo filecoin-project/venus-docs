@@ -2,7 +2,7 @@
 home: true
 heroImage: /assets/venus-hero-logo.png
 actionText: 快速上手 →
-actionLink: /zh/guide/
+actionLink: /zh/intro/
 footer: MIT Apache dual Licensed 
 ---
 
