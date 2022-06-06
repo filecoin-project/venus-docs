@@ -81,7 +81,7 @@ module.exports = {
                         link: '/cs/'
                     },
                     {
-                        text: 'Storage Service',
+                        text: 'Power Service',
                         link: '/cluster/'
                     },
                     {

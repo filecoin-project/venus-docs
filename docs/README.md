@@ -2,7 +2,7 @@
 home: true
 heroImage: /assets/venus-hero-logo.png
 actionText: Get Started →
-actionLink: /guide/
+actionLink: /intro/
 footer: MIT Apache dual Licensed 
 ---
 
