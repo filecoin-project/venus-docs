@@ -73,15 +73,19 @@ module.exports = {
                 description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
                 nav: [
                     {
-                        text: 'Getting Started',
-                        link: '/guide/'
+                        text: 'Introduction',
+                        link: '/intro/'
                     },
                     {
-                        text: 'venus-cluster',
+                        text: 'Chain Service',
+                        link: '/cs/'
+                    },
+                    {
+                        text: 'Storage Service',
                         link: '/cluster/'
                     },
                     {
-                        text: 'venus-market',
+                        text: 'Deal Service',
                         link: '/market/'
                     },
                     {
@@ -96,27 +100,38 @@ module.exports = {
                         text: 'Operation',
                         link: '/operation/'
                     },
-                    {
-                        text: 'Master Class',
-                        link: '/master/'
-                    }
                 ],
                 sidebar: {
-                    '/guide/': [
+                    '/intro/': [
                         {
                             title: 'Introduction',
                             collapsable: false,
                             children: [
                                 ['', 'Overview'],
-                                ['How-To-Contribute-Docs.md', 'Contribute to doc']
                             ]
                         },
                         {
-                            title: 'Chain Service',
+                            title: 'Contributing',
                             collapsable: false,
                             children: [
-                                ['How-To-Deploy-MingPool.md', 'Deploy a chain service'],
-                                ['Using-venus-Shared-Modules.md', 'Use a chain service'],
+                                ['contribute-docs.md', 'Contribute to doc']
+                            ]
+                        },
+                    ],
+                    '/cs/': [
+                        {
+                            title: 'Introduction',
+                            collapsable: false,
+                            children: [
+                                ['', 'Overview'],
+                            ]
+                        },
+                        {
+                            title: 'Deployment',
+                            collapsable: false,
+                            children: [
+                                ['deploy-a-cs.md', 'Deploy a chain service'],
+                                ['join-a-cs.md', 'Use a chain service'],
                             ]
                         },
                     ],
