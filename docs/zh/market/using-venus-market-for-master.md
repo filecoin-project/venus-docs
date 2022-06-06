@@ -41,7 +41,7 @@ generate token success: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidG9rZW4
 
 ```shell
 ./venus-market pool-run \
---node-url=/ip4/192.168.200.21/tcp/3454/ \
+--node-url=/ip4/192.168.200.21/tcp/3453/ \
 --auth-url=http://192.168.200.21:8989 \
 --gateway-url=/ip4/192.168.200.21/tcp/45132/ \
 --messager-url=/ip4/192.168.200.21/tcp/39812/ \
@@ -54,7 +54,7 @@ generate token success: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidG9rZW4
 当第一次启动时venus-market时,按[命令行指定启动参数](#命令行指定参数启动)后, 配置文件的对应项看起来是这样的.
 ```yuml
 [Node]
-  Url = "/ip4/192.168.200.21/tcp/3454/"
+  Url = "/ip4/192.168.200.21/tcp/3453/"
   Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiemwiLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.3u-PInSUmX-8f6Z971M7JBCHYgFVQrvwUjJfFY03ouQ"
 [Messager]
   Url = "/ip4/192.168.200.21/tcp/39812/"
