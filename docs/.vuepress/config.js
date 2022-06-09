@@ -311,6 +311,7 @@ module.exports = {
                             children: [
                                 ['deploy-a-cs.md', '部署链服务'],
                                 ['join-a-cs.md', '使用链服务'],
+                                ['venus-run-in-docker.md', '使用DOcker部署链服务'],
                             ]
                         },
                     ],
@@ -392,7 +393,6 @@ module.exports = {
                                 ['venus_load_balancing.md', '简易负载均衡'],
                                 // ['How-To-Connect-Network.md', '加入不同网络'],
                                 ['tips-running-in-China.md', '中国部署小贴士'],
-                                ['venus-run-in-docker.md', '在Docker中运行venus'],
                             ]
                         },
                         {
