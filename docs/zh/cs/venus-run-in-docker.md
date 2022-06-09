@@ -174,7 +174,7 @@ tanlang/venus \
 --import-snapshot /snapshot.car 
 ```
 
-	如果需要进入容器修改配置文件或者调整组件运行环境的话：
+如果需要进入容器修改配置文件或者调整组件运行环境的话：
 
 ```shell
 docker exec -it filvenus/venus /bin/bash
