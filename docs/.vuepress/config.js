@@ -4,7 +4,9 @@ module.exports = {
     base: '/',
     markdown: {
         config: md => {
-            md.set({linkify: true})
+            md.set({
+                linkify: true
+            })
             md.use(require('markdown-it-emoji'))
             md.use(require('markdown-it-container'))
             md.use(require('markdown-it-footnote'))
@@ -22,7 +24,10 @@ module.exports = {
         ['vuepress-plugin-code-copy', true]
     ],
     head: [
-        ['link', {rel: 'icon', href: '/assets/venus-logo.png'}],
+        ['link', {
+            rel: 'icon',
+            href: '/assets/venus-logo.png'
+        }],
         [
             'script',
             {
@@ -71,8 +76,7 @@ module.exports = {
                 lang: 'en-US',
                 title: 'Venus Filecoin',
                 description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
-                nav: [
-                    {
+                nav: [{
                         text: 'Introduction',
                         link: '/intro/'
                     },
@@ -102,8 +106,7 @@ module.exports = {
                     },
                 ],
                 sidebar: {
-                    '/intro/': [
-                        {
+                    '/intro/': [{
                             title: 'Introduction',
                             collapsable: false,
                             children: [
@@ -118,8 +121,7 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/cs/': [
-                        {
+                    '/cs/': [{
                             title: 'Introduction',
                             collapsable: false,
                             children: [
@@ -135,8 +137,7 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/cluster/': [
-                        {
+                    '/cluster/': [{
                             title: 'Introduction',
                             collapsable: false,
                             children: [
@@ -152,8 +153,7 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/market/': [
-                        {
+                    '/market/': [{
                             title: 'Introduction',
                             collapsable: false,
                             children: [
@@ -166,12 +166,11 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['Using-venus-market.md', 'Getting started'],
-                                ['migrate_market_v1_to_v2.md', 'Upgrading to version 2.0'],                              
+                                ['migrate_market_v1_to_v2.md', 'Upgrading to version 2.0'],
                             ]
                         },
                     ],
-                    '/modules/': [
-                        {
+                    '/modules/': [{
                             title: 'Chain Service',
                             collapsable: false,
                             children: [
@@ -193,8 +192,7 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/advanced/': [
-                        {
+                    '/advanced/': [{
                             title: 'Advanced Practice',
                             collapsable: false,
                             children: [
@@ -217,8 +215,7 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/operation/': [
-                        {
+                    '/operation/': [{
                             title: 'Operation',
                             collapsable: false,
                             children: [
@@ -237,20 +234,18 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/master/': [
-                        {
-                            title: 'Master Course',
-                            collapsable: false,
-                            children: [
-                                ['', 'TOC'],
-                                ['Intro_to_Venus.md', 'Introduction'],
-                                ['Chain_service_construction.md', 'Deploy/join a Chain Service'],
-                                ['Daily_op_and_maintenance.md', 'Node operations'],
-                                ['Q&A.md', 'Q&A'],
-                                ['Incubation_exit_guide.md', 'Exit incubation program'],
-                            ]
-                        }
-                    ]
+                    '/master/': [{
+                        title: 'Master Course',
+                        collapsable: false,
+                        children: [
+                            ['', 'TOC'],
+                            ['Intro_to_Venus.md', 'Introduction'],
+                            ['Chain_service_construction.md', 'Deploy/join a Chain Service'],
+                            ['Daily_op_and_maintenance.md', 'Node operations'],
+                            ['Q&A.md', 'Q&A'],
+                            ['Incubation_exit_guide.md', 'Exit incubation program'],
+                        ]
+                    }]
                 }
             },
             '/zh/': {
@@ -258,8 +253,7 @@ module.exports = {
                 label: '简体中文',
                 title: '启明星',
                 description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
-                nav: [
-                    {
+                nav: [{
                         text: '启明星简介',
                         link: '/zh/intro/'
                     },
@@ -289,8 +283,7 @@ module.exports = {
                     },
                 ],
                 sidebar: {
-                    '/zh/intro/': [
-                        {
+                    '/zh/intro/': [{
                             title: '简述',
                             collapsable: false,
                             children: [
@@ -305,8 +298,7 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/zh/cs/': [
-                        {
+                    '/zh/cs/': [{
                             title: '简述',
                             collapsable: false,
                             children: [
@@ -322,8 +314,7 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/zh/cluster/': [
-                        {
+                    '/zh/cluster/': [{
                             title: '简述',
                             collapsable: false,
                             children: [
@@ -351,8 +342,7 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/zh/market/': [
-                        {
+                    '/zh/market/': [{
                             title: '简述',
                             collapsable: false,
                             children: [
@@ -369,8 +359,7 @@ module.exports = {
                             ]
                         }
                     ],
-                    '/zh/modules/': [
-                        {
+                    '/zh/modules/': [{
                             title: '链服务组件',
                             collapsable: false,
                             children: [
@@ -393,8 +382,7 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/zh/advanced/': [
-                        {
+                    '/zh/advanced/': [{
                             title: '进阶实战',
                             collapsable: false,
                             children: [
@@ -404,7 +392,7 @@ module.exports = {
                                 ['venus_load_balancing.md', '简易负载均衡'],
                                 // ['How-To-Connect-Network.md', '加入不同网络'],
                                 ['tips-running-in-China.md', '中国部署小贴士'],
-
+                                ['venus-run-in-docker.md', '在Docker中运行venus'],
                             ]
                         },
                         {
@@ -419,8 +407,7 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/zh/operation/': [
-                        {
+                    '/zh/operation/': [{
                             title: '运维实战',
                             collapsable: false,
                             children: [
@@ -440,23 +427,20 @@ module.exports = {
                             ]
                         },
                     ],
-                    '/zh/master/': [
-                        {
-                            title: '大师课',
-                            collapsable: false,
-                            children: [
-                                ['', '目录'],
-                                ['Intro_to_Venus.md', 'Venus概要'],
-                                ['Chain_service_construction.md', '部署/加入链服务'],
-                                ['Daily_op_and_maintenance.md', '节点日常运维'],
-                                ['Q&A.md', 'Q&A'],
-                                ['Incubation_exit_guide.md', '节点迁出指南'],
-                            ]
-                        }
-                    ]
+                    '/zh/master/': [{
+                        title: '大师课',
+                        collapsable: false,
+                        children: [
+                            ['', '目录'],
+                            ['Intro_to_Venus.md', 'Venus概要'],
+                            ['Chain_service_construction.md', '部署/加入链服务'],
+                            ['Daily_op_and_maintenance.md', '节点日常运维'],
+                            ['Q&A.md', 'Q&A'],
+                            ['Incubation_exit_guide.md', '节点迁出指南'],
+                        ]
+                    }]
                 }
             }
         }
     }
 }
-
