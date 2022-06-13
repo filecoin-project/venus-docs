@@ -189,7 +189,10 @@ docker exec -it filvenus/venus /bin/bash
 #### 编译环境的构建
 
 ```shell
-# 到任意组件根目录
+# 到venus 组件的根目录
+git clone https://github.com/filecoin-project/venus.git
+cd ./venus
+# 构建 运行环境
 make docker-buildenv
 # 网络受限需要使用代理时
 make docker BUILD_DOCKER_PROXY=<socks5 | https >://<IP>:<PORT> docker-buildenv 
@@ -198,7 +201,10 @@ make docker BUILD_DOCKER_PROXY=<socks5 | https >://<IP>:<PORT> docker-buildenv
 #### 运行环境的构建
 
 ```shell
-# 到任意组件根目录
+# 到venus 组件的根目录
+git clone https://github.com/filecoin-project/venus.git
+cd ./venus
+# 构建 运行环境
 make docker-runtime
 # 网络受限需要使用代理时
 make docker-runtime BUILD_DOCKER_PROXY=<socks5 | https >://<IP>:<PORT> 
