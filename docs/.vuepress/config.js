@@ -311,7 +311,7 @@ module.exports = {
                             children: [
                                 ['deploy-a-cs.md', '部署链服务'],
                                 ['join-a-cs.md', '使用链服务'],
-                                ['venus-run-in-docker.md', '使用DOcker部署链服务'],
+                                ['venus-run-in-docker.md', '使用Docker部署链服务'],
                             ]
                         },
                     ],
