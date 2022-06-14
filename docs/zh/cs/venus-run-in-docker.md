@@ -9,7 +9,7 @@
 
 ```shell
 # 下载配置文件
-wget https://github.com/filecoin-project/venus-docs/raw/feat/docker-docs/script/docker-compose.yaml
+wget https://raw.githubusercontent.com/filecoin-project/venus-docs/master/script/docker-compose.yaml
 
 # 启动docker集群
 snapshot=/path/to/your/snapshot.car \
