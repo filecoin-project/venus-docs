@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>准备 | 启明星</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/venus-logo.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-SMSDTMGLTV"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SMSDTMGLTV');</script>
+    <meta name="description" content="GO语言实现的Filecoin分布式存储网络">
+    
+    <link rel="preload" href="/assets/css/0.styles.3e16e4d0.css" as="style"><link rel="preload" href="/assets/js/app.a401c72b.js" as="script"><link rel="preload" href="/assets/js/2.79d5dbf7.js" as="script"><link rel="preload" href="/assets/js/99.1b0f6866.js" as="script"><link rel="prefetch" href="/assets/js/10.efd4fd00.js"><link rel="prefetch" href="/assets/js/100.b7ed5f08.js"><link rel="prefetch" href="/assets/js/101.f48426c2.js"><link rel="prefetch" href="/assets/js/102.12dcf098.js"><link rel="prefetch" href="/assets/js/103.aa4f7aba.js"><link rel="prefetch" href="/assets/js/104.0b2d5d0d.js"><link rel="prefetch" href="/assets/js/105.d16b6c26.js"><link rel="prefetch" href="/assets/js/106.e78c5cc5.js"><link rel="prefetch" href="/assets/js/107.e803e894.js"><link rel="prefetch" href="/assets/js/108.52f052e5.js"><link rel="prefetch" href="/assets/js/109.5f80a24e.js"><link rel="prefetch" href="/assets/js/11.1024c7fb.js"><link rel="prefetch" href="/assets/js/110.20033423.js"><link rel="prefetch" href="/assets/js/111.73ee066e.js"><link rel="prefetch" href="/assets/js/112.802b3efa.js"><link rel="prefetch" href="/assets/js/113.c40f6dfa.js"><link rel="prefetch" href="/assets/js/114.bee856b2.js"><link rel="prefetch" href="/assets/js/115.d21964f5.js"><link rel="prefetch" href="/assets/js/116.1ab8ef2d.js"><link rel="prefetch" href="/assets/js/117.48269041.js"><link rel="prefetch" href="/assets/js/118.b940e110.js"><link rel="prefetch" href="/assets/js/119.015e4294.js"><link rel="prefetch" href="/assets/js/12.57f72ff0.js"><link rel="prefetch" href="/assets/js/120.eb013c5d.js"><link rel="prefetch" href="/assets/js/121.81678139.js"><link rel="prefetch" href="/assets/js/122.dc5d39d0.js"><link rel="prefetch" href="/assets/js/123.ef807529.js"><link rel="prefetch" href="/assets/js/124.e910eb65.js"><link rel="prefetch" href="/assets/js/125.86660980.js"><link rel="prefetch" href="/assets/js/126.35d739fd.js"><link rel="prefetch" href="/assets/js/127.92bf5d76.js"><link rel="prefetch" href="/assets/js/128.df5af2f0.js"><link rel="prefetch" href="/assets/js/129.dfccfcc7.js"><link rel="prefetch" href="/assets/js/13.cfdd2e97.js"><link rel="prefetch" href="/assets/js/130.4a8c11b4.js"><link rel="prefetch" href="/assets/js/131.2a658666.js"><link rel="prefetch" href="/assets/js/132.5119f9d5.js"><link rel="prefetch" href="/assets/js/133.69620285.js"><link rel="prefetch" href="/assets/js/134.aef2a20d.js"><link rel="prefetch" href="/assets/js/135.27b50c00.js"><link rel="prefetch" href="/assets/js/136.dc06a954.js"><link rel="prefetch" href="/assets/js/14.fc99bfdc.js"><link rel="prefetch" href="/assets/js/15.fa7ede5c.js"><link rel="prefetch" href="/assets/js/16.ca801eaa.js"><link rel="prefetch" href="/assets/js/17.d6e677a4.js"><link rel="prefetch" href="/assets/js/18.e8545baa.js"><link rel="prefetch" href="/assets/js/19.47645763.js"><link rel="prefetch" href="/assets/js/20.39b2c9c4.js"><link rel="prefetch" href="/assets/js/21.b1288734.js"><link rel="prefetch" href="/assets/js/22.4090a796.js"><link rel="prefetch" href="/assets/js/23.0a67dbf2.js"><link rel="prefetch" href="/assets/js/24.f8948210.js"><link rel="prefetch" href="/assets/js/25.dd33de12.js"><link rel="prefetch" href="/assets/js/26.42c4b90e.js"><link rel="prefetch" href="/assets/js/27.8c00d5df.js"><link rel="prefetch" href="/assets/js/28.3204a758.js"><link rel="prefetch" href="/assets/js/29.0136d5fb.js"><link rel="prefetch" href="/assets/js/3.6df625ec.js"><link rel="prefetch" href="/assets/js/30.4624dd76.js"><link rel="prefetch" href="/assets/js/31.39c935cb.js"><link rel="prefetch" href="/assets/js/32.bae97709.js"><link rel="prefetch" href="/assets/js/33.4e84b4db.js"><link rel="prefetch" href="/assets/js/34.022a1859.js"><link rel="prefetch" href="/assets/js/35.6db35d27.js"><link rel="prefetch" href="/assets/js/36.3f33b9a0.js"><link rel="prefetch" href="/assets/js/37.969b3f13.js"><link rel="prefetch" href="/assets/js/38.a8fb163f.js"><link rel="prefetch" href="/assets/js/39.99d76196.js"><link rel="prefetch" href="/assets/js/4.f9f100a8.js"><link rel="prefetch" href="/assets/js/40.3fdc4c92.js"><link rel="prefetch" href="/assets/js/41.859e1b54.js"><link rel="prefetch" href="/assets/js/42.c3f6525f.js"><link rel="prefetch" href="/assets/js/43.6aa47b23.js"><link rel="prefetch" href="/assets/js/44.08c79258.js"><link rel="prefetch" href="/assets/js/45.ff123f9d.js"><link rel="prefetch" href="/assets/js/46.c02b7bae.js"><link rel="prefetch" href="/assets/js/47.685dd179.js"><link rel="prefetch" href="/assets/js/48.0110bb30.js"><link rel="prefetch" href="/assets/js/49.91708705.js"><link rel="prefetch" href="/assets/js/5.833a2dc9.js"><link rel="prefetch" href="/assets/js/50.18c8291a.js"><link rel="prefetch" href="/assets/js/51.dbacb565.js"><link rel="prefetch" href="/assets/js/52.602f7a39.js"><link rel="prefetch" href="/assets/js/53.f5fffa2b.js"><link rel="prefetch" href="/assets/js/54.6a77c33e.js"><link rel="prefetch" href="/assets/js/55.818e81e7.js"><link rel="prefetch" href="/assets/js/56.869804b8.js"><link rel="prefetch" href="/assets/js/57.f22044b1.js"><link rel="prefetch" href="/assets/js/58.275739db.js"><link rel="prefetch" href="/assets/js/59.1c8406b2.js"><link rel="prefetch" href="/assets/js/6.277ad0d9.js"><link rel="prefetch" href="/assets/js/60.95fff903.js"><link rel="prefetch" href="/assets/js/61.5d95fb2b.js"><link rel="prefetch" href="/assets/js/62.cc2841e1.js"><link rel="prefetch" href="/assets/js/63.fbc0fe62.js"><link rel="prefetch" href="/assets/js/64.da849664.js"><link rel="prefetch" href="/assets/js/65.b2137564.js"><link rel="prefetch" href="/assets/js/66.fd74d99f.js"><link rel="prefetch" href="/assets/js/67.bb07faf9.js"><link rel="prefetch" href="/assets/js/68.42537ae2.js"><link rel="prefetch" href="/assets/js/69.91feee4a.js"><link rel="prefetch" href="/assets/js/7.2bef234d.js"><link rel="prefetch" href="/assets/js/70.cd69abea.js"><link rel="prefetch" href="/assets/js/71.e649f446.js"><link rel="prefetch" href="/assets/js/72.e06f4190.js"><link rel="prefetch" href="/assets/js/73.9d4381c6.js"><link rel="prefetch" href="/assets/js/74.57fce68c.js"><link rel="prefetch" href="/assets/js/75.36ff0289.js"><link rel="prefetch" href="/assets/js/76.6a8352c8.js"><link rel="prefetch" href="/assets/js/77.047218b3.js"><link rel="prefetch" href="/assets/js/78.d1b0ddcc.js"><link rel="prefetch" href="/assets/js/79.283a24b6.js"><link rel="prefetch" href="/assets/js/8.69e3ff48.js"><link rel="prefetch" href="/assets/js/80.4e98639a.js"><link rel="prefetch" href="/assets/js/81.c0c939f0.js"><link rel="prefetch" href="/assets/js/82.322c0737.js"><link rel="prefetch" href="/assets/js/83.4d97be20.js"><link rel="prefetch" href="/assets/js/84.862c1bc6.js"><link rel="prefetch" href="/assets/js/85.9d085ac4.js"><link rel="prefetch" href="/assets/js/86.8f866286.js"><link rel="prefetch" href="/assets/js/87.ec5e4d60.js"><link rel="prefetch" href="/assets/js/88.51ec77ab.js"><link rel="prefetch" href="/assets/js/89.47e39d65.js"><link rel="prefetch" href="/assets/js/9.34948a42.js"><link rel="prefetch" href="/assets/js/90.f1fbf3fc.js"><link rel="prefetch" href="/assets/js/91.ba062de5.js"><link rel="prefetch" href="/assets/js/92.98c445e8.js"><link rel="prefetch" href="/assets/js/93.dec6326f.js"><link rel="prefetch" href="/assets/js/94.7639ebf6.js"><link rel="prefetch" href="/assets/js/95.7fd6ef43.js"><link rel="prefetch" href="/assets/js/96.dfab9392.js"><link rel="prefetch" href="/assets/js/97.da42dfd2.js"><link rel="prefetch" href="/assets/js/98.858f390a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3e16e4d0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/zh/" class="home-link router-link-active"><img src="/assets/venus-logo-title.svg" alt="启明星" class="logo"> <span class="site-name can-hide">启明星</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  启明星简介
+</a></div><div class="nav-item"><a href="/zh/cs/" class="nav-link router-link-active">
+  链服务
+</a></div><div class="nav-item"><a href="/zh/cluster/" class="nav-link">
+  算力服务
+</a></div><div class="nav-item"><a href="/zh/market/" class="nav-link">
+  订单服务
+</a></div><div class="nav-item"><a href="/zh/modules/" class="nav-link">
+  组件
+</a></div><div class="nav-item"><a href="/zh/advanced/" class="nav-link">
+  进阶
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link">
+  运维
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cs/join-a-cs.html" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/cs/join-a-cs.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  启明星简介
+</a></div><div class="nav-item"><a href="/zh/cs/" class="nav-link router-link-active">
+  链服务
+</a></div><div class="nav-item"><a href="/zh/cluster/" class="nav-link">
+  算力服务
+</a></div><div class="nav-item"><a href="/zh/market/" class="nav-link">
+  订单服务
+</a></div><div class="nav-item"><a href="/zh/modules/" class="nav-link">
+  组件
+</a></div><div class="nav-item"><a href="/zh/advanced/" class="nav-link">
+  进阶
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link">
+  运维
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cs/join-a-cs.html" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/cs/join-a-cs.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>简述</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/cs/" aria-current="page" class="sidebar-link">概要</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>部署</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/cs/deploy-a-cs.html" class="sidebar-link">部署链服务</a></li><li><a href="/zh/cs/join-a-cs.html" aria-current="page" class="active sidebar-link">使用链服务</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/cs/join-a-cs.html#准备" class="sidebar-link">准备</a></li><li class="sidebar-sub-header"><a href="/zh/cs/join-a-cs.html#安装venus-wallet" class="sidebar-link">安装venus-wallet</a></li><li class="sidebar-sub-header"><a href="/zh/cs/join-a-cs.html#安装venus-cluster" class="sidebar-link">安装venus-cluster</a></li><li class="sidebar-sub-header"><a href="/zh/cs/join-a-cs.html#问题" class="sidebar-link">问题?</a></li></ul></li><li><a href="/zh/cs/venus-run-in-docker.html" class="sidebar-link">使用Docker部署链服务</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="准备"><a href="#准备" class="header-anchor">#</a> 准备</h2> <p>在深入部署您的挖矿操作之前，请确保您已完成以下步骤。</p> <div class="custom-block warning"><p class="custom-block-title">注意</p> <p>建议您在部署到主网上之前在<code>calibration</code>网络中测试您的配置。</p></div> <h3 id="永久存储"><a href="#永久存储" class="header-anchor">#</a> 永久存储</h3> <p>选择您熟悉的网络文件系统（例如 NFS）并部署您的存储集群。</p> <h3 id="在共享模块中设置您的帐户"><a href="#在共享模块中设置您的帐户" class="header-anchor">#</a> 在共享模块中设置您的帐户</h3> <p>有两种方法可以配置您的帐户。</p> <h4 id="对于需接入共享模块的用户"><a href="#对于需接入共享模块的用户" class="header-anchor">#</a> 对于需接入共享模块的用户</h4> <p>如果您尝试连接到第三方托管的共享venus模块，联系上述服务的管理员并让他们为您设置。</p> <div class="custom-block tip"><p class="custom-block-title">提示</p> <p>venus-wallet 可以部署为链服务或者本地组件，具体取决于您的安全要求。</p></div> <h4 id="对于共享模块的管理员"><a href="#对于共享模块的管理员" class="header-anchor">#</a> 对于共享模块的管理员</h4> <p>如果您是托管共享 venus 模块的管理员，请使用以下命令注册各个集群。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 创建user,默认激活状态</span>
+$ ./venus-auth user <span class="token function">add</span> <span class="token operator">&lt;</span>ACCOUNT_NAME<span class="token operator">&gt;</span>
+<span class="token comment"># 激活user</span>
+$ ./venus-auth user update --name <span class="token operator">&lt;</span>ACCOUNT_NAME<span class="token operator">&gt;</span> --state <span class="token number">1</span>
+<span class="token comment"># 绑定节点号</span>
+$ ./venus-auth user miner <span class="token function">add</span> <span class="token operator">&lt;</span>ACCOUNT_NAME<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>MinerID<span class="token operator">&gt;</span>
+
+<span class="token comment"># 为此账号分配token，用于接入服务层验证</span>
+$ ./venus-auth token gen --perm <span class="token function">write</span> <span class="token operator">&lt;</span>ACCOUNT_NAME<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>AUTH_TOKEN_FOR_ACCOUNT_NAME<span class="token operator">&gt;</span>
+</code></pre></div><h3 id="软件依赖"><a href="#软件依赖" class="header-anchor">#</a> 软件依赖</h3> <p>在运行<code>Venus</code>之前，您需要安装<a href="https://lotus.filecoin.io/lotus/install/linux/#software-dependencies" target="_blank" rel="noopener noreferrer">这些<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>软件。（注：和lotus的软件依赖相同）</p> <h2 id="安装venus-wallet"><a href="#安装venus-wallet" class="header-anchor">#</a> 安装venus-wallet</h2> <p>下载并编译<code>Venus-wallet</code>的源代码。</p> <ul><li>首次编译</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">git</span> clone https://github.com/filecoin-project/venus-wallet.git
+<span class="token comment"># change directory to venus-wallet</span>
+$ <span class="token builtin class-name">cd</span> venus-wallet
+$ <span class="token function">git</span> checkout <span class="token operator">&lt;</span>LATEST_RELEASE<span class="token operator">&gt;</span>
+$ <span class="token function">make</span>
+</code></pre></div><ul><li>曾经成功编译过</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># change directory to venus-wallet,switch to the incubation branch</span>
+$ <span class="token function">git</span> fetch
+$ <span class="token function">git</span> pull
+</code></pre></div><p>在后台运行<code>venus-wallet</code>模块。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">nohup</span> ./venus-wallet run <span class="token operator">&gt;</span> wallet.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">提示</p> <p>使用 <code>tail -f wallet.log</code> 来监控钱包日志。</p></div> <p>为您的<code>venus-wallet</code>设置密码</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./venus-wallet setpwd
+Password:******
+Enter Password again:******
+Password <span class="token builtin class-name">set</span> successfully
+</code></pre></div><div class="custom-block warning"><p class="custom-block-title">注意</p> <p>请备份您的密码并妥善保存，否则你将无法使用wallet相关的功能。每次venus-wallet run启动时带--password标志会自动解锁钱包,如果没带,在wallet实例启动后你需要手动解锁:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./venus-wallet unlock
+Password: 
+
+<span class="token comment"># 查看解锁状态</span>
+$ ./venus-wallet lock-state
+wallet state: unlocked
+</code></pre></div><p>在扇区封装的过程中需要调用wallet进行签名,如果不解锁,会导致签名失败,进而导致扇区任务失败.</p></div> <p>生成owner和worker地址。（如果您没有现有的miner ID）</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./venus-wallet new bls
+<span class="token operator">&lt;</span>OWNER_ADDRESS<span class="token operator">&gt;</span>
+$ ./venus-wallet new bls
+<span class="token operator">&lt;</span>WORKER_ADDRESS<span class="token operator">&gt;</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">提示</p> <p>如果您在<code>Calibration</code>上进行测试，则必须使用来自水龙头的测试币为您的所有地址提供资金。对于校准网，请使用此<a href="https://faucet.calibration.fildev.network/funds.html" target="_blank" rel="noopener noreferrer">水龙头<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。</p></div> <p><em><strong>配置venus-wallet接入共享服务,使用您从共享模块管理员处获得的帐号信息更改 <code>~/.venus_wallet/config.toml</code>中的<code>[APIRegisterHub]</code> 部分</strong></em></p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">APIRegisterHub</span><span class="token punctuation">]</span>
+<span class="token key property">RegisterAPI</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;/ip4/&lt;IP_ADDRESS_OF_VENUS_GATEWAY&gt;/tcp/45132&quot;</span><span class="token punctuation">]</span>
+<span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;&lt;AUTH_TOKEN_FOR_ACCOUNT_NAME&gt;&quot;</span>
+<span class="token key property">SupportAccounts</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;&lt;ACCOUNT_NAME&gt;&quot;</span><span class="token punctuation">]</span>
+</code></pre></div><p>重新启动<code>venus-wallet</code>以使更改生效。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># grep [PID] of venus-wallet process</span>
+$ <span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">grep</span> wallet
+<span class="token comment"># kill the process and restart</span>
+$ <span class="token function">kill</span> <span class="token punctuation">[</span>PID<span class="token punctuation">]</span>
+$ <span class="token function">nohup</span> ./venus-wallet run <span class="token operator">&gt;</span> wallet.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+</code></pre></div><p>如成功连接 <code>venus-gateway</code>，您将看到以下日志。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token number">2021</span>-07-12T15:14:12.457+0800    INFO    wallet_event    wallet_event/listenevent.go:197 connect to server fcf714b2-eeb6-498b-aafc-5e58eccd9d0f  <span class="token punctuation">{</span><span class="token string">&quot;api hub&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;/ip4/&lt;IP_ADDRESS&gt;/tcp/45132&quot;</span><span class="token punctuation">}</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">提示</p> <p>建议使用<code>systemd</code>或<code>supervisord</code>等线程控制。</p></div> <div class="custom-block warning"><p class="custom-block-title">注意</p> <p>请确保venus-wallet 处于unlocked状态，要么会在Sealer模块初始化时卡在 &quot;Waiting for confirmation&quot;，导致miner帐号生成不了。</p></div> <h2 id="安装venus-cluster"><a href="#安装venus-cluster" class="header-anchor">#</a> 安装venus-cluster</h2> <p>下载代码。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">git</span> clone https://github.com/ipfs-force-community/venus-cluster.git
+</code></pre></div><p>编译<code>venus-cluster</code>。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">cd</span> venus-cluster
+$ <span class="token function">git</span> checkout <span class="token operator">&lt;</span>LATEST_RELEASE<span class="token operator">&gt;</span>
+$ <span class="token function">make</span> all
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">提示</p> <p>编译完成后，会在 ./dist/bin 目录下有<code>venus-worker</code>和<code>venus-sector-manager</code>两个可执行文件。</p></div> <h3 id="创建矿工号-可选"><a href="#创建矿工号-可选" class="header-anchor">#</a> 创建矿工号（可选）</h3> <p>创建矿工号。（如果已经有矿工号可以跳过此步）</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./venus-sector-manager util miner create 
+--from<span class="token operator">=</span><span class="token operator">&lt;</span>OWNER_ADDRESS<span class="token operator">&gt;</span> 
+--owner<span class="token operator">=</span><span class="token operator">&lt;</span>OWNER_ADDRESS<span class="token operator">&gt;</span> 
+--worker<span class="token operator">=</span><span class="token operator">&lt;</span>WORKER_ADDRESS<span class="token operator">&gt;</span>
+--sector-size<span class="token operator">=</span>32GiB
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">提示</p> <p>使用<code>--net</code>来选择网络，默认为主网。</p></div> <div class="custom-block tip"><p class="custom-block-title">提示</p> <p>成功创建矿工号会有类似以下日志输出：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token number">2022</span>-05-09T07:29:51.325Z  INFO  cmd  internal/util_miner.go:242  miner actor: t01219 <span class="token punctuation">(</span>t2z4nnndtt2iuu57lq3ivor7xdvqwivwb5renrh3a<span class="token punctuation">)</span>  
+<span class="token punctuation">{</span><span class="token string">&quot;size&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;512MiB&quot;</span>, <span class="token string">&quot;from&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t3wultr2i47m24ew2p3bskclnb4rtgmuwb6cwjleqbeu4ndqocx67635dibpsq3ugpbv5y7fpjlpxlmkqcgnva&quot;</span>, 
+<span class="token string">&quot;actor&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t01166&quot;</span>, <span class="token string">&quot;owner&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t3wultr2i47m24ew2p3bskclnb4rtgmuwb6cwjleqbeu4ndqocx67635dibpsq3ugpbv5y7fpjlpxlmkqcgnva&quot;</span>, 
+<span class="token string">&quot;worker&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t3wultr2i47m24ew2p3bskclnb4rtgmuwb6cwjleqbeu4ndqocx67635dibpsq3ugpbv5y7fpjlpxlmkqcgnva&quot;</span><span class="token punctuation">}</span>
+</code></pre></div></div> <h3 id="venus-sector-manager"><a href="#venus-sector-manager" class="header-anchor">#</a> venus-sector-manager</h3> <p>初始化工作目录</p> <div class="language-bash extra-class"><pre class="language-bash"><code>./dist/bin/venus-sector-manager daemon init
+</code></pre></div><p>按需配置默认配置文件<code>~/.venus-sector-manager/sector-manager.cfg</code>。这里给出一份参考，详细配置说明可以参见<a href="/zh/cluster/Venus-Sector-Manager">这里</a>。</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Common</span><span class="token punctuation">]</span>
+  <span class="token punctuation">[</span><span class="token table class-name">Common.API</span><span class="token punctuation">]</span>
+    <span class="token comment"># 链服务地址，必填项，字符串类型</span>
+    <span class="token key property">Chain</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+    <span class="token comment"># 消息服务地址，必填项，字符串类型</span>
+    <span class="token key property">Messager</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+    <span class="token comment"># 市场服务地址，封装真实数据时为必填项，字符串类型，CC数据非必填项</span>
+    <span class="token comment"># Market = &quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+    <span class="token comment"># 网关服务地址，必填项，字符串类型</span>
+    <span class="token key property">Gateway</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+    <span class="token comment"># 服务 token， 必填项，字符串类型</span>
+    <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;{auth token}&quot;</span>
+   
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PieceStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># 路径，必填项，字符串类型</span>
+  <span class="token comment">#Path = &quot;{store_path}&quot;</span>
+   
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># 名称， 选填项，字符串类型</span>
+  <span class="token key property">Name</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_name1}&quot;</span>
+  <span class="token comment"># 路径，必填项，字符串类型，建议使用绝对路径</span>
+  <span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_path1}&quot;</span>
+   
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">Name</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_name2}&quot;</span>
+  <span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_path2}&quot;</span>
+   
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Miners</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># `SP` actor id， 必填项，数字类型，t033680-&gt;33680</span>
+  <span class="token key property">Actor</span> <span class="token punctuation">=</span> <span class="token number">33680</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Sector</span><span class="token punctuation">]</span>
+    <span class="token comment"># 扇区起始编号，选填项，数字类型，默认值为 0</span>
+    <span class="token key property">InitNumber</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+    <span class="token comment"># 扇区编号上限，选填项，数字类型，默认值为 null， 表示无上限限制</span>
+    <span class="token key property">MaxNumber</span> <span class="token punctuation">=</span> <span class="token number">1000000</span>
+    <span class="token comment"># 是否允许分配扇区， 选填项，布尔类型，默认值为 true， 即开启分配</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+    <span class="token comment"># 真实订单</span>
+    <span class="token key property">EnableDeals</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Pre</span><span class="token punctuation">]</span>
+    <span class="token comment"># 发送地址，必填项，地址类型，miner的worker地址</span>
+    <span class="token key property">Sender</span> <span class="token punctuation">=</span> <span class="token string">&quot;t3vi4amwofexsfpontn5g722psgikzochthhhu3ptvofzrqmgajs67gt5n2ririlc4hj667dvfsn3kmxiwgtya&quot;</span>
+    <span class="token comment"># 单条提交消息的 Gas 估算倍数，选填项，浮点数类型，默认值为1.2</span>
+    <span class="token comment">#GasOverEstimation = 1.2</span>
+    <span class="token comment"># 单条提交消息的FeeCap 限制，选填项，FIL值类型，默认值为 5 nanoFIL</span>
+    <span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Pre.Batch</span><span class="token punctuation">]</span>
+    <span class="token comment"># 是否启用聚合提交，选填项，布尔类型，默认值为 false， 即不启用</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+    <span class="token comment"># 最小聚合条数，选填项，数字类型，默认值为 16，即最小聚合条数为 16条</span>
+    <span class="token comment">#Threshold = 16</span>
+    <span class="token comment"># 最大等待时间，选填项，时间类型，默认值为 1h，即最大等待 1 小时</span>
+    <span class="token comment">#MaxWait = &quot;1h0m0s&quot;</span>
+    <span class="token comment"># 检查间隔，选填项，时间类型，默认值为 1min，即每隔 1min 检查一次是否满足聚合条件</span>
+    <span class="token comment">#CheckInterval = &quot;1m0s&quot;</span>
+    <span class="token comment"># 聚合提交消息的 Gas 估算倍数，选填项，浮点数类型，默认值为 1.2</span>
+    <span class="token comment">#GasOverEstimation = 1.2</span>
+    <span class="token comment"># 聚合提交消息的FeeCap 限制，选填项，FIL值类型，默认值为 5 nanoFIL</span>
+    <span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+   
+  <span class="token comment">#用于配置 ProveCommit 消息提交的策略，其配置项和作用与 Miners.Commitment.Pre内的完全一致。</span>
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Prove</span><span class="token punctuation">]</span>
+    <span class="token key property">Sender</span> <span class="token punctuation">=</span> <span class="token string">&quot;t3vi4amwofexsfpontn5g722psgikzochthhhu3ptvofzrqmgajs67gt5n2ririlc4hj667dvfsn3kmxiwgtya&quot;</span>
+    <span class="token comment">#GasOverEstimation = 1.2</span>
+    <span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Prove.Batch</span><span class="token punctuation">]</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+    <span class="token comment">#Threshold = 16</span>
+    <span class="token comment">#MaxWait = &quot;1h0m0s&quot;</span>
+    <span class="token comment">#CheckInterval = &quot;1m0s&quot;</span>
+    <span class="token comment">#GasOverEstimation = 1.2</span>
+    <span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.PoSt</span><span class="token punctuation">]</span>
+    <span class="token comment"># 发送地址，必填项，地址类型</span>
+    <span class="token key property">Sender</span> <span class="token punctuation">=</span> <span class="token string">&quot;t3vi4amwofexsfpontn5g722psgikzochthhhu3ptvofzrqmgajs67gt5n2ririlc4hj667dvfsn3kmxiwgtya&quot;</span>
+    <span class="token comment"># 是否启用，选填项，布尔类型，默认值为 true</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+    <span class="token comment"># 是否对扇区文件进行强校验，选填项，布尔类型，默认值为 true</span>
+    <span class="token comment"># 开启时，除了对文件存在性进行判断外，还会尝试读取部分信息，如元数据等</span>
+    <span class="token comment">#StrictCheck = true</span>
+    <span class="token comment"># WindowPoSt 消息的 Gas 估算倍数，选填项，浮点数类型，默认值为 1.2</span>
+    <span class="token comment">#GasOverEstimation = 1.2</span>
+    <span class="token comment"># WindowPoSt 消息的FeeCap 限制，选填项，FIL值类型，默认值为 5 nanoFIL</span>
+    <span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+    <span class="token comment"># 消息的稳定高度，选填项，数字类型，默认值为 10</span>
+    <span class="token comment">#Confidence = 10</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Proof</span><span class="token punctuation">]</span>
+    <span class="token comment"># 是否启用，选填项，布尔类型，默认值为 false</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Deal</span><span class="token punctuation">]</span>
+    <span class="token comment"># 是否启用订单，选填项，布尔类型，默认值为 false</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+</code></pre></div><p>启动<code>venus-sector-manager</code></p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./dist/bin/venus-sector-manager --net<span class="token operator">=</span>cali daemon run --poster --miner --listen <span class="token number">0.0</span>.0.0:1789
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">提示</p> <p>使用<code>--net</code>来选择网络，默认为主网。</p></div> <h3 id="venus-worker"><a href="#venus-worker" class="header-anchor">#</a> venus-worker</h3> <p>规划用于封装过程中数据的本地存储，并使用以下命令创建并初始化数据目录。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./dist/bin/venus-worker store sealing-init -l <span class="token operator">&lt;</span>dir<span class="token operator"><span class="token file-descriptor important">1</span>&gt;</span> <span class="token operator">&lt;</span>dir<span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span> <span class="token operator">&lt;</span>dir<span class="token operator"><span class="token file-descriptor important">3</span>&gt;</span> <span class="token operator">&lt;</span><span class="token punctuation">..</span>.<span class="token operator">&gt;</span>
+</code></pre></div><p>挂载持久化数据目录，并使用以下命令初始化数据目录。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./dist/bin/venus-worker store file-init -l <span class="token operator">&lt;</span>dir<span class="token operator"><span class="token file-descriptor important">1</span>&gt;</span>
+</code></pre></div><p>规划用于各封装阶段的CPU核、numa 区域等配置。按需完成配置文件。以下为<code>worker</code>配置例子，更详细的配置项、作用、配置方法可以参考<a href="/zh/cluster/Venus-Worker-c">这个</a>文档。</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">worker</span><span class="token punctuation">]</span>
+  <span class="token comment"># 实例名，选填项，字符串类型，默认以连接 `venus-sector-manager` 所使用的网卡 IP 地址作为实例名</span>
+  <span class="token comment"># name = &quot;bytest&quot;</span>
+  <span class="token comment"># rpc 服务监听地址，选填项，字符串类型， 默认为&quot;0.0.0.0&quot;，即监听本机所有地址</span>
+  <span class="token comment"># rpc_server.host = &quot;0.0.0.0&quot;</span>
+  <span class="token comment"># rpc 服务监听端口，选填项，数字类型，默认为17890</span>
+  <span class="token comment"># rpc_server.port = 17890</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">sector_manager</span><span class="token punctuation">]</span>
+  <span class="token comment"># 构造 rpc 客户端时使用的连接地址，必填项，字符串类型</span>
+  <span class="token key property">rpc_client.addr</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{some_ip}/tcp/1789&quot;</span>
+  <span class="token comment"># rpc_client.headers = { User-Agent = &quot;jsonrpc-core-client&quot; }</span>
+  <span class="token comment"># piece_token = &quot;{auth token}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">sealing</span><span class="token punctuation">]</span>
+  <span class="token comment"># 允许的`SP`，选填项，数字数组格式</span>
+  <span class="token key property">allowed_miners</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token number">33680</span><span class="token punctuation">]</span>
+  <span class="token comment"># 允许的扇区大小，选填项，字符串数组格式，[&quot;32GiB&quot;, &quot;64GiB&quot;]</span>
+  <span class="token key property">allowed_sizes</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;32GiB&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;64GiB&quot;</span><span class="token punctuation">]</span>
+  <span class="token comment"># 是否允许向扇区内添加订单，选填项，布尔类型，默认为 false。</span>
+  <span class="token comment"># 当设置为 true 时，通常需要同时设置 `sector_manager` 中的 `piece_token` 项</span>
+  <span class="token comment"># enable_deals = true</span>
+  <span class="token comment"># 封装过程中遇到 temp 类型的错误时，重试的次数，选填项，数字格式，默认为 5</span>
+  <span class="token comment"># max_retries = 3</span>
+  <span class="token comment"># 封装过程中遇到 temp 类型的错误时，重试的间隔，选填项，时间字符串格式，默认为 “30s&quot;， 即30秒</span>
+  <span class="token comment"># seal_interval = &quot;30s&quot;</span>
+  <span class="token comment"># 空闲的 `sealing_store` 申请封装任务的间隔， 选填项，时间字符串格式，默认为 ”30s&quot;， 即30秒</span>
+  <span class="token comment"># recover_interval = &quot;30s&quot;</span>
+  <span class="token comment"># rpc 状态轮询请求的间隔，选填项，时间字符串格式，默认为 ”30s&quot;， 即30秒</span>
+  <span class="token comment"># 封装过程中，部分环节使用了轮询方式来获取非实时的信息，如消息上链等。这个值有助于避免过于频繁的请求占用网络资源</span>
+  <span class="token comment"># rpc_polling_interval = &quot;30s&quot;</span>
+  <span class="token comment"># 是否跳过 proof 的本地校验环节，选填项，布尔格式，默认为 false</span>
+  <span class="token comment"># ignore_proof_check = false</span>
+
+<span class="token comment"># 根据实际资源规划</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># 扇区数据目录路径，必填项，字符串类型，建议使用绝对路径，数据目录和工作线程是一对一绑定的</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store1}&quot;</span>
+  <span class="token comment"># 封装过程的定制参数，仅对当前工作线程生效</span>
+  <span class="token comment"># sealing.allowed_miners = [10123, 10124, 10125]</span>
+  <span class="token comment"># sealing.allowed_sizes = [&quot;32GiB&quot;, &quot;64GiB&quot;]</span>
+  <span class="token comment"># sealing.enable_deals = true</span>
+  <span class="token comment"># sealing.max_retries = 3</span>
+  <span class="token comment"># sealing.seal_interval = &quot;30s&quot;</span>
+  <span class="token comment"># sealing.recover_interval = &quot;30s&quot;</span>
+  <span class="token comment"># sealing.rpc_polling_interval = &quot;30s&quot;</span>
+  <span class="token comment"># sealing.ignore_proof_check = false</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store2}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store3}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store4}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store5}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store6}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store7}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store8}&quot;</span>
+
+<span class="token comment"># attached用于配置已完成的扇区持久化数据保存的位置，允许同时配置多个。</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">attached</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># 名称， 选填项，字符串类型，默认为路径对应的绝对路径</span>
+  <span class="token key property">name</span> <span class="token punctuation">=</span> <span class="token string">&quot;bytest&quot;</span>
+  <span class="token comment"># 路径，必填项，字符串类型，建议直接填写绝对路径</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;/xx/xx/xxx&quot;</span>
+  <span class="token comment"># 只读，选填项，布尔类型，默认值为 false</span>
+  <span class="token comment">#readonly = false</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">processors.static_tree_d</span><span class="token punctuation">]</span>
+  <span class="token key property">32GiB</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to static tree_d for 32GiB}&quot;</span>
+  <span class="token key property">64GiB</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to static tree_d for 64GiB}&quot;</span>
+
+<span class="token comment"># 根据实际资源规划</span>
+<span class="token punctuation">[</span><span class="token table class-name">processors.limit</span><span class="token punctuation">]</span>
+  <span class="token comment"># pc1 阶段的并发数限制，选填项，数字类型</span>
+  <span class="token key property">pc1</span> <span class="token punctuation">=</span> <span class="token number">4</span>
+  <span class="token comment"># pc2 阶段的并发数限制，选填项，数字类型</span>
+  <span class="token key property">pc2</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+  <span class="token comment"># c2 阶段的并发数限制，选填项，数字类型</span>
+  <span class="token key property">c2</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+
+<span class="token comment"># fields for pc1 processors</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># numa 亲和性分区 id，选填项，数字类型，默认值为 null，不会设置亲和性，需要根据宿主机的 numa 分区进行填写</span>
+  <span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+  <span class="token comment"># cpu 核绑定和限制选项，选填项，字符串类型，默认值为 null，不设置绑定，值的格式遵循标准 cgroup.cpuset 格式</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;0-7&quot;</span>
+  <span class="token comment"># 声明本processor支持的最多并发量</span>
+  <span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+  <span class="token comment"># 外部执行器的附加环境变量，选填项，字典类型，默认值为 null</span>
+  <span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;12-19&quot;</span>
+  <span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+  <span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;8-11,24-27&quot;</span>
+  <span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_GPU_COLUMN_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">FIL_PROOFS_USE_GPU_TREE_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;0&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;20-23,36-39&quot;</span>
+  <span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_GPU_COLUMN_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">FIL_PROOFS_USE_GPU_TREE_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.c2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;28-35&quot;</span>
+  <span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;2,3&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.tree_d</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;40-45&quot;</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">提示</p> <p>您也可以参考社区<code>venus-cluster</code>性能测试的相关<a href="https://github.com/filecoin-project/venus/discussions/4866" target="_blank" rel="noopener noreferrer">技术文档<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，作为参考。</p></div> <p>使用启动<code>venus-worker</code>。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ /path/to/venus-worker daemon -c /path/to/venus-worker.toml
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">提示</p> <p>以上关于sector-manager.cfg和venus-worker.toml配置文件只是一份最简单的可运行配置，其他配置的详细信息可参<a href="/zh/cluster/">这些文档</a>。</p></div> <div class="custom-block tip"><p class="custom-block-title">提示</p> <p>关于配置文件需要注意的是：<code>venus-worker.toml</code>的<code>[[attached]]</code>中的<code>name = &quot;xxx&quot;</code> 和路径要与<code>sector-manager.cfg</code>中的<code>[[Common.PersistStores]] Name = &quot;xxx&quot;</code>和路径一致。</p></div> <h2 id="问题"><a href="#问题" class="header-anchor">#</a> 问题?</h2> <p>来<a href="https://filecoinproject.slack.com/archives/C028PCH8L31" target="_blank" rel="noopener noreferrer">Slack<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>上找我们吧！</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/filecoin-project/venus-docs/edit/master/docs/zh/cs/join-a-cs.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2022/6/1 16:42:28</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/zh/cs/deploy-a-cs.html" class="prev">
+        部署链服务
+      </a></span> <span class="next"><a href="/zh/cs/venus-run-in-docker.html">
+        使用Docker部署链服务
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.a401c72b.js" defer></script><script src="/assets/js/2.79d5dbf7.js" defer></script><script src="/assets/js/99.1b0f6866.js" defer></script>
+  </body>
+</html>

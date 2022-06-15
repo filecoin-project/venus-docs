@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Venus-集群最大化利用资源增长算力方案 | 启明星</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/venus-logo.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-SMSDTMGLTV"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SMSDTMGLTV');</script>
+    <meta name="description" content="GO语言实现的Filecoin分布式存储网络">
+    
+    <link rel="preload" href="/assets/css/0.styles.3e16e4d0.css" as="style"><link rel="preload" href="/assets/js/app.a401c72b.js" as="script"><link rel="preload" href="/assets/js/2.79d5dbf7.js" as="script"><link rel="preload" href="/assets/js/125.86660980.js" as="script"><link rel="prefetch" href="/assets/js/10.efd4fd00.js"><link rel="prefetch" href="/assets/js/100.b7ed5f08.js"><link rel="prefetch" href="/assets/js/101.f48426c2.js"><link rel="prefetch" href="/assets/js/102.12dcf098.js"><link rel="prefetch" href="/assets/js/103.aa4f7aba.js"><link rel="prefetch" href="/assets/js/104.0b2d5d0d.js"><link rel="prefetch" href="/assets/js/105.d16b6c26.js"><link rel="prefetch" href="/assets/js/106.e78c5cc5.js"><link rel="prefetch" href="/assets/js/107.e803e894.js"><link rel="prefetch" href="/assets/js/108.52f052e5.js"><link rel="prefetch" href="/assets/js/109.5f80a24e.js"><link rel="prefetch" href="/assets/js/11.1024c7fb.js"><link rel="prefetch" href="/assets/js/110.20033423.js"><link rel="prefetch" href="/assets/js/111.73ee066e.js"><link rel="prefetch" href="/assets/js/112.802b3efa.js"><link rel="prefetch" href="/assets/js/113.c40f6dfa.js"><link rel="prefetch" href="/assets/js/114.bee856b2.js"><link rel="prefetch" href="/assets/js/115.d21964f5.js"><link rel="prefetch" href="/assets/js/116.1ab8ef2d.js"><link rel="prefetch" href="/assets/js/117.48269041.js"><link rel="prefetch" href="/assets/js/118.b940e110.js"><link rel="prefetch" href="/assets/js/119.015e4294.js"><link rel="prefetch" href="/assets/js/12.57f72ff0.js"><link rel="prefetch" href="/assets/js/120.eb013c5d.js"><link rel="prefetch" href="/assets/js/121.81678139.js"><link rel="prefetch" href="/assets/js/122.dc5d39d0.js"><link rel="prefetch" href="/assets/js/123.ef807529.js"><link rel="prefetch" href="/assets/js/124.e910eb65.js"><link rel="prefetch" href="/assets/js/126.35d739fd.js"><link rel="prefetch" href="/assets/js/127.92bf5d76.js"><link rel="prefetch" href="/assets/js/128.df5af2f0.js"><link rel="prefetch" href="/assets/js/129.dfccfcc7.js"><link rel="prefetch" href="/assets/js/13.cfdd2e97.js"><link rel="prefetch" href="/assets/js/130.4a8c11b4.js"><link rel="prefetch" href="/assets/js/131.2a658666.js"><link rel="prefetch" href="/assets/js/132.5119f9d5.js"><link rel="prefetch" href="/assets/js/133.69620285.js"><link rel="prefetch" href="/assets/js/134.aef2a20d.js"><link rel="prefetch" href="/assets/js/135.27b50c00.js"><link rel="prefetch" href="/assets/js/136.dc06a954.js"><link rel="prefetch" href="/assets/js/14.fc99bfdc.js"><link rel="prefetch" href="/assets/js/15.fa7ede5c.js"><link rel="prefetch" href="/assets/js/16.ca801eaa.js"><link rel="prefetch" href="/assets/js/17.d6e677a4.js"><link rel="prefetch" href="/assets/js/18.e8545baa.js"><link rel="prefetch" href="/assets/js/19.47645763.js"><link rel="prefetch" href="/assets/js/20.39b2c9c4.js"><link rel="prefetch" href="/assets/js/21.b1288734.js"><link rel="prefetch" href="/assets/js/22.4090a796.js"><link rel="prefetch" href="/assets/js/23.0a67dbf2.js"><link rel="prefetch" href="/assets/js/24.f8948210.js"><link rel="prefetch" href="/assets/js/25.dd33de12.js"><link rel="prefetch" href="/assets/js/26.42c4b90e.js"><link rel="prefetch" href="/assets/js/27.8c00d5df.js"><link rel="prefetch" href="/assets/js/28.3204a758.js"><link rel="prefetch" href="/assets/js/29.0136d5fb.js"><link rel="prefetch" href="/assets/js/3.6df625ec.js"><link rel="prefetch" href="/assets/js/30.4624dd76.js"><link rel="prefetch" href="/assets/js/31.39c935cb.js"><link rel="prefetch" href="/assets/js/32.bae97709.js"><link rel="prefetch" href="/assets/js/33.4e84b4db.js"><link rel="prefetch" href="/assets/js/34.022a1859.js"><link rel="prefetch" href="/assets/js/35.6db35d27.js"><link rel="prefetch" href="/assets/js/36.3f33b9a0.js"><link rel="prefetch" href="/assets/js/37.969b3f13.js"><link rel="prefetch" href="/assets/js/38.a8fb163f.js"><link rel="prefetch" href="/assets/js/39.99d76196.js"><link rel="prefetch" href="/assets/js/4.f9f100a8.js"><link rel="prefetch" href="/assets/js/40.3fdc4c92.js"><link rel="prefetch" href="/assets/js/41.859e1b54.js"><link rel="prefetch" href="/assets/js/42.c3f6525f.js"><link rel="prefetch" href="/assets/js/43.6aa47b23.js"><link rel="prefetch" href="/assets/js/44.08c79258.js"><link rel="prefetch" href="/assets/js/45.ff123f9d.js"><link rel="prefetch" href="/assets/js/46.c02b7bae.js"><link rel="prefetch" href="/assets/js/47.685dd179.js"><link rel="prefetch" href="/assets/js/48.0110bb30.js"><link rel="prefetch" href="/assets/js/49.91708705.js"><link rel="prefetch" href="/assets/js/5.833a2dc9.js"><link rel="prefetch" href="/assets/js/50.18c8291a.js"><link rel="prefetch" href="/assets/js/51.dbacb565.js"><link rel="prefetch" href="/assets/js/52.602f7a39.js"><link rel="prefetch" href="/assets/js/53.f5fffa2b.js"><link rel="prefetch" href="/assets/js/54.6a77c33e.js"><link rel="prefetch" href="/assets/js/55.818e81e7.js"><link rel="prefetch" href="/assets/js/56.869804b8.js"><link rel="prefetch" href="/assets/js/57.f22044b1.js"><link rel="prefetch" href="/assets/js/58.275739db.js"><link rel="prefetch" href="/assets/js/59.1c8406b2.js"><link rel="prefetch" href="/assets/js/6.277ad0d9.js"><link rel="prefetch" href="/assets/js/60.95fff903.js"><link rel="prefetch" href="/assets/js/61.5d95fb2b.js"><link rel="prefetch" href="/assets/js/62.cc2841e1.js"><link rel="prefetch" href="/assets/js/63.fbc0fe62.js"><link rel="prefetch" href="/assets/js/64.da849664.js"><link rel="prefetch" href="/assets/js/65.b2137564.js"><link rel="prefetch" href="/assets/js/66.fd74d99f.js"><link rel="prefetch" href="/assets/js/67.bb07faf9.js"><link rel="prefetch" href="/assets/js/68.42537ae2.js"><link rel="prefetch" href="/assets/js/69.91feee4a.js"><link rel="prefetch" href="/assets/js/7.2bef234d.js"><link rel="prefetch" href="/assets/js/70.cd69abea.js"><link rel="prefetch" href="/assets/js/71.e649f446.js"><link rel="prefetch" href="/assets/js/72.e06f4190.js"><link rel="prefetch" href="/assets/js/73.9d4381c6.js"><link rel="prefetch" href="/assets/js/74.57fce68c.js"><link rel="prefetch" href="/assets/js/75.36ff0289.js"><link rel="prefetch" href="/assets/js/76.6a8352c8.js"><link rel="prefetch" href="/assets/js/77.047218b3.js"><link rel="prefetch" href="/assets/js/78.d1b0ddcc.js"><link rel="prefetch" href="/assets/js/79.283a24b6.js"><link rel="prefetch" href="/assets/js/8.69e3ff48.js"><link rel="prefetch" href="/assets/js/80.4e98639a.js"><link rel="prefetch" href="/assets/js/81.c0c939f0.js"><link rel="prefetch" href="/assets/js/82.322c0737.js"><link rel="prefetch" href="/assets/js/83.4d97be20.js"><link rel="prefetch" href="/assets/js/84.862c1bc6.js"><link rel="prefetch" href="/assets/js/85.9d085ac4.js"><link rel="prefetch" href="/assets/js/86.8f866286.js"><link rel="prefetch" href="/assets/js/87.ec5e4d60.js"><link rel="prefetch" href="/assets/js/88.51ec77ab.js"><link rel="prefetch" href="/assets/js/89.47e39d65.js"><link rel="prefetch" href="/assets/js/9.34948a42.js"><link rel="prefetch" href="/assets/js/90.f1fbf3fc.js"><link rel="prefetch" href="/assets/js/91.ba062de5.js"><link rel="prefetch" href="/assets/js/92.98c445e8.js"><link rel="prefetch" href="/assets/js/93.dec6326f.js"><link rel="prefetch" href="/assets/js/94.7639ebf6.js"><link rel="prefetch" href="/assets/js/95.7fd6ef43.js"><link rel="prefetch" href="/assets/js/96.dfab9392.js"><link rel="prefetch" href="/assets/js/97.da42dfd2.js"><link rel="prefetch" href="/assets/js/98.858f390a.js"><link rel="prefetch" href="/assets/js/99.1b0f6866.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3e16e4d0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/zh/" class="home-link router-link-active"><img src="/assets/venus-logo-title.svg" alt="启明星" class="logo"> <span class="site-name can-hide">启明星</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  启明星简介
+</a></div><div class="nav-item"><a href="/zh/cs/" class="nav-link">
+  链服务
+</a></div><div class="nav-item"><a href="/zh/cluster/" class="nav-link">
+  算力服务
+</a></div><div class="nav-item"><a href="/zh/market/" class="nav-link">
+  订单服务
+</a></div><div class="nav-item"><a href="/zh/modules/" class="nav-link">
+  组件
+</a></div><div class="nav-item"><a href="/zh/advanced/" class="nav-link">
+  进阶
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link router-link-active">
+  运维
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/operation/Efficiency_of_sealing.html" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/operation/Efficiency_of_sealing.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  启明星简介
+</a></div><div class="nav-item"><a href="/zh/cs/" class="nav-link">
+  链服务
+</a></div><div class="nav-item"><a href="/zh/cluster/" class="nav-link">
+  算力服务
+</a></div><div class="nav-item"><a href="/zh/market/" class="nav-link">
+  订单服务
+</a></div><div class="nav-item"><a href="/zh/modules/" class="nav-link">
+  组件
+</a></div><div class="nav-item"><a href="/zh/advanced/" class="nav-link">
+  进阶
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link router-link-active">
+  运维
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/operation/Efficiency_of_sealing.html" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/operation/Efficiency_of_sealing.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>运维实战</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/" aria-current="page" class="sidebar-link">Venus链服务高可用方案</a></li><li><a href="/zh/operation/example-single-box.html" class="sidebar-link">单矿机示例（depreciating）</a></li><li><a href="/zh/operation/Efficiency_of_sealing.html" aria-current="page" class="active sidebar-link">最大化利用资源提升密封扇区效率</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/operation/Efficiency_of_sealing.html#总体思路" class="sidebar-link">总体思路</a></li><li class="sidebar-sub-header"><a href="/zh/operation/Efficiency_of_sealing.html#任务耗时统计" class="sidebar-link">任务耗时统计</a></li><li class="sidebar-sub-header"><a href="/zh/operation/Efficiency_of_sealing.html#速率因子" class="sidebar-link">速率因子</a></li><li class="sidebar-sub-header"><a href="/zh/operation/Efficiency_of_sealing.html#worker运行方式和资源消耗" class="sidebar-link">worker运行方式和资源消耗</a></li><li class="sidebar-sub-header"><a href="/zh/operation/Efficiency_of_sealing.html#产量优化" class="sidebar-link">产量优化</a></li><li class="sidebar-sub-header"><a href="/zh/operation/Efficiency_of_sealing.html#损失和止损" class="sidebar-link">损失和止损</a></li></ul></li><li><a href="/zh/operation/System_monitor_of_Zabbix.html" class="sidebar-link">系统监控安装与使用之Zabbix</a></li><li><a href="/zh/operation/lotus-vs-venus.html" class="sidebar-link">Venus封装配置解释</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>网络/组件升级</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/Nv15_upgrade_guide.html" class="sidebar-link">nv15网络升级</a></li><li><a href="/zh/operation/migrate_market_v1_to_v2.html" class="sidebar-link">market_v2升级</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="venus-集群最大化利用资源增长算力方案"><a href="#venus-集群最大化利用资源增长算力方案" class="header-anchor">#</a> Venus-集群最大化利用资源增长算力方案</h1> <p>   在 Filecoin的网络中，算力大小至关重要，与矿工的收入息息相关。算力的增长与维持需要软硬件资源较多，每个扇区的密封需要P1、P2、C1，C2等
+诸多过程，并且每个过程所依赖的资源各不相同，如：P1偏向多核CPU，P4可用GPU优化等。故如何找出能最大化利用现有资源提升算力的方案是一个复杂的过程。这篇文章为如何找出最优方案提供一些思路。</p> <h2 id="总体思路"><a href="#总体思路" class="header-anchor">#</a> 总体思路</h2> <blockquote><p>本文方案是通过各个阶段的任务耗时来推算如何均衡的分配各阶段任务的机器数量占比</p></blockquote> <ul><li>根据实际场景，将所有加速配置都打开，做几个sector，统计每个阶段任务耗时。每个阶段对硬件资源的的依赖如下：
+<ul><li>P1：cpu及磁盘io</li></ul> <ul><li>P2：cpu，gpu，带宽及磁盘io</li> <li>C1-C2： cpu，gpu，带宽及磁盘io</li></ul></li></ul> <blockquote><p>这里多做几个是为了统计出较稳定的耗时，此阶段需保持加速设置及软硬件资源始终不变。</p></blockquote> <ul><li><p>维持任务数平衡，即每个机器都有任何时刻都有任务可做，理论上每个阶段任务数与耗时成反比；</p></li> <li><p>扇区任务由pledge命令控制，配合最大并发密封扇区数（MaxSealingSectors）管理集群中sector并发数量；</p></li> <li><p>每个worker可以指定可接受的任务类型。</p></li></ul> <h2 id="任务耗时统计"><a href="#任务耗时统计" class="header-anchor">#</a> 任务耗时统计</h2> <p>   worker可以领取的任务类型有：</p> <div class="language- extra-class"><pre class="language-text"><code>TTAddPiece   TaskType = &quot;seal/v0/addpiece&quot;
+TTPreCommit1 TaskType = &quot;seal/v0/precommit/1&quot;
+TTPreCommit2 TaskType = &quot;seal/v0/precommit/2&quot;
+TTCommit1    TaskType = &quot;seal/v0/commit/1&quot; // NOTE: We use this to transfer the sector into miner-local storage for now; Don't use on workers!
+TTCommit2    TaskType = &quot;seal/v0/commit/2&quot;
+
+TTFinalize TaskType = &quot;seal/v0/finalize&quot;
+
+TTFetch  TaskType = &quot;seal/v0/fetch&quot;
+TTUnseal TaskType = &quot;seal/v0/unseal&quot;
+
+</code></pre></div><p>   每个任务都分为两个阶段：prepare阶段和worker阶段，在日志中表现为：</p> <div class="language- extra-class"><pre class="language-text"><code># seal/v0/fetch
+2021-08-03T14:00:07.925+0800    INFO    advmgr  sector-storage/sched_worker.go:401      Sector 7 prepare for seal/v0/fetch ...
+2021-08-03T14:05:36.772+0800    INFO    advmgr  sector-storage/sched_worker.go:403      Sector 7 prepare for seal/v0/fetch end ...
+
+2021-08-03T14:05:36.772+0800    INFO    advmgr  sector-storage/sched_worker.go:442      Sector 7 work for seal/v0/fetch ...
+2021-08-03T14:05:36.774+0800    INFO    advmgr  sector-storage/sched_worker.go:444      Sector 7 work for seal/v0/fetch end ...
+
+# seal/v0/addpiece
+2021-08-03T13:38:37.977+0800    INFO    advmgr  sector-storage/sched_worker.go:401      Sector 8 prepare for seal/v0/addpiece ...
+2021-08-03T13:38:37.978+0800    INFO    advmgr  sector-storage/sched_worker.go:403      Sector 8 prepare for seal/v0/addpiece end ...
+
+2021-08-03T13:38:37.978+0800    INFO    advmgr  sector-storage/sched_worker.go:442      Sector 8 work for seal/v0/addpiece ...
+2021-08-03T13:44:26.295+0800    INFO    advmgr  sector-storage/sched_worker.go:444      Sector 8 work for seal/v0/addpiece end ...
+
+# seal/v0/commit/2
+2021-08-03T13:26:02.119+0800    INFO    advmgr  sector-storage/sched_worker.go:401      Sector 7 prepare for seal/v0/commit/2 ...
+2021-08-03T13:26:02.119+0800    INFO    advmgr  sector-storage/sched_worker.go:403      Sector 7 prepare for seal/v0/commit/2 end ...
+
+2021-08-03T13:26:02.119+0800    INFO    advmgr  sector-storage/sched_worker.go:442      Sector 7 work for seal/v0/commit/2 ...
+2021-08-03T13:49:46.180+0800    INFO    advmgr  sector-storage/sched_worker.go:444      Sector 7 work for seal/v0/commit/2 end ...
+
+# seal/v0/finalize
+2021-08-03T13:54:17.414+0800    INFO    advmgr  sector-storage/sched_worker.go:401      Sector 7 prepare for seal/v0/finalize ...
+2021-08-03T13:59:30.471+0800    INFO    advmgr  sector-storage/sched_worker.go:403      Sector 7 prepare for seal/v0/finalize end ...
+
+2021-08-03T13:59:30.471+0800    INFO    advmgr  sector-storage/sched_worker.go:442      Sector 7 work for seal/v0/finalize ...
+2021-08-03T14:00:07.915+0800    INFO    advmgr  sector-storage/sched_worker.go:444      Sector 7 work for seal/v0/finalize end ...
+
+</code></pre></div><p>   可以看出有些任务在prepare阶段比较耗时，有些在work阶段比较耗时，一般来说需要网路传输，带宽资源的在prepare比较耗时，如fetch，finalize等；而需要计算的任务在work阶段比较耗时，如AP，P1，P2，C2等。</p> <p>   为了便于计算，这里将任务阶段进行合并，主要分为：AP，P1，P2，C2阶段，将这四个阶段之前的仍无耗时统一归为相应阶段的耗时，如 T（P1）=P1耗时+P1前的fetch耗时。这里waitseed怎么归类，在后面的时间逻辑中有没有考虑进去</p> <h2 id="速率因子"><a href="#速率因子" class="header-anchor">#</a> 速率因子</h2> <h3 id="临时存储设备"><a href="#临时存储设备" class="header-anchor">#</a> 临时存储设备</h3> <p>  Filecoin 在封装算力是会产生一些临时文件，在任务的进行中存在很多随机存取，这就要求磁盘吞吐量不能太差，否则会导致磁盘IO过高，计算资源等待磁盘读取处于闲置状态。</p> <ul><li>如何挑选适合的设备</li></ul> <p>  如何寻找适合的设备，其实就是需要多少的磁盘吞吐量，可以通过一个简单的计算公式得到它。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>文件大小 * 线程并行数量 / 运行时间 <span class="token operator">=</span> 平均每秒钟传输速度
+  
+因为每个阶段的吞吐不同，拆分计算可以让得到的数据更精准
+  
+P1 读取 + P1 写入 <span class="token operator">=</span> P1 阶段所需的吞吐量，其他阶段相同，把所有阶段所需的吞吐加起来就得到了所需的吞吐量，当然需要一些性能上的冗余
+</code></pre></div><p>  通常情况下绝大多数的矿工都会使用SSD或者NVME，当有多块硬盘时我们可以通过<code>venus-worker storage attach --seal &lt;/path/&gt;</code>命令或者启动多个worker来设置多个路径，但这并不是一个比较好的方法，路径过于分散会导致后续的维护相对复杂，无法充分利用，通过创建raid方式可以获得更好的性能和空间利用率，并且便于后续的维护。</p> <ul><li>软raid创建</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">mdadm</span> -C /dev/md1 -l <span class="token number">0</span> -n <span class="token number">2</span> /dev/sdb1 /dev/sdc1
+<span class="token function">mdadm</span> -C /dev/md2 -l <span class="token number">5</span> -n <span class="token number">6</span> /dev/sd<span class="token punctuation">[</span>b-g<span class="token punctuation">]</span><span class="token number">1</span>
+-C $创建软件RAID
+-l $指定RAID级别  <span class="token number">1</span>表示raid1  其他同理  
+-n $指定磁盘个数
+-x $指定备用设备个数
+-A $重组之前的设备
+</code></pre></div><p>​	有关mdadm用法、MD和各种级别的RAID的更多信息，请参阅：http://raid.wiki.kernel.org/</p> <p>​	获取最新版本的mdadm应始终可以从如下链接获取：http://www.kernel.org/pub/linux/utils/raid/mdadm/</p> <p>​	硬raid创建时请查看您的raid卡型号和说明进行操作</p> <h3 id="永久存储设备"><a href="#永久存储设备" class="header-anchor">#</a> 永久存储设备</h3> <p>   永久存储设备的访问机制和可能遇到的问题：</p> <ol><li>在每个任务阶段产生的文件有些是要永久存储的，用于wdPoSt或winningPoSt，在每个sector完成阶段需要传输到永久存储目录，这个过程需要带宽资源，并且要保证磁盘io；</li> <li>wdPoSt大量的随机读取非常小的文件，这可能会导致读取过慢而影响时空证明导致算力惩罚；</li> <li>当存储过于集中时，少量的机器损坏会导致所有的数据丢失；</li> <li>当磁盘过多时，并且盘符没有固定，启动时可能导致盘符移动；</li> <li>如果是raid，尽量选择raid5或者raid6，raid10这种冗余性更高的方式；</li> <li>需要监控磁盘空间利用率并报警。</li></ol> <h3 id="网络传输"><a href="#网络传输" class="header-anchor">#</a> 网络传输</h3> <p>   网络传输会有两个部分：</p> <ul><li><p>临时数据的网络传输，某个阶段的任务需要上个阶段的数据时会用http协议请求所需文件，需要保证传输时间小于计算时间。</p> <p>举例：
+传输往往和计算是同步进行的</p> <p>传输时间 &gt; 计算时间 资源闲置，计算资源等待网络资源，拉长整个扇区封装的声明周期，就是降产</p> <p>传输时间 &lt; 计算时间 计算资源充分利用</p> <ul><li><p>观察计算资源是否出现闲置</p></li> <li><p>计算网络传输速度能否满足计算时间</p> <p>Precommit2如果计算耗时25分钟，读取 440G左右文件，写入100G左右文件<br>
+(440G * 1024 / 25 / 60) + (100G * 1024 / 25 / 60) = 单个线程所需的吞吐量</p></li> <li><p>多台机器同步阶段的文件传输</p> <p>我们有A，B，C 三个机器分别负责P1，P2，Commit</p> <p>当A机器开始P1时会向B机器的P2传输32G左右的Unsealed</p> <p>当B机器开始P2时，A机器的P1生成的440G左右所有文件会传输到B的机器上</p> <p>Commit又分为C1和C2.当C机器运行C1时需要P1和P2的所有文件，计算的结果通过内存直接传递给C2，所以并不会在落盘新的文件</p></li></ul></li> <li><p>最终数据传输，我们要知道当最终的存储也会成为我们的产量瓶颈（貌似和下面的不符合）</p> <ol><li><p>假设计算资源的产量是每天产出6T的算力，但如果存储的网络传输最大每天只能传输5T，那么这就会导致产量的下降</p></li> <li><p>如果我们使用了NFS这样的网络文件系统，当网络断开链接是，NFS往往是会直接卡死的，所以可能需要设置NFS的超时机制</p></li></ol></li></ul> <h3 id="worker的指令集加速"><a href="#worker的指令集加速" class="header-anchor">#</a> worker的指令集加速</h3> <p>   P1阶段时，使用SHA指令集和不使用指令集会有巨大的差距，目前大多数矿工都采用AMD型号的CPU原因就是SHA指令集的关系，研究发现，使用SHA指令集基本可以跑进250分钟以内，但不使用SHA指令集能够跑进420分钟已经非常艰难了</p> <div class="language- extra-class"><pre class="language-text"><code>确保编译时使用RUSTFLAGS=&quot;-C target-cpu=native -g&quot; FFI_BUILD_FROM_SOURCE=&quot;1&quot; 源码编译filecoin-ffi库，如果cpu支持则启用SHA扩展，这会大幅提高扇区封装速度，源码编译（make deps）时特征如下:
+
++ trap '{ rm -f $__build_output_log_tmp; }' EXIT
++ local '__rust_flags=--print native-static-libs -C target-feature=+sse2'
++ RUSTFLAGS='--print native-static-libs -C target-feature=+sse2'
++ cargo +nightly-2021-04-24 build --release --no-default-features --features multicore-sdr --features pairing,gpu
++ tee /tmp/tmp.IYtnd3xka9
+   Compiling autocfg v1.0.1
+   Compiling libc v0.2.97
+   Compiling cfg-if v1.0.0
+   Compiling proc-macro2 v1.0.27
+   Compiling unicode-xid v0.2.2
+   Compiling syn v1.0.73
+   Compiling lazy_static v1.4.0
+   Compiling cc v1.0.68
+   Compiling typenum v1.13.0
+   Compiling serde_derive v1.0.126
+   Compiling serde v1.0.126
+</code></pre></div><h3 id="核数限制"><a href="#核数限制" class="header-anchor">#</a> 核数限制</h3> <p>​	当想要把CPU的资源利用的更高时，需要非常合理的规划CPU的使用，比如有一个64核的CPU，我们要想PreCommit2和Commit分别分到32核，这样两种任务相互不受影响，也不会导致某一个占用大量的计算资源导致另一个卡住的情况，此时我们就需要利用到核数限制</p> <ul><li>通过<code>taskset</code>限核</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 当我们想要启动某个进程时，可以通过 taskset -c 0-31 这种方式来进行限核操作</span>
+<span class="token comment"># 例如</span>
+
+<span class="token assign-left variable">TRUST_PARAMS</span><span class="token operator">=</span><span class="token number">1</span> <span class="token function">nohup</span> taskset -c <span class="token number">0</span>-32 ./venus-worker run <span class="token punctuation">\</span>
+--miner-addr<span class="token operator">=</span><span class="token operator">&lt;</span>/ip4/sealer-ip/tcp/sealer-port<span class="token operator">&gt;</span> <span class="token punctuation">\</span>
+--miner-token<span class="token operator">=</span><span class="token operator">&lt;</span>token<span class="token operator">&gt;</span> <span class="token punctuation">\</span>  
+--listen<span class="token operator">=</span><span class="token operator">&lt;</span><span class="token number">0.0</span>.0.0:345<span class="token operator"><span class="token file-descriptor important">8</span>&gt;</span> <span class="token operator">&lt;</span>flags<span class="token operator">&gt;</span> <span class="token operator">&gt;&gt;</span> worker.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span class="token punctuation">\</span>
+
+<span class="token comment"># 扩展使用 taskset -c 0-9,19-29,39-49 进行跳跃式限核</span>
+</code></pre></div><p>这种方式的弊端就在于不方便在程序运行时对核数进行实时调整</p> <ul><li>通过Cgrep限核</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 好的目录划分会帮助对多个进程的管理</span>
+<span class="token function">sudo</span> <span class="token function">mkdir</span> -p /sys/fs/cgroup/cpuset/Pre1-worker
+
+<span class="token comment"># 设置能够使用的核数范围</span>
+<span class="token function">sudo</span> <span class="token builtin class-name">echo</span> <span class="token number">0</span>-31 <span class="token operator">&gt;</span> /sys/fs/cgroup/cpuset/Pre1-worker/cpuset.cpus
+
+<span class="token comment"># 加入进程的PID</span>
+<span class="token function">sudo</span> <span class="token builtin class-name">echo</span> <span class="token operator">&lt;</span>PID<span class="token operator">&gt;</span> <span class="token operator">&gt;</span> /sys/fs/cgroup/cpuset/Pre1-worker/cgroup.procs
+</code></pre></div><p>Cgrep是在进程启动之后加入到配置文件的，并且支持实时的修改核数限制，当然也可以尝试使用docker限核，但docker的限核也是通过Cgrep来实现，至于Cgrep其他的用法我们基本都用不到，就不一一说明了</p> <h2 id="worker运行方式和资源消耗"><a href="#worker运行方式和资源消耗" class="header-anchor">#</a> worker运行方式和资源消耗</h2> <h3 id="p1阶段"><a href="#p1阶段" class="header-anchor">#</a> P1阶段</h3> <ul><li>P1阶段的加速因子</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">export</span> <span class="token assign-left variable">FIL_PROOFS_MAXIMIZE_CACHING</span><span class="token operator">=</span><span class="token number">1</span>  <span class="token comment"># 控制cache文件缓存到内存中，起到加速作用，会占用56G内存</span>
+  
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">FIL_PROOFS_USE_MULTICORE_SDR</span><span class="token operator">=</span><span class="token number">1</span> <span class="token comment"># 控制P1阶段是否使用多核运行，他会占用单个CPU组，所以每个CPU缓存组只会运行一个任务</span>
+</code></pre></div><p><code>P1</code>阶段有两种选择，可以选择更快的速度或者更少的CPU，需要根据实际资源决定。</p> <ul><li>P1的内存资源消耗</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 内存中会存储56G的cache文件</span>
+<span class="token comment"># 加上2层layer文件，32G的矿工每层文件32G，64G每层文件64G</span>
+  
+<span class="token comment"># 以32G矿工为例，如果我们同时运行了10个任务</span>
+  
+56G cahce 文件 + <span class="token number">32</span> *2 * 并行线程数 <span class="token operator">=</span> 696G Mem
+</code></pre></div><ul><li>P1的磁盘资源消耗</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 11层layer文件 </span>
+  
+<span class="token comment"># 64G的tree-d文件</span>
+  
+<span class="token comment"># 32G的unsealed文件</span>
+  
+<span class="token number">11</span> * 32G + <span class="token number">64</span> + <span class="token number">32</span> <span class="token operator">=</span> 440G
+</code></pre></div><h3 id="p2阶段"><a href="#p2阶段" class="header-anchor">#</a> P2阶段</h3> <ul><li>P2的加速因子有两个</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">export</span> <span class="token assign-left variable">FIL_PROOFS_USE_GPU_COLUMN_BUILDER</span><span class="token operator">=</span><span class="token number">1</span>  <span class="token comment"># 使用GPU运算tree-r-last阶段</span>
+   
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">FIL_PROOFS_USE_GPU_TREE_BUILDER</span><span class="token operator">=</span><span class="token number">1</span> <span class="token comment"># 使用GPU运算tree-c阶段</span>
+   
+<span class="token comment"># 任何环境变量都不增加的情况下使用CPU运算</span>
+</code></pre></div><p>从实验结果来看使用GPU运算要明显比CPU快得多，而CPU运算时的核数，主频跟时间是成线性比例的，CPU核数越多速度越快，主频越高越快，反之亦然。</p> <ul><li>P2内存资源</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code>--precommit2   <span class="token builtin class-name">enable</span> precommit2 <span class="token punctuation">(</span>32G sectors: all cores, 96GiB Memory<span class="token punctuation">)</span> <span class="token punctuation">(</span>default: <span class="token boolean">true</span><span class="token punctuation">)</span>
+  
+<span class="token comment"># 在命令行中可以看到运行一个需要96GiB的内存，如果并行2个就是2倍</span>
+</code></pre></div><ul><li>P2的磁盘资源消耗</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 32G</span>
+<span class="token comment"># 8个tree-c文件，每个 4.6G左右</span>
+  
+<span class="token comment"># 8个tree-r-last,每个9.2M</span>
+  
+<span class="token comment"># t_aux，4K，p_aux，4K</span>
+
+<span class="token comment"># 32G的sealed文件</span>
+  
+----------------------
+<span class="token comment"># 64G</span>
+<span class="token comment"># 16个tree-c文件，每个 4.6G左右</span>
+  
+<span class="token comment"># 16个tree-r-last,每个9.2M</span>
+  
+<span class="token comment"># t_aux，4K，p_aux，4K</span>
+
+<span class="token comment"># 64G的sealed文件</span>
+</code></pre></div><h3 id="commit"><a href="#commit" class="header-anchor">#</a> Commit</h3> <ul><li>Commit中的C1的磁盘资源消耗</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># C1需要前面2个阶段产生的所有文件</span>
+
+P1 440G + P2 79G <span class="token operator">=</span> 519G 
+
+<span class="token comment"># 每个C1的任务需要消耗487G左右的空间</span>
+</code></pre></div><p>C1并没有太多的CPU消耗，并且时间极短</p> <ul><li>Commit中的C2的运行方式，CPU和GPU</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token assign-left variable">BELLMAN_NO_GPU</span><span class="token operator">=</span><span class="token number">1</span> <span class="token comment"># 禁用GPU</span>
+
+<span class="token assign-left variable">BELLMAN_CUSTOM_GPU</span><span class="token operator">=</span><span class="token string">&quot;GeForce RTX 3090:10496&quot;</span> 
+<span class="token comment"># 指定GPU的cuda核心数，当GPU型号比较冷门无法识别时可使用</span>
+</code></pre></div><ul><li>C2的内存资源消耗</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">enable</span> commit <span class="token punctuation">(</span>32G sectors: all cores or GPUs, 128GiB Memory + 64GiB swap<span class="token punctuation">)</span> <span class="token punctuation">(</span>default: <span class="token boolean">true</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 命令行中指出总共需要 128G + 64 G = 192G的内存</span>
+</code></pre></div><h2 id="产量优化"><a href="#产量优化" class="header-anchor">#</a> 产量优化</h2> <h3 id="产量的计算公式"><a href="#产量的计算公式" class="header-anchor">#</a> 产量的计算公式</h3> <p>  每个阶段的效率:</p> <div class="language- extra-class"><pre class="language-text"><code> 产出数量 / 时间 = 效率
+ 
+ # 得到效率之后，我们就可以很轻松的算出产量
+ 
+ 效率/h/个数 * 24h * 32G = 日产量
+</code></pre></div><p>例如我们有1台机器</p> <p>P1：240分钟</p> <p>P2：30分钟</p> <p>Commit：35分钟</p> <p>此时我们可以简单一个计算公式的表格</p> <table><thead><tr><th>运行阶段</th> <th>时间/m</th> <th>并行线程数</th> <th>效率/时间h/个数</th> <th>计算公式</th></tr></thead> <tbody><tr><td>P1</td> <td>240</td> <td>1</td> <td>0.25</td> <td>= 1 / (240 /60)</td></tr> <tr><td>P2</td> <td>30</td> <td>1</td> <td>2</td> <td>= 1 / (30 /60)</td></tr> <tr><td>Commit</td> <td>35</td> <td>1</td> <td>1.7142857143</td> <td>= 1 / (35 /60)</td></tr></tbody></table> <h4 id="如何找到每个阶段的最佳运行数量和配置"><a href="#如何找到每个阶段的最佳运行数量和配置" class="header-anchor">#</a> 如何找到每个阶段的最佳运行数量和配置</h4> <p>   从上面的表格中我们明显看出P1的效率明显不足，而此时P2和Commit机器必定会闲置，如何处理呢？产出的时间无法调整， 那么我们就可以调整并行的线程数，当然我们可以新增一些计算内存的公式来指导我们对内存的消耗</p> <table><thead><tr><th>运行阶段</th> <th>时间/m</th> <th>并行线程数</th> <th>效率/时间h/个数</th> <th>计算公式</th> <th>日产量/G</th> <th>公式</th> <th>mem/G</th></tr></thead> <tbody><tr><td>P1</td> <td>240</td> <td>7</td> <td>1.75</td> <td>= 7 / (240 /60)</td> <td>1344</td> <td>=7*64+56</td> <td>504</td></tr> <tr><td>P2</td> <td>30</td> <td>1</td> <td>2</td> <td>= 1 / (30 /60)</td> <td>1536</td> <td>=1*96</td> <td>96</td></tr> <tr><td>Commit</td> <td>35</td> <td>1</td> <td>1.7142857143</td> <td>= 1 / (35 /60)</td> <td>1316.571429</td> <td>=1*128+64</td> <td>192</td></tr></tbody></table> <p>现在三个阶段的效率已经非常接近了，但是此时我们仍然存在一些问题：</p> <ol><li>Commit效率低于P1，这会导致大量的任务阻塞到Commit阶段</li> <li>当某个阶段的效率过高时就会出现闲置</li> <li>我们需要微调资源的分布来尽可能的保证每个阶段的效率无限相等</li></ol> <h4 id="集群方案运行的的可能性"><a href="#集群方案运行的的可能性" class="header-anchor">#</a> 集群方案运行的的可能性</h4> <p>​		当我们有多台机器时，我们就要决定某些机器运行哪些阶段，在这之前我们再来看下不同阶段的特性：</p> <ol><li>P1 : 极度消耗内存，可以单核，多核，并行运行，临时存储需要伴随着并行数量的增多而增多</li> <li>P2 : 轻度消耗内存，CPU，GPU都可以运行，如果拆分，需要传输大量的文件</li> <li>Commit: 中度消耗内存，CPU，GPU都可以运行，如果拆分，需要传输所有临时文件</li></ol> <p>如果我们此时只考虑这些因素，那么我们的组合方式有多少种呢？而这些不同的组合方式一定会带来不通的产量，虽然每个矿工的机器都有所不同，但我们的目标是一样的：</p> <ol><li>更高的产量组合运行方式</li> <li>各个阶段更加均衡的分布</li></ol> <p>我们可能无法做到完美，但无限接近也是最好的结果</p> <h4 id="如何寻找最佳的下发任务数-始终保持机器满负荷运行"><a href="#如何寻找最佳的下发任务数-始终保持机器满负荷运行" class="header-anchor">#</a> 如何寻找最佳的下发任务数，始终保持机器满负荷运行</h4> <p>  当我们找到最佳的组合方式之后我们需要考虑的就是如何才能保证这些机器24小时都是不间断运行的呢？我们不希望任何一个阶段的出现闲置</p> <p>当我们发现P1需要并行7个时，那么我们如果保证P1的任务量是充足的，那么后续的两个阶段在不考虑其他问题的情况下，也一定是充足的，所以我们需要保证始终维持P1时刻都有7个任务</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token comment"># 在venus-sealer的配置文件中我们可以设置最大的任务数，这可以帮我我们避免任务数下发过多</span>
+
+<span class="token key property">DataDir</span> <span class="token punctuation">=</span> <span class="token string">&quot;~/.venussealer&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">API</span><span class="token punctuation">]</span>
+  <span class="token key property">ListenAddress</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/0.0.0.0/tcp/2345/http&quot;</span>
+  <span class="token key property">RemoteListenAddress</span> <span class="token punctuation">=</span> <span class="token string">&quot;192.168.200.6:2345&quot;</span>
+  <span class="token key property">Timeout</span> <span class="token punctuation">=</span> <span class="token string">&quot;30s&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Sealing</span><span class="token punctuation">]</span>
+  <span class="token key property">MaxWaitDealsSectors</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+  <span class="token key property">MaxSealingSectors</span> <span class="token punctuation">=</span> <span class="token number">7</span>    <span class="token comment"># 修改为 7</span>
+  <span class="token key property">MaxSealingSectorsForDeals</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+</code></pre></div><p>此时我们可以通过一个简单的定时脚本就可以做到，始终维持最佳的任务量了</p> <h2 id="损失和止损"><a href="#损失和止损" class="header-anchor">#</a> 损失和止损</h2> <p>  如果一个任务执行错误之后又被反复的重试，这就像我们有7个通道进行算力的封装，但是此时有一通道阻塞或者损坏，这就会降低我们 1 / 7 的产量，所以及时的处理错误也是非常重要的</p> <ul><li><p>何种情况下应该立刻抛弃任务</p> <ol><li>ticket过期</li> <li>Commit过期</li> <li>依赖文件损坏重试多次都未成功时;</li></ol></li> <li><p>移除无法完成的sector</p></li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code>venus-sealer sectors remove --really-do-it <span class="token operator">&lt;</span>sectorNum<span class="token operator">&gt;</span>
+</code></pre></div><p>如遇到无法彻底删除请查询：<a href="https://github.com/filguard/lotus-ops/blob/master/documents/questions.md#1-%E9%A1%BD%E5%9B%BA%E6%89%87%E5%8C%BA%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4" target="_blank" rel="noopener noreferrer">顽固扇区如何删除<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/filecoin-project/venus-docs/edit/master/docs/zh/operation/Efficiency_of_sealing.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2021/8/10 14:49:47</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/zh/operation/example-single-box.html" class="prev">
+        单矿机示例（depreciating）
+      </a></span> <span class="next"><a href="/zh/operation/System_monitor_of_Zabbix.html">
+        系统监控安装与使用之Zabbix
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.a401c72b.js" defer></script><script src="/assets/js/2.79d5dbf7.js" defer></script><script src="/assets/js/125.86660980.js" defer></script>
+  </body>
+</html>

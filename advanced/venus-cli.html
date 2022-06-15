@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CLI Commands | Venus Filecoin</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/venus-logo.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-SMSDTMGLTV"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SMSDTMGLTV');</script>
+    <meta name="description" content="Venus is a Go implementation of the Filecoin Distributed Storage Network.">
+    
+    <link rel="preload" href="/assets/css/0.styles.3e16e4d0.css" as="style"><link rel="preload" href="/assets/js/app.a401c72b.js" as="script"><link rel="preload" href="/assets/js/2.79d5dbf7.js" as="script"><link rel="preload" href="/assets/js/35.6db35d27.js" as="script"><link rel="prefetch" href="/assets/js/10.efd4fd00.js"><link rel="prefetch" href="/assets/js/100.b7ed5f08.js"><link rel="prefetch" href="/assets/js/101.f48426c2.js"><link rel="prefetch" href="/assets/js/102.12dcf098.js"><link rel="prefetch" href="/assets/js/103.aa4f7aba.js"><link rel="prefetch" href="/assets/js/104.0b2d5d0d.js"><link rel="prefetch" href="/assets/js/105.d16b6c26.js"><link rel="prefetch" href="/assets/js/106.e78c5cc5.js"><link rel="prefetch" href="/assets/js/107.e803e894.js"><link rel="prefetch" href="/assets/js/108.52f052e5.js"><link rel="prefetch" href="/assets/js/109.5f80a24e.js"><link rel="prefetch" href="/assets/js/11.1024c7fb.js"><link rel="prefetch" href="/assets/js/110.20033423.js"><link rel="prefetch" href="/assets/js/111.73ee066e.js"><link rel="prefetch" href="/assets/js/112.802b3efa.js"><link rel="prefetch" href="/assets/js/113.c40f6dfa.js"><link rel="prefetch" href="/assets/js/114.bee856b2.js"><link rel="prefetch" href="/assets/js/115.d21964f5.js"><link rel="prefetch" href="/assets/js/116.1ab8ef2d.js"><link rel="prefetch" href="/assets/js/117.48269041.js"><link rel="prefetch" href="/assets/js/118.b940e110.js"><link rel="prefetch" href="/assets/js/119.015e4294.js"><link rel="prefetch" href="/assets/js/12.57f72ff0.js"><link rel="prefetch" href="/assets/js/120.eb013c5d.js"><link rel="prefetch" href="/assets/js/121.81678139.js"><link rel="prefetch" href="/assets/js/122.dc5d39d0.js"><link rel="prefetch" href="/assets/js/123.ef807529.js"><link rel="prefetch" href="/assets/js/124.e910eb65.js"><link rel="prefetch" href="/assets/js/125.86660980.js"><link rel="prefetch" href="/assets/js/126.35d739fd.js"><link rel="prefetch" href="/assets/js/127.92bf5d76.js"><link rel="prefetch" href="/assets/js/128.df5af2f0.js"><link rel="prefetch" href="/assets/js/129.dfccfcc7.js"><link rel="prefetch" href="/assets/js/13.cfdd2e97.js"><link rel="prefetch" href="/assets/js/130.4a8c11b4.js"><link rel="prefetch" href="/assets/js/131.2a658666.js"><link rel="prefetch" href="/assets/js/132.5119f9d5.js"><link rel="prefetch" href="/assets/js/133.69620285.js"><link rel="prefetch" href="/assets/js/134.aef2a20d.js"><link rel="prefetch" href="/assets/js/135.27b50c00.js"><link rel="prefetch" href="/assets/js/136.dc06a954.js"><link rel="prefetch" href="/assets/js/14.fc99bfdc.js"><link rel="prefetch" href="/assets/js/15.fa7ede5c.js"><link rel="prefetch" href="/assets/js/16.ca801eaa.js"><link rel="prefetch" href="/assets/js/17.d6e677a4.js"><link rel="prefetch" href="/assets/js/18.e8545baa.js"><link rel="prefetch" href="/assets/js/19.47645763.js"><link rel="prefetch" href="/assets/js/20.39b2c9c4.js"><link rel="prefetch" href="/assets/js/21.b1288734.js"><link rel="prefetch" href="/assets/js/22.4090a796.js"><link rel="prefetch" href="/assets/js/23.0a67dbf2.js"><link rel="prefetch" href="/assets/js/24.f8948210.js"><link rel="prefetch" href="/assets/js/25.dd33de12.js"><link rel="prefetch" href="/assets/js/26.42c4b90e.js"><link rel="prefetch" href="/assets/js/27.8c00d5df.js"><link rel="prefetch" href="/assets/js/28.3204a758.js"><link rel="prefetch" href="/assets/js/29.0136d5fb.js"><link rel="prefetch" href="/assets/js/3.6df625ec.js"><link rel="prefetch" href="/assets/js/30.4624dd76.js"><link rel="prefetch" href="/assets/js/31.39c935cb.js"><link rel="prefetch" href="/assets/js/32.bae97709.js"><link rel="prefetch" href="/assets/js/33.4e84b4db.js"><link rel="prefetch" href="/assets/js/34.022a1859.js"><link rel="prefetch" href="/assets/js/36.3f33b9a0.js"><link rel="prefetch" href="/assets/js/37.969b3f13.js"><link rel="prefetch" href="/assets/js/38.a8fb163f.js"><link rel="prefetch" href="/assets/js/39.99d76196.js"><link rel="prefetch" href="/assets/js/4.f9f100a8.js"><link rel="prefetch" href="/assets/js/40.3fdc4c92.js"><link rel="prefetch" href="/assets/js/41.859e1b54.js"><link rel="prefetch" href="/assets/js/42.c3f6525f.js"><link rel="prefetch" href="/assets/js/43.6aa47b23.js"><link rel="prefetch" href="/assets/js/44.08c79258.js"><link rel="prefetch" href="/assets/js/45.ff123f9d.js"><link rel="prefetch" href="/assets/js/46.c02b7bae.js"><link rel="prefetch" href="/assets/js/47.685dd179.js"><link rel="prefetch" href="/assets/js/48.0110bb30.js"><link rel="prefetch" href="/assets/js/49.91708705.js"><link rel="prefetch" href="/assets/js/5.833a2dc9.js"><link rel="prefetch" href="/assets/js/50.18c8291a.js"><link rel="prefetch" href="/assets/js/51.dbacb565.js"><link rel="prefetch" href="/assets/js/52.602f7a39.js"><link rel="prefetch" href="/assets/js/53.f5fffa2b.js"><link rel="prefetch" href="/assets/js/54.6a77c33e.js"><link rel="prefetch" href="/assets/js/55.818e81e7.js"><link rel="prefetch" href="/assets/js/56.869804b8.js"><link rel="prefetch" href="/assets/js/57.f22044b1.js"><link rel="prefetch" href="/assets/js/58.275739db.js"><link rel="prefetch" href="/assets/js/59.1c8406b2.js"><link rel="prefetch" href="/assets/js/6.277ad0d9.js"><link rel="prefetch" href="/assets/js/60.95fff903.js"><link rel="prefetch" href="/assets/js/61.5d95fb2b.js"><link rel="prefetch" href="/assets/js/62.cc2841e1.js"><link rel="prefetch" href="/assets/js/63.fbc0fe62.js"><link rel="prefetch" href="/assets/js/64.da849664.js"><link rel="prefetch" href="/assets/js/65.b2137564.js"><link rel="prefetch" href="/assets/js/66.fd74d99f.js"><link rel="prefetch" href="/assets/js/67.bb07faf9.js"><link rel="prefetch" href="/assets/js/68.42537ae2.js"><link rel="prefetch" href="/assets/js/69.91feee4a.js"><link rel="prefetch" href="/assets/js/7.2bef234d.js"><link rel="prefetch" href="/assets/js/70.cd69abea.js"><link rel="prefetch" href="/assets/js/71.e649f446.js"><link rel="prefetch" href="/assets/js/72.e06f4190.js"><link rel="prefetch" href="/assets/js/73.9d4381c6.js"><link rel="prefetch" href="/assets/js/74.57fce68c.js"><link rel="prefetch" href="/assets/js/75.36ff0289.js"><link rel="prefetch" href="/assets/js/76.6a8352c8.js"><link rel="prefetch" href="/assets/js/77.047218b3.js"><link rel="prefetch" href="/assets/js/78.d1b0ddcc.js"><link rel="prefetch" href="/assets/js/79.283a24b6.js"><link rel="prefetch" href="/assets/js/8.69e3ff48.js"><link rel="prefetch" href="/assets/js/80.4e98639a.js"><link rel="prefetch" href="/assets/js/81.c0c939f0.js"><link rel="prefetch" href="/assets/js/82.322c0737.js"><link rel="prefetch" href="/assets/js/83.4d97be20.js"><link rel="prefetch" href="/assets/js/84.862c1bc6.js"><link rel="prefetch" href="/assets/js/85.9d085ac4.js"><link rel="prefetch" href="/assets/js/86.8f866286.js"><link rel="prefetch" href="/assets/js/87.ec5e4d60.js"><link rel="prefetch" href="/assets/js/88.51ec77ab.js"><link rel="prefetch" href="/assets/js/89.47e39d65.js"><link rel="prefetch" href="/assets/js/9.34948a42.js"><link rel="prefetch" href="/assets/js/90.f1fbf3fc.js"><link rel="prefetch" href="/assets/js/91.ba062de5.js"><link rel="prefetch" href="/assets/js/92.98c445e8.js"><link rel="prefetch" href="/assets/js/93.dec6326f.js"><link rel="prefetch" href="/assets/js/94.7639ebf6.js"><link rel="prefetch" href="/assets/js/95.7fd6ef43.js"><link rel="prefetch" href="/assets/js/96.dfab9392.js"><link rel="prefetch" href="/assets/js/97.da42dfd2.js"><link rel="prefetch" href="/assets/js/98.858f390a.js"><link rel="prefetch" href="/assets/js/99.1b0f6866.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3e16e4d0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/assets/venus-logo-title.svg" alt="Venus Filecoin" class="logo"> <span class="site-name can-hide">Venus Filecoin</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  Chain Service
+</a></div><div class="nav-item"><a href="/cluster/" class="nav-link">
+  Power Service
+</a></div><div class="nav-item"><a href="/market/" class="nav-link">
+  Deal Service
+</a></div><div class="nav-item"><a href="/modules/" class="nav-link">
+  Components
+</a></div><div class="nav-item"><a href="/advanced/" class="nav-link router-link-active">
+  Advanced
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  Operation
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/advanced/venus-cli.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/advanced/venus-cli.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  Chain Service
+</a></div><div class="nav-item"><a href="/cluster/" class="nav-link">
+  Power Service
+</a></div><div class="nav-item"><a href="/market/" class="nav-link">
+  Deal Service
+</a></div><div class="nav-item"><a href="/modules/" class="nav-link">
+  Components
+</a></div><div class="nav-item"><a href="/advanced/" class="nav-link router-link-active">
+  Advanced
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  Operation
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/advanced/venus-cli.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/advanced/venus-cli.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Advanced Practice</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/advanced/" aria-current="page" class="sidebar-link">Withdraw Rewards</a></li><li><a href="/advanced/Chain.html" class="sidebar-link">Chain Management</a></li><li><a href="/advanced/venus-cli.html" aria-current="page" class="active sidebar-link">Venus CLI Commands</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/advanced/venus-cli.html#query-chain-status" class="sidebar-link">Query chain status</a></li><li class="sidebar-sub-header"><a href="/advanced/venus-cli.html#wallet-command" class="sidebar-link">Wallet command</a></li><li class="sidebar-sub-header"><a href="/advanced/venus-cli.html#sync-commnad" class="sidebar-link">Sync commnad</a></li><li class="sidebar-sub-header"><a href="/advanced/venus-cli.html#network-command" class="sidebar-link">Network command</a></li><li class="sidebar-sub-header"><a href="/advanced/venus-cli.html#query-state-of-actor" class="sidebar-link">Query state of actor</a></li></ul></li><li><a href="/advanced/venus_load_balancing.html" class="sidebar-link">Simple Load Balancing</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Local Dev Env</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/advanced/How-To-Setup_2knet.html" class="sidebar-link">How to start a local dev network</a></li><li><a href="/advanced/How-To-Connect-Network.html" class="sidebar-link">Connect to different network</a></li><li><a href="/advanced/Multisig-wallet.html" class="sidebar-link">Multisig wallet</a></li><li><a href="/advanced/Payment-Channel.html" class="sidebar-link">Payment channel</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="cli-commands"><a href="#cli-commands" class="header-anchor">#</a> CLI Commands</h1> <p>For a complete list of available commands, simply run <code>venus --help</code> in your terminal.</p> <div class="language- extra-class"><pre class="language-text"><code>  START RUNNING FILECOIN
+    venus daemon                 - Start a long-running daemon process
+    venus wallet                 - Manage your filecoin wallets
+    venus msig                   - Interact with a multisig wallet
+  
+  VIEW DATA STRUCTURES
+    venus chain                  - Inspect the filecoin blockchain
+    venus sync                   - Inspect the filecoin Sync
+    venus dag                    - Interact with IPLD DAG objects
+    venus show                   - Get human-readable representations of filecoin objects
+  
+  NETWORK COMMANDS
+    venus swarm                  - Interact with the swarm
+    venus drand                  - retrieve drand randomness
+  
+  MESSAGE COMMANDS
+    venus send                   - Send message
+    venus mpool                  - Manage the message pool
+  
+  State COMMANDS
+    venus state wait-msg               - Wait for a message to appear on chain
+    venus state search-msg             - Search to see whether a message has appeared on chain
+    venus state power                  - Query network or miner power
+    venus state sectors                - Query the sector set of a miner
+    venus state active-sectors         - Query the active sector set of a miner
+    venus state sector                 - Get miner sector info
+    venus state get-actor              - Print actor information
+    venus state lookup                 - Find corresponding ID address
+    venus state sector-size            - Look up miners sector size
+    venus state get-deal               - View on-chain deal info
+    venus state miner-info             - Retrieve miner information
+    venus state network-version        - MReturns the network version
+    venus state list-actor             - list all actors
+  
+  Paych COMMANDS 
+    venus paych                  - Manage payment channels
+  
+  TOOL COMMANDS
+    venus inspect                - Show info about the venus node
+    venus leb128                 - Leb128 cli encode/decode
+    venus log                    - Interact with the daemon event log output
+    venus protocol               - Show protocol parameter details
+    venus version                - Show venus version information
+    venus seed                   - Seal sectors for genesis miner
+    venus fetch                  - Fetch proving parameters
+</code></pre></div><h1 id="common-commands"><a href="#common-commands" class="header-anchor">#</a> Common commands</h1> <h1 id="start-a-mainnet-node"><a href="#start-a-mainnet-node" class="header-anchor">#</a> Start a mainnet node</h1> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus daemon
+</code></pre></div><h2 id="query-chain-status"><a href="#query-chain-status" class="header-anchor">#</a> Query chain status</h2> <ol><li>get current head tipset</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus chain <span class="token function">head</span>
+
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;Height&quot;</span><span class="token builtin class-name">:</span> <span class="token number">449124</span>,
+    <span class="token string">&quot;ParentWeight&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;9725370313&quot;</span>,
+    <span class="token string">&quot;Cids&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                    <span class="token string">&quot;/&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafy2bzacectt2udhaow37r53dfpnq6o3edvf5iswbpk77bcfiuce4xn5zkc3g&quot;</span>
+            <span class="token punctuation">}</span>,
+            <span class="token punctuation">{</span>
+                    <span class="token string">&quot;/&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafy2bzacebjintkddt24xdqvma3xwqurp6bahdhqxvwc54kqvuxbi3tiy2rig&quot;</span>
+            <span class="token punctuation">}</span>,
+            <span class="token punctuation">{</span>
+                    <span class="token string">&quot;/&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafy2bzaceczumkmzgjfasc4cpb2cqkhhv5eqgf2ikzgwgmw5554bgguivykf6&quot;</span>
+            <span class="token punctuation">}</span>,
+            <span class="token punctuation">{</span>
+                    <span class="token string">&quot;/&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafy2bzacebd5jt744qsoi5pieisxme2xtmdgmlylma2wgbbu2vmrp3bjlflq2&quot;</span>
+            <span class="token punctuation">}</span>,
+            <span class="token punctuation">{</span>
+                    <span class="token string">&quot;/&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafy2bzacedl3fvcvybsukh4odytkz2fxemrr2rln7t75oqj2wkj7yg2vohl3g&quot;</span>
+            <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>,
+    <span class="token string">&quot;Timestamp&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;2021-01-28 04:42:00&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="2"><li>list recent tipset</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus chain <span class="token function">ls</span>
+<span class="token punctuation">[</span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>.
+    <span class="token punctuation">{</span>
+            <span class="token string">&quot;Height&quot;</span><span class="token builtin class-name">:</span> <span class="token number">449115</span>,
+            <span class="token string">&quot;Timestamp&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;2021-01-28 04:37:30&quot;</span>,
+            <span class="token string">&quot;Blocks&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                            <span class="token string">&quot;Cid&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+                                    <span class="token string">&quot;/&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafy2bzaceb2xn4hnnovksfeqjrig44bgxow5ixuymlo75nnftjad2mufzzjjw&quot;</span>
+                            <span class="token punctuation">}</span>,
+                            <span class="token string">&quot;Miner&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t0112667&quot;</span>
+                    <span class="token punctuation">}</span>,
+                    <span class="token punctuation">{</span>
+                            <span class="token string">&quot;Cid&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+                                    <span class="token string">&quot;/&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafy2bzacecoswf32ayvdhotbp3pcgabq6q34c5czqscugb5lfcig26igbkem2&quot;</span>
+                            <span class="token punctuation">}</span>,
+                            <span class="token string">&quot;Miner&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t030347&quot;</span>
+                    <span class="token punctuation">}</span>,
+                    <span class="token punctuation">{</span>
+                            <span class="token string">&quot;Cid&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+                                    <span class="token string">&quot;/&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafy2bzacedo3xucwhpz3ndralqbrgzmbzxvkj23btp46tppby2vadyovvtux6&quot;</span>
+                            <span class="token punctuation">}</span>,
+                            <span class="token string">&quot;Miner&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t03176&quot;</span>
+                    <span class="token punctuation">}</span>,
+                    <span class="token punctuation">{</span>
+                            <span class="token string">&quot;Cid&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+                                    <span class="token string">&quot;/&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafy2bzacecrnceor3dj3zixrizqkgcivxrevy7jkzh5wolgp7kok7cimcsoyu&quot;</span>
+                            <span class="token punctuation">}</span>,
+                            <span class="token string">&quot;Miner&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t089228&quot;</span>
+                    <span class="token punctuation">}</span>,
+                    <span class="token punctuation">{</span>
+                            <span class="token string">&quot;Cid&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+                                    <span class="token string">&quot;/&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafy2bzaceas2qb642iagyc2konpf3bdykw7kryv245dvsmuboikanj35ymes4&quot;</span>
+                            <span class="token punctuation">}</span>,
+                            <span class="token string">&quot;Miner&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t023152&quot;</span>
+                    <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><ol start="3"><li>set tipset head</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code> ./venus chain set-head bafy2bzaceckeg7onfhua5jf4xrnrzt2erix5pibjov2r4vvdhcih6oql7vm24 bafy2bzacedt74pgv2rk7iddptz2nz4kfcsoccqnrb4q7mbluof6puw5iccqms
+</code></pre></div><h2 id="wallet-command"><a href="#wallet-command" class="header-anchor">#</a> Wallet command</h2> <ol><li>create address</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus wallet new
+</code></pre></div><ol start="2"><li>list address</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus wallet <span class="token function">ls</span>
+
+Address                                                                                 Balance                     Nonce  Default  
+f1nixbb3trp2mujzf5z7mguidthwo4levnldy4s4a                                               <span class="token number">0</span> FIL                       <span class="token number">0</span>               
+f1ytd5blzi3y2nsupqzye6ogpaphow3lljii3zkdi                                               <span class="token number">0</span> FIL                       <span class="token number">0</span>               
+f3qmxlwlzmvvn6vwo73jhuzjufmo65lrdwecxcmd7poyv5yex5hqngvo26sqjzzdge4vj3yxmwn5x24igremna  <span class="token number">0</span> FIL                       <span class="token number">0</span>      X        
+f3rjuxqnsjk7wuuzf3rqwsfxpbmqp23dn6ik5vyow2ntw5sgdxyijh7cfbujbmwtzdpii6ikunumez55jcxbbq  <span class="token number">0</span> FIL                       <span class="token number">0</span>           
+</code></pre></div><ol start="3"><li>set default address</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus wallet set-default f3qmxlwlzmvvn6vwo73jhuzjufmo65lrdwecxcmd7poyv5yex5hqngvo26sqjzzdge4vj3yxmwn5x24igremna
+</code></pre></div><ol start="4"><li>get default address</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus wallet default
+</code></pre></div><ol start="5"><li>export/import address,compatible with the lotus private key format</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus wallet <span class="token function">import</span>
+./venus wallet <span class="token builtin class-name">export</span> <span class="token operator">&lt;</span>password<span class="token operator">&gt;</span>
+</code></pre></div><ol start="6"><li>query balance of address</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus wallet balance f3rjuxqnsjk7wuuzf3rqwsfxpbmqp23dn6ik5vyow2ntw5sgdxyijh7cfbujbmwtzdpii6ikunumez55jcxbbq
+<span class="token number">0</span> FIL
+</code></pre></div><ol start="7"><li>set wallet password</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus wallet set-password <span class="token operator">&lt;</span>password<span class="token operator">&gt;</span>
+</code></pre></div><ol start="8"><li>lock and unlock wallet</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus wallet lock <span class="token operator">&lt;</span>password<span class="token operator">&gt;</span>
+./venus wallet unlock <span class="token operator">&lt;</span>password<span class="token operator">&gt;</span>
+</code></pre></div><h2 id="sync-commnad"><a href="#sync-commnad" class="header-anchor">#</a> Sync commnad</h2> <ol><li>query sync status</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus <span class="token function">sync</span> status
+
+Syncing:
+SyncTarget: <span class="token number">1</span>
+        Base: <span class="token number">450231</span> <span class="token punctuation">{</span> bafy2bzaceby6aq4obp5pjgjsxtyneqgsrcou4tgx2rsgqptoxgb4pyxh4asae bafy2bzacebancasvojeszwqnfvexlmn52vgcq7ns45nnwzixr67dzsel2kolu bafy2bzaced37mxrstmq2ij4x3szso446fodutq4jaarns6n2vdijeem2k44be bafy2bzacebtxektwn3mndyhpwnj6rkhnf6mfnfa2fyds4jv2xxb3nukuy26d6 bafy2bzacedmjrn42yzfl4yzuzn66ir33exrjxotahtets7btjfm4x36rdcsgu <span class="token punctuation">}</span>
+        Target: <span class="token number">450239</span> <span class="token punctuation">{</span> bafy2bzaceb6ulfdjeak6uaxrsd62jobtuilee4wkk3bj5ta4qfi7ll52tbyrm bafy2bzacebkbsyo2hp4qgrsfgzjz5qvyrgfz6n6nsq6kfxvw7s4s66yfynpwi <span class="token punctuation">}</span>
+        Current: <span class="token number">450232</span> <span class="token punctuation">{</span> bafy2bzacedwjdxb5jx5wo4zwg7emwfhbw34bvs3hvo362r3um25nisdakrl7g bafy2bzaced4jq6hx56o4symynuwqhlhf4kzo3qdqofeilizzflejvgjjr2bmq <span class="token punctuation">}</span>
+        Status: syncing
+        Err: <span class="token operator">&lt;</span>nil<span class="token operator">&gt;</span>
+
+SyncTarget: <span class="token number">2</span>
+        Base: <span class="token number">450231</span> <span class="token punctuation">{</span> bafy2bzaceby6aq4obp5pjgjsxtyneqgsrcou4tgx2rsgqptoxgb4pyxh4asae bafy2bzacebancasvojeszwqnfvexlmn52vgcq7ns45nnwzixr67dzsel2kolu bafy2bzaced37mxrstmq2ij4x3szso446fodutq4jaarns6n2vdijeem2k44be bafy2bzacebtxektwn3mndyhpwnj6rkhnf6mfnfa2fyds4jv2xxb3nukuy26d6 bafy2bzacedmjrn42yzfl4yzuzn66ir33exrjxotahtets7btjfm4x36rdcsgu <span class="token punctuation">}</span>
+        Target: <span class="token number">450238</span> <span class="token punctuation">{</span> bafy2bzacebtf2l5y34acbfnie6ilvvhxj5gyrnknnygintqzqkoxcsnmmuado bafy2bzacedswqjogt57cf7q22ebbrnbw3qygxd6q3z6vhm74b6tyzqjlrvox4 bafy2bzacecrv2kxpvuocgrtfjlot3da57655zbvrcu2reuospak3vdxa3u7v2 bafy2bzacecahv6twxmeihivncobqadfm7xyh3gvnrpjhs47i7537er7uyeote <span class="token punctuation">}</span>
+        Current: <span class="token number">450233</span> <span class="token punctuation">{</span> bafy2bzaceb4ybtg3p63fd7hvrajj5cw7oi52ie3zj2r3apxvod4u4e3y3svac bafy2bzacecmasydskhxrcrdih6na4qxpcdpavj6d5wydgft7ba574mx57ij76 bafy2bzacedrxgj2cjq537zoe24qhzizkx5ix4g7rpzbjl73qfm4ldom2kt7pq bafy2bzaceat2eg6ujh2qmlwwvna5qmntbayquvesvik55jfbrfkcgugcl6dmq bafy2bzaceawwc3hp3b5bl2a3gjmvehxytqvxtabtwosj77lnbcmu5ln4gh77u bafy2bzaceabwkrifkce2rraystlg2ouxudklyd2b3pmck2ineguidz4r3x35o bafy2bzacebfxvqczftyzoxosdrlxylhupurmovpqhympe6anukleg2z7emmbo bafy2bzaceb2bbk4ykijqz7em4zgag5eikvqzierp6mevw2bytnj4xrbb2dthc <span class="token punctuation">}</span>
+        Status: syncing
+        Err: <span class="token operator">&lt;</span>nil<span class="token operator">&gt;</span>
+
+SyncTarget: <span class="token number">3</span>
+        Base: <span class="token number">450231</span> <span class="token punctuation">{</span> bafy2bzaceby6aq4obp5pjgjsxtyneqgsrcou4tgx2rsgqptoxgb4pyxh4asae bafy2bzacebancasvojeszwqnfvexlmn52vgcq7ns45nnwzixr67dzsel2kolu bafy2bzaced37mxrstmq2ij4x3szso446fodutq4jaarns6n2vdijeem2k44be bafy2bzacebtxektwn3mndyhpwnj6rkhnf6mfnfa2fyds4jv2xxb3nukuy26d6 bafy2bzacedmjrn42yzfl4yzuzn66ir33exrjxotahtets7btjfm4x36rdcsgu <span class="token punctuation">}</span>
+        Target: <span class="token number">450237</span> <span class="token punctuation">{</span> bafy2bzaceavndy2pgdjpacapy4gs6pszbvxssvwrnw4uydnne4boowvyjlzjm bafy2bzacedutkurnrzna3hctqwxkrghhy6ufkanonfbq54cjcaoquoss4galy bafy2bzaced477xs5udb2r2xkomt6webzmjcwvy257bhpvgxrq6v573o66ywsy bafy2bzaceddjcr45kqhrwikemn7lfuhe5k3cqhhebrrzucsemv4bbxh755hx4 <span class="token punctuation">}</span>
+        Current: <span class="token number">450233</span> <span class="token punctuation">{</span> bafy2bzaceb4ybtg3p63fd7hvrajj5cw7oi52ie3zj2r3apxvod4u4e3y3svac bafy2bzacecmasydskhxrcrdih6na4qxpcdpavj6d5wydgft7ba574mx57ij76 bafy2bzacedrxgj2cjq537zoe24qhzizkx5ix4g7rpzbjl73qfm4ldom2kt7pq bafy2bzaceat2eg6ujh2qmlwwvna5qmntbayquvesvik55jfbrfkcgugcl6dmq bafy2bzaceawwc3hp3b5bl2a3gjmvehxytqvxtabtwosj77lnbcmu5ln4gh77u bafy2bzaceabwkrifkce2rraystlg2ouxudklyd2b3pmck2ineguidz4r3x35o bafy2bzacebfxvqczftyzoxosdrlxylhupurmovpqhympe6anukleg2z7emmbo bafy2bzaceb2bbk4ykijqz7em4zgag5eikvqzierp6mevw2bytnj4xrbb2dthc <span class="token punctuation">}</span>
+        Status: syncing
+        Err: <span class="token operator">&lt;</span>nil<span class="token operator">&gt;</span>
+
+Waiting:
+SyncTarget: <span class="token number">4</span>
+        Base: <span class="token number">450231</span> <span class="token punctuation">{</span> bafy2bzaceby6aq4obp5pjgjsxtyneqgsrcou4tgx2rsgqptoxgb4pyxh4asae bafy2bzacebancasvojeszwqnfvexlmn52vgcq7ns45nnwzixr67dzsel2kolu bafy2bzaced37mxrstmq2ij4x3szso446fodutq4jaarns6n2vdijeem2k44be bafy2bzacebtxektwn3mndyhpwnj6rkhnf6mfnfa2fyds4jv2xxb3nukuy26d6 bafy2bzacedmjrn42yzfl4yzuzn66ir33exrjxotahtets7btjfm4x36rdcsgu <span class="token punctuation">}</span>
+        Target: <span class="token number">450239</span> <span class="token punctuation">{</span> bafy2bzaceb6ulfdjeak6uaxrsd62jobtuilee4wkk3bj5ta4qfi7ll52tbyrm bafy2bzacebkbsyo2hp4qgrsfgzjz5qvyrgfz6n6nsq6kfxvw7s4s66yfynpwi bafy2bzacebca26ouxt6tv32ul46457zftb5ozy6lmeejtrw2w5srb4zgnflou <span class="token punctuation">}</span>
+        Current:
+        Status: <span class="token function">wait</span>
+        Err: <span class="token operator">&lt;</span>nil<span class="token operator">&gt;</span>
+
+History:
+</code></pre></div><ol start="2"><li>set the number of synchronizations</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus <span class="token function">sync</span> set-concurrent <span class="token number">1</span>
+</code></pre></div><h2 id="network-command"><a href="#network-command" class="header-anchor">#</a> Network command</h2> <ol><li>print local node information</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus swarm <span class="token function">id</span>
+
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;Addresses&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+            <span class="token string">&quot;/ip4/192.168.1.151/tcp/6000/p2p/QmTBY16KjbJifqrepWriHNaSVxBJRKg63G8hJrAZAstCQt&quot;</span>,
+            <span class="token string">&quot;/ip4/127.0.0.1/tcp/6000/p2p/QmTBY16KjbJifqrepWriHNaSVxBJRKg63G8hJrAZAstCQt&quot;</span>
+    <span class="token punctuation">]</span>,
+    <span class="token string">&quot;ID&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;QmTBY16KjbJifqrepWriHNaSVxBJRKg63G8hJrAZAstCQt&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="2"><li>query the peers that the node is connected to</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus swarm peers
+
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;Peers&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                    <span class="token string">&quot;Addr&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;/ip4/101.206.156.202/tcp/23151&quot;</span>,
+                    <span class="token string">&quot;Peer&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;12D3KooWNhc5Rzgc1c8p9kvBVhrLUB4ZZniwnpi4yQd1WVf952tp&quot;</span>,
+                    <span class="token string">&quot;Latency&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;&quot;</span>,
+                    <span class="token string">&quot;Muxer&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;&quot;</span>,
+                    <span class="token string">&quot;Streams&quot;</span><span class="token builtin class-name">:</span> null
+            <span class="token punctuation">}</span>,
+            <span class="token punctuation">{</span>
+                    <span class="token string">&quot;Addr&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;/ip4/103.40.249.175/tcp/12350&quot;</span>,
+                    <span class="token string">&quot;Peer&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;12D3KooWNfUzbXzVXqLV9pEubVenJoQHkWtkrR3aSvwyoXc7Kpys&quot;</span>,
+                    <span class="token string">&quot;Latency&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;&quot;</span>,
+                    <span class="token string">&quot;Muxer&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;&quot;</span>,
+                    <span class="token string">&quot;Streams&quot;</span><span class="token builtin class-name">:</span> null
+            <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>connect to other node</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus swarm connect /ip4/192.168.1.151/tcp/6000/p2p/QmTBY16KjbJifqrepWriHNaSVxBJRKg63G8hJrAZAstCQt
+</code></pre></div><h2 id="query-state-of-actor"><a href="#query-state-of-actor" class="header-anchor">#</a> Query state of actor</h2> <ol><li>get actor infomation</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus state get-actor f02438
+
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;Address&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;f02438&quot;</span>,
+    <span class="token string">&quot;Balance&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;659448.801619331229682404 FIL&quot;</span>,
+    <span class="token string">&quot;Nonce&quot;</span><span class="token builtin class-name">:</span> <span class="token number">0</span>,
+    <span class="token string">&quot;Code&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafkqaetgnfwc6mrpon2g64tbm5sw22lomvza (fil/2/storageminer)&quot;</span>,
+    <span class="token string">&quot;Head&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bafy2bzacedexilt4kyzffmagjwpyenct5eddn7cazfjquz4v7b3b4czitn3au&quot;</span>
+<span class="token punctuation">}</span> 
+</code></pre></div><ol start="2"><li>query information of miner</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus state miner-info f02438
+
+Available Balance: <span class="token number">8867.856318782083445622</span> FIL
+Owner:  f077316
+Worker: f0117055
+Control <span class="token number">0</span>:      f0117046
+Control <span class="token number">1</span>:      f0117042
+Control <span class="token number">2</span>:      f0117040
+PeerID: 12D3KooWMrDPhKaMeJFenXRFd4Rb9Zt111CBY7uY6AoZ93MTbLHw
+Multiaddrs:     /ip4/47.115.10.99/tcp/14567 
+Consensus Fault End:    -1
+SectorSize:     <span class="token number">32</span> GiB <span class="token punctuation">(</span><span class="token number">34359738368</span><span class="token punctuation">)</span>
+Byte Power:   <span class="token number">35.78</span> PiB / <span class="token number">2.143</span> EiB <span class="token punctuation">(</span><span class="token number">1.6305</span>%<span class="token punctuation">)</span>
+Actual Power: <span class="token number">35.8</span> Pi / <span class="token number">2.14</span> Ei <span class="token punctuation">(</span><span class="token number">1.6302</span>%<span class="token punctuation">)</span>
+
+Proving Period Start:   <span class="token number">447666</span> <span class="token punctuation">(</span><span class="token number">21</span> hours <span class="token number">36</span> minutes ago<span class="token punctuation">)</span>
+</code></pre></div><ol start="3"><li>get sector infomation of miner</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus state sector f02438 <span class="token number">100001</span>
+
+SectorNumber:  <span class="token number">100001</span>
+SealProof:  <span class="token number">3</span>
+SealedCID:  bagboea4b5abcaps45jsrklqqa3dw26jd7rybpzwsneapwvx6s4pqludkhie3hflh
+DealIDs:  <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+Activation:  <span class="token number">898</span> <span class="token punctuation">(</span><span class="token number">22</span> weeks <span class="token number">2</span> days ago<span class="token punctuation">)</span>
+Expiration:  <span class="token number">1553585</span> <span class="token punctuation">(</span>in <span class="token number">1</span> year <span class="token number">2</span> weeks<span class="token punctuation">)</span>
+
+DealWeight:  <span class="token number">0</span>
+VerifiedDealWeight:  <span class="token number">0</span>
+InitialPledge:  <span class="token number">0.99999998430674944</span> FIL
+ExpectedDayReward:  <span class="token number">0.503660272286038996</span> FIL
+ExpectedStoragePledge:  <span class="token number">1.42807706338520528</span> FIL
+
+Deadline:  <span class="token number">0</span>
+Partition:  <span class="token number">0</span>
+</code></pre></div><ol start="4"><li>search msg by id</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus state search-msg bafy2bzaceckluouswlxpaujhihar4yngk3dx6daqbjfoyolbfvlelwgapmzxg 
+
+message was executed <span class="token keyword">in</span> tipset: <span class="token punctuation">[</span>bafy2bzacebek5gtutmhdvt5rpt6s2k7exk2ve2tj3f2h36nswnw7ehbbmirec bafy2bzaceaem7ljdwxl3eqncy7r7cc3225sx24g6oyzbsf4p7pavcxasuzcs2 bafy2bzacecty4e55ryfjmdjc24jwp2iwobk6pqk4mrsmsjdjtpchsizyervqe bafy2bzacecbldsf73ekzxqsgxawupwhx4cm5xvy6qp43ne5qkss42xvnfjcic bafy2bzaceajgyz6y26fbhsirnrizdt4yt55374abobm5lzugl3eik3yd23afk<span class="token punctuation">]</span>
+Exit Code: <span class="token number">0</span>
+Gas Used: <span class="token number">13133828</span>
+</code></pre></div><ol start="5"><li>wait for msg result of msgid</li></ol> <div class="language-shell script extra-class"><pre class="language-shell"><code>./venus state wait-msg bafy2bzaceanbalwsqc5fetxcdfamfovlpkdjd2s5eje4bwsaxnrrbyswjv5g4
+
+message was executed <span class="token keyword">in</span> tipset: <span class="token punctuation">[</span>bafy2bzacebek5gtutmhdvt5rpt6s2k7exk2ve2tj3f2h36nswnw7ehbbmirec bafy2bzaceaem7ljdwxl3eqncy7r7cc3225sx24g6oyzbsf4p7pavcxasuzcs2 bafy2bzacecty4e55ryfjmdjc24jwp2iwobk6pqk4mrsmsjdjtpchsizyervqe bafy2bzacecbldsf73ekzxqsgxawupwhx4cm5xvy6qp43ne5qkss42xvnfjcic bafy2bzaceajgyz6y26fbhsirnrizdt4yt55374abobm5lzugl3eik3yd23afk<span class="token punctuation">]</span>
+Exit Code: <span class="token number">0</span>
+Gas Used: <span class="token number">44152257</span>
+Return: 
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/filecoin-project/venus-docs/edit/master/docs/advanced/venus-cli.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">5/26/2022, 10:50:04 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/advanced/Chain.html" class="prev">
+        Chain Management
+      </a></span> <span class="next"><a href="/advanced/venus_load_balancing.html">
+        Simple Load Balancing
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.a401c72b.js" defer></script><script src="/assets/js/2.79d5dbf7.js" defer></script><script src="/assets/js/35.6db35d27.js" defer></script>
+  </body>
+</html>

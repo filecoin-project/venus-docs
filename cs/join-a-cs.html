@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Pre-requisites | Venus Filecoin</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/venus-logo.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-SMSDTMGLTV"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SMSDTMGLTV');</script>
+    <meta name="description" content="Venus is a Go implementation of the Filecoin Distributed Storage Network.">
+    
+    <link rel="preload" href="/assets/css/0.styles.3e16e4d0.css" as="style"><link rel="preload" href="/assets/js/app.a401c72b.js" as="script"><link rel="preload" href="/assets/js/2.79d5dbf7.js" as="script"><link rel="preload" href="/assets/js/41.859e1b54.js" as="script"><link rel="prefetch" href="/assets/js/10.efd4fd00.js"><link rel="prefetch" href="/assets/js/100.b7ed5f08.js"><link rel="prefetch" href="/assets/js/101.f48426c2.js"><link rel="prefetch" href="/assets/js/102.12dcf098.js"><link rel="prefetch" href="/assets/js/103.aa4f7aba.js"><link rel="prefetch" href="/assets/js/104.0b2d5d0d.js"><link rel="prefetch" href="/assets/js/105.d16b6c26.js"><link rel="prefetch" href="/assets/js/106.e78c5cc5.js"><link rel="prefetch" href="/assets/js/107.e803e894.js"><link rel="prefetch" href="/assets/js/108.52f052e5.js"><link rel="prefetch" href="/assets/js/109.5f80a24e.js"><link rel="prefetch" href="/assets/js/11.1024c7fb.js"><link rel="prefetch" href="/assets/js/110.20033423.js"><link rel="prefetch" href="/assets/js/111.73ee066e.js"><link rel="prefetch" href="/assets/js/112.802b3efa.js"><link rel="prefetch" href="/assets/js/113.c40f6dfa.js"><link rel="prefetch" href="/assets/js/114.bee856b2.js"><link rel="prefetch" href="/assets/js/115.d21964f5.js"><link rel="prefetch" href="/assets/js/116.1ab8ef2d.js"><link rel="prefetch" href="/assets/js/117.48269041.js"><link rel="prefetch" href="/assets/js/118.b940e110.js"><link rel="prefetch" href="/assets/js/119.015e4294.js"><link rel="prefetch" href="/assets/js/12.57f72ff0.js"><link rel="prefetch" href="/assets/js/120.eb013c5d.js"><link rel="prefetch" href="/assets/js/121.81678139.js"><link rel="prefetch" href="/assets/js/122.dc5d39d0.js"><link rel="prefetch" href="/assets/js/123.ef807529.js"><link rel="prefetch" href="/assets/js/124.e910eb65.js"><link rel="prefetch" href="/assets/js/125.86660980.js"><link rel="prefetch" href="/assets/js/126.35d739fd.js"><link rel="prefetch" href="/assets/js/127.92bf5d76.js"><link rel="prefetch" href="/assets/js/128.df5af2f0.js"><link rel="prefetch" href="/assets/js/129.dfccfcc7.js"><link rel="prefetch" href="/assets/js/13.cfdd2e97.js"><link rel="prefetch" href="/assets/js/130.4a8c11b4.js"><link rel="prefetch" href="/assets/js/131.2a658666.js"><link rel="prefetch" href="/assets/js/132.5119f9d5.js"><link rel="prefetch" href="/assets/js/133.69620285.js"><link rel="prefetch" href="/assets/js/134.aef2a20d.js"><link rel="prefetch" href="/assets/js/135.27b50c00.js"><link rel="prefetch" href="/assets/js/136.dc06a954.js"><link rel="prefetch" href="/assets/js/14.fc99bfdc.js"><link rel="prefetch" href="/assets/js/15.fa7ede5c.js"><link rel="prefetch" href="/assets/js/16.ca801eaa.js"><link rel="prefetch" href="/assets/js/17.d6e677a4.js"><link rel="prefetch" href="/assets/js/18.e8545baa.js"><link rel="prefetch" href="/assets/js/19.47645763.js"><link rel="prefetch" href="/assets/js/20.39b2c9c4.js"><link rel="prefetch" href="/assets/js/21.b1288734.js"><link rel="prefetch" href="/assets/js/22.4090a796.js"><link rel="prefetch" href="/assets/js/23.0a67dbf2.js"><link rel="prefetch" href="/assets/js/24.f8948210.js"><link rel="prefetch" href="/assets/js/25.dd33de12.js"><link rel="prefetch" href="/assets/js/26.42c4b90e.js"><link rel="prefetch" href="/assets/js/27.8c00d5df.js"><link rel="prefetch" href="/assets/js/28.3204a758.js"><link rel="prefetch" href="/assets/js/29.0136d5fb.js"><link rel="prefetch" href="/assets/js/3.6df625ec.js"><link rel="prefetch" href="/assets/js/30.4624dd76.js"><link rel="prefetch" href="/assets/js/31.39c935cb.js"><link rel="prefetch" href="/assets/js/32.bae97709.js"><link rel="prefetch" href="/assets/js/33.4e84b4db.js"><link rel="prefetch" href="/assets/js/34.022a1859.js"><link rel="prefetch" href="/assets/js/35.6db35d27.js"><link rel="prefetch" href="/assets/js/36.3f33b9a0.js"><link rel="prefetch" href="/assets/js/37.969b3f13.js"><link rel="prefetch" href="/assets/js/38.a8fb163f.js"><link rel="prefetch" href="/assets/js/39.99d76196.js"><link rel="prefetch" href="/assets/js/4.f9f100a8.js"><link rel="prefetch" href="/assets/js/40.3fdc4c92.js"><link rel="prefetch" href="/assets/js/42.c3f6525f.js"><link rel="prefetch" href="/assets/js/43.6aa47b23.js"><link rel="prefetch" href="/assets/js/44.08c79258.js"><link rel="prefetch" href="/assets/js/45.ff123f9d.js"><link rel="prefetch" href="/assets/js/46.c02b7bae.js"><link rel="prefetch" href="/assets/js/47.685dd179.js"><link rel="prefetch" href="/assets/js/48.0110bb30.js"><link rel="prefetch" href="/assets/js/49.91708705.js"><link rel="prefetch" href="/assets/js/5.833a2dc9.js"><link rel="prefetch" href="/assets/js/50.18c8291a.js"><link rel="prefetch" href="/assets/js/51.dbacb565.js"><link rel="prefetch" href="/assets/js/52.602f7a39.js"><link rel="prefetch" href="/assets/js/53.f5fffa2b.js"><link rel="prefetch" href="/assets/js/54.6a77c33e.js"><link rel="prefetch" href="/assets/js/55.818e81e7.js"><link rel="prefetch" href="/assets/js/56.869804b8.js"><link rel="prefetch" href="/assets/js/57.f22044b1.js"><link rel="prefetch" href="/assets/js/58.275739db.js"><link rel="prefetch" href="/assets/js/59.1c8406b2.js"><link rel="prefetch" href="/assets/js/6.277ad0d9.js"><link rel="prefetch" href="/assets/js/60.95fff903.js"><link rel="prefetch" href="/assets/js/61.5d95fb2b.js"><link rel="prefetch" href="/assets/js/62.cc2841e1.js"><link rel="prefetch" href="/assets/js/63.fbc0fe62.js"><link rel="prefetch" href="/assets/js/64.da849664.js"><link rel="prefetch" href="/assets/js/65.b2137564.js"><link rel="prefetch" href="/assets/js/66.fd74d99f.js"><link rel="prefetch" href="/assets/js/67.bb07faf9.js"><link rel="prefetch" href="/assets/js/68.42537ae2.js"><link rel="prefetch" href="/assets/js/69.91feee4a.js"><link rel="prefetch" href="/assets/js/7.2bef234d.js"><link rel="prefetch" href="/assets/js/70.cd69abea.js"><link rel="prefetch" href="/assets/js/71.e649f446.js"><link rel="prefetch" href="/assets/js/72.e06f4190.js"><link rel="prefetch" href="/assets/js/73.9d4381c6.js"><link rel="prefetch" href="/assets/js/74.57fce68c.js"><link rel="prefetch" href="/assets/js/75.36ff0289.js"><link rel="prefetch" href="/assets/js/76.6a8352c8.js"><link rel="prefetch" href="/assets/js/77.047218b3.js"><link rel="prefetch" href="/assets/js/78.d1b0ddcc.js"><link rel="prefetch" href="/assets/js/79.283a24b6.js"><link rel="prefetch" href="/assets/js/8.69e3ff48.js"><link rel="prefetch" href="/assets/js/80.4e98639a.js"><link rel="prefetch" href="/assets/js/81.c0c939f0.js"><link rel="prefetch" href="/assets/js/82.322c0737.js"><link rel="prefetch" href="/assets/js/83.4d97be20.js"><link rel="prefetch" href="/assets/js/84.862c1bc6.js"><link rel="prefetch" href="/assets/js/85.9d085ac4.js"><link rel="prefetch" href="/assets/js/86.8f866286.js"><link rel="prefetch" href="/assets/js/87.ec5e4d60.js"><link rel="prefetch" href="/assets/js/88.51ec77ab.js"><link rel="prefetch" href="/assets/js/89.47e39d65.js"><link rel="prefetch" href="/assets/js/9.34948a42.js"><link rel="prefetch" href="/assets/js/90.f1fbf3fc.js"><link rel="prefetch" href="/assets/js/91.ba062de5.js"><link rel="prefetch" href="/assets/js/92.98c445e8.js"><link rel="prefetch" href="/assets/js/93.dec6326f.js"><link rel="prefetch" href="/assets/js/94.7639ebf6.js"><link rel="prefetch" href="/assets/js/95.7fd6ef43.js"><link rel="prefetch" href="/assets/js/96.dfab9392.js"><link rel="prefetch" href="/assets/js/97.da42dfd2.js"><link rel="prefetch" href="/assets/js/98.858f390a.js"><link rel="prefetch" href="/assets/js/99.1b0f6866.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3e16e4d0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/assets/venus-logo-title.svg" alt="Venus Filecoin" class="logo"> <span class="site-name can-hide">Venus Filecoin</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link router-link-active">
+  Chain Service
+</a></div><div class="nav-item"><a href="/cluster/" class="nav-link">
+  Power Service
+</a></div><div class="nav-item"><a href="/market/" class="nav-link">
+  Deal Service
+</a></div><div class="nav-item"><a href="/modules/" class="nav-link">
+  Components
+</a></div><div class="nav-item"><a href="/advanced/" class="nav-link">
+  Advanced
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  Operation
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cs/join-a-cs.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/cs/join-a-cs.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link router-link-active">
+  Chain Service
+</a></div><div class="nav-item"><a href="/cluster/" class="nav-link">
+  Power Service
+</a></div><div class="nav-item"><a href="/market/" class="nav-link">
+  Deal Service
+</a></div><div class="nav-item"><a href="/modules/" class="nav-link">
+  Components
+</a></div><div class="nav-item"><a href="/advanced/" class="nav-link">
+  Advanced
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  Operation
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cs/join-a-cs.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/cs/join-a-cs.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Introduction</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cs/" aria-current="page" class="sidebar-link">Overview</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Deployment</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cs/deploy-a-cs.html" class="sidebar-link">Deploy a chain service</a></li><li><a href="/cs/join-a-cs.html" aria-current="page" class="active sidebar-link">Use a chain service</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/cs/join-a-cs.html#pre-requisites" class="sidebar-link">Pre-requisites</a></li><li class="sidebar-sub-header"><a href="/cs/join-a-cs.html#install-venus-wallet" class="sidebar-link">Install venus-wallet</a></li><li class="sidebar-sub-header"><a href="/cs/join-a-cs.html#install-venus-cluster" class="sidebar-link">Install venus-cluster</a></li><li class="sidebar-sub-header"><a href="/cs/join-a-cs.html#questions" class="sidebar-link">Questions?</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="pre-requisites"><a href="#pre-requisites" class="header-anchor">#</a> Pre-requisites</h2> <p>Before diving into deployment of your mining operation, please make sure you go through the following steps.</p> <div class="custom-block warning"><p class="custom-block-title">WARNING</p> <p>It is recommended that you test your setup in calibration network before deploying on mainnet.</p></div> <h3 id="setup-your-permanent-storage"><a href="#setup-your-permanent-storage" class="header-anchor">#</a> Setup your permanent storage</h3> <p>Choose a network file system that you are familiar with (NFS for example) and deploy your storage cluster.</p> <h3 id="get-your-account-setup-in-shared-modules"><a href="#get-your-account-setup-in-shared-modules" class="header-anchor">#</a> Get your account setup in shared modules</h3> <p>There are two ways to have your account setup.</p> <h4 id="for-miners-connecting-to-shared-modules"><a href="#for-miners-connecting-to-shared-modules" class="header-anchor">#</a> For miners connecting to shared modules</h4> <p>If you are trying to connect to a hosted shared venus modules,  contact admin of said service and have them set it up for you.</p> <div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>venus-wallet can be deployed as either a chain service or a local component depend on your security requirement.</p></div> <h4 id="for-admins-of-shared-modules"><a href="#for-admins-of-shared-modules" class="header-anchor">#</a> For admins of shared modules</h4> <p>If you are an admin hosting shared venus modules, use the following command to create an account for your sealer-cluster.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># create user, default state=1</span>
+$ ./venus-auth user <span class="token function">add</span> <span class="token operator">&lt;</span>ACCOUNT_NAME<span class="token operator">&gt;</span>
+<span class="token comment"># bind miner to user</span>
+$ ./venus-auth user miner <span class="token function">add</span> <span class="token operator">&lt;</span>ACCOUNT_NAME<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>MINER_ID<span class="token operator">&gt;</span> 
+
+<span class="token comment"># The returned token is what miner have to add into their config file in order to gain access to your shared modules</span>
+$ ./venus-auth token gen --perm <span class="token function">write</span> <span class="token operator">&lt;</span>ACCOUNT_NAME<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>AUTH_TOKEN_FOR_ACCOUNT_NAME<span class="token operator">&gt;</span>
+</code></pre></div><p>Update user information if necessary.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>./venus-auth user update --user<span class="token operator">=</span><span class="token operator">&lt;</span>ACCOUNT_NAME<span class="token operator">&gt;</span> --help
+</code></pre></div><h3 id="software-dependencies"><a href="#software-dependencies" class="header-anchor">#</a> Software dependencies</h3> <p>You will need to install these <a href="https://lotus.filecoin.io/lotus/install/linux/#software-dependencies" target="_blank" rel="noopener noreferrer">software dependencies<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> (same as Lotus) before running venus.</p> <h2 id="install-venus-wallet"><a href="#install-venus-wallet" class="header-anchor">#</a> Install venus-wallet</h2> <p>Download and compile the source code of venus-wallet.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">git</span> clone https://github.com/filecoin-project/venus-wallet.git
+<span class="token comment"># change directory to venus-wallet</span>
+$ <span class="token builtin class-name">cd</span> venus-wallet
+$ <span class="token function">git</span> checkout <span class="token operator">&lt;</span>RELEASE_TAG<span class="token operator">&gt;</span>
+$ <span class="token function">make</span>
+</code></pre></div><p>Run venus-wallet module in background.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">nohup</span> ./venus-wallet run <span class="token operator">&gt;</span> wallet.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>Use <code>tail -f wallet.log</code> to monitor wallet log.</p></div> <p>Setup a password for your venus-wallet.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./venus-wallet setpwd
+Password:******
+Enter Password again:******
+Password <span class="token builtin class-name">set</span> successfully
+</code></pre></div><div class="custom-block warning"><p class="custom-block-title">WARNING</p> <p>Please keep backups of your password and store them properly or you will lose contorl of your wallet.</p></div> <div class="custom-block warning"><p class="custom-block-title">WARNING</p> <p>When restarting your wallet, manuually unlock your wallet or you wallet won't be able to sign any messages during sealing or other tasks.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./venus-wallet unlock
+Password:
+</code></pre></div><p>Use <code>--password</code> for auto unlocking after running.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./venus-wallet run --password
+</code></pre></div><p>Check current state your wallet.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./venus-wallet lock-state
+wallet state: unlocked
+</code></pre></div></div> <p>Generate owner and worker addresses. (If you don't have an existing miner id)</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./venus-wallet new bls
+<span class="token operator">&lt;</span>OWNER_ADDRESS<span class="token operator">&gt;</span>
+$ ./venus-wallet new bls
+<span class="token operator">&lt;</span>WORKER_ADDRESS<span class="token operator">&gt;</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>If you are testing or Calibration, you have to fund all your addresses with test coins from faucets. For calibration, use this <a href="https://faucet.calibration.fildev.network/funds.html" target="_blank" rel="noopener noreferrer">faucet<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>.</p></div> <div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>Use <code>./venus-wallet import</code> command for importing addresses from private keys.</p></div> <p>Change <code>[APIRegisterHub]</code> section of  <code>~/.venus_wallet/config.toml</code> using the credential you get from shared module admin.</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">APIRegisterHub</span><span class="token punctuation">]</span>
+<span class="token key property">RegisterAPI</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;/ip4/&lt;IP_ADDRESS_OF_VENUS_GATEWAY&gt;/tcp/45132&quot;</span><span class="token punctuation">]</span>
+<span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;&lt;AUTH_TOKEN_FOR_VENUS_WALLET&gt;&quot;</span>
+<span class="token key property">SupportAccounts</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;&lt;ACCOUNT_NAME&gt;&quot;</span><span class="token punctuation">]</span>
+</code></pre></div><div class="custom-block warning"><p class="custom-block-title">WARNING</p> <p>Make sure above 3 params are correctly set, or connection to venus shared modules will fail.</p></div> <p>Restart venus-wallet so that the changes takes into effect.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># grep [PID] of venus-wallet process</span>
+$ <span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">grep</span> wallet
+root   <span class="token number">6704</span>  <span class="token number">2.3</span>  <span class="token number">0.0</span> <span class="token number">2361236</span> <span class="token number">43148</span> pts/2   Sl   <span class="token number">17</span>:33   <span class="token number">0</span>:18 ./venus-wallet run
+root   <span class="token number">8029</span>  <span class="token number">0.0</span>  <span class="token number">0.0</span> <span class="token number">112828</span>   <span class="token number">952</span> pts/2    S+   <span class="token number">17</span>:46   <span class="token number">0</span>:00 <span class="token function">grep</span> --color<span class="token operator">=</span>auto venus-wallet
+<span class="token comment"># kill the process and restart</span>
+$ <span class="token function">kill</span> -9 <span class="token punctuation">[</span>PID<span class="token punctuation">]</span>
+$ <span class="token function">nohup</span> ./venus-wallet run <span class="token operator">&gt;</span> wallet.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+</code></pre></div><p>You should see logs close to the following indicating successful connection to <code>venus-gateway</code>.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token number">2021</span>-07-12T15:14:12.457+0800    INFO    wallet_event    wallet_event/listenevent.go:197 connect to server fcf714b2-eeb6-498b-aafc-5e58eccd9d0f  <span class="token punctuation">{</span><span class="token string">&quot;api hub&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;/ip4/&lt;IP_ADDRESS&gt;/tcp/45132&quot;</span><span class="token punctuation">}</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>Using process controll like  <code>systemmd</code> or <code>supervisord</code> is recommended.</p></div> <div class="custom-block warning"><p class="custom-block-title">WARNING</p> <p>Pls keep the wallet unlock state. If the state is locked , it will block sealer &quot;Waiting for confirmation&quot;.</p></div> <h2 id="install-venus-cluster"><a href="#install-venus-cluster" class="header-anchor">#</a> Install venus-cluster</h2> <p>Download source code.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">git</span> clone https://github.com/ipfs-force-community/venus-cluster.git
+</code></pre></div><p>Compile <code>venus-cluster</code>.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">cd</span> venus-cluster
+$ <span class="token function">make</span> all
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>After compilation, two executable, <code>venus-worker</code> and <code>venus-sector-manager</code>, will be generated under <code>./dist/bin</code>.</p></div> <h3 id="create-a-miner-id-optional"><a href="#create-a-miner-id-optional" class="header-anchor">#</a> Create a miner-id（optional）</h3> <p>Skip this step if you already have a miner-id.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./venus-sector-manager util miner create 
+--from<span class="token operator">=</span><span class="token operator">&lt;</span>OWNER_ADDRESS<span class="token operator">&gt;</span> 
+--owner<span class="token operator">=</span><span class="token operator">&lt;</span>OWNER_ADDRESS<span class="token operator">&gt;</span> 
+--worker<span class="token operator">=</span><span class="token operator">&lt;</span>WORKER_ADDRESS<span class="token operator">&gt;</span>
+--sector-size<span class="token operator">=</span>32GiB
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>Use <code>--net</code> param for different network options. Default is mainnet.</p></div> <div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>You will see logs similar to the following once successfully created new miner-id.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token number">2022</span>-05-09T07:29:51.325Z  INFO  cmd  internal/util_miner.go:242  miner actor: t01219 <span class="token punctuation">(</span>t2z4nnndtt2iuu57lq3ivor7xdvqwivwb5renrh3a<span class="token punctuation">)</span>  
+<span class="token punctuation">{</span><span class="token string">&quot;size&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;512MiB&quot;</span>, <span class="token string">&quot;from&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t3wultr2i47m24ew2p3bskclnb4rtgmuwb6cwjleqbeu4ndqocx67635dibpsq3ugpbv5y7fpjlpxlmkqcgnva&quot;</span>, 
+<span class="token string">&quot;actor&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t01166&quot;</span>, <span class="token string">&quot;owner&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t3wultr2i47m24ew2p3bskclnb4rtgmuwb6cwjleqbeu4ndqocx67635dibpsq3ugpbv5y7fpjlpxlmkqcgnva&quot;</span>, 
+<span class="token string">&quot;worker&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;t3wultr2i47m24ew2p3bskclnb4rtgmuwb6cwjleqbeu4ndqocx67635dibpsq3ugpbv5y7fpjlpxlmkqcgnva&quot;</span><span class="token punctuation">}</span>
+</code></pre></div></div> <h3 id="venus-sector-manager"><a href="#venus-sector-manager" class="header-anchor">#</a> venus-sector-manager</h3> <p>Initialize work space.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>./dist/bin/venus-sector-manager daemon init
+</code></pre></div><p>Tailor <code>~/.venus-sector-manager/sector-manager.cfg</code> to your own hardware. Detailed instructions on each configurations could be found <a href="/zh/cluster/Venus-Sector-Manager">here</a>.</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Common</span><span class="token punctuation">]</span>
+  <span class="token punctuation">[</span><span class="token table class-name">Common.API</span><span class="token punctuation">]</span>
+    <span class="token comment"># *mandatory* node address (chain service)</span>
+    <span class="token key property">Chain</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+    <span class="token comment"># *mandatory* messager address (chain service)</span>
+    <span class="token key property">Messager</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+    <span class="token comment"># market node address</span>
+    <span class="token comment"># Market = &quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+    <span class="token comment"># *mandatory* gateway address (chain service)</span>
+    <span class="token key property">Gateway</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+    <span class="token comment"># *mandatory* authentication token (chain service)</span>
+    <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;{auth token}&quot;</span>
+   
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PieceStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># *mandatory*</span>
+  <span class="token comment">#Path = &quot;{store_path}&quot;</span>
+   
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># optional</span>
+  <span class="token key property">Name</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_name1}&quot;</span>
+  <span class="token comment"># *mandatory* use of absolute path is recommended</span>
+  <span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_path1}&quot;</span>
+   
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">Name</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_name2}&quot;</span>
+  <span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_path2}&quot;</span>
+   
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Miners</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># *mandatory* `SP` actor id (Remove the &quot;t0&quot; or &quot;f0&quot; at the beginning)</span>
+  <span class="token key property">Actor</span> <span class="token punctuation">=</span> <span class="token number">33680</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Sector</span><span class="token punctuation">]</span>
+    <span class="token comment"># oprional, pledge new sector from InitNumber</span>
+    <span class="token key property">InitNumber</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+    <span class="token comment"># oprional, stop pledging new sector at MaxNumber</span>
+    <span class="token key property">MaxNumber</span> <span class="token punctuation">=</span> <span class="token number">1000000</span>
+    <span class="token comment"># Enable sealing</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+    <span class="token comment"># Enable storage deals</span>
+    <span class="token key property">EnableDeals</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Pre</span><span class="token punctuation">]</span>
+    <span class="token comment"># address for sending out pre messages</span>
+    <span class="token key property">Sender</span> <span class="token punctuation">=</span> <span class="token string">&quot;t3vi4amwofexsfpontn5g722psgikzochthhhu3ptvofzrqmgajs67gt5n2ririlc4hj667dvfsn3kmxiwgtya&quot;</span>
+    <span class="token comment">#GasOverEstimation = 1.2</span>
+    <span class="token comment"># FeeCap limit for single pre message</span>
+    <span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Pre.Batch</span><span class="token punctuation">]</span>
+    <span class="token comment"># if bacth pre is enabled?</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+    <span class="token comment"># Minimum number of messages for one batch</span>
+    <span class="token comment">#Threshold = 16</span>
+    <span class="token comment"># Max wait time before batch pre</span>
+    <span class="token comment">#MaxWait = &quot;1h0m0s&quot;</span>
+    <span class="token comment"># How often it checks the threshold is met</span>
+    <span class="token comment">#CheckInterval = &quot;1m0s&quot;</span>
+    <span class="token comment">#GasOverEstimation = 1.2</span>
+    <span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+   
+  <span class="token comment"># Same set of config for ProveCommit as for pre above</span>
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Prove</span><span class="token punctuation">]</span>
+    <span class="token key property">Sender</span> <span class="token punctuation">=</span> <span class="token string">&quot;t3vi4amwofexsfpontn5g722psgikzochthhhu3ptvofzrqmgajs67gt5n2ririlc4hj667dvfsn3kmxiwgtya&quot;</span>
+    <span class="token comment">#GasOverEstimation = 1.2</span>
+    <span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Prove.Batch</span><span class="token punctuation">]</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+    <span class="token comment">#Threshold = 16</span>
+    <span class="token comment">#MaxWait = &quot;1h0m0s&quot;</span>
+    <span class="token comment">#CheckInterval = &quot;1m0s&quot;</span>
+    <span class="token comment">#GasOverEstimation = 1.2</span>
+    <span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.PoSt</span><span class="token punctuation">]</span>
+    <span class="token comment"># address for sending out Post messages</span>
+    <span class="token key property">Sender</span> <span class="token punctuation">=</span> <span class="token string">&quot;t3vi4amwofexsfpontn5g722psgikzochthhhu3ptvofzrqmgajs67gt5n2ririlc4hj667dvfsn3kmxiwgtya&quot;</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+    <span class="token comment">#StrictCheck = true</span>
+    <span class="token comment">#GasOverEstimation = 1.2</span>
+    <span class="token comment"># FeeCap limit for single post message</span>
+    <span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+    <span class="token comment">#Confidence = 10</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Proof</span><span class="token punctuation">]</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+   
+  <span class="token punctuation">[</span><span class="token table class-name">Miners.Deal</span><span class="token punctuation">]</span>
+    <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+</code></pre></div><p>Start <code>venus-sector-manager</code>.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./dist/bin/venus-sector-manager --net<span class="token operator">=</span>cali daemon run --poster --miner --listen <span class="token number">0.0</span>.0.0:1789
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>Again, use <code>--net</code> param for different network options. Default is mainnet.</p></div> <h3 id="venus-worker"><a href="#venus-worker" class="header-anchor">#</a> venus-worker</h3> <p>Plan your sealing storage and init directories.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./dist/bin/venus-worker store sealing-init -l <span class="token operator">&lt;</span>dir<span class="token operator"><span class="token file-descriptor important">1</span>&gt;</span> <span class="token operator">&lt;</span>dir<span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span> <span class="token operator">&lt;</span>dir<span class="token operator"><span class="token file-descriptor important">3</span>&gt;</span> <span class="token operator">&lt;</span><span class="token punctuation">..</span>.<span class="token operator">&gt;</span>
+</code></pre></div><p>Attach permanent storage and init directories.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./dist/bin/venus-worker store file-init -l <span class="token operator">&lt;</span>dir<span class="token operator"><span class="token file-descriptor important">1</span>&gt;</span>
+</code></pre></div><p>Plan CPU cores, numa, etc for eahc sealing tasks and tailor your configuration file to it. The following is an example configuration for <code>venus-worker</code>. More detailed instructions on each configurations could be found <a href="/zh/cluster/Venus-Worker-c">here</a></p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">worker</span><span class="token punctuation">]</span>
+  <span class="token comment"># optional, instance name of venus-sector-manager</span>
+  <span class="token comment"># name = &quot;bytest&quot;</span>
+  <span class="token comment"># rpc_server.host = &quot;0.0.0.0&quot;</span>
+  <span class="token comment"># rpc_server.port = 17890</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">sector_manager</span><span class="token punctuation">]</span>
+  <span class="token key property">rpc_client.addr</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{some_ip}/tcp/1789&quot;</span>
+  <span class="token comment"># rpc_client.headers = { User-Agent = &quot;jsonrpc-core-client&quot; }</span>
+  <span class="token comment"># piece_token = &quot;{auth token}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">sealing</span><span class="token punctuation">]</span>
+  <span class="token comment"># miner IDs that this venus-worker can serve; Ex: [22908, 11034, 191107]</span>
+  <span class="token key property">allowed_miners</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token number">33680</span><span class="token punctuation">]</span>
+  <span class="token key property">allowed_sizes</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;32GiB&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;64GiB&quot;</span><span class="token punctuation">]</span>
+  <span class="token comment"># When set to ture, you will need to configure `piece_token` in `sector_manager`</span>
+  <span class="token comment"># enable_deals = true</span>
+  <span class="token comment"># Max number of retries when errors of temp type encountred during sealing</span>
+  <span class="token comment"># max_retries = 3</span>
+  <span class="token comment"># Time intervals between retires when errors of temp type encountred during sealing</span>
+  <span class="token comment"># seal_interval = &quot;30s&quot;</span>
+  <span class="token comment"># Time interval between idle `sealing_store`s to start pledging</span>
+  <span class="token comment"># recover_interval = &quot;30s&quot;</span>
+  <span class="token comment"># Used to reduce network congestion during sealing for rpc polling non-time sensitive informations</span>
+  <span class="token comment"># rpc_polling_interval = &quot;30s&quot;</span>
+  <span class="token comment"># wether to skip local proof check</span>
+  <span class="token comment"># ignore_proof_check = false</span>
+
+<span class="token comment"># Plan out your sealing pipeline based on your hardware specs</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># Number of sealing_thread corresponds to number of working directories you configured for sealing storage; Absolute path is preferred</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store1}&quot;</span>
+  <span class="token comment"># Each sealing thread then can be further customized </span>
+  <span class="token comment"># sealing.allowed_miners = [10123, 10124, 10125]</span>
+  <span class="token comment"># sealing.allowed_sizes = [&quot;32GiB&quot;, &quot;64GiB&quot;]</span>
+  <span class="token comment"># sealing.enable_deals = true</span>
+  <span class="token comment"># sealing.max_retries = 3</span>
+  <span class="token comment"># sealing.seal_interval = &quot;30s&quot;</span>
+  <span class="token comment"># sealing.recover_interval = &quot;30s&quot;</span>
+  <span class="token comment"># sealing.rpc_polling_interval = &quot;30s&quot;</span>
+  <span class="token comment"># sealing.ignore_proof_check = false</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store2}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store3}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store4}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store5}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store6}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store7}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store8}&quot;</span>
+
+<span class="token comment"># You can have multiple [[attached]] path for permanent storage of sealed sectors</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">attached</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># optional</span>
+  <span class="token key property">name</span> <span class="token punctuation">=</span> <span class="token string">&quot;bytest&quot;</span>
+  <span class="token comment"># Absolute path is preferred</span>
+  <span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;/xx/xx/xxx&quot;</span>
+  <span class="token comment">#readonly = false</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">processors.static_tree_d</span><span class="token punctuation">]</span>
+  <span class="token key property">32GiB</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to static tree_d for 32GiB}&quot;</span>
+  <span class="token key property">64GiB</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to static tree_d for 64GiB}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">processors.limit</span><span class="token punctuation">]</span>
+  <span class="token comment"># Number of concurrent pc1</span>
+  <span class="token key property">pc1</span> <span class="token punctuation">=</span> <span class="token number">4</span>
+  <span class="token comment"># Number of concurrent pc2</span>
+  <span class="token key property">pc2</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+  <span class="token comment"># Number of concurrent c2</span>
+  <span class="token key property">c2</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+
+<span class="token comment"># fields for pc1 processors</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token comment"># optional</span>
+  <span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+  <span class="token comment"># follows cgroup.cpuset format</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;0-7&quot;</span>
+  <span class="token comment"># max concurrency</span>
+  <span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+  <span class="token comment"># Any external environment variable when executing this particular pc1 task</span>
+  <span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;12-19&quot;</span>
+  <span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+  <span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;8-11,24-27&quot;</span>
+  <span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_GPU_COLUMN_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">FIL_PROOFS_USE_GPU_TREE_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;0&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;20-23,36-39&quot;</span>
+  <span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_GPU_COLUMN_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">FIL_PROOFS_USE_GPU_TREE_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.c2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;28-35&quot;</span>
+  <span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;2,3&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.tree_d</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;40-45&quot;</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>You can also reference the configurations in <code>venus-cluster</code> <a href="https://github.com/filecoin-project/venus/discussions/4866" target="_blank" rel="noopener noreferrer">community test<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>.</p></div> <p>Start <code>venus-worker</code>.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ /path/to/venus-worker daemon -c /path/to/venus-worker.toml
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>The above <code>sector-manager.cfg</code> and <code>venus-worker.toml</code> are just minimal to get you to start pledging sectors. More detailed information on configurations could be found <a href="/zh/cluster/">here</a>.</p></div> <div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>Note that <code>name = &quot;xxx&quot;</code> under <code>[[attached]]</code> in <code>venus-worker.toml</code> must be the same <code>Name = &quot;xxx&quot;</code> under <code>[[Common.PersistStores]]</code> in <code>sector-manager.cfg</code>.</p></div> <h2 id="questions"><a href="#questions" class="header-anchor">#</a> Questions?</h2> <p>Find us on <a href="https://filecoinproject.slack.com/archives/CEHHJNJS3" target="_blank" rel="noopener noreferrer">Slack<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>!</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/filecoin-project/venus-docs/edit/master/docs/cs/join-a-cs.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">6/6/2022, 2:27:25 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/cs/deploy-a-cs.html" class="prev">
+        Deploy a chain service
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.a401c72b.js" defer></script><script src="/assets/js/2.79d5dbf7.js" defer></script><script src="/assets/js/41.859e1b54.js" defer></script>
+  </body>
+</html>
