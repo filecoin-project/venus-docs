@@ -4,7 +4,7 @@ venus-market v2支持两种运行模式
 - 作为链服务运行模式
 - 作为独立组件运行模式
 
-旷工搭建自己的venus-market只为自己服务, 推荐使用**独立组件**模式, 如果你是一个链服务的提供者, 
+矿工搭建自己的venus-market只为自己服务, 推荐使用**独立组件**模式, 如果你是一个链服务的提供者, 
 需要使用venus-market搭建一个服务面向许多分散的旷工,需要使用链服务模式, 请参考[venus-market for master](./using-venus-market-for-master.md)
 
 ### 全局配置
