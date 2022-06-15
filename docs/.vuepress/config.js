@@ -358,7 +358,14 @@ module.exports = {
                                 ['using-venus-market-for-master.md', '链服务部署market服务'],
                                 ['using-venus-market-for-miner.md', '本地部署market节点'],
                             ]
-                        }
+                        },
+                        {
+                            title: '订单',
+                            collapsable: false,
+                            children: [
+                                ['prep-datasets.md', '大数据集准备'],
+                            ]
+                        },
                     ],
                     '/zh/modules/': [{
                             title: '链服务组件',
