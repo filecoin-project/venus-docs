@@ -169,6 +169,13 @@ module.exports = {
                                 ['migrate_market_v1_to_v2.md', 'Upgrading to version 2.0'],
                             ]
                         },
+                        {
+                            title: 'Storage deals',
+                            collapsable: false,
+                            children: [
+                                ['prep-datasets.md', 'preping large datasets'],
+                            ]
+                        },
                     ],
                     '/modules/': [{
                             title: 'Chain Service',
