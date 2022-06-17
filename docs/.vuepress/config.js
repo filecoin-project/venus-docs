@@ -334,19 +334,33 @@ module.exports = {
                             title: '部署',
                             collapsable: false,
                             children: [
-                                ['Using-venus-cluster-alt.md', '快速上手'],
-                                ['Venus-Sector-Manager.md', 'venus-sector-manager配置'],
-                                ['Venus-Worker-c.md', 'venus-worker配置'],
-                                ['processors_example.md', 'Processors配置范例'],
+                                ['getting-started.md', '快速上手'],
+                                ['venus-sector-manager-config.md', 'venus-sector-manager配置'],
+                                ['venus-worker-config.md', 'venus-worker配置'],
+                                ['processors-config-example.md', 'Processors配置范例'],
                             ]
                         },
                         {
-                            title: '其他功能特性',
+                            title: '运维',
+                            collapsable: false,
+                            children: [
+                                ['task-flow.md', '任务状态流转'],
+                                ['task-management.md', 'worker任务管理'],
+                            ]
+                        },
+                        {
+                            title: '功能特性',
                             collapsable: false,
                             children: [
                                 ['poster.md', 'poster分离'],
                                 ['snapdeal.md', 'Snapdeal'],
-                                ['migrate_sectors.md', '导入已有扇区'],
+                            ]
+                        },
+                        {
+                            title: '迁移',
+                            collapsable: false,
+                            children: [
+                                ['migrate-sectors.md', '导入已有扇区'],
                             ]
                         },
                     ],
