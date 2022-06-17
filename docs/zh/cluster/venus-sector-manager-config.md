@@ -19,19 +19,21 @@
 [[Common.PieceStores]]
 #Name = "{store_name}"
 #Path = "{store_path}"
-#Strict = false
-#ReadOnly = false
 #
 [[Common.PersistStores]]
 #Name = "{store_name}"
 #Path = "{store_path}"
 #Strict = false
 #ReadOnly = false
+#Weight = 1
+[Common.PersistStores.Meta]
+#SomeKey = "SomeValue"
 #
 [[Miners]]
 #Actor = 10086
 [Miners.Sector]
 #InitNumber = 0
+#MinNumber = 10
 #MaxNumber = 1000000
 #Enabled = true
 #EnableDeals = false
@@ -40,13 +42,20 @@
 [Miners.SnapUp]
 #Enabled = false
 #Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
+#SendFund = true
 #GasOverEstimation = 1.2
 #MaxFeeCap = "5 nanoFIL"
 #MessageConfidential = 15
 #ReleaseCondidential = 30
+[Miners.SnapUp.Retry]
+#MaxAttempts = 10
+#PollInterval = "3m0s"
+#APIFailureWait = "3m0s"
+#LocalFailureWait = "3m0s"
 [Miners.Commitment]
 #Confidence = 10
 [Miners.Commitment.Pre]
+#SendFund = true
 #Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
 #GasOverEstimation = 1.2
 #MaxFeeCap = "5 nanoFIL"
@@ -58,12 +67,25 @@
 #GasOverEstimation = 1.2
 #MaxFeeCap = "5 nanoFIL"
 [Miners.Commitment.Prove]
+#SendFund = true
 #Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
 #GasOverEstimation = 1.2
 #MaxFeeCap = "5 nanoFIL"
 [Miners.Commitment.Prove.Batch]
 #Enabled = false
 #Threshold = 16
+#MaxWait = "1h0m0s"
+#CheckInterval = "1m0s"
+#GasOverEstimation = 1.2
+#MaxFeeCap = "5 nanoFIL"
+[Miners.Commitment.Terminate]
+#Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
+#SendFund = true
+#GasOverEstimation = 1.2
+#MaxFeeCap = "5 nanoFIL"
+[Miners.Commitment.Terminate.Batch]
+#Enabled = false
+#Threshold = 5
 #MaxWait = "1h0m0s"
 #CheckInterval = "1m0s"
 #GasOverEstimation = 1.2
@@ -75,6 +97,7 @@
 #GasOverEstimation = 1.2
 #MaxFeeCap = "5 nanoFIL"
 #Confidence = 10
+#ChallengeConfidence = 10
 [Miners.Proof]
 #Enabled = false
 #
@@ -158,11 +181,32 @@ Path = "/mnt/mass/piece1"
 [[Common.PersistStores]]
 # 名称， 选填项，字符串类型
 # 默认为路径对应的绝对路径
-Name = "remote-store1"
+#Name = "remote-store1"
 
 # 路径，必填项，字符串类型
 # 建议使用绝对路径
 Path = "/mnt/remote/10.0.0.14/store"
+
+# 只读，选填项，布尔类型
+# 默认值为 false
+# 自 v0.4.0 起，持久化存储分配逻辑转到 vsmgr 上
+# 可通过此配置设置存储是否可以继续写入
+#ReadOnly = false
+
+# 权重，选填项，数字类型
+# 默认值为 1
+# 当填写值为 0 时，等效于 1
+# 自 v0.4.0 起，持久化存储分配逻辑转到 vsmgr 上
+# 可通过此配置设置多个持久化存储之间的权重配比
+#Weight = 1
+
+# 元信息，选填项，字典类型
+# 内部值为 Key = "Value" 的格式
+# 默认值为 null
+# 用于支持不同类型存储方案的预备，目前没有任何作用
+[Common.PersistStores.Meta]
+#SomeKey = "SomeValue"
+#
 ```
 
 
@@ -195,7 +239,19 @@ Actor = 10086
 [Miners.Sector]
 # 扇区起始编号，选填项，数字类型
 # 默认值为 0
+# 已废弃
 InitNumber = 0
+
+# 扇区最小编号，选填项，数字类型
+# 默认值为 null
+# 与 InitNumber 相比，当设置此项时，
+# 1. 任何时刻，分配器都不会给出小于等于此值的扇区编号。
+# 2. 此项的值可以在集群运行过程中调整。
+#    提高配置值，分配结果将始终遵循 1) 的描述。
+#    降低配置值通常不会产生效果。
+#
+# 未设置此项时，如果 InitNumber 为非0值，则等效于此项。
+#MinNumber = 10
 
 # 扇区编号上限，选填项，数字类型
 # 默认值为 null， 表示无上限限制
@@ -230,6 +286,10 @@ InitNumber = 0
 # 发送地址，在启用的情况下为必填项，地址类型
 #Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
 
+# 提交上链消息时是否从 Sender 发送必要的资金，选填项，布尔类型
+# 默认值为 true
+#SendFund = true
+
 # 单条提交消息的 Gas 估算倍数，选填项，浮点数类型
 # 默认值为1.2
 #GasOverEstimation = 1.2
@@ -245,6 +305,25 @@ InitNumber = 0
 # 释放旧数据存储空间的确信高度，选填项，数字类型
 # 默认值为 30
 #ReleaseCondidential = 30
+
+# SnapUp 提交重试策略
+[Miners.SnapUp.Retry]
+
+# 最大重试次数，选填项，数字类型
+# 默认为 NULL，表示不做限制
+#MaxAttempts = 10
+
+# 轮询状态的间隔，选填项，事件类型
+# 默认值为 3min
+#PollInterval = "3m0s"
+
+# API 接口异常的重试间隔，选填项，事件类型
+# 默认值为 3min
+#APIFailureWait = "3m0s"
+
+# 本地异常的重试间隔，如本地数据库异常、本地存储异常等，选填项，事件类型
+# 默认值为 3min
+#LocalFailureWait = "3m0s"
 ```
 
 ### [Miners.Commitment]
@@ -270,6 +349,10 @@ InitNumber = 0
 
 ```
 [Miners.Commitment.Pre]
+# 提交上链消息时是否从 Sender 发送必要的资金，选填项，布尔类型
+# 默认值为 true
+#SendFund = true
+
 # 发送地址，必填项，地址类型
 Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
 
@@ -316,6 +399,12 @@ Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
 
 
 
+### [Miners.Commitment.Terminate]
+
+用于配置 `TerminateSectors` 消息提交的策略，其配置项和作用与 `Miners.Commitment.Pre` 内的基本一致。实际场景中发送此类消息不会很频繁，建议配置单条提交模式，使用聚合提交模式时,`Threshold` 建议配置较小的值，保证消息及时上链。
+
+
+
 ### [Miners.PoSt]
 
 用于配置 `WindowPoSt` 的相关策略。
@@ -345,6 +434,13 @@ Sender = "t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za"
 # 消息的稳定高度，选填项，数字类型
 # 默认值为 10
 #Confidence = 10
+
+# 启动 WindowPoSt 的稳定高度，选填项，数字类型
+# 默认值为 10
+# 这个值决定了需要等待多少个高度才认定链进入稳定状态，可以启动 WindowPoSt 任务
+# 此值设定越小，会越早启动，但同时也越容易受到分叉影响
+# 当设置为 0 时，会使用默认值 10
+#ChallengeConfidence = 10
 ```
 
 

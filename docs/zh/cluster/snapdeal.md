@@ -47,7 +47,7 @@ deadline  count
 location = "/data/local-snap"
 plan = "snapup"
 
-[processors.limit]
+[processors.limitation.concurrent]
 ...
 tree_d = 1
 snap_encode = 1
