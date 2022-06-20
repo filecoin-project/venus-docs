@@ -1,3 +1,3 @@
-## venus-miner
+## venus-miner文档
 
-关于venus-miner日常常用命令可参见`master`文档中的这个[板块](https://venus.filecoin.io/zh/master/Chain_service_construction.html#venus-miner)。
+`venus-miner`自身组件文档请参见[这里](https://github.com/filecoin-project/venus-miner/tree/master/docs/)。
