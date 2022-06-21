@@ -149,7 +149,33 @@ module.exports = {
                             title: 'Deployment',
                             collapsable: false,
                             children: [
-                                ['Using-venus-cluster-alt.md', 'Getting started'],
+                                ['getting-started.md', 'Getting started'],
+                                ['venus-sector-manager-config.md', 'venus-sector-manager config'],
+                                ['venus-worker-config.md', 'venus-worker config'],
+                                ['processors-config-example.md', 'Processors config example'],
+                            ]
+                        },
+                        {
+                            title: 'Operations',
+                            collapsable: false,
+                            children: [
+                                ['task-flow.md', 'Task flow'],
+                                ['task-management.md', 'Task management'],
+                            ]
+                        },
+                        {
+                            title: 'Other Features',
+                            collapsable: false,
+                            children: [
+                                ['poster.md', 'poster worker'],
+                                ['snapdeal.md', 'Snapdeal'],
+                            ]
+                        },
+                        {
+                            title: 'Migration',
+                            collapsable: false,
+                            children: [
+                                ['migrate-sectors.md', 'Import existing sectors'],
                             ]
                         },
                     ],
