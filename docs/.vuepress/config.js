@@ -422,7 +422,7 @@ module.exports = {
                                 ['Venus-Auth.md', 'venus-auth'],
                                 ['venus-miner.md', 'venus-miner'],
                                 ['How-To-Use-Messager.md', 'venus-messager'],
-                                ['Venus-Gateway.md', 'venus-gateway'],
+                                ['venus-gateway.md', 'venus-gateway'],
                                 ['How-To-Use-Wallet-In-Venus.md', 'venus-wallet（本地）'],
                             ]
                         },
