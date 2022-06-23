@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configuration analysis of venus-sector-manager | Venus Filecoin</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/venus-logo.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-SMSDTMGLTV"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SMSDTMGLTV');</script>
+    <meta name="description" content="Venus is a Go implementation of the Filecoin Distributed Storage Network.">
+    
+    <link rel="preload" href="/assets/css/0.styles.117964e0.css" as="style"><link rel="preload" href="/assets/js/app.6c6b37e5.js" as="script"><link rel="preload" href="/assets/js/2.9fe70abb.js" as="script"><link rel="preload" href="/assets/js/44.468ef2c0.js" as="script"><link rel="prefetch" href="/assets/js/10.ec947dfe.js"><link rel="prefetch" href="/assets/js/100.44ed30cc.js"><link rel="prefetch" href="/assets/js/101.a1f9e7c4.js"><link rel="prefetch" href="/assets/js/102.9a364685.js"><link rel="prefetch" href="/assets/js/103.14a5e7a1.js"><link rel="prefetch" href="/assets/js/104.2c3e604c.js"><link rel="prefetch" href="/assets/js/105.5c46e3fd.js"><link rel="prefetch" href="/assets/js/106.f6c040d6.js"><link rel="prefetch" href="/assets/js/107.3c26a0b2.js"><link rel="prefetch" href="/assets/js/108.b5351397.js"><link rel="prefetch" href="/assets/js/109.e78b6d99.js"><link rel="prefetch" href="/assets/js/11.de33ac00.js"><link rel="prefetch" href="/assets/js/110.5c35700d.js"><link rel="prefetch" href="/assets/js/111.e49c3d38.js"><link rel="prefetch" href="/assets/js/112.13f70572.js"><link rel="prefetch" href="/assets/js/113.70025d55.js"><link rel="prefetch" href="/assets/js/114.8917b102.js"><link rel="prefetch" href="/assets/js/115.53b1bc9f.js"><link rel="prefetch" href="/assets/js/116.670283f8.js"><link rel="prefetch" href="/assets/js/117.d6f9600d.js"><link rel="prefetch" href="/assets/js/118.8724217a.js"><link rel="prefetch" href="/assets/js/119.1d37566e.js"><link rel="prefetch" href="/assets/js/12.91f5d015.js"><link rel="prefetch" href="/assets/js/120.2b09f55c.js"><link rel="prefetch" href="/assets/js/121.a00218ab.js"><link rel="prefetch" href="/assets/js/122.176dda50.js"><link rel="prefetch" href="/assets/js/123.d4101326.js"><link rel="prefetch" href="/assets/js/124.bd9f34f1.js"><link rel="prefetch" href="/assets/js/125.508c2548.js"><link rel="prefetch" href="/assets/js/126.5c08e300.js"><link rel="prefetch" href="/assets/js/127.2e8770b9.js"><link rel="prefetch" href="/assets/js/128.9f6ec6f5.js"><link rel="prefetch" href="/assets/js/129.6d928697.js"><link rel="prefetch" href="/assets/js/13.4d966ad2.js"><link rel="prefetch" href="/assets/js/130.e196a688.js"><link rel="prefetch" href="/assets/js/131.6732006c.js"><link rel="prefetch" href="/assets/js/132.4ca16cb9.js"><link rel="prefetch" href="/assets/js/133.ffd5a64e.js"><link rel="prefetch" href="/assets/js/134.edbbd81c.js"><link rel="prefetch" href="/assets/js/135.8648668e.js"><link rel="prefetch" href="/assets/js/136.772f7afd.js"><link rel="prefetch" href="/assets/js/137.5c70fa97.js"><link rel="prefetch" href="/assets/js/138.cd685511.js"><link rel="prefetch" href="/assets/js/139.caf36b6e.js"><link rel="prefetch" href="/assets/js/14.66f86f22.js"><link rel="prefetch" href="/assets/js/140.772881d3.js"><link rel="prefetch" href="/assets/js/141.c9eb599a.js"><link rel="prefetch" href="/assets/js/142.c53fad80.js"><link rel="prefetch" href="/assets/js/143.4a4c1f41.js"><link rel="prefetch" href="/assets/js/144.31c892dd.js"><link rel="prefetch" href="/assets/js/145.3118f2b7.js"><link rel="prefetch" href="/assets/js/146.83baba42.js"><link rel="prefetch" href="/assets/js/15.df845ff7.js"><link rel="prefetch" href="/assets/js/16.18866332.js"><link rel="prefetch" href="/assets/js/17.255649c7.js"><link rel="prefetch" href="/assets/js/18.b0566a78.js"><link rel="prefetch" href="/assets/js/19.404d3c6d.js"><link rel="prefetch" href="/assets/js/20.ae9d2d61.js"><link rel="prefetch" href="/assets/js/21.f103509b.js"><link rel="prefetch" href="/assets/js/22.9293c3a3.js"><link rel="prefetch" href="/assets/js/23.8a90cb50.js"><link rel="prefetch" href="/assets/js/24.c81bf4bb.js"><link rel="prefetch" href="/assets/js/25.58d2b70f.js"><link rel="prefetch" href="/assets/js/26.51729e2d.js"><link rel="prefetch" href="/assets/js/27.430fdbd3.js"><link rel="prefetch" href="/assets/js/28.2344794c.js"><link rel="prefetch" href="/assets/js/29.0c7bb433.js"><link rel="prefetch" href="/assets/js/3.14e01593.js"><link rel="prefetch" href="/assets/js/30.98cab6e1.js"><link rel="prefetch" href="/assets/js/31.df778644.js"><link rel="prefetch" href="/assets/js/32.ff7b7cea.js"><link rel="prefetch" href="/assets/js/33.05f3c8ec.js"><link rel="prefetch" href="/assets/js/34.74e2d10a.js"><link rel="prefetch" href="/assets/js/35.6acee29b.js"><link rel="prefetch" href="/assets/js/36.6895e746.js"><link rel="prefetch" href="/assets/js/37.44b927df.js"><link rel="prefetch" href="/assets/js/38.6546cf48.js"><link rel="prefetch" href="/assets/js/39.659f7472.js"><link rel="prefetch" href="/assets/js/4.cf5826a0.js"><link rel="prefetch" href="/assets/js/40.2f22fd31.js"><link rel="prefetch" href="/assets/js/41.2cb9cc57.js"><link rel="prefetch" href="/assets/js/42.b4bc6854.js"><link rel="prefetch" href="/assets/js/43.e8157bf8.js"><link rel="prefetch" href="/assets/js/45.5d9145d9.js"><link rel="prefetch" href="/assets/js/46.fc4a98b6.js"><link rel="prefetch" href="/assets/js/47.3a93aea9.js"><link rel="prefetch" href="/assets/js/48.cea8da35.js"><link rel="prefetch" href="/assets/js/49.8eaddac7.js"><link rel="prefetch" href="/assets/js/5.a0af5dba.js"><link rel="prefetch" href="/assets/js/50.9e0d04a5.js"><link rel="prefetch" href="/assets/js/51.f484f3c9.js"><link rel="prefetch" href="/assets/js/52.2d83e27e.js"><link rel="prefetch" href="/assets/js/53.367c5d0f.js"><link rel="prefetch" href="/assets/js/54.34349bc6.js"><link rel="prefetch" href="/assets/js/55.d096b05c.js"><link rel="prefetch" href="/assets/js/56.d92afcd7.js"><link rel="prefetch" href="/assets/js/57.5408d09f.js"><link rel="prefetch" href="/assets/js/58.9626f3c2.js"><link rel="prefetch" href="/assets/js/59.ee3f072b.js"><link rel="prefetch" href="/assets/js/6.95de18b2.js"><link rel="prefetch" href="/assets/js/60.cb9eb6f0.js"><link rel="prefetch" href="/assets/js/61.d6cac8c4.js"><link rel="prefetch" href="/assets/js/62.f5215ad0.js"><link rel="prefetch" href="/assets/js/63.27552992.js"><link rel="prefetch" href="/assets/js/64.90592f44.js"><link rel="prefetch" href="/assets/js/65.426b7c2f.js"><link rel="prefetch" href="/assets/js/66.43e909e3.js"><link rel="prefetch" href="/assets/js/67.d6ea0741.js"><link rel="prefetch" href="/assets/js/68.4ffdc3b6.js"><link rel="prefetch" href="/assets/js/69.c0e73ef4.js"><link rel="prefetch" href="/assets/js/7.cd0044c1.js"><link rel="prefetch" href="/assets/js/70.51a9e192.js"><link rel="prefetch" href="/assets/js/71.fe7ade02.js"><link rel="prefetch" href="/assets/js/72.830ae127.js"><link rel="prefetch" href="/assets/js/73.bd32ee3a.js"><link rel="prefetch" href="/assets/js/74.bd4817e4.js"><link rel="prefetch" href="/assets/js/75.ee0a522d.js"><link rel="prefetch" href="/assets/js/76.93619c2b.js"><link rel="prefetch" href="/assets/js/77.58b2e9d2.js"><link rel="prefetch" href="/assets/js/78.28a2933e.js"><link rel="prefetch" href="/assets/js/79.fd58a85d.js"><link rel="prefetch" href="/assets/js/8.ae71b12b.js"><link rel="prefetch" href="/assets/js/80.1de91f97.js"><link rel="prefetch" href="/assets/js/81.dccf53d7.js"><link rel="prefetch" href="/assets/js/82.1282388a.js"><link rel="prefetch" href="/assets/js/83.d55fd382.js"><link rel="prefetch" href="/assets/js/84.24b95d6b.js"><link rel="prefetch" href="/assets/js/85.3c8edcfe.js"><link rel="prefetch" href="/assets/js/86.3951acf9.js"><link rel="prefetch" href="/assets/js/87.cc3c6c1e.js"><link rel="prefetch" href="/assets/js/88.db9394dc.js"><link rel="prefetch" href="/assets/js/89.dc2b966d.js"><link rel="prefetch" href="/assets/js/9.994a6419.js"><link rel="prefetch" href="/assets/js/90.367fe0a7.js"><link rel="prefetch" href="/assets/js/91.bcc09268.js"><link rel="prefetch" href="/assets/js/92.c03e6f09.js"><link rel="prefetch" href="/assets/js/93.f0f0147d.js"><link rel="prefetch" href="/assets/js/94.e5c5edf9.js"><link rel="prefetch" href="/assets/js/95.56029c30.js"><link rel="prefetch" href="/assets/js/96.aee0899a.js"><link rel="prefetch" href="/assets/js/97.a8a80865.js"><link rel="prefetch" href="/assets/js/98.cdc6da17.js"><link rel="prefetch" href="/assets/js/99.666bac74.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.117964e0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/assets/venus-logo-title.svg" alt="Venus Filecoin" class="logo"> <span class="site-name can-hide">Venus Filecoin</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  Chain Service
+</a></div><div class="nav-item"><a href="/cluster/" class="nav-link router-link-active">
+  Power Service
+</a></div><div class="nav-item"><a href="/market/" class="nav-link">
+  Deal Service
+</a></div><div class="nav-item"><a href="/modules/" class="nav-link">
+  Components
+</a></div><div class="nav-item"><a href="/advanced/" class="nav-link">
+  Advanced
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  Operation
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cluster/venus-sector-manager-config.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/cluster/venus-sector-manager-config.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  Chain Service
+</a></div><div class="nav-item"><a href="/cluster/" class="nav-link router-link-active">
+  Power Service
+</a></div><div class="nav-item"><a href="/market/" class="nav-link">
+  Deal Service
+</a></div><div class="nav-item"><a href="/modules/" class="nav-link">
+  Components
+</a></div><div class="nav-item"><a href="/advanced/" class="nav-link">
+  Advanced
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  Operation
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cluster/venus-sector-manager-config.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/cluster/venus-sector-manager-config.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Introduction</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cluster/" aria-current="page" class="sidebar-link">Overview</a></li><li><a href="/cluster/architecture.html" class="sidebar-link">Architecture</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Deployment</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cluster/getting-started.html" class="sidebar-link">Getting started</a></li><li><a href="/cluster/venus-sector-manager-config.html" aria-current="page" class="active sidebar-link">venus-sector-manager config</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/cluster/venus-sector-manager-config.html#common" class="sidebar-link">[Common]</a></li><li class="sidebar-sub-header"><a href="/cluster/venus-sector-manager-config.html#a-minimal-working-configuration-file-example" class="sidebar-link">A minimal working configuration file example</a></li></ul></li><li><a href="/cluster/venus-worker-config.html" class="sidebar-link">venus-worker config</a></li><li><a href="/cluster/processors-config-example.html" class="sidebar-link">Processors config example</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Operations</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cluster/task-flow.html" class="sidebar-link">Task flow</a></li><li><a href="/cluster/task-management.html" class="sidebar-link">Task management</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Other Features</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cluster/poster.html" class="sidebar-link">poster worker</a></li><li><a href="/cluster/snapdeal.html" class="sidebar-link">Snapdeal</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Migration</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cluster/migrate-sectors.html" class="sidebar-link">Import existing sectors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="configuration-analysis-of-venus-sector-manager"><a href="#configuration-analysis-of-venus-sector-manager" class="header-anchor">#</a> Configuration analysis of venus-sector-manager</h1> <p><code>venus-sector-manager</code> is to interact with the chain and maintain the sector's attention. Let's take a look at its configuration file structure and configuration.</p> <p>After initialization, we can get a copy of the original configuration:</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token comment"># Default config:</span>
+<span class="token punctuation">[</span><span class="token table class-name">Common</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token table class-name">Common.API</span><span class="token punctuation">]</span>
+<span class="token comment">#Chain = &quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+<span class="token comment">#Messager = &quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+<span class="token comment">#Market = &quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+<span class="token comment">#Gateway = [&quot;/ip4/{api_host}/tcp/{api_port}&quot;]</span>
+<span class="token comment">#Token = &quot;{some token}&quot;</span>
+<span class="token comment">#ChainEventInterval = &quot;1m0s&quot;</span>
+<span class="token comment">#</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PieceStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment">#Name = &quot;{store_name}&quot;</span>
+<span class="token comment">#Path = &quot;{store_path}&quot;</span>
+<span class="token comment">#</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment">#Name = &quot;{store_name}&quot;</span>
+<span class="token comment">#Path = &quot;{store_path}&quot;</span>
+<span class="token comment">#Strict = false</span>
+<span class="token comment">#ReadOnly = false</span>
+<span class="token comment">#Weight = 1</span>
+<span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores.Meta</span><span class="token punctuation">]</span>
+<span class="token comment">#SomeKey = &quot;SomeValue&quot;</span>
+<span class="token comment">#</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Miners</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment">#Actor = 10086</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Sector</span><span class="token punctuation">]</span>
+<span class="token comment">#InitNumber = 0</span>
+<span class="token comment">#MinNumber = 10</span>
+<span class="token comment">#MaxNumber = 1000000</span>
+<span class="token comment">#Enabled = true</span>
+<span class="token comment">#EnableDeals = false</span>
+<span class="token comment">#LifetimeDays = 540</span>
+<span class="token comment">#Verbose = false</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.SnapUp</span><span class="token punctuation">]</span>
+<span class="token comment">#Enabled = false</span>
+<span class="token comment">#Sender = &quot;t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za&quot;</span>
+<span class="token comment">#SendFund = true</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+<span class="token comment">#MessageConfidential = 15</span>
+<span class="token comment">#ReleaseCondidential = 30</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.SnapUp.Retry</span><span class="token punctuation">]</span>
+<span class="token comment">#MaxAttempts = 10</span>
+<span class="token comment">#PollInterval = &quot;3m0s&quot;</span>
+<span class="token comment">#APIFailureWait = &quot;3m0s&quot;</span>
+<span class="token comment">#LocalFailureWait = &quot;3m0s&quot;</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment</span><span class="token punctuation">]</span>
+<span class="token comment">#Confidence = 10</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Pre</span><span class="token punctuation">]</span>
+<span class="token comment">#SendFund = true</span>
+<span class="token comment">#Sender = &quot;t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za&quot;</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Pre.Batch</span><span class="token punctuation">]</span>
+<span class="token comment">#Enabled = false</span>
+<span class="token comment">#Threshold = 16</span>
+<span class="token comment">#MaxWait = &quot;1h0m0s&quot;</span>
+<span class="token comment">#CheckInterval = &quot;1m0s&quot;</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Prove</span><span class="token punctuation">]</span>
+<span class="token comment">#SendFund = true</span>
+<span class="token comment">#Sender = &quot;t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za&quot;</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Prove.Batch</span><span class="token punctuation">]</span>
+<span class="token comment">#Enabled = false</span>
+<span class="token comment">#Threshold = 16</span>
+<span class="token comment">#MaxWait = &quot;1h0m0s&quot;</span>
+<span class="token comment">#CheckInterval = &quot;1m0s&quot;</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Terminate</span><span class="token punctuation">]</span>
+<span class="token comment">#Sender = &quot;t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za&quot;</span>
+<span class="token comment">#SendFund = true</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Terminate.Batch</span><span class="token punctuation">]</span>
+<span class="token comment">#Enabled = false</span>
+<span class="token comment">#Threshold = 5</span>
+<span class="token comment">#MaxWait = &quot;1h0m0s&quot;</span>
+<span class="token comment">#CheckInterval = &quot;1m0s&quot;</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Post</span><span class="token punctuation">]</span>
+<span class="token comment">#Sender = &quot;t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za&quot;</span>
+<span class="token comment">#Enabled = true</span>
+<span class="token comment">#StrictCheck = true</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+<span class="token comment">#Confidence = 10</span>
+<span class="token comment">#ChallengeConfidence = 10</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Proof</span><span class="token punctuation">]</span>
+<span class="token comment">#Enabled = false</span>
+</code></pre></div><p>We will analyze the configurable items one by one.</p> <h2 id="common"><a href="#common" class="header-anchor">#</a> [Common]</h2> <p><code>Common</code> is a public configuration, which is divided into three sub-configuration items:</p> <h3 id="common-api"><a href="#common-api" class="header-anchor">#</a> [Common.API]</h3> <p><code>Common.API</code> is interface-related configuration, its content includes:</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Common.API</span><span class="token punctuation">]</span>
+<span class="token comment"># Chain service address, required, string type</span>
+<span class="token comment"># Fill in according to the actual situation of the service used</span>
+<span class="token key property">Chain</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+
+<span class="token comment"># Message service address, required, string type</span>
+<span class="token comment"># Fill in according to the actual situation of the service used</span>
+<span class="token key property">Messager</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+
+<span class="token comment"># Market service address, required, string type</span>
+<span class="token comment"># Fill in according to the actual situation of the service used</span>
+<span class="token key property">Market</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+
+<span class="token comment"># Event gateway service address, required, string type</span>
+<span class="token comment"># Fill in according to the actual situation of the service used</span>
+<span class="token key property">Gateway</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span><span class="token punctuation">]</span>
+
+<span class="token comment"># service token, required, string type</span>
+<span class="token comment"># Fill in according to the actual situation of the service used</span>
+<span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;{some token}&quot;</span>
+
+<span class="token comment"># Interval time for detecting chain height changes, optional, time type</span>
+<span class="token comment"># Default is 1min</span>
+<span class="token comment">#ChainEventInterval = &quot;1m0s&quot;</span>
+</code></pre></div><h3 id="common-piecestores"><a href="#common-piecestores" class="header-anchor">#</a> [[Common.PieceStores]]</h3> <p><code>Common.PieceStores</code> is an option for configuring local order <code>piece</code> data. When there is available offline storage, you can configure this item to avoid getting the <code>piece</code> data of the order through the public network.</p> <p>Each local store directory corresponds to a <code>Common.PieceStores</code> configuration block.</p> <h4 id="basic-configuration-example"><a href="#basic-configuration-example" class="header-anchor">#</a> Basic configuration example</h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PieceStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># path, required, string type</span>
+<span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;/mnt/mass/piece1&quot;</span>
+</code></pre></div><h3 id="common-persiststores"><a href="#common-persiststores" class="header-anchor">#</a> [[Common.PersistStores]]</h3> <p><code>Common.PersistStores</code> is used to configure sector persistent data stores. It corresponds to the <code>remote_store</code> concept in <code>venus-worker</code>.</p> <p>Similar to <code>Common.PieceStores</code>, each persistent store directory corresponds to a <code>Common.PersistStores</code> configuration block.</p> <h4 id="basic-configuration-example-2"><a href="#basic-configuration-example-2" class="header-anchor">#</a> Basic configuration example</h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># name, optional, string type</span>
+<span class="token comment"># The default is the absolute path corresponding to the path</span>
+<span class="token comment">#Name = &quot;remote-store1&quot;</span>
+
+<span class="token comment"># path, required, string type</span>
+<span class="token comment"># It is recommended to use absolute paths</span>
+<span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;/mnt/remote/10.0.0.14/store&quot;</span>
+
+<span class="token comment"># read only, optional, boolean</span>
+<span class="token comment"># Default is false</span>
+<span class="token comment"># Since v0.4.0, the persistent storage allocation logic goes to vsmgr</span>
+<span class="token comment"># This configuration can be used to set whether the storage can continue to write</span>
+<span class="token comment">#ReadOnly = false</span>
+
+<span class="token comment"># weight, optional, number type</span>
+<span class="token comment"># Default is 1</span>
+<span class="token comment"># When the fill value is 0, it is equivalent to 1</span>
+<span class="token comment"># Since v0.4.0, the persistent storage allocation logic goes to vsmgr</span>
+<span class="token comment"># This configuration can be used to set the weight allocation ratio between multiple persistent stores</span>
+<span class="token comment">#Weight = 1</span>
+
+<span class="token comment"># Meta information, optional items, dictionary type</span>
+<span class="token comment"># The internal value is in the format of Key = &quot;Value&quot;</span>
+<span class="token comment"># Default value is null</span>
+<span class="token comment"># Used to support the preparation of different types of storage schemes, currently has no effect</span>
+<span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores.Meta</span><span class="token punctuation">]</span>
+<span class="token comment">#SomeKey = &quot;SomeValue&quot;</span>
+</code></pre></div><p>##[[Miners]]</p> <p><code>Miners</code> is an important configuration item, which is used to define its behavior and policy for a certain <code>SP</code>.</p> <p><code>venus-cluster</code> is designed to support multiple <code>SP</code>s with the same set of components. The specific performance in <code>venus-sector-manager</code> is that you can set multiple <code>Miners</code> configuration blocks as needed.</p> <h3 id="main-configuration-item"><a href="#main-configuration-item" class="header-anchor">#</a> Main configuration item</h3> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Miners</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># `SP` actor id, required, numeric type</span>
+<span class="token key property">Actor</span> <span class="token punctuation">=</span> <span class="token number">10086</span>
+</code></pre></div><p>In addition to the main configuration, <code>Miners</code> also contains a number of different sub-configuration blocks, let's analyze them one by one</p> <h3 id="miners-sector"><a href="#miners-sector" class="header-anchor">#</a> [Miners.Sector]</h3> <p>Policy used to control sector allocation.</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Miners.Sector</span><span class="token punctuation">]</span>
+<span class="token comment"># Sector start number, optional, number type</span>
+<span class="token comment"># Default value is 0</span>
+<span class="token comment"># Obsolete</span>
+<span class="token key property">InitNumber</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+
+<span class="token comment"># Minimum sector number, optional, number type</span>
+<span class="token comment"># Default value is null</span>
+<span class="token comment"># Compared to InitNumber, when this is set,</span>
+<span class="token comment"># 1. At any time, the allocator will not give a sector number less than or equal to this value.</span>
+<span class="token comment"># 2. The value of this item can be adjusted during cluster operation.</span>
+<span class="token comment"># Increase the config value, the assignment result will always follow the description of 1).</span>
+<span class="token comment"># Lowering the config value usually has no effect.</span>
+<span class="token comment">#</span>
+<span class="token comment"># When this item is not set, if InitNumber is a non-zero value, it is equivalent to this item.</span>
+<span class="token comment">#MinNumber = 10</span>
+
+<span class="token comment"># Sector number upper limit, optional, number type</span>
+<span class="token comment"># The default value is null, which means no upper limit</span>
+<span class="token comment">#MaxNumber = 1000000</span>
+
+<span class="token comment"># Whether to allow allocation of sectors, optional, boolean type</span>
+<span class="token comment"># The default value is true, that is, the allocation is enabled</span>
+<span class="token comment">#Enabled = true</span>
+
+<span class="token comment"># Whether to allow allocation of orders, optional, boolean</span>
+<span class="token comment"># Default is false</span>
+<span class="token comment">#EnableDeals = false</span>
+
+<span class="token comment"># The life cycle of the CC sector, the unit is days, optional, number type</span>
+<span class="token comment"># Default is 540</span>
+<span class="token comment">#LifetimeDays = 540</span>
+
+<span class="token comment"># Sector log verbosity of related modules, optional items, boolean type</span>
+<span class="token comment"># The default value is false, which simplifies the log output</span>
+<span class="token comment">#Verbose = false</span>
+</code></pre></div><h3 id="miners-snapup"><a href="#miners-snapup" class="header-anchor">#</a> [Miners.SnapUp]</h3> <p>Production strategy for controlling <code>SnapDeal</code></p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Miners.SnapUp</span><span class="token punctuation">]</span>
+<span class="token comment"># Whether to enable, optional, boolean type</span>
+<span class="token comment"># Default is false</span>
+<span class="token comment">#Enabled = false</span>
+
+<span class="token comment"># Send address, required if enabled, address type</span>
+<span class="token comment">#Sender = &quot;t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za&quot;</span>
+
+<span class="token comment"># Whether to send the necessary funds from Sender when submitting the on-chain message, optional, boolean type</span>
+<span class="token comment"># Default value is true</span>
+<span class="token comment">#SendFund = true</span>
+
+<span class="token comment"># Gas estimate multiple for a single commit message, optional, floating point type</span>
+<span class="token comment"># Default is 1.2</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+
+<span class="token comment"># FeeCap limit for a single commit message, optional, FIL value type</span>
+<span class="token comment"># Default is 5 nanoFIL</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+
+<span class="token comment"># The confidence height of the update message on the chain, optional, number type</span>
+<span class="token comment"># Default is 15</span>
+<span class="token comment">#MessageConfidential = 15</span>
+
+<span class="token comment"># Confidence height to release old data storage space, optional, number type</span>
+<span class="token comment"># Default is 30</span>
+<span class="token comment">#ReleaseCondidential = 30</span>
+
+<span class="token comment"># SnapUp submit retry policy</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.SnapUp.Retry</span><span class="token punctuation">]</span>
+
+<span class="token comment"># maximum number of retries, optional, number type</span>
+<span class="token comment"># The default is NULL, which means no limit</span>
+<span class="token comment">#MaxAttempts = 10</span>
+
+<span class="token comment"># Polling status interval, optional, event type</span>
+<span class="token comment"># Default is 3min</span>
+<span class="token comment">#PollInterval = &quot;3m0s&quot;</span>
+
+<span class="token comment"># API interface exception retry interval, optional items, event type</span>
+<span class="token comment"># Default is 3min</span>
+<span class="token comment">#APIFailureWait = &quot;3m0s&quot;</span>
+
+<span class="token comment"># Retry interval for local exceptions, such as local database exceptions, local storage exceptions, etc., optional items, event type</span>
+<span class="token comment"># Default is 3min</span>
+<span class="token comment">#LocalFailureWait = &quot;3m0s&quot;</span>
+</code></pre></div><h3 id="miners-commitment"><a href="#miners-commitment" class="header-anchor">#</a> [Miners.Commitment]</h3> <p>Generic section for configuring encapsulated message submission policies.</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment</span><span class="token punctuation">]</span>
+<span class="token comment"># Stable height of the message, optional, number type</span>
+<span class="token comment"># Default is 10</span>
+<span class="token comment">#Confidence = 10</span>
+</code></pre></div><h3 id="miners-commitment-pre"><a href="#miners-commitment-pre" class="header-anchor">#</a> [Miners.Commitment.Pre]</h3> <p>Strategy for configuring <code>PreCommit</code> message commits</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Pre</span><span class="token punctuation">]</span>
+<span class="token comment"># Whether to send the necessary funds from Sender when submitting the on-chain message, optional, boolean type</span>
+<span class="token comment"># Default value is true</span>
+<span class="token comment">#SendFund = true</span>
+
+<span class="token comment"># Sending address, required items, address type</span>
+<span class="token key property">Sender</span> <span class="token punctuation">=</span> <span class="token string">&quot;t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za&quot;</span>
+
+<span class="token comment"># Gas estimate multiple for a single commit message, optional, floating point type</span>
+<span class="token comment"># Default is 1.2</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+
+<span class="token comment"># FeeCap limit for a single commit message, optional, FIL value type</span>
+<span class="token comment"># Default is 5 nanoFIL</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+
+<span class="token comment"># Aggregate submitted policy configuration blocks</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Pre.Batch</span><span class="token punctuation">]</span>
+<span class="token comment"># Whether to enable aggregate submission, optional, boolean type</span>
+<span class="token comment"># The default value is false, i.e. not enabled</span>
+<span class="token comment">#Enabled = false</span>
+
+<span class="token comment"># Minimum number of aggregates, optional, number type</span>
+<span class="token comment"># The default value is 16, that is, the minimum number of aggregates is 16</span>
+<span class="token comment">#Threshold = 16</span>
+
+<span class="token comment"># maximum waiting time, optional, time type</span>
+<span class="token comment"># The default value is 1h, that is, the maximum wait time is 1 hour</span>
+<span class="token comment">#MaxWait = &quot;1h0m0s&quot;</span>
+
+<span class="token comment"># check interval, optional, time type</span>
+<span class="token comment"># The default value is 1min, that is, every 1min to check whether the aggregation conditions are met</span>
+<span class="token comment">#CheckInterval = &quot;1m0s&quot;</span>
+
+<span class="token comment"># Gas estimation multiple of aggregated commit messages, optional, floating point type</span>
+<span class="token comment"># Default is 1.2</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+
+<span class="token comment"># FeeCap limit for aggregated commit messages, optional items, FIL value type</span>
+<span class="token comment"># Default is 5 nanoFIL</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+</code></pre></div><h3 id="miners-commitment-prove"><a href="#miners-commitment-prove" class="header-anchor">#</a> [Miners.Commitment.Prove]</h3> <p>The strategy used to configure <code>ProveCommit</code> message submission, its configuration items and functions are exactly the same as those in <code>Miners.Commitment.Pre</code>.</p> <h3 id="miners-commitment-terminate"><a href="#miners-commitment-terminate" class="header-anchor">#</a> [Miners.Commitment.Terminate]</h3> <p>The strategy used to configure <code>TerminateSectors</code> message submission, its configuration items and functions are basically the same as those in <code>Miners.Commitment.Pre</code>. In actual scenarios, such messages are not sent very frequently. It is recommended to configure single submission mode. When using aggregate submission mode, <code>Threshold</code> is recommended to be configured with a smaller value to ensure that messages are uploaded on the chain in time.</p> <h3 id="miners-post"><a href="#miners-post" class="header-anchor">#</a> [Miners.PoSt]</h3> <p>Related policies for configuring <code>WindowPoSt</code>.</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Miners.Post</span><span class="token punctuation">]</span>
+<span class="token comment"># Sending address, required items, address type</span>
+<span class="token key property">Sender</span> <span class="token punctuation">=</span> <span class="token string">&quot;t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za&quot;</span>
+
+<span class="token comment"># Whether to enable, optional, boolean type</span>
+<span class="token comment"># Default value is true</span>
+<span class="token comment">#Enabled = true</span>
+
+<span class="token comment"># Whether to perform strong verification on sector files, optional, boolean type</span>
+<span class="token comment"># Default value is true</span>
+<span class="token comment"># When enabled, in addition to judging the existence of the file, it will also try to read some information, such as metadata, etc.</span>
+<span class="token comment">#StrictCheck = true</span>
+
+<span class="token comment"># Gas estimation multiple of WindowPoSt message, optional, floating point type</span>
+<span class="token comment"># Default is 1.2</span>
+<span class="token comment">#GasOverEstimation = 1.2</span>
+
+<span class="token comment"># FeeCap limit of WindowPoSt message, optional, FIL value type</span>
+<span class="token comment"># Default is 5 nanoFIL</span>
+<span class="token comment">#MaxFeeCap = &quot;5 nanoFIL&quot;</span>
+
+<span class="token comment"># Stable height of the message, optional, number type</span>
+<span class="token comment"># Default is 10</span>
+<span class="token comment">#Confidence = 10</span>
+
+<span class="token comment"># Start the stable height of WindowPoSt, optional, number type</span>
+<span class="token comment"># Default is 10</span>
+<span class="token comment"># This value determines how many heights to wait for the chain to enter a stable state, and the WindowPoSt task can be started</span>
+<span class="token comment"># The smaller this value is set, the earlier it will start, but at the same time, the more vulnerable it is to fork</span>
+<span class="token comment"># When set to 0, the default value of 10 will be used</span>
+<span class="token comment">#ChallengeConfidence = 10</span>
+</code></pre></div><h3 id="miners-proof"><a href="#miners-proof" class="header-anchor">#</a> [Miners.Proof]</h3> <p>Used to configure WinningPoSt Proof related policies</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Miners.Proof</span><span class="token punctuation">]</span>
+<span class="token comment"># Whether to enable, optional, boolean type</span>
+<span class="token comment"># Default is false</span>
+<span class="token comment">#Enabled = false</span>
+</code></pre></div><h3 id="miners-deal-deprecated"><a href="#miners-deal-deprecated" class="header-anchor">#</a> [Miners.Deal] <code>Deprecated</code></h3> <p>Used to configure order-related policies.</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Miners.Deal</span><span class="token punctuation">]</span>
+<span class="token comment"># Whether to enable, optional, boolean type</span>
+<span class="token comment"># Default is false</span>
+<span class="token comment">#Enabled = false</span>
+</code></pre></div><h2 id="a-minimal-working-configuration-file-example"><a href="#a-minimal-working-configuration-file-example" class="header-anchor">#</a> A minimal working configuration file example</h2> <p>Let's take the example of starting a <code>venus-sector-manager</code> that supports a <code>SP</code> operation,</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Common</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token table class-name">Common.API</span><span class="token punctuation">]</span>
+<span class="token key property">Chain</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+<span class="token key property">Messager</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+<span class="token key property">Market</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span>
+<span class="token key property">Gateway</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;/ip4/{api_host}/tcp/{api_port}&quot;</span><span class="token punctuation">]</span>
+<span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;{some token}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PieceStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_path}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">Name</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_name1}&quot;</span>
+<span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_path1}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">Name</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_name2}&quot;</span>
+<span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_path2}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">Name</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_name3}&quot;</span>
+<span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_path3}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Common.PersistStores</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">Name</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_name4}&quot;</span>
+<span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;{store_path4}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">Miners</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">Actor</span> <span class="token punctuation">=</span> <span class="token number">10086</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Sector</span><span class="token punctuation">]</span>
+<span class="token key property">InitNumber</span> <span class="token punctuation">=</span> <span class="token number">1000</span>
+<span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+<span class="token key property">EnableDeals</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Pre</span><span class="token punctuation">]</span>
+<span class="token key property">Sender</span> <span class="token punctuation">=</span> <span class="token string">&quot;t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Pre.Batch</span><span class="token punctuation">]</span>
+<span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">false</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Prove</span><span class="token punctuation">]</span>
+<span class="token key property">Sender</span> <span class="token punctuation">=</span> <span class="token string">&quot;t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Commitment.Prove.Batch</span><span class="token punctuation">]</span>
+<span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Post</span><span class="token punctuation">]</span>
+<span class="token key property">Sender</span> <span class="token punctuation">=</span> <span class="token string">&quot;t1abjxfbp274xpdqcpuaykwkfb43omjotacm2p3za&quot;</span>
+<span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Miners.Proof</span><span class="token punctuation">]</span>
+<span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+</code></pre></div><p>This activates one:</p> <ul><li>Have 1 local PieceStore</li> <li>Has 4 local persistent stores</li> <li>Enable sector allocation, whose initial number is 1000</li> <li>Do not enable aggregated PreCommit</li> <li>Enable aggregated ProveCommit</li> <li>Enable WinningPost module</li> <li>enable order</li></ul> <p>An instance of <code>venus-sector-manager</code>.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/filecoin-project/venus-docs/edit/master/docs/cluster/venus-sector-manager-config.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">6/23/2022, 5:07:27 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/cluster/getting-started.html" class="prev">
+        Getting started
+      </a></span> <span class="next"><a href="/cluster/venus-worker-config.html">
+        venus-worker config
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.6c6b37e5.js" defer></script><script src="/assets/js/2.9fe70abb.js" defer></script><script src="/assets/js/44.468ef2c0.js" defer></script>
+  </body>
+</html>

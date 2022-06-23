@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configuration analysis of venus-worker | Venus Filecoin</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/venus-logo.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-SMSDTMGLTV"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SMSDTMGLTV');</script>
+    <meta name="description" content="Venus is a Go implementation of the Filecoin Distributed Storage Network.">
+    
+    <link rel="preload" href="/assets/css/0.styles.117964e0.css" as="style"><link rel="preload" href="/assets/js/app.6c6b37e5.js" as="script"><link rel="preload" href="/assets/js/2.9fe70abb.js" as="script"><link rel="preload" href="/assets/js/45.5d9145d9.js" as="script"><link rel="prefetch" href="/assets/js/10.ec947dfe.js"><link rel="prefetch" href="/assets/js/100.44ed30cc.js"><link rel="prefetch" href="/assets/js/101.a1f9e7c4.js"><link rel="prefetch" href="/assets/js/102.9a364685.js"><link rel="prefetch" href="/assets/js/103.14a5e7a1.js"><link rel="prefetch" href="/assets/js/104.2c3e604c.js"><link rel="prefetch" href="/assets/js/105.5c46e3fd.js"><link rel="prefetch" href="/assets/js/106.f6c040d6.js"><link rel="prefetch" href="/assets/js/107.3c26a0b2.js"><link rel="prefetch" href="/assets/js/108.b5351397.js"><link rel="prefetch" href="/assets/js/109.e78b6d99.js"><link rel="prefetch" href="/assets/js/11.de33ac00.js"><link rel="prefetch" href="/assets/js/110.5c35700d.js"><link rel="prefetch" href="/assets/js/111.e49c3d38.js"><link rel="prefetch" href="/assets/js/112.13f70572.js"><link rel="prefetch" href="/assets/js/113.70025d55.js"><link rel="prefetch" href="/assets/js/114.8917b102.js"><link rel="prefetch" href="/assets/js/115.53b1bc9f.js"><link rel="prefetch" href="/assets/js/116.670283f8.js"><link rel="prefetch" href="/assets/js/117.d6f9600d.js"><link rel="prefetch" href="/assets/js/118.8724217a.js"><link rel="prefetch" href="/assets/js/119.1d37566e.js"><link rel="prefetch" href="/assets/js/12.91f5d015.js"><link rel="prefetch" href="/assets/js/120.2b09f55c.js"><link rel="prefetch" href="/assets/js/121.a00218ab.js"><link rel="prefetch" href="/assets/js/122.176dda50.js"><link rel="prefetch" href="/assets/js/123.d4101326.js"><link rel="prefetch" href="/assets/js/124.bd9f34f1.js"><link rel="prefetch" href="/assets/js/125.508c2548.js"><link rel="prefetch" href="/assets/js/126.5c08e300.js"><link rel="prefetch" href="/assets/js/127.2e8770b9.js"><link rel="prefetch" href="/assets/js/128.9f6ec6f5.js"><link rel="prefetch" href="/assets/js/129.6d928697.js"><link rel="prefetch" href="/assets/js/13.4d966ad2.js"><link rel="prefetch" href="/assets/js/130.e196a688.js"><link rel="prefetch" href="/assets/js/131.6732006c.js"><link rel="prefetch" href="/assets/js/132.4ca16cb9.js"><link rel="prefetch" href="/assets/js/133.ffd5a64e.js"><link rel="prefetch" href="/assets/js/134.edbbd81c.js"><link rel="prefetch" href="/assets/js/135.8648668e.js"><link rel="prefetch" href="/assets/js/136.772f7afd.js"><link rel="prefetch" href="/assets/js/137.5c70fa97.js"><link rel="prefetch" href="/assets/js/138.cd685511.js"><link rel="prefetch" href="/assets/js/139.caf36b6e.js"><link rel="prefetch" href="/assets/js/14.66f86f22.js"><link rel="prefetch" href="/assets/js/140.772881d3.js"><link rel="prefetch" href="/assets/js/141.c9eb599a.js"><link rel="prefetch" href="/assets/js/142.c53fad80.js"><link rel="prefetch" href="/assets/js/143.4a4c1f41.js"><link rel="prefetch" href="/assets/js/144.31c892dd.js"><link rel="prefetch" href="/assets/js/145.3118f2b7.js"><link rel="prefetch" href="/assets/js/146.83baba42.js"><link rel="prefetch" href="/assets/js/15.df845ff7.js"><link rel="prefetch" href="/assets/js/16.18866332.js"><link rel="prefetch" href="/assets/js/17.255649c7.js"><link rel="prefetch" href="/assets/js/18.b0566a78.js"><link rel="prefetch" href="/assets/js/19.404d3c6d.js"><link rel="prefetch" href="/assets/js/20.ae9d2d61.js"><link rel="prefetch" href="/assets/js/21.f103509b.js"><link rel="prefetch" href="/assets/js/22.9293c3a3.js"><link rel="prefetch" href="/assets/js/23.8a90cb50.js"><link rel="prefetch" href="/assets/js/24.c81bf4bb.js"><link rel="prefetch" href="/assets/js/25.58d2b70f.js"><link rel="prefetch" href="/assets/js/26.51729e2d.js"><link rel="prefetch" href="/assets/js/27.430fdbd3.js"><link rel="prefetch" href="/assets/js/28.2344794c.js"><link rel="prefetch" href="/assets/js/29.0c7bb433.js"><link rel="prefetch" href="/assets/js/3.14e01593.js"><link rel="prefetch" href="/assets/js/30.98cab6e1.js"><link rel="prefetch" href="/assets/js/31.df778644.js"><link rel="prefetch" href="/assets/js/32.ff7b7cea.js"><link rel="prefetch" href="/assets/js/33.05f3c8ec.js"><link rel="prefetch" href="/assets/js/34.74e2d10a.js"><link rel="prefetch" href="/assets/js/35.6acee29b.js"><link rel="prefetch" href="/assets/js/36.6895e746.js"><link rel="prefetch" href="/assets/js/37.44b927df.js"><link rel="prefetch" href="/assets/js/38.6546cf48.js"><link rel="prefetch" href="/assets/js/39.659f7472.js"><link rel="prefetch" href="/assets/js/4.cf5826a0.js"><link rel="prefetch" href="/assets/js/40.2f22fd31.js"><link rel="prefetch" href="/assets/js/41.2cb9cc57.js"><link rel="prefetch" href="/assets/js/42.b4bc6854.js"><link rel="prefetch" href="/assets/js/43.e8157bf8.js"><link rel="prefetch" href="/assets/js/44.468ef2c0.js"><link rel="prefetch" href="/assets/js/46.fc4a98b6.js"><link rel="prefetch" href="/assets/js/47.3a93aea9.js"><link rel="prefetch" href="/assets/js/48.cea8da35.js"><link rel="prefetch" href="/assets/js/49.8eaddac7.js"><link rel="prefetch" href="/assets/js/5.a0af5dba.js"><link rel="prefetch" href="/assets/js/50.9e0d04a5.js"><link rel="prefetch" href="/assets/js/51.f484f3c9.js"><link rel="prefetch" href="/assets/js/52.2d83e27e.js"><link rel="prefetch" href="/assets/js/53.367c5d0f.js"><link rel="prefetch" href="/assets/js/54.34349bc6.js"><link rel="prefetch" href="/assets/js/55.d096b05c.js"><link rel="prefetch" href="/assets/js/56.d92afcd7.js"><link rel="prefetch" href="/assets/js/57.5408d09f.js"><link rel="prefetch" href="/assets/js/58.9626f3c2.js"><link rel="prefetch" href="/assets/js/59.ee3f072b.js"><link rel="prefetch" href="/assets/js/6.95de18b2.js"><link rel="prefetch" href="/assets/js/60.cb9eb6f0.js"><link rel="prefetch" href="/assets/js/61.d6cac8c4.js"><link rel="prefetch" href="/assets/js/62.f5215ad0.js"><link rel="prefetch" href="/assets/js/63.27552992.js"><link rel="prefetch" href="/assets/js/64.90592f44.js"><link rel="prefetch" href="/assets/js/65.426b7c2f.js"><link rel="prefetch" href="/assets/js/66.43e909e3.js"><link rel="prefetch" href="/assets/js/67.d6ea0741.js"><link rel="prefetch" href="/assets/js/68.4ffdc3b6.js"><link rel="prefetch" href="/assets/js/69.c0e73ef4.js"><link rel="prefetch" href="/assets/js/7.cd0044c1.js"><link rel="prefetch" href="/assets/js/70.51a9e192.js"><link rel="prefetch" href="/assets/js/71.fe7ade02.js"><link rel="prefetch" href="/assets/js/72.830ae127.js"><link rel="prefetch" href="/assets/js/73.bd32ee3a.js"><link rel="prefetch" href="/assets/js/74.bd4817e4.js"><link rel="prefetch" href="/assets/js/75.ee0a522d.js"><link rel="prefetch" href="/assets/js/76.93619c2b.js"><link rel="prefetch" href="/assets/js/77.58b2e9d2.js"><link rel="prefetch" href="/assets/js/78.28a2933e.js"><link rel="prefetch" href="/assets/js/79.fd58a85d.js"><link rel="prefetch" href="/assets/js/8.ae71b12b.js"><link rel="prefetch" href="/assets/js/80.1de91f97.js"><link rel="prefetch" href="/assets/js/81.dccf53d7.js"><link rel="prefetch" href="/assets/js/82.1282388a.js"><link rel="prefetch" href="/assets/js/83.d55fd382.js"><link rel="prefetch" href="/assets/js/84.24b95d6b.js"><link rel="prefetch" href="/assets/js/85.3c8edcfe.js"><link rel="prefetch" href="/assets/js/86.3951acf9.js"><link rel="prefetch" href="/assets/js/87.cc3c6c1e.js"><link rel="prefetch" href="/assets/js/88.db9394dc.js"><link rel="prefetch" href="/assets/js/89.dc2b966d.js"><link rel="prefetch" href="/assets/js/9.994a6419.js"><link rel="prefetch" href="/assets/js/90.367fe0a7.js"><link rel="prefetch" href="/assets/js/91.bcc09268.js"><link rel="prefetch" href="/assets/js/92.c03e6f09.js"><link rel="prefetch" href="/assets/js/93.f0f0147d.js"><link rel="prefetch" href="/assets/js/94.e5c5edf9.js"><link rel="prefetch" href="/assets/js/95.56029c30.js"><link rel="prefetch" href="/assets/js/96.aee0899a.js"><link rel="prefetch" href="/assets/js/97.a8a80865.js"><link rel="prefetch" href="/assets/js/98.cdc6da17.js"><link rel="prefetch" href="/assets/js/99.666bac74.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.117964e0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/assets/venus-logo-title.svg" alt="Venus Filecoin" class="logo"> <span class="site-name can-hide">Venus Filecoin</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  Chain Service
+</a></div><div class="nav-item"><a href="/cluster/" class="nav-link router-link-active">
+  Power Service
+</a></div><div class="nav-item"><a href="/market/" class="nav-link">
+  Deal Service
+</a></div><div class="nav-item"><a href="/modules/" class="nav-link">
+  Components
+</a></div><div class="nav-item"><a href="/advanced/" class="nav-link">
+  Advanced
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  Operation
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cluster/venus-worker-config.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/cluster/venus-worker-config.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/cs/" class="nav-link">
+  Chain Service
+</a></div><div class="nav-item"><a href="/cluster/" class="nav-link router-link-active">
+  Power Service
+</a></div><div class="nav-item"><a href="/market/" class="nav-link">
+  Deal Service
+</a></div><div class="nav-item"><a href="/modules/" class="nav-link">
+  Components
+</a></div><div class="nav-item"><a href="/advanced/" class="nav-link">
+  Advanced
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  Operation
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cluster/venus-worker-config.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/cluster/venus-worker-config.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Introduction</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cluster/" aria-current="page" class="sidebar-link">Overview</a></li><li><a href="/cluster/architecture.html" class="sidebar-link">Architecture</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Deployment</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cluster/getting-started.html" class="sidebar-link">Getting started</a></li><li><a href="/cluster/venus-sector-manager-config.html" class="sidebar-link">venus-sector-manager config</a></li><li><a href="/cluster/venus-worker-config.html" aria-current="page" class="active sidebar-link">venus-worker config</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/cluster/venus-worker-config.html#worker" class="sidebar-link">[worker]</a></li><li class="sidebar-sub-header"><a href="/cluster/venus-worker-config.html#sector-manager" class="sidebar-link">[sector_manager]</a></li><li class="sidebar-sub-header"><a href="/cluster/venus-worker-config.html#sealing" class="sidebar-link">[sealing]</a></li><li class="sidebar-sub-header"><a href="/cluster/venus-worker-config.html#remote-store-deprecated" class="sidebar-link">[remote_store] deprecated</a></li><li class="sidebar-sub-header"><a href="/cluster/venus-worker-config.html#attached-selection" class="sidebar-link">[attached_selection]</a></li><li class="sidebar-sub-header"><a href="/cluster/venus-worker-config.html#attached" class="sidebar-link">[[attached]]</a></li><li class="sidebar-sub-header"><a href="/cluster/venus-worker-config.html#processors" class="sidebar-link">[processors]</a></li><li class="sidebar-sub-header"><a href="/cluster/venus-worker-config.html#a-minimal-working-configuration-file-example" class="sidebar-link">A minimal working configuration file example</a></li></ul></li><li><a href="/cluster/processors-config-example.html" class="sidebar-link">Processors config example</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Operations</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cluster/task-flow.html" class="sidebar-link">Task flow</a></li><li><a href="/cluster/task-management.html" class="sidebar-link">Task management</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Other Features</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cluster/poster.html" class="sidebar-link">poster worker</a></li><li><a href="/cluster/snapdeal.html" class="sidebar-link">Snapdeal</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Migration</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cluster/migrate-sectors.html" class="sidebar-link">Import existing sectors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="configuration-analysis-of-venus-worker"><a href="#configuration-analysis-of-venus-worker" class="header-anchor">#</a> Configuration analysis of venus-worker</h1> <p>venus-worker is the execution body of data encapsulation. Let's take a look at its configuration file structure and configuration method.</p> <p>The configuration file of <code>venus-worker</code> is in <code>toml</code> format. It should be noted that in this format, lines starting with <code>#</code> will be regarded as comments and will not take effect.</p> <p>Taking a mock instance as an example, a basic configuration might look like this:</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">worker</span><span class="token punctuation">]</span>
+<span class="token comment"># name = &quot;worker-#1&quot;</span>
+<span class="token comment"># rpc_server.host = &quot;192.168.1.100&quot;</span>
+<span class="token comment"># rpc_server.port = 17891</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">sector_manager</span><span class="token punctuation">]</span>
+<span class="token key property">rpc_client.addr</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/127.0.0.1/tcp/1789&quot;</span>
+<span class="token comment"># rpc_client.headers = { User-Agent = &quot;jsonrpc-core-client&quot; }</span>
+<span class="token comment"># piece_token = &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiMS0xMjUiLCJwZXJtIjoic2lnbiIsImV4dCI6IiJ9.JenwgK0JZcxFDin3cyhBUN41VXNvYw-_0UUT2ZOohM0&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">sealing</span><span class="token punctuation">]</span>
+<span class="token comment"># allowed_miners = [10123, 10124, 10125]</span>
+<span class="token comment"># allowed_sizes = [&quot;32GiB&quot;, &quot;64GiB&quot;]</span>
+<span class="token key property">enable_deals</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+<span class="token comment"># max_deals = 3</span>
+<span class="token key property">max_retries</span> <span class="token punctuation">=</span> <span class="token number">3</span>
+<span class="token comment"># seal_interval = &quot;30s&quot;</span>
+<span class="token comment"># recover_interval = &quot;60s&quot;</span>
+<span class="token comment"># rpc_polling_interval = &quot;180s&quot;</span>
+<span class="token comment"># ignore_proof_check = false</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;./mock-tmp/store1&quot;</span>
+<span class="token comment"># plan = &quot;snapup&quot;</span>
+<span class="token comment"># sealing.allowed_miners = [10123, 10124, 10125]</span>
+<span class="token comment"># sealing.allowed_sizes = [&quot;32GiB&quot;, &quot;64GiB&quot;]</span>
+<span class="token comment"># sealing.enable_deals = true</span>
+<span class="token comment"># sealing.max_deals = 3</span>
+<span class="token comment"># sealing.max_retries = 3</span>
+<span class="token comment"># sealing.seal_interval = &quot;30s&quot;</span>
+<span class="token comment"># sealing.recover_interval = &quot;60s&quot;</span>
+<span class="token comment"># sealing.rpc_polling_interval = &quot;180s&quot;</span>
+<span class="token comment"># sealing.ignore_proof_check = false</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;./mock-tmp/store2&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;./mock-tmp/store3&quot;</span>
+
+<span class="token comment">#deprecated</span>
+<span class="token comment"># [remote_store]</span>
+<span class="token comment"># name = &quot;persist-store1&quot;</span>
+<span class="token comment"># location = &quot;./mock-tmp/remote&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">attached</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># name = &quot;persist-store1&quot;</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;./mock-tmp/remote&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">attached_selection</span><span class="token punctuation">]</span>
+<span class="token comment"># enable_space_weighted = false</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">processors.limit</span><span class="token punctuation">]</span>
+<span class="token comment"># pc1 = 3</span>
+<span class="token comment"># pc2 = 2</span>
+<span class="token comment"># c2 = 1</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">processors.ext_locks</span><span class="token punctuation">]</span>
+<span class="token comment"># gpu1 = 1</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">processors.static_tree_d</span><span class="token punctuation">]</span>
+<span class="token comment"># 2KiB = &quot;./tmp/2k/sc-02-data-tree-d.dat&quot;</span>
+
+<span class="token comment"># fields for tree_d processor</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.tree_d</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+
+<span class="token comment"># fields for pc1 processors</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># bin = &quot;./dist/bin/venus-worker-plugin-pc1&quot;</span>
+<span class="token comment"># args = [&quot;--args-1&quot;, &quot;1&quot;, --&quot;args-2&quot;, &quot;2&quot;]</span>
+<span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;4-5&quot;</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">RUST_LOG</span> <span class="token punctuation">=</span> <span class="token string">&quot;info&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;6-7&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;12-13&quot;</span>
+
+<span class="token comment"># fields for pc2 processors</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># cgroup.cpuset = &quot;24-27&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;28-31&quot;</span>
+
+
+<span class="token comment"># fields for c2 processor</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.c2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;32-47&quot;</span>
+</code></pre></div><p>Below we will analyze the configurable items one by one.</p> <h2 id="worker"><a href="#worker" class="header-anchor">#</a> [worker]</h2> <p>The <code>worker</code> configuration item is used to configure some basic information of this instance.</p> <h3 id="basic-configuration-example"><a href="#basic-configuration-example" class="header-anchor">#</a> Basic configuration example</h3> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">worker</span><span class="token punctuation">]</span>
+<span class="token comment"># instance name, optional, string type</span>
+<span class="token comment"># By default, the IP address of the network card used to connect to `venus-sector-manager` is used as the instance name</span>
+<span class="token comment"># name = &quot;worker-#1&quot;</span>
+
+<span class="token comment"># rpc service listening address, optional, string type</span>
+<span class="token comment"># The default is &quot;0.0.0.0&quot;, that is, listening to all addresses of the machine</span>
+<span class="token comment"># rpc_server.host = &quot;192.168.1.100&quot;</span>
+
+<span class="token comment"># rpc service listening port, optional, number type</span>
+<span class="token comment"># Default is 17890</span>
+<span class="token comment"># rpc_server.port = 17891</span>
+</code></pre></div><p>In most cases, each field in this configuration item does not need to be manually configured.</p> <p>Only in some special cases, such as:</p> <ul><li>want to name each <code>venus-worker</code> instance according to your own choreography</li> <li>Don't want to monitor all network card IPs, only allow local rpc requests</li> <li>Multiple <code>venus-workers</code> are deployed on one machine, in order to avoid port conflicts, they need to be distinguished</li></ul> <p>In other scenarios, you need to manually configure the options here as needed.</p> <h2 id="sector-manager"><a href="#sector-manager" class="header-anchor">#</a> [sector_manager]</h2> <p><code>sector_manager</code> is used to configure <code>venus-sector-manager</code> related information so that <code>venus-worker</code> can connect to the corresponding service correctly.</p> <h3 id="basic-configuration-example-2"><a href="#basic-configuration-example-2" class="header-anchor">#</a> Basic configuration example</h3> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">sector_manager</span><span class="token punctuation">]</span>
+<span class="token comment"># The connection address used when constructing the rpc client, required, string type</span>
+<span class="token comment"># Can accept `multiaddr` format, also can accept url format such as `http://127.0.0.1:1789`, `ws://127.0.0.1:1789`</span>
+<span class="token comment"># Normally, use the `multiaddr` format for consistency with other components</span>
+<span class="token key property">rpc_client.addr</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/127.0.0.1/tcp/1789&quot;</span>
+
+<span class="token comment"># The http header information, optional items, dictionary type used when constructing the rpc client</span>
+<span class="token comment"># default is null</span>
+<span class="token comment"># rpc_client.headers = { User-Agent = &quot;jsonrpc-core-client&quot; }</span>
+
+<span class="token comment"># The verification token carried when requesting order piece data, optional items, string type</span>
+<span class="token comment"># default is null</span>
+<span class="token comment"># This is usually set when this instance allows encapsulation of sectors with order data</span>
+<span class="token comment"># The value of this item is usually the token value of the venus series service used</span>
+<span class="token comment"># piece_token = &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiMS0xMjUiLCJwZXJtIjoic2lnbiIsImV4dCI6IiJ9.JenwgK0JZcxFDin3cyhBUN41VXNvYw-_0UUT2ZOohM0&quot;</span>
+</code></pre></div><h2 id="sealing"><a href="#sealing" class="header-anchor">#</a> [sealing]</h2> <p><code>sealing</code> is used to configure common parameter options in the sealing process.</p> <h3 id="basic-configuration-example-3"><a href="#basic-configuration-example-3" class="header-anchor">#</a> Basic configuration example</h3> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">sealing</span><span class="token punctuation">]</span>
+<span class="token comment"># Allowed `SP`, optional, number array format</span>
+<span class="token comment"># Defaults to null, allows tasks from any `SP`</span>
+<span class="token comment"># After configuration, only package tasks from `SP` listed in the array can be executed</span>
+<span class="token comment"># allowed_miners = [10123, 10124, 10125]</span>
+
+<span class="token comment"># Allowed sector size, optional, string array format</span>
+<span class="token comment"># Defaults to null, allows sector tasks of any size</span>
+<span class="token comment"># After configuration, only tasks that match the sector size listed in the array can be executed</span>
+<span class="token comment"># allowed_sizes = [&quot;32GiB&quot;, &quot;64GiB&quot;]</span>
+
+<span class="token comment"># Whether to allow adding orders to the sector, optional, boolean type</span>
+<span class="token comment"># Default is false</span>
+<span class="token comment"># When set to true, the `piece_token` item in `sector_manager` usually needs to be set at the same time</span>
+<span class="token comment"># enable_deals = true</span>
+
+<span class="token comment"># The maximum number of orders allowed to be added to the sector, optional, number type</span>
+<span class="token comment"># default is null</span>
+<span class="token comment"># max_deals = 3</span>
+
+<span class="token comment"># When an error of the temp type is encountered during the encapsulation process, the number of retries, optional items, number format</span>
+<span class="token comment"># default is 5</span>
+<span class="token comment"># max_retries = 3</span>
+
+<span class="token comment"># When a temp type error is encountered during the encapsulation process, the retry interval, optional items, time string format</span>
+<span class="token comment"># The default is &quot;30s&quot;, which is 30 seconds</span>
+<span class="token comment"># recover_interval = &quot;30s&quot;</span>
+
+<span class="token comment"># Idle `sealing_store` application interval for sealing tasks, optional, time string format</span>
+<span class="token comment"># The default is &quot;30s&quot;, which is 30 seconds</span>
+<span class="token comment"># seal_interval = &quot;30s&quot;</span>
+
+<span class="token comment"># rpc status polling request interval, optional, time string format</span>
+<span class="token comment"># The default is &quot;180s&quot;, which is 180 seconds</span>
+<span class="token comment"># During the encapsulation process, some links use the polling method to obtain non-real-time information, such as message uploading.</span>
+<span class="token comment"># This value helps to avoid overly frequent requests consuming network resources</span>
+<span class="token comment"># rpc_polling_interval = &quot;180s&quot;</span>
+
+<span class="token comment"># Whether to skip the local verification link of proof, optional, boolean format</span>
+<span class="token comment"># Default is false</span>
+<span class="token comment"># Usually only set this for things like testing</span>
+<span class="token comment"># ignore_proof_check = false</span>
+</code></pre></div><p>The configuration items in <code>sealing</code> usually have default items preset by experience, which makes us not need to configure it by ourselves in most cases.</p> <h3 id="special-configuration-example"><a href="#special-configuration-example" class="header-anchor">#</a> Special configuration example</h3> <h4 id="_1-test-network-serving-only-specific-sp"><a href="#_1-test-network-serving-only-specific-sp" class="header-anchor">#</a> 1. Test network, serving only specific <code>SP</code></h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token key property">allowed_miners</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token number">2234</span><span class="token punctuation">,</span> <span class="token number">2236</span><span class="token punctuation">,</span> <span class="token number">2238</span><span class="token punctuation">]</span>
+</code></pre></div><h4 id="_2-large-scale-clusters-to-reduce-network-usage"><a href="#_2-large-scale-clusters-to-reduce-network-usage" class="header-anchor">#</a> 2. Large-scale clusters to reduce network usage</h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token comment"># Among the recoverable exceptions, a considerable part is caused by network jitter, increase the interval of automatic recovery and reduce the frequency of requests</span>
+<span class="token key property">recover_interval</span> <span class="token punctuation">=</span> <span class="token string">&quot;90s&quot;</span>
+
+<span class="token comment"># The polling request in the normal process also increases the interval time and reduces the request frequency</span>
+<span class="token key property">rpc_polling_interval</span> <span class="token punctuation">=</span> <span class="token string">&quot;300s&quot;</span>
+</code></pre></div><h4 id="_3-increase-the-possibility-of-abnormal-self-healing-of-sectors"><a href="#_3-increase-the-possibility-of-abnormal-self-healing-of-sectors" class="header-anchor">#</a> 3. Increase the possibility of abnormal self-healing of sectors</h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token comment"># Increase the number of autorecovery attempts</span>
+<span class="token key property">max_retries</span> <span class="token punctuation">=</span> <span class="token number">10</span>
+
+<span class="token comment"># Increase the auto-recovery interval</span>
+<span class="token key property">recover_interval</span> <span class="token punctuation">=</span> <span class="token string">&quot;60s&quot;</span>
+</code></pre></div><p>##[[sealing_thread]]</p> <p><code>sealing_thread</code> is used to configure for each sector worker thread. Multiple <code>sealing_thread</code> configuration groups can exist in a configuration file.</p> <h3 id="basic-configuration-example-4"><a href="#basic-configuration-example-4" class="header-anchor">#</a> Basic configuration example</h3> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># Sector data directory path, required, string type</span>
+<span class="token comment"># It is recommended to use an absolute path, the data directory and the worker thread are bound one-to-one</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;/mnt/nvme1/store&quot;</span>
+
+<span class="token comment"># task type, optional, string type</span>
+<span class="token comment"># Default value is null</span>
+<span class="token comment"># Optionally fill in sealer or snapup, when not filled in, the default is equivalent to selaer</span>
+<span class="token comment"># plan = &quot;snapup&quot;</span>
+
+<span class="token comment"># Custom parameters of the encapsulation process, only valid for the current worker thread</span>
+<span class="token comment"># sealing.allowed_miners = [10123, 10124, 10125]</span>
+<span class="token comment"># sealing.allowed_sizes = [&quot;32GiB&quot;, &quot;64GiB&quot;]</span>
+<span class="token comment"># sealing.enable_deals = true</span>
+<span class="token comment"># sealing.max_retries = 3</span>
+<span class="token comment"># sealing.seal_interval = &quot;30s&quot;</span>
+<span class="token comment"># sealing.recover_interval = &quot;60s&quot;</span>
+<span class="token comment"># sealing.rpc_polling_interval = &quot;180s&quot;</span>
+<span class="token comment"># sealing.ignore_proof_check = false</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;/mnt/nvme2/store&quot;</span>
+
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;/mnt/nvme3/store&quot;</span>
+</code></pre></div><p>The number of <code>sealing_thread</code> and the corresponding data paths need to be arranged according to the planning situation.</p> <p>In order to facilitate combination and matching, each <code>sealing_thread</code> can be configured with an independent <code>sealing</code> sub-item, which satisfies:</p> <ul><li><p>The naming, type and effect of configurable items are consistent with the general <code>sealing</code> items</p></li> <li><p>Only valid for the current worker thread</p></li> <li><p>When not configured use the value in the generic <code>sealing</code> item</p></li></ul> <h3 id="special-configuration-example-2"><a href="#special-configuration-example-2" class="header-anchor">#</a> Special configuration example</h3> <h4 id="_1-two-worker-threads-each-serving-a-different-sp"><a href="#_1-two-worker-threads-each-serving-a-different-sp" class="header-anchor">#</a> 1. Two worker threads, each serving a different <code>SP</code></h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;/mnt/nvme2/store&quot;</span>
+<span class="token key property">sealing.allowed_miners</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token number">1357</span><span class="token punctuation">]</span>
+
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;/mnt/nvme3/store&quot;</span>
+<span class="token key property">sealing.allowed_miners</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token number">2468</span><span class="token punctuation">]</span>
+</code></pre></div><h4 id="_2-two-worker-threads-each-serving-different-sector-sizes"><a href="#_2-two-worker-threads-each-serving-different-sector-sizes" class="header-anchor">#</a> 2. Two worker threads, each serving different sector sizes</h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;/mnt/nvme2/store&quot;</span>
+<span class="token key property">sealing.allowed_sizes</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;32GiB&quot;</span><span class="token punctuation">]</span>
+
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;/mnt/nvme3/store&quot;</span>
+<span class="token key property">sealing.allowed_sizes</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;64GiB&quot;</span><span class="token punctuation">]</span>
+</code></pre></div><h2 id="remote-store-deprecated"><a href="#remote-store-deprecated" class="header-anchor">#</a> [remote_store] deprecated</h2> <p><code>remote_store</code> is used to configure where the completed sector persistent data is saved.</p> <h3 id="basic-configuration-example-5"><a href="#basic-configuration-example-5" class="header-anchor">#</a> Basic configuration example</h3> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">remote_store</span><span class="token punctuation">]</span>
+<span class="token comment"># name, optional, string type</span>
+<span class="token comment"># The default is the absolute path corresponding to the path</span>
+<span class="token comment"># name = &quot;remote-store1&quot;</span>
+
+<span class="token comment"># path, required, string type</span>
+<span class="token comment"># It is recommended to fill in the absolute path directly</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;/mnt/remote/10.0.0.14/store&quot;</span>
+
+</code></pre></div><p>Due to the need to coordinate storage location information between <code>venus-worker</code> and <code>venus-sector-manager</code>, in many cases the same persistent storage directory is on the <code>venus-worker</code> machine and the <code>venus-sector-manager</code> The mount paths on the machines are not exactly the same, so we decided to use <code>name</code> as the basis for coordination.</p> <p>You can also choose not to configure <code>name</code> on both sides of <code>venus-worker</code> and <code>venus-sector-manager</code> during configuration if the mount path of the persistent storage directory is the same on all machines. In this case, both will use the absolute path as the <code>name</code>, which will also match.</p> <h2 id="attached-selection"><a href="#attached-selection" class="header-anchor">#</a> [attached_selection]</h2> <p><code>attached_selection</code> is used to configure the location where the persistent data of the selected sector is saved</p> <h3 id="basic-configuration-example-6"><a href="#basic-configuration-example-6" class="header-anchor">#</a> Basic configuration example</h3> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">attached_selection</span><span class="token punctuation">]</span>
+<span class="token comment"># Whether to enable the selection strategy with the remaining space as the weight, optional, boolean type</span>
+<span class="token comment"># Default is false</span>
+<span class="token comment"># enable_space_weighted = false</span>
+
+</code></pre></div><h2 id="attached"><a href="#attached" class="header-anchor">#</a> [[attached]]</h2> <p><code>attached</code> is used to configure where the completed sector persistent data is saved, allowing multiple configurations at the same time.</p> <h3 id="basic-configuration-example-7"><a href="#basic-configuration-example-7" class="header-anchor">#</a> Basic configuration example</h3> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">attached</span><span class="token punctuation">]</span>
+<span class="token comment"># name, optional, string type</span>
+<span class="token comment"># The default is the absolute path corresponding to the path</span>
+<span class="token comment"># name = &quot;remote-store1&quot;</span>
+
+<span class="token comment"># path, required, string type</span>
+<span class="token comment"># It is recommended to fill in the absolute path directly</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;/mnt/remote/10.0.0.14/store&quot;</span>
+
+<span class="token comment"># read only, optional, boolean</span>
+<span class="token comment"># Default is false</span>
+<span class="token comment"># readonly = true</span>
+
+</code></pre></div><p>Due to the need to coordinate storage location information between <code>venus-worker</code> and <code>venus-sector-manager</code>, in many cases the same persistent storage directory is on the <code>venus-worker</code> machine and the <code>venus-sector-manager</code> The mount paths on the machines are not exactly the same, so we decided to use <code>name</code> as the basis for coordination.</p> <p>You can also choose not to configure <code>name</code> on both sides of <code>venus-worker</code> and <code>venus-sector-manager</code> during configuration if the mount path of the persistent storage directory is the same on all machines. In this case, both will use the absolute path as the <code>name</code>, which will also match.</p> <h2 id="processors"><a href="#processors" class="header-anchor">#</a> [processors]</h2> <p><code>processors</code> is used to configure encapsulated executors, and to encapsulate some information during computation.</p> <p>This configuration item is actually divided into three sub-items, and we analyze them one by one.</p> <h3 id="processors-limit"><a href="#processors-limit" class="header-anchor">#</a> [processors.limit]</h3> <p><code>processors.limit</code> is used to configure the control of the number of parallel tasks for different packaging stages. This is to reduce the competition for resources at different stages.</p> <p>It should be noted that when external executors are configured, the number of external executors and the total allowed concurrency will also affect the number of parallel tasks.</p> <h4 id="basic-configuration-example-8"><a href="#basic-configuration-example-8" class="header-anchor">#</a> Basic configuration example</h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">processors.limit</span><span class="token punctuation">]</span>
+<span class="token comment"># tree_d stage concurrency limit, optional, number type</span>
+<span class="token comment"># tree_d = 1</span>
+
+<span class="token comment"># Concurrency limit for the pc1 stage, optional, number type</span>
+<span class="token comment"># pc1 = 3</span>
+
+<span class="token comment"># Concurrency limit of the pc2 stage, optional, number type</span>
+<span class="token comment"># pc2 = 2</span>
+
+<span class="token comment"># Concurrency limit for stage c2, optional, number type</span>
+<span class="token comment"># c2 = 1</span>
+</code></pre></div><p>For example, if <code>pc2 = 2</code> is set, then at most two sectors can perform tasks in the <code>pc2</code> phase at the same time.</p> <h3 id="processors-ext-locks"><a href="#processors-ext-locks" class="header-anchor">#</a> [processors.ext_locks]</h3> <p><code>processors.ext_locks</code> is used to configure some custom lock restrictions, which is used in conjunction with the <code>locks</code> configuration item in <code>[[processors.{stage_name}]]</code>.
+This configuration item allows users to customize some restrictions and make different external processors subject to them.</p> <h4 id="basic-configuration-example-9"><a href="#basic-configuration-example-9" class="header-anchor">#</a> Basic configuration example</h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">processors.ext_locks</span><span class="token punctuation">]</span>
+<span class="token comment"># some_name = some_number</span>
+</code></pre></div><h4 id="special-configuration-example-3"><a href="#special-configuration-example-3" class="header-anchor">#</a> Special configuration example</h4> <p><code>processors.ext_locks</code> is not self-contained.</p> <h5 id="a-gpu-shared-by-pc2-and-c2"><a href="#a-gpu-shared-by-pc2-and-c2" class="header-anchor">#</a> A GPU, shared by pc2 and c2</h5> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">processors.ext_locks</span><span class="token punctuation">]</span>
+<span class="token key property">gpu</span><span class="token punctuation">=</span><span class="token number">1</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">locks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;gpu&quot;</span><span class="token punctuation">]</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.c2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">locks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;gpu&quot;</span><span class="token punctuation">]</span>
+</code></pre></div><p>In this way, <code>pc2</code> <code>c2</code> will each start an external processor, and the two will compete, which means that the two will not happen at the same time.</p> <h5 id="two-gpus-common-to-pc2-and-c2"><a href="#two-gpus-common-to-pc2-and-c2" class="header-anchor">#</a> Two GPUs, common to pc2 and c2</h5> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">processors.ext_locks</span><span class="token punctuation">]</span>
+<span class="token key property">gpu1</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+<span class="token key property">gpu2</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">locks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;gpu1&quot;</span><span class="token punctuation">]</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">locks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;gpu2&quot;</span><span class="token punctuation">]</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.c2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">locks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;gpu1&quot;</span><span class="token punctuation">]</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.c2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">locks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;gpu2&quot;</span><span class="token punctuation">]</span>
+</code></pre></div><p>In this way, <code>pc2</code> <code>c2</code> will each start two external processors, which will create a two-two competition relationship, which allows to limit a GPU to only execute one of the stages of tasks.</p> <h3 id="processors-static-tree-d"><a href="#processors-static-tree-d" class="header-anchor">#</a> [processors.static_tree_d]</h3> <p><code>processors.static_tree_d</code> is a configuration item introduced to improve the efficiency of <code>cc sector</code>.</p> <p>When a static file path is configured for the corresponding sector size, this file will be used directly as the tree_d file for <code>cc sector</code> without trying to generate it again.</p> <h4 id="basic-configuration-example-10"><a href="#basic-configuration-example-10" class="header-anchor">#</a> Basic configuration example</h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">processors.static_tree_d</span><span class="token punctuation">]</span>
+<span class="token key property">2KiB</span> <span class="token punctuation">=</span> <span class="token string">&quot;/var/tmp/2k/sc-02-data-tree-d.dat&quot;</span>
+<span class="token key property">32GiB</span> <span class="token punctuation">=</span> <span class="token string">&quot;/var/tmp/32g/sc-02-data-tree-d.dat&quot;</span>
+<span class="token key property">64GiB</span> <span class="token punctuation">=</span> <span class="token string">&quot;/var/tmp/64g/sc-02-data-tree-d.dat&quot;</span>
+</code></pre></div><h3 id="processors-stage-name"><a href="#processors-stage-name" class="header-anchor">#</a> [[processors.{stage_name}]]</h3> <p>This is the configuration group used to configure external actuators.</p> <p>Currently <code>{stage_name}</code> is optional</p> <ul><li><code>tree_d</code></li> <li><code>pc1</code></li> <li><code>pc2</code></li> <li><code>c2</code></li></ul> <p>Each such configuration group means that an external executor of the corresponding stage will be started. The optional configuration items include:</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># Custom external executor executable file path, optional, string type</span>
+<span class="token comment"># By default, the executable file path corresponding to the main process will be used</span>
+<span class="token comment"># bin = &quot;./dist/bin/venus-worker-plugin-pc1&quot;</span>
+
+<span class="token comment"># Customize the parameters of the external actuator, optional items, string array type</span>
+<span class="token comment"># The default value is null, `venus-worker`'s own executor default parameters will be used</span>
+<span class="token comment"># args = [&quot;--args-1&quot;, &quot;1&quot;, --&quot;args-2&quot;, &quot;2&quot;]</span>
+
+<span class="token comment"># numa affinity partition id, optional, number type</span>
+<span class="token comment"># Default value is null, no affinity will be set</span>
+<span class="token comment"># Need to fill in according to the host's numa partition</span>
+<span class="token comment"># numa_preferred = 0</span>
+
+<span class="token comment"># cpu core binding and limit options, optional, string type</span>
+<span class="token comment"># The default value is null, no binding is set</span>
+<span class="token comment"># The format of the value follows the standard cgroup.cpuset format</span>
+<span class="token comment"># cgroup.cpuset = &quot;4-5&quot;</span>
+
+<span class="token comment"># Additional environment variables for external executors, optional, dictionary type</span>
+<span class="token comment"># Default value is null</span>
+<span class="token comment"># envs = { RUST_LOG = &quot;info&quot; }</span>
+
+<span class="token comment"># The maximum number of concurrent tasks allowed by this executor</span>
+<span class="token comment"># The default value is null, unlimited, but whether the task is executed concurrently depends on the implementation of the external executor used</span>
+<span class="token comment"># Mainly used in pc1 so that multiple parallel links can be used, which can effectively save resources such as shared memory and thread pools</span>
+<span class="token comment"># concurrent = 4</span>
+
+<span class="token comment"># Custom external limit lock name, optional, string array type</span>
+<span class="token comment"># Default value is null</span>
+<span class="token comment"># locks = [&quot;gpu1&quot;]</span>
+</code></pre></div><h4 id="basic-configuration-example-11"><a href="#basic-configuration-example-11" class="header-anchor">#</a> Basic configuration example</h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">processors.limit</span><span class="token punctuation">]</span>
+<span class="token key property">pc1</span> <span class="token punctuation">=</span> <span class="token number">4</span>
+<span class="token key property">pc2</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+<span class="token key property">c2</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;0-7&quot;</span>
+<span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;12-19&quot;</span>
+<span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;8-11,24-27&quot;</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_GPU_COLUMN_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">FIL_PROOFS_USE_GPU_TREE_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;0&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;20-23,36-39&quot;</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_GPU_COLUMN_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">FIL_PROOFS_USE_GPU_TREE_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.c2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;28-35&quot;</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;2,3&quot;</span> <span class="token punctuation">}</span>
+
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.tree_d</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;40-45&quot;</span>
+</code></pre></div><p>The above is an example <code>processors.{stage_name}</code> configuration for a 48C + 4GPU based device. Under this configuration, it will start:</p> <ul><li>2 <code>pc1</code> external executors, using <code>MULTICORE_SDR</code> mode, each with 8 cores, allowing 2 concurrent tasks, and memory allocation preferentially uses this numa partition</li> <li>2 <code>pc2</code> external executors, each with 8 cores, each using a GPU</li> <li>1 <code>c2</code> external executor, allocated 8 cores, using a GPU</li> <li>1 <code>tree_d</code> external executor with 6 cores allocated</li></ul> <h4 id="special-configuration-example-4"><a href="#special-configuration-example-4" class="header-anchor">#</a> Special configuration example</h4> <h5 id="_1-closed-source-algorithmically-optimized-c2-external-executor-using-patch"><a href="#_1-closed-source-algorithmically-optimized-c2-external-executor-using-patch" class="header-anchor">#</a> 1. Closed source, algorithmically optimized c2 external executor using patch</h5> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.c2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">bin</span><span class="token punctuation">=</span>/usr/local/bin/venus-worker-c2-optimized
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;40-47&quot;</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;2,3&quot;</span> <span class="token punctuation">}</span>
+</code></pre></div><h5 id="_2-c2-external-executor-using-outsourced-mode"><a href="#_2-c2-external-executor-using-outsourced-mode" class="header-anchor">#</a> 2. c2 external executor using outsourced mode</h5> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.c2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">bin</span><span class="token punctuation">=</span>/usr/local/bin/venus-worker-c2-outsource
+<span class="token key property">args</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;--url&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;/ip4/apis.filecoin.io/tcp/10086/https&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;--timeout&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;10s&quot;</span><span class="token punctuation">]</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">LICENCE_PATH</span> <span class="token punctuation">=</span> <span class="token string">&quot;/var/tmp/c2.licence.dev&quot;</span> <span class="token punctuation">}</span>
+</code></pre></div><h5 id="_3-use-cpu-mode-to-make-up-for-pc2-computing-power-when-gpu-is-insufficient"><a href="#_3-use-cpu-mode-to-make-up-for-pc2-computing-power-when-gpu-is-insufficient" class="header-anchor">#</a> 3. Use CPU mode to make up for pc2 computing power when GPU is insufficient</h5> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;8-11,24-27&quot;</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_GPU_COLUMN_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">FIL_PROOFS_USE_GPU_TREE_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;0&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;20-23,36-45&quot;</span>
+</code></pre></div><h4 id="_4-under-the-optimal-ratio-the-total-amount-of-pc1-is-odd-and-cannot-be-divided-equally"><a href="#_4-under-the-optimal-ratio-the-total-amount-of-pc1-is-odd-and-cannot-be-divided-equally" class="header-anchor">#</a> 4. Under the optimal ratio, the total amount of pc1 is odd and cannot be divided equally</h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">processors.limit</span><span class="token punctuation">]</span>
+<span class="token key property">pc1</span> <span class="token punctuation">=</span> <span class="token number">29</span>
+<span class="token key property">pc2</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+<span class="token key property">c2</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;0-41&quot;</span>
+<span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">14</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;48-92&quot;</span>
+<span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">15</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+</code></pre></div><h4 id="_5-hope-to-use-numa-0-area-to-complete-pc1-first"><a href="#_5-hope-to-use-numa-0-area-to-complete-pc1-first" class="header-anchor">#</a> 5. Hope to use numa 0 area to complete pc1 first</h4> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">processors.limit</span><span class="token punctuation">]</span>
+<span class="token key property">pc1</span> <span class="token punctuation">=</span> <span class="token number">29</span>
+<span class="token key property">pc2</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+<span class="token key property">c2</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;0-47&quot;</span>
+<span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">16</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;48-86&quot;</span>
+<span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">13</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+</code></pre></div><h2 id="a-minimal-working-configuration-file-example"><a href="#a-minimal-working-configuration-file-example" class="header-anchor">#</a> A minimal working configuration file example</h2> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">sector_manager</span><span class="token punctuation">]</span>
+<span class="token key property">rpc_client.addr</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/{some_ip}/tcp/1789&quot;</span>
+
+<span class="token comment"># According to actual resource planning</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store1}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store2}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store3}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store4}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store5}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store6}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store7}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">sealing_thread</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to sealing store8}&quot;</span>
+
+
+<span class="token punctuation">[</span><span class="token table class-name">remote_store</span><span class="token punctuation">]</span>
+<span class="token key property">name</span> <span class="token punctuation">=</span> <span class="token string">&quot;{remote store name}&quot;</span>
+<span class="token key property">location</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to remote store}&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">processors.static_tree_d</span><span class="token punctuation">]</span>
+<span class="token key property">32GiB</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to static tree_d for 32GiB}&quot;</span>
+<span class="token key property">64GiB</span> <span class="token punctuation">=</span> <span class="token string">&quot;{path to static tree_d for 64GiB}&quot;</span>
+
+<span class="token comment"># According to actual resource planning</span>
+<span class="token punctuation">[</span><span class="token table class-name">processors.limit</span><span class="token punctuation">]</span>
+<span class="token key property">pc1</span> <span class="token punctuation">=</span> <span class="token number">4</span>
+<span class="token key property">pc2</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+<span class="token key property">c2</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;0-7&quot;</span>
+<span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">numa_preferred</span> <span class="token punctuation">=</span> <span class="token number">1</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;12-19&quot;</span>
+<span class="token key property">concurrent</span> <span class="token punctuation">=</span> <span class="token number">2</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_MULTICORE_SDR</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;8-11,24-27&quot;</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_GPU_COLUMN_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">FIL_PROOFS_USE_GPU_TREE_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;0&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.pc2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;20-23,36-39&quot;</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">FIL_PROOFS_USE_GPU_COLUMN_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">FIL_PROOFS_USE_GPU_TREE_BUILDER</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;1&quot;</span> <span class="token punctuation">}</span>
+
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.c2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;28-35&quot;</span>
+<span class="token key property">envs</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">CUDA_VISIBLE_DEVICES</span> <span class="token punctuation">=</span> <span class="token string">&quot;2,3&quot;</span> <span class="token punctuation">}</span>
+
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">processors.tree_d</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token key property">cgroup.cpuset</span> <span class="token punctuation">=</span> <span class="token string">&quot;40-45&quot;</span>
+</code></pre></div><p>After planning according to the actual situation and filling in the corresponding information, the above is a copy:</p> <ul><li>only do <code>cc sector</code></li> <li>tree_d free for 32GiB and 64GiB sectors</li> <li>Integrated resource allocation</li></ul> <p>The minimal configuration file.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/filecoin-project/venus-docs/edit/master/docs/cluster/venus-worker-config.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">6/23/2022, 5:07:27 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/cluster/venus-sector-manager-config.html" class="prev">
+        venus-sector-manager config
+      </a></span> <span class="next"><a href="/cluster/processors-config-example.html">
+        Processors config example
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.6c6b37e5.js" defer></script><script src="/assets/js/2.9fe70abb.js" defer></script><script src="/assets/js/45.5d9145d9.js" defer></script>
+  </body>
+</html>
