@@ -113,7 +113,7 @@ $ ./venus-auth user list
 Download and compile the source code of venus-gateway.
 
 ```bash
-$ git clone https://github.com/filecoin-project/venus-gateway.git
+$ git clone https://github.com/ipfs-force-community/venus-gateway.git
 $ cd venus-gateway
 $ git checkout <RELEASE_TAG>
 $ make
