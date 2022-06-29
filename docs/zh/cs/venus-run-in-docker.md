@@ -27,10 +27,10 @@ docker-compose down
 #### 直接通过变量文件启动 Venus 服务
 
 ```shell
-# 下载配置文件
-wget https://github.com/filecoin-project/venus-docs/raw/feat/docker-docs/script/docker-compose.yaml 
+# 下载配置文件(同上)
 
-# ./env 
+
+# 编写环境变量文件 ./env 
 # 
 snapshot=/path/to/your/snapshot.car   # required
 nettype=<nettype>    # default:butterfly
@@ -118,7 +118,7 @@ docker run -d  --name venus-miner --net=host filvenus/venus-miner init \
 docker run -d --name venus-market --net=host \
 -v </path/to/your/PieceStorage>:/PieceStorage
 filvenus/venus-market  pool-run \
---node-url=/ip4/[<VENUS_NODE_IP_ADDRESS>](127.0.0.1)/tcp/3453  \
+--node-url=/ip4/<VENUS_NODE_IP_ADDRESS>/tcp/3453  \
 --auth-url=http://<VENUS_AUTH_IP_ADDRESS:PORT> \
 --gateway-url=/ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132 \
 --messager-url=/ip4/<VENUS_MESSAGER_IP_ADDRESS>/tcp/39812/ \
