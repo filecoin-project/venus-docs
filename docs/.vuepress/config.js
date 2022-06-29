@@ -263,7 +263,8 @@ module.exports = {
                             title: 'Upgrade',
                             collapsable: false,
                             children: [
-                                ['Nv15_upgrade_guide.md', 'nv15 upgrade'],
+                                ['nv15-upgrade.md', 'nv15 upgrade'],
+                                ['nv16-upgrade.md', 'nv16 upgrade'],
                             ]
                         },
                     ],
@@ -476,7 +477,8 @@ module.exports = {
                             title: '网络/组件升级',
                             collapsable: false,
                             children: [
-                                ['Nv15_upgrade_guide.md', 'nv15网络升级'],
+                                ['nv15-upgrade.md', 'nv15网络升级'],
+                                ['nv16-upgrade.md', 'nv16网络升级'],
                                 ['migrate_market_v1_to_v2.md', 'market_v2升级'],
                             ]
                         },
