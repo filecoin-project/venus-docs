@@ -1,8 +1,9 @@
-# snapshot (required)
+# snapshot (optionnal)
 # nettype (default:butterfly)
 # piecestorage (defaul:./.venus/storage/)
 # proxy (optional)
 # TZ (optional)
+
 
 version: '3'
 services:
@@ -24,7 +25,7 @@ services:
       - 3453:3453
     network_mode: "host"
     volumes:
-      - ${snapshot?snapshot.car is needed!}:/snapshot.car
+      - ${snapshot-./.venus/storage/snapshot.car}:/snapshot.car
       - ./.venus/env:/env
       - ./.venus/root:/root
     environment:
