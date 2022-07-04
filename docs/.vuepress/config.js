@@ -208,20 +208,26 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'venus daemon'],
-                                ['Venus-Auth.md', 'venus-auth'],
+                                ['venus-auth.md', 'venus-auth'],
                                 ['venus-miner.md', 'venus-miner'],
-                                ['How-To-Use-Messager.md', 'venus-messager'],
-                                ['Venus-Gateway.md', 'venus-gateway'],
-                                ['How-To-Use-Wallet-In-Venus.md', 'venus-wallet (local)'],
-                                ['Venus-Market.md', 'venus-market'],
+                                ['venus-messager.md', 'venus-messager'],
+                                ['venus-gateway.md', 'venus-gateway'],
+                                ['venus-wallet-builtin.md', 'venus-wallet (builtin)'],
                             ]
                         },
                         {
                             title: 'Local Component',
                             collapsable: false,
                             children: [
-                                ['Venus-Wallet.md', 'venus-wallet (remote)'],
-                                ['Venus-Worker.md', 'venus-worker'],
+                                ['venus-cluster.md', 'venus-cluster'],
+                                ['venus-wallet.md', 'venus-wallet (remote)'],
+                            ]
+                        },
+                        {
+                            title: 'Hybrid Component',
+                            collapsable: false,
+                            children: [
+                                ['venus-market.md', 'venus-market'],          
                             ]
                         },
                     ],
@@ -420,21 +426,33 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['', 'Venus daemon'],
-                                ['Venus-Auth.md', 'venus-auth'],
+                                ['venus-auth.md', 'venus-auth'],
                                 ['venus-miner.md', 'venus-miner'],
-                                ['How-To-Use-Messager.md', 'venus-messager'],
+                                ['venus-messager.md', 'venus-messager'],
                                 ['venus-gateway.md', 'venus-gateway'],
-                                ['How-To-Use-Wallet-In-Venus.md', 'venus-wallet（本地）'],
+                                ['venus-wallet-builtin.md', 'venus-wallet（内置）'],
                             ]
                         },
                         {
                             title: '本地组件',
                             collapsable: false,
                             children: [
-                                ['Venus-Cluster.md', 'venus-cluster'],
-                                ['Venus-Market.md', 'venus-market'],
-                                ['Venus-Worker.md', 'venus-worker（sealer）'],
-                                ['Venus-Wallet.md', 'venus-wallet（远程）'],
+                                ['venus-cluster.md', 'venus-cluster'],
+                                ['venus-wallet.md', 'venus-wallet（远程）'],
+                            ]
+                        },
+                        {
+                            title: '混合组件',
+                            collapsable: false,
+                            children: [
+                                ['venus-market.md', 'venus-market'],
+                            ]
+                        },
+                        {
+                            title: '组件构建',
+                            collapsable: false,
+                            children: [
+                                ['build.md', '全组件构建'],
                             ]
                         },
                     ],
