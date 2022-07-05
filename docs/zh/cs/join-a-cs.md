@@ -178,6 +178,14 @@ $ make all
 编译完成后，会在 ./dist/bin 目录下有`venus-worker`和`venus-sector-manager`两个可执行文件。
 :::
 
+### venus-sector-manager
+
+初始化工作目录
+
+```bash
+./dist/bin/venus-sector-manager daemon init
+```
+
 ### 创建矿工号（可选）
 
 创建矿工号。（如果已经有矿工号可以跳过此步）
@@ -204,13 +212,7 @@ $ ./venus-sector-manager util miner create
 ```
 :::
 
-### venus-sector-manager
-
-初始化工作目录
-
-```bash
-./dist/bin/venus-sector-manager daemon init
-```
+### 配置venus-sector-manager
 
 按需配置默认配置文件`~/.venus-sector-manager/sector-manager.cfg`。这里给出一份参考，详细配置说明可以参见[这里](/zh/cluster/Venus-Sector-Manager)。
 

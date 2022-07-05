@@ -199,6 +199,15 @@ $ make all
 After compilation, two executable, `venus-worker` and `venus-sector-manager`, will be generated under `./dist/bin`.
 :::
 
+
+### venus-sector-manager
+
+Initialize work space.
+
+```bash
+./dist/bin/venus-sector-manager daemon init
+```
+
 ### Create a miner-id（optional）
 
 Skip this step if you already have a miner-id.
@@ -225,13 +234,7 @@ You will see logs similar to the following once successfully created new miner-i
 ```
 :::
 
-### venus-sector-manager
-
-Initialize work space.
-
-```bash
-./dist/bin/venus-sector-manager daemon init
-```
+### venus-sector-manager configurations
 
 Tailor `~/.venus-sector-manager/sector-manager.cfg` to your own hardware. Detailed instructions on each configurations could be found [here](/zh/cluster/Venus-Sector-Manager).
 
