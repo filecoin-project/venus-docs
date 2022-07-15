@@ -3,7 +3,7 @@
 # piecestorage (defaul:./.venus/storage/)
 # proxy (optional)
 # TZ (optional)
-
+# genesisfile (optional)
 
 version: '3'
 services:
@@ -26,12 +26,15 @@ services:
     network_mode: "host"
     volumes:
       - ${snapshot-./.venus/storage/snapshot.car}:/snapshot.car
+      - ${genesisfile-./.venus/storage/genesis.gen}:/genesis.gen
       - ./.venus/env:/env
       - ./.venus/root:/root
     environment:
       - HTTPS_PROXY=${proxy}
       - nettype=${nettype-butterfly}
       - TZ=${TZ-UTC}
+      - snapshot=${snapshot}
+      - genesisfile=${genesisfile}
     entrypoint: "/script/compose.sh"
     depends_on:
       - auth
