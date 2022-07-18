@@ -20,7 +20,7 @@ $ make
 Start venus-market.
 
 ```shell script
-$ ./venus-market run --node-url <node url> --messager-url <messager-url> --auth-token <auth token>  --signer-url <wallet url> --signer-token  <wallet token> --piecestorage <piece storeage path> --miner <miner address>
+$ ./venus-market run --node-url <node url> --messager-url <messager-url> --auth-token <auth token>  --signer-url <wallet url> --signer-token  <wallet token>  --miner <miner address>
 ```
 
 Start client.

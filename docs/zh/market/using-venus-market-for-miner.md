@@ -22,10 +22,12 @@ ListenAddress = "/ip4/0.0.0.0/tcp/41235"
 ```yuml
 [PieceStorage]
   [PieceStorage.Fs]
-    Enable = false
+    Name:""
+    ReadOnly = false
     Path = ""
   [PieceStorage.S3]
-    Enable = true
+    Name:""
+    ReadOnly = true
     EndPoint = "http://oss-cn-shanghai.aliyuncs.com/venus-market-test"
     AccessKey = "LTAI5t6HiFgsqN6eVJ......"
     SecretKey = "AlFNH9NakUsVjVRxMHaaYP7p......"
@@ -49,7 +51,6 @@ PublishMsgPeriod = "10s"
   --node-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiMS0xMjUiLCJwZXJtIjoic2lnbiIsImV4dCI6IiJ9.JenwgK0JZcxFDin3cyhBUN41VXNvYw-_0UUT2ZOohM0 \
   --wallet-url=/ip4/127.0.0.1/tcp/5678/http \
   --wallet-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.lE180EhNrEu1yGmnVEmT2vySD3UpiUU73kKTYpgQhJ0 \
-  --piecestorage=fs:/Users/zl/Downloads/pieces_solo --miner=t01051:accountName
 ```
 参数说明:
 - node-url, 可以为自己的venus节点, 也可以是链服务的venus节点
@@ -66,7 +67,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiw
 #### 使用自己的venus节点
 
 ```shell
-./venus-market solo-run --node-url=/ip4/192.168.200.21/tcp/3454/ --node-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.OmJkVf10xXip7U0mSvX09gDG806tkFximCOrTxROIPg --piecestorage=fs:/Users/zl/Downloads/pieces_solo --miner=t01041:accountName
+./venus-market solo-run --node-url=/ip4/192.168.200.21/tcp/3454/ --node-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.OmJkVf10xXip7U0mSvX09gDG806tkFximCOrTxROIPg --miner=t01041:accountName
 ```
 
 参数说明:
@@ -428,10 +429,12 @@ ID  State              OnChain  Active  Expiration                    Deals  Dea
 ```yaml
 [PieceStorage]
   [PieceStorage.Fs]
-    Enable = true
+    Name:""
+    ReadOnly = true
     Path = "/path/pieces_store"
   [PieceStorage.S3]
-    Enable = false
+    Name:""
+    ReadOnly = false
     EndPoint = ""
     AccessKey = ""
     SecretKey = ""
@@ -440,6 +443,4 @@ ID  State              OnChain  Active  Expiration                    Deals  Dea
 在设置为`Fs`模式下,market和sealer的`Path`配置应该是指向的同一个物理机的同一个路径下.
 在测试时,如果没有指向同样的配置, 或者market和sealer不在同一个机器上也没有映射共享目录, sealer会找不到piece文件的.
 这种情况需要在开始封装扇区之前将market目录下的对应deal的piece文件拷贝到sealer的piece store目录中.
-
-
-
+其中PieceStorage中的Name 属性应该是全局唯一的。
