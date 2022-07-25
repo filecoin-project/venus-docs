@@ -96,6 +96,6 @@ scrape_configs:
 ```bash
 $ ./prometheus --config.file=prometheus.yml
 ```
-http://localhost:9090/targets, 可查询组件的指标。
+使用`http://localhost:9090/targets`, 可查询组件的指标。
 
 
