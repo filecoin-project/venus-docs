@@ -18,21 +18,13 @@ ListenAddress = "/ip4/0.0.0.0/tcp/41235"
 ```
 
 #### PieceStorage存储模式
-目前venus-market支持两种Piece数据的存储模式:文件系统模式和对象存储服务模式,通过配置文件中的`PieceStorage`节来设置
-```yuml
-[PieceStorage]
-  [PieceStorage.Fs]
-    Name:""
-    ReadOnly = false
-    Path = ""
-  [PieceStorage.S3]
-    Name:""
-    ReadOnly = true
-    EndPoint = "http://oss-cn-shanghai.aliyuncs.com/venus-market-test"
-    AccessKey = "LTAI5t6HiFgsqN6eVJ......"
-    SecretKey = "AlFNH9NakUsVjVRxMHaaYP7p......"
-    Token = ""
-```
+目前`venus-market`支持两种`Piece`数据的存储模式：
+- 文件系统模式
+- 对象存储服务模式
+该配置决定了等待封装的扇区数据的存储位置，建议`Market`和`Sealer`的`PieceStorage`配置为同一个存储路径，这样可以减少不必要的网络传输。
+
+该配置通过配置文件中的`PieceStorage`节来设置，具体参见[Market配置文档](https://github.com/filecoin-project/venus-market/blob/master/docs/zh/venus-market%E9%85%8D%E7%BD%AE%E8%A7%A3%E9%87%8A.md#扇区存储配置)。
+
 
 #### 配置PublishMsgPeriod等待时间
 venus-marke在收到market-client的订单时, 并不会马上就发布`ClientDealProposal`消息,会等待一定的周期, 这个周期是通过配置文件中的`PublishMsgPeriod`项来控制,在测试时可以将此项设置为较小值减少等待时间.下面的设置,将等待时间设置为10秒
@@ -425,21 +417,10 @@ ID  State              OnChain  Active  Expiration                    Deals  Dea
 
 如果一切顺利, deal封装完成, `State`状态为`Proving`
 
-:warning::**venus-market和sealer都有`PieceStorage`的配置项:**
-```yaml
-[PieceStorage]
-  [PieceStorage.Fs]
-    Name:""
-    ReadOnly = true
-    Path = "/path/pieces_store"
-  [PieceStorage.S3]
-    Name:""
-    ReadOnly = false
-    EndPoint = ""
-    AccessKey = ""
-    SecretKey = ""
-    Token = ""
-```
+:::warning
+`venus-market`和`sealer`都有`PieceStorage`的配置项,他们最好指向同一个存储路径。参见[Piecestorage存储模式](#piecestorage存储模式)。
+:::
+
 在设置为`Fs`模式下,market和sealer的`Path`配置应该是指向的同一个物理机的同一个路径下.
 在测试时,如果没有指向同样的配置, 或者market和sealer不在同一个机器上也没有映射共享目录, sealer会找不到piece文件的.
 这种情况需要在开始封装扇区之前将market目录下的对应deal的piece文件拷贝到sealer的piece store目录中.
