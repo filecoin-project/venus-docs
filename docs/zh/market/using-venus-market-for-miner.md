@@ -417,7 +417,9 @@ ID  State              OnChain  Active  Expiration                    Deals  Dea
 
 如果一切顺利, deal封装完成, `State`状态为`Proving`
 
-:warning::**venus-market和sealer都有`PieceStorage`的配置项,他们最好指向同一个存储路径。参见[Piecestorage存储模式](#piecestorage存储模式)**
+:::warning
+`venus-market`和`sealer`都有`PieceStorage`的配置项,他们最好指向同一个存储路径。参见[Piecestorage存储模式](#piecestorage存储模式)。
+:::
 
 在设置为`Fs`模式下,market和sealer的`Path`配置应该是指向的同一个物理机的同一个路径下.
 在测试时,如果没有指向同样的配置, 或者market和sealer不在同一个机器上也没有映射共享目录, sealer会找不到piece文件的.
