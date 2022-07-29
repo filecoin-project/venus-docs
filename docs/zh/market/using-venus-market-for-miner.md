@@ -19,7 +19,7 @@ ListenAddress = "/ip4/0.0.0.0/tcp/41235"
 
 #### PieceStorage存储模式
 目前venus-market支持两种Piece数据的存储模式:文件系统模式和对象存储服务模式
-该配置决定了等待封装的扇区数据的存储位置，建议Market和Sealer 的 PieceStorage 配置为同一个存储路径，这样可以减少不必要的网络传输。
+该配置决定了等待封装的扇区数据的存储位置，建议`Market`和`Sealer`的`PieceStorage`配置为同一个存储路径，这样可以减少不必要的网络传输。
 
 该配置通过配置文件中的`PieceStorage`节来设置，具体参见[Market配置文档](https://github.com/filecoin-project/venus-market/blob/master/docs/zh/venus-market%E9%85%8D%E7%BD%AE%E8%A7%A3%E9%87%8A.md#扇区存储配置)
 
