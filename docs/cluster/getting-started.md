@@ -95,7 +95,7 @@ $ ./dist/bin/venus-sector-manager daemon init
 
 :::tip
 
-For more details on what each configuration does, please refer to [this document](https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/zh/04.venus-sector-manager%E7%9A%84%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90.md).
+For more details on what each configuration does, please refer to [this document](https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/en/04.venus-sector-manager-config.md).
 
 :::
 
@@ -129,7 +129,7 @@ $ ./dist/bin/venus-worker store file-init -l <dir1>
 
 :::tip
 
-For more details on what each configuration does, please refer to [this document](https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/zh/03.venus-worker%E7%9A%84%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90.md).
+For more details on what each configuration does, please refer to [this document](https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/en/03.venus-worker-config.md).
 
 :::
 
