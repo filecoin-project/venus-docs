@@ -150,25 +150,22 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['getting-started.md', 'Getting started'],
+                            ]
+                        },
+                        {
+                            title: 'Configurations',
+                            collapsable: false,
+                            children: [
                                 ['venus-sector-manager-config.md', 'venus-sector-manager config'],
                                 ['venus-worker-config.md', 'venus-worker config'],
-                                ['processors-config-example.md', 'Processors config example'],
                             ]
                         },
                         {
                             title: 'Operations',
                             collapsable: false,
                             children: [
-                                ['task-flow.md', 'Task flow'],
                                 ['task-management.md', 'Task management'],
-                            ]
-                        },
-                        {
-                            title: 'Other Features',
-                            collapsable: false,
-                            children: [
-                                ['poster.md', 'poster worker'],
-                                ['snapdeal.md', 'Snapdeal'],
+                                ['task-flow.md', 'Task flow'],
                             ]
                         },
                         {
@@ -178,6 +175,14 @@ module.exports = {
                                 ['migrate-sectors.md', 'Import existing sectors'],
                             ]
                         },
+                        {
+                            title: 'Other Features',
+                            collapsable: false,
+                            children: [
+                                ['other.md', 'More features...'],
+                            ]
+                        },
+                        
                     ],
                     '/market/': [{
                             title: 'Introduction',
@@ -200,6 +205,13 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['prep-datasets.md', 'preping large datasets'],
+                            ]
+                        },
+                        {
+                            title: 'Other Features',
+                            collapsable: false,
+                            children: [
+                                ['other.md', 'More features...'],
                             ]
                         },
                     ],
@@ -351,6 +363,12 @@ module.exports = {
                             children: [
                                 ['deploy-a-cs.md', '部署链服务'],
                                 ['join-a-cs.md', '使用链服务'],
+                            ]
+                        },
+                        {
+                            title: '简易部署',
+                            collapsable: false,
+                            children: [
                                 ['venus-run-in-docker.md', '使用Docker部署链服务'],
                             ]
                         },
@@ -368,25 +386,23 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['getting-started.md', '快速上手'],
+                            ]
+                        },
+                        {
+                            title: '配置',
+                            collapsable: false,
+                            children: [
                                 ['venus-sector-manager-config.md', 'venus-sector-manager配置'],
                                 ['venus-worker-config.md', 'venus-worker配置'],
-                                ['processors-config-example.md', 'Processors配置范例'],
+                                ['processors-config-example.md', '外部执行器配置范例'],
                             ]
                         },
                         {
                             title: '运维',
                             collapsable: false,
                             children: [
-                                ['task-flow.md', '任务状态流转'],
                                 ['task-management.md', 'worker任务管理'],
-                            ]
-                        },
-                        {
-                            title: '功能特性',
-                            collapsable: false,
-                            children: [
-                                ['poster.md', 'poster分离'],
-                                ['snapdeal.md', 'Snapdeal'],
+                                ['task-flow.md', '任务状态流转'],
                             ]
                         },
                         {
@@ -394,6 +410,13 @@ module.exports = {
                             collapsable: false,
                             children: [
                                 ['migrate-sectors.md', '导入已有扇区'],
+                            ]
+                        },
+                        {
+                            title: '其他功能特性',
+                            collapsable: false,
+                            children: [
+                                ['other.md', '其他'],
                             ]
                         },
                     ],
@@ -414,10 +437,27 @@ module.exports = {
                             ]
                         },
                         {
+                            title: '配置',
+                            collapsable: false,
+                            children: [
+                                ['getting-started.md', '快速启用'],
+                                ['market-client-config.md', 'market-client配置'],
+                                ['market-config.md', 'venus-market配置'],
+                            ]
+                        },
+                        {
                             title: '订单',
                             collapsable: false,
                             children: [
                                 ['prep-datasets.md', '大数据集准备'],
+                                ['migrate-offline-deal.md', '迁移离线订单'],
+                            ]
+                        },
+                        {
+                            title: '其他',
+                            collapsable: false,
+                            children: [
+                                ['other.md', '其他'],
                             ]
                         },
                     ],
