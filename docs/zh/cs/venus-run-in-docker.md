@@ -15,11 +15,10 @@ wget https://raw.githubusercontent.com/filecoin-project/venus-docs/master/script
 snapshot=/path/to/your/snapshot.car \
 nettype=<nettype> \
 proxy=<socks5|https>://<PROXY_IP>:<PROXY_PORT> \
-piecestorage=/path/to/your/PieceStorage
+piecestorage=/path/to/your/PieceStorage \
 docker-compose up -d
 
 # 关闭集群
-snapshot=/path/to/your/snapshot.car \
 docker-compose down
 ```
 
@@ -32,10 +31,12 @@ docker-compose down
 
 # 编写环境变量文件 ./env 
 # 
-snapshot=/path/to/your/snapshot.car   # required
-nettype=<nettype>    # default:butterfly
-piecestorage=/path/to/your/PieceStorage   # defaul:./.venus/storage/
-proxy=<socks5|https>://<PROXY_IP>:<PROXY_PORT>   # optional
+snapshot=/path/to/your/snapshot.car   # (optional)
+nettype=<nettype>    # (default:butterfly)
+piecestorage=/path/to/your/PieceStorage   # (defaul:./.venus/storage/)
+proxy=<socks5|https>://<PROXY_IP>:<PROXY_PORT>   # (optional) proxy for venus node
+TZ # (optional) your local time zone
+genesisfile # (optional) 
  
 
 # 启动和关闭集群

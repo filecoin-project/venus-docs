@@ -46,7 +46,6 @@ generate token success: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidG9rZW4
 --gateway-url=/ip4/192.168.200.21/tcp/45132/ \
 --messager-url=/ip4/192.168.200.21/tcp/39812/ \
 --auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiemwiLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.3u-PInSUmX-8f6Z971M7JBCHYgFVQrvwUjJfFY03ouQ \
---piecestorage=fs:/path/pieces_solo
 ```
 
 #### 通过配置文件指定参数启动
