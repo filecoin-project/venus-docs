@@ -79,7 +79,7 @@ docker run -d --name venus-auth --net=host filvenus/venus-auth run
 #### Venus
 
 ```shell
-docker run -d --name venus  --net=host -v /path/to/snapshot.car:/snapshot.car \
+docker run -d --name venus --net=host -v /path/to/snapshot.car:/snapshot.car \
 --env HTTPS_PROXY=<PROXY_IF_NEED> \
 filvenus/venus daemon \
 --network=<NETTYPE> \
