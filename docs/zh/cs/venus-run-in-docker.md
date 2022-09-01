@@ -21,6 +21,10 @@ docker-compose up -d
 # 关闭集群
 docker-compose down
 ```
+:::tip
+配置文件的首行指定了组件镜像版本的要求，当使用组件镜像版本较低时，建议下载配置文件的历史版本
+:::
+
 
 
 #### 直接通过变量文件启动 Venus 服务
@@ -31,12 +35,14 @@ docker-compose down
 
 # 编写环境变量文件 ./env 
 # 
-snapshot=/path/to/your/snapshot.car   # (optional)
 nettype=<nettype>    # (default:butterfly)
 piecestorage=/path/to/your/PieceStorage   # (defaul:./.venus/storage/)
+proofparameters=/path/to/your/proof-parameters-files/ # (default:/var/tmp/filecoin-proof-parameters/)
+genesisfile=/path/to/your/genesisfile  # (optional) 
+snapshot=/path/to/your/snapshot.car   # (optional)
+TZ=<TimeZone> # (optional) your local time zone
 proxy=<socks5|https>://<PROXY_IP>:<PROXY_PORT>   # (optional) proxy for venus node
-TZ # (optional) your local time zone
-genesisfile # (optional) 
+
  
 
 # 启动和关闭集群
@@ -52,7 +58,7 @@ venus 和 market 组件默认监听本地IP，如有需要，请注意修改相�
 :::
 
 :::warning
-在miner初始化完成之后要记得通过auth 绑定到相应的用户，参见[用户管理](https://venus.filecoin.io/zh/guide/Using-venus-Shared-Modules.html#%E5%AF%B9%E4%BA%8E%E5%85%B1%E4%BA%AB%E6%A8%A1%E5%9D%97%E7%9A%84%E7%AE%A1%E7%90%86%E5%91%98)
+在miner初始化完成之后要记得通过auth 绑定到相应的用户，参见[添加矿工](https://github.com/filecoin-project/venus-auth/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md#miner-%E7%9B%B8%E5%85%B3)
 :::
 
 :::warning
@@ -67,15 +73,15 @@ venus 和 market 组件默认监听本地IP，如有需要，请注意修改相�
 #### Venus Auth
 
 ```shell
-docker run -d --name venus-auth --net=host filvenus/venus-auth
+docker run -d --name venus-auth --net=host filvenus/venus-auth run
 ```
 
 #### Venus
 
 ```shell
-docker run -d --name venus --net=host -v /path/to/snapshot.car:/snapshot.car \
+docker run -d --name venus  --net=host -v /path/to/snapshot.car:/snapshot.car \
 --env HTTPS_PROXY=<PROXY_IF_NEED> \
-filvenus/venus \
+filvenus/venus daemon \
 --network=<NETTYPE> \
 --auth-url=<VENUS_AUTH_URL> \
 --import-snapshot /snapshot.car 
@@ -93,7 +99,7 @@ run --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT>
 #### Venus Messager
 
 ```shell
-docker run -d  --name venus-messager --net=host filvenus/venus-messager  \
+docker run -d  --name venus-messager  --net=host filvenus/venus-messager run \
 --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --node-url /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
 --gateway-url=/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/45132 \
@@ -185,30 +191,25 @@ docker exec -it filvenus/venus /bin/bash
 
 ### 基础镜像的构建
 
-基础环境在各个组件中是通用的，如果在同一台主机上则只需要构建一次
+基础环境镜像是构建venus组件容器时，需要用到的前置镜像，如果对于venus组件的构建环境和运行环境没有定制化的要求，建议直接使用官方的基础环境镜像。
+如果需要定制制化构建基础环境镜像，比如添加运维工具之类的，可以从[venus-docs仓库](https://github.com/filecoin-project/venus-docs/tree/master/script)下载基础镜像的dockerfile文件。然后运行 `dockers build` 命令构建相应的基础镜像
 
 #### 编译环境的构建
 
 ```shell
-# 到venus 组件的根目录
-git clone https://github.com/filecoin-project/venus.git
-cd ./venus
+# 下载dockerfile
+curl -O https://raw.githubusercontent.com/filecoin-project/venus-docs/master/script/venus-buildenv.dockerfile
 # 构建 运行环境
-make docker-buildenv
-# 网络受限需要使用代理时
-make docker BUILD_DOCKER_PROXY=<socks5 | https >://<IP>:<PORT> docker-buildenv 
+docker build -t filvenus/venus-buildenv -f ./venus-buildenv.dockerfile .
 ```
 
 #### 运行环境的构建
 
 ```shell
-# 到venus 组件的根目录
-git clone https://github.com/filecoin-project/venus.git
-cd ./venus
+# 下载dockerfile
+curl -O https://raw.githubusercontent.com/filecoin-project/venus-docs/master/script/venus-runtime.dockerfile
 # 构建 运行环境
-make docker-runtime
-# 网络受限需要使用代理时
-make docker-runtime BUILD_DOCKER_PROXY=<socks5 | https >://<IP>:<PORT> 
+docker build -t filvenus/venus-runtime -f ./venus-runtime.dockerfile .
 ```
 
 ### 组件的构建
