@@ -1,9 +1,12 @@
-# snapshot (optionnal)
-# nettype (default:butterfly)
+# 使用 v1.7以上版本的组件镜像
+
+# nettype (default:mainnet)
 # piecestorage (defaul:./.venus/storage/)
+# proofparameters  (default:/var/tmp/filecoin-proof-parameters/)
+# snapshot (optionnal)
+# genesisfile (optional)
 # proxy (optional)
 # TZ (optional)
-# genesisfile (optional)
 
 version: '3'
 services:
@@ -27,11 +30,12 @@ services:
     volumes:
       - ${snapshot-./.venus/storage/snapshot.car}:/snapshot.car
       - ${genesisfile-./.venus/storage/genesis.gen}:/genesis.gen
+      - ${proofparameters-/var/tmp/filecoin-proof-parameters/}:/var/tmp/filecoin-proof-parameters/
       - ./.venus/env:/env
       - ./.venus/root:/root
     environment:
       - HTTPS_PROXY=${proxy}
-      - nettype=${nettype-butterfly}
+      - nettype=${nettype-mainnet}
       - TZ=${TZ-UTC}
       - snapshot=${snapshot}
       - genesisfile=${genesisfile}
@@ -86,7 +90,7 @@ services:
       - ./.venus/env:/env
       - ./.venus/root:/root
     environment:
-      - nettype=${nettype-butterfly}
+      - nettype=${nettype-mainnet}
       - TZ=${TZ-UTC}
     entrypoint: "/script/wait-for-it.sh 127.0.0.1:3453 -t 0  -- /script/compose.sh"
     depends_on:
