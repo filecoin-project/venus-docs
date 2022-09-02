@@ -13,7 +13,7 @@ RUN export GOPROXY=https://goproxy.cn,direct  && make
 
 FROM filvenus/venus-runtime
 
-ARG BUILD_TARGET=venus-miner
+ARG BUILD_TARGET=
 
 # DIR for app
 WORKDIR /app
