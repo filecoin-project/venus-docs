@@ -197,6 +197,10 @@ dda7399c-fee1-4899-a9c0-0ea94d6d9d99:
 ```shell
 ./venus-market storage-deals set-ask --miner=t01041 --price=0.02fil --verified-price=0.01fil --min-piece-size=512b --max-piece-size=8M
 ```
+
+特殊情况说明:
+- 当miner的worker地址发生改变(发送ChangeWorkerAddress消息)，需要再次使用上面的`storage-deals set-ask`重新签名挂单信息；否则会出现`bls signature failed to verify`错误，无法进行发单操作。
+
 查看挂单信息:
 ```shell
 ./venus-market storage-deals get-ask --miner=t01041
