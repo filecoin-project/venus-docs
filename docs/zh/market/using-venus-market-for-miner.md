@@ -1,4 +1,4 @@
-## venus-market-v2 miner用户指南
+# venus-market-v2 miner用户指南
 
 venus-market v2支持两种运行模式
 - 作为链服务运行模式
@@ -198,8 +198,10 @@ dda7399c-fee1-4899-a9c0-0ea94d6d9d99:
 ./venus-market storage-deals set-ask --miner=t01041 --price=0.02fil --verified-price=0.01fil --min-piece-size=512b --max-piece-size=8M
 ```
 
+:::warning
 特殊情况说明:
-- 当miner的worker地址发生改变(发送ChangeWorkerAddress消息)，需要再次使用上面的`storage-deals set-ask`重新签名挂单信息；否则会出现`bls signature failed to verify`错误，无法进行发单操作。
+当`miner`的`worker`地址发生改变(如，发送`ChangeWorkerAddress`消息)，需要再次使用上面的`storage-deals set-ask`重新签名挂单信息；否则会出现`bls signature failed to verify`错误，无法进行发单操作。
+:::
 
 查看挂单信息:
 ```shell
