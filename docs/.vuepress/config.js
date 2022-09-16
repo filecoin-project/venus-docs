@@ -182,7 +182,7 @@ module.exports = {
                                 ['other.md', 'More features...'],
                             ]
                         },
-                        
+
                     ],
                     '/market/': [{
                             title: 'Introduction',
@@ -239,7 +239,7 @@ module.exports = {
                             title: 'Hybrid Component',
                             collapsable: false,
                             children: [
-                                ['venus-market.md', 'venus-market'],          
+                                ['venus-market.md', 'venus-market'],
                             ]
                         },
                     ],
@@ -432,15 +432,13 @@ module.exports = {
                             title: '部署',
                             collapsable: false,
                             children: [
-                                ['using-venus-market-for-master.md', '链服务部署market服务'],
-                                ['using-venus-market-for-miner.md', '本地部署market节点'],
+                                ['getting-started.md', '部署'],
                             ]
                         },
                         {
                             title: '配置',
                             collapsable: false,
                             children: [
-                                ['getting-started.md', '快速启用'],
                                 ['market-client-config.md', 'market-client配置'],
                                 ['market-config.md', 'venus-market配置'],
                             ]
