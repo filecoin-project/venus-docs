@@ -1,3 +1,6 @@
+FROM filvenus/venus-buildenv as buildenv
+RUN cd /root && git clone --depth=1 https://github.com/filecoin-project/venus-docs.git 
+
 FROM ubuntu:20.04
 
 # install dependence
@@ -16,7 +19,7 @@ ENV LANG C.UTF-8
 
 
 # copy ddl
-COPY --from=filvenus/venus-buildenv   /usr/lib/x86_64-linux-gnu/libhwloc.so.15  \
+COPY --from=buildenv  /usr/lib/x86_64-linux-gnu/libhwloc.so.15  \
     /usr/lib/x86_64-linux-gnu/libOpenCL.so.1  \
     /lib/x86_64-linux-gnu/libgcc_s.so.1  \
     /lib/x86_64-linux-gnu/libutil.so.1  \
@@ -29,7 +32,7 @@ COPY --from=filvenus/venus-buildenv   /usr/lib/x86_64-linux-gnu/libhwloc.so.15  
     /usr/lib/x86_64-linux-gnu/libltdl.so.7  \
     /lib/
 
-
+COPY --from=buildenv /root/venus-docs/script/common/* /script/
 # DIR for app
 WORKDIR /app
 ENV PATH "$PATH:/app/"

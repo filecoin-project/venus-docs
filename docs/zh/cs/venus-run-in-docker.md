@@ -192,7 +192,7 @@ docker exec -it filvenus/venus /bin/bash
 ### 基础镜像的构建
 
 基础环境镜像是构建venus组件容器时，需要用到的前置镜像，如果对于venus组件的构建环境和运行环境没有定制化的要求，建议直接使用官方的基础环境镜像。
-如果需要定制制化构建基础环境镜像，比如添加运维工具之类的，可以从[venus-docs仓库](https://github.com/filecoin-project/venus-docs/tree/master/script)下载基础镜像的dockerfile文件。然后运行 `dockers build` 命令构建相应的基础镜像
+如果需要定制制化构建基础环境镜像，比如添加运维工具之类的，可以从克隆[venus-docs仓库](https://github.com/filecoin-project/venus-docs),然后分别执行 `make docker-buildenv` 和 `make docker-runtime` 构建相应的镜像
 
 #### 编译环境的构建
 
