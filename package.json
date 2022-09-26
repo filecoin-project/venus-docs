@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start": "yarn docs:dev",
+    "predownload": "node ./script/download.js",
     "docs:dev": "npx vuepress dev docs",
     "docs:build": "npx vuepress build docs",
     "docs:links": "npx vuepress check-md docs",
