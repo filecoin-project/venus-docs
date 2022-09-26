@@ -4,12 +4,12 @@ const fs = require('fs');
 const path = require('path');
 
 
-function downloadFile(rawUri, dest) {
+function downloadFile(uri, dest) {
     docDir = path.resolve(__dirname, '../');
     targetPath = path.join(docDir, "docs", dest);
     const file = fs.createWriteStream(targetPath);
 
-    rawUri = rawUri.replace("github.com", "raw.githubusercontent.com");
+    rawUri = uri.replace("github.com", "raw.githubusercontent.com");
     rawUri = rawUri.replace("/blob/", "/");
 
     https.get(rawUri, (res) => {
@@ -65,6 +65,7 @@ function preDownload(config) {
     });
 
     preDownloadUrls.forEach((url) => {
+        console.debug(`download ${url.url} to ${url.path}`);
         downloadFile(url.url, url.path);
     });
 
