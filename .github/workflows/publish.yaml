@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  schedule:
+    - cron: '0 0 1/2 * *'
+  workflow_dispatch:
 
 
 jobs:
@@ -18,6 +21,7 @@ jobs:
       - name: Install and Build 
         run: |
           npm install
+          npm run predownload
           npm run docs:build
       - name: Deploy 
         uses: JamesIves/github-pages-deploy-action@releases/v3
