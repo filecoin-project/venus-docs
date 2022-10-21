@@ -500,9 +500,7 @@ module.exports = {
                         children: [
                             ['', '提取奖励'],
                             ['chain.md', '链维护'],
-                            ['venus-cli.md', '常用CLI'],
                             ['venus_load_balancing.md', '简易负载均衡'],
-                            // ['How-To-Connect-Network.md', '加入不同网络'],
                             ['tips-running-in-China.md', '中国部署小贴士'],
                         ]
                     },
@@ -510,10 +508,17 @@ module.exports = {
                         title: '本地开发',
                         collapsable: false,
                         children: [
-                            // ['venus_system_architcture.md', 'Venus系统架构'],
                             ['How-To-Setup_2knet.md', '本地2k开发网络'],
                             ['Multisig-Wallet.md', '多签钱包'],
                             ['Payment-Channel.md', '支付通道'],
+
+                        ]
+                    },
+                    {
+                        title: '功能设计',
+                        collapsable: false,
+                        children: [
+                            ['design-user-data-isolation.md', '用户数据隔离'],
 
                         ]
                     },
