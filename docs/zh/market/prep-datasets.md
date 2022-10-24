@@ -31,6 +31,17 @@ $ nohup aws s3 sync s3://stpubdata/tess/public/ffi/s0006/2018 /mnt/nas/venus-dat
 ```
 下载速度根据用户自身的机房出口网络情况而定
 
+## 关于大数据的选择:
+```url
+https://github.com/awslabs/open-data-registry/tree/main/datasets
+```
+里面包含aws所有开源的大数据集，请与用户(或venus-team)确认所下载的大数据是否符合datacap申请的数据类型。
+
+例如:开普勒的光度测量数据，可以看到github上open-data-registry仓库下有一个k2.yaml的文件;
+只需在aws仓库后跟上大数据集名称，就可以在浏览器上得到下载的地址
+
+https://registry.opendata.aws/k2/
+
 ## go-graphsplit
 
 编译`go-graphsplit`用于切`piece`工具
@@ -56,7 +67,7 @@ make
 ```shell
 $ TMPDIR=/mnt/nvme01 /root/graphsplit chunk \
 --car-dir=/mnt/nas/venus-data/16g-pice-data \
---slice-size=1073741824 \
+--slice-size=17179869184 \
 --parallel=1 \
 --graph-name=gs-test \
 --calc-commp \
@@ -67,7 +78,7 @@ $ TMPDIR=/mnt/nvme01 /root/graphsplit chunk \
 
 :::tip
 `--car-dir`: 指定切割完成后`CAR`文件存储的路径；
-`--slice-size`: 指定切割的`piece`文件大小，以`bite`为基础单位；1024*1024*1024=1073741824 这个就表示是`16G`的`piece`文件
+`--slice-size`: 指定切割的`piece`文件大小，以`bite`为基础单位；16*1024*1024*1024=17179869184 这个就表示是`16G`的`piece`文件；但是**一般情况会选择使用16.5G左右的原文件大小，防止会出现一些误差，导致使用16G的piece填充**；
 `--parallel`: 指定并发的数量，值越大消耗的CPU和内存会越高
 `--calc-commp`: 计算`commp`的值；
 `--rename`: 将`CAR`文件自动转换成piece文件
@@ -112,4 +123,18 @@ MaxNumber = 1000000
 Enabled = true
 EnableDeals = true
 LifetimeDays = 210
+```
+
+venus-worker需要在连接venus-sector-manager时需要携带token，才可以获取到Piece数据
+```shell
+[sector_manager]
+  # 构造 rpc 客户端时使用的连接地址，必填项，字符串类型
+  rpc_client.addr = "/ip4/192.168.100.1/tcp/1789"
+  rpc_client.headers = { User-Agent = "jsonrpc-core-client" }
+  piece_token = "eyJhbGciOiJIUzxxxxxxxx.eyJuYW1lIjoibGpoOG1xxx.gY3ymGxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  
+  
+[[sealing_thread]]
+  sealing.enable_deals = true
+  sealing.max_retries = 5
 ```
