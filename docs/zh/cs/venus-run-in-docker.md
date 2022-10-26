@@ -35,7 +35,7 @@ docker-compose down
 
 # 编写环境变量文件 ./env 
 # 
-nettype=<nettype>    # (default:butterfly)
+nettype=<nettype>    # (default:butterflynet)
 piecestorage=/path/to/your/PieceStorage   # (defaul:./.venus/storage/)
 proofparameters=/path/to/your/proof-parameters-files/ # (default:/var/tmp/filecoin-proof-parameters/)
 genesisfile=/path/to/your/genesisfile  # (optional) 

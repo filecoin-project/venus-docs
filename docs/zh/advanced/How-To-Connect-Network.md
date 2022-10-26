@@ -13,7 +13,7 @@
 必须配置为连接到Calibration网络的参数。
 
 ```sh
-./venus daemon --network cali
+./venus daemon --network calibrationnet
 ```
 
 ## 2k 本地网络
