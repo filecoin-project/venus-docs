@@ -14,7 +14,7 @@ In venus, it is easy to decide whether to connect to different networks by setti
 parameters must be configured to connect to the calibration network.
 
 ```sh
-./venus daemon --network cali
+./venus daemon --network calibrationnet
 ```
 
 ## 2k Local Network

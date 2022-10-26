@@ -161,7 +161,7 @@ t02082
 启动`venus`进程进行链同步。 使用 `--network` 来指定`venus`连接的网络。
 
 ```bash
-$ nohup ./venus daemon --network=cali --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 & 
+$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 &
 ```
 
 > 使用`tail -f venus.log` 或 `./venus sync status` 检查同步过程中是否有任何错误。

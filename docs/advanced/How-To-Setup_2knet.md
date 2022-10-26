@@ -363,18 +363,22 @@ Start a venus node for funds sending only.
 $ nohup ./venus daemon --genesisfile=devgen.car --network=2k > venus.log 2>&1 &
 ```
 
+Set wallet password
+
+```sh
+$ ./venus wallet set-password
+Password:*
+Enter Password again:*
+Password set successfully 
+You must REMEMBER your password! Without the password, it's impossible to decrypt the key!
+```
+
 Import genesis wallet.
 
 ```shell script
 $ ./venus-wallet export t3sjhgun7xcklmyga6x3c5sq6pbncdlmrjmepfz7ms4fuqimtk4fida37dhq7kpq3tn7nyu5hpnn7mtp3a7lia
 Password:*
 7b2254797065223a22626c73222c22507269766174654b6579223a224541326e6a463363326b4f467977323079564f574b66733371794d6451767a35334c667459497347456b673d227d
-
-$ ./venus wallet set-password
-Password:*
-Enter Password again:*
-Password set successfully 
-You must REMEMBER your password! Without the password, it's impossible to decrypt the key!
 
 $ ./venus wallet import
 ipfs: Reading from /dev/stdin; send Ctrl-d to stop.
