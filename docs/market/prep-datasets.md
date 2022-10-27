@@ -49,9 +49,12 @@ $ TMPDIR=/mnt/nvme01 /root/graphsplit chunk \
 ```
 
 :::tip
-`--car-dir`: Specify the path where the `CAR` files should be stored
-
-`--calc-commp`: Compute value of `commp`
+`--car-dir`: Specify the path where the `CAR` files should be stored;
+`--slice-size`: Specify the output `piece` file size (`byte` as unit); Eg, 1024 * 1024 * 1024 = 1073741824 means `1G` of `piece` file; It is recommended to use either `16G`(`17179869184`) or `32G`(`34359738368`);
+指定切割后输出的的`piece`文件大小，以`byte`为基础单位；1024 * 1024 * 1024 = 1073741824 这个就表示是`1G`的`piece`文件, 推荐大小为 `16G`(`17179869184`) 或 `32G`(`34359738368`)；
+`--parallel`: Max parallel processes allowed;
+`--calc-commp`: Compute value of `commp`;
+`--rename`: Convert `CAR` files to `piece` data;
 :::
 
 When processing is done, there will be many piece files and a `manifest.csv` under `--car-dir`. Transfer piece files to the path defined by `pieceStore` for both `venus-market` and `venus-sector-manager`.
@@ -91,7 +94,6 @@ Please make sure the configurations of `venus-sector-manager` are set to take st
 
 :::tip
 Check if both **Enabled** and **EnableDeals** are set to **true** in `.venus-sector-manager/sector-manager.cfg`
-:::
 
 ```shell
 [Miners.Sector]
@@ -101,3 +103,21 @@ Enabled = true
 EnableDeals = true
 LifetimeDays = 210
 ```
+:::
+
+
+:::tip
+Please make sure that RPC configuration of `venus-worker` is properly set with `token` informantion so that it can fetch `Piece` data from path defined in `venus-sector-manager`.
+
+```shell
+[sector_manager]
+  rpc_client.addr = "/ip4/192.168.100.1/tcp/1789"
+  rpc_client.headers = { User-Agent = "jsonrpc-core-client" }
+  piece_token = "eyJhbGciOiJIUzxxxxxxxx.eyJuYW1lIjoibGpoOG1xxx.gY3ymGxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  
+  
+[[sealing_thread]]
+  sealing.enable_deals = true
+  sealing.max_retries = 5
+```
+:::
