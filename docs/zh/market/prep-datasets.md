@@ -67,7 +67,7 @@ $ TMPDIR=/mnt/nvme01 /root/graphsplit chunk \
 
 :::tip
 `--car-dir`: 指定切割完成后`CAR`文件存储的路径；
-`--slice-size`: 指定切割的`piece`文件大小，以`bite`为基础单位；1024*1024*1024=1073741824 这个就表示是`16G`的`piece`文件
+`--slice-size`: 指定切割后输出的的`piece`文件大小，以`byte`为基础单位；1024 * 1024 * 1024 = 1073741824 这个就表示是`1G`的`piece`文件, 推荐大小为 `16G`(`17179869184`) 或 `32G`(`34359738368`)
 `--parallel`: 指定并发的数量，值越大消耗的CPU和内存会越高
 `--calc-commp`: 计算`commp`的值；
 `--rename`: 将`CAR`文件自动转换成piece文件
