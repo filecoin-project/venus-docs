@@ -333,6 +333,10 @@ module.exports = {
                     text: '运维',
                     link: '/zh/operation/'
                 },
+                {
+                    text: '研究',
+                    link: '/zh/research/'
+                },
                 ],
                 sidebar: {
                     '/zh/intro/': [{
@@ -539,18 +543,36 @@ module.exports = {
                         ]
                     },
                     ],
-                    '/zh/master/': [{
-                        title: '大师课',
+                    '/zh/research/': [{
+                        title: 'Venus生态研究',
                         collapsable: false,
                         children: [
-                            ['', '目录'],
-                            ['Intro_to_Venus.md', 'Venus概要'],
-                            ['Chain_service_construction.md', '部署/加入链服务'],
-                            ['Daily_op_and_maintenance.md', '节点日常运维'],
-                            ['Q&A.md', 'Q&A'],
-                            ['Incubation_exit_guide.md', '节点迁出指南'],
+                            ['', '概述'],
                         ]
-                    }]
+                    },
+                    {
+                        title: 'FIP解读',
+                        collapsable: false,
+                        children: [
+                            ['fip0045.md', 'FIP0045'],
+                            ['fip0034.md', 'FIP0034'],
+                        ]
+                    },
+                    {
+                        title: '设计方案',
+                        collapsable: false,
+                        children: [
+                            ['saas.md', 'SaaS'],
+                        ]
+                    },
+                    {
+                        title: '其他解读',
+                        collapsable: false,
+                        children: [
+                            ['boost-protocol-research.md', 'Boost协议解读'],
+                        ]
+                    },
+                    ]
                 }
             }
         }
