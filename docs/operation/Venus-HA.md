@@ -12,7 +12,6 @@ venus:
 ```sh
 #build
 git clone https://github.com/filecoin-project/venus.git
-make deps
 make
 #run
 ./venus daemon --network <network-type> --auth-url <venus-auth url>
@@ -21,22 +20,21 @@ make
 lotus:
 ```sh
 #build
-git clone https://github.com/ipfs-force-community/chain-co.git
+git clone https://github.com/ipfs-force-community/lotus.git
 git checkout v1.11.2_incubation
 make <network-type>
 #run
-./lotus daemon --auth-url --auth-url <venus-auth url>
+./lotus daemon --auth-url <venus-auth url>
 ```
 
 ## chain-co agent
 
-output file in bin directory
 ```sh
 #build
 git clone https://github.com/ipfs-force-community/chain-co.git
 make
 #run
-./bin/chain-ro  run -listen 0.0.0.0:<port> --auth-url <venus-auth url> --node <token:libp2p> --node<token:libp2p>
+./chain-co run -listen 0.0.0.0:<port> --auth-url <venus-auth url> --node <token:libp2p> --node<token:libp2p>
 ```
 
 ## proxy(optional)
