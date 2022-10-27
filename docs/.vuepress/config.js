@@ -518,14 +518,6 @@ module.exports = {
 
                         ]
                     },
-                    {
-                        title: '功能设计',
-                        collapsable: false,
-                        children: [
-                            ['design-user-data-isolation.md', '用户数据隔离'],
-
-                        ]
-                    },
                     ],
                     '/zh/operation/': [{
                         title: '运维实战',
@@ -567,6 +559,7 @@ module.exports = {
                         title: '设计方案',
                         collapsable: false,
                         children: [
+                            ['user-data-isolation.md', '用户数据隔离'],
                             ['saas.md', 'SaaS'],
                         ]
                     },
