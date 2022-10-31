@@ -10,10 +10,11 @@
 
 `venus-market` 支持矿工的市场交易属性可独立配置，并可以由矿工自己配置，而不是通过链服务维护人员间接进行。
 
-`venus-market` 推荐作为独立组件部署，将 `solo-run` 模式作为默认启动方式。（为什么这样做后文会详细讨论）
+`venus-market` 推荐作为独立组件部署，将 `solo-run` 模式作为默认启动方式或者直接废弃 `pool-run` 模式。（为什么这样做后文会详细讨论）
 
 关联：
 - [ ] 提案的[issue](https://github.com/filecoin-project/venus/issues/5410)
+- [ ] [社区discussion](https://github.com/filecoin-project/venus/discussions/5425)
 
 ## Motivation (来源/背景)
 
@@ -52,13 +53,26 @@ MaxMarketBalanceAddFee = "0 FIL"
 `venus-market` `pool-run` 模式下，`pieces`数据在目前的协议下无法直接存储到`SP`的封装机器，在封装过程中需要下载，当订单量较大时，对网络带宽的要求较高，故推荐将`venus-market`作为独立组件部署。
 后续协议(boost?待考察)支持订单交易中可以将数据直接存到`SP`封装机器上时优先推荐作为链服务组件?
 
+### 延伸问题
+
+- 批量发单的问题: market-client需要支持批量发单，并将发单记录到数据库，便于统计为 `miners` 发单情况；
+
 
 ## Specification (feature Spec)
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow others to easily translate into product implementations. -->
 <!--具体的技术spec，需要对feature的syntax，semantics进行描述。Spec需要能够让别人更容易的按照spec去实现这个feature。-->
 ### 默认的部署方式
 
-将 `solo-run` 模式作为默认的启动方式。主要是为了减少不必要的数据传输，原因见上文。
+目前的可选项有：
+
+- 将 `solo-run` 模式作为默认的启动方式。主要是为了减少不必要的数据传输，原因见上文。存在的缺点是：
+    - `SP` 需要维护一个固定的公网`IP`,并开放一个端口；（安全性降低？）
+    - 野望的降低：从服务于多个用户的多个矿工 --> 服务于一个用户的多个矿工。在市场检索方面的多样性降低？
+
+- 废弃 `pool-run` 模式，将 `solo-run` 模式作为唯一的部署方式。
+
+个人倾向于第2个，与其维护带有缺陷的模式，不如权利做好 `solo-run` 模式，完善整个接发单流程，如：批量发单、离线交易等。
+还有一点是要支持 `pool-run` 模式，额外的工作量也不小，对于新的多矿工交易属性配置需要提供额外的用户界面。
 
 ### 属性配置
 
