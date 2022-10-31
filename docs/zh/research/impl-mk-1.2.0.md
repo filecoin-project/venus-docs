@@ -6,7 +6,7 @@
 # Abstract (功能简介)
 
 1. 网络层增加mk/1.2.0协议的handler，处理订单结合现有的存储订单的功能来实现。
-2. 类似原来的piece resource下载功能，实现一个基于http的文件查询接口， 协议上可以参考boost实现，尽量保持一直。
+2. 类似原来的piece resource下载功能，实现一个基于http的文件查询接口， 协议上可以参考boost实现，尽量保持一致。
 3. market-client上增加一个http文件服务器， 文件来源和现有的local data存储打通，尽量的结合系统现有的功能来实现。
 
 # Motivation (来源/背景)
@@ -31,7 +31,7 @@ IsOffline           TransferType为true,则TransferType为TTManual
 ClientDealProposal 按原来的
 DealDataRoot       dataroot
 Transfer.Type      增加http
-Transfer.ClientID  数据苦类型不变，表示类型该表，重新封装一个ClientID, 新老公用，需要转成PeerId时按需转换。
+Transfer.ClientID  数据类型不变，重新封装一个ClientID, 新老共用，需要转成PeerId时按需转换。
 Transfer.Params    需增加
 Transfer.Size      PayloadSize
 ```
@@ -63,6 +63,9 @@ Version            增加版本字段，用于区分新老协议， 待定，可
 4. data list的时候可以显示一个文件的http地址， 发起新版本存储订单命令可以使用此url。
 
 
+## 对于查询订单状态的协议接口
+
+在返回的信息当中NBytesReceived信息的获取可能会存在困难，如果存在负载均衡的情况可能会不太好统计处理，落库更新压力会有些大，而且是这个字段的意义不是很大，第一版实现可以先忽略该字段。
 
 # Design Rationale (设计思路)
 
@@ -70,7 +73,7 @@ Version            增加版本字段，用于区分新老协议， 待定，可
 
 # Backwards Compatibility (兼容性)
 
-1. 数据兼容，需要迁移数据。 老数据生成随机uuid， proposalcid设置成可控且唯一索引类型。 为了保证各个表风格一致， 考虑所有表都改成uuid主键。
+1. 数据兼容，需要迁移数据。 老数据生成随机uuid， proposalcid设置成可空且唯一索引类型。 为了保证各个表风格一致， 考虑所有表都改成uuid主键。
 2. http文件下载功能中，boost的默认行为和现在的默认行为不一致，直接改动会导致cluster出现问题， 因此可能需要两个版本的协议共存一段时间
 3. 新的协议保存的字段数据很少很多，可能会造成现有的功能出现损坏或者这些新版本的订单无法正常工作
 
