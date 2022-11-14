@@ -111,6 +111,7 @@ module.exports = {
                         collapsable: false,
                         children: [
                             ['', 'Overview'],
+                            ['one-pager.md', 'One Pager']
                         ]
                     },
                     {
@@ -340,10 +341,12 @@ module.exports = {
                 ],
                 sidebar: {
                     '/zh/intro/': [{
-                        title: '简述',
+                        title: '概述',
                         collapsable: false,
                         children: [
                             ['', '启明星概要'],
+                            ['one-pager.md', '单页介绍文档'],
+
                         ]
                     },
                     {

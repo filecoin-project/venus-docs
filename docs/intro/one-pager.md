@@ -1,0 +1,1 @@
+![venus-cluster](../.vuepress/public/one-pager-venus.png)
