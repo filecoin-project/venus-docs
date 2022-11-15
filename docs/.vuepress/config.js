@@ -563,6 +563,7 @@ module.exports = {
                         collapsable: false,
                         children: [
                             ['saas.md', 'SaaS'],
+                            ['market-attributes-self-config.md', '市场的交易属性配置'],
                         ]
                     },
                     {
@@ -570,7 +571,6 @@ module.exports = {
                         collapsable: false,
                         children: [
                             ['boost-protocol-research.md', 'Boost协议解读'],
-                            ['market-attributes-self-config.md', '市场的交易属性配置'],
                         ]
                     },
                     ]
