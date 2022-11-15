@@ -1,40 +1,53 @@
 const config = require("../docs/.vuepress/config");
-const https = require('https');
+const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+const console = require("console");
 
+const proxy = process.env.http_proxy || process.env.HTTP_PROXY;
 
 function downloadFile(uri, dest) {
     docDir = path.resolve(__dirname, '../');
-    targetPath = path.join(docDir, "docs", dest);
+    const targetPath = path.join(docDir, "docs", dest);
     const file = fs.createWriteStream(targetPath);
+    let param = null
+
+    if (proxy != null && proxy != "") {
+        proxy_host = proxy ? proxy.split("//")[1].split(":")[0] : null;
+        proxy_port = proxy ? proxy.split("//")[1].split(":")[1] : null;
+        proxy_scheme = proxy ? proxy.split("//")[0].split(":")[0] : null;
+        proxy_scheme = proxy_scheme == "socks5" ? "http" : proxy_scheme;
+        param = {
+            proxy: {
+                host: proxy_host,
+                port: parseInt(proxy_port),
+                protocol: proxy_scheme != "socks5" ? proxy_scheme : "http"
+            }
+        };
+    }
 
     rawUri = uri.replace("github.com", "raw.githubusercontent.com");
     rawUri = rawUri.replace("/blob/", "/");
 
-    https.get(rawUri, (res) => {
-        if (res.statusCode !== 200) {
+    axios.get(rawUri, param).then(res => {
+        if (res.status !== 200) {
             content = `# 文档引用
-请访问这个[链接](${uri})，了解更多相关信息。`
+    请访问这个[链接](${uri})，了解更多相关信息。`
             file.write(content)
             console.log(`download error : ${res.statusCode}(${rawUri})`);
             return;
         }
 
-        res.on('end', () => {
-            console.log('download end ' + rawUri);
-        });
-
-        file.on('finish', () => {
+        file.write(res.data, (err) => {
+            if (err) {
+                console.log(err);
+            }
             console.log('finish write file to ' + targetPath)
             file.close();
-        }).on('error', (err) => {
-            fs.unlink(dest);
-            reject(err.message);
         })
-
-        res.pipe(file);
-    });
+    }).catch(err => {
+        console.log(err)
+    })
 }
 
 function preDownload(config) {
