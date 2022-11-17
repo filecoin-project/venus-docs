@@ -232,15 +232,9 @@ module.exports = {
                         title: 'Local Component',
                         collapsable: false,
                         children: [
+                            ['venus-market.md', 'venus-market'],
                             ['venus-cluster.md', 'venus-cluster'],
                             ['venus-wallet.md', 'venus-wallet (remote)'],
-                        ]
-                    },
-                    {
-                        title: 'Hybrid Component',
-                        collapsable: false,
-                        children: [
-                            ['venus-market.md', 'venus-market'],
                         ]
                     },
                     ],
@@ -295,8 +289,9 @@ module.exports = {
                         title: 'Upgrade',
                         collapsable: false,
                         children: [
-                            ['nv15-upgrade.md', 'nv15 upgrade'],
+                            ['nv17-upgrade.md', 'nv17 upgrade'],
                             ['nv16-upgrade.md', 'nv16 upgrade'],
+                            ['nv15-upgrade.md', 'nv15 upgrade'],
                         ]
                     },
                     ],
@@ -497,12 +492,6 @@ module.exports = {
                         children: [
                             ['venus-cluster.md', 'venus-cluster'],
                             ['venus-wallet.md', 'venus-wallet（远程）'],
-                        ]
-                    },
-                    {
-                        title: '混合组件',
-                        collapsable: false,
-                        children: [
                             ['venus-market.md', 'venus-market'],
                         ]
                     },
@@ -566,8 +555,9 @@ module.exports = {
                         title: '网络/组件升级',
                         collapsable: false,
                         children: [
-                            ['nv15-upgrade.md', 'nv15网络升级'],
+                            ['nv17-upgrade.md', 'nv17网络升级'],
                             ['nv16-upgrade.md', 'nv16网络升级'],
+                            ['nv15-upgrade.md', 'nv15网络升级'],
                             ['migrate_market_v1_to_v2.md', 'market_v2升级'],
                         ]
                     },
