@@ -20,7 +20,7 @@ services:
       - ./.venus/env:/env
       - ./.venus/root:/root
     network_mode: "host"
-    entrypoint: "/script/compose.sh"
+    entrypoint: "/script/compose/venus-auth.sh"
 
   venus:
     image: filvenus/venus
@@ -39,7 +39,7 @@ services:
       - TZ=${TZ-UTC}
       - snapshot=${snapshot}
       - genesisfile=${genesisfile}
-    entrypoint: "/script/compose.sh"
+    entrypoint: "/script/compose/venus.sh"
     depends_on:
       - auth
 
@@ -75,7 +75,7 @@ services:
       - ./.venus/root:/root
     environment:
       - TZ=${TZ-UTC}
-    entrypoint: "/script/wait-for-it.sh 127.0.0.1:3453 -t 0  -- /script/compose.sh"
+    entrypoint: "/script/wait-for-it.sh 127.0.0.1:3453 -t 0  -- /script/compose/venus-messager.sh"
     depends_on:
       - auth
       - venus
@@ -92,7 +92,7 @@ services:
     environment:
       - nettype=${nettype-mainnet}
       - TZ=${TZ-UTC}
-    entrypoint: "/script/wait-for-it.sh 127.0.0.1:3453 -t 0  -- /script/compose.sh"
+    entrypoint: "/script/wait-for-it.sh 127.0.0.1:3453 -t 0  -- /script/compose/venus-miner.sh"
     depends_on:
       - auth
       - venus
@@ -110,7 +110,7 @@ services:
       - ./.venus/root:/root
       - ${piecestorage-./.venus/storage/}:/PieceStorage
 
-    entrypoint: "/script/wait-for-it.sh 127.0.0.1:39812 -t 0  -- /script/compose.sh"
+    entrypoint: "/script/wait-for-it.sh 127.0.0.1:39812 -t 0  -- /script/compose/venus-market.sh"
     depends_on:
       - auth
       - venus
