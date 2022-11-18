@@ -14,14 +14,9 @@ RUN export GOPROXY=https://goproxy.cn,direct  && make
 FROM filvenus/venus-runtime
 
 ARG BUILD_TARGET=
-
-# DIR for app
-WORKDIR /app
+ENV VENUS_COMPONENT=${BUILD_TARGET}
 
 # copy the app from build env
 COPY --from=buildenv  /build/${BUILD_TARGET} /app/${BUILD_TARGET}
-
-COPY ./docker/script  /script
-
 
 ENTRYPOINT ["/script/init.sh"]
