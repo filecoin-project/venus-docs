@@ -581,9 +581,10 @@ module.exports = {
                         title: '设计方案',
                         collapsable: false,
                         children: [
-                            ['impl-mk-1.2.0.md', '集成Boost协议'],
-                            ['saas.md', 'SaaS'],
                             ['market-attributes-self-config.md', '市场的交易属性配置'],
+                            ['impl-mk-1.2.0.md', '集成Boost协议'],
+                            ['metrics-design.md', 'Metrics指标'],
+                            ['saas.md', 'SaaS'],
                         ]
                     },
                     {
