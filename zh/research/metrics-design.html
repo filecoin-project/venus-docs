@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>启明星</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/venus-logo.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-SMSDTMGLTV"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SMSDTMGLTV');</script>
+    <meta name="description" content="GO语言实现的Filecoin分布式存储网络">
+    
+    <link rel="preload" href="/assets/css/0.styles.117964e0.css" as="style"><link rel="preload" href="/assets/js/app.1e669d06.js" as="script"><link rel="preload" href="/assets/js/2.e01744a9.js" as="script"><link rel="preload" href="/assets/js/174.16641d2a.js" as="script"><link rel="prefetch" href="/assets/js/10.e051a485.js"><link rel="prefetch" href="/assets/js/100.ce1abd3c.js"><link rel="prefetch" href="/assets/js/101.09f8a55c.js"><link rel="prefetch" href="/assets/js/102.527a1e82.js"><link rel="prefetch" href="/assets/js/103.e3013150.js"><link rel="prefetch" href="/assets/js/104.7fa9632c.js"><link rel="prefetch" href="/assets/js/105.6c5d8498.js"><link rel="prefetch" href="/assets/js/106.e6a02492.js"><link rel="prefetch" href="/assets/js/107.4f325a2b.js"><link rel="prefetch" href="/assets/js/108.a7371b1f.js"><link rel="prefetch" href="/assets/js/109.ee389690.js"><link rel="prefetch" href="/assets/js/11.896bb61d.js"><link rel="prefetch" href="/assets/js/110.e4ac860d.js"><link rel="prefetch" href="/assets/js/111.2f8fdf90.js"><link rel="prefetch" href="/assets/js/112.3802c91e.js"><link rel="prefetch" href="/assets/js/113.65874865.js"><link rel="prefetch" href="/assets/js/114.7f8dbf4a.js"><link rel="prefetch" href="/assets/js/115.79fbe8fb.js"><link rel="prefetch" href="/assets/js/116.cfee202d.js"><link rel="prefetch" href="/assets/js/117.8fb7b638.js"><link rel="prefetch" href="/assets/js/118.91b28c36.js"><link rel="prefetch" href="/assets/js/119.728248cd.js"><link rel="prefetch" href="/assets/js/12.b761f02a.js"><link rel="prefetch" href="/assets/js/120.04898538.js"><link rel="prefetch" href="/assets/js/121.19545869.js"><link rel="prefetch" href="/assets/js/122.5e6c9e28.js"><link rel="prefetch" href="/assets/js/123.76d13ff2.js"><link rel="prefetch" href="/assets/js/124.450685ea.js"><link rel="prefetch" href="/assets/js/125.249102cc.js"><link rel="prefetch" href="/assets/js/126.5a5107cb.js"><link rel="prefetch" href="/assets/js/127.20ec2f15.js"><link rel="prefetch" href="/assets/js/128.b35cfb5e.js"><link rel="prefetch" href="/assets/js/129.2a93f40f.js"><link rel="prefetch" href="/assets/js/13.dc7f8b47.js"><link rel="prefetch" href="/assets/js/130.e868d841.js"><link rel="prefetch" href="/assets/js/131.55f44c98.js"><link rel="prefetch" href="/assets/js/132.8c98949a.js"><link rel="prefetch" href="/assets/js/133.32b47780.js"><link rel="prefetch" href="/assets/js/134.5433ccd4.js"><link rel="prefetch" href="/assets/js/135.0f6a1ba9.js"><link rel="prefetch" href="/assets/js/136.2acad207.js"><link rel="prefetch" href="/assets/js/137.41770113.js"><link rel="prefetch" href="/assets/js/138.740a19c3.js"><link rel="prefetch" href="/assets/js/139.7a8eec5a.js"><link rel="prefetch" href="/assets/js/14.acacf3b7.js"><link rel="prefetch" href="/assets/js/140.a33e4419.js"><link rel="prefetch" href="/assets/js/141.d51939b4.js"><link rel="prefetch" href="/assets/js/142.cfe91046.js"><link rel="prefetch" href="/assets/js/143.74f47310.js"><link rel="prefetch" href="/assets/js/144.3c3286b1.js"><link rel="prefetch" href="/assets/js/145.4c7735cc.js"><link rel="prefetch" href="/assets/js/146.7fab480f.js"><link rel="prefetch" href="/assets/js/147.9c0dd71c.js"><link rel="prefetch" href="/assets/js/148.b8bb2640.js"><link rel="prefetch" href="/assets/js/149.baee5f78.js"><link rel="prefetch" href="/assets/js/15.9fe507b1.js"><link rel="prefetch" href="/assets/js/150.4df8129a.js"><link rel="prefetch" href="/assets/js/151.cb43fe3d.js"><link rel="prefetch" href="/assets/js/152.393945cc.js"><link rel="prefetch" href="/assets/js/153.1bc3e964.js"><link rel="prefetch" href="/assets/js/154.89b90398.js"><link rel="prefetch" href="/assets/js/155.552175ae.js"><link rel="prefetch" href="/assets/js/156.4f37b10d.js"><link rel="prefetch" href="/assets/js/157.1e480cc3.js"><link rel="prefetch" href="/assets/js/158.8f94ba92.js"><link rel="prefetch" href="/assets/js/159.78180e9c.js"><link rel="prefetch" href="/assets/js/16.b330c053.js"><link rel="prefetch" href="/assets/js/160.00198ae8.js"><link rel="prefetch" href="/assets/js/161.4135963a.js"><link rel="prefetch" href="/assets/js/162.9d13b58a.js"><link rel="prefetch" href="/assets/js/163.59171994.js"><link rel="prefetch" href="/assets/js/164.94284a4a.js"><link rel="prefetch" href="/assets/js/165.1c5c6f9c.js"><link rel="prefetch" href="/assets/js/166.69459c17.js"><link rel="prefetch" href="/assets/js/167.fa40d78b.js"><link rel="prefetch" href="/assets/js/168.8a002d3e.js"><link rel="prefetch" href="/assets/js/169.428ad2cf.js"><link rel="prefetch" href="/assets/js/17.ab5688e9.js"><link rel="prefetch" href="/assets/js/170.f494b6c7.js"><link rel="prefetch" href="/assets/js/171.21f2b155.js"><link rel="prefetch" href="/assets/js/172.353b696e.js"><link rel="prefetch" href="/assets/js/173.5b2121f5.js"><link rel="prefetch" href="/assets/js/175.bd6681dc.js"><link rel="prefetch" href="/assets/js/18.6d14e80d.js"><link rel="prefetch" href="/assets/js/19.d124f9ca.js"><link rel="prefetch" href="/assets/js/20.03742790.js"><link rel="prefetch" href="/assets/js/21.6d4fd074.js"><link rel="prefetch" href="/assets/js/22.7eb52957.js"><link rel="prefetch" href="/assets/js/23.1a2d0e54.js"><link rel="prefetch" href="/assets/js/24.54c9744a.js"><link rel="prefetch" href="/assets/js/25.63da7e63.js"><link rel="prefetch" href="/assets/js/26.c3cf91f0.js"><link rel="prefetch" href="/assets/js/27.8547f5b7.js"><link rel="prefetch" href="/assets/js/28.1bdd7034.js"><link rel="prefetch" href="/assets/js/29.6b1dba90.js"><link rel="prefetch" href="/assets/js/3.1e79d891.js"><link rel="prefetch" href="/assets/js/30.197106b1.js"><link rel="prefetch" href="/assets/js/31.b1768049.js"><link rel="prefetch" href="/assets/js/32.290513d5.js"><link rel="prefetch" href="/assets/js/33.59bfbc0b.js"><link rel="prefetch" href="/assets/js/34.00ef2111.js"><link rel="prefetch" href="/assets/js/35.3545f7b3.js"><link rel="prefetch" href="/assets/js/36.3b8c596c.js"><link rel="prefetch" href="/assets/js/37.47fd6c49.js"><link rel="prefetch" href="/assets/js/38.8c88e81c.js"><link rel="prefetch" href="/assets/js/39.554542f4.js"><link rel="prefetch" href="/assets/js/4.5782673e.js"><link rel="prefetch" href="/assets/js/40.79612d09.js"><link rel="prefetch" href="/assets/js/41.51b89868.js"><link rel="prefetch" href="/assets/js/42.4b022c64.js"><link rel="prefetch" href="/assets/js/43.62de1b11.js"><link rel="prefetch" href="/assets/js/44.1769da99.js"><link rel="prefetch" href="/assets/js/45.725a3881.js"><link rel="prefetch" href="/assets/js/46.c1b409dc.js"><link rel="prefetch" href="/assets/js/47.1df41197.js"><link rel="prefetch" href="/assets/js/48.436e0286.js"><link rel="prefetch" href="/assets/js/49.5c36e1f2.js"><link rel="prefetch" href="/assets/js/5.ea3bfad3.js"><link rel="prefetch" href="/assets/js/50.3baf9999.js"><link rel="prefetch" href="/assets/js/51.a8df868c.js"><link rel="prefetch" href="/assets/js/52.7a8fa001.js"><link rel="prefetch" href="/assets/js/53.bc5be956.js"><link rel="prefetch" href="/assets/js/54.8c427cae.js"><link rel="prefetch" href="/assets/js/55.897c8c4a.js"><link rel="prefetch" href="/assets/js/56.8673975d.js"><link rel="prefetch" href="/assets/js/57.e23082f4.js"><link rel="prefetch" href="/assets/js/58.891e2378.js"><link rel="prefetch" href="/assets/js/59.a394a928.js"><link rel="prefetch" href="/assets/js/6.0d64cdd9.js"><link rel="prefetch" href="/assets/js/60.8eadc699.js"><link rel="prefetch" href="/assets/js/61.1067735d.js"><link rel="prefetch" href="/assets/js/62.5a40bfc7.js"><link rel="prefetch" href="/assets/js/63.7520a94f.js"><link rel="prefetch" href="/assets/js/64.04801b88.js"><link rel="prefetch" href="/assets/js/65.38e7820f.js"><link rel="prefetch" href="/assets/js/66.b045290b.js"><link rel="prefetch" href="/assets/js/67.3b22b0a6.js"><link rel="prefetch" href="/assets/js/68.50ceec34.js"><link rel="prefetch" href="/assets/js/69.1ccd29a7.js"><link rel="prefetch" href="/assets/js/7.9134aa5e.js"><link rel="prefetch" href="/assets/js/70.f93183bd.js"><link rel="prefetch" href="/assets/js/71.f6b32e29.js"><link rel="prefetch" href="/assets/js/72.a439763e.js"><link rel="prefetch" href="/assets/js/73.ec0490d2.js"><link rel="prefetch" href="/assets/js/74.676eee9b.js"><link rel="prefetch" href="/assets/js/75.03c16401.js"><link rel="prefetch" href="/assets/js/76.470f0c0d.js"><link rel="prefetch" href="/assets/js/77.2e61755d.js"><link rel="prefetch" href="/assets/js/78.0623588b.js"><link rel="prefetch" href="/assets/js/79.b681bb68.js"><link rel="prefetch" href="/assets/js/8.6dd402d1.js"><link rel="prefetch" href="/assets/js/80.e3a81a7d.js"><link rel="prefetch" href="/assets/js/81.14220477.js"><link rel="prefetch" href="/assets/js/82.322ed03a.js"><link rel="prefetch" href="/assets/js/83.0c6f914f.js"><link rel="prefetch" href="/assets/js/84.bd80db08.js"><link rel="prefetch" href="/assets/js/85.809a3f18.js"><link rel="prefetch" href="/assets/js/86.971ddda2.js"><link rel="prefetch" href="/assets/js/87.e457d878.js"><link rel="prefetch" href="/assets/js/88.bc6864f4.js"><link rel="prefetch" href="/assets/js/89.06ac11bc.js"><link rel="prefetch" href="/assets/js/9.56337f6d.js"><link rel="prefetch" href="/assets/js/90.038b2838.js"><link rel="prefetch" href="/assets/js/91.d7ee8b05.js"><link rel="prefetch" href="/assets/js/92.d346cfcd.js"><link rel="prefetch" href="/assets/js/93.4f9c8c4d.js"><link rel="prefetch" href="/assets/js/94.b71bab99.js"><link rel="prefetch" href="/assets/js/95.f02a5266.js"><link rel="prefetch" href="/assets/js/96.5c10e102.js"><link rel="prefetch" href="/assets/js/97.f5293797.js"><link rel="prefetch" href="/assets/js/98.5a6e459a.js"><link rel="prefetch" href="/assets/js/99.69842a6b.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.117964e0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/zh/" class="home-link router-link-active"><img src="/assets/venus-logo-title.svg" alt="启明星" class="logo"> <span class="site-name can-hide">启明星</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  启明星简介
+</a></div><div class="nav-item"><a href="/zh/cs/" class="nav-link">
+  链服务
+</a></div><div class="nav-item"><a href="/zh/cluster/" class="nav-link">
+  算力服务
+</a></div><div class="nav-item"><a href="/zh/market/" class="nav-link">
+  订单服务
+</a></div><div class="nav-item"><a href="/zh/modules/" class="nav-link">
+  组件
+</a></div><div class="nav-item"><a href="/zh/advanced/" class="nav-link">
+  进阶
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link">
+  运维
+</a></div><div class="nav-item"><a href="/zh/research/" class="nav-link router-link-active">
+  研究
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/research/metrics-design.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  启明星简介
+</a></div><div class="nav-item"><a href="/zh/cs/" class="nav-link">
+  链服务
+</a></div><div class="nav-item"><a href="/zh/cluster/" class="nav-link">
+  算力服务
+</a></div><div class="nav-item"><a href="/zh/market/" class="nav-link">
+  订单服务
+</a></div><div class="nav-item"><a href="/zh/modules/" class="nav-link">
+  组件
+</a></div><div class="nav-item"><a href="/zh/advanced/" class="nav-link">
+  进阶
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link">
+  运维
+</a></div><div class="nav-item"><a href="/zh/research/" class="nav-link router-link-active">
+  研究
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/research/metrics-design.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Venus生态研究</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/research/" aria-current="page" class="sidebar-link">概述</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>FIP解读</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/research/fip0045.html" class="sidebar-link">FIP0045</a></li><li><a href="/zh/research/fip0034.html" class="sidebar-link">FIP0034</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>设计方案</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/research/market-attributes-self-config.html" class="sidebar-link">市场的交易属性配置</a></li><li><a href="/zh/research/impl-mk-1.2.0.html" class="sidebar-link">集成Boost协议</a></li><li><a href="/zh/research/metrics-design.html" aria-current="page" class="active sidebar-link">Metrics指标</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/research/metrics-design.html#simple-summary-概述" class="sidebar-link">Simple Summary / 概述</a></li><li class="sidebar-sub-header"><a href="/zh/research/metrics-design.html#abstract-功能简介" class="sidebar-link">Abstract / 功能简介</a></li><li class="sidebar-sub-header"><a href="/zh/research/metrics-design.html#motivation-来源和背景" class="sidebar-link">Motivation / 来源和背景</a></li><li class="sidebar-sub-header"><a href="/zh/research/metrics-design.html#specification-spec" class="sidebar-link">Specification / Spec</a></li><li class="sidebar-sub-header"><a href="/zh/research/metrics-design.html#design-rationale-设计思路" class="sidebar-link">Design Rationale / 设计思路</a></li><li class="sidebar-sub-header"><a href="/zh/research/metrics-design.html#backwards-compatibility-兼容性" class="sidebar-link">Backwards Compatibility / 兼容性</a></li><li class="sidebar-sub-header"><a href="/zh/research/metrics-design.html#test-cases-测试用例" class="sidebar-link">Test Cases / 测试用例</a></li><li class="sidebar-sub-header"><a href="/zh/research/metrics-design.html#security-considerations-安全考量" class="sidebar-link">Security Considerations / 安全考量</a></li><li class="sidebar-sub-header"><a href="/zh/research/metrics-design.html#related" class="sidebar-link">Related</a></li></ul></li><li><a href="/zh/research/saas.html" class="sidebar-link">SaaS</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>其他解读</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/research/boost-protocol-research.html" class="sidebar-link">Boost协议解读</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="simple-summary-概述"><a href="#simple-summary-概述" class="header-anchor">#</a> Simple Summary / 概述</h2> <p>Metrics for montoring general health of Venus system.</p> <h2 id="abstract-功能简介"><a href="#abstract-功能简介" class="header-anchor">#</a> Abstract / 功能简介</h2> <p>Metrics provides the toolbox for SP to minimize the impact of their operation errors, to get to see if winidowPost messages get properly sent out in time, to monitor time/latency for PoST computation and much more so that SPs do not get punished by the protocol unintentionally.</p> <ul><li>Live heart beat map of all critical information of your storage system</li> <li>Lower protocol penalties from mechanics such as PCD, PoST slashes, missing block etc</li> <li>Easy integration with third party monitoring solution</li></ul> <h2 id="motivation-来源和背景"><a href="#motivation-来源和背景" class="header-anchor">#</a> Motivation / 来源和背景</h2> <p>One of the issues that new SPs or even many veteran SPs facing everyday when they on-board loads of sectors is getting a clear picture of the heartbeat for their storage system to diagnose whatever has gone wrong in their pipeline. A thousand things could go wrong when moving sectors through SP’s storage systems such as chain head out of sync, messages stuck in mpool, missing block producing round, high API latency and etc. SPs have to navigate through these anomalies all the time and be quick to response to these conditions.</p> <p>This is where Data Onboarding Metrics for Venus Filecoin comes into play. We propose to build a series of critical metrics for each component of Venus Filecoin to reflect the live health of a storage system so that operators could have better knowledge of what’s going with their systems and then could better react to different situations instead of relying on guessing, digging through tons of logs or overly extensive dev-ops experience.</p> <h2 id="specification-spec"><a href="#specification-spec" class="header-anchor">#</a> Specification / Spec</h2> <p>venus-miner</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// latency for GetBaseInfo API</span>
+GetBaseInfoDuration   <span class="token punctuation">(</span>Milliseconds<span class="token punctuation">)</span>
+<span class="token comment">// latency for ComputeTicket API</span>
+ComputeTicketDuration <span class="token punctuation">(</span>Milliseconds<span class="token punctuation">)</span>
+<span class="token comment">// latency for IsRoundWinner API</span>
+IsRoundWinnerDuration <span class="token punctuation">(</span>Milliseconds<span class="token punctuation">)</span>
+<span class="token comment">// latency for ComputeProof API</span>
+ComputeProofDuration <span class="token punctuation">(</span>Seconds<span class="token punctuation">)</span>
+
+<span class="token comment">// number of block produced</span>
+NumberOfBlock <span class="token punctuation">(</span>Dimensionless<span class="token punctuation">)</span>
+<span class="token comment">// number of rounds that miner_id is winner</span>
+NumberOfIsRoundWinner <span class="token punctuation">(</span>Dimensionless<span class="token punctuation">)</span>
+</code></pre></div><p>venus-messager</p> <div class="language-go extra-class"><pre class="language-go"><code>
+<span class="token comment">// Below metrics are updated on a per wallet address granularity </span>
+WalletBalance  <span class="token punctuation">(</span>UnitDimensionless<span class="token punctuation">)</span>
+WalletDBNonce <span class="token punctuation">(</span>UnitDimensionless<span class="token punctuation">)</span>
+WalletChainNonce <span class="token punctuation">(</span>Dimensionless<span class="token punctuation">)</span>
+
+<span class="token comment">// Current number of messages that are waiting for venus-messager to fill out parameters like signature, gas usage, nonce etc.</span>
+<span class="token comment">// This metric is updated on a per wallet address granularity </span>
+NumOfUnFillMsg <span class="token punctuation">(</span>UnitDimensionless<span class="token punctuation">)</span>
+<span class="token comment">// Current number of messages that venus-messager has filled out parameters like signature, gas usage, nonce etc.</span>
+<span class="token comment">// This metric is updated on a per wallet address granularity </span>
+NumOfFillMsg  <span class="token punctuation">(</span>Dimensionless<span class="token punctuation">)</span>
+<span class="token comment">// Current number of messages that venus-messager has failed to fill out parameters like signature, gas usage, nonce etc.</span>
+<span class="token comment">// This metric is updated on a per wallet address granularity </span>
+NumOfFailedMsg <span class="token punctuation">(</span>UnitDimensionless<span class="token punctuation">)</span>
+
+<span class="token comment">// Current number of messages that haven't being on-chain for more than 3 minutes</span>
+NumOfMsgBlockedThreeMinutes <span class="token punctuation">(</span>Dimensionless<span class="token punctuation">)</span>
+<span class="token comment">// Current number of messages that haven't being on-chain for more than 5 minutes</span>
+NumOfMsgBlockedFiveMinutes  <span class="token punctuation">(</span>UnitDimensionless<span class="token punctuation">)</span>
+
+<span class="token comment">// Number of message being selected by venus-messager during last round of message pushing</span>
+SelectedMsgNumOfLastRound <span class="token punctuation">(</span>UnitDimensionless<span class="token punctuation">)</span>
+<span class="token comment">// Number of message being pushed by venus-messager during last round of message pushing</span>
+ToPushMsgNumOfLastRound  <span class="token punctuation">(</span>UnitDimensionless<span class="token punctuation">)</span>
+<span class="token comment">// Number of message being expired by venus-messager during last round of message pushing</span>
+ExpiredMsgNumOfLastRound <span class="token punctuation">(</span>UnitDimensionless<span class="token punctuation">)</span>
+<span class="token comment">// Number of message encountered errors during last round of message pushing</span>
+ErrMsgNumOfLastRound  <span class="token punctuation">(</span>UnitDimensionless<span class="token punctuation">)</span>
+
+<span class="token comment">// Current time difference between chain head time and time on venus-messager machine system time</span>
+ChainHeadStableDelay  <span class="token punctuation">(</span>UnitSeconds<span class="token punctuation">)</span>
+<span class="token comment">// Histogram of time difference between chain head time and time on venus-messager machine system time</span>
+ChainHeadStableDuration <span class="token punctuation">(</span>UnitSeconds<span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</code></pre></div><p>venus-gateway</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// Number of wallet connecting to the gateway</span>
+WalletCount
+<span class="token comment">// Number of wallet addresses connecting to the gateway</span>
+WalletAddressCount
+<span class="token comment">// IP of remote wallet connecting to the gateway</span>
+WalletIPAddress
+
+<span class="token comment">// Number of SP connecting to the gateway</span>
+SPCount
+<span class="token comment">// Number of SP addresses connecting to the gateway</span>
+SPAddressCount
+<span class="token comment">// IP of remote SP connecting to the gateway</span>
+SPIPAddress
+
+<span class="token comment">// Number of signature gateway initiated</span>
+SignCount
+</code></pre></div><p>venus-market</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// Count of storage deals accepted</span>
+StorageDealAccepted
+<span class="token comment">// Number of active data transfer </span>
+NumberOfActiveTransfer
+<span class="token comment">// Speed of data transfer, per transfer, unit = Mbps</span>
+DataTransferSpeed
+<span class="token comment">// The rate of successful data transfer</span>
+SucessTransferRate
+</code></pre></div><p>venus-cluster</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// Count of new sectors, per miner_id </span>
+SectorManagerNewSector
+
+<span class="token comment">// Count of preCommit, per miner_id </span>
+SectorManagerPreCommitSector
+
+<span class="token comment">// count of commit, per miner_id </span>
+SectorManagerCommitSector
+
+<span class="token comment">// time of computing winningPost, per miner_id, unit = Seconds</span>
+ProverWinningPostDuration
+
+<span class="token comment">// time of computing WindowPost, per miner_id, unit = Minutes</span>
+ProverWindowPostDuration
+
+<span class="token comment">// Completion rate for partition that have passed windowPost, per miner_id</span>
+<span class="token comment">// Eg: ProverWindowPostCompleteRate=0.9 when 9 out 10 partition complete windowPost submission</span>
+ProverWindowPostCompleteRate
+
+<span class="token comment">// Latency of sector manage API calls, unit = ms</span>
+APIRequestDuration
+</code></pre></div><p>Note that all metrics are not final and subject to have more parameters when community see fit.</p> <h2 id="design-rationale-设计思路"><a href="#design-rationale-设计思路" class="header-anchor">#</a> Design Rationale / 设计思路</h2> <p>Metrics designs allows user to use any exporters to its liking through configuration, which expands the usability of the metrics system so that it can be easily integrated to either new or existing monitoring solution user may already have.</p> <div class="language-yml extra-class"><pre class="language-yml"><code><span class="token punctuation">[</span>Metrics<span class="token punctuation">]</span>
+  <span class="token comment"># 是否开启metrics指标统计，默认为false</span>
+  Enabled = false
+  
+  <span class="token punctuation">[</span>Metrics.Exporter<span class="token punctuation">]</span>
+    <span class="token comment"># 指标导出器类型，目前可选：prometheus或graphite，默认为prometheus</span>
+    Type = &quot;prometheus&quot;
+    
+    <span class="token punctuation">[</span>Metrics.Exporter.Prometheus<span class="token punctuation">]</span>
+      <span class="token comment"># multiaddr</span>
+      EndPoint = &quot;/ip4/0.0.0.0/tcp/4568&quot;
+      <span class="token comment"># 命名规范: &quot;a_b_c&quot;, 不能带&quot;-&quot;</span>
+      Namespace = &quot;messager01&quot; 
+      <span class="token comment"># 指标注册表类型，可选：default（默认，会附带程序运行的环境指标）或 define（自定义）</span>
+      RegistryType = &quot;define&quot;
+      <span class="token comment"># prometheus 服务路径</span>
+      Path = &quot;/debug/metrics&quot;
+      <span class="token comment"># 上报周期</span>
+      ReportingPeriod = &quot;10s&quot;
+      
+    <span class="token punctuation">[</span>Metrics.Exporter.Graphite<span class="token punctuation">]</span>
+      <span class="token comment"># 命名规范: &quot;a_b_c&quot;, 不能带&quot;-&quot;</span>
+      Namespace = &quot;messager01&quot; 
+      <span class="token comment"># graphite exporter 收集器服务地址</span>
+      Host = &quot;127.0.0.1&quot;
+      <span class="token comment"># graphite exporter 收集器服务监听端口</span>
+      Port = 4568
+      <span class="token comment"># 上报周期</span>
+      ReportingPeriod = &quot;10s&quot;
+</code></pre></div><h2 id="backwards-compatibility-兼容性"><a href="#backwards-compatibility-兼容性" class="header-anchor">#</a> Backwards Compatibility / 兼容性</h2> <p>n/a</p> <h2 id="test-cases-测试用例"><a href="#test-cases-测试用例" class="header-anchor">#</a> Test Cases / 测试用例</h2> <p>n/a</p> <h2 id="security-considerations-安全考量"><a href="#security-considerations-安全考量" class="header-anchor">#</a> Security Considerations / 安全考量</h2> <p>n/a</p> <h2 id="related"><a href="#related" class="header-anchor">#</a> Related</h2> <p>A <a href="https://github.com/filecoin-project/devgrants/issues/858" target="_blank" rel="noopener noreferrer">grant<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> was filed for this initiative to fund the development of this project.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/filecoin-project/venus-docs/edit/master/docs/zh/research/metrics-design.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2022/12/1 06:34:51</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/zh/research/impl-mk-1.2.0.html" class="prev">
+        集成Boost协议
+      </a></span> <span class="next"><a href="/zh/research/saas.html">
+        SaaS
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.1e669d06.js" defer></script><script src="/assets/js/2.e01744a9.js" defer></script><script src="/assets/js/174.16641d2a.js" defer></script>
+  </body>
+</html>
