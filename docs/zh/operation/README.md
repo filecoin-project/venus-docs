@@ -6,7 +6,7 @@
 
 ## 部署节点
 
-api auth suggest to use venus-auth but not local.  in local mode, when reimport snapshot, token will change
+节点授权这里建议连接venus-auth进行授权，不然节点重启时,token会发生变化。
 
 venus:
 ```sh
@@ -34,7 +34,7 @@ make <network-type>
 git clone https://github.com/ipfs-force-community/chain-co.git
 make
 #run
-./chain-co  run -listen 0.0.0.0:<port> --auth-url <venus-auth url> --node <token:libp2p> --node<token:libp2p>
+./chain-co --listen 0.0.0.0:<port>  run --auth-url <venus-auth url> --node <token:rpc-url> --node<token:rpc-url>
 ```
 
 ## 部署代理(可选)
