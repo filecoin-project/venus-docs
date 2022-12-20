@@ -21,7 +21,6 @@ lotus:
 ```sh
 #build
 git clone https://github.com/ipfs-force-community/lotus.git
-git checkout v1.11.2_incubation
 make <network-type>
 #run
 ./lotus daemon --auth-url <venus-auth url>
