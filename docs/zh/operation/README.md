@@ -6,7 +6,7 @@
 
 ## 部署节点
 
-节点授权这里建议连接venus-auth进行授权，不然节点重启时,token会发生变化。
+节点授权这里建议连接`venus-auth`进行授权，不然节点重启时，`token`会发生变化。
 
 venus:
 ```sh
@@ -95,4 +95,4 @@ http {
 
 1. 因为节点之间数据还是分离的，所以无法提供完全一致的接口访问，特别是在头部区块的处理上。
 2. 如果部署lotus，需要使用定制后的版本，因为venus有一些特有的接口.
-3. 如果存在问题，请提issue。
+3. 如果遇到问题`bug`，欢迎提交[issue](https://github.com/filecoin-project/venus/issues/new/choose)给我们。
