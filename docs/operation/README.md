@@ -21,7 +21,6 @@ lotus:
 ```sh
 #build
 git clone https://github.com/ipfs-force-community/lotus.git
-git checkout v1.11.2_incubation
 make <network-type>
 #run
 ./lotus daemon --auth-url <venus-auth url>
@@ -34,7 +33,7 @@ make <network-type>
 git clone https://github.com/ipfs-force-community/chain-co.git
 make
 #run
-./chain-co  run -listen 0.0.0.0:<port> --auth-url <venus-auth url> --node <token:libp2p> --node<token:libp2p>
+./chain-co --listen 0.0.0.0:<port>  run --auth-url <venus-auth url> --node <token:rpc-url> --node<token:rpc-url>
 ```
 
 ## proxy(optional)
