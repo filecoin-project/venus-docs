@@ -10,7 +10,7 @@ push-buildenv:
 	docker push filvenus/venus-buildenv:$(TAG)
 
 docker-runtime:
-	docker build --build-arg https_proxy=$(BUILD_DOCKER_PROXY) -t filvenus/venus-runtime:$(TAG)-f script/docker/venus-runtime.dockerfile .
+	docker build --build-arg https_proxy=$(BUILD_DOCKER_PROXY) -t filvenus/venus-runtime:$(TAG) -f script/docker/venus-runtime.dockerfile .
 
 push-runtime:
 	docker push filvenus/venus-runtime:$(TAG)
