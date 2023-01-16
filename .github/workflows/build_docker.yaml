@@ -1,0 +1,31 @@
+name: Build Docker 
+
+on:
+  push:
+    branches:
+      - master
+    paths: 
+      - 'script/docker/**'
+  workflow_dispatch:
+
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2 
+        with:
+          persist-credentials: false
+
+      - name: Login DockerHub
+        run: |
+          docker login --username=filvenus --password ${{ secrets.DOCKER_PASSWORD }}
+
+
+      - name: Build And Push
+        run: |
+          make docker-runtime
+          make push-runtime
+          make docker-buildenv
+          make push-buildenv
