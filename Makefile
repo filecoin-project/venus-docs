@@ -4,7 +4,7 @@ dev:
 
 TAG:=v1.9.0
 docker-buildenv:
-	docker build --build-arg https_proxy=$(BUILD_DOCKER_PROXY) -t filvenus/venus-buildenv$(TAG) -f script/docker/venus-buildenv.dockerfile .
+	docker build --build-arg https_proxy=$(BUILD_DOCKER_PROXY) -t filvenus/venus-buildenv:$(TAG) -f script/docker/venus-buildenv.dockerfile .
 
 push-buildenv:
 	docker push filvenus/venus-buildenv:$(TAG)

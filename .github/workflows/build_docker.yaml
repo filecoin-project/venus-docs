@@ -1,4 +1,4 @@
-name: Build buildenv
+name: Build Docker 
 
 on:
   push:
@@ -18,8 +18,14 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Build Docker
+      - name: Login DockerHub
         run: |
-          make docker-buildenv
           docker login --username=filvenus --password ${{ secrets.DOCKER_PASSWORD }}
+
+
+      - name: Build And Push
+        run: |
+          make docker-runtime
+          make push-runtime
+          make docker-buildenv
           make push-buildenv
