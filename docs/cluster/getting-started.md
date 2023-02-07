@@ -102,14 +102,8 @@ For more details on what each configuration does, please refer to [this document
 3. Start `venus-sector-manager`.
 
 ```bash
-$ ./dist/bin/venus-sector-manager --net="cali" daemon run
+$ ./dist/bin/venus-sector-manager daemon run
 ```
-
-:::tip
-
-`--net` defaults to `mainnet`.
-
-:::
 
 ### venus-worker
 
