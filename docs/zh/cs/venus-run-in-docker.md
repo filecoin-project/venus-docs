@@ -9,12 +9,11 @@
 
 ```shell
 # 下载配置文件
-wget https://raw.githubusercontent.com/filecoin-project/venus-docs/master/script/docker-compose.yaml
+wget https://raw.githubusercontent.com/filecoin-project/venus-docs/master/script/docker/docker-compose.yaml
 
 # 启动docker集群
 snapshot=/path/to/your/snapshot.car \
 nettype=<nettype> \
-proxy=<socks5|https>://<PROXY_IP>:<PROXY_PORT> \
 piecestorage=/path/to/your/PieceStorage \
 docker-compose up -d
 
