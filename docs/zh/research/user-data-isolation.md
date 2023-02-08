@@ -41,10 +41,6 @@
 
 - 历史出块权
 
-#### venus-gateway
-
-- 支持用户签名的 `venus-wallet` 列表。可以提前验证某个钱包的消息能否被签名等。
-
 #### venus-market
 
 - 订单数据(deals)
@@ -59,7 +55,7 @@
 ### 用户界面
 
 - venus-sector-manager：actor地址管理，订单，pieces及消息管理等；
-- venus-tools： 转账，***
+- venus-tools
 - venus-wallet：`signer`与用户关系管理
 
 ## Design Rationale (设计思路)
