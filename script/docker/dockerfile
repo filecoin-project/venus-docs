@@ -10,8 +10,8 @@ COPY . /build
 RUN export GOPROXY=https://goproxy.cn,direct  && make
 
 
-
-FROM filvenus/venus-runtime
+ARG RUMTIME_TAG=latest
+FROM filvenus/venus-runtime:${RUMTIME_TAG}
 
 ARG BUILD_TARGET=
 ENV VENUS_COMPONENT=${BUILD_TARGET}
