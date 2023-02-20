@@ -65,6 +65,8 @@ services:
     depends_on:
       - auth
 
+    entrypoint: "/script/compose/venus-gateway.sh"
+
   messager:
     image: filvenus/venus-messager
     network_mode: "host"
