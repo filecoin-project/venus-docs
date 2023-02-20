@@ -4,10 +4,10 @@ WORKDIR /build
 
 COPY ./go.mod /build/
 COPY ./exter[n] ./go.mod  /build/extern/
-RUN export GOPROXY=https://goproxy.cn,direct && go mod download 
+RUN  go mod download 
 
 COPY . /build
-RUN export GOPROXY=https://goproxy.cn,direct  && make
+RUN make
 
 
 ARG RUMTIME_TAG=latest
