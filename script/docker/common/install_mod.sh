@@ -1,7 +1,7 @@
 #! bash
 # this script is used to pre download and install golang dependencies from source repos
 
-go env -w GOPROXY=https://goproxy.io,direct
+# go env -w GOPROXY=https://goproxy.io,direct
 
 repos=(\
 https://github.com/filecoin-project/venus.git \
