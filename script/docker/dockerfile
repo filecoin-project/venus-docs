@@ -1,3 +1,5 @@
+ARG RUNTIME_TAG=latest
+
 FROM filvenus/venus-buildenv AS buildenv
 
 WORKDIR /build
@@ -10,8 +12,7 @@ COPY . /build
 RUN make
 
 
-ARG RUMTIME_TAG=latest
-FROM filvenus/venus-runtime:${RUMTIME_TAG}
+FROM filvenus/venus-runtime:${RUNTIME_TAG}
 
 ARG BUILD_TARGET=
 ENV VENUS_COMPONENT=${BUILD_TARGET}
