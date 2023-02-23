@@ -1,0 +1,45 @@
+name: Build Docker Buildenv
+
+on:
+  push:
+    branches:
+      - master
+    paths: 
+      - 'script/docker/venus-buildenv.dockerfile'
+      - 'script/docker/common/install_mod.sh'
+  workflow_dispatch:
+
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2 
+        with:
+          persist-credentials: false
+
+      - name: Login DockerHub
+        run: |
+          docker login --username=filvenus --password ${{ secrets.DOCKER_PASSWORD }}
+
+
+      - name: Build And Push Buildenv
+        run: |
+          make docker-buildenv
+          make push-buildenv
+
+      - name: Push Buildenv As Latest
+        if : github.ref_name == 'master'
+        run: |
+          docker push filvenus/venus-buildenv:latest
+
+      - name: Build And Push Runtime
+        run: |
+          make docker-runtime
+          make push-runtime
+
+      - name: Push Runtime As Latest
+        if : github.ref_name == 'master'
+        run: |
+          docker push filvenus/venus-runtime:latest

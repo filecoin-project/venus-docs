@@ -1,11 +1,14 @@
-name: Build Docker 
+name: Build Docker Runtime
 
 on:
   push:
     branches:
       - master
+      - 'dev/**'
     paths: 
       - 'script/docker/**'
+      - '!script/docker/venus-buildenv.dockerfile'
+      - '!script/docker/common/install_mod.sh'
   workflow_dispatch:
 
 
@@ -27,5 +30,8 @@ jobs:
         run: |
           make docker-runtime
           make push-runtime
-          make docker-buildenv
-          make push-buildenv
+
+      - name: Push As Latest
+        if : github.ref_name == 'master'
+        run: |
+          docker push filvenus/venus-runtime:latest

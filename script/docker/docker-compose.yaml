@@ -53,15 +53,6 @@ services:
       - ./.venus/root:/root
     ports:
       - 45132:45132
-
-    command:
-      [
-        "--listen",
-        "/ip4/0.0.0.0/tcp/45132",
-        "run",
-        "--auth-url",
-        "http://127.0.0.1:8989"
-      ]
     depends_on:
       - auth
 
