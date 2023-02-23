@@ -25,7 +25,13 @@ jobs:
 
       - name: Build And Push
         run: |
-          make docker-runtime
-          make push-runtime
           make docker-buildenv
           make push-buildenv
+          make docker-runtime
+          make push-runtime
+
+      - name: Push As Latest
+        if : github.ref_name == 'master'
+        run: |
+          docker push filvenus/venus-buildenv:latest
+          docker push filvenus/venus-runtime:latest
