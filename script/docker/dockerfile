@@ -1,0 +1,23 @@
+ARG RUNTIME_TAG=latest
+
+FROM filvenus/venus-buildenv AS buildenv
+
+WORKDIR /build
+
+COPY ./go.mod /build/
+COPY ./exter[n] ./go.mod  /build/extern/
+RUN  go mod download 
+
+COPY . /build
+RUN make
+
+
+FROM filvenus/venus-runtime:${RUNTIME_TAG}
+
+ARG BUILD_TARGET=
+ENV VENUS_COMPONENT=${BUILD_TARGET}
+
+# copy the app from build env
+COPY --from=buildenv  /build/${BUILD_TARGET} /app/${BUILD_TARGET}
+
+ENTRYPOINT ["/script/init.sh"]

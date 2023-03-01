@@ -81,22 +81,6 @@ module.exports = {
                     link: '/intro/'
                 },
                 {
-                    text: 'Chain Service',
-                    link: '/cs/'
-                },
-                {
-                    text: 'Power Service',
-                    link: '/cluster/'
-                },
-                {
-                    text: 'Deal Service',
-                    link: '/market/'
-                },
-                {
-                    text: 'Components',
-                    link: '/modules/'
-                },
-                {
                     text: 'Advanced',
                     link: '/advanced/'
                 },
@@ -111,6 +95,16 @@ module.exports = {
                         collapsable: false,
                         children: [
                             ['', 'Overview'],
+                            ['one-pager.md', 'One Pager']
+                        ]
+                    },
+                    {
+                        title: 'Products',
+                        collapsable: false,
+                        children: [
+                            ['sophon.md', 'Sophon'],
+                            ['damocles.md', 'Damocles'],
+                            ['droplet.md', 'Droplet'],
                         ]
                     },
                     {
@@ -118,128 +112,6 @@ module.exports = {
                         collapsable: false,
                         children: [
                             ['contribute-docs.md', 'Contribute to doc']
-                        ]
-                    },
-                    ],
-                    '/cs/': [{
-                        title: 'Introduction',
-                        collapsable: false,
-                        children: [
-                            ['', 'Overview'],
-                        ]
-                    },
-                    {
-                        title: 'Deployment',
-                        collapsable: false,
-                        children: [
-                            ['deploy-a-cs.md', 'Deploy a chain service'],
-                            ['join-a-cs.md', 'Use a chain service'],
-                        ]
-                    },
-                    ],
-                    '/cluster/': [{
-                        title: 'Introduction',
-                        collapsable: false,
-                        children: [
-                            ['', 'Overview'],
-                            ['architecture.md', 'Architecture'],
-                        ]
-                    },
-                    {
-                        title: 'Deployment',
-                        collapsable: false,
-                        children: [
-                            ['getting-started.md', 'Getting started'],
-                        ]
-                    },
-                    {
-                        title: 'Configurations',
-                        collapsable: false,
-                        children: [
-                            ['venus-sector-manager-config.md', 'venus-sector-manager config'],
-                            ['venus-worker-config.md', 'venus-worker config'],
-                        ]
-                    },
-                    {
-                        title: 'Operations',
-                        collapsable: false,
-                        children: [
-                            ['task-management.md', 'Task management'],
-                            ['task-flow.md', 'Task flow'],
-                        ]
-                    },
-                    {
-                        title: 'Migration',
-                        collapsable: false,
-                        children: [
-                            ['migrate-sectors.md', 'Import existing sectors', "https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/zh/06.%E5%AF%BC%E5%85%A5%E5%B7%B2%E5%AD%98%E5%9C%A8%E7%9A%84%E6%89%87%E5%8C%BA%E6%95%B0%E6%8D%AE.md"],
-                        ]
-                    },
-                    {
-                        title: 'Other Features',
-                        collapsable: false,
-                        children: [
-                            ['other.md', 'More features...'],
-                        ]
-                    },
-
-                    ],
-                    '/market/': [{
-                        title: 'Introduction',
-                        collapsable: false,
-                        children: [
-                            ['', 'Overview'],
-                            ['architecture.md', 'Architecture'],
-                        ]
-                    },
-                    {
-                        title: 'Deployment',
-                        collapsable: false,
-                        children: [
-                            ['Using-venus-market.md', 'Getting started'],
-                            ['migrate_market_v1_to_v2.md', 'Upgrading to version 2.0'],
-                        ]
-                    },
-                    {
-                        title: 'Storage deals',
-                        collapsable: false,
-                        children: [
-                            ['prep-datasets.md', 'preping large datasets'],
-                        ]
-                    },
-                    {
-                        title: 'Other Features',
-                        collapsable: false,
-                        children: [
-                            ['other.md', 'More features...'],
-                        ]
-                    },
-                    ],
-                    '/modules/': [{
-                        title: 'Chain Service',
-                        collapsable: false,
-                        children: [
-                            ['', 'venus daemon'],
-                            ['venus-auth.md', 'venus-auth'],
-                            ['venus-miner.md', 'venus-miner'],
-                            ['venus-messager.md', 'venus-messager'],
-                            ['venus-gateway.md', 'venus-gateway'],
-                            ['venus-wallet-builtin.md', 'venus-wallet (builtin)'],
-                        ]
-                    },
-                    {
-                        title: 'Local Component',
-                        collapsable: false,
-                        children: [
-                            ['venus-cluster.md', 'venus-cluster'],
-                            ['venus-wallet.md', 'venus-wallet (remote)'],
-                        ]
-                    },
-                    {
-                        title: 'Hybrid Component',
-                        collapsable: false,
-                        children: [
-                            ['venus-market.md', 'venus-market'],
                         ]
                     },
                     ],
@@ -265,6 +137,19 @@ module.exports = {
 
                         ]
                     },
+                    {
+                        title: 'RPC API Reference',
+                        collapsable: false,
+                        children: [
+                            ['chain-api-v0.md', 'Chain api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v0/method.md"],
+                            ['chain-api-v1.md', 'Chain api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v1/method.md"],
+                            ['gateway-api-v0.md', 'Gateway api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v0/method.md"],
+                            ['gateway-api-v1.md', 'Gateway api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v1/method.md"],
+                            ['market-api.md', 'Market api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/method.md"],
+                            ['messager-api.md', 'Messager api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/messager/method.md"],
+                            ['wallet-api.md', 'Wallet api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/wallet/method.md"]
+                        ]
+                    },
                     ],
                     '/operation/': [{
                         title: 'Operation',
@@ -281,8 +166,9 @@ module.exports = {
                         title: 'Upgrade',
                         collapsable: false,
                         children: [
-                            ['nv15-upgrade.md', 'nv15 upgrade'],
+                            ['nv17-upgrade.md', 'nv17 upgrade'],
                             ['nv16-upgrade.md', 'nv16 upgrade'],
+                            ['nv15-upgrade.md', 'nv15 upgrade'],
                         ]
                     },
                     ],
@@ -306,24 +192,8 @@ module.exports = {
                 title: '启明星',
                 description: 'Venus is a Go implementation of the Filecoin Distributed Storage Network.',
                 nav: [{
-                    text: '启明星简介',
+                    text: '简介',
                     link: '/zh/intro/'
-                },
-                {
-                    text: '链服务',
-                    link: '/zh/cs/'
-                },
-                {
-                    text: '算力服务',
-                    link: '/zh/cluster/'
-                },
-                {
-                    text: '订单服务',
-                    link: '/zh/market/'
-                },
-                {
-                    text: '组件',
-                    link: '/zh/modules/'
                 },
                 {
                     text: '进阶',
@@ -340,10 +210,21 @@ module.exports = {
                 ],
                 sidebar: {
                     '/zh/intro/': [{
-                        title: '简述',
+                        title: '概述',
                         collapsable: false,
                         children: [
                             ['', '启明星概要'],
+                            ['one-pager.md', '单页介绍文档'],
+
+                        ]
+                    },
+                    {
+                        title: '产品',
+                        collapsable: false,
+                        children: [
+                            ['sophon.md', '智子'],
+                            ['damocles.md', '执剑人'],
+                            ['droplet.md', '水滴'],
                         ]
                     },
                     {
@@ -351,150 +232,6 @@ module.exports = {
                         collapsable: false,
                         children: [
                             ['contribute-doc.md', '贡献文档'],
-                        ]
-                    },
-                    ],
-                    '/zh/cs/': [{
-                        title: '简述',
-                        collapsable: false,
-                        children: [
-                            ['', '概要'],
-                        ]
-                    },
-                    {
-                        title: '部署',
-                        collapsable: false,
-                        children: [
-                            ['deploy-a-cs.md', '部署链服务'],
-                            ['join-a-cs.md', '使用链服务'],
-                        ]
-                    },
-                    {
-                        title: '简易部署',
-                        collapsable: false,
-                        children: [
-                            ['venus-run-in-docker.md', '使用Docker部署链服务'],
-                        ]
-                    },
-                    ],
-                    '/zh/cluster/': [{
-                        title: '简述',
-                        collapsable: false,
-                        children: [
-                            ['', '概要'],
-                            ['architecture.md', '架构'],
-                        ]
-                    },
-                    {
-                        title: '部署',
-                        collapsable: false,
-                        children: [
-                            ['getting-started.md', '快速上手'],
-                        ]
-                    },
-                    {
-                        title: '配置',
-                        collapsable: false,
-                        children: [
-                            ['venus-sector-manager-config.md', 'venus-sector-manager配置', "https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/zh/04.venus-sector-manager%E7%9A%84%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90.md"],
-                            ['venus-worker-config.md', 'venus-worker配置', "https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/zh/03.venus-worker%E7%9A%84%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90.md"],
-                            ['processors-config-example.md', '外部执行器配置范例', "https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/zh/07.venus-worker%E5%A4%96%E9%83%A8%E6%89%A7%E8%A1%8C%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E8%8C%83%E4%BE%8B.md"],
-                        ]
-                    },
-                    {
-                        title: '运维',
-                        collapsable: false,
-                        children: [
-                            ['task-management.md', 'worker任务管理', "https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/zh/10.venus-worker%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86.md"],
-                            ['task-flow.md', '任务状态流转', "https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/zh/11.%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E6%B5%81%E8%BD%AC.md"],
-                        ]
-                    },
-                    {
-                        title: '迁移',
-                        collapsable: false,
-                        children: [
-                            ['migrate-sectors.md', '导入已有扇区', "https://github.com/ipfs-force-community/venus-cluster/blob/main/docs/zh/06.%E5%AF%BC%E5%85%A5%E5%B7%B2%E5%AD%98%E5%9C%A8%E7%9A%84%E6%89%87%E5%8C%BA%E6%95%B0%E6%8D%AE.md"],
-                        ]
-                    },
-                    {
-                        title: '其他功能特性',
-                        collapsable: false,
-                        children: [
-                            ['other.md', '其他'],
-                        ]
-                    },
-                    ],
-                    '/zh/market/': [{
-                        title: '简述',
-                        collapsable: false,
-                        children: [
-                            ['', '概要'],
-                            ['architecture.md', '架构'],
-                        ]
-                    },
-                    {
-                        title: '部署',
-                        collapsable: false,
-                        children: [
-                            ['getting-started.md', '部署'],
-                        ]
-                    },
-                    {
-                        title: '配置',
-                        collapsable: false,
-                        children: [
-                            ['market-client-config.md', 'market-client配置', "https://github.com/filecoin-project/venus-market/blob/master/docs/zh/market-client%E9%85%8D%E7%BD%AE%E8%A7%A3%E9%87%8A.md"],
-                            ['market-config.md', 'venus-market配置', "https://github.com/filecoin-project/venus-market/blob/master/docs/zh/venus-market%E9%85%8D%E7%BD%AE%E8%A7%A3%E9%87%8A.md"],
-                        ]
-                    },
-                    {
-                        title: '订单',
-                        collapsable: false,
-                        children: [
-                            ['prep-datasets.md', '大数据集准备'],
-                            ['migrate-offline-deal.md', '迁移离线订单', "https://github.com/filecoin-project/venus-market/blob/master/docs/zh/%E5%A6%82%E4%BD%95%E8%BF%81%E7%A7%BB%E7%A6%BB%E7%BA%BF%E8%AE%A2%E5%8D%95.md"],
-                        ]
-                    },
-                    {
-                        title: '其他',
-                        collapsable: false,
-                        children: [
-                            ['other.md', '其他'],
-                        ]
-                    },
-                    ],
-                    '/zh/modules/': [{
-                        title: '链服务组件',
-                        collapsable: false,
-                        children: [
-                            ['', 'Venus daemon'],
-                            ['venus-auth.md', 'venus-auth'],
-                            ['venus-miner.md', 'venus-miner'],
-                            ['venus-messager.md', 'venus-messager'],
-                            ['venus-gateway.md', 'venus-gateway'],
-                            ['venus-wallet-builtin.md', 'venus-wallet（内置）'],
-                        ]
-                    },
-                    {
-                        title: '本地组件',
-                        collapsable: false,
-                        children: [
-                            ['venus-cluster.md', 'venus-cluster'],
-                            ['venus-wallet.md', 'venus-wallet（远程）'],
-                        ]
-                    },
-                    {
-                        title: '混合组件',
-                        collapsable: false,
-                        children: [
-                            ['venus-market.md', 'venus-market'],
-                        ]
-                    },
-                    {
-                        title: '组件构建',
-                        collapsable: false,
-                        children: [
-                            ['build.md', '全组件构建'],
                         ]
                     },
                     ],
@@ -518,6 +255,19 @@ module.exports = {
 
                         ]
                     },
+                    {
+                        title: 'RPC 接口参考',
+                        collapsable: false,
+                        children: [
+                            ['chain-api-v0.md', 'Chain api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v0/method.md"],
+                            ['chain-api-v1.md', 'Chain api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v1/method.md"],
+                            ['gateway-api-v0.md', 'Gateway api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v0/method.md"],
+                            ['gateway-api-v1.md', 'Gateway api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v1/method.md"],
+                            ['market-api.md', 'Market api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/method.md"],
+                            ['messager-api.md', 'Messager api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/messager/method.md"],
+                            ['wallet-api.md', 'Wallet api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/wallet/method.md"]
+                        ]
+                    },
                     ],
                     '/zh/operation/': [{
                         title: '运维实战',
@@ -534,8 +284,9 @@ module.exports = {
                         title: '网络/组件升级',
                         collapsable: false,
                         children: [
-                            ['nv15-upgrade.md', 'nv15网络升级'],
+                            ['nv17-upgrade.md', 'nv17网络升级'],
                             ['nv16-upgrade.md', 'nv16网络升级'],
+                            ['nv15-upgrade.md', 'nv15网络升级'],
                             ['migrate_market_v1_to_v2.md', 'market_v2升级'],
                         ]
                     },
@@ -548,11 +299,12 @@ module.exports = {
                         ]
                     },
                     {
-                        title: 'FIP解读',
+                        title: '协议解读',
                         collapsable: false,
                         children: [
                             ['fip0045.md', 'FIP0045'],
                             ['fip0034.md', 'FIP0034'],
+                            ['boost-protocol-research.md', 'Boost协议解读'],
                         ]
                     },
                     {
@@ -560,14 +312,9 @@ module.exports = {
                         collapsable: false,
                         children: [
                             ['user-data-isolation.md', '用户数据隔离'],
-                            ['saas.md', 'SaaS'],
-                        ]
-                    },
-                    {
-                        title: '其他解读',
-                        collapsable: false,
-                        children: [
-                            ['boost-protocol-research.md', 'Boost协议解读'],
+                            ['market-attributes-self-config.md', '市场的交易属性配置'],
+                            ['impl-mk-1.2.0.md', '集成Boost协议'],
+                            ['metrics-design.md', 'Metrics指标'],
                         ]
                     },
                     ]

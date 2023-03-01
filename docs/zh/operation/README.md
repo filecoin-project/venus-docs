@@ -6,7 +6,7 @@
 
 ## 部署节点
 
-api auth suggest to use venus-auth but not local.  in local mode, when reimport snapshot, token will change
+节点授权这里建议连接`venus-auth`进行授权，不然节点重启时，`token`会发生变化。
 
 venus:
 ```sh
@@ -21,7 +21,6 @@ lotus:
 ```sh
 #build
 git clone https://github.com/ipfs-force-community/lotus.git
-git checkout v1.11.2_incubation
 make <network-type>
 #run
 ./lotus daemon --auth-url <venus-auth url>
@@ -34,7 +33,7 @@ make <network-type>
 git clone https://github.com/ipfs-force-community/chain-co.git
 make
 #run
-./chain-co  run -listen 0.0.0.0:<port> --auth-url <venus-auth url> --node <token:libp2p> --node<token:libp2p>
+./chain-co --listen 0.0.0.0:<port>  run --auth-url <venus-auth url> --node <token:rpc-url> --node<token:rpc-url>
 ```
 
 ## 部署代理(可选)
@@ -95,4 +94,4 @@ http {
 
 1. 因为节点之间数据还是分离的，所以无法提供完全一致的接口访问，特别是在头部区块的处理上。
 2. 如果部署lotus，需要使用定制后的版本，因为venus有一些特有的接口.
-3. 如果存在问题，请提issue。
+3. 如果遇到问题`bug`，欢迎提交[issue](https://github.com/filecoin-project/venus/issues/new/choose)给我们。
