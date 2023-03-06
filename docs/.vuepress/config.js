@@ -163,9 +163,10 @@ module.exports = {
                         ]
                     },
                     {
-                        title: 'Upgrade',
+                        title: 'Network Upgrade',
                         collapsable: false,
                         children: [
+                            ['nv18-upgrade.md', 'nv18 upgrade'],
                             ['nv17-upgrade.md', 'nv17 upgrade'],
                             ['nv16-upgrade.md', 'nv16 upgrade'],
                             ['nv15-upgrade.md', 'nv15 upgrade'],
@@ -287,6 +288,7 @@ module.exports = {
                         title: '网络/组件升级',
                         collapsable: false,
                         children: [
+                            ['nv18-upgrade.md', 'nv18网络升级'],
                             ['nv17-upgrade.md', 'nv17网络升级'],
                             ['nv16-upgrade.md', 'nv16网络升级'],
                             ['nv15-upgrade.md', 'nv15网络升级'],
