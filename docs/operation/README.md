@@ -33,7 +33,7 @@ make <network-type>
 git clone https://github.com/ipfs-force-community/chain-co.git
 make
 #run
-./chain-co --listen 0.0.0.0:<port>  run --auth-url <venus-auth url> --node <token:rpc-url> --node<token:rpc-url>
+./chain-co --listen 0.0.0.0:<port>  run --auth <auth-token>:<venus-auth url> --node <token>:<rpc-url> --node<token>:<rpc-url> 
 ```
 
 ## proxy(optional)
