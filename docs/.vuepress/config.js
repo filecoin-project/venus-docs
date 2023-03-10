@@ -119,7 +119,7 @@ module.exports = {
                         ]
                     },
                     ],
-                    '/research': [{
+                    '/research/': [{
                         title: 'Research',
                         collapsable: false,
                         children: [
