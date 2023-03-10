@@ -88,6 +88,10 @@ module.exports = {
                     text: 'Operation',
                     link: '/operation/'
                 },
+                {
+                    text: 'Research',
+                    link: '/research/'
+                },
                 ],
                 sidebar: {
                     '/intro/': [{
@@ -115,6 +119,13 @@ module.exports = {
                         ]
                     },
                     ],
+                    '/research': [{
+                        title: 'Research',
+                        collapsable: false,
+                        children: [
+                            ['sealing-process.md', 'Sealing Process', "https://github.com/zhiqiangxu/filecoin-review/blob/main/sealing_process.md"]
+                        ]
+                    },],
                     '/advanced/': [{
                         title: 'Advanced Practice',
                         collapsable: false,
