@@ -156,7 +156,8 @@ module.exports = {
                             ['chain-api-v1.md', 'Chain api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v1/method.md"],
                             ['gateway-api-v0.md', 'Gateway api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v0/method.md"],
                             ['gateway-api-v1.md', 'Gateway api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v1/method.md"],
-                            ['market-api.md', 'Market api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/method.md"],
+                            ['market-api-v0.md', 'Market api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/v0/method.md"],
+                            ['market-api-v1.md', 'Market api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/v1/method.md"],
                             ['messager-api.md', 'Messager api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/messager/method.md"],
                             ['wallet-api.md', 'Wallet api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/wallet/method.md"]
                         ]
@@ -275,7 +276,8 @@ module.exports = {
                             ['chain-api-v1.md', 'Chain api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v1/method.md"],
                             ['gateway-api-v0.md', 'Gateway api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v0/method.md"],
                             ['gateway-api-v1.md', 'Gateway api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v1/method.md"],
-                            ['market-api.md', 'Market api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/method.md"],
+                            ['market-api-v0.md', 'Market api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/v0/method.md"],
+                            ['market-api-v1.md', 'Market api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/v1/method.md"],
                             ['messager-api.md', 'Messager api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/messager/method.md"],
                             ['wallet-api.md', 'Wallet api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/wallet/method.md"]
                         ]
