@@ -9,7 +9,12 @@ const proxy = process.env.http_proxy || process.env.HTTP_PROXY;
 function downloadFile(uri, dest) {
     docDir = path.resolve(__dirname, '../');
     const targetPath = path.join(docDir, "docs", dest);
-    const file = fs.createWriteStream(targetPath);
+    const dir = path.dirname(targetPath);
+    // check if dir exists
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    }
+    const file = fs.createWriteStream(targetPath, { flags: 'w+' });
     let param = null
 
     if (proxy != null && proxy != "") {
