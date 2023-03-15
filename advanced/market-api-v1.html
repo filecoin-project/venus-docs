@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sample code of curl | Venus Filecoin</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/venus-logo.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-SMSDTMGLTV"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SMSDTMGLTV');</script>
+    <meta name="description" content="Venus is a Go implementation of the Filecoin Distributed Storage Network.">
+    
+    <link rel="preload" href="/assets/css/0.styles.117964e0.css" as="style"><link rel="preload" href="/assets/js/app.22adc996.js" as="script"><link rel="preload" href="/assets/js/2.d93b85b3.js" as="script"><link rel="preload" href="/assets/js/39.b1a86981.js" as="script"><link rel="prefetch" href="/assets/js/10.3d1b0761.js"><link rel="prefetch" href="/assets/js/100.9f1f7271.js"><link rel="prefetch" href="/assets/js/101.c6ddda40.js"><link rel="prefetch" href="/assets/js/102.b18a4209.js"><link rel="prefetch" href="/assets/js/103.6e8ec401.js"><link rel="prefetch" href="/assets/js/104.febaf10b.js"><link rel="prefetch" href="/assets/js/105.709a8ad3.js"><link rel="prefetch" href="/assets/js/106.b3cc2e7b.js"><link rel="prefetch" href="/assets/js/107.06786b93.js"><link rel="prefetch" href="/assets/js/108.df0fd7cd.js"><link rel="prefetch" href="/assets/js/109.4975d272.js"><link rel="prefetch" href="/assets/js/11.98b51a60.js"><link rel="prefetch" href="/assets/js/110.654546e8.js"><link rel="prefetch" href="/assets/js/111.558bff16.js"><link rel="prefetch" href="/assets/js/112.2df8b27b.js"><link rel="prefetch" href="/assets/js/12.047c0c1b.js"><link rel="prefetch" href="/assets/js/13.3214acef.js"><link rel="prefetch" href="/assets/js/14.d9ffe342.js"><link rel="prefetch" href="/assets/js/15.f82fb42e.js"><link rel="prefetch" href="/assets/js/16.d4a4635b.js"><link rel="prefetch" href="/assets/js/17.8e997d26.js"><link rel="prefetch" href="/assets/js/18.239e4651.js"><link rel="prefetch" href="/assets/js/19.bc76b117.js"><link rel="prefetch" href="/assets/js/20.6e544861.js"><link rel="prefetch" href="/assets/js/21.0e15d93f.js"><link rel="prefetch" href="/assets/js/22.7e14d97d.js"><link rel="prefetch" href="/assets/js/23.fcddfb27.js"><link rel="prefetch" href="/assets/js/24.7303e4a8.js"><link rel="prefetch" href="/assets/js/25.0a0abec4.js"><link rel="prefetch" href="/assets/js/26.998e88da.js"><link rel="prefetch" href="/assets/js/27.e480a1b5.js"><link rel="prefetch" href="/assets/js/28.e09e0ccc.js"><link rel="prefetch" href="/assets/js/29.28e077d6.js"><link rel="prefetch" href="/assets/js/3.00808366.js"><link rel="prefetch" href="/assets/js/30.def6f408.js"><link rel="prefetch" href="/assets/js/31.fd489160.js"><link rel="prefetch" href="/assets/js/32.d1735f82.js"><link rel="prefetch" href="/assets/js/33.1709f983.js"><link rel="prefetch" href="/assets/js/34.fd1c8a56.js"><link rel="prefetch" href="/assets/js/35.eaf7f0bf.js"><link rel="prefetch" href="/assets/js/36.cb3f2a10.js"><link rel="prefetch" href="/assets/js/37.46684317.js"><link rel="prefetch" href="/assets/js/38.811c586d.js"><link rel="prefetch" href="/assets/js/4.add5c062.js"><link rel="prefetch" href="/assets/js/40.603f4834.js"><link rel="prefetch" href="/assets/js/41.2cc08c93.js"><link rel="prefetch" href="/assets/js/42.c09021c3.js"><link rel="prefetch" href="/assets/js/43.f28ff22e.js"><link rel="prefetch" href="/assets/js/44.dc41c5de.js"><link rel="prefetch" href="/assets/js/45.5df62bc0.js"><link rel="prefetch" href="/assets/js/46.79bb3421.js"><link rel="prefetch" href="/assets/js/47.facc2aa7.js"><link rel="prefetch" href="/assets/js/48.d57dd275.js"><link rel="prefetch" href="/assets/js/49.c6404067.js"><link rel="prefetch" href="/assets/js/5.0aab8d0c.js"><link rel="prefetch" href="/assets/js/50.711a61af.js"><link rel="prefetch" href="/assets/js/51.3d26c658.js"><link rel="prefetch" href="/assets/js/52.2898fbfa.js"><link rel="prefetch" href="/assets/js/53.4b5078c6.js"><link rel="prefetch" href="/assets/js/54.bec1fcba.js"><link rel="prefetch" href="/assets/js/55.ef9f6c55.js"><link rel="prefetch" href="/assets/js/56.c8e54fa9.js"><link rel="prefetch" href="/assets/js/57.0169b61a.js"><link rel="prefetch" href="/assets/js/58.0e1551a4.js"><link rel="prefetch" href="/assets/js/59.51684736.js"><link rel="prefetch" href="/assets/js/6.3dd12158.js"><link rel="prefetch" href="/assets/js/60.1a79e06e.js"><link rel="prefetch" href="/assets/js/61.c0260caf.js"><link rel="prefetch" href="/assets/js/62.aef023ef.js"><link rel="prefetch" href="/assets/js/63.93904342.js"><link rel="prefetch" href="/assets/js/64.2d63cff6.js"><link rel="prefetch" href="/assets/js/65.ddfddca8.js"><link rel="prefetch" href="/assets/js/66.5c01052c.js"><link rel="prefetch" href="/assets/js/67.2606fee6.js"><link rel="prefetch" href="/assets/js/68.04ee15b8.js"><link rel="prefetch" href="/assets/js/69.64e1dcb1.js"><link rel="prefetch" href="/assets/js/7.a560c27d.js"><link rel="prefetch" href="/assets/js/70.be3fa1b8.js"><link rel="prefetch" href="/assets/js/71.0ddf91f8.js"><link rel="prefetch" href="/assets/js/72.9bbf272e.js"><link rel="prefetch" href="/assets/js/73.9486caa6.js"><link rel="prefetch" href="/assets/js/74.c330d8a0.js"><link rel="prefetch" href="/assets/js/75.4f1a79b0.js"><link rel="prefetch" href="/assets/js/76.ea4bb4e3.js"><link rel="prefetch" href="/assets/js/77.42baf7cf.js"><link rel="prefetch" href="/assets/js/78.2947243d.js"><link rel="prefetch" href="/assets/js/79.31a2f015.js"><link rel="prefetch" href="/assets/js/8.5dfb883c.js"><link rel="prefetch" href="/assets/js/80.61c62b4f.js"><link rel="prefetch" href="/assets/js/81.f3c441e4.js"><link rel="prefetch" href="/assets/js/82.0845661c.js"><link rel="prefetch" href="/assets/js/83.943be80b.js"><link rel="prefetch" href="/assets/js/84.2c376162.js"><link rel="prefetch" href="/assets/js/85.87a93425.js"><link rel="prefetch" href="/assets/js/86.178d3be1.js"><link rel="prefetch" href="/assets/js/87.a48100a5.js"><link rel="prefetch" href="/assets/js/88.0c1f5e7a.js"><link rel="prefetch" href="/assets/js/89.a0a8ed81.js"><link rel="prefetch" href="/assets/js/9.f165dc9a.js"><link rel="prefetch" href="/assets/js/90.0b4b171e.js"><link rel="prefetch" href="/assets/js/91.d0037794.js"><link rel="prefetch" href="/assets/js/92.65cd6a76.js"><link rel="prefetch" href="/assets/js/93.814974c3.js"><link rel="prefetch" href="/assets/js/94.97afe57b.js"><link rel="prefetch" href="/assets/js/95.f3fdb2fb.js"><link rel="prefetch" href="/assets/js/96.9452cb49.js"><link rel="prefetch" href="/assets/js/97.56902773.js"><link rel="prefetch" href="/assets/js/98.cc679661.js"><link rel="prefetch" href="/assets/js/99.12636551.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.117964e0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/assets/venus-logo-title.svg" alt="Venus Filecoin" class="logo"> <span class="site-name can-hide">Venus Filecoin</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/advanced/" class="nav-link router-link-active">
+  Advanced
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  Operation
+</a></div><div class="nav-item"><a href="/research/" class="nav-link">
+  Research
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/advanced/market-api-v1.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/advanced/market-api-v1.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/advanced/" class="nav-link router-link-active">
+  Advanced
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  Operation
+</a></div><div class="nav-item"><a href="/research/" class="nav-link">
+  Research
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/advanced/market-api-v1.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/advanced/market-api-v1.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Advanced Practice</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/advanced/" aria-current="page" class="sidebar-link">Withdraw Rewards</a></li><li><a href="/advanced/Chain.html" class="sidebar-link">Chain Management</a></li><li><a href="/advanced/venus-cli.html" class="sidebar-link">Venus CLI Commands</a></li><li><a href="/advanced/venus_load_balancing.html" class="sidebar-link">Simple Load Balancing</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Local Dev Env</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/advanced/How-To-Setup_2knet.html" class="sidebar-link">How to start a local dev network</a></li><li><a href="/advanced/How-To-Connect-Network.html" class="sidebar-link">Connect to different network</a></li><li><a href="/advanced/Multisig-wallet.html" class="sidebar-link">Multisig wallet</a></li><li><a href="/advanced/Payment-Channel.html" class="sidebar-link">Payment channel</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>RPC API Reference</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/advanced/chain-api-v0.html" class="sidebar-link">Chain api v0</a></li><li><a href="/advanced/chain-api-v1.html" class="sidebar-link">Chain api v1</a></li><li><a href="/advanced/gateway-api-v0.html" class="sidebar-link">Gateway api v0</a></li><li><a href="/advanced/gateway-api-v1.html" class="sidebar-link">Gateway api v1</a></li><li><a href="/advanced/market-api-v0.html" class="sidebar-link">Market api v0</a></li><li><a href="/advanced/market-api-v1.html" aria-current="page" class="active sidebar-link">Market api v1</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/advanced/market-api-v1.html#market" class="sidebar-link">Market</a></li></ul></li><li><a href="/advanced/messager-api.html" class="sidebar-link">Messager api</a></li><li><a href="/advanced/wallet-api.html" class="sidebar-link">Wallet api</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="sample-code-of-curl"><a href="#sample-code-of-curl" class="header-anchor">#</a> Sample code of curl</h1> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># &lt;Inputs&gt; corresponding to the value of Inputs Tag of each API</span>
+<span class="token function">curl</span> http://<span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span>:<span class="token operator">&lt;</span>port<span class="token operator">&gt;</span>/rpc/v1 -X POST -H <span class="token string">&quot;Content-Type: application/json&quot;</span>  -H <span class="token string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span>  -d <span class="token string">'{&quot;method&quot;: &quot;VENUS_MARKET.&lt;method&gt;&quot;, &quot;params&quot;: &lt;Inputs&gt;, &quot;id&quot;: 0}'</span>
+</code></pre></div><h1 id="groups"><a href="#groups" class="header-anchor">#</a> Groups</h1> <ul><li><a href="#market">Market</a> <ul><li><a href="#actordelete">ActorDelete</a></li> <li><a href="#actorexist">ActorExist</a></li> <li><a href="#actorlist">ActorList</a></li> <li><a href="#actorsectorsize">ActorSectorSize</a></li> <li><a href="#actorupsert">ActorUpsert</a></li> <li><a href="#addfspiecestorage">AddFsPieceStorage</a></li> <li><a href="#adds3piecestorage">AddS3PieceStorage</a></li> <li><a href="#assignunpackeddeals">AssignUnPackedDeals</a></li> <li><a href="#dagstoregc">DagstoreGC</a></li> <li><a href="#dagstoreinitializeall">DagstoreInitializeAll</a></li> <li><a href="#dagstoreinitializeshard">DagstoreInitializeShard</a></li> <li><a href="#dagstoreinitializestorage">DagstoreInitializeStorage</a></li> <li><a href="#dagstorelistshards">DagstoreListShards</a></li> <li><a href="#dagstorerecovershard">DagstoreRecoverShard</a></li> <li><a href="#dealsconsiderofflineretrievaldeals">DealsConsiderOfflineRetrievalDeals</a></li> <li><a href="#dealsconsiderofflinestoragedeals">DealsConsiderOfflineStorageDeals</a></li> <li><a href="#dealsconsideronlineretrievaldeals">DealsConsiderOnlineRetrievalDeals</a></li> <li><a href="#dealsconsideronlinestoragedeals">DealsConsiderOnlineStorageDeals</a></li> <li><a href="#dealsconsiderunverifiedstoragedeals">DealsConsiderUnverifiedStorageDeals</a></li> <li><a href="#dealsconsiderverifiedstoragedeals">DealsConsiderVerifiedStorageDeals</a></li> <li><a href="#dealsimportdata">DealsImportData</a></li> <li><a href="#dealsmaxprovidercollateralmultiplier">DealsMaxProviderCollateralMultiplier</a></li> <li><a href="#dealsmaxpublishfee">DealsMaxPublishFee</a></li> <li><a href="#dealsmaxstartdelay">DealsMaxStartDelay</a></li> <li><a href="#dealspiececidblocklist">DealsPieceCidBlocklist</a></li> <li><a href="#dealspublishmsgperiod">DealsPublishMsgPeriod</a></li> <li><a href="#dealssetconsiderofflineretrievaldeals">DealsSetConsiderOfflineRetrievalDeals</a></li> <li><a href="#dealssetconsiderofflinestoragedeals">DealsSetConsiderOfflineStorageDeals</a></li> <li><a href="#dealssetconsideronlineretrievaldeals">DealsSetConsiderOnlineRetrievalDeals</a></li> <li><a href="#dealssetconsideronlinestoragedeals">DealsSetConsiderOnlineStorageDeals</a></li> <li><a href="#dealssetconsiderunverifiedstoragedeals">DealsSetConsiderUnverifiedStorageDeals</a></li> <li><a href="#dealssetconsiderverifiedstoragedeals">DealsSetConsiderVerifiedStorageDeals</a></li> <li><a href="#dealssetmaxprovidercollateralmultiplier">DealsSetMaxProviderCollateralMultiplier</a></li> <li><a href="#dealssetmaxpublishfee">DealsSetMaxPublishFee</a></li> <li><a href="#dealssetmaxstartdelay">DealsSetMaxStartDelay</a></li> <li><a href="#dealssetpiececidblocklist">DealsSetPieceCidBlocklist</a></li> <li><a href="#dealssetpublishmsgperiod">DealsSetPublishMsgPeriod</a></li> <li><a href="#getdeals">GetDeals</a></li> <li><a href="#getretrievaldealstatistic">GetRetrievalDealStatistic</a></li> <li><a href="#getstoragedealstatistic">GetStorageDealStatistic</a></li> <li><a href="#getunpackeddeals">GetUnPackedDeals</a></li> <li><a href="#id">ID</a></li> <li><a href="#listpiecestorageinfos">ListPieceStorageInfos</a></li> <li><a href="#listenmarketevent">ListenMarketEvent</a></li> <li><a href="#markdealsaspacking">MarkDealsAsPacking</a></li> <li><a href="#marketaddbalance">MarketAddBalance</a></li> <li><a href="#marketcanceldatatransfer">MarketCancelDataTransfer</a></li> <li><a href="#marketdatatransferpath">MarketDataTransferPath</a></li> <li><a href="#marketdatatransferupdates">MarketDataTransferUpdates</a></li> <li><a href="#marketgetask">MarketGetAsk</a></li> <li><a href="#marketgetdealupdates">MarketGetDealUpdates</a></li> <li><a href="#marketgetreserved">MarketGetReserved</a></li> <li><a href="#marketgetretrievalask">MarketGetRetrievalAsk</a></li> <li><a href="#marketimportdealdata">MarketImportDealData</a></li> <li><a href="#marketimportpublisheddeal">MarketImportPublishedDeal</a></li> <li><a href="#marketlistdatatransfers">MarketListDataTransfers</a></li> <li><a href="#marketlistdeals">MarketListDeals</a></li> <li><a href="#marketlistincompletedeals">MarketListIncompleteDeals</a></li> <li><a href="#marketlistretrievalask">MarketListRetrievalAsk</a></li> <li><a href="#marketlistretrievaldeals">MarketListRetrievalDeals</a></li> <li><a href="#marketliststorageask">MarketListStorageAsk</a></li> <li><a href="#marketmaxbalanceaddfee">MarketMaxBalanceAddFee</a></li> <li><a href="#marketmaxdealsperpublishmsg">MarketMaxDealsPerPublishMsg</a></li> <li><a href="#marketpendingdeals">MarketPendingDeals</a></li> <li><a href="#marketpublishpendingdeals">MarketPublishPendingDeals</a></li> <li><a href="#marketreleasefunds">MarketReleaseFunds</a></li> <li><a href="#marketreservefunds">MarketReserveFunds</a></li> <li><a href="#marketrestartdatatransfer">MarketRestartDataTransfer</a></li> <li><a href="#marketsetask">MarketSetAsk</a></li> <li><a href="#marketsetdatatransferpath">MarketSetDataTransferPath</a></li> <li><a href="#marketsetmaxbalanceaddfee">MarketSetMaxBalanceAddFee</a></li> <li><a href="#marketsetmaxdealsperpublishmsg">MarketSetMaxDealsPerPublishMsg</a></li> <li><a href="#marketsetretrievalask">MarketSetRetrievalAsk</a></li> <li><a href="#marketwithdraw">MarketWithdraw</a></li> <li><a href="#messagergetmessage">MessagerGetMessage</a></li> <li><a href="#messagerpushmessage">MessagerPushMessage</a></li> <li><a href="#messagerwaitmessage">MessagerWaitMessage</a></li> <li><a href="#netaddrslisten">NetAddrsListen</a></li> <li><a href="#offlinedealimport">OfflineDealImport</a></li> <li><a href="#paychvoucherlist">PaychVoucherList</a></li> <li><a href="#piecesgetcidinfo">PiecesGetCIDInfo</a></li> <li><a href="#piecesgetpieceinfo">PiecesGetPieceInfo</a></li> <li><a href="#pieceslistcidinfos">PiecesListCidInfos</a></li> <li><a href="#pieceslistpieces">PiecesListPieces</a></li> <li><a href="#removepiecestorage">RemovePieceStorage</a></li> <li><a href="#responsemarketevent">ResponseMarketEvent</a></li> <li><a href="#sectorgetexpectedsealduration">SectorGetExpectedSealDuration</a></li> <li><a href="#sectorsetexpectedsealduration">SectorSetExpectedSealDuration</a></li> <li><a href="#updatedealonpacking">UpdateDealOnPacking</a></li> <li><a href="#updatedealstatus">UpdateDealStatus</a></li> <li><a href="#updatestoragedealstatus">UpdateStorageDealStatus</a></li> <li><a href="#version">Version</a></li></ul></li></ul> <h2 id="market"><a href="#market" class="header-anchor">#</a> Market</h2> <h3 id="actordelete"><a href="#actordelete" class="header-anchor">#</a> ActorDelete</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="actorexist"><a href="#actorexist" class="header-anchor">#</a> ActorExist</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>true</code></p> <h3 id="actorlist"><a href="#actorlist" class="header-anchor">#</a> ActorList</h3> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Addr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Account&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="actorsectorsize"><a href="#actorsectorsize" class="header-anchor">#</a> ActorSectorSize</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>34359738368</code></p> <h3 id="actorupsert"><a href="#actorupsert" class="header-anchor">#</a> ActorUpsert</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Addr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Account&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>true</code></p> <h3 id="addfspiecestorage"><a href="#addfspiecestorage" class="header-anchor">#</a> AddFsPieceStorage</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token boolean">true</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="adds3piecestorage"><a href="#adds3piecestorage" class="header-anchor">#</a> AddS3PieceStorage</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token boolean">true</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="assignunpackeddeals"><a href="#assignunpackeddeals" class="header-anchor">#</a> AssignUnPackedDeals</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Number&quot;</span><span class="token operator">:</span> <span class="token number">9</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token number">34359738368</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;MaxPiece&quot;</span><span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MaxPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MinPiece&quot;</span><span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MinPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MinUsedSpace&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Offset&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Length&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PayloadSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;DealID&quot;</span><span class="token operator">:</span> <span class="token number">5432</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;TotalStorageFee&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;FastRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PublishCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="dagstoregc"><a href="#dagstoregc" class="header-anchor">#</a> DagstoreGC</h3> <p>DagstoreGC runs garbage collection on the DAG store.</p> <p>Perms: admin</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Success&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Error&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="dagstoreinitializeall"><a href="#dagstoreinitializeall" class="header-anchor">#</a> DagstoreInitializeAll</h3> <p>DagstoreInitializeAll initializes all uninitialized shards in bulk,
+according to the policy passed in the parameters.</p> <p>It is recommended to set a maximum concurrency to avoid extreme
+IO pressure if the storage subsystem has a large amount of deals.</p> <p>It returns a stream of events to report progress.</p> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;MaxConcurrency&quot;</span><span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;IncludeSealed&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;Key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Event&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Success&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Error&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Total&quot;</span><span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Current&quot;</span><span class="token operator">:</span> <span class="token number">123</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="dagstoreinitializeshard"><a href="#dagstoreinitializeshard" class="header-anchor">#</a> DagstoreInitializeShard</h3> <p>DagstoreInitializeShard initializes an uninitialized shard.</p> <p>Initialization consists of fetching the shard's data (deal payload) from
+the storage subsystem, generating an index, and persisting the index
+to facilitate later retrievals, and/or to publish to external sources.</p> <p>This operation is intended to complement the initial migration. The
+migration registers a shard for every unique piece CID, with lazy
+initialization. Thus, shards are not initialized immediately to avoid
+IO activity competing with proving. Instead, shard are initialized
+when first accessed. This method forces the initialization of a shard by
+accessing it and immediately releasing it. This is useful to warm up the
+cache to facilitate subsequent retrievals, and to generate the indexes
+to publish them externally.</p> <p>This operation fails if the shard is not in ShardStateNew state.
+It blocks until initialization finishes.</p> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dagstoreinitializestorage"><a href="#dagstoreinitializestorage" class="header-anchor">#</a> DagstoreInitializeStorage</h3> <p>DagstoreInitializeStorage initializes all pieces in specify storage</p> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;MaxConcurrency&quot;</span><span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;IncludeSealed&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;Key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Event&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Success&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Error&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Total&quot;</span><span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Current&quot;</span><span class="token operator">:</span> <span class="token number">123</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="dagstorelistshards"><a href="#dagstorelistshards" class="header-anchor">#</a> DagstoreListShards</h3> <p>DagstoreListShards returns information about all shards known to the
+DAG store. Only available on nodes running the markets subsystem.</p> <p>Perms: admin</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;State&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Error&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="dagstorerecovershard"><a href="#dagstorerecovershard" class="header-anchor">#</a> DagstoreRecoverShard</h3> <p>DagstoreRecoverShard attempts to recover a failed shard.</p> <p>This operation fails if the shard is not in ShardStateErrored state.
+It blocks until recovery finishes. If recovery failed, it returns the
+error.</p> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealsconsiderofflineretrievaldeals"><a href="#dealsconsiderofflineretrievaldeals" class="header-anchor">#</a> DealsConsiderOfflineRetrievalDeals</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>true</code></p> <h3 id="dealsconsiderofflinestoragedeals"><a href="#dealsconsiderofflinestoragedeals" class="header-anchor">#</a> DealsConsiderOfflineStorageDeals</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>true</code></p> <h3 id="dealsconsideronlineretrievaldeals"><a href="#dealsconsideronlineretrievaldeals" class="header-anchor">#</a> DealsConsiderOnlineRetrievalDeals</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>true</code></p> <h3 id="dealsconsideronlinestoragedeals"><a href="#dealsconsideronlinestoragedeals" class="header-anchor">#</a> DealsConsiderOnlineStorageDeals</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>true</code></p> <h3 id="dealsconsiderunverifiedstoragedeals"><a href="#dealsconsiderunverifiedstoragedeals" class="header-anchor">#</a> DealsConsiderUnverifiedStorageDeals</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>true</code></p> <h3 id="dealsconsiderverifiedstoragedeals"><a href="#dealsconsiderverifiedstoragedeals" class="header-anchor">#</a> DealsConsiderVerifiedStorageDeals</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>true</code></p> <h3 id="dealsimportdata"><a href="#dealsimportdata" class="header-anchor">#</a> DealsImportData</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealsmaxprovidercollateralmultiplier"><a href="#dealsmaxprovidercollateralmultiplier" class="header-anchor">#</a> DealsMaxProviderCollateralMultiplier</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>42</code></p> <h3 id="dealsmaxpublishfee"><a href="#dealsmaxpublishfee" class="header-anchor">#</a> DealsMaxPublishFee</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>&quot;0 FIL&quot;</code></p> <h3 id="dealsmaxstartdelay"><a href="#dealsmaxstartdelay" class="header-anchor">#</a> DealsMaxStartDelay</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>60000000000</code></p> <h3 id="dealspiececidblocklist"><a href="#dealspiececidblocklist" class="header-anchor">#</a> DealsPieceCidBlocklist</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="dealspublishmsgperiod"><a href="#dealspublishmsgperiod" class="header-anchor">#</a> DealsPublishMsgPeriod</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>60000000000</code></p> <h3 id="dealssetconsiderofflineretrievaldeals"><a href="#dealssetconsiderofflineretrievaldeals" class="header-anchor">#</a> DealsSetConsiderOfflineRetrievalDeals</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token boolean">true</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealssetconsiderofflinestoragedeals"><a href="#dealssetconsiderofflinestoragedeals" class="header-anchor">#</a> DealsSetConsiderOfflineStorageDeals</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token boolean">true</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealssetconsideronlineretrievaldeals"><a href="#dealssetconsideronlineretrievaldeals" class="header-anchor">#</a> DealsSetConsiderOnlineRetrievalDeals</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token boolean">true</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealssetconsideronlinestoragedeals"><a href="#dealssetconsideronlinestoragedeals" class="header-anchor">#</a> DealsSetConsiderOnlineStorageDeals</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token boolean">true</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealssetconsiderunverifiedstoragedeals"><a href="#dealssetconsiderunverifiedstoragedeals" class="header-anchor">#</a> DealsSetConsiderUnverifiedStorageDeals</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token boolean">true</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealssetconsiderverifiedstoragedeals"><a href="#dealssetconsiderverifiedstoragedeals" class="header-anchor">#</a> DealsSetConsiderVerifiedStorageDeals</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token boolean">true</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealssetmaxprovidercollateralmultiplier"><a href="#dealssetmaxprovidercollateralmultiplier" class="header-anchor">#</a> DealsSetMaxProviderCollateralMultiplier</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token number">42</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealssetmaxpublishfee"><a href="#dealssetmaxpublishfee" class="header-anchor">#</a> DealsSetMaxPublishFee</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;0 FIL&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealssetmaxstartdelay"><a href="#dealssetmaxstartdelay" class="header-anchor">#</a> DealsSetMaxStartDelay</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token number">60000000000</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealssetpiececidblocklist"><a href="#dealssetpiececidblocklist" class="header-anchor">#</a> DealsSetPieceCidBlocklist</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="dealssetpublishmsgperiod"><a href="#dealssetpublishmsgperiod" class="header-anchor">#</a> DealsSetPublishMsgPeriod</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token number">60000000000</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="getdeals"><a href="#getdeals" class="header-anchor">#</a> GetDeals</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token number">123</span><span class="token punctuation">,</span>
+  <span class="token number">123</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;DealID&quot;</span><span class="token operator">:</span> <span class="token number">5432</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SectorID&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Offset&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Length&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Proposal&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ClientSignature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;TransferType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Root&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PublishCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;FastRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Status&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Undefine&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="getretrievaldealstatistic"><a href="#getretrievaldealstatistic" class="header-anchor">#</a> GetRetrievalDealStatistic</h3> <p>GetRetrievalDealStatistic get retrieval deal statistic information
+todo address undefined is invalid, it is currently not possible to directly associate an order with a miner</p> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;DealsStatus&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;0&quot;</span><span class="token operator">:</span> <span class="token number">9</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="getstoragedealstatistic"><a href="#getstoragedealstatistic" class="header-anchor">#</a> GetStorageDealStatistic</h3> <p>GetStorageDealStatistic get storage deal statistic information
+if set miner address to address.Undef, return all storage deal info</p> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;DealsStatus&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;42&quot;</span><span class="token operator">:</span> <span class="token number">9</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="getunpackeddeals"><a href="#getunpackeddeals" class="header-anchor">#</a> GetUnPackedDeals</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;MaxPiece&quot;</span><span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MaxPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MinPiece&quot;</span><span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MinPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MinUsedSpace&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Offset&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Length&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PayloadSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;DealID&quot;</span><span class="token operator">:</span> <span class="token number">5432</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;TotalStorageFee&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;FastRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PublishCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="id"><a href="#id" class="header-anchor">#</a> ID</h3> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response: <code>&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</code></p> <h3 id="listpiecestorageinfos"><a href="#listpiecestorageinfos" class="header-anchor">#</a> ListPieceStorageInfos</h3> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;FsStorage&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;Path&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ReadOnly&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Status&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;Capacity&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Available&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Reserved&quot;</span><span class="token operator">:</span> <span class="token number">9</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;S3Storage&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;Name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ReadOnly&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;EndPoint&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Bucket&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;SubDir&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Status&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;Capacity&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Available&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Reserved&quot;</span><span class="token operator">:</span> <span class="token number">9</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="listenmarketevent"><a href="#listenmarketevent" class="header-anchor">#</a> ListenMarketEvent</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;Id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;e26f1e5c-47f7-4561-a11d-18fab6e748af&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Method&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Payload&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="markdealsaspacking"><a href="#markdealsaspacking" class="header-anchor">#</a> MarkDealsAsPacking</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">[</span>
+    <span class="token number">5432</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="marketaddbalance"><a href="#marketaddbalance" class="header-anchor">#</a> MarketAddBalance</h3> <p>Perms: sign</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;0&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="marketcanceldatatransfer"><a href="#marketcanceldatatransfer" class="header-anchor">#</a> MarketCancelDataTransfer</h3> <p>MarketCancelDataTransfer cancels a data transfer with the given transfer ID and other peer</p> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token number">3</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+  <span class="token boolean">true</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="marketdatatransferpath"><a href="#marketdatatransferpath" class="header-anchor">#</a> MarketDataTransferPath</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>&quot;string value&quot;</code></p> <h3 id="marketdatatransferupdates"><a href="#marketdatatransferupdates" class="header-anchor">#</a> MarketDataTransferUpdates</h3> <p>Perms: admin</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;TransferID&quot;</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Status&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;BaseCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;IsInitiator&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;IsSender&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Voucher&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;OtherPeer&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Transferred&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Stages&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;Stages&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;Name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Description&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;CreatedTime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;UpdatedTime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Logs&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;Log&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;UpdatedTime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="marketgetask"><a href="#marketgetask" class="header-anchor">#</a> MarketGetAsk</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;Ask&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;Price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;VerifiedPrice&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MinPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MaxPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Timestamp&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Expiry&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SeqNo&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Signature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;CreatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;UpdatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="marketgetdealupdates"><a href="#marketgetdealupdates" class="header-anchor">#</a> MarketGetDealUpdates</h3> <p>Perms: admin</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;Proposal&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;ClientSignature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;ProposalCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;AddFundsCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;PublishCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;State&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;PiecePath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/some/path&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;PayloadSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;MetadataPath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/some/path&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;SlashEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;FastRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;FundsReserved&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Ref&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;TransferType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Root&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PieceCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1024</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;RawBlockSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;AvailableForRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;DealID&quot;</span><span class="token operator">:</span> <span class="token number">5432</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;CreationTime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;TransferChannelId&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;Initiator&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Responder&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ID&quot;</span><span class="token operator">:</span> <span class="token number">3</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;SectorNumber&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Offset&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;PieceStatus&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Undefine&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;InboundCAR&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;CreatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;UpdatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="marketgetreserved"><a href="#marketgetreserved" class="header-anchor">#</a> MarketGetReserved</h3> <p>Perms: sign</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>&quot;0&quot;</code></p> <h3 id="marketgetretrievalask"><a href="#marketgetretrievalask" class="header-anchor">#</a> MarketGetRetrievalAsk</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;PricePerByte&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;UnsealPrice&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;PaymentInterval&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;PaymentIntervalIncrease&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="marketimportdealdata"><a href="#marketimportdealdata" class="header-anchor">#</a> MarketImportDealData</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="marketimportpublisheddeal"><a href="#marketimportpublisheddeal" class="header-anchor">#</a> MarketImportPublishedDeal</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Proposal&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ClientSignature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ProposalCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;AddFundsCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PublishCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;State&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PiecePath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/some/path&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PayloadSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MetadataPath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/some/path&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SlashEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;FastRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;FundsReserved&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Ref&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;TransferType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Root&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1024</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;RawBlockSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;AvailableForRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;DealID&quot;</span><span class="token operator">:</span> <span class="token number">5432</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;CreationTime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;TransferChannelId&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Initiator&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Responder&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ID&quot;</span><span class="token operator">:</span> <span class="token number">3</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SectorNumber&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Offset&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PieceStatus&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Undefine&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;InboundCAR&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;CreatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;UpdatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="marketlistdatatransfers"><a href="#marketlistdatatransfers" class="header-anchor">#</a> MarketListDataTransfers</h3> <p>Perms: admin</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;TransferID&quot;</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Status&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;BaseCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;IsInitiator&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;IsSender&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Voucher&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;OtherPeer&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Transferred&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Stages&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Stages&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;Name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;Description&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;CreatedTime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;UpdatedTime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;Logs&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;Log&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;UpdatedTime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="marketlistdeals"><a href="#marketlistdeals" class="header-anchor">#</a> MarketListDeals</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">[</span>
+    <span class="token string">&quot;f01234&quot;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Proposal&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;State&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;SectorStartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;LastUpdatedEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;SlashEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;VerifiedClaim&quot;</span><span class="token operator">:</span> <span class="token number">0</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="marketlistincompletedeals"><a href="#marketlistincompletedeals" class="header-anchor">#</a> MarketListIncompleteDeals</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Proposal&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ClientSignature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ProposalCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;AddFundsCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PublishCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;State&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PiecePath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/some/path&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PayloadSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MetadataPath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/some/path&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SlashEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;FastRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;FundsReserved&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Ref&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;TransferType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Root&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1024</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;RawBlockSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;AvailableForRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;DealID&quot;</span><span class="token operator">:</span> <span class="token number">5432</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;CreationTime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;TransferChannelId&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Initiator&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Responder&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ID&quot;</span><span class="token operator">:</span> <span class="token number">3</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SectorNumber&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Offset&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PieceStatus&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Undefine&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;InboundCAR&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;CreatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;UpdatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="marketlistretrievalask"><a href="#marketlistretrievalask" class="header-anchor">#</a> MarketListRetrievalAsk</h3> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PricePerByte&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;UnsealPrice&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PaymentInterval&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PaymentIntervalIncrease&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;CreatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;UpdatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="marketlistretrievaldeals"><a href="#marketlistretrievaldeals" class="header-anchor">#</a> MarketListRetrievalDeals</h3> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;PayloadCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ID&quot;</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Selector&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Raw&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PricePerByte&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PaymentInterval&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PaymentIntervalIncrease&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;UnsealPrice&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;StoreID&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SelStorageProposalCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ChannelID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Initiator&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Responder&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ID&quot;</span><span class="token operator">:</span> <span class="token number">3</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Receiver&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;TotalSent&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;FundsReceived&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;CurrentInterval&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;LegacyProtocol&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;CreatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;UpdatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="marketliststorageask"><a href="#marketliststorageask" class="header-anchor">#</a> MarketListStorageAsk</h3> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Ask&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;VerifiedPrice&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;MinPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;MaxPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Timestamp&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Expiry&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;SeqNo&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Signature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;CreatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;UpdatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="marketmaxbalanceaddfee"><a href="#marketmaxbalanceaddfee" class="header-anchor">#</a> MarketMaxBalanceAddFee</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>&quot;0 FIL&quot;</code></p> <h3 id="marketmaxdealsperpublishmsg"><a href="#marketmaxdealsperpublishmsg" class="header-anchor">#</a> MarketMaxDealsPerPublishMsg</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>42</code></p> <h3 id="marketpendingdeals"><a href="#marketpendingdeals" class="header-anchor">#</a> MarketPendingDeals</h3> <p>Perms: write</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Deals&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;Proposal&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;ClientSignature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PublishPeriodStart&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PublishPeriod&quot;</span><span class="token operator">:</span> <span class="token number">60000000000</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="marketpublishpendingdeals"><a href="#marketpublishpendingdeals" class="header-anchor">#</a> MarketPublishPendingDeals</h3> <p>Perms: admin</p> <p>Inputs: <code>[]</code></p> <p>Response: <code>{}</code></p> <h3 id="marketreleasefunds"><a href="#marketreleasefunds" class="header-anchor">#</a> MarketReleaseFunds</h3> <p>Perms: sign</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;0&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="marketreservefunds"><a href="#marketreservefunds" class="header-anchor">#</a> MarketReserveFunds</h3> <p>Perms: sign</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;0&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="marketrestartdatatransfer"><a href="#marketrestartdatatransfer" class="header-anchor">#</a> MarketRestartDataTransfer</h3> <p>MarketRestartDataTransfer attempts to restart a data transfer with the given transfer ID and other peer</p> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token number">3</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+  <span class="token boolean">true</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="marketsetask"><a href="#marketsetask" class="header-anchor">#</a> MarketSetAsk</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+  <span class="token number">10101</span><span class="token punctuation">,</span>
+  <span class="token number">1032</span><span class="token punctuation">,</span>
+  <span class="token number">1032</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="marketsetdatatransferpath"><a href="#marketsetdatatransferpath" class="header-anchor">#</a> MarketSetDataTransferPath</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="marketsetmaxbalanceaddfee"><a href="#marketsetmaxbalanceaddfee" class="header-anchor">#</a> MarketSetMaxBalanceAddFee</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;0 FIL&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="marketsetmaxdealsperpublishmsg"><a href="#marketsetmaxdealsperpublishmsg" class="header-anchor">#</a> MarketSetMaxDealsPerPublishMsg</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token number">42</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="marketsetretrievalask"><a href="#marketsetretrievalask" class="header-anchor">#</a> MarketSetRetrievalAsk</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;PricePerByte&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;UnsealPrice&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PaymentInterval&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PaymentIntervalIncrease&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="marketwithdraw"><a href="#marketwithdraw" class="header-anchor">#</a> MarketWithdraw</h3> <p>Perms: sign</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;0&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="messagergetmessage"><a href="#messagergetmessage" class="header-anchor">#</a> MessagerGetMessage</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;CID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacebbpdegvr3i4cosewthysg5xkxpqfn2wfcz6mv2hmoktwbdxkax4s&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Version&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;To&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;From&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Nonce&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Value&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;GasLimit&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;GasFeeCap&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;GasPremium&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Method&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Params&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="messagerpushmessage"><a href="#messagerpushmessage" class="header-anchor">#</a> MessagerPushMessage</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;CID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacebbpdegvr3i4cosewthysg5xkxpqfn2wfcz6mv2hmoktwbdxkax4s&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Version&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;To&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;From&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Nonce&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Value&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;GasLimit&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;GasFeeCap&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;GasPremium&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Method&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Params&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;MaxFee&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;GasOverEstimation&quot;</span><span class="token operator">:</span> <span class="token number">12.3</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;GasOverPremium&quot;</span><span class="token operator">:</span> <span class="token number">12.3</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="messagerwaitmessage"><a href="#messagerwaitmessage" class="header-anchor">#</a> MessagerWaitMessage</h3> <p>messager</p> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;Message&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Receipt&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;ExitCode&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Return&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;GasUsed&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;EventsRoot&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;ReturnDec&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;TipSet&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Height&quot;</span><span class="token operator">:</span> <span class="token number">10101</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="netaddrslisten"><a href="#netaddrslisten" class="header-anchor">#</a> NetAddrsListen</h3> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;ID&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Addrs&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;/ip4/52.36.61.156/tcp/1347/p2p/12D3KooWFETiESTf1v4PGUvtnxMAcEFMzLZbJGg4tjWfGEimYior&quot;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="offlinedealimport"><a href="#offlinedealimport" class="header-anchor">#</a> OfflineDealImport</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Proposal&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ClientSignature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ProposalCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;AddFundsCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PublishCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;State&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PiecePath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/some/path&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PayloadSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MetadataPath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/some/path&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SlashEpoch&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;FastRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;FundsReserved&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Ref&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;TransferType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Root&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">1024</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;RawBlockSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;AvailableForRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;DealID&quot;</span><span class="token operator">:</span> <span class="token number">5432</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;CreationTime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;TransferChannelId&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Initiator&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Responder&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12D3KooWGzxzKZYveHXtpG6AsrUJBcWxHBFS2HsEoGTxrMLvKXtf&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ID&quot;</span><span class="token operator">:</span> <span class="token number">3</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SectorNumber&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Offset&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PieceStatus&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Undefine&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;InboundCAR&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;CreatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;UpdatedAt&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="paychvoucherlist"><a href="#paychvoucherlist" class="header-anchor">#</a> PaychVoucherList</h3> <p>Paych</p> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;ChannelAddr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;TimeLockMin&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;TimeLockMax&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SecretHash&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Extra&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Actor&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Method&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Lane&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Nonce&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Amount&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MinSettleHeight&quot;</span><span class="token operator">:</span> <span class="token number">10101</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Merges&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;Lane&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Nonce&quot;</span><span class="token operator">:</span> <span class="token number">42</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Signature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="piecesgetcidinfo"><a href="#piecesgetcidinfo" class="header-anchor">#</a> PiecesGetCIDInfo</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;CID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;PieceBlockLocations&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;RelOffset&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;BlockSize&quot;</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="piecesgetpieceinfo"><a href="#piecesgetpieceinfo" class="header-anchor">#</a> PiecesGetPieceInfo</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Deals&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;DealID&quot;</span><span class="token operator">:</span> <span class="token number">5432</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;SectorID&quot;</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Offset&quot;</span><span class="token operator">:</span> <span class="token number">1032</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Length&quot;</span><span class="token operator">:</span> <span class="token number">1032</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="pieceslistcidinfos"><a href="#pieceslistcidinfos" class="header-anchor">#</a> PiecesListCidInfos</h3> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="pieceslistpieces"><a href="#pieceslistpieces" class="header-anchor">#</a> PiecesListPieces</h3> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="removepiecestorage"><a href="#removepiecestorage" class="header-anchor">#</a> RemovePieceStorage</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="responsemarketevent"><a href="#responsemarketevent" class="header-anchor">#</a> ResponseMarketEvent</h3> <p>market event</p> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;e26f1e5c-47f7-4561-a11d-18fab6e748af&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Payload&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Error&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="sectorgetexpectedsealduration"><a href="#sectorgetexpectedsealduration" class="header-anchor">#</a> SectorGetExpectedSealDuration</h3> <p>SectorGetExpectedSealDuration gets the time that a newly-created sector
+waits for more deals before it starts sealing</p> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>60000000000</code></p> <h3 id="sectorsetexpectedsealduration"><a href="#sectorsetexpectedsealduration" class="header-anchor">#</a> SectorSetExpectedSealDuration</h3> <p>SectorSetExpectedSealDuration sets the expected time for a sector to seal</p> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token number">60000000000</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="updatedealonpacking"><a href="#updatedealonpacking" class="header-anchor">#</a> UpdateDealOnPacking</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token number">5432</span><span class="token punctuation">,</span>
+  <span class="token number">9</span><span class="token punctuation">,</span>
+  <span class="token number">1032</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="updatedealstatus"><a href="#updatedealstatus" class="header-anchor">#</a> UpdateDealStatus</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token number">5432</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;Undefine&quot;</span><span class="token punctuation">,</span>
+  <span class="token number">42</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="updatestoragedealstatus"><a href="#updatestoragedealstatus" class="header-anchor">#</a> UpdateStorageDealStatus</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token number">42</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;Undefine&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="version"><a href="#version" class="header-anchor">#</a> Version</h3> <p>Version provides information about API provider</p> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;Version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;APIVersion&quot;</span><span class="token operator">:</span> <span class="token number">131840</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/filecoin-project/venus-docs/edit/master/docs/advanced/market-api-v1.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/advanced/market-api-v0.html" class="prev">
+        Market api v0
+      </a></span> <span class="next"><a href="/advanced/messager-api.html">
+        Messager api
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.22adc996.js" defer></script><script src="/assets/js/2.d93b85b3.js" defer></script><script src="/assets/js/39.b1a86981.js" defer></script>
+  </body>
+</html>
