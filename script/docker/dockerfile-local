@@ -1,0 +1,9 @@
+FROM filvenus/venus-runtime:${RUNTIME_TAG}
+
+ARG BUILD_TARGET=
+ENV VENUS_COMPONENT=${BUILD_TARGET}
+
+# copy the app from build env
+COPY ${BUILD_TARGET} /app/${BUILD_TARGET}
+
+ENTRYPOINT ["/script/init.sh"]
