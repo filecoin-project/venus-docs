@@ -139,7 +139,7 @@ nohup ./venus-messager run \
 ### venus-miner
 ```bash
 # init miner repo
-./venus-miner init --nettype=2k --auth-api=http://127.0.0.1:8989 \
+./venus-miner init --auth-api=http://127.0.0.1:8989 \
  --gateway-api=/ip4/127.0.0.1/tcp/45132 \
  --api=/ip4/127.0.0.1/tcp/3453 --token=<SHARED_ADMIN_AUTH_TOKEN> \
  --slash-filter local

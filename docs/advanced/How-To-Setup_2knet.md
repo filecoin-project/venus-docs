@@ -76,7 +76,7 @@ To allow connection from different IP address, you need to change `apiAddress` o
 venus-auth manages the jwt tokens used by other venus components so that they can communicate with each other securely on the network. Generate tokens for shared modules.
 
 ```shell script
-# --perm specifies admin, sign, wirte or read permission of the token generated
+# --perm specifies admin, sign, write or read permission of the token generated
 $ ./venus-auth token gen --perm admin <SHARED>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
@@ -150,7 +150,7 @@ db-type also supports mysql in the following format.
 ### venus-miner
 ```shell script
 # init miner repo
-./venus-miner init --nettype=2k --auth-api=http://127.0.0.1:8989 \
+./venus-miner init --auth-api=http://127.0.0.1:8989 \
  --gateway-api=/ip4/127.0.0.1/tcp/45132 \
  --api=/ip4/127.0.0.1/tcp/3453 --token=<SHARED_ADMIN_AUTH_TOKEN> \
  --slash-filter local
@@ -296,7 +296,7 @@ Start venus-miner.
 
 ```shell script
 # run 
-$ nohup ./venus-miner run --nettype=2k --nosync > miner.log 2>& 1 &
+$ nohup ./venus-miner run --nosync > miner.log 2>& 1 &
 ```
 
 Check if storage provider id is properly added.
