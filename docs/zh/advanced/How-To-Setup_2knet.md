@@ -27,7 +27,7 @@ $ ./venus-auth user list
 ### venus-gateway
 
 ```bash
-$ nohup ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run --auth-url=http://127.0.0.1:8989 > gateway.log 2>&1 &
+$ nohup ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run --auth-url=http://127.0.0.1:8989 --auth-token=<venus-auth token> > gateway.log 2>&1 &
 
 # wallet列表
 $ ./venus-gateway  wallet list
@@ -55,7 +55,7 @@ $ ./venus seed genesis add-miner localnet.json ~/.genesis-sectors/pre-seal-t0100
 
 - 启动venus
 ```sh
-$ nohup ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --network=2k --auth-url=http://127.0.0.1:8989 > venus.log 2>&1 &
+$ nohup ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --network=2k --auth-url=http://127.0.0.1:8989 --auth-token=<venus-auth token>  > venus.log 2>&1 &
 ```
 > venus作为公共服务组件需要监听不同IP时需要修改配置文件 `.venus/config.json`
 ```bash

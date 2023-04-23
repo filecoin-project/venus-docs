@@ -31,7 +31,7 @@ $ ./venus-auth user list
 Start venus-gateway.
 
 ```shell script
-$ nohup ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run --auth-url=http://127.0.0.1:8989 > gateway.log 2>&1 &
+$ nohup ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run --auth-url=http://127.0.0.1:8989 --auth-token=<venus-auth token> > gateway.log 2>&1 &
 
 # wallet
 $ ./venus-gateway wallet list
@@ -58,7 +58,7 @@ $ ./venus seed genesis add-miner localnet.json ~/.genesis-sectors/pre-seal-t0100
 Run venus 
 
 ```sh
-$ nohup ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --network=2k --auth-url=http://127.0.0.1:8989 > venus.log 2>&1 &
+$ nohup ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --network=2k --auth-url=http://127.0.0.1:8989 --auth-token=<auth token> > venus.log 2>&1 &
 ```
 > As a public service component, venus needs to modify the configuration file when it needs to monitor different IPs. `.venus/config.json`
 :::tip
