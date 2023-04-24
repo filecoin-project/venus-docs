@@ -3,7 +3,7 @@
 便于集群的横向扩展是Venus的设计初衷，Venus团队致力于用户更加简单的运维自己的集群。
 
 Venus系统的实现采用了微服务架构，将各部分重复的功能解耦出来，形成不同的组件。根据部署方式和功能的不同，划分为链服务组件和本地组件。
-在Veuus的实现中，一套链服务可以服务多个集群，链服务可以由服务商或多个存储提供者联合搭建，每个接入链服务的存储提供者仅需将精力放在本地组件上，即算力的增长与维持。
+在Venus的实现中，一套链服务可以服务多个集群，链服务可以由服务商或多个存储提供者联合搭建，每个接入链服务的存储提供者仅需将精力放在本地组件上，即算力的增长与维持。
 
 在Venus系统中，链服务层的正常运行显得尤为重要，一旦服务异常就可能导致多个集群故障。此文档就如何搭建链服务进行介绍。
 
@@ -31,9 +31,6 @@ CentOS:
 ```bash
 sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum install -y git gcc bzr jq pkgconfig clang llvm mesa-libGL-devel opencl-headers ocl-icd ocl-icd-devel hwloc-devel
 ```
-
-- [Go 1.16 或更高版本](https://golang.org/dl/)
-- 每个组件皆用相同分支: **`incubation`**
 
 </br>
 
@@ -70,15 +67,21 @@ maxIdleTime = "30s"
 
 `venus-auth`管理着其他Venus组件使用的[jwt](https://jwt.io/)token，以便它们在网络上安全地相互通信。
 
+创建 token 需要先创建用户
+
+```bash
+$ ./venus-auth user add <SHARED>
+```
+
 为链服务组件生成token。
 
 ```bash
-# --perm specifies admin, sign, wirte or read permission of the token generated
+# --perm specifies admin, sign, write or read permission of the token generated
 $ ./venus-auth token gen --perm admin <SHARED>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
 
-为独立组件生成token。token可以通过`<USER>` 逻辑分组，作为加入分布式存储池的单个存储提供者。
+为独立组件生成token。token可以通过 `<USER>` 逻辑分组，作为加入分布式存储池的单个存储提供者。
 
 ```shell script
 $ ./venus-auth user add <USER>
@@ -115,6 +118,7 @@ github.com/dgraph-io/badger/v3@v3.2011.1/fb/BlockOffset.go:6:2: missing go.sum e
 $ ./venus-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
 # Use either a http or https url
 --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-token <venus-auth token> \
 > venus-gateway.log 2>&1 &
 ```
 
@@ -161,7 +165,7 @@ t02082
 启动`venus`进程进行链同步。 使用 `--network` 来指定`venus`连接的网络。
 
 ```bash
-$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 &
+$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<venus-auth token>  > venus.log 2>&1 &
 ```
 
 > 使用`tail -f venus.log` 或 `./venus sync status` 检查同步过程中是否有任何错误。
@@ -318,9 +322,7 @@ $ ./venus-messager address set-sel-msg-num --num=5 <address>
 
 初始化`venus-miner`。
 ```bash
-$ ./venus-miner init
-# For nettype, choose from mainnet, debug, 2k, calibnet
---nettype <NET_TYPE> \
+$ ./venus-miner init \
 --auth-api <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --token <SHARED_ADMIN_AUTH_TOKEN> \
 --gateway-api /ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132 \

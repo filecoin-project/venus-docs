@@ -12,18 +12,20 @@ venus:
 ```sh
 #build
 git clone https://github.com/filecoin-project/venus.git
+git checkout <latest tag>
 make
 #run
-./venus daemon --network <network-type> --auth-url <venus-auth url>
+./venus daemon --network <network-type> --auth-url <venus-auth url> --auth-token <venus-auth token>
 ```
 
 lotus:
 ```sh
 #build
 git clone https://github.com/ipfs-force-community/lotus.git
+git checkout <latest tag>
 make <network-type>
 #run
-./lotus daemon --auth-url <venus-auth url>
+./lotus daemon --auth-url <venus-auth url> --auth-token <venus-auth token>
 ```
 
 ## 部署chain-co
@@ -31,9 +33,10 @@ make <network-type>
 ```sh
 #build
 git clone https://github.com/ipfs-force-community/chain-co.git
+git checkout <latest tag>
 make
 #run
-./chain-co --listen 0.0.0.0:<port>  run --auth-url <venus-auth url> --node <token:rpc-url> --node<token:rpc-url>
+./chain-co --listen 0.0.0.0:<port>  run --auth <token:url> --node <token:rpc-url> --node<token:rpc-url>
 ```
 
 ## 部署代理(可选)
