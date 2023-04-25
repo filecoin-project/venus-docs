@@ -14,12 +14,12 @@
 组件名|tag|commit
 ---|---|---
 venus-auth | v1.11.0 | 0c30588
-venus | v1.11.0 | afd3d47 
+venus | v1.11.1 | 870f1b4 
 venus-messager | v1.11.0 | e4c4ab4 
-venus-gateway | v1.11.0 | 877a851 
+venus-gateway | v1.11.1 | 8d7be74 
 venus-wallet | v1.11.0 | 7afa1eb 
 venus-miner | v1.11.0 | a30f342 
-venus-market | v2.7.0 | 61f2cb5 
+venus-market | v2.7.1 | b920551 
 venus-sector-manager | v0.6.0-rc3 | 134b502
 venus-worker | 无需升级 | -
 
@@ -174,7 +174,7 @@ venus-worker | 无需升级 | -
 
 - 启动时必须带上 cs-token, 或者修改 配置项 AuthNode.Token
 
-### venus-wallet-pro
+### venus-wallet
 
 影响功能： 无
 
@@ -182,7 +182,6 @@ venus-worker | 无需升级 | -
 
 注意事项：
 - 升级后观察是否正常签名，消息能否正常上链
-- 删除wallet new,import,export命令,这三个命令本身就没有用,删除是为了避免误操作.
 
 ### venus-sector-manger
 
@@ -194,7 +193,6 @@ venus-worker | 无需升级 | -
 - 编译时,需要先 `make dist-clean` 再 `make`
 - wdpost 算法回滚步骤
 	1. vsm 切换到 [fip-0061-fallback] https://github.com/ipfs-force-community/venus-cluster/tree/fip-0061-fallback 分支
-	2. 使用原来的多机wdpost二进制程序，注意备份原来的 wdpost-master 配置文件
 
 ---
 
