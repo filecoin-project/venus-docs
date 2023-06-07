@@ -210,16 +210,12 @@ module.exports = {
                     link: '/zh/intro/'
                 },
                 {
-                    text: '进阶',
-                    link: '/zh/advanced/'
-                },
-                {
-                    text: '运维',
+                    text: '运维/部署',
                     link: '/zh/operation/'
                 },
                 {
-                    text: '研究',
-                    link: '/zh/research/'
+                    text: '关于',
+                    link: '/zh/about/'
                 },
                 ],
                 sidebar: {
@@ -249,54 +245,15 @@ module.exports = {
                         ]
                     },
                     ],
-                    '/zh/advanced/': [{
-                        title: '进阶实战',
-                        collapsable: false,
-                        children: [
-                            ['', '提取奖励'],
-                            ['chain.md', '链维护'],
-                            ['venus_load_balancing.md', '简易负载均衡'],
-                            ['tips-running-in-China.md', '中国部署小贴士'],
-                        ]
-                    },
-                    {
-                        title: '本地开发',
-                        collapsable: false,
-                        children: [
-                            ['How-To-Setup_2knet.md', '本地2k开发网络'],
-                            ['Multisig-Wallet.md', '多签钱包'],
-                            ['Payment-Channel.md', '支付通道'],
-
-                        ]
-                    },
-                    {
-                        title: 'RPC 接口参考',
-                        collapsable: false,
-                        children: [
-                            ['chain-api-v0.md', 'Chain api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v0/method.md"],
-                            ['chain-api-v1.md', 'Chain api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v1/method.md"],
-                            ['gateway-api-v0.md', 'Gateway api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v0/method.md"],
-                            ['gateway-api-v1.md', 'Gateway api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v1/method.md"],
-                            ['market-api-v0.md', 'Market api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/v0/method.md"],
-                            ['market-api-v1.md', 'Market api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/v1/method.md"],
-                            ['messager-api.md', 'Messager api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/messager/method.md"],
-                            ['wallet-api.md', 'Wallet api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/wallet/method.md"]
-                        ]
-                    },
-                    ],
                     '/zh/operation/': [{
-                        title: '运维实战',
+                        title: '部署',
                         collapsable: false,
                         children: [
-                            ['', 'Venus链服务高可用方案'],
-                            ['example-single-box.md', '单矿机示例（depreciating）'],
-                            ['Efficiency_of_sealing.md', '最大化利用资源提升密封扇区效率'],
-                            ['System_monitor_of_Zabbix.md', '系统监控安装与使用之Zabbix'],
-                            ['lotus-vs-venus.md', 'Venus封装配置解释'],
+                            ['', '部署Venus解决方案'],
                         ]
                     },
                     {
-                        title: '网络/组件升级',
+                        title: '网络/产品升级',
                         collapsable: false,
                         children: [
                             ['nv19-upgrade.md', 'nv19网络升级'],
@@ -308,30 +265,11 @@ module.exports = {
                         ]
                     },
                     ],
-                    '/zh/research/': [{
-                        title: 'Venus生态研究',
+                    '/zh/about/': [{
+                        title: '',
                         collapsable: false,
                         children: [
-                            ['', '概述'],
-                        ]
-                    },
-                    {
-                        title: '协议解读',
-                        collapsable: false,
-                        children: [
-                            ['fip0045.md', 'FIP0045'],
-                            ['fip0034.md', 'FIP0034'],
-                            ['boost-protocol-research.md', 'Boost协议解读'],
-                        ]
-                    },
-                    {
-                        title: '设计方案',
-                        collapsable: false,
-                        children: [
-                            ['user-data-isolation.md', '用户数据隔离'],
-                            ['market-attributes-self-config.md', '市场的交易属性配置'],
-                            ['impl-mk-1.2.0.md', '集成Boost协议'],
-                            ['metrics-design.md', 'Metrics指标'],
+                            ['', '关于我们'],
                         ]
                     },
                     ]
