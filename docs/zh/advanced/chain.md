@@ -25,17 +25,17 @@ Filecoin的区块链增长相对较快，因此完全同步将需要很长时间
 
 我们建议大多数用户从最小的轻量级快照执行初始节点同步。受信任状态快照不包含完整的链，并且可能不适合需要对历史状态信息执行查询的节点（例如区块浏览器），但对于大多数用户而言，它们是可行的。
 
-最近的最小受信任状态链快照在 [这里](https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car). 我们可以用venus启动守护程序并直接从URL导入：
+最近的最小受信任状态链快照在 [这里](https://snapshots.mainnet.filops.net/minimal/latest.zst). 我们可以用venus启动守护程序并直接从URL导入：
 
 ```sh
 # 快照大小约为7GiB。这适用于mainnet。
-venus daemon --import-snapshot https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car
+venus daemon --import-snapshot https://snapshots.mainnet.filops.net/minimal/latest.zst
 
 # 另一种方法是先下载并使用该文件
 venus daemon --import-snapshot <filename.car>
 
 # sha256sum 与临时快照一起存储，可以通过以下方式获取
-curl -sI https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car \
+curl -sI https://snapshots.mainnet.filops.net/minimal/latest.zst \
 | perl -ne '/^x-amz-website-redirect-location:(.+)\.car\s*$/ && print "$1.sha256sum"' \
 | xargs curl -s
 ```
@@ -72,7 +72,7 @@ venus chain head
 3. 如上所述，使用最小快照启动daemon:
 
   ```bash
-  venus daemon --import-snapshot https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car
+  venus daemon --import-snapshot https://snapshots.mainnet.filops.net/minimal/latest.zst
   ```
 
 在GitHub上[创建一个问题](https://github.com/filecoin-project/venus-docs/issues)。

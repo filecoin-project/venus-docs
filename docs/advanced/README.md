@@ -33,6 +33,6 @@ $ ./venus-sealer actor control list
 
 ## Send funds from your addresses
 
-`venus-wallet` doesn't support sending funds from `cli`. Sending funds can be realized by exporting private key to a [wallet](https://docs.filecoin.io/about-filecoin/managing-assets/#wallets) that supports filecoin. And then send funds through the said wallet.
+`venus-wallet` doesn't support sending funds from `cli`. Sending funds can be realized by exporting private key to a [wallet](https://docs.filecoin.io/basics/assets/wallets/) that supports filecoin. And then send funds through the said wallet.
 
 Note that venus shared modules also blocks `send` messages for security reason, making your storage system more secure from potential attacks. This design makes sending funds less convienent but allows the seperation of an admin role and a node operator role for increased security. 
