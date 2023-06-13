@@ -1,4 +1,4 @@
-# 算力增加与维持部署参考方案2
+# 算力增加与维持部署参考方案 2
 
 ## 机器配置
 
@@ -12,19 +12,19 @@
 | 显卡  | 3090 * 1 |
 | 存储  | 4TB SSD *25 RAID 5 |
 
-台数:1台
+台数:1 台
 
 ## 任务配比
 
-任务分为 AP,P1,P2,Commit阶段
+任务分为 AP,P1,P2,Commit 阶段
 	
-|  运行方式   | 核数限制  |  耗时(分钟) |  内存消耗(G) |  效率(个/小时) | 日产量(T) |
+|  运行方式   | 核数限制  |  耗时 (分钟) |  内存消耗 (G) |  效率 (个/小时) | 日产量 (T) |
 |  -----------  | -----  |  ---------  |  ----------  |  ------------  | -------  |
 |     P1 * 5    |   20  |    220      |   376   |   1.3636   |  1.0227  |
 |  P2,AP,Commit |   12  |    10    |   120   |      3     |  1.125   |
 
 资源说明：
-- 内存加到512G;
+- 内存加到 512G;
 
 ## 部署
 
@@ -39,9 +39,9 @@
     done
 ```
 
-- 确保证明参数文件已下载,参数文件默认目录: /var/tmp/filecoin-proof-parameters
+- 确保证明参数文件已下载，参数文件默认目录：/var/tmp/filecoin-proof-parameters
 
-- 启动venus-sealer: sealer只做windowPoSt.
+- 启动 venus-sealer: sealer 只做 windowPoSt.
 ```sh
 ./venus-sealer --network=mainnet init --actor=<MINER_ID> --node-url=/ip4/<IP_ADDRESS_OF_VENUS/tcp/3453 --messager-url=/ip4/<IP_ADDRESS_OF_VENUS_MESSAGER>/tcp/<PORT_OF_VENUS_MESSAGER> --gateway-url=/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/<PORT_OF_VENUS_GATEWAY> --auth-token <AUTH_TOKEN_FOR_ACCOUNT_NAME> --no-local-storage
     
@@ -62,9 +62,9 @@ BELLMAN_CPU_UTILIZATION=0.2 FIL_PROOFS_USE_MULTICORE_SDR=1 nohup ./venus-sealer 
 ./venus-sealer storage attach --init --store <ABSOLUTE_PATH_OF_YOUR_PERMANENT_STORAGE>
 ```
 
-> init时加`--no-local-storage`不回创建默认的store/seal目录;
+> init 时加`--no-local-storage`不回创建默认的store/seal目录;
 
-- 启动venus-worker-01: 只做P1
+- 启动 venus-worker-01: 只做 P1
 ```bash
 FIL_PROOFS_MAXIMIZE_CACHING=1 BELLMAN_CPU_UTILIZATION=0.2 FIL_PROOFS_USE_MULTICORE_SDR=1 \
 nohup ./venus-worker --repo=<ABSOLUTE_PATH_OF_WORKER_01> run --miner-addr=/ip4/127.0.0.1/tcp/2345 --miner-token=<sealer token> \
@@ -73,9 +73,9 @@ nohup ./venus-worker --repo=<ABSOLUTE_PATH_OF_WORKER_01> run --miner-addr=/ip4/1
 # 指定seal路径
 ./venus-worker --repo=<ABSOLUTE_PATH_OF_WORKER_01> storage attach --init --seal <ABSOLUTE_LOCAL_PATH>
 ```
-> FIL_PROOFS_MAXIMIZE_CACHING=1 表示做P1的时候把部分临时文件缓存到内存
+> FIL_PROOFS_MAXIMIZE_CACHING=1 表示做 P1 的时候把部分临时文件缓存到内存
 
-- 启动venus-worker-02: 做AP,P2,Commit等任务
+- 启动 venus-worker-02: 做 AP,P2,Commit 等任务
 
 ```bash
 BELLMAN_CPU_UTILIZATION=0.2 FIL_PROOFS_USE_MULTICORE_SDR=1 TMP_DIR=<OTHER_PATH> \
@@ -86,13 +86,13 @@ nohup ./venus-worker --repo=<ABSOLUTE_PATH_OF_WORKER_02> run --miner-addr=/ip4/1
 ./venus-worker --repo=<ABSOLUTE_PATH_OF_WORKER_02> storage attach --init --seal <ABSOLUTE_LOCAL_PATH>
 ```
 
-> 设置worker01和worker02的seal路径相同，可以避免不必要的拷贝;
+> 设置 worker01 和 worker02 的 seal 路径相同，可以避免不必要的拷贝;
 
-> P2没有设置用GPU;
+> P2 没有设置用 GPU;
 
-> TMP_DIR目的是为了避免和venus-sealer竞争bellman.gpu.lock,C2阶段会自动搜索用GPU,如果和wdPost竞争gpu锁会报错
+> TMP_DIR 目的是为了避免和 venus-sealer 竞争 bellman.gpu.lock,C2 阶段会自动搜索用 GPU，如果和 wdPost 竞争 gpu 锁会报错
 
-- 设置发送消息的wallet
+- 设置发送消息的 wallet
 
 ```sh
 [Addresses]
@@ -103,7 +103,7 @@ nohup ./venus-worker --repo=<ABSOLUTE_PATH_OF_WORKER_02> run --miner-addr=/ip4/1
 ```
 > 根据上面字段的含义自己配置想要的结果
 
-- 限核: Cgrep限核
+- 限核：Cgrep 限核
 
 ```bash
 # 设置进程管理目录
@@ -120,8 +120,8 @@ sudo echo <PID> > /sys/fs/cgroup/cpuset/worker/cgroup.procs
 
 ```
 
-> PID: 进程ID号;
+> PID: 进程 ID 号;
 
-> 每次worker重启后PID会变化,需要更新文件.
+> 每次 worker 重启后 PID 会变化，需要更新文件。
 
 > /sys/fs/cgroup/cpuset是系统目录,worker是自己创建的.

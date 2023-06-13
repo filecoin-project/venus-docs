@@ -6,9 +6,9 @@
 
 ### venus-auth
 
-tag：v1.6.0
+tag: v1.6.0
 
-影响功能：支持多个miner共享同一个token的功能
+影响功能：支持多个 miner 共享同一个 token 的功能
 
 依赖升级组件：无
 
@@ -20,19 +20,19 @@ tag：v1.6.0
 
 3. `./venus-auth user miner list <user>` 可以查看每个用户绑定的 miner
 
-4. 使用命令 `./venus-auth user list`列出所有user，**确保被使用的user状态都为enabled状态**
+4. 使用命令 `./venus-auth user list`列出所有 user，**确保被使用的 user 状态都为 enabled 状态**
 
 
 ### venus
 
-tag：v1.6.0
+tag: v1.6.0
 
-影响功能：支持nv16网络
+影响功能：支持 nv16 网络
 
-依赖升级组件: 无
+依赖升级组件：无
 
 注意事项：
-1. 升级后检查vk文件是否完整
+1. 升级后检查 vk 文件是否完整
 
 2. 升级后检查配置文件，升级高度是否正常设置，配置文件默认在 `~/.venus/config.json` :
     ```
@@ -44,10 +44,10 @@ tag：v1.6.0
 
 3. 升级后需检查是否正常同步区块
 
-4. api版本发生变化，影响miner的连接
+4. api 版本发生变化，影响 miner 的连接
 
     ```
-    # 用 curl 命令测试接口 StateGetBeaconEntry、BeaconGetEntry，下面三个curl命令返回结果应该一样
+    # 用 curl 命令测试接口 StateGetBeaconEntry、BeaconGetEntry，下面三个 curl 命令返回结果应该一样
     curl http://127.0.0.1:3453/rpc/v0 -X POST -H "Content-Type: application/json" -H "Authorization: Bearer token" -d '{"method": "Filecoin.BeaconGetEntry","params":[1933610], "id": 0}'
     curl http://127.0.0.1:3453/rpc/v1 -X POST -H "Content-Type: application/json" -H "Authorization: Bearer token" -d '{"method": "Filecoin.BeaconGetEntry","params":[1933610], "id": 0}'       
     curl http://127.0.0.1:3453/rpc/v1 -X POST -H "Content-Type: application/json" -H "Authorization: Bearer token" -d '{"method": "Filecoin.StateGetBeaconEntry","params":[1933610], "id": 0}'
@@ -73,9 +73,9 @@ tag：v1.6.0
     verifiedregistry  bafk2bzaceb3zbkjz3auizmoln2unmxep7dyfcmsre64vnqfhdyh7rkqfoxlw4
     ```
 
-6. 主网可以通过设置环境变量 `export VENUS_USE_FVM_TO_SYNC_MAINNET_V15=1` 在nv15网络使用fvm
+6. 主网可以通过设置环境变量 `export VENUS_USE_FVM_TO_SYNC_MAINNET_V15=1` 在 nv15 网络使用 fvm
 
-7. 若不排查问题，rust日志级别**不建议**设置为 `trace`，因为会打印较多日志
+7. 若不排查问题，rust 日志级别**不建议**设置为 `trace`，因为会打印较多日志
 
 8. 升级后可以通过命令来 `./venus  state get-actor t01000` 来确认是否升级成功
 
@@ -86,7 +86,7 @@ tag:v1.6.0
 
 影响功能：支持新的网络版本，新增主目录，默认在 `~/.venus-messager`
 
-依赖升级组件: 
+依赖升级组件：
 
 注意事项：
 1. 升级后是否生成主目录 `~/.venus-messager`
@@ -100,21 +100,21 @@ tag:v1.6.0
 
 ### venus-miner
 
-tag：v1.6.0
+tag: v1.6.0
 
-影响功能:
-1. 获取beacon的接口名字 由 `BeaconGetEntry` 改为 `StateGetBeaconEntry`
+影响功能：
+1. 获取 beacon 的接口名字 由 `BeaconGetEntry` 改为 `StateGetBeaconEntry`
 
-依赖升级组件: venus,venus-auth,venus-gateway
+依赖升级组件：venus,venus-auth,venus-gateway
 
-注意事项: 
+注意事项：
 1. 升级后常用命令 address state/list/update验证一遍.
-2. 如果用mysql数据库，检查下miner_blocks表中parent_key字段是varchar(1000)
+2. 如果用 mysql 数据库，检查下 miner_blocks 表中 parent_key 字段是 varchar(1000)
 
 
 ### venus-gateway
 
-tag：v1.6.0
+tag: v1.6.0
 
 影响功能：修复没有自动清理超时的请求
 
@@ -125,7 +125,7 @@ tag：v1.6.0
 
 ### venus-market
 
-tag：v2.2.0
+tag: v2.2.0
 
 影响功能：
 
@@ -136,11 +136,11 @@ tag：v2.2.0
 
 #### 社区
 
-tag：v1.6.0
+tag: v1.6.0
 
 影响功能：
 
 注意事项：
 
 1. 需要解锁钱包
-2. 是否注册到gateway
+2. 是否注册到 gateway

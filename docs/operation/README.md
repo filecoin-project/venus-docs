@@ -42,9 +42,9 @@ make
 ## proxy(optional)
 
 There are many options for the proxy, including load balancing such as nginx, slb, etc., but note that it needs to support websocket and custom http headers. Take nginx as an example here
-install nginx： https://www.nginx.com/resources/wiki/start/topics/tutorials/install
+install nginx: https://www.nginx.com/resources/wiki/start/topics/tutorials/install
 
-nginx config：
+nginx config:
 ```
 user nginx;
 worker_processes auto;

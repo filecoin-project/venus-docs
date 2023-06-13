@@ -239,7 +239,7 @@ The above log indicates that the wallet is registered on gateway thus enabling t
 
 ### venus-sealer
 
-init genesis-miner t01000。
+init genesis-miner t01000.
 
 ```shell script
 $ ./venus-sealer --network=2k init --genesis-miner --actor=t01000 --sector-size=2048 --pre-sealed-sectors=~/.genesis-sectors --pre-sealed-metadata=~/.genesis-sectors/pre-seal-t01000.json --nosync \

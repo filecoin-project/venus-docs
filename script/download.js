@@ -37,7 +37,7 @@ function downloadFile(uri, dest) {
     axios.get(rawUri, param).then(res => {
         if (res.status !== 200) {
             content = `# 文档引用
-    请访问这个[链接](${uri})，了解更多相关信息。`
+    请访问这个 [链接](${uri})，了解更多相关信息。`
             file.write(content)
             console.log(`download error : ${res.statusCode}(${rawUri})`);
             return;

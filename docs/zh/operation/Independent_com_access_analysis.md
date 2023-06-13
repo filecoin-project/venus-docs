@@ -1,23 +1,23 @@
 
 
-### venus-wallet健康状态检查:
+### venus-wallet 健康状态检查：
 
 #### 1、启动
 
-可以看到venus-wallet连接到的gateway节点地址信息和venus-gateway建立连接的会话ID信息
+可以看到 venus-wallet 连接到的 gateway 节点地址信息和 venus-gateway 建立连接的会话 ID 信息
 
 ```bash
 wallet_event/listenevent.go:173	restarting listenWalletRequestOnce	{"api hub": "/dns/gateway.filincubator.com/tcp/83/wss"}
 wallet_event/listenevent.go:200	connect to server 9ad36ec8-4a47-4f84-b618-e89cf03f6f38	{"api hub": "/dns/gateway.filincubator.com/tcp/83/wss"
 ```
 
-但如果有类似如下的报错信息，则为异常启动:
+但如果有类似如下的报错信息，则为异常启动：
 
 ```bash
  ERROR   wallet_event    wallet_event/listenevent.go:236 WalletSign error password not set       {"api hub": "/dns/gateway.filincubator.com/tcp/83/wss"}
 ```
 
-从日志报venus-wallet的密码没有设置，需要执行**./venus-wallet setpwd**来配置wallet的密码。
+从日志报 venus-wallet 的密码没有设置，需要执行**./venus-wallet setpwd**来配置 wallet 的密码。
 
 
 
@@ -31,17 +31,17 @@ Password:******
 wallet lock successfully
 ```
 
-此时，在日志中会有一条如下信息:
+此时，在日志中会有一条如下信息：
 
 ```bash
 WARN  rpc  go-jsonrpc@v1.1ec/handler.go:279  error in RPC call to 'Filecoin.Unlock': wallet already unlocked
 ```
 
-现在venus-wallet已经上锁了，这个会影响venus-sealer发送到venus-message的消息不会被签名,如下图:
+现在 venus-wallet 已经上锁了，这个会影响 venus-sealer 发送到 venus-message 的消息不会被签名，如下图：
 
 ![error-message](../../.vuepress/public/error-message.png)
 
-可以执行如下命令，解锁venus-wallet，可以对venus-sealer发出来的消息进行签名后，由venus节点向链上发送
+可以执行如下命令，解锁 venus-wallet，可以对 venus-sealer 发出来的消息进行签名后，由 venus 节点向链上发送
 
 ```bash
 ./venus-wallet  unlock
@@ -51,15 +51,15 @@ wallet unlock successfully
 
 
 
-### Venus-sealer健康状态检查:
+### Venus-sealer 健康状态检查：
 
-主要可以从输出的日志中看到版本信息、节点同步状态、加载证明参数文件、本地存储id和venus-sealer连接到venus-gateway节点的会话建立等信息；
+主要可以从输出的日志中看到版本信息、节点同步状态、加载证明参数文件、本地存储 id 和 venus-sealer 连接到 venus-gateway 节点的会话建立等信息；
 
 ![](../../.vuepress/public/venus-sealer-start.jpg)
 
 
 
-### venus-worker健康状态检查:
+### venus-worker 健康状态检查：
 
 ```bash
  INFO    main    venus-worker/main.go:158        Starting venus worker
@@ -75,11 +75,11 @@ wallet unlock successfully
  INFO    main    venus-worker/main.go:530        Worker registered successfully, waiting for tasks
 ```
 
-可以从venus-worker日志中，看到venus-worker启动后加载的配置文件目录，监控的端口号；以及在启动之后注册到venus-sealer上，等待获取任务。
+可以从 venus-worker 日志中，看到 venus-worker 启动后加载的配置文件目录，监控的端口号；以及在启动之后注册到 venus-sealer 上，等待获取任务。
 
 
 
-如下输出以下信息，则说明venus-worker已经获得了新的任务:
+如下输出以下信息，则说明 venus-worker 已经获得了新的任务：
 
 ```bash
 INFO filcrypto::proofs::api > seal_commit_phase2: start

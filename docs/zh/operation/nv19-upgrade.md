@@ -5,7 +5,7 @@
 1. 所有组件全部更换
 2. 更新完通过 curl 命令调用 `Version` 接口检查版本号，各组件接口调用方式：https://github.com/filecoin-project/venus/issues/5132
 3. pre/pro消息上链的情况
-4. WD消息上链的情况
+4. WD 消息上链的情况
 5. 出块情况是否正常
 6. gas fee 相关设置是否生效
 
@@ -42,7 +42,7 @@ venus-worker | 无需升级 | -
 
 - 其他组件对获取 auth 的服务
 
-依赖升级组件:  无
+依赖升级组件：无
 
 注意事项：
 
@@ -50,14 +50,14 @@ venus-worker | 无需升级 | -
 - 创建 token 之前需要先创建对应的用户
 
 备注：
-- 新版本的 auth 在启动的时候会自动生成一个名为 "defaultLocalToken" 的token, 该 token 用于 auth-cli 执行命令时的鉴权
+- 新版本的 auth 在启动的时候会自动生成一个名为 "defaultLocalToken" 的 token, 该 token 用于 auth-cli 执行命令时的鉴权
 
 
 ### venus 
 
 影响功能：无
 
-依赖升级组件:  venus-auth
+依赖升级组件：venus-auth
 
 注意事项：
 
@@ -65,7 +65,7 @@ venus-worker | 无需升级 | -
 
 **启动时应带上 flag --auth-token ,或者修改配置文件 api.venusAuthToken 配置项**
 
-1. 升级后检查vk文件是否完整
+1. 升级后检查 vk 文件是否完整
 
 2. 升级后检查配置文件，通过日志检查 `UpgradeLightningHeight` 和 `UpgradeThunderHeight` 是否正常 :
 
@@ -107,7 +107,7 @@ venus-worker | 无需升级 | -
 	storagemarket     bafk2bzaceazu2j2zu4p24tr22btnqzkhzjvyjltlvsagaj6w3syevikeb5d7m
     ```
 
-5. 若不排查问题，rust日志级别**不建议**设置为 `trace`，因为会打印较多日志
+5. 若不排查问题，rust 日志级别**不建议**设置为 `trace`，因为会打印较多日志
 
 6. 升级后可以通过命令来 `./venus state get-actor t01000` 来确认是否升级成功
 
@@ -116,7 +116,7 @@ venus-worker | 无需升级 | -
 	**经测试本次预迁移时间在 80 秒左右，正式迁移时间再 60 秒左右**
 
     ```
-    预迁移高度是升级高度前120个高度：2809800 - 120 = 2809680
+    预迁移高度是升级高度前 120 个高度：2809800 - 120 = 2809680
     pre-migration  开始：STARTING pre-migration  结束：COMPLETED pre-migration
     migration      开始：STARTING migration      结束：COMPLETED migration
     ```
@@ -125,13 +125,13 @@ venus-worker | 无需升级 | -
 
 影响功能：无
 
-依赖升级组件: venus-auth
+依赖升级组件：venus-auth
 
 注意事项：
 
-- 编译时,需要先 `make dist-clean` 再 `make`
-- 启动时,应带上 flag --auth-token ,或者直接在配置中设置配置项: AuthConfig.Token
-- 移除 flag：`--disable-address-verify`，**升级时检查启动命令是否还在使用该flag**
+- 编译时，需要先 `make dist-clean` 再 `make`
+- 启动时，应带上 flag --auth-token ,或者直接在配置中设置配置项：AuthConfig.Token
+- 移除 flag：`--disable-address-verify`，**升级时检查启动命令是否还在使用该 flag**
 
 ### venus-messager
 
@@ -139,17 +139,17 @@ venus-worker | 无需升级 | -
 - 消息 replace
 - list --block 命令
 
-依赖升级组件: venus, venus-auth, venus-gateway
+依赖升级组件：venus, venus-auth, venus-gateway
 
 注意事项：
 
-- 升级第一次启动时, 带上 auth-token flag, 或者先修改配置文件 JWTConfig.Token 配置项
-- 升级之后需要观察能否正常接收消息, 消息能否正常上链
+- 升级第一次启动时，带上 auth-token flag, 或者先修改配置文件 JWTConfig.Token 配置项
+- 升级之后需要观察能否正常接收消息，消息能否正常上链
 
 
-备注:
+备注：
 - replace fee 系数的最小值 由 1.25 下调 到 1.11
-- list blocked 消息的时候, unfill 状态的消息也会作为 blocked 消息被列出来
+- list blocked 消息的时候，unfill 状态的消息也会作为 blocked 消息被列出来
 
 
 ### venus-miner
@@ -162,13 +162,13 @@ venus-worker | 无需升级 | -
 
 注意事项：
 
-- 配置文件中 [Auth].[Token] 必须配置，且在venus-auth中具有admin权限，不要使用`defaultLocalToken`对应的token，应手动创建一个.
+- 配置文件中 [Auth].[Token] 必须配置，且在 venus-auth 中具有 admin 权限，不要使用`defaultLocalToken`对应的 token，应手动创建一个。
 
 ### venus-market
 
 影响功能：
 - 新增和调整部分命令
-依赖升级组件: auth, venus, gateway, messager
+依赖升级组件：auth, venus, gateway, messager
 
 注意事项：
 
@@ -176,9 +176,9 @@ venus-worker | 无需升级 | -
 
 ### venus-wallet
 
-影响功能： 无
+影响功能：无
 
-依赖升级组件: gateway
+依赖升级组件：gateway
 
 注意事项：
 - 升级后观察是否正常签名，消息能否正常上链
@@ -187,23 +187,23 @@ venus-worker | 无需升级 | -
 
 影响功能：fip-0061 wdpost 算法改动
 
-依赖升级组件: 链服务组件
+依赖升级组件：链服务组件
 
 注意事项：
-- 编译时,需要先 `make dist-clean` 再 `make`
+- 编译时，需要先 `make dist-clean` 再 `make`
 - wdpost 算法回滚步骤
 	1. vsm 切换到 [fip-0061-fallback] https://github.com/ipfs-force-community/venus-cluster/tree/fip-0061-fallback 分支
 
 ---
 
-更新结果验证步骤: 
+更新结果验证步骤：
 1. 程序启动正常
 2. pre/pro消息正常上链
 3. 出块正常
-4. WD上链正常
+4. WD 上链正常
 5. 算力增长正常
 7. 真实订单检索正常
-8. 数据库各种gas，生命周期，聚合设置正常
+8. 数据库各种 gas，生命周期，聚合设置正常
 
 ### 数据库变更
 

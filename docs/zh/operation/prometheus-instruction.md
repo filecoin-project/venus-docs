@@ -36,7 +36,7 @@ scrape_configs:
     static_configs:
       - targets: ["localhost:9090"]
  
-  # 配置采集点,一个job可对应一个或多个采集点
+  # 配置采集点，一个 job 可对应一个或多个采集点
   - job_name: "venus"
   
     metrics_path: "/metrics"
@@ -76,7 +76,7 @@ scrape_configs:
 `venus` 每个实现指标监控的服务可以认为是单独的采集点。下面配置采集 `venus-miner` 和 `venus-messager` 的监控指标。文件名为 `venus.yml`。
 
 ```yaml
-# 该文件中的每一个targets都是一个采集点
+# 该文件中的每一个 targets 都是一个采集点
 - targets:
   # venus-miner 指标监控服务地址
   - "<ip>:<port>" 
