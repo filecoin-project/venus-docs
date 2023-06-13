@@ -1,6 +1,6 @@
 ## nv18 各组件升级文档
 
-如果 venus 各组件的版本从 `v1.8.x` 升级到 `v1.10.0`，请先阅读 [venus chain-service v1.9.* & venus-market v2.5.* upgrade list / 链服务v1.9.*和订单服务v2.5.*升级清单](https://github.com/filecoin-project/venus/discussions/5531)，尤其注意 `venus-auth` 和 `venus-market` 的升级，`venus-auth` 升级前需要为每一个矿工都创建一个用户，`venus-market` 的启动方式和配置有较大变动。
+如果 venus 各组件的版本从 `v1.8.x` 升级到 `v1.10.0`，请先阅读 [venus chain-service v1.9.* & venus-market v2.5.* upgrade list / 链服务 v1.9.*和订单服务 v2.5.*升级清单](https://github.com/filecoin-project/venus/discussions/5531)，尤其注意 `venus-auth` 和 `venus-market` 的升级，`venus-auth` 升级前需要为每一个矿工都创建一个用户，`venus-market` 的启动方式和配置有较大变动。
 
 ### 时间线
 
@@ -16,13 +16,13 @@
 
 影响功能：支持 nv18 网络
 
-依赖升级组件: 无
+依赖升级组件：无
 
 注意事项：
 
 1. 编译：先 `make dist-clean` 再 `make`，这样可以防止未能正常升级 `filecoin-ffi` 而带来的问题
 
-2. 升级后检查vk文件是否完整
+2. 升级后检查 vk 文件是否完整
 
 3. 升级后检查配置文件，通过日志检查 `AllowableClockDriftSecs` `UpgradeHyggeHeight` 和 `UpgradeHyggeHeight` 是否正常 :
 
@@ -66,14 +66,14 @@
     cron              bafk2bzacedcbtsifegiu432m5tysjzkxkmoczxscb6hqpmrr6img7xzdbbs2g
     ```
 
-6. 若不排查问题，rust日志级别**不建议**设置为 `trace`，因为会打印较多日志
+6. 若不排查问题，rust 日志级别**不建议**设置为 `trace`，因为会打印较多日志
 
 7. 升级后可以通过命令来 `./venus state get-actor t01000` 来确认是否升级成功
 
 8. actor 迁移
 
     ```
-    预迁移高度是升级高度前60个高度：2683288
+    预迁移高度是升级高度前 60 个高度：2683288
     pre-migration  开始：STARTING pre-migration  结束：COMPLETED pre-migration
     migration      开始：STARTING migration      结束：COMPLETED migration
     ```
@@ -120,7 +120,7 @@
 
 1. 补充对接口权限的验证
 
-依赖升级组件: 
+依赖升级组件：
 
 注意事项：
 
@@ -133,11 +133,11 @@
 
 ### venus-miner
 
-影响功能:
+影响功能：
 
-依赖升级组件:
+依赖升级组件：
 
-注意事项: 
+注意事项：
 
 1. 升级后能否正常出块
 
@@ -170,7 +170,7 @@
 注意事项：
 
 1. 启动后需要解锁钱包
-2. 是否注册到gateway
+2. 是否注册到 gateway
 
 ### venus-sector-manager
 编译：先 `make dist-clean` 再 `make`

@@ -1,39 +1,39 @@
 ## 原则
     
-&ensp;&ensp;基于目前的需要,先从重构guide和modules模块,让两块联动,形成比较易读的venus集群部署介绍.
+&ensp;&ensp;基于目前的需要，先从重构 guide 和 modules 模块，让两块联动，形成比较易读的 venus 集群部署介绍。
     
-- modules模块存储各组件的简介,将不相干的文档移到对应位置
+- modules 模块存储各组件的简介，将不相干的文档移到对应位置
 
-- guide和modules对于组件介绍存在很多重复的,只保留一份
+- guide 和 modules 对于组件介绍存在很多重复的，只保留一份
 
-- modules模块组件介绍老旧,超链接到项目的介绍文档,避免项目内更新后doc中不及时及重复劳动
+- modules 模块组件介绍老旧，超链接到项目的介绍文档，避免项目内更新后 doc 中不及时及重复劳动
 
-- guide将组件介绍,编译构建,部署文档独立
+- guide 将组件介绍，编译构建，部署文档独立
 
-- guide模块增加QA模块,将venus discussion的问题以超链接方式统一到QA模块
+- guide 模块增加 QA 模块，将 venus discussion 的问题以超链接方式统一到 QA 模块
 
-- 部署模块尽量少一些设计的介绍,简明扼要,每个指定的操作尽量不涉及不相干的,以免造成误解
+- 部署模块尽量少一些设计的介绍，简明扼要，每个指定的操作尽量不涉及不相干的，以免造成误解
 
 ## TODO list
 
-- [ ] modules模块
+- [ ] modules 模块
   - [ ] 引导页内容更新
   - [ ] 不相关文档移走
   - [ ] 文档命名一致
   - [ ] 组件介绍匹配项目进度
   - [x] 编译构建独立到一个文档
-  - [ ] 组件文档移除从项目中搬过来的内容,用超链接
-  - [ ] market和cluster模块的技术文档移到modules模块,
+  - [ ] 组件文档移除从项目中搬过来的内容，用超链接
+  - [ ] market 和 cluster 模块的技术文档移到 modules 模块，
   
-- [ ] guide模块
+- [ ] guide 模块
   - [ ] 将部署用到的基础知识单独形成文档
   - [x] 编译构建超链接到对应文档
-  - [x] 增加部分组件的验证:怎么判断部署成功
+  - [x] 增加部分组件的验证：怎么判断部署成功
   - [ ] 目录结构调整
-    - [ ] market和cluster归属到链服务部署和独立组件部署文档
-    - [ ] .fil_withdraw_and_send.md.swp文件删除
-    - [ ] sealer文档放到单独的目录
-  - [ ] Troubleshooting-&-FAQ.md用超链接方式管理venus discussion
+    - [ ] market 和 cluster 归属到链服务部署和独立组件部署文档
+    - [ ] .fil_withdraw_and_send.md.swp 文件删除
+    - [ ] sealer 文档放到单独的目录
+  - [ ] Troubleshooting-&-FAQ.md 用超链接方式管理 venus discussion
  
  - [ ] 移除没有价值或过时的文档
  - [ ] 在很多模块中重复的内容整合

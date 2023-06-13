@@ -4,7 +4,7 @@
 
 ### 部署
 
-经过`Venus`在2022年底的[品牌重塑](https://github.com/filecoin-project/venus/discussions/5420)之后，`Venus`拆分出3个产品，分别是[智子](https://sophon.venus-fil.io/zh/)，[执剑人](https://damocles.venus-fil.io/zh/)以及[水滴](https://droplet.venus-fil.io/zh/)。关于各产品的具体部署流程，请参见各产品的文档。 
+经过`Venus`在 2022 年底的[品牌重塑](https://github.com/filecoin-project/venus/discussions/5420)之后，`Venus`拆分出 3 个产品，分别是[智子](https://sophon.venus-fil.io/zh/)，[执剑人](https://damocles.venus-fil.io/zh/)以及[水滴](https://droplet.venus-fil.io/zh/)。关于各产品的具体部署流程，请参见各产品的文档。 
 
 ### 架构
 

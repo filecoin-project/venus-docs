@@ -1,6 +1,6 @@
 # nv17 各组件升级文档
 
-如果 `venus-wallet` 或者 `venus-gateway` 的版本从 `v1.6.x` 升级到 `v1.8.0`，请先阅读 [Venus组件v1.7.0使用注意事项 ](https://github.com/filecoin-project/venus/discussions/5265)，注意 `venus-gateway` 和 `venus-wallet`的升级顺序。
+如果 `venus-wallet` 或者 `venus-gateway` 的版本从 `v1.6.x` 升级到 `v1.8.0`，请先阅读 [Venus 组件 v1.7.0 使用注意事项 ](https://github.com/filecoin-project/venus/discussions/5265)，注意 `venus-gateway` 和 `venus-wallet`的升级顺序。
 
 ### 时间线
 
@@ -24,15 +24,15 @@
 
 ### venus
 
-影响功能：支持nv17网络
+影响功能：支持 nv17 网络
 
-依赖升级组件:无
+依赖升级组件：无
 
 注意事项：
 
 编译：先 `make dist-clean` 再 `make`，这样可以防止未能正常升级 `filecoin-ffi` 而带来的问题
 
-1. 升级后检查vk文件是否完整
+1. 升级后检查 vk 文件是否完整
 
 2. 升级后检查配置文件，升级高度是否正常设置，配置文件默认在 `~/.venus/config.json` :
     ```
@@ -68,7 +68,7 @@
     storageminer      bafk2bzacedyux5hlrildwutvvjdcsvjtwsoc5xnqdjl73ouiukgklekeuyfl4
     ```
 
-5. 若不排查问题，rust日志级别**不建议**设置为 `trace`，因为会打印较多日志
+5. 若不排查问题，rust 日志级别**不建议**设置为 `trace`，因为会打印较多日志
 
 6. 升级后可以通过命令来 `./venus state get-actor t01000` 来确认是否升级成功
 
@@ -77,9 +77,9 @@
 
 功能：
 
-1. 增加对basefee的控制，可以对某个地址单独设置 basefee，当链上basefee高于限制的basefee，消息将不会被推送出去
+1. 增加对 basefee 的控制，可以对某个地址单独设置 basefee，当链上 basefee 高于限制的 basefee，消息将不会被推送出去
 
-依赖升级组件: 
+依赖升级组件：
 
 注意事项：
 
@@ -88,11 +88,11 @@
 
 ### venus-miner
 
-影响功能:
+影响功能：
 
-依赖升级组件:
+依赖升级组件：
 
-注意事项: 
+注意事项：
 
 1. 从 `1.7.*`升级到`v1.8.0`会自动迁移配置文件，从 `1.6.*` 升级到`v1.8.0`需重新初始化`repo`(init)，[参考](https://github.com/filecoin-project/venus-miner/blob/master/docs/zh/CHANGELOG.md#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-2)
 2. 升级后能否正常出块
@@ -125,4 +125,4 @@
 注意事项：
 
 1. 启动后需要解锁钱包
-2. 是否注册到gateway
+2. 是否注册到 gateway

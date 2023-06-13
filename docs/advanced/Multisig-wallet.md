@@ -9,7 +9,7 @@ Multi-signature wallet is a wallet that needs multiple keys to authorize the sam
     - "[--phrase]" ：With descriptor parameter, you need to specify "--phrase" to use
     - "\<phrase\>"：the parameters to fill in the vacancy do not need to specify the meaning, but need to be filled in strictly according to the sequence
     - "[--]"： The boundary of the above two parameters
-> Example of instruction label：venus msig create [--phrase1=\<phrase1>] [--] \<phrase2\> [\<phrase3\>] 
+> Example of instruction label: venus msig create [--phrase1=\<phrase1>] [--] \<phrase2\> [\<phrase3\>] 
 >1. phrase1: With descriptor parameter, optional. If it needs to be used, it must be specified with "--phrase1=xxx"
 >2. phrase2: Parameter used to fill in the vacancy, required 
 >3. phrase3: Parameter used to fill in the vacancy, required
@@ -72,8 +72,8 @@ ID      State    Approvals  To             Value   Method        Params
 0       pending  1          t01004 (self)  0 FIL   AddSigner(5)  {"Signer":"t01005","Increase":false}
 ```
 > Add t01005 to t01004 (multisig wallet), and the number of votes required for voting will not increase
-- increase-threshold： Whether to automatically increase the number of votes required after adding a new address. The default is false
-- signer：The wallet address to be added is not included in the multisig wallet
+- increase-threshold: Whether to automatically increase the number of votes required after adding a new address. The default is false
+- signer: The wallet address to be added is not included in the multisig wallet
 
 ### Agree to add new address
 >./venus msig add-approve [--from=\<from>] [--] \<multisigAddress> \<proposerAddress> \<txId> \<newAddress> \<increaseThreshold>
@@ -113,7 +113,7 @@ Transactions:  1
 ID      State    Approvals  To             Value   Method                          Params
 1       pending  1          t01004 (self)  0 FIL   ChangeNumApprovalsThreshold(8)  {"NewThreshold":3}
 ```
-- newM： Total voting rights
+- newM: Total voting rights
 
 ### Agree to change the number of votes required (approve instruction is universal consent instruction)
 > ./venus msig approve [--from=\<from>] [--] \<multisigAddress> \<messageId> [\<proposerAddress>] [\<destination>] [\<value>] [\<methodId>] [\<methodParams>]
@@ -127,12 +127,12 @@ $ ./venus msig approve --from=t01002 t01004 1
 Threshold: 3 / 4
 ```
 > Generally, to agree to a proposal, you only need to use the approve instruction and specify the multisig address and the ID in the multi signer address Transactions state
-- multisigAddress： Operation multisig address
-- messageId： The TxID returned by the propose operation can be found in the inspect instruction
-- proposerAddress：Proposed originator wallet address
-- destination：Destination address (for example, when multisig addresses are transferred to other addresses, this field is the other address)
-- value： Amount of fil transferred
-- methodId：The methodNum corresponding to propose can be found in the inspect instruction
+- multisigAddress: Operation multisig address
+- messageId: The TxID returned by the propose operation can be found in the inspect instruction
+- proposerAddress: Proposed originator wallet address
+- destination: Destination address (for example, when multisig addresses are transferred to other addresses, this field is the other address)
+- value: Amount of fil transferred
+- methodId: The methodNum corresponding to propose can be found in the inspect instruction
     - Propose: 2 
     - Approve: 3
     - Cancel: 4
@@ -249,9 +249,9 @@ ID      State    Approvals  To             Value   Method          Params
 5       pending  1          t01004 (self)  0 FIL   LockBalance(9)  {"StartEpoch":1600,"UnlockDuration":100,"Amount":"50000000000000000000"}
 
 ```
-- startEpoch：Effective block epoch
-- unlockDuration：Balance lock block span. After startEpoch + unlockduration, the locked balance will be automatically unlocked
-- amount：Locked FIL amount
+- startEpoch: Effective block epoch
+- unlockDuration: Balance lock block span. After startEpoch + unlockduration, the locked balance will be automatically unlocked
+- amount: Locked FIL amount
 
 ### Proposal to lock
 > ./venus msig lock-cancel [--from=\<from>] [--] \<multisigAddress> \<txId> \<startEpoch> \<unlockDuration> \<amount>

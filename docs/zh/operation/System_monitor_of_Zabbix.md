@@ -1,6 +1,6 @@
 
 
-#### 一、服务器基础配置:
+#### 一、服务器基础配置：
 
 ```bash
 systemctl stop firewalld 
@@ -26,7 +26,7 @@ getenforce //查看selinux状态
 # yum install rh-php72-php-mysqlnd zabbix-nginx-conf-scl -y
 ```
 
-修改zabbix的安装源配置文件，启用前端的源
+修改 zabbix 的安装源配置文件，启用前端的源
 
 ```bash
 # vim /etc/yum.repos.d/zabbix.repo 
@@ -40,7 +40,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591
 
 
 
-#### 三、安装MySQL
+#### 三、安装 MySQL
 
 ```bash
 mkdir mysql-dir
@@ -60,14 +60,14 @@ cat /var/log/mysqld.log | grep root
 
 2021-07-26T10:50:49.538494Z 1 [Note] A temporary password is generated for root@localhost: **20yyk:Ar67S;**
 
-登录数据库:
+登录数据库：
 
 ```mysql
 # mysql -uroot -p
 Enter password: 20yyk:Ar67S;
 ```
 
-配置数据库:
+配置数据库：
 
 ```bash
 set global validate_password_policy=0;
@@ -84,7 +84,7 @@ flush privileges;
 create database zabbix character set utf8 collate utf8_bin;
 ```
 
-导入zabbix模版文件:
+导入 zabbix 模版文件：
 
 ```bash
 zcat /usr/share/doc/zabbix-server-mysql-5.0.14/create.sql.gz | mysql -uzabbix -p123456 zabbix
@@ -92,15 +92,15 @@ zcat /usr/share/doc/zabbix-server-mysql-5.0.14/create.sql.gz | mysql -uzabbix -p
 
 
 
-#### 四、修改zabbix默认配置文件
+#### 四、修改 zabbix 默认配置文件
 
-1、修改连接数据库的密码:
+1、修改连接数据库的密码：
 
 ```bash
 # vim /etc/zabbix/zabbix_server.conf
 DBPassword=123456
 ```
-2、修改nginx和所属地域
+2、修改 nginx 和所属地域
 
 ```bash
 # vim /etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf
@@ -120,7 +120,7 @@ server {
         server_name     test.zabbix.com;//取消注释修改成IP或自己的域名
 ```
 
-4、如果是伪装域名则修改本地的hosts文件
+4、如果是伪装域名则修改本地的 hosts 文件
 
 ```bash
 vim /etc/hosts
@@ -139,7 +139,7 @@ systemctl restart zabbix-server zabbix-agent rh-nginx116-nginx rh-php72-php-fpm
 systemctl enable zabbix-server zabbix-agent rh-nginx116-nginx rh-php72-php-fpm
 ```
 
-6、修改zabbix-agent的配置文件
+6、修改 zabbix-agent 的配置文件
 
 ```bash
 cat /etc/zabbix/zabbix_agentd.conf | egrep -v "^$|^#"
@@ -151,8 +151,8 @@ Hostname=venus-sealer
 Include=/etc/zabbix/zabbix_agentd.d/*.conf
 ```
 
-#### 四、配置zabbix监控主机
-1、在浏览器输入zabbix-server的ip地址或者主机名
+#### 四、配置 zabbix 监控主机
+1、在浏览器输入 zabbix-server 的 ip 地址或者主机名
 ![](/01-zabbix-install.jpg)
 ![](/02-zabbix-install.jpg)
 
@@ -162,15 +162,15 @@ Include=/etc/zabbix/zabbix_agentd.d/*.conf
 ![](/05-zabbix-all.jpg)
 ![](/06-zabbix-finished.jpg)
 
-3、登录到zabbix系统，默认的用户为Admin，密码为zabbix;注意Admin的A是大写字母
+3、登录到 zabbix 系统，默认的用户为 Admin，密码为 zabbix;注意 Admin 的 A 是大写字母
 ![](/07-zabbix-login.jpg)
 ![](/08-zabbix-dashboard.jpg)
 
-4、添加zabbix-agent主机
+4、添加 zabbix-agent 主机
 ![](/09-zabbix-agent.jpg)
 ![](/10-zabbix-agent-add.jpg)
 
-5、查看zabbix监控机器的内存图
+5、查看 zabbix 监控机器的内存图
 ![](/11-zabbix-graphs.jpg)
 ![](/12-zabbix-memory.jpg)
 

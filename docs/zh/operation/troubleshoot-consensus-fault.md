@@ -1,16 +1,16 @@
-## Venus Tipset Execution trace比较工具使用说明
+## Venus Tipset Execution trace 比较工具使用说明
 
-execution-trace比较工具是用于当venus链同步发生共识错误导致同步异常时,
-用于快速定位不一致的消息及其执行细节,帮助精准定位问题.
+execution-trace 比较工具是用于当 venus 链同步发生共识错误导致同步异常时，
+用于快速定位不一致的消息及其执行细节，帮助精准定位问题。
 
 ### 原理
-此工具通过API接口在lotus和venus上执行整个tipset中的消息, 并获取所有的execution-trace进行比较,
-通常共识错误发生时, execution-traced的细节也是不一致的.
+此工具通过 API 接口在 lotus 和 venus 上执行整个 tipset 中的消息，并获取所有的 execution-trace 进行比较，
+通常共识错误发生时，execution-traced 的细节也是不一致的。
 
-### 操作步骤:
+### 操作步骤：
 
-#### 编译lotus,并启动
-在原力区维护的lotus, v1.12.0/incubation分支上,支持了相关接口,
+#### 编译 lotus，并启动
+在原力区维护的 lotus, v1.12.0/incubation 分支上，支持了相关接口，
 编译时添加`ENABLE_GAS_TARCE=1`
 ```shell
 git clone https://github.com/ipfs-force-community/lotus.git 
@@ -18,14 +18,14 @@ git checkout -b v1.12.0/incubation oriign/v1.12.0/incubation
 make lotus ENABLE_GAS_TRACE=1
 ```
 
-#### 获取execution-trace分析工具
+#### 获取 execution-trace 分析工具
 ```shell
 git clone https://github.com/zl03jsj/filecoin-head-comparer.git
 ```
 
-#### 配置execution-trace分析工具
+#### 配置 execution-trace 分析工具
 在项目的跟目录下打开配置文件`./cfg_exec_trace.json`
-编辑配置venus和lotus的节点信息:
+编辑配置 venus 和 lotus 的节点信息：
 ```json
 {
   "lotus": {
@@ -39,9 +39,9 @@ git clone https://github.com/zl03jsj/filecoin-head-comparer.git
 }
 ```
 
-#### 启动execution-trace工具开始问题检测
-由于共识问题, 导致链同步时问题时, 通过日志, 很容易就可以定位有问题的tipset epoch,
-在根目录执行命令,在参数中指定高度,就可以对指定的tipset进行分析比较了.
+#### 启动 execution-trace 工具开始问题检测
+由于共识问题，导致链同步时问题时，通过日志，很容易就可以定位有问题的 tipset epoch,
+在根目录执行命令，在参数中指定高度，就可以对指定的 tipset 进行分析比较了。
 
 ```shell
 python3 ./exec_trace_cmp.py 1288233
@@ -78,12 +78,12 @@ idx: 20, Compare msg(bafy2bzaceatyz5v6cxbnb7lw4zrw574aogec4aaeaxy2rwzs3fvr2qnvvo
           .......................................
 ```
 
-当执行一致时, 会看到下面的输出.
+当执行一致时，会看到下面的输出。
 ```
 Venus and lotus got the same state root(bafy2bzacebhpihnow4fwuebtxenpl27kvl4k7aeozlsruwcdj3berrposkfgs) after apply tipset(1288233)
 ```
 
-当执行不一致是, 会看到如下的输出
+当执行不一致是，会看到如下的输出
 ```shell
 ....
 idx:477, Compare msg(bafy2bzaceclyunwu6ig3pvwurm34vxengjc33igcax3rxmmazo4ypevkcc4xg) stateAfterApply: bafy2bzacebmfzfvdp7x6fg7yk7i7p7gbvu56afosgbxyju6236b4ytpllv2tg execution-traces: ok
@@ -187,4 +187,4 @@ implicit message(f00 -> f03, method : 2, nonce:1288233)
 idx:480, Compare msg({'/': 'bafy2bzacebka5xwpzelt4cl5pa452k3oi45mbcy7pyrlc3om7sfnul4cz7dcu'}) stateAfterApply: bafy2bzacebhpihnow4fwuebtxenpl27kvl4k7aeozlsruwcdj3berrposkfgs execution-traces: failed
 ```
 
-程序会打印出不同的execution-trace的消息, 以及不匹配的调用堆栈,可以方便快速定位问题.
+程序会打印出不同的 execution-trace 的消息，以及不匹配的调用堆栈，可以方便快速定位问题。

@@ -1,6 +1,6 @@
 # nv18 Upgrade Guide
 
-If you are upgrading chain service components from `v1.8.x` to `v1.10.0`, please read [venus chain-service v1.9.* & venus-market v2.5.* upgrade list / 链服务v1.9.*和订单服务v2.5.*升级清单](https://github.com/filecoin-project/venus/discussions/5531) first and pay special attention to the upgrade of `venus-auth` and `venus-market`. Before upgrading `venus-auth`, a user account needs to be created for each miner. Also startup CLI and configurations of `venus-market` major breaking changes made to it.
+If you are upgrading chain service components from `v1.8.x` to `v1.10.0`, please read [venus chain-service v1.9.* & venus-market v2.5.* upgrade list / 链服务 v1.9.*和订单服务 v2.5.*升级清单](https://github.com/filecoin-project/venus/discussions/5531) first and pay special attention to the upgrade of `venus-auth` and `venus-market`. Before upgrading `venus-auth`, a user account needs to be created for each miner. Also startup CLI and configurations of `venus-market` major breaking changes made to it.
 
 ## About nv18 upgrade
 

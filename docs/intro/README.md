@@ -126,5 +126,5 @@ Docs : venus.filecoin.io
 Discussion : github.com/filecoin-project/venus/discussions
 Slack : filecoinproject.slack.com/archives/C028PCH8L31
 GitHub : github.com/filecoin-project
-Chain explorer ：filscan.io/home
-Store on the MainNet ：https://docs.filecoin.io/
+Chain explorer : filscan.io/home
+Store on the MainNet : https://docs.filecoin.io/
