@@ -43,17 +43,17 @@ venus 节点自身有一些区别与 lotus 的地方：
 
 1. 创建区块的接口中支持了外部签名（后续会向 Lotus 提 PR）
 2. 消息选择的接口支持同时选择多个批次的消息，用于多存储提供者出块时选择消息。
-3. 支持 venus-auth 的的中心访问授权
+3. 支持 sophon-auth 的的中心访问授权
 
 因此如果对 Venus/Lotus 混合部署感兴趣，需要使用我们维护的 [lotus 兼容 venus 的项目](https://github.com/ipfs-force-community/lotus/releases)，可自行 pick 代码编译。
 
 ### sophon-auth
 
-[sophon-auth](https://github.com/ipfs-force-community/sophon-auth)(原 venus-auth) 是用于授权的组件，在典型的部署环境下 sophon-auth 用于给 venus、sophon-miner、sophon-messager 提供授权服务，每个本地的节点访问共享组件都要经过授权，后续会在这个基础上进行功能扩充，做一些安全方面的控制，比如访问限流、黑名单。
+[sophon-auth](https://github.com/ipfs-force-community/sophon-auth) (原 venus-auth) 是用于授权的组件，在典型的部署环境下 sophon-auth 用于给 venus、sophon-miner、sophon-messager 提供授权服务，每个本地的节点访问共享组件都要经过授权，后续会在这个基础上进行功能扩充，做一些安全方面的控制，比如访问限流、黑名单。
 
 ### sophon-miner
 
-[sophon-miner](https://github.com/ipfs-force-community/sophon-miner)(原 venus-miner) 的作用是聚集出块权，可以为接入链服务的多个集群执行出块逻辑。sophon-miner 有以下特点：
+[sophon-miner](https://github.com/ipfs-force-community/sophon-miner) (原 venus-miner) 的作用是聚集出块权，可以为接入链服务的多个集群执行出块逻辑。sophon-miner 有以下特点：
 
 1. 分离数据：由于生成区块的过程需要访问数据，并且存储提供者的 sealer 可能是异构的，但目前多数存储提供者会使用自己定制的代码，那么要实现联合挖矿就存在如何访问到这些数据的问题。通过隔断 sophon-miner 对存储组织方式的依赖，通过让证明在存储提供者侧完成，无论存储提供者的 sealer 如何组织存储，只要实现了**ComputeProof**接口，sophon-miner 就可以通过这个接口来生成证明。
 2. 分离私钥：计算随机数及签名区块的过程中，所有涉及到私钥的操作都通过远程钱包的方式来访问，这样既无泄漏集群私钥，又能保证出块逻辑正常运行。
@@ -62,7 +62,7 @@ venus 节点自身有一些区别与 lotus 的地方：
 
 ### sophon-messager
 
-[sophon-messager](https://github.com/ipfs-force-community/sophon-messager)(原 venus-messager) 组件的目标是更好的帮助消息上链，并能够灵活的控制消息上链的时机，减少 gas 消耗，流量控制等。其中包括远程钱包管理、地址管理、消息管理。 
+[sophon-messager](https://github.com/ipfs-force-community/sophon-messager) (原 venus-messager) 组件的目标是更好的帮助消息上链，并能够灵活的控制消息上链的时机，减少 gas 消耗，流量控制等。其中包括远程钱包管理、地址管理、消息管理。 
 
 1. 地址管理：主要是管理 nonce 值，保证 nonce 值能够按照正确的顺序分配。
 2. 消息管理：消息管理分成三个部分，分别是“消息接收和保存”、“消息选择及推送”“消息上链状态的追踪”。
@@ -87,13 +87,13 @@ venus 节点自身有一些区别与 lotus 的地方：
 
 ### droplet
 
-[droplet](https://github.com/ipfs-force-community/droplet)(原 venus-market) 是 Venus 系统中的市场组件。其愿景是打造 Filecoin 网络中分布式的存储和检索市场。目前已经实现了兼容 Lotus 协议的订单存储和检索，逐渐向着 droplet 服务多个集群的接单，对外提供统一的检索服务方向发展。可参见[droplet 设计与路线图](https://github.com/filecoin-project/venus/blob/master/documentation/en/venus-market-design-roadmap.md)
+[droplet](https://github.com/ipfs-force-community/droplet) (原 venus-market) 是 Venus 系统中的市场组件。其愿景是打造 Filecoin 网络中分布式的存储和检索市场。目前已经实现了兼容 Lotus 协议的订单存储和检索，逐渐向着 droplet 服务多个集群的接单，对外提供统一的检索服务方向发展。可参见[droplet 设计与路线图](https://github.com/filecoin-project/venus/blob/master/documentation/en/venus-market-design-roadmap.md)
 
 ### sophon-gateway
 
-[sophon-gateway](https://github.com/ipfs-force-community/sophon-gateway)(原 venus-gateway) 是独立组件与链服务层的桥梁，用于简化部署并降低存储提供者访问的复杂性、增加存储提供者访问的安全性。独立组件启动时将其服务接口注册到 sophon-gateway，链服务组件需要时通过 sophon-gateway 请求对应集群的服务接口。
+[sophon-gateway](https://github.com/ipfs-force-community/sophon-gateway) (原 venus-gateway) 是独立组件与链服务层的桥梁，用于简化部署并降低存储提供者访问的复杂性、增加存储提供者访问的安全性。独立组件启动时将其服务接口注册到 sophon-gateway，链服务组件需要时通过 sophon-gateway 请求对应集群的服务接口。
 
-- 存储提供者不需要外部 IP 和曝光钱包服务；
+- 存储提供者不需要外部 IP 和曝露钱包服务；
 - 存储池配置 SSL 证书后，集群与存储池的连接是安全的；
 - 存储提供者可以简单地将多个客户端（钱包/证明）注册到存储池以获得高可用性。
 
@@ -101,4 +101,4 @@ venus 节点自身有一些区别与 lotus 的地方：
 
 ### damocles 
 
-[damocles](https://github.com/ipfs-force-community/damocles)(原 venus-cluster) 是 Venus 推出的新版本扇区封装、算力维持组件，相对于原本的 venus-sealer，在任务调度、最大化系统资源方面有一定优势，其面向的用户受众也将有所不同。
+[damocles](https://github.com/ipfs-force-community/damocles) (原 venus-cluster) 是 Venus 推出的新版本扇区封装、算力维持组件，相对于原本的 venus-sealer，在任务调度、最大化系统资源方面有一定优势，其面向的用户受众也将有所不同。
