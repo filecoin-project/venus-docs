@@ -5,7 +5,7 @@ on:
     branches:
       - master
       - 'dev/**'
-    paths: 
+    paths:
       - 'script/docker/**'
       - '!script/docker/venus-buildenv.dockerfile'
       - '!script/docker/common/install_mod.sh'
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v2 
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
 
