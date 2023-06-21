@@ -81,16 +81,12 @@ module.exports = {
                     link: '/intro/'
                 },
                 {
-                    text: 'Advanced',
-                    link: '/advanced/'
-                },
-                {
-                    text: 'Operation',
+                    text: 'Deployment & Operation',
                     link: '/operation/'
                 },
                 {
-                    text: 'Research',
-                    link: '/research/'
+                    text: 'About',
+                    link: '/about/'
                 },
                 ],
                 sidebar: {
@@ -119,59 +115,11 @@ module.exports = {
                         ]
                     },
                     ],
-                    '/research/': [{
-                        title: 'Research',
-                        collapsable: false,
-                        children: [
-                            ['sealing-process.md', 'Sealing Process', "https://github.com/zhiqiangxu/filecoin-review/blob/main/sealing_process.md"]
-                        ]
-                    },],
-                    '/advanced/': [{
-                        title: 'Advanced Practice',
-                        collapsable: false,
-                        children: [
-                            ['', 'Withdraw Rewards'],
-                            ['Chain.md', 'Chain Management'],
-                            ['venus-cli.md', 'Venus CLI Commands'],
-                            ['venus_load_balancing.md', 'Simple Load Balancing'],
-
-                        ]
-                    },
-                    {
-                        title: 'Local Dev Env',
-                        collapsable: false,
-                        children: [
-                            ['How-To-Setup_2knet.md', 'How to start a local dev network'],
-                            ['How-To-Connect-Network.md', 'Connect to different network'],
-                            ['Multisig-wallet.md', 'Multisig wallet'],
-                            ['Payment-Channel.md', 'Payment channel'],
-
-                        ]
-                    },
-                    {
-                        title: 'RPC API Reference',
-                        collapsable: false,
-                        children: [
-                            ['chain-api-v0.md', 'Chain api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v0/method.md"],
-                            ['chain-api-v1.md', 'Chain api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v1/method.md"],
-                            ['gateway-api-v0.md', 'Gateway api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v0/method.md"],
-                            ['gateway-api-v1.md', 'Gateway api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v1/method.md"],
-                            ['market-api-v0.md', 'Market api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/v0/method.md"],
-                            ['market-api-v1.md', 'Market api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/v1/method.md"],
-                            ['messager-api.md', 'Messager api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/messager/method.md"],
-                            ['wallet-api.md', 'Wallet api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/wallet/method.md"]
-                        ]
-                    },
-                    ],
                     '/operation/': [{
-                        title: 'Operation',
+                        title: 'Deployment',
                         collapsable: false,
                         children: [
-                            ['', 'High Availability Solution'],
-                            ['example-single-box.md', 'Example single box setup (depreciating)'],
-                            ['Efficiency_of_sealing.md', 'Finding optimal configurations'],
-                            ['System_monitor_of_Zabbix.md', 'System monitoring (Zabbix)'],
-                            ['lotus-vs-venus.md', 'Configurations inherited from Lotus'],
+                            ['', 'Deployment of a Venus system'],
                         ]
                     },
                     {
@@ -186,16 +134,11 @@ module.exports = {
                         ]
                     },
                     ],
-                    '/master/': [{
-                        title: 'Master Course',
+                    '/about/': [{
+                        title: '',
                         collapsable: false,
                         children: [
-                            ['', 'TOC'],
-                            ['Intro_to_Venus.md', 'Introduction'],
-                            ['Chain_service_construction.md', 'Deploy/join a Chain Service'],
-                            ['Daily_op_and_maintenance.md', 'Node operations'],
-                            ['Q&A.md', 'Q&A'],
-                            ['Incubation_exit_guide.md', 'Exit incubation program'],
+                            ['', 'About'],
                         ]
                     }]
                 }
