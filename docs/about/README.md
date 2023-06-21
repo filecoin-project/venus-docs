@@ -1,6 +1,4 @@
 
-![](../.vuepress/public/contact.jpg)
-
 ## Mission, Vision, Value
 
 - :exclamation:Mission: push ecosystem forward by driving Filcoin infrastructure
