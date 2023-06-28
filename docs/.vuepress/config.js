@@ -175,7 +175,7 @@ module.exports = {
                         title: '产品',
                         collapsable: false,
                         children: [
-                            ['https://sophon.venus-fil.io', '智子'],
+                            ['https://sophon.venus-fil.io/zh/', '智子'],
                             ['https://damocles.venus-fil.io', '执剑人'],
                             ['https://droplet.venus-fil.io', '水滴'],
                         ]
