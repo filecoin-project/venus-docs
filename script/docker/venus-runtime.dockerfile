@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM debian:bookworm
 
 # install dependence
 RUN apt-get -qq update \
