@@ -102,9 +102,9 @@ module.exports = {
                         title: 'Products',
                         collapsable: false,
                         children: [
-                            ['sophon.md', 'Sophon'],
-                            ['damocles.md', 'Damocles'],
-                            ['droplet.md', 'Droplet'],
+                            ['https://sophon.venus-fil.io', 'Sophon'],
+                            ['https://damocles.venus-fil.io', 'Damocles'],
+                            ['https://droplet.venus-fil.io', 'Droplet'],
                         ]
                     },
                     {
@@ -175,9 +175,9 @@ module.exports = {
                         title: '产品',
                         collapsable: false,
                         children: [
-                            ['sophon.md', '智子'],
-                            ['damocles.md', '执剑人'],
-                            ['droplet.md', '水滴'],
+                            ['https://sophon.venus-fil.io', '智子'],
+                            ['https://damocles.venus-fil.io', '执剑人'],
+                            ['https://droplet.venus-fil.io', '水滴'],
                         ]
                     },
                     {
