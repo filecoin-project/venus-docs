@@ -1,7 +1,7 @@
 # build container stage
 FROM golang:1.19 AS build-env
 
-RUN  sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+# RUN  sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 
 # download dependence
 RUN apt-get update -y 
