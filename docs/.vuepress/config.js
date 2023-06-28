@@ -177,7 +177,7 @@ module.exports = {
                         children: [
                             ['https://sophon.venus-fil.io/zh/', '智子'],
                             ['https://damocles.venus-fil.io/zh/', '执剑人'],
-                            ['https://droplet.venus-fil.io', '水滴'],
+                            ['https://droplet.venus-fil.io/zh/', '水滴'],
                         ]
                     },
                     {
