@@ -2,7 +2,7 @@ FROM debian:bookworm
 
 # install dependence
 RUN apt-get -qq update \
-    && apt-get -qq install -y --no-install-recommends ca-certificates curl vim telnet tzdata subversion jq
+    && apt-get -qq install -y --no-install-recommends ca-certificates curl vim telnet tzdata subversion jq procps 
 
 # set time zone to Shanghai
 ENV TZ=Asia/Shanghai
