@@ -21,7 +21,6 @@ module.exports = {
         '@vuepress/nprogress',
         '@vuepress/medium-zoom',
         '@vuepress-plugin-zooming',
-        'fulltext-search',
         ['vuepress-plugin-code-copy', true]
     ],
     head: [
