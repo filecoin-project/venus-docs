@@ -8,4 +8,4 @@ Since the [rebranding](https://github.com/filecoin-project/venus/discussions/542
 
 ### Architecture
 
-<img src="https://user-images.githubusercontent.com/1591330/227900001-a572c81d-607c-48ed-832e-54298ce87259.png" width=800 />
+<img src="https://github.com/ipfs-force-community/venus-core-devs/assets/1591330/83fabaa2-0da4-48aa-bfdd-1b6032bcf96e" width=800 />
