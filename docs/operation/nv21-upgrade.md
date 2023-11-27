@@ -12,17 +12,17 @@
 
 ## Products Upgrade Guide
 
-Component name|tag|commit
+Product | tag | commit
 ---|---|---
-sophon-auth | - |
-venus | - |
-sophon-messager | - |
-soohon-gateway | - |
-venus-wallet | - |
-sophon-miner | - |
-droplet | - |
-damocles-manager | - |
-damocles-worker | - |
+sophon-auth | v1.14.0 | 7caadbc
+venus | v1.14.0 | 45058a7
+sophon-messager | v1.14.0 | e5f8371
+soohon-gateway | v1.14.0 | 1adf038
+venus-wallet | v1.14.0 |  b478cd0
+sophon-miner | v1.14.0 |  9ca976c
+droplet | v2.10.0 |  6daf168
+damocles-manager |  v0.9.0 | 9f87e20
+damocles-worker | v0.9.0 | 9f87e20
 
 
 ### Recommended Upgrade Sequence
@@ -79,7 +79,7 @@ Compile: First `make dist-clean` and then `make`, this can prevent problems caus
      #cali
      UpgradeWatermelonHeight: 1013134
      #mainnet
-     UpgradeWatermelonHeight:
+     UpgradeWatermelonHeight: 3469380
      ```
 
 3. After the upgrade, you need to check whether the block height is synchronized normally.
@@ -90,7 +90,25 @@ Compile: First `make dist-clean` and then `make`, this can prevent problems caus
      ./venus state actor-cids --network-version 21
 
      # Ordering may be different
-
+     Network Version: 21
+    Actor Version: 12
+    Actor             CID
+    datacap           bafk2bzacebpiwb2ml4qbnnaayxumtk43ryhc63exdgnhivy3hwgmzemawsmpq
+    ethaccount        bafk2bzaceb4gkau2vgsijcxpfuq33bd7w3efr2rrhxrwiacjmns2ntdiamswq
+    reward            bafk2bzacealqnxn5lwzwexd6reav4dppypquklx2ujlnvaxiqk2tzstyvkp5u
+    verifiedregistry  bafk2bzacedudgflxc75c77c6zkmfyq4u2xuk7k6xw6dfdccarjrvxx453b77q
+    eam               bafk2bzaceb3elj4hfbbjp7g5bptc7su7mptszl4nlqfedilxvstjo5ungm6oe
+    multisig          bafk2bzacecw5lyp3n3t67xdwrmo36h4z7afc3lobmmr6wg55w6yjzg5jhmh42
+    storagemarket     bafk2bzacedylkg5am446lcuih4voyzdn4yjeqfsxfzh5b6mcuhx4mok5ph5c4
+    system            bafk2bzacebfqrja2hip7esf4eafxjmu6xcogoqu5xxtgdg7xa5szgvvdguchu
+    account           bafk2bzaceboftg75mdiba7xbo2i3uvgtca4brhnr3u5ptihonixgpnrvhpxoa
+    cron              bafk2bzacechxjkfe2cehx4s7skj3wzfpzf7zolds64khrrrs66bhazsemktls
+    placeholder       bafk2bzacedfvut2myeleyq67fljcrw4kkmn5pb5dpyozovj7jpoez5irnc3ro
+    storagepower      bafk2bzacecsij5tpfzjpfuckxvccv2p3bdqjklkrfyyoei6lx5dyj5j4fvjm6
+    evm               bafk2bzacecmnyfiwb52tkbwmm2dsd7ysi3nvuxl3lmspy7pl26wxj4zj7w4wi
+    init              bafk2bzacebllyegx5r6lggf6ymyetbp7amacwpuxakhtjvjtvoy2bfkzk3vms
+    paymentchannel    bafk2bzacectv4cm47bnhga5febf3lo3fq47g72kmmp2xd5s6tcxz7hiqdywa4
+    storageminer      bafk2bzacedo75pabe4i2l3hvhtsjmijrcytd2y76xwe573uku25fi7sugqld6
      ```
 
 5. If there is no problem troubleshoot, it is not recommended to set the rust log level to `trace` because more logs will be printed.
@@ -100,7 +118,7 @@ Compile: First `make dist-clean` and then `make`, this can prevent problems caus
 7. actor migration
 
 :::tip
-**After testing, the pre-migration time is about seconds, and the official migration time is about seconds**
+**After testing, the pre-migration time is about 20 to 30 minutes, and the actual migration time is about 70 seconds**
 
      ```
      The pre-migration height is the 120 heights before the upgrade height:
@@ -224,4 +242,4 @@ Upgrade result verification steps:
 
 ### Database changes
 
-1. Add `id` field to droplet `storage_deals` table
+1. Add `id` field to droplet `storage_deals` table  ==> `ALTER TABLE storage_deals ADD id varchar(128)`

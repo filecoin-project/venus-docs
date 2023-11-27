@@ -1,4 +1,4 @@
-# Venus 各组件升级文档（持续更新中）
+# Venus 各组件升级文档
 
 ## 注意事项
 
@@ -14,15 +14,15 @@
 
 组件名|tag|commit
 ---|---|---
-sophon-auth | - | 
-venus | - | 
-sophon-messager | - |  
-soohon-gateway | - | 
-venus-wallet | - |  
-sophon-miner | - |  
-droplet | - | 
-damocles-manager | - | 
-damocles-worker | - | 
+sophon-auth | v1.14.0 | 7caadbc
+venus | v1.14.0 | 45058a7
+sophon-messager | v1.14.0 | e5f8371
+soohon-gateway | v1.14.0 | 1adf038
+venus-wallet | v1.14.0 |  b478cd0
+sophon-miner | v1.14.0 |  9ca976c
+droplet | v2.10.0 |  6daf168
+damocles-manager |  v0.9.0 | 9f87e20
+damocles-worker | v0.9.0 | 9f87e20
 
 
 ### 升级顺序
@@ -70,7 +70,7 @@ damocles-worker | - |
     # cali
     UpgradeWatermelonHeight: 1013134
     # mainnet
-    UpgradeWatermelonHeight:
+    UpgradeWatermelonHeight: 3469380
     ```
 
 3. 升级后需检查是否正常同步区块
@@ -81,7 +81,25 @@ damocles-worker | - |
     ./venus state actor-cids --network-version 21
 
     # 顺序可能会不一样
-
+    Network Version: 21
+    Actor Version: 12
+    Actor             CID
+    datacap           bafk2bzacebpiwb2ml4qbnnaayxumtk43ryhc63exdgnhivy3hwgmzemawsmpq
+    ethaccount        bafk2bzaceb4gkau2vgsijcxpfuq33bd7w3efr2rrhxrwiacjmns2ntdiamswq
+    reward            bafk2bzacealqnxn5lwzwexd6reav4dppypquklx2ujlnvaxiqk2tzstyvkp5u
+    verifiedregistry  bafk2bzacedudgflxc75c77c6zkmfyq4u2xuk7k6xw6dfdccarjrvxx453b77q
+    eam               bafk2bzaceb3elj4hfbbjp7g5bptc7su7mptszl4nlqfedilxvstjo5ungm6oe
+    multisig          bafk2bzacecw5lyp3n3t67xdwrmo36h4z7afc3lobmmr6wg55w6yjzg5jhmh42
+    storagemarket     bafk2bzacedylkg5am446lcuih4voyzdn4yjeqfsxfzh5b6mcuhx4mok5ph5c4
+    system            bafk2bzacebfqrja2hip7esf4eafxjmu6xcogoqu5xxtgdg7xa5szgvvdguchu
+    account           bafk2bzaceboftg75mdiba7xbo2i3uvgtca4brhnr3u5ptihonixgpnrvhpxoa
+    cron              bafk2bzacechxjkfe2cehx4s7skj3wzfpzf7zolds64khrrrs66bhazsemktls
+    placeholder       bafk2bzacedfvut2myeleyq67fljcrw4kkmn5pb5dpyozovj7jpoez5irnc3ro
+    storagepower      bafk2bzacecsij5tpfzjpfuckxvccv2p3bdqjklkrfyyoei6lx5dyj5j4fvjm6
+    evm               bafk2bzacecmnyfiwb52tkbwmm2dsd7ysi3nvuxl3lmspy7pl26wxj4zj7w4wi
+    init              bafk2bzacebllyegx5r6lggf6ymyetbp7amacwpuxakhtjvjtvoy2bfkzk3vms
+    paymentchannel    bafk2bzacectv4cm47bnhga5febf3lo3fq47g72kmmp2xd5s6tcxz7hiqdywa4
+    storageminer      bafk2bzacedo75pabe4i2l3hvhtsjmijrcytd2y76xwe573uku25fi7sugqld6
     ```
 
 5. 若不排查问题，rust日志级别**不建议**设置为 `trace`，因为会打印较多日志
@@ -89,18 +107,17 @@ damocles-worker | - |
 6. 升级后可以通过命令来 `./venus state get-actor t01000` 来确认是否升级成功
 
 7. actor 迁移
-	
-	**经测试本次预迁移时间在  秒左右，正式迁移时间在  秒左右**
+
+    **经测试本次预迁移时间在 20-30 分钟，正式迁移时间在 70 秒左右**
 
     ```
-    预迁移高度是升级高度前 120 个高度：
+    预迁移高度是升级高度前 180 个高度：
     pre-migration  开始：STARTING pre-migration  结束：COMPLETED pre-migration
     migration      开始：STARTING migration      结束：COMPLETED migration
     ```
 
 
-
-### soohon-gateway
+### sophon-gateway
 
 影响功能：无
 
@@ -184,4 +201,4 @@ damocles-worker | - |
 
 ### 数据库变更
 
-1. droplet `storage_deals` 表增加 `id` 字段
+1. droplet `storage_deals` 表增加 `id` 字段 ==> `ALTER TABLE storage_deals ADD id varchar(128)`
