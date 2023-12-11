@@ -15,15 +15,14 @@
 组件名|tag|commit
 ---|---|---
 sophon-auth | v1.14.0 | 7caadbc
-venus | v1.14.0 | 45058a7
+venus | v1.14.2 | 9204048  
 sophon-messager | v1.14.0 | e5f8371
 soohon-gateway | v1.14.0 | 1adf038
 venus-wallet | v1.14.0 |  b478cd0
 sophon-miner | v1.14.0 |  9ca976c
 droplet | v2.10.0 |  6daf168
-damocles-manager |  v0.9.0 | 9f87e20
-damocles-worker | v0.9.0 | 9f87e20
-
+damocles-manager |  v0.9.2 | f3c5400
+damocles-worker | v0.9.2 | f3c5400
 
 ### 升级顺序
 
@@ -61,6 +60,16 @@ damocles-worker | v0.9.0 | 9f87e20
 
 编译：先 `make dist-clean` 再 `make`，这样可以防止未能正常升级 `filecoin-ffi` 而带来的问题
 **如果 `~/.venus` 存在且需要导入快照，需要先删除 `~/.venus/version` 文件再导入快照**
+
+```
+本次升级 migration（actor迁移）使用的CPU越多，消耗的内存也越多，所以需要限制CPU使用的数量。
+在 venus 中可以通过环境变量（VENUS_MIGRATION_MAX_WORKER_COUN）来控制 migration 使用的CPU数量，
+例子：export VENUS_MIGRATION_MAX_WORKER_COUNT=13。以下是对于不同机器内存时，建议设置 VENUS_MIGRATION_MAX_WORKER_COUNT 的数量：
+
+48G VENUS_MIGRATION_MAX_WORKER_COUNT=13
+64G VENUS_MIGRATION_MAX_WORKER_COUNT=18
+96G VENUS_MIGRATION_MAX_WORKER_COUNT=24
+```
 
 1. 升级后检查vk文件是否完整
 
@@ -185,6 +194,7 @@ damocles-worker | v0.9.0 | 9f87e20
 依赖升级组件: damocles-manager
 
 注意事项：
+- 建议等封装完所有的任务之后, 没有正在进行的的封装任务时, 进行程序更新。如果需要再封装进行的过程中进行更新的话，封装线程可能会卡在 `SyntheticPoRepNeeded` 状态。这个时候重置任务的状态为 `PCSubmitted` 即可：`damocles-manager util worker resume <worker name> <thread index> PCSubmitted`
 - 新的证明类型 SyntheticPoRep 会使用新的证明参数文件。 如果启用 SyntheticPoRep 最好提前准备好新的证明参数，**证明参数有问题可能会导致 SyntheticPoRep 死锁**。
 
 ---

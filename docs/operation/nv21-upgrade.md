@@ -15,14 +15,15 @@
 Product | tag | commit
 ---|---|---
 sophon-auth | v1.14.0 | 7caadbc
-venus | v1.14.0 | 45058a7
+venus | v1.14.2 | 9204048 
 sophon-messager | v1.14.0 | e5f8371
 soohon-gateway | v1.14.0 | 1adf038
 venus-wallet | v1.14.0 |  b478cd0
 sophon-miner | v1.14.0 |  9ca976c
 droplet | v2.10.0 |  6daf168
-damocles-manager |  v0.9.0 | 9f87e20
-damocles-worker | v0.9.0 | 9f87e20
+damocles-manager |  v0.9.2 | f3c5400
+damocles-worker | v0.9.2 | f3c5400
+
 
 
 ### Recommended Upgrade Sequence
@@ -70,6 +71,17 @@ Compile: First `make dist-clean` and then `make`, this can prevent problems caus
 
 **If `~/.venus` exists and you need to import a snapshot, you need to delete the `~/.venus/version` file first before importing the snapshot**
 :::
+
+```
+The memory consumption of migration depends on the CPUs used. You can set the limit of CPU by environment variable (`VENUS_MIGRATION_MAX_WORKER_COUNT=n`), to avoid use out of memory.
+Recommended value of `VENUS_MIGRATION_MAX_WORKER_COUNT`:
+
+48G VENUS_MIGRATION_MAX_WORKER_COUNT=13
+64G VENUS_MIGRATION_MAX_WORKER_COUNT=18
+96G VENUS_MIGRATION_MAX_WORKER_COUNT=24
+
+The migration of update 
+```
 
 1. Check whether the vk file is complete after upgrading
 
@@ -225,7 +237,9 @@ Dependency:
 - damocles-manager
 
 Precautions:
+Translation:
 
+- It is recommended to perform program updates after all tasks have been done and there are no ongoing tasks. If an update is required during the task on going, the sealing thread may get stuck in the 'SyntheticPoRepNeeded' state. In such cases, resetting the task status to 'PCSubmitted' can resolve the issue. You can use the following command: `damocles-manager util worker resume <worker name> <thread index> PCSubmitted`.
 - The new proof type `SyntheticPoRep` uses a new proof parameter file. If `SyntheticPoRep` is enabled, it is best to prepare new proof parameters in advance. **Failing to do so may cause SyntheticPoRep deadlock**.
 
 ---
