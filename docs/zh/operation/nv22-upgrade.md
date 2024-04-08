@@ -22,8 +22,8 @@ soohon-gateway | v1.15.0 | 541891a
 venus-wallet | v1.15.0 | 6b3de34
 sophon-miner | v1.15.0 | 8dd6c68
 droplet | v2.11.0 | 44481dd 
-damocles-manager |  v0.10.0 |
-damocles-worker | v0.10.0 |
+damocles-manager |  v0.10.0-rc1 | 2f6c5f9
+damocles-worker | v0.10.0-rc1 | 2f6c5f9
 
 ### 升级顺序
 
