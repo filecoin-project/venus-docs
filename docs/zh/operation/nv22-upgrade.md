@@ -15,7 +15,7 @@
 组件名|tag|commit
 ---|---|---
 sophon-auth | v1.15.0 | a1e964b
-venus | v1.15.0 | aabda75 
+venus | v1.15.1 | 81c99f3 
 sophon-co | v0.8.0 | 0e48712
 sophon-messager | v1.15.0 | 1e4f0d5
 soohon-gateway | v1.15.0 | 541891a
@@ -70,7 +70,7 @@ damocles-worker | v0.10.0-rc1 | 2f6c5f9
     # cali
     UpgradeDragonHeight: 1427974
     # mainnet
-    UpgradeDragonHeight: 3817920
+    UpgradeDragonHeight: 3855360
     ```
 
 3. 升级后需检查是否正常同步区块

@@ -15,7 +15,7 @@
 Component name|tag|commit
 ---|---|---
 sophon-auth | v1.15.0 | a1e964b
-venus | v1.15.0 | aabda75
+venus | v1.15.1 | 81c99f3
 sophon-co | v0.8.0 | 0e48712
 sophon-messager | v1.15.0 | 1e4f0d5
 soohon-gateway | v1.15.0 | 541891a
@@ -76,7 +76,7 @@ Compile: First `make dist-clean` and then `make`, this can prevent problems caus
      #cali
      UpgradeDragonHeight: 1427974
      #mainnet
-     UpgradeDragonHeight: 3817920
+     UpgradeDragonHeight: 3855360
      ```
 
 3. After the upgrade, you need to check if the blocks are synchronized normally.
