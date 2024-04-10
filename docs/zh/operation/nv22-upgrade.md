@@ -70,7 +70,7 @@ damocles-worker | v0.10.0-rc1 | 2f6c5f9
     # cali
     UpgradeDragonHeight: 1427974
     # mainnet
-    UpgradeDragonHeight: 3817920
+    UpgradeDragonHeight: 3855360
     ```
 
 3. 升级后需检查是否正常同步区块

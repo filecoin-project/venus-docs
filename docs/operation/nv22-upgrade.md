@@ -76,7 +76,7 @@ Compile: First `make dist-clean` and then `make`, this can prevent problems caus
      #cali
      UpgradeDragonHeight: 1427974
      #mainnet
-     UpgradeDragonHeight: 3817920
+     UpgradeDragonHeight: 3855360
      ```
 
 3. After the upgrade, you need to check if the blocks are synchronized normally.
