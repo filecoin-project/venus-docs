@@ -1,4 +1,4 @@
-# Venus Stack nv22 Upgrade Guide (WIP)
+# Venus Stack nv22 Upgrade Guide
 
 ## Precautions
 
@@ -51,7 +51,7 @@ Upgrade Dependency:
 
 Precautions:
 
-- Is authentication working normally after startup?
+- Check if authentication working normally after startup.
 
 ### Venus
 
@@ -238,5 +238,4 @@ Upgrade result verification steps:
 
 ### Database changes
 
-1. The droplet adds the `direct_deals` table to store DD
-O deals.
+1. The droplet adds the `direct_deals` table to store DDO deals.
