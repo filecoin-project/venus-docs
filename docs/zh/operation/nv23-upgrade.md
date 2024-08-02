@@ -65,13 +65,13 @@ damocles-worker | v0.11.0 | 7d06bd4
 
 1. 升级后检查vk文件是否完整
 
-2. 升级后执行命令 `./venus state network-info`，然后检查通过日志检查 UpgradeDragonHeight 是否正常:
+2. 升级后执行命令 `./venus state network-info`，然后检查通过日志检查 UpgradeWaffleHeight 是否正常:
 
     ```
     # cali
-    UpgradeDragonHeight: 1779094
+    UpgradeWaffleHeight: 1779094
     # mainnet
-    UpgradeDragonHeight: 4154640
+    UpgradeWaffleHeight: 4154640
     ```
 
 3. 升级后需检查是否正常同步区块
@@ -156,7 +156,7 @@ damocles-worker | v0.11.0 | 7d06bd4
 
 影响功能：
 
-- 支持 direct data onboarding，使用文档：https://github.com/ipfs-force-community/droplet/blob/master/docs/zh/direct-on-boarding.md
+- 无
 
 
 依赖升级组件: auth, venus, gateway, messager
