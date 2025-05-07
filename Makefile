@@ -6,7 +6,7 @@ dev:
 	npm run predownload
 	npm run docs:dev
 
-TAG:=v1.16.0
+TAG:=v1.17.0
 docker-buildenv:
 	docker build --build-arg https_proxy=$(BUILD_DOCKER_PROXY) -t filvenus/venus-buildenv:$(TAG) -f script/docker/venus-buildenv.dockerfile .
 	docker tag filvenus/venus-buildenv:$(TAG) filvenus/venus-buildenv:latest
